@@ -12,7 +12,8 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `impressum/`, `datenschutz/` | Rechtstexte, in der Fußzeile aller Seiten verlinkt. Laden bewusst kein `app.js`. **Platzhalter in eckigen Klammern vor der Veröffentlichung ausfüllen** |
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
-| `assets/` | `css/`, `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
+| `vorlage/` | Vorlage für Materialseiten mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
+| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste der Materialseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
 
 ## Inhalte ergänzen
 
@@ -76,9 +77,41 @@ Ein Foto mit einer Frage, die die SuS zum Material führt. Das Bild soll fachlic
 - Bilder als WebP, möglichst unter ca. 150 KB. Keine erkennbaren Personen. Bildquelle und Lizenz angeben.
 - Ohne `bildAlt` gilt das Bild als Dekoration. Für Impulsbilder besser eine Beschreibung ergänzen.
 
+## Materialseiten und Kopfleiste
+
+Jede Anwendung bekommt dieselbe Kopfleiste: **Zurück zum Portal**, Titel, Fach, Klasse und den Lesemodus „Aa". Sie wird von `assets/js/material.js` aus den `data`-Attributen am `body` erzeugt. Ändert sich die Kopfleiste, ändert sich nur diese eine Datei.
+
+| Attribut am `body` | Bedeutung |
+|---|---|
+| `data-root` | Weg zum Repository-Stamm, z. B. `../../../` bei `biologie/klasse-8/zelle/`. Nur relative Pfade werden akzeptiert |
+| `data-title` | Titel in der Kopfleiste. Ohne Angabe gilt der `<title>` der Seite |
+| `data-subject` | `Biologie`, `Geografie` oder `Interaktiv` (steuert die Fachfarbe, das Fach steht immer auch als Text da) |
+| `data-grade` | z. B. `Klasse 8`, `Klasse 9/10`. Ab Klasse 9 gilt die dichtere Darstellung, davor die luftigere |
+
+### Neues Material aus der Vorlage
+
+1. Ordner `vorlage/` kopieren nach z. B. `biologie/klasse-8/zelle/` (nur die Datei `index.html` wird gebraucht).
+2. In der kopierten Datei die Pfade um zwei Ebenen verlängern: jedes `../` durch `../../../` ersetzen (Suchen und Ersetzen, fünf Stellen: `link`, zwei `script`, `data-root`, `noscript`). Den Kommentar zum Kopieren löschen.
+3. `data-title`, `data-subject`, `data-grade` anpassen, Inhalte ersetzen, `<meta name="robots" content="noindex">` entfernen.
+4. Eintrag in `projects.json` ergänzen (siehe oben).
+
+Bausteine der Vorlage: Einstieg, Material (M1, M2 …) mit Quelle, Text mit Zeilennummern (jede Zeile ein `li`, Nummer an jeder fünften), Tabelle im eigenen Scroll-Container, Abbildung mit festem Seitenverhältnis, Aufgabe mit Operator und Niveau (`data-stufe` 1 bis 3), Teilaufgaben zum Abhaken, Hilfe-Kästen (Tipp, Wortspeicher mit Silben, Satzbausteine) und Schreibraum. Aufgabe, Material und Hilfe unterscheiden sich durch Rahmen und Beschriftung, nicht nur durch Farbe. Lehrkrafthinweise und Erwartungshorizonte gehören nie auf die Schülerseite.
+
+### Bestehende Anwendung einhängen
+
+Eine Anwendung mit eigenem Aussehen bekommt nur die Kopfleiste. Im `<head>` ergänzen (Pfade je nach Tiefe anpassen, `defer` ist Pflicht):
+
+```html
+<link rel="stylesheet" href="../../../assets/css/material.css">
+<script src="../../../assets/js/prefs.js"></script>
+<script src="../../../assets/js/material.js" defer></script>
+```
+
+Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-grade` setzen. `material.css` ist eigenständig, alle Klassen tragen das Präfix `lp-`. Danach die Anwendung prüfen: Kopfleiste ist oben angeheftet, Vollbild-Layouts mit `100vh` können dadurch minimal überlaufen.
+
 ## Lesemodus
 
-Das Symbol „Aa" in der Kopfleiste öffnet die Einstellungen: Schriftgröße (3 Stufen), Zeilenabstand und Darstellung (Auto, Hell, Dunkel). Gespeichert wird nur im Browser (`localStorage`), ohne Konto und ohne Übertragung.
+Das Symbol „Aa" in der Kopfleiste (Portal und Materialseiten) öffnet die Einstellungen: Schriftgröße (3 Stufen), Zeilenabstand und Darstellung (Auto, Hell, Dunkel). Gespeichert wird nur im Browser (`localStorage`), ohne Konto und ohne Übertragung. Die Einstellung gilt portalweit. Auf Vorlagenseiten wirken Schriftgröße und Zeilenabstand auf den ganzen Inhalt, bei eingehängten Anwendungen auf die Kopfleiste.
 
 ## GitHub Pages aktivieren
 

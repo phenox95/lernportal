@@ -1,0 +1,248 @@
+/* Lernportal – Materialseiten: Kopfleiste und Bausteine.
+   Eigenständig: braucht weder styles.css noch ein Framework.
+   Alle Klassen und Variablen tragen das Präfix lp-, damit bestehende Materialien nicht beeinflusst werden.
+   Schrift: Systemschrift des Geräts, keine Schriftdatei. Größen in rem bzw. em (Lesemodus wirkt). */
+
+:root {
+  color-scheme: light dark;
+  --lp-schrift: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
+  --lp-lh: 1.5;
+  --lp-bg: #fcfcfa;
+  --lp-flaeche: #ffffff;
+  --lp-gruppe: #f4f4f0;
+  --lp-feld: #ecece7;
+  --lp-text: #1d1f1d;
+  --lp-text2: #5c605a;
+  --lp-linie: #e0e0da;
+  --lp-rahmen: #7d817a;
+  --lp-glas: rgba(252, 252, 250, 0.8);
+  --lp-fokus: #0a6fe0;
+  --lp-schatten: 0 24px 60px -16px rgba(0, 0, 0, 0.3);
+  --lp-bio-ink: #0c6a49;
+  --lp-bio-tint: rgba(28, 148, 104, 0.12);
+  --lp-geo-ink: #8f4f0e;
+  --lp-geo-tint: rgba(184, 105, 28, 0.13);
+  --lp-akzent: var(--lp-text2);
+  --lp-akzent-tint: var(--lp-feld);
+}
+
+:root[data-theme="dark"] {
+  --lp-bg: #0e100f; --lp-flaeche: #181b19; --lp-gruppe: #131614; --lp-feld: #222624;
+  --lp-text: #f2f3f0; --lp-text2: #a9aea7; --lp-linie: #2a2e2b; --lp-rahmen: #7f847c;
+  --lp-glas: rgba(14, 16, 15, 0.74); --lp-fokus: #4da3ff; --lp-schatten: 0 24px 60px -16px rgba(0, 0, 0, 0.7);
+  --lp-bio-ink: #5fd3a3; --lp-bio-tint: rgba(95, 211, 163, 0.16);
+  --lp-geo-ink: #f0b068; --lp-geo-tint: rgba(240, 176, 104, 0.16);
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"], :root:not([data-theme]) {
+    --lp-bg: #0e100f; --lp-flaeche: #181b19; --lp-gruppe: #131614; --lp-feld: #222624;
+    --lp-text: #f2f3f0; --lp-text2: #a9aea7; --lp-linie: #2a2e2b; --lp-rahmen: #7f847c;
+    --lp-glas: rgba(14, 16, 15, 0.74); --lp-fokus: #4da3ff; --lp-schatten: 0 24px 60px -16px rgba(0, 0, 0, 0.7);
+    --lp-bio-ink: #5fd3a3; --lp-bio-tint: rgba(95, 211, 163, 0.16);
+    --lp-geo-ink: #f0b068; --lp-geo-tint: rgba(240, 176, 104, 0.16);
+  }
+}
+
+/* Lesemodus: Zeilenabstand überall, Schriftgröße nur auf Vorlagenseiten (html.lp-vorlage)
+   bzw. in der Kopfleiste. Bestehende Materialien behalten ihr eigenes Layout. */
+:root[data-spacing="weit"] { --lp-lh: 1.8; }
+html.lp-vorlage[data-size="gross"] { font-size: 112.5%; }
+html.lp-vorlage[data-size="sehr-gross"] { font-size: 125%; }
+
+/* Fachfarben (Orientierung, nie alleiniger Informationsträger: Fach steht immer auch als Text da) */
+body[data-subject="Biologie"] {
+  --lp-akzent: var(--lp-bio-ink); --lp-akzent-tint: var(--lp-bio-tint);
+  --lp-v1: #1c9468; --lp-v2: #0c6a49;
+}
+body[data-subject="Geografie"] {
+  --lp-akzent: var(--lp-geo-ink); --lp-akzent-tint: var(--lp-geo-tint);
+  --lp-v1: #b8691c; --lp-v2: #8f4f0e;
+}
+
+/* ============ Kopfleiste ============ */
+.lp-kopf, .lp-kopf *, .lp-kopf *::before, .lp-kopf *::after { box-sizing: border-box; }
+.lp-kopf {
+  position: sticky; top: 0; z-index: 1000;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--lp-bg); color: var(--lp-text);
+  border-bottom: 1px solid var(--lp-linie);
+  font-family: var(--lp-schrift); font-size: 1rem; line-height: 1.4; text-align: left;
+}
+:root[data-size="gross"]:not(.lp-vorlage) .lp-kopf { font-size: 1.125rem; }
+:root[data-size="sehr-gross"]:not(.lp-vorlage) .lp-kopf { font-size: 1.25rem; }
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .lp-kopf {
+    background: var(--lp-glas);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .lp-kopf { background: var(--lp-bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+/* feine Fachlinie, rein dekorativ */
+.lp-kopf::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px;
+  background: linear-gradient(90deg, var(--lp-v1, var(--lp-linie)), var(--lp-v2, var(--lp-linie)));
+  pointer-events: none;
+}
+.lp-kopf-innen {
+  display: flex; align-items: center; gap: 0.5em;
+  max-width: 68em; min-height: 3.5em; margin: 0 auto; padding: 0.25em clamp(0.5em, 3vw, 1.5em);
+}
+.lp-zurueck {
+  flex: none; display: inline-flex; align-items: center; gap: 0.2em;
+  min-width: 2.75em; min-height: 2.75em; padding: 0 0.6em 0 0.35em; border-radius: 0.75em;
+  color: var(--lp-text2); font-size: 0.9375em; font-weight: 600; text-decoration: none;
+}
+.lp-zurueck:hover { background: var(--lp-feld); color: var(--lp-text); }
+.lp-zurueck svg { flex: none; }
+.lp-zurueck .lp-lang { display: none; }
+@media (min-width: 40em) { .lp-zurueck .lp-lang { display: inline; } }
+.lp-kopf-titel { flex: 1; min-width: 0; }
+.lp-kopf .lp-titel { margin: 0; font-size: 1em; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; color: var(--lp-text); }
+.lp-kopf .lp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.15em 0.5em; margin: 0.15em 0 0; font-size: 0.875em; color: var(--lp-text2); }
+.lp-kopf .lp-fach {
+  padding: 0.05em 0.65em; border-radius: 1em; background: var(--lp-akzent-tint);
+  color: var(--lp-akzent); font-weight: 700;
+}
+.lp-werkzeuge { position: relative; flex: none; }
+
+/* Lesemodus-Panel (von prefs.js erzeugt), hier eigenständig gestaltet */
+.lp-kopf .icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.75em; min-height: 2.75em; padding: 0 0.6em; margin: 0;
+  border: 0; border-radius: 0.75em; background: transparent; color: var(--lp-text); cursor: pointer;
+  font: inherit; font-size: 1.0625em; font-weight: 700; letter-spacing: -0.02em;
+}
+.lp-kopf .icon-btn:hover, .lp-kopf .icon-btn[aria-expanded="true"] { background: var(--lp-feld); }
+.lp-kopf .prefs-panel {
+  position: absolute; right: 0; top: calc(100% + 0.5em); z-index: 5;
+  width: min(22em, calc(100vw - 1.5em)); padding: 1.1em;
+  background: var(--lp-flaeche); color: var(--lp-text);
+  border: 1px solid var(--lp-linie); border-radius: 1.25em; box-shadow: var(--lp-schatten);
+}
+.lp-kopf .prefs-panel[hidden] { display: none; }
+.lp-kopf .prefs-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5em; }
+.lp-kopf .prefs-head h2 { margin: 0; font-size: 1.125em; font-weight: 700; color: var(--lp-text); }
+.lp-kopf .prefs-panel fieldset { margin: 0.9em 0 0; padding: 0; border: 0; min-width: 0; }
+.lp-kopf .prefs-panel legend { padding: 0; margin-bottom: 0.4em; font-size: 0.875em; color: var(--lp-text2); }
+.lp-kopf .segmented { display: flex; gap: 0.25em; padding: 0.25em; background: var(--lp-feld); border-radius: 0.875em; }
+.lp-kopf .segmented button {
+  flex: 1; min-height: 2.75em; padding: 0 0.5em; margin: 0; border: 0; border-radius: 0.625em;
+  background: transparent; color: var(--lp-text2); font: inherit; font-size: 0.9375em; cursor: pointer;
+}
+.lp-kopf .segmented button[aria-pressed="true"] { background: var(--lp-flaeche); color: var(--lp-text); font-weight: 700; box-shadow: 0 1px 3px rgba(20, 24, 20, 0.2); }
+.lp-kopf .prefs-reset {
+  width: 100%; min-height: 2.75em; margin-top: 1em; border: 1px solid var(--lp-rahmen); border-radius: 0.75em;
+  background: transparent; color: var(--lp-text); font: inherit; cursor: pointer;
+}
+.lp-kopf .prefs-reset:hover { background: var(--lp-feld); }
+.lp-kopf :focus-visible { outline: 3px solid var(--lp-fokus); outline-offset: 2px; }
+
+/* ============ Bausteine der Vorlage (body.lp-seite) ============ */
+body.lp-seite {
+  --lp-abstand: 1.5rem; --lp-radius: 1.1rem;
+  margin: 0; background: var(--lp-bg); color: var(--lp-text);
+  font-family: var(--lp-schrift); font-size: 1rem; line-height: var(--lp-lh);
+  -webkit-font-smoothing: antialiased;
+}
+/* Dichte nach Jahrgang: 7–8 freundlich-sachlich mit mehr Weißraum, 9–10 nüchtern und dichter */
+body.lp-seite[data-dichte="9-10"] { --lp-abstand: 1rem; --lp-radius: 0.5rem; }
+.lp-seite *, .lp-seite *::before, .lp-seite *::after { box-sizing: border-box; }
+.lp-seite :focus-visible { outline: 3px solid var(--lp-fokus); outline-offset: 2px; }
+.lp-seite img { max-width: 100%; display: block; }
+
+.lp-inhalt {
+  display: grid; gap: var(--lp-abstand);
+  max-width: 68rem; margin: 0 auto; padding: var(--lp-abstand) clamp(1rem, 4vw, 1.5rem) 3rem;
+}
+.lp-inhalt > * { width: 100%; max-width: 48rem; margin: 0; }
+.lp-inhalt > .lp-breit { max-width: none; }
+
+.lp-label { display: block; margin: 0 0 0.35rem; font-size: 0.875rem; font-weight: 700; color: var(--lp-text2); }
+.lp-seite p { margin: 0 0 0.75em; }
+.lp-seite p:last-child { margin-bottom: 0; }
+
+/* Einstieg / Leitfrage */
+.lp-leitfrage {
+  padding: 1.1rem 1.25rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius);
+  background: var(--lp-akzent-tint);
+}
+.lp-leitfrage p { font-size: 1.25rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; max-width: 36rem; }
+
+/* Material: dünner neutraler Rahmen, Beschriftung M1, M2 … */
+.lp-material { border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); overflow: hidden; }
+.lp-material-kopf { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.6rem 1.1rem; border-bottom: 1px solid var(--lp-linie); background: var(--lp-gruppe); }
+.lp-material-kopf strong { font-size: 1rem; }
+.lp-material-kopf span { font-size: 0.9375rem; color: var(--lp-text2); }
+.lp-material-inhalt { padding: 1rem 1.1rem; }
+.lp-quelle { margin: 0; padding: 0.6rem 1.1rem; border-top: 1px solid var(--lp-linie); font-size: 0.875rem; color: var(--lp-text2); }
+
+/* Text mit Zeilennummern: jede Zeile ein <li> (ein Satz oder ein kurzer Sinnschritt), Nummer an jeder 5. Zeile */
+.lp-zeilen { counter-reset: lp-z; margin: 0; padding: 0; list-style: none; max-width: 70ch; }
+.lp-zeilen li { counter-increment: lp-z; position: relative; padding-left: 2.75rem; }
+.lp-zeilen li:nth-child(5n)::before {
+  content: counter(lp-z); position: absolute; left: 0; top: 0; width: 2rem; text-align: right;
+  font-size: 0.875rem; font-weight: 700; color: var(--lp-text2);
+}
+.lp-fett { font-weight: 700; }
+
+/* Tabellen und breite Inhalte scrollen im eigenen Container, nie die ganze Seite */
+.lp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.lp-scroll:focus-visible { outline: 3px solid var(--lp-fokus); outline-offset: -3px; }
+.lp-tabelle { width: 100%; min-width: 20rem; border-collapse: collapse; font-size: 1rem; }
+.lp-tabelle caption { padding: 0 0 0.5rem; text-align: left; font-size: 0.9375rem; color: var(--lp-text2); }
+.lp-tabelle th, .lp-tabelle td { padding: 0.6rem 0.75rem; border: 1px solid var(--lp-rahmen); text-align: left; vertical-align: top; }
+.lp-tabelle thead th { background: var(--lp-gruppe); font-weight: 700; }
+
+/* Abbildung mit festem Seitenverhältnis (kein Layoutsprung), Quelle darunter, kein Text über dem Bild */
+.lp-abbildung { margin: 0; }
+.lp-bildrahmen { aspect-ratio: 16 / 9; background: var(--lp-feld); display: grid; place-items: center; color: var(--lp-text2); font-size: 0.9375rem; }
+.lp-bildrahmen img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Aufgabe: kräftiger Rahmen in der Fachfarbe */
+.lp-aufgabe { border: 2px solid var(--lp-akzent); border-radius: var(--lp-radius); background: var(--lp-flaeche); padding: 1rem 1.1rem 1.1rem; }
+.lp-aufgabe-kopf { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; }
+.lp-aufgabe-kopf .lp-label { margin: 0; font-size: 1rem; color: var(--lp-akzent); }
+.lp-op { font-weight: 700; }
+.lp-auftrag { max-width: 70ch; }
+
+/* Niveau-Markierung 1 bis 3 gefüllte Punkte, ohne Farbcodierung, ohne „leicht/schwer" */
+.lp-niveau { display: inline-flex; gap: 0.3rem; color: var(--lp-text); }
+.lp-niveau i { display: block; width: 0.8rem; height: 0.8rem; border: 2px solid currentColor; border-radius: 50%; }
+.lp-niveau[data-stufe="1"] i:nth-child(1),
+.lp-niveau[data-stufe="2"] i:nth-child(-n+2),
+.lp-niveau[data-stufe="3"] i { background: currentColor; }
+
+/* Teilaufgaben mit Abhak-Kästchen (Zustand wird nicht gespeichert) */
+.lp-teile { margin: 0.25rem 0 0; padding: 0; list-style: none; }
+.lp-teil { display: flex; gap: 0.75rem; align-items: flex-start; min-height: 2.75rem; padding: 0.3rem 0; cursor: pointer; max-width: 70ch; }
+.lp-teil input { flex: none; width: 1.5rem; height: 1.5rem; margin: 0.6rem 0 0; accent-color: var(--lp-akzent); cursor: pointer; }
+.lp-teil > span { padding-top: 0.5rem; }
+
+/* Hilfe: gestrichelter Rahmen, getönt, immer mit Beschriftung (Tipp, Wortspeicher, Satzbausteine) */
+.lp-hilfe { margin-top: 0.9rem; padding: 0.8rem 1rem; border: 2px dashed var(--lp-rahmen); border-radius: calc(var(--lp-radius) * 0.7); background: var(--lp-gruppe); }
+.lp-hilfe .lp-label { color: var(--lp-text); }
+.lp-hilfe p, .lp-hilfe li { max-width: 70ch; }
+.lp-woerter { display: flex; flex-wrap: wrap; gap: 0.5rem 0.6rem; margin: 0; padding: 0; list-style: none; }
+.lp-woerter li { padding: 0.25rem 0.7rem; border: 1px solid var(--lp-rahmen); border-radius: 0.6rem; background: var(--lp-flaeche); }
+.lp-wort { white-space: nowrap; }
+.lp-sr {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.lp-bausteine { margin: 0; padding-left: 1.2rem; }
+
+/* Schreibraum mit Linien (Eingabe bleibt im Browser) */
+.lp-schreib {
+  display: block; width: 100%; min-height: 9rem; margin-top: 0.9rem; padding: 0.1rem 0.75rem;
+  border: 1px solid var(--lp-rahmen); border-radius: calc(var(--lp-radius) * 0.6);
+  background-color: var(--lp-flaeche); color: var(--lp-text);
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.25rem - 1px), var(--lp-linie) calc(2.25rem - 1px), var(--lp-linie) 2.25rem);
+  background-attachment: local;
+  font: inherit; line-height: 2.25rem; resize: vertical;
+}
+
+.lp-fuss { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--lp-linie); font-size: 0.875rem; color: var(--lp-text2); }
+.lp-noscript { margin: 0; padding: 0.75rem 1rem; background: var(--lp-gruppe); font-family: var(--lp-schrift); }
