@@ -13,7 +13,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
 | `vorlage/` | Vorlage für Materialseiten mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
-| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten der Anwendungen, `material-lp.css` Materialvorlage), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten), `img/fach/` (optionale Themenbilder der Fachseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
+| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten: Anwendungen mit Portal-Variablen und Materialvorlage mit Präfix `lp-`), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten), `img/fach/` (optionale Themenbilder der Fachseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
 
 ## Inhalte ergänzen
 
@@ -102,16 +102,16 @@ Bausteine der Vorlage: Einstieg, Material (M1, M2 …) mit Quelle, Text mit Zeil
 Eine Anwendung mit eigenem Aussehen bekommt nur die Kopfleiste. Im `<head>` ergänzen (Pfade je nach Tiefe anpassen, `defer` ist Pflicht):
 
 ```html
-<link rel="stylesheet" href="../../../assets/css/material-lp.css">
+<link rel="stylesheet" href="../../../assets/css/material.css">
 <script src="../../../assets/js/prefs.js"></script>
 <script src="../../../assets/js/material.js" defer></script>
 ```
 
-Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-grade` setzen. `material-lp.css` ist eigenständig, alle Klassen tragen das Präfix `lp-`. Danach die Anwendung prüfen: Kopfleiste ist oben angeheftet, Vollbild-Layouts mit `100vh` können dadurch minimal überlaufen.
+Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-grade` setzen. Der Teil mit dem Präfix `lp-` in `material.css` ist eigenständig, die Klassen der Vorlage und der Kopfleiste tragen alle dieses Präfix. Danach die Anwendung prüfen: Kopfleiste ist oben angeheftet, Vollbild-Layouts mit `100vh` können dadurch minimal überlaufen.
 
 ## Gestaltung
 
-Stil „Digital Library“: warmes Weiß (`#f7f7f4`), dunkler Text, feine Linien, große Typografie. Die Fächer erscheinen als Textzeilen mit einem dezenten Fachpunkt (Biologie grün, Geografie ocker). Die Fachfarbe ist nur Punkt, Linie oder Rahmen, der Text bleibt dunkel, damit der Kontrast reicht. Es gibt keine Verläufe, kein Glas, keine Schatten und keine Bildkacheln. Alle Farben, Radien und Maße stehen als Variablen am Anfang von `styles.css` bzw. `material-lp.css`.
+Stil „Digital Library“: warmes Weiß (`#f7f7f4`), dunkler Text, feine Linien, große Typografie. Die Fächer erscheinen als Textzeilen mit einem dezenten Fachpunkt (Biologie grün, Geografie ocker). Die Fachfarbe ist nur Punkt, Linie oder Rahmen, der Text bleibt dunkel, damit der Kontrast reicht. Es gibt keine Verläufe, kein Glas, keine Schatten und keine Bildkacheln. Alle Farben, Radien und Maße stehen als Variablen am Anfang von `styles.css` bzw. `material.css`.
 
 ## Themenbilder (optional)
 
