@@ -1,187 +1,3 @@
-/* Rahmen für Materialseiten (nach dem Portal-Stylesheet laden).
-   Nutzt die Portal-Variablen (Farben, Dunkelmodus, Lesemodus) und gestaltet
-   Aufgabe, Material und Hilfe im gleichen Look. Alle Größen in rem. */
-
-:root {
-  --card: var(--surface);
-  --muted: var(--text-2);
-  --line-soft: #c9ccc6;
-  --control: #7d837c;
-  --accent: #0c6a49;
-  --accent-2: #0f7a55;
-  --accent-hover: #0a5a3e;
-  --on-accent: #ffffff;
-  --accent-ink: var(--bio-ink);
-  --hl: #c24a08;
-  --ok: #0c6a49;
-  --bad: #a12a1a;
-  --ok-bg: rgba(12, 106, 73, 0.12);
-  --bad-bg: rgba(161, 42, 26, 0.1);
-  /* Auge (Abbildung) */
-  --sclera: #8f8a78; --choroid: #5b3d2e; --retina: #c0643c;
-  --horn-fill: rgba(120, 170, 220, .35); --horn-line: #2f6fa5;
-  --iris-fill: #3f7f8c; --iris-line: #1f5560;
-  --lens-fill: rgba(250, 220, 120, .65); --lens-line: #8a6a08;
-  --glas-fill: rgba(140, 195, 230, .28); --innen-fill: rgba(140, 195, 230, .10);
-  --cil-fill: #b98aa8; --cil-line: #6b3d5c;
-  --nerv-fill: #e6c75c; --nerv-line: #7a6512;
-  --gelb-fill: #f2d03b; --gelb-line: #7a5f00;
-  --ray: #b45309; --axis: #8a908a;
-}
-:root[data-theme="dark"] {
-  --line-soft: #3a3f3a; --control: #8b928a;
-  --accent: #5fd4a6; --accent-2: #7fe0b9; --accent-hover: #86e3bd; --on-accent: #06241a; --accent-ink: #6fd9b0;
-  --hl: #ffa468; --ok: #6fd9b0; --bad: #ff9a8a;
-  --ok-bg: rgba(111, 217, 176, 0.14); --bad-bg: rgba(255, 154, 138, 0.14);
-  --sclera: #d8d4c4; --choroid: #a27d68; --retina: #ff9a6a;
-  --horn-fill: rgba(120, 170, 220, .30); --horn-line: #8ab8e8;
-  --iris-fill: #5aa7b5; --iris-line: #a9dce5;
-  --lens-fill: rgba(250, 220, 120, .35); --lens-line: #e8c860;
-  --glas-fill: rgba(140, 195, 230, .22); --innen-fill: rgba(140, 195, 230, .08);
-  --cil-fill: #8a5f7a; --cil-line: #e0b5d0;
-  --nerv-fill: #b89a30; --nerv-line: #f0dc8c;
-  --gelb-fill: #f2d03b; --gelb-line: #f6e48a;
-  --ray: #ffb066; --axis: #98a098;
-}
-@media (prefers-color-scheme: dark) {
-  :root[data-theme="auto"], :root:not([data-theme]) {
-    --line-soft: #3a3f3a; --control: #8b928a;
-    --accent: #5fd4a6; --accent-2: #7fe0b9; --accent-hover: #86e3bd; --on-accent: #06241a; --accent-ink: #6fd9b0;
-    --hl: #ffa468; --ok: #6fd9b0; --bad: #ff9a8a;
-    --ok-bg: rgba(111, 217, 176, 0.14); --bad-bg: rgba(255, 154, 138, 0.14);
-    --sclera: #d8d4c4; --choroid: #a27d68; --retina: #ff9a6a;
-    --horn-fill: rgba(120, 170, 220, .30); --horn-line: #8ab8e8;
-    --iris-fill: #5aa7b5; --iris-line: #a9dce5;
-    --lens-fill: rgba(250, 220, 120, .35); --lens-line: #e8c860;
-    --glas-fill: rgba(140, 195, 230, .22); --innen-fill: rgba(140, 195, 230, .08);
-    --cil-fill: #8a5f7a; --cil-line: #e0b5d0;
-    --nerv-fill: #b89a30; --nerv-line: #f0dc8c;
-    --gelb-fill: #f2d03b; --gelb-line: #f6e48a;
-    --ray: #ffb066; --axis: #98a098;
-  }
-}
-
-/* Seitenkopf der Materialseite */
-.material-page .hero { padding: 1rem 0 0.25rem; }
-.material-page .title { margin-bottom: 0.4rem; font-size: clamp(1.9rem, 6vw, 3rem); }
-.material-page .eyebrow { margin-bottom: 0.3rem; }
-.seite { padding-bottom: 3rem; }
-
-/* Aufgabe: weiße Karte mit weichem Schatten */
-.aufgabe { margin: 1.25rem 0; padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 1.5rem; box-shadow: var(--shadow); }
-.aufgabe > h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.7rem; margin: 0 0 0.6rem; font-size: 1.3125rem; line-height: 1.35; letter-spacing: -0.015em; }
-.nr { flex: none; align-self: center; display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: linear-gradient(160deg, var(--accent-2), var(--accent)); color: var(--on-accent); font-size: 1rem; font-weight: 700; }
-.niveau { margin-left: auto; font-size: 1rem; letter-spacing: 0.15em; color: var(--muted); white-space: nowrap; }
-.aufgabe p { max-width: 75ch; }
-.aufgabe p:first-of-type { margin-top: 0; }
-
-/* Material: getönte Fläche. Hilfe: gestrichelter Kasten. */
-.material { margin: 1rem 0; padding: 0.85rem 1rem 1.1rem; background: var(--group); border: 1px solid var(--line); border-radius: 1.1rem; }
-.hilfe { margin: 1rem 0; padding: 0.7rem 1rem 0.9rem; background: var(--bio-tint); border: 1.5px dashed var(--control); border-radius: 1.1rem; }
-.box-label { display: block; margin: 0 0 0.45rem; font-size: 0.875rem; font-weight: 700; }
-.quelle { margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--muted); }
-.wortspeicher { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; margin: 0; padding: 0; list-style: none; }
-.wortspeicher li { padding: 0.2rem 0.65rem; background: var(--surface); border: 1px solid var(--control); border-radius: 0.6rem; }
-.schreib label { display: block; margin-bottom: 0.3rem; font-weight: 700; }
-textarea { width: 100%; max-width: 75ch; min-height: 6.5rem; padding: 0.7rem 0.85rem; font: inherit; line-height: 1.6; color: var(--text); background: var(--bg); border: 1.5px solid var(--control); border-radius: 0.9rem; resize: vertical; }
-.hinweis { margin: 0.25rem 0 0; font-size: 0.875rem; color: var(--muted); }
-.frage { margin: 1.25rem 0; padding: 1rem 1.25rem; background: linear-gradient(180deg, var(--bio-tint), transparent 75%), var(--surface); border: 1px solid var(--line); border-radius: 1.5rem; box-shadow: var(--shadow); }
-.frage label { display: block; margin-bottom: 0.35rem; font-size: 1.0625rem; font-weight: 700; }
-.frage textarea { min-height: 4.5rem; }
-
-/* Schaltflächen */
-.btn { min-height: 2.75rem; padding: 0.5rem 1.2rem; font: inherit; font-weight: 700; color: var(--on-accent); background: linear-gradient(180deg, var(--accent-2), var(--accent)); border: 1.5px solid var(--accent); border-radius: 0.9rem; box-shadow: 0 10px 20px -14px var(--accent); cursor: pointer; }
-.btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
-.btn.zweit { color: var(--accent-ink); background: transparent; box-shadow: none; }
-.btn.zweit:hover { background: var(--group); }
-.btn[disabled] { opacity: 0.55; cursor: not-allowed; }
-.seg { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; padding: 0.25rem; background: var(--field); border-radius: 0.95rem; }
-.seg button { min-height: 2.75rem; min-width: 2.75rem; padding: 0.4rem 0.95rem; font: inherit; color: var(--text); background: transparent; border: 0; border-radius: 0.7rem; cursor: pointer; }
-.seg button[aria-pressed="true"] { color: var(--on-accent); font-weight: 700; background: linear-gradient(180deg, var(--accent-2), var(--accent)); }
-.seg button[disabled] { opacity: 0.55; cursor: not-allowed; }
-.steuer { margin: 0 0 0.9rem; }
-.steuer > .box-label { margin-bottom: 0.3rem; }
-
-/* Abbildung und Infofeld */
-.zweispalt { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
-@media (max-width: 48rem) { .zweispalt { grid-template-columns: minmax(0, 1fr); } }
-.abb { padding: 0.5rem; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 1rem; }
-.abb svg { display: block; width: 100%; height: auto; }
-.tg { cursor: pointer; }
-.hl * { fill: none !important; stroke: var(--hl) !important; stroke-width: 5; stroke-dasharray: 7 4; pointer-events: none; }
-.hl { pointer-events: none; }
-.info { min-height: 8rem; padding: 0.8rem 1rem; background: var(--surface); border: 1.5px solid var(--accent); border-radius: 1rem; }
-.info h3 { margin: 0 0 0.25rem; font-size: 1.125rem; }
-.info .silben { font-weight: 400; font-size: 1rem; color: var(--muted); }
-.info p { margin: 0.25rem 0; }
-.zaehler { margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--muted); }
-.teile { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0.4rem; margin: 0.75rem 0 0; padding: 0; list-style: none; }
-.teile button { width: 100%; min-height: 2.75rem; padding: 0.35rem 0.75rem; text-align: left; font: inherit; color: var(--text); background: var(--surface); border: 1.5px solid var(--control); border-radius: 0.8rem; cursor: pointer; }
-.teile button[aria-pressed="true"] { color: var(--on-accent); font-weight: 700; background: var(--accent); border-color: var(--accent); }
-
-/* Übung Benennen */
-.optionen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0.75rem 0; }
-@media (max-width: 30rem) { .optionen { grid-template-columns: minmax(0, 1fr); } }
-.optionen button { min-height: 3rem; padding: 0.4rem 0.85rem; text-align: left; font: inherit; color: var(--text); background: var(--surface); border: 1.5px solid var(--control); border-radius: 0.8rem; cursor: pointer; }
-.optionen button[disabled] { cursor: default; }
-.optionen button.richtig { font-weight: 700; background: var(--ok-bg); border-color: var(--ok); }
-.optionen button.falsch { background: var(--bad-bg); border-color: var(--bad); border-style: dashed; }
-.rueck { display: flex; gap: 0.5rem; align-items: flex-start; margin: 0.5rem 0; font-weight: 700; }
-.rueck svg { flex: none; width: 1.5rem; height: 1.5rem; margin-top: 0.1rem; }
-.rueck.ok, .ergebnis-zeile.ok, .zeilen-rueck.ok { color: var(--ok); }
-.rueck.nok, .ergebnis-zeile.nok, .zeilen-rueck.nok { color: var(--bad); }
-.ergebnis-zeile { display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0; }
-.ergebnis-zeile svg { flex: none; width: 1.5rem; height: 1.5rem; }
-.fortschritt { margin: 0 0 0.4rem; font-size: 0.875rem; color: var(--muted); }
-
-/* Zuordnung (Kamera) */
-.zuordnung { width: 100%; margin: 0.5rem 0; border-collapse: collapse; }
-.zuordnung th, .zuordnung td { padding: 0.5rem 0.5rem 0.5rem 0; text-align: left; vertical-align: middle; border-bottom: 1px solid var(--line-soft); }
-.zuordnung thead th { font-size: 0.875rem; }
-select { min-height: 2.75rem; max-width: 100%; padding: 0.3rem 0.7rem; font: inherit; color: var(--text); background: var(--surface); border: 1.5px solid var(--control); border-radius: 0.8rem; }
-.zeilen-rueck { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; }
-.zeilen-rueck svg { flex: none; width: 1.375rem; height: 1.375rem; }
-@media (max-width: 36rem) {
-  .zuordnung, .zuordnung tbody, .zuordnung tr, .zuordnung td, .zuordnung th { display: block; }
-  .zuordnung thead { position: absolute; left: -9999px; }
-  .zuordnung tr { padding: 0.5rem 0; border-bottom: 1px solid var(--line-soft); }
-  .zuordnung td, .zuordnung th { padding: 0.15rem 0; border: 0; }
-}
-
-/* Simulation */
-.regler { display: block; width: 100%; max-width: 34rem; min-height: 2.75rem; accent-color: var(--accent); }
-.wert { font-weight: 700; }
-.regler-zeile { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; max-width: 40rem; }
-.regler-zeile label { font-weight: 700; }
-.status { margin: 0.75rem 0; padding: 0.65rem 0.95rem; background: var(--surface); border: 1.5px solid var(--accent); border-radius: 1rem; }
-.status p { margin: 0.2rem 0; }
-.status .rueck { margin: 0.2rem 0; }
-.sehtafel { padding: 0.75rem; text-align: center; overflow: hidden; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 1rem; }
-.sehtafel .buchstaben { margin: 0; padding-left: 0.3em; font-size: clamp(1.5rem, 8vw, 2.25rem); font-weight: 700; letter-spacing: 0.3em; transition: filter 0.15s; }
-@media (prefers-reduced-motion: reduce) { .sehtafel .buchstaben { transition: none; } }
-.ray { fill: none; stroke: var(--ray); stroke-width: 3; stroke-linejoin: round; }
-.ray-weiter { fill: none; stroke: var(--ray); stroke-width: 2.5; stroke-dasharray: 5 5; opacity: 0.85; }
-.achse { stroke: var(--axis); stroke-width: 1.5; stroke-dasharray: 2 6; }
-.auge-umriss { fill: var(--glas-fill); stroke: var(--sclera); stroke-width: 4; }
-.netzhaut-l { stroke: var(--retina); stroke-width: 7; stroke-linecap: round; fill: none; }
-.linse-s { fill: var(--lens-fill); stroke: var(--lens-line); stroke-width: 3; }
-.iris-s { stroke: var(--iris-line); stroke-width: 7; stroke-linecap: round; }
-.brille-s { fill: rgba(130, 130, 130, .18); stroke: var(--text); stroke-width: 3; }
-.fokus-s { fill: var(--surface); stroke: var(--ray); stroke-width: 3.5; }
-.radio-gruppe { margin: 0.75rem 0; padding: 0; border: 0; }
-.radio-gruppe legend { margin-bottom: 0.25rem; padding: 0; font-weight: 700; }
-.radio-gruppe label { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; cursor: pointer; }
-.radio-gruppe input { flex: none; width: 1.375rem; height: 1.375rem; accent-color: var(--accent); }
-
-/* Simulationslayout: Anzeige bleibt beim Verstellen der Regler sichtbar */
-.sim-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; align-items: start; }
-@media (min-width: 56rem) {
-  .sim-layout { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
-  .sim-anzeige { position: sticky; top: 4.5rem; }
-}
-
-
-/* ===== Materialvorlage (Präfix lp-) und Kopfleiste (material.js) ===== */
 /* Lernportal – Materialseiten: Kopfleiste und Bausteine.
    Eigenständig: braucht weder styles.css noch ein Framework.
    Alle Klassen und Variablen tragen das Präfix lp-, damit bestehende Materialien nicht beeinflusst werden.
@@ -202,18 +18,26 @@ select { min-height: 2.75rem; max-width: 100%; padding: 0.3rem 0.7rem; font: inh
   --lp-fokus: #0a6fe0;
   --lp-bio: #557a5c;
   --lp-geo: #a58c61;
+  --lp-bio-tint: rgba(85, 122, 92, 0.15);
+  --lp-geo-tint: rgba(165, 140, 97, 0.17);
   --lp-akzent: var(--lp-text2);
+  --lp-schatten: 0 1px 2px rgba(31, 36, 32, 0.06), 0 14px 30px -18px rgba(31, 36, 32, 0.3);
+  --lp-schatten-stark: 0 2px 4px rgba(31, 36, 32, 0.08), 0 20px 36px -18px rgba(31, 36, 32, 0.38);
 }
 :root[data-theme="dark"] {
   --lp-bg: #121513; --lp-flaeche: #1a1e1b; --lp-gruppe: #151815; --lp-feld: #222723;
   --lp-text: #f0f2ee; --lp-text2: #a6ada7; --lp-linie: #2c312d; --lp-rahmen: #7f867f; --lp-fokus: #4da3ff;
   --lp-bio: #8db894; --lp-geo: #d1b685;
+  --lp-bio-tint: rgba(141, 184, 148, 0.16); --lp-geo-tint: rgba(209, 182, 133, 0.16);
+  --lp-schatten: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 30px -16px rgba(0, 0, 0, 0.75); --lp-schatten-stark: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 36px -16px rgba(0, 0, 0, 0.85);
 }
 @media (prefers-color-scheme: dark) {
   :root[data-theme="auto"], :root:not([data-theme]) {
     --lp-bg: #121513; --lp-flaeche: #1a1e1b; --lp-gruppe: #151815; --lp-feld: #222723;
     --lp-text: #f0f2ee; --lp-text2: #a6ada7; --lp-linie: #2c312d; --lp-rahmen: #7f867f; --lp-fokus: #4da3ff;
     --lp-bio: #8db894; --lp-geo: #d1b685;
+    --lp-bio-tint: rgba(141, 184, 148, 0.16); --lp-geo-tint: rgba(209, 182, 133, 0.16);
+    --lp-schatten: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 30px -16px rgba(0, 0, 0, 0.75); --lp-schatten-stark: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 36px -16px rgba(0, 0, 0, 0.85);
   }
 }
 
@@ -262,14 +86,25 @@ body[data-subject="Geografie"] { --lp-akzent: var(--lp-geo); }
 .lp-schlank .lp-kopf-innen { min-height: 3em; }
 .lp-schlank .lp-werkzeuge { margin-left: auto; }
 
-/* Titelblock auf Vorlagenseiten: Fach, Klasse und Titel typografisch, optional ein Themenbild rechts daneben.
-   Keine Fläche, keine Verläufe. Das Bild steht neben dem Titel, nie darunter oder dahinter. */
-.lp-titelblock { font-family: var(--lp-schrift); color: var(--lp-text); }
-.lp-titelblock-innen { display: grid; gap: 1.25rem; align-items: center; max-width: 68rem; margin: 0 auto; padding: 2rem clamp(1rem, 4vw, 1.5rem) 0.5rem; }
+/* Titelblock auf Vorlagenseiten: flache Fachtönung mit dezentem Fachmuster (rein dekorativ), Text in Textfarbe.
+   Optional ein Themenbild neben dem Titel, nie darunter oder dahinter. Keine Verläufe, keine Schatten. */
+.lp-titelblock { position: relative; isolation: isolate; overflow: hidden; font-family: var(--lp-schrift); color: var(--lp-text); border-bottom: 1px solid var(--lp-linie); }
+.lp-titelblock.lp-bio { background: linear-gradient(var(--lp-bio-tint), var(--lp-bio-tint)), var(--lp-bg); }
+.lp-titelblock.lp-geo { background: linear-gradient(var(--lp-geo-tint), var(--lp-geo-tint)), var(--lp-bg); }
+.lp-titelblock-innen { position: relative; display: grid; gap: 1.25rem; align-items: center; max-width: 68rem; margin: 0 auto; padding: 1.75rem clamp(1rem, 4vw, 1.5rem) 1.75rem; }
+.lp-titelblock-innen::after {
+  content: ""; position: absolute; z-index: -1; pointer-events: none; right: 0; top: 0; width: min(26rem, 80%); height: 100%; min-height: 8rem; opacity: 0.32;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: right top; mask-position: right top;
+  -webkit-mask-size: auto 100%, 100% 100%; mask-size: auto 100%, 100% 100%; -webkit-mask-composite: source-in; mask-composite: intersect;
+}
+.lp-titelblock.lp-bio .lp-titelblock-innen::after { background: var(--lp-bio); -webkit-mask-image: url("../img/muster/bio.svg"), linear-gradient(to left, transparent, #000 16%); mask-image: url("../img/muster/bio.svg"), linear-gradient(to left, transparent, #000 16%); }
+.lp-titelblock.lp-geo .lp-titelblock-innen::after { background: var(--lp-geo); -webkit-mask-image: url("../img/muster/geo.svg"), linear-gradient(to left, transparent, #000 16%); mask-image: url("../img/muster/geo.svg"), linear-gradient(to left, transparent, #000 16%); }
+.lp-titelblock { --lp-text2: color-mix(in srgb, var(--lp-text) 80%, var(--lp-bg)); }
+@media (max-width: 40rem) { .lp-titelblock-innen::after { opacity: 0.22; } }
 .lp-titelblock .lp-meta { margin: 0 0 0.6rem; font-size: 0.9375rem; }
 .lp-haupttitel { margin: 0; max-width: 40rem; font-size: clamp(2rem, 7vw, 3rem); font-weight: 700; letter-spacing: -0.035em; line-height: 1.08; color: var(--lp-text); }
 .lp-titelbild { margin: 0; }
-.lp-titelbild img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: var(--lp-feld); border: 1px solid var(--lp-linie); border-radius: 0.75rem; }
+.lp-titelbild img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: var(--lp-feld); border: 1px solid var(--lp-linie); border-radius: 1rem; box-shadow: var(--lp-schatten-stark); }
 .lp-titelbild figcaption { margin-top: 0.5rem; font-size: 0.875rem; color: var(--lp-text2); }
 @media (min-width: 52rem) { .lp-titelblock.lp-mit-bild .lp-titelblock-innen { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); gap: 2.5rem; } }
 
@@ -285,7 +120,7 @@ body[data-subject="Geografie"] { --lp-akzent: var(--lp-geo); }
   position: absolute; right: 0; top: calc(100% + 0.5em); z-index: 5;
   width: min(22em, calc(100vw - 1.5em)); padding: 1.1em;
   background: var(--lp-flaeche); color: var(--lp-text);
-  border: 1px solid var(--lp-linie); border-radius: 1.25em;
+  border: 1px solid var(--lp-linie); border-radius: 1.25em; box-shadow: var(--lp-schatten-stark);
 }
 .lp-kopf .prefs-panel[hidden] { display: none; }
 .lp-kopf .prefs-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5em; }
@@ -337,7 +172,7 @@ body.lp-seite[data-dichte="9-10"] { --lp-abstand: 1rem; --lp-radius: 0.5rem; }
 .lp-leitfrage p { font-size: 1.25rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; max-width: 36rem; }
 
 /* Material: dünner neutraler Rahmen, Beschriftung M1, M2 … */
-.lp-material { border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); overflow: hidden; }
+.lp-material { border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); overflow: hidden; box-shadow: var(--lp-schatten); }
 .lp-material-kopf { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.6rem 1.1rem; border-bottom: 1px solid var(--lp-linie); background: var(--lp-gruppe); }
 .lp-material-kopf strong { font-size: 1rem; }
 .lp-material-kopf span { font-size: 0.9375rem; color: var(--lp-text2); }
@@ -367,7 +202,7 @@ body.lp-seite[data-dichte="9-10"] { --lp-abstand: 1rem; --lp-radius: 0.5rem; }
 .lp-bildrahmen img { width: 100%; height: 100%; object-fit: contain; }
 
 /* Aufgabe: kräftiger Rahmen in der Fachfarbe */
-.lp-aufgabe { border: 2px solid var(--lp-akzent); border-radius: var(--lp-radius); background: var(--lp-flaeche); padding: 1rem 1.1rem 1.1rem; }
+.lp-aufgabe { border: 2px solid var(--lp-akzent); border-radius: var(--lp-radius); background: var(--lp-flaeche); padding: 1rem 1.1rem 1.1rem; box-shadow: var(--lp-schatten); }
 .lp-aufgabe-kopf { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; }
 .lp-aufgabe-kopf .lp-label { margin: 0; font-size: 1rem; color: var(--lp-text); }
 .lp-op { font-weight: 700; }

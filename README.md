@@ -9,11 +9,10 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `index.html` | Startseite: Suche, zwei Fachbereiche, Impuls der Woche, Register nach Klassenstufe |
 | `biologie/`, `geografie/` | Fachseiten mit Suche und Filtern (Klassenstufe, Art, Themenfeld) |
 | `alle/` | Alle Materialien mit zusätzlichem Fachfilter. Das Register der Startseite verlinkt hierher (`alle/?klasse=8`) |
-| `impressum/`, `datenschutz/` | Rechtstexte, in der Fußzeile aller Seiten verlinkt. Laden bewusst kein `app.js`. **Platzhalter in eckigen Klammern vor der Veröffentlichung ausfüllen** |
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
 | `vorlage/` | Vorlage für Materialseiten mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
-| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten: Anwendungen mit Portal-Variablen und Materialvorlage mit Präfix `lp-`), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten), `img/fach/` (optionale Themenbilder der Fachseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
+| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
 
 ## Inhalte ergänzen
 
@@ -107,15 +106,15 @@ Eine Anwendung mit eigenem Aussehen bekommt nur die Kopfleiste. Im `<head>` erg�
 <script src="../../../assets/js/material.js" defer></script>
 ```
 
-Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-grade` setzen. Der Teil mit dem Präfix `lp-` in `material.css` ist eigenständig, die Klassen der Vorlage und der Kopfleiste tragen alle dieses Präfix. Danach die Anwendung prüfen: Kopfleiste ist oben angeheftet, Vollbild-Layouts mit `100vh` können dadurch minimal überlaufen.
+Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-grade` setzen. `material.css` ist eigenständig, alle Klassen tragen das Präfix `lp-`. Danach die Anwendung prüfen: Kopfleiste ist oben angeheftet, Vollbild-Layouts mit `100vh` können dadurch minimal überlaufen.
 
 ## Gestaltung
 
-Stil „Digital Library“: warmes Weiß (`#f7f7f4`), dunkler Text, feine Linien, große Typografie. Die Fächer erscheinen als Textzeilen mit einem dezenten Fachpunkt (Biologie grün, Geografie ocker). Die Fachfarbe ist nur Punkt, Linie oder Rahmen, der Text bleibt dunkel, damit der Kontrast reicht. Es gibt keine Verläufe, kein Glas, keine Schatten und keine Bildkacheln. Alle Farben, Radien und Maße stehen als Variablen am Anfang von `styles.css` bzw. `material.css`.
+Stil „Digital Library" mit warmer Fachfarbe: Der Aufbau ist ruhig (warmes Weiß `#f7f7f4`, dunkler Text, große Typografie, Linien in Listen). Die Wärme kommt aus flachen Fachtönungen (Biologie grün, Geografie ocker), dezenten Fachmustern (`assets/img/muster/`), optionalen Themenbildern und weichen Schatten. Es gibt keine Verläufe, kein Glas und keine harten Schatten. Fachfarbe ist Punkt, Linie, Rahmen, Tönung oder Muster, der Text bleibt in Textfarbe. Alle Farben, Radien, Tönungen und Schatten stehen als Variablen am Anfang von `styles.css` bzw. `material.css`. Die Fachmuster sind rein dekorativ und werden per CSS-Maske in der Fachfarbe eingefärbt, sie folgen deshalb dem Dunkelmodus.
 
 ## Themenbilder (optional)
 
-Statt nur Typografie kann rechts neben dem Titel ein Themenbild stehen. Das Bild steht neben dem Text, nie darunter oder dahinter.
+Statt nur Typografie kann rechts neben dem Titel ein Themenbild stehen. Das Bild steht neben dem Text, nie darunter oder dahinter. Das Fachmuster bleibt hinter dem Bild sichtbar.
 
 - **Fachseite:** In `biologie/index.html` und `geografie/index.html` steht ein auskommentierter Block. Ergänze die Klasse `mit-bild` bei `band-inner` und entferne die Kommentarzeichen um die `figure`. Bild nach `assets/img/fach/biologie.webp` bzw. `geografie.webp` legen.
 - **Materialseite:** Am `body` ergänzen: `data-bild="assets/img/<material>/titel.webp"` (Pfad ab Repository-Stamm), `data-bild-alt` und `data-bild-quelle`. Lädt das Bild nicht, verschwindet es.
@@ -128,18 +127,6 @@ Das Symbol „Aa" in der Kopfleiste (Portal und Materialseiten) öffnet die Eins
 ## GitHub Pages aktivieren
 
 Im Repository unter **Settings → Pages** als Build source **Deploy from a branch** wählen, Branch `main`, Ordner `/(root)`, dann **Save**.
-
-## Rechtstexte (Impressum, Datenschutz)
-
-In `impressum/index.html` und `datenschutz/index.html` stehen Platzhalter in eckigen Klammern (Name, Anschrift, E-Mail, zuständige Gesellschaft von GitHub, Rechtsgrundlage, Aufsichtsbehörde, Datum). Sie müssen vor der Veröffentlichung ausgefüllt werden. Suche nach `[` in beiden Dateien. Die Texte sind keine Rechtsberatung. Offen sind: private oder dienstliche Anschrift, mögliche Anzeige- oder Genehmigungspflicht, Eignung von GitHub-Hosting für den Einsatz mit SuS. Das vorab mit Schulleitung bzw. Datenschutzbeauftragten klären.
-
-## Eigene Domain bei GitHub Pages
-
-1. Domain registrieren (Anbieter mit EU-Sitz, Whois-Datenschutz).
-2. Unter **Settings → Pages → Custom domain** eintragen. GitHub legt `CNAME` im Stamm an.
-3. DNS: `www` als CNAME auf `<Benutzername>.github.io`. Für die Apex-Domain die A-/AAAA-Einträge aus der aktuellen GitHub-Dokumentation „Managing a custom domain for your GitHub Pages site" übernehmen (nicht aus dem Gedächtnis eintragen).
-4. Nach grüner DNS-Prüfung **Enforce HTTPS** aktivieren.
-5. Danach läuft das Portal im Stamm der Domain statt unter `/lernportal/`. Relative Pfade bleiben gültig. Nach absoluten Pfaden mit `/lernportal/` suchen und ersetzen (aktuell keine vorhanden).
 
 ## Hinweis
 
