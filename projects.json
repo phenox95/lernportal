@@ -61,5 +61,27 @@
     "datum": "2026-11-03",
     "sichtbar": true,
     "status": "Beispiel"
+  },
+  {
+    "title": "Das Auge: Bau und Funktion",
+    "description": "Beschreibe die Teile des Auges und benenne sie.",
+    "type": "Lernmodul",
+    "path": "biologie/klasse-9/auge-bau/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "Sinne",
+    "dauer": "45 Min.",
+    "datum": "2026-11-03"
+  },
+  {
+    "title": "Kurzsichtigkeit und Brille",
+    "description": "Untersuche den Strahlengang und teste Brillen.",
+    "type": "Simulation",
+    "path": "biologie/klasse-9/kurzsichtigkeit/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "Sinne",
+    "dauer": "45 Min.",
+    "datum": "2026-11-03"
   }
 ]
