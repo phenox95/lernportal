@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Das Auge: Bau und Funktion – Biologie Klasse 9</title>
+<meta name="description" content="Interaktive Abbildung zum Bau des Auges mit Übungen.">
+<script src="../../../assets/js/prefs.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="zurueck" href="../../../">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      Zurück zum Portal
+    </a>
+    <div class="titelblock">
+      <h1>Das Auge: Bau und Funktion</h1>
+      <span class="meta">Biologie, Klasse 9</span>
+    </div>
+  </div>
+</header>
+
+<main class="seite">
+  <noscript><p class="aufgabe">Dieses Material braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+
+  <section class="frage">
+    <label for="klassenfrage">Unsere Frage für heute</label>
+    <textarea id="klassenfrage" rows="2"></textarea>
+    <p class="hinweis">Schreibe hier die Frage der Klasse auf. Dein Text wird nicht gespeichert.</p>
+  </section>
+
+  <!-- Aufgabe 1 -->
+  <section class="aufgabe" aria-labelledby="a1">
+    <h2 id="a1"><span class="nr" aria-hidden="true">1</span><span><strong>Beschreibe</strong> den Bau des Auges.</span><span class="niveau" role="img" aria-label="Niveau 1 von 3">●○○</span></h2>
+    <p>Tippe ein Teil in der Abbildung an oder wähle es in der Liste. Lies die Funktion. Beschreibe danach zwei Teile in eigenen Worten.</p>
+
+    <div class="material">
+      <span class="box-label">Material M1: Schnitt durch das Auge</span>
+      <div class="zweispalt">
+        <div>
+          <div class="abb" id="abb1">
+            <svg id="auge-svg" viewBox="170 20 390 340" role="img" aria-label="Schematischer Schnitt durch ein Auge von der Seite. Das Licht fällt von links ein. Vorn liegen Hornhaut, Iris, Pupille und Linse. Hinten liegen Netzhaut, Gelber Fleck, Blinder Fleck und Sehnerv.">
+              <circle fill="var(--innen-fill)" cx="340" cy="200" r="129"/>
+              <path fill="var(--innen-fill)" d="M214.2 130 Q174 200 214.2 270 Z"/>
+              <g class="tg" data-teil="glaskoerper"><path class="f" fill="var(--glas-fill)" stroke="var(--line-soft)" stroke-width="1.5" d="M280 98.4 A118 118 0 1 1 280 301.6 Z"/></g>
+              <g class="tg" data-teil="lederhaut"><path class="f" fill="none" stroke="var(--sclera)" stroke-width="9" d="M214.2 130 A144 144 0 1 1 214.2 270"/></g>
+              <g class="tg" data-teil="aderhaut"><path class="f" fill="none" stroke="var(--choroid)" stroke-width="7" d="M272 85.7 A133 133 0 1 1 272 314.3"/></g>
+              <g class="tg" data-teil="netzhaut"><path class="f" fill="none" stroke="var(--retina)" stroke-width="8" d="M282 92.7 A122 122 0 1 1 282 307.3"/></g>
+              <g class="tg" data-teil="ziliarmuskel">
+                <ellipse class="f" fill="var(--cil-fill)" stroke="var(--cil-line)" stroke-width="2.5" cx="262" cy="98" rx="17" ry="12"/>
+                <ellipse class="f" fill="var(--cil-fill)" stroke="var(--cil-line)" stroke-width="2.5" cx="262" cy="302" rx="17" ry="12"/>
+                <line class="f" stroke="var(--cil-line)" stroke-width="1.5" x1="257" y1="109" x2="256" y2="165"/>
+                <line class="f" stroke="var(--cil-line)" stroke-width="1.5" x1="267" y1="109" x2="268" y2="165"/>
+                <line class="f" stroke="var(--cil-line)" stroke-width="1.5" x1="257" y1="291" x2="256" y2="235"/>
+                <line class="f" stroke="var(--cil-line)" stroke-width="1.5" x1="267" y1="291" x2="268" y2="235"/>
+              </g>
+              <g class="tg" data-teil="linse"><ellipse class="f" fill="var(--lens-fill)" stroke="var(--lens-line)" stroke-width="3" cx="262" cy="200" rx="16" ry="38"/></g>
+              <g class="tg" data-teil="iris">
+                <rect class="f" fill="var(--iris-fill)" stroke="var(--iris-line)" stroke-width="2" x="231" y="106" width="14" height="70" rx="5"/>
+                <rect class="f" fill="var(--iris-fill)" stroke="var(--iris-line)" stroke-width="2" x="231" y="224" width="14" height="70" rx="5"/>
+              </g>
+              <g class="tg" data-teil="pupille"><rect class="f" fill="transparent" stroke="var(--text)" stroke-width="1.5" stroke-dasharray="3 3" x="224" y="176" width="28" height="48" rx="4" pointer-events="all"/></g>
+              <g class="tg" data-teil="hornhaut"><path class="f" fill="var(--horn-fill)" stroke="var(--horn-line)" stroke-width="2.5" d="M214.2 130 Q162 200 214.2 270 Q174 200 214.2 130 Z"/></g>
+              <g class="tg" data-teil="sehnerv"><line class="f" stroke="var(--nerv-line)" stroke-width="22" x1="453" y1="246" x2="538" y2="282"/><line class="f" stroke="var(--nerv-fill)" stroke-width="17" x1="453" y1="246" x2="536" y2="281"/></g>
+              <g class="tg" data-teil="blinder-fleck"><circle class="f" fill="var(--card)" stroke="var(--text)" stroke-width="2" stroke-dasharray="3 3" cx="450.5" cy="244.5" r="9"/></g>
+              <g class="tg" data-teil="gelber-fleck"><ellipse class="f" fill="var(--gelb-fill)" stroke="var(--gelb-line)" stroke-width="2" cx="458" cy="200" rx="5" ry="13"/></g>
+              <g id="hl1" class="hl"></g>
+            </svg>
+          </div>
+          <p class="quelle">Quelle: eigene, vereinfachte Zeichnung.</p>
+        </div>
+        <div>
+          <div class="info" id="info1" aria-live="polite"></div>
+          <ul class="teile" id="liste1" aria-label="Teile des Auges"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="hilfe">
+      <span class="box-label">Hilfe: Wortspeicher</span>
+      <ul class="wortspeicher" id="wortspeicher">
+        <li>Horn-haut</li><li>Le-der-haut</li><li>Ader-haut</li><li>I-ris</li><li>Pu-pil-le</li><li>Lin-se</li><li>Zi-li-ar-mus-kel</li><li>Glas-kör-per</li><li>Netz-haut</li><li>Gel-ber Fleck</li><li>Blin-der Fleck</li><li>Seh-nerv</li>
+      </ul>
+    </div>
+
+    <div class="schreib">
+      <label for="beschr1">Schreibraum: Beschreibe zwei Teile</label>
+      <textarea id="beschr1" rows="4"></textarea>
+      <p class="hinweis">Satzbaustein: Das Teil heißt … Es liegt … Es hat die Aufgabe, … Dein Text wird nicht gespeichert.</p>
+    </div>
+  </section>
+
+  <!-- Aufgabe 2 -->
+  <section class="aufgabe" aria-labelledby="a2">
+    <h2 id="a2"><span class="nr" aria-hidden="true">2</span><span><strong>Benenne</strong> das markierte Teil.</span><span class="niveau" role="img" aria-label="Niveau 2 von 3">●●○</span></h2>
+    <p>Ein Teil des Auges ist mit einer gestrichelten Linie markiert. Wähle den richtigen Namen. Du bekommst nach jeder Antwort eine Rückmeldung. Es gibt keine Zeitbegrenzung.</p>
+    <div class="steuer">
+      <span class="box-label" id="umfang-label">Umfang</span>
+      <div class="seg" role="group" aria-labelledby="umfang-label" id="umfang">
+        <button type="button" data-umfang="kern" aria-pressed="true">Kernbegriffe (6)</button>
+        <button type="button" data-umfang="alle" aria-pressed="false">Alle Teile (12)</button>
+      </div>
+    </div>
+    <div class="material">
+      <span class="box-label">Material M2: Auge mit Markierung</span>
+      <div class="zweispalt">
+        <div class="abb" id="abb2"></div>
+        <div id="quiz" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aufgabe 3 -->
+  <section class="aufgabe" aria-labelledby="a3">
+    <h2 id="a3"><span class="nr" aria-hidden="true">3</span><span><strong>Vergleiche</strong> das Auge mit einer Kamera. Ordne jedem Kamera-Teil das passende Teil des Auges zu.</span><span class="niveau" role="img" aria-label="Niveau 2 von 3">●●○</span></h2>
+    <table class="zuordnung">
+      <thead><tr><th scope="col">Kamera-Teil</th><th scope="col">Teil des Auges</th><th scope="col">Rückmeldung</th></tr></thead>
+      <tbody id="kamera-body"></tbody>
+    </table>
+    <button type="button" class="btn" id="kamera-pruefen">Prüfen</button>
+    <p id="kamera-summe" aria-live="polite" class="hinweis"></p>
+    <div class="hilfe">
+      <span class="box-label">Hilfe: Tipp</span>
+      Lies noch einmal die Funktion der Teile in Aufgabe 1. Zwei Teile des Auges bündeln das Licht. Beim Objektiv zählen beide Antworten.
+    </div>
+  </section>
+
+  <!-- Aufgabe 4 -->
+  <section class="aufgabe" aria-labelledby="a4">
+    <h2 id="a4"><span class="nr" aria-hidden="true">4</span><span><strong>Erkläre</strong>, warum sich die Pupille bei hellem Licht verkleinert.</span><span class="niveau" role="img" aria-label="Niveau 3 von 3">●●●</span></h2>
+    <div class="hilfe">
+      <span class="box-label">Hilfe: Satzbausteine</span>
+      Bei hellem Licht … Die Iris … Dadurch wird die Pupille … So gelangt … Licht auf die Netzhaut. Das schützt …
+    </div>
+    <div class="schreib">
+      <label for="erkl4">Schreibraum</label>
+      <textarea id="erkl4" rows="5"></textarea>
+      <p class="hinweis">Dein Text wird nicht gespeichert.</p>
+    </div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
