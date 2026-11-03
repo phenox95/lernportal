@@ -7,17 +7,26 @@
   <meta name="robots" content="noindex">
   <title>Vorlage Materialseite – Lernportal</title>
   <!-- Beim Kopieren nach biologie/klasse-N/thema/: in den fünf Zeilen mit Pfaden (link, zwei script, data-root, noscript) jeden Pfad um zwei Ordnerebenen verlängern, siehe README. -->
-  <link rel="stylesheet" href="../assets/css/material.css">
+  <link rel="stylesheet" href="../assets/css/material-lp.css">
   <script src="../assets/js/prefs.js"></script>
   <script src="../assets/js/material.js" defer></script>
 </head>
 <body class="lp-seite" data-root="../" data-title="Vorlage: Materialseite" data-subject="Biologie" data-grade="Klasse 8">
   <noscript><p class="lp-noscript"><a href="../">Zurück zum Portal</a> · Diese Seite braucht JavaScript für die Kopfleiste.</p></noscript>
 
-  <!-- Die Kopfleiste (Zurück, Titel, Fach, Klasse, Lesemodus) erzeugt material.js aus den data-Attributen am body. -->
+  <!-- Themenbild im Titelblock (optional): am body ergänzen data-bild="assets/img/<material>/titel.webp" (Pfad ab Repository-Stamm), data-bild-alt="Beschreibung" und data-bild-quelle="Foto: Urheber, Lizenz". Bild 4:3, WebP, möglichst unter ca. 150 KB. -->
+  <!-- Kopfleiste (Zurück, Lesemodus) und Titelblock (Fach, Klasse, Titel mit Fachgrafik) erzeugt material.js aus den data-Attributen am body. -->
   <!-- Lehrkrafthinweise und Erwartungshorizonte gehören NIE auf diese Seite. -->
 
   <main class="lp-inhalt">
+
+    <!-- Impulsbild (optional): Anlass für die Fragenentwicklung der SuS, muss ohne Vorerklärung erschließbar sein.
+         Echtes Bild: <img src="impuls.webp" alt="Beschreibung dessen, was zu sehen ist" width="1280" height="720" loading="lazy"> -->
+    <figure class="lp-material lp-abbildung" aria-labelledby="impuls">
+      <div class="lp-material-kopf"><strong id="impuls">Impuls</strong><span>Bild zum Einstieg</span></div>
+      <div class="lp-bildrahmen"><span>Platz für ein Impulsbild (WebP)</span></div>
+      <figcaption class="lp-quelle">Quelle: Urheber, Lizenz</figcaption>
+    </figure>
 
     <!-- Einstieg oder Leitfrage -->
     <aside class="lp-leitfrage" aria-labelledby="einstieg">

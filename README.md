@@ -13,7 +13,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
 | `vorlage/` | Vorlage für Materialseiten mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
-| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste der Materialseiten), `img/muster/` (Fachgrafiken als SVG), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
+| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten der Anwendungen, `material-lp.css` Materialvorlage), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten), `img/fach/` (optionale Themenbilder der Fachseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
 
 ## Inhalte ergänzen
 
@@ -79,7 +79,7 @@ Ein Foto mit einer Frage, die die SuS zum Material führt. Das Bild soll fachlic
 
 ## Materialseiten und Kopfleiste
 
-Jede Anwendung bekommt dieselbe Kopfleiste: **Zurück zum Portal**, Titel, Fach, Klasse und den Lesemodus „Aa". Sie wird von `assets/js/material.js` aus den `data`-Attributen am `body` erzeugt. Ändert sich die Kopfleiste, ändert sich nur diese eine Datei.
+Jede Anwendung bekommt dieselbe Kopfleiste mit **Zurück zum Portal** und dem Lesemodus „Aa". Auf Vorlagenseiten (`class="lp-seite"` am `body`) folgt darunter ein Titelblock mit Fach, Klasse, Titel und optional einem Themenbild. Bei eingehängten Anwendungen steht der Titel direkt in der schmalen Leiste. Alles erzeugt `assets/js/material.js` aus den `data`-Attributen am `body`. Ändert sich die Kopfleiste, ändert sich nur diese eine Datei.
 
 | Attribut am `body` | Bedeutung |
 |---|---|
@@ -102,16 +102,24 @@ Bausteine der Vorlage: Einstieg, Material (M1, M2 …) mit Quelle, Text mit Zeil
 Eine Anwendung mit eigenem Aussehen bekommt nur die Kopfleiste. Im `<head>` ergänzen (Pfade je nach Tiefe anpassen, `defer` ist Pflicht):
 
 ```html
-<link rel="stylesheet" href="../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../assets/css/material-lp.css">
 <script src="../../../assets/js/prefs.js"></script>
 <script src="../../../assets/js/material.js" defer></script>
 ```
 
-Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-grade` setzen. `material.css` ist eigenständig, alle Klassen tragen das Präfix `lp-`. Danach die Anwendung prüfen: Kopfleiste ist oben angeheftet, Vollbild-Layouts mit `100vh` können dadurch minimal überlaufen.
+Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-grade` setzen. `material-lp.css` ist eigenständig, alle Klassen tragen das Präfix `lp-`. Danach die Anwendung prüfen: Kopfleiste ist oben angeheftet, Vollbild-Layouts mit `100vh` können dadurch minimal überlaufen.
 
-## Fachgrafiken
+## Gestaltung
 
-`assets/img/muster/bio.svg` (Zellverband) und `geo.svg` (Höhenlinien mit Gradnetz) sind rein dekorative Muster. Sie erscheinen hinter der Überschrift der Fachseiten, in den Fachflächen der Startseite und im Titelblock der Materialvorlage. Das SVG dient als CSS-Maske und wird in der Fachfarbe eingefärbt. Dadurch passen sich die Muster dem Dunkelmodus an. Sie blenden zur Textseite und zum Rand hin aus, tragen keinen Inhalt und brauchen keinen Alternativtext. Neue Muster nur selbst zeichnen oder mit klarer Lizenz verwenden. Die Maskenebenen stehen am Ende von `styles.css` und in `material.css`.
+Stil „Digital Library“: warmes Weiß (`#f7f7f4`), dunkler Text, feine Linien, große Typografie. Die Fächer erscheinen als Textzeilen mit einem dezenten Fachpunkt (Biologie grün, Geografie ocker). Die Fachfarbe ist nur Punkt, Linie oder Rahmen, der Text bleibt dunkel, damit der Kontrast reicht. Es gibt keine Verläufe, kein Glas, keine Schatten und keine Bildkacheln. Alle Farben, Radien und Maße stehen als Variablen am Anfang von `styles.css` bzw. `material-lp.css`.
+
+## Themenbilder (optional)
+
+Statt nur Typografie kann rechts neben dem Titel ein Themenbild stehen. Das Bild steht neben dem Text, nie darunter oder dahinter.
+
+- **Fachseite:** In `biologie/index.html` und `geografie/index.html` steht ein auskommentierter Block. Ergänze die Klasse `mit-bild` bei `band-inner` und entferne die Kommentarzeichen um die `figure`. Bild nach `assets/img/fach/biologie.webp` bzw. `geografie.webp` legen.
+- **Materialseite:** Am `body` ergänzen: `data-bild="assets/img/<material>/titel.webp"` (Pfad ab Repository-Stamm), `data-bild-alt` und `data-bild-quelle`. Lädt das Bild nicht, verschwindet es.
+- **Anforderungen:** 4:3, WebP, möglichst unter ca. 150 KB, eigene Bilder oder klare Lizenz, Urheber und Lizenz in der Quelle, keine erkennbaren Personen (besonders keine Minderjährigen) ohne Einwilligung, aussagekräftiger Alternativtext. Ohne `data-bild-alt` gilt das Bild als Dekoration.
 
 ## Lesemodus
 

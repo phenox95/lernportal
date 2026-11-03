@@ -74,7 +74,7 @@
     const badge = project.status ? `<span class="badge">${escapeHtml(project.status)}</span>` : "";
     return `
       <a class="row" href="${escapeHtml(resolvePath(project.path))}">
-        <span class="tile ${tileClass(project)}">${icon(typeIcon(project), 22)}</span>
+        <span class="dot ${tileClass(project)}" aria-hidden="true"></span>
         <span class="row-main">
           <span class="row-title">${escapeHtml(project.title)}${badge}</span>
           <span class="row-meta">${meta}</span>
