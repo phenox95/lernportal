@@ -221,3 +221,16 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 
 .site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem 1.5rem; margin-top: 4rem; padding: 1.75rem 0 2.5rem; border-top: 1px solid var(--line); font-size: 0.875rem; color: var(--text-2); }
 .site-footer a:hover { color: var(--text); text-decoration: underline; }
+
+/* Fußzeile: Rechtslinks (Tippfläche >= 44 px) */
+.footer-links { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* Rechtstexte (Impressum, Datenschutz) */
+.prose { max-width: 42rem; }
+.prose h2 { margin: 2rem 0 0.5rem; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+.prose p, .prose li { max-width: 70ch; }
+.prose ul { padding-left: 1.25rem; margin: 0.5rem 0 1rem; }
+.prose a { text-decoration: underline; text-underline-offset: 0.2em; }
+.prose .kurz { margin: 1.5rem 0 0; padding: 1.1rem 1.25rem; background: var(--surface); border: 2px solid var(--text); border-radius: 1.25rem; }
+.prose .kurz h2 { margin-top: 0; }
