@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kurzsichtigkeit und Brille (Simulation) – Biologie Klasse 9</title>
+<meta name="description" content="Simulation zum Strahlengang im Auge: Kurzsichtigkeit untersuchen und mit einer Brille ausgleichen.">
+<script src="../../../assets/js/prefs.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="zurueck" href="../../../">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      Zurück zum Portal
+    </a>
+    <div class="titelblock">
+      <h1>Kurzsichtigkeit und Brille</h1>
+      <span class="meta">Biologie, Klasse 9, Simulation</span>
+    </div>
+  </div>
+</header>
+
+<main class="seite">
+  <noscript><p class="aufgabe">Dieses Material braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+
+  <section class="frage">
+    <label for="klassenfrage">Unsere Frage für heute</label>
+    <textarea id="klassenfrage" rows="2"></textarea>
+    <p class="hinweis">Schreibe hier die Frage der Klasse auf. Dein Text wird nicht gespeichert.</p>
+  </section>
+
+  <!-- Simulation -->
+  <section class="aufgabe" aria-labelledby="sim-titel">
+    <h2 id="sim-titel">Simulation: Strahlengang im Auge</h2>
+    <p>Das Licht kommt von links. Drei orange Linien zeigen Lichtstrahlen. Die Linse im Auge bündelt sie. Die dicke senkrechte Linie rechts im Auge ist die Netzhaut. Das Bild entsteht scharf, wenn sich die Strahlen genau auf der Netzhaut treffen.</p>
+
+    <div class="material">
+      <span class="box-label">Material M1: Modell eines Auges</span>
+      <div class="sim-layout">
+        <div class="sim-anzeige">
+          <div class="abb">
+            <svg id="sim" viewBox="-372 -120 600 240" role="img" aria-label="Modell eines Auges von der Seite. Lichtstrahlen laufen von links durch die Linse auf die Netzhaut. Die genaue Lage des Bündelpunkts steht im Text unter der Abbildung.">
+              <line class="achse" x1="-372" y1="0" x2="228" y2="0"/>
+              <g id="g-auge"></g>
+              <g id="g-brille"></g>
+              <g id="g-strahlen"></g>
+              <g id="g-fokus"></g>
+            </svg>
+          </div>
+          <p class="quelle">Quelle: eigene, vereinfachte Zeichnung. Hornhaut und Linse sind in einer Linse zusammengefasst. Die Linse ändert ihre Form nicht.</p>
+          <div class="status" id="status" aria-live="polite" aria-atomic="true"></div>
+          <span class="box-label">So sieht die Person die Buchstaben</span>
+          <div class="sehtafel"><p class="buchstaben" id="buchstaben" aria-hidden="true">E F P T Z</p></div>
+        </div>
+        <div class="sim-steuerung">
+          <div class="steuer">
+            <span class="box-label" id="lab-preset">Voreinstellung</span>
+            <div class="seg" role="group" aria-labelledby="lab-preset" id="seg-preset">
+              <button type="button" data-preset="normal" aria-pressed="true">Normalauge</button>
+              <button type="button" data-preset="lang" aria-pressed="false">Auge zu lang</button>
+              <button type="button" data-preset="stark" aria-pressed="false">Linse zu stark</button>
+            </div>
+          </div>
+          <div class="steuer">
+            <div class="regler-zeile"><label for="r-laenge">Länge des Auges</label><output id="o-laenge" for="r-laenge" class="wert"></output></div>
+            <input class="regler" type="range" id="r-laenge" min="20" max="30" step="0.5" value="24">
+          </div>
+          <div class="steuer">
+            <div class="regler-zeile"><label for="r-linse">Stärke der Linse</label><output id="o-linse" for="r-linse" class="wert"></output></div>
+            <input class="regler" type="range" id="r-linse" min="0" max="14" step="1" value="8">
+          </div>
+          <div class="steuer">
+            <span class="box-label" id="lab-gegenstand">Gegenstand</span>
+            <div class="seg" role="group" aria-labelledby="lab-gegenstand" id="seg-gegenstand">
+              <button type="button" data-d="inf" aria-pressed="true">weit weg</button>
+              <button type="button" data-d="400" aria-pressed="false">40 cm</button>
+              <button type="button" data-d="200" aria-pressed="false">20 cm</button>
+            </div>
+          </div>
+          <div class="steuer">
+            <span class="box-label" id="lab-brille">Brille</span>
+            <div class="seg" role="group" aria-labelledby="lab-brille" id="seg-brille">
+              <button type="button" data-b="none" aria-pressed="true">keine</button>
+              <button type="button" data-b="minus" aria-pressed="false">Zerstreuungslinse (minus)</button>
+              <button type="button" data-b="plus" aria-pressed="false">Sammellinse (plus)</button>
+            </div>
+          </div>
+          <div class="steuer">
+            <div class="regler-zeile"><label for="r-brille">Stärke der Brille</label><output id="o-brille" for="r-brille" class="wert"></output></div>
+            <input class="regler" type="range" id="r-brille" min="0" max="8" step="0.5" value="0" disabled>
+            <p class="hinweis">dpt ist die Abkürzung für Dioptrie. Das ist die Einheit für die Stärke einer Brille.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hilfe">
+      <span class="box-label">Hilfe: Wortspeicher</span>
+      <ul class="wortspeicher">
+        <li>Kurz-sich-tig-keit</li><li>Netz-haut</li><li>Lin-se</li><li>Bün-del-punkt</li><li>Zer-streu-ungs-lin-se</li><li>Sam-mel-lin-se</li><li>Di-op-trie</li>
+      </ul>
+      <p class="hinweis">Der Bündelpunkt ist der Punkt, an dem sich die Lichtstrahlen treffen.</p>
+    </div>
+  </section>
+
+  <!-- Aufgabe 1 -->
+  <section class="aufgabe" aria-labelledby="a1">
+    <h2 id="a1"><span class="nr" aria-hidden="true">1</span><span><strong>Beschreibe</strong> den Strahlengang im Normalauge.</span><span class="niveau" role="img" aria-label="Niveau 1 von 3">●○○</span></h2>
+    <p>Wähle die Voreinstellung Normalauge, den Gegenstand weit weg und keine Brille.</p>
+    <form class="pruef" data-richtig="auf" data-ok="Richtig. Beim Normalauge treffen sich die Strahlen auf der Netzhaut. Das Bild ist scharf." data-nok="Noch nicht. Sieh dir die Abbildung und den Text unter ihr noch einmal an.">
+      <fieldset class="radio-gruppe">
+        <legend>Wo liegt der Bündelpunkt?</legend>
+        <label><input type="radio" name="a1" value="vor"> vor der Netzhaut</label>
+        <label><input type="radio" name="a1" value="auf"> auf der Netzhaut</label>
+        <label><input type="radio" name="a1" value="hinter"> hinter der Netzhaut</label>
+      </fieldset>
+      <button type="submit" class="btn">Prüfen</button>
+      <div class="pr-fb" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- Aufgabe 2 -->
+  <section class="aufgabe" aria-labelledby="a2">
+    <h2 id="a2"><span class="nr" aria-hidden="true">2</span><span><strong>Untersuche</strong>, was passiert, wenn das Auge länger oder die Linse stärker wird.</span><span class="niveau" role="img" aria-label="Niveau 1 von 3">●○○</span></h2>
+    <p>Beginne beim Normalauge. Verändere immer nur einen Regler.</p>
+    <form class="pruef" data-richtig="vor" data-ok="Richtig. Der Bündelpunkt liegt vor der Netzhaut. Das Bild ist unscharf." data-nok="Noch nicht. Verändere den Regler noch einmal und beobachte den Bündelpunkt.">
+      <fieldset class="radio-gruppe">
+        <legend>Du machst das Auge länger. Wo liegt der Bündelpunkt?</legend>
+        <label><input type="radio" name="a2a" value="vor"> vor der Netzhaut</label>
+        <label><input type="radio" name="a2a" value="auf"> auf der Netzhaut</label>
+        <label><input type="radio" name="a2a" value="hinter"> hinter der Netzhaut</label>
+      </fieldset>
+      <button type="submit" class="btn">Prüfen</button>
+      <div class="pr-fb" aria-live="polite"></div>
+    </form>
+    <form class="pruef" data-richtig="vor" data-ok="Richtig. Eine stärkere Linse bündelt das Licht früher. Der Bündelpunkt rückt nach vorn." data-nok="Noch nicht. Stelle die Länge wieder auf 24 mm. Verändere dann die Stärke der Linse.">
+      <fieldset class="radio-gruppe">
+        <legend>Du machst die Linse stärker. Wo liegt der Bündelpunkt?</legend>
+        <label><input type="radio" name="a2b" value="vor"> vor der Netzhaut</label>
+        <label><input type="radio" name="a2b" value="auf"> auf der Netzhaut</label>
+        <label><input type="radio" name="a2b" value="hinter"> hinter der Netzhaut</label>
+      </fieldset>
+      <button type="submit" class="btn">Prüfen</button>
+      <div class="pr-fb" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- Aufgabe 3 -->
+  <section class="aufgabe" aria-labelledby="a3">
+    <h2 id="a3"><span class="nr" aria-hidden="true">3</span><span><strong>Erkläre</strong> zwei Ursachen für Kurzsichtigkeit.</span><span class="niveau" role="img" aria-label="Niveau 2 von 3">●●○</span></h2>
+    <div class="hilfe">
+      <span class="box-label">Hilfe: Satzbausteine</span>
+      Ursache 1: Das Auge ist zu … Die Netzhaut liegt dann zu weit … Der Bündelpunkt liegt …<br>
+      Ursache 2: Die Linse bricht das Licht zu … Der Bündelpunkt liegt dann …
+    </div>
+    <div class="schreib">
+      <label for="erkl3">Schreibraum</label>
+      <textarea id="erkl3" rows="5"></textarea>
+      <p class="hinweis">Dein Text wird nicht gespeichert.</p>
+    </div>
+  </section>
+
+  <!-- Aufgabe 4 -->
+  <section class="aufgabe" aria-labelledby="a4">
+    <h2 id="a4"><span class="nr" aria-hidden="true">4</span><span><strong>Teste</strong>, welche Brille das Bild eines zu langen Auges scharf macht.</span><span class="niveau" role="img" aria-label="Niveau 2 von 3">●●○</span></h2>
+    <p>Wähle die Voreinstellung Auge zu lang und den Gegenstand weit weg. Probiere beide Brillen aus. Verändere auch die Stärke.</p>
+    <form class="pruef" data-richtig="minus" data-ok="Richtig. Die Zerstreuungslinse (minus) gleicht das zu lange Auge aus." data-nok="Noch nicht. Probiere die andere Brille aus und beobachte den Bündelpunkt.">
+      <fieldset class="radio-gruppe">
+        <legend>Welche Brille macht das Bild scharf?</legend>
+        <label><input type="radio" name="a4" value="minus"> Zerstreuungslinse (minus)</label>
+        <label><input type="radio" name="a4" value="plus"> Sammellinse (plus)</label>
+      </fieldset>
+      <button type="submit" class="btn">Prüfen</button>
+      <div class="pr-fb" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- Aufgabe 5 -->
+  <section class="aufgabe" aria-labelledby="a5">
+    <h2 id="a5"><span class="nr" aria-hidden="true">5</span><span><strong>Begründe</strong>, warum diese Brille hilft.</span><span class="niveau" role="img" aria-label="Niveau 2 von 3">●●○</span></h2>
+    <div class="hilfe">
+      <span class="box-label">Hilfe: Satzbausteine</span>
+      Die Brille lenkt die Lichtstrahlen … Dadurch rückt der Bündelpunkt nach … Er liegt dann auf …
+    </div>
+    <div class="schreib">
+      <label for="begr5">Schreibraum</label>
+      <textarea id="begr5" rows="4"></textarea>
+      <p class="hinweis">Dein Text wird nicht gespeichert.</p>
+    </div>
+  </section>
+
+  <!-- Aufgabe 6 -->
+  <section class="aufgabe" aria-labelledby="a6">
+    <h2 id="a6"><span class="nr" aria-hidden="true">6</span><span><strong>Vergleiche</strong>, wie ein kurzsichtiges Auge weit entfernte und nahe Gegenstände sieht.</span><span class="niveau" role="img" aria-label="Niveau 2 von 3">●●○</span></h2>
+    <p>Wähle die Voreinstellung Auge zu lang ohne Brille. Stelle den Gegenstand nacheinander auf weit weg, 40 cm und 20 cm ein. Achte auf den Bündelpunkt und auf die Buchstaben.</p>
+    <div class="hilfe">
+      <span class="box-label">Hilfe: Satzbausteine</span>
+      Bei einem weit entfernten Gegenstand … Bei 20 cm … Deshalb sehen Kurzsichtige in der Nähe …
+    </div>
+    <div class="schreib">
+      <label for="verg6">Schreibraum</label>
+      <textarea id="verg6" rows="4"></textarea>
+      <p class="hinweis">Dein Text wird nicht gespeichert.</p>
+    </div>
+  </section>
+
+  <!-- Aufgabe 7 -->
+  <section class="aufgabe" aria-labelledby="a7">
+    <h2 id="a7"><span class="nr" aria-hidden="true">7</span><span><strong>Beurteile</strong> das Modell: Nenne zwei Stellen, an denen es vom echten Auge abweicht.</span><span class="niveau" role="img" aria-label="Niveau 3 von 3">●●●</span></h2>
+    <div class="hilfe">
+      <span class="box-label">Hilfe: Tipp</span>
+      Denke an die Form der Linse, an Hornhaut und Linse und an den Wechsel zwischen Nähe und Ferne.
+    </div>
+    <div class="schreib">
+      <label for="beurt7">Schreibraum</label>
+      <textarea id="beurt7" rows="4"></textarea>
+      <p class="hinweis">Dein Text wird nicht gespeichert.</p>
+    </div>
+  </section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
