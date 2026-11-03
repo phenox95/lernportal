@@ -276,3 +276,16 @@ body[data-subject="Geografie"] .hero::before {
   .fach-tile { transition: none; }
   .fach-tile:hover { transform: none; }
 }
+
+/* Fußzeile: Rechtslinks (Tippfläche >= 44 px) */
+.footer-links { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 2.75rem; text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* Rechtstexte (Impressum, Datenschutz) */
+.prose { max-width: 42rem; }
+.prose h2 { margin: 2rem 0 0.5rem; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+.prose p, .prose li { max-width: 70ch; }
+.prose ul { padding-left: 1.25rem; margin: 0.5rem 0 1rem; }
+.prose a { text-decoration: underline; text-underline-offset: 0.2em; }
+.prose .kurz { margin: 1.5rem 0 0; padding: 1.1rem 1.25rem; background: var(--surface); border: 2px solid var(--text); border-radius: 1.25rem; }
+.prose .kurz h2 { margin-top: 0; }

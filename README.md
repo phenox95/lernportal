@@ -9,6 +9,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `index.html` | Startseite: Suche, zwei Fachbereiche, Impuls der Woche, Register nach Klassenstufe |
 | `biologie/`, `geografie/` | Fachseiten mit Suche und Filtern (Klassenstufe, Art, Themenfeld) |
 | `alle/` | Alle Materialien mit zusätzlichem Fachfilter. Das Register der Startseite verlinkt hierher (`alle/?klasse=8`) |
+| `impressum/`, `datenschutz/` | Rechtstexte, in der Fußzeile aller Seiten verlinkt. Laden bewusst kein `app.js`. **Platzhalter in eckigen Klammern vor der Veröffentlichung ausfüllen** |
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
 | `assets/` | `css/`, `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
@@ -82,6 +83,18 @@ Das Symbol „Aa" in der Kopfleiste öffnet die Einstellungen: Schriftgröße (3
 ## GitHub Pages aktivieren
 
 Im Repository unter **Settings → Pages** als Build source **Deploy from a branch** wählen, Branch `main`, Ordner `/(root)`, dann **Save**.
+
+## Rechtstexte (Impressum, Datenschutz)
+
+In `impressum/index.html` und `datenschutz/index.html` stehen Platzhalter in eckigen Klammern (Name, Anschrift, E-Mail, zuständige Gesellschaft von GitHub, Rechtsgrundlage, Aufsichtsbehörde, Datum). Sie müssen vor der Veröffentlichung ausgefüllt werden. Suche nach `[` in beiden Dateien. Die Texte sind keine Rechtsberatung. Offen sind: private oder dienstliche Anschrift, mögliche Anzeige- oder Genehmigungspflicht, Eignung von GitHub-Hosting für den Einsatz mit SuS. Das vorab mit Schulleitung bzw. Datenschutzbeauftragten klären.
+
+## Eigene Domain bei GitHub Pages
+
+1. Domain registrieren (Anbieter mit EU-Sitz, Whois-Datenschutz).
+2. Unter **Settings → Pages → Custom domain** eintragen. GitHub legt `CNAME` im Stamm an.
+3. DNS: `www` als CNAME auf `<Benutzername>.github.io`. Für die Apex-Domain die A-/AAAA-Einträge aus der aktuellen GitHub-Dokumentation „Managing a custom domain for your GitHub Pages site" übernehmen (nicht aus dem Gedächtnis eintragen).
+4. Nach grüner DNS-Prüfung **Enforce HTTPS** aktivieren.
+5. Danach läuft das Portal im Stamm der Domain statt unter `/lernportal/`. Relative Pfade bleiben gültig. Nach absoluten Pfaden mit `/lernportal/` suchen und ersetzen (aktuell keine vorhanden).
 
 ## Hinweis
 
