@@ -1,29 +1,65 @@
 [
   {
-    "title": "Beispiel: Mitose",
+    "title": "Die Zelle – Aufbau und Funktion",
+    "subject": "Biologie",
+    "grade": "Klasse 8",
+    "type": "Interaktive Präsentation",
+    "description": "Zellbestandteile kennenlernen und ihre Aufgaben verstehen.",
+    "path": "biologie/klasse-8/zelle/",
+    "themenfeld": "Zelle",
+    "dauer": "45 Min.",
+    "datum": "2026-11-03",
+    "sichtbar": true,
+    "status": "Beispiel"
+  },
+  {
+    "title": "Mitose",
     "subject": "Biologie",
     "grade": "Klasse 10",
     "type": "Präsentation",
     "description": "Eine Einführung in die Zellteilung.",
     "path": "biologie/klasse-10/mitose/",
+    "themenfeld": "Zellteilung",
+    "dauer": "45 Min.",
+    "datum": "2026-11-03",
+    "sichtbar": true,
     "status": "Beispiel"
   },
   {
-    "title": "Beispiel: Leben in Risikoräumen",
+    "title": "Klimazonen der Erde",
+    "subject": "Geografie",
+    "grade": "Klasse 7/8",
+    "type": "Interaktive Karte",
+    "description": "Klima und Vegetation verschiedener Räume vergleichen.",
+    "path": "geografie/klasse-7/klimazonen/",
+    "themenfeld": "Klima",
+    "dauer": "45 Min.",
+    "datum": "2026-11-03",
+    "sichtbar": true,
+    "status": "Beispiel"
+  },
+  {
+    "title": "Leben in Risikoräumen",
     "subject": "Geografie",
     "grade": "Klasse 7",
     "type": "Lernmodul",
     "description": "Mensch und Natur in gefährdeten Räumen.",
     "path": "geografie/klasse-7/risikoraeume/",
+    "themenfeld": "Risikoräume",
+    "dauer": "Doppelstunde",
+    "datum": "2026-11-03",
+    "sichtbar": true,
     "status": "Beispiel"
   },
   {
-    "title": "Beispiel: Interaktive Übung",
+    "title": "Interaktive Übung",
     "subject": "Interaktiv",
     "grade": "Verschiedene",
     "type": "Interaktive Anwendung",
     "description": "Ein Platzhalter für Quiz, Simulationen und Lernspiele.",
     "path": "interaktiv/",
+    "datum": "2026-11-03",
+    "sichtbar": true,
     "status": "Beispiel"
   }
 ]

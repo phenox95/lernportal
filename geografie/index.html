@@ -1,2 +1,86 @@
 <!doctype html>
-<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url=../#materialien"><title>Geografie – Lernportal</title></head><body><p><a href="../#materialien">Zur Geografie-Übersicht</a></p></body></html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Geografie – digitale Unterrichtsmaterialien.">
+  <title>Geografie – Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/app.js" defer></script>
+</head>
+<body data-page="fach" data-root="../" data-subject="Geografie">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href=".././" aria-label="Lernportal Startseite"><span class="brand-dot" aria-hidden="true"></span>Lernportal</a>
+      <nav class="top-nav" aria-label="Hauptnavigation">
+        <a href="../biologie/">Biologie</a>
+        <a href="../geografie/" aria-current="page">Geografie</a>
+        <a href="../alle/">Alle Materialien</a>
+      </nav>
+      <div class="header-tools" id="prefs-slot"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <a class="back-link" href="../"><span data-icon="back" data-size="20" aria-hidden="true"></span>Lernportal</a>
+        <p class="eyebrow">Fachbereich</p>
+        <h1 class="title">Geografie</h1>
+        <p class="lead">Räume · Menschen · Umwelt</p>
+        <div class="search">
+          <label class="sr-only" for="q">In Geografie suchen</label>
+          <span data-icon="search" data-size="20" aria-hidden="true"></span>
+          <input id="q" type="search" placeholder="Thema oder Material suchen" autocomplete="off" enterkeyhint="search">
+        </div>
+        <div class="filters">
+          <div>
+            <span class="filter-label" id="l-klasse">Klassenstufe</span>
+            <div class="segmented" id="grade-control" role="group" aria-labelledby="l-klasse">
+              <button type="button" data-value="Alle" aria-pressed="true">Alle</button>
+              <button type="button" data-value="7" aria-pressed="false">7</button>
+              <button type="button" data-value="8" aria-pressed="false">8</button>
+              <button type="button" data-value="9" aria-pressed="false">9</button>
+              <button type="button" data-value="10" aria-pressed="false">10</button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <div>
+              <label class="filter-label" for="filter-art">Art</label>
+              <div class="select-wrap">
+                <select id="filter-art">
+                  <option value="Alle">Alle Arten</option>
+                  <option value="Präsentation">Präsentation</option>
+                  <option value="Lernmodul">Lernmodul</option>
+                  <option value="Interaktiv">Interaktiv</option>
+                </select>
+                <span data-icon="down" data-size="18" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div id="theme-field" hidden>
+              <label class="filter-label" for="filter-theme">Themenfeld</label>
+              <div class="select-wrap">
+                <select id="filter-theme"><option value="Alle">Alle Themenfelder</option></select>
+                <span data-icon="down" data-size="18" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="wrap">
+      <p class="result-count" id="result-count" aria-live="polite"></p>
+      <div id="project-list"><p class="loading-message">Materialien werden geladen …</p></div>
+    </div>
+  </main>
+
+  <div class="wrap">
+    <footer class="site-footer">
+      <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
+      <span>Impressum · Datenschutz</span>
+    </footer>
+  </div>
+</body>
+</html>
