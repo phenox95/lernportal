@@ -1,248 +1,181 @@
-/* Lernportal – Materialseiten: Kopfleiste und Bausteine.
-   Eigenständig: braucht weder styles.css noch ein Framework.
-   Alle Klassen und Variablen tragen das Präfix lp-, damit bestehende Materialien nicht beeinflusst werden.
-   Schrift: Systemschrift des Geräts, keine Schriftdatei. Größen in rem bzw. em (Lesemodus wirkt). */
+/* Rahmen für Materialseiten (nach dem Portal-Stylesheet laden).
+   Nutzt die Portal-Variablen (Farben, Dunkelmodus, Lesemodus) und gestaltet
+   Aufgabe, Material und Hilfe im gleichen Look. Alle Größen in rem. */
 
 :root {
-  color-scheme: light dark;
-  --lp-schrift: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
-  --lp-lh: 1.5;
-  --lp-bg: #fcfcfa;
-  --lp-flaeche: #ffffff;
-  --lp-gruppe: #f4f4f0;
-  --lp-feld: #ecece7;
-  --lp-text: #1d1f1d;
-  --lp-text2: #5c605a;
-  --lp-linie: #e0e0da;
-  --lp-rahmen: #7d817a;
-  --lp-glas: rgba(252, 252, 250, 0.8);
-  --lp-fokus: #0a6fe0;
-  --lp-schatten: 0 24px 60px -16px rgba(0, 0, 0, 0.3);
-  --lp-bio-ink: #0c6a49;
-  --lp-bio-tint: rgba(28, 148, 104, 0.12);
-  --lp-geo-ink: #8f4f0e;
-  --lp-geo-tint: rgba(184, 105, 28, 0.13);
-  --lp-akzent: var(--lp-text2);
-  --lp-akzent-tint: var(--lp-feld);
+  --card: var(--surface);
+  --muted: var(--text-2);
+  --line-soft: #c9ccc6;
+  --control: #7d837c;
+  --accent: #0c6a49;
+  --accent-2: #0f7a55;
+  --accent-hover: #0a5a3e;
+  --on-accent: #ffffff;
+  --accent-ink: var(--bio-ink);
+  --hl: #c24a08;
+  --ok: #0c6a49;
+  --bad: #a12a1a;
+  --ok-bg: rgba(12, 106, 73, 0.12);
+  --bad-bg: rgba(161, 42, 26, 0.1);
+  /* Auge (Abbildung) */
+  --sclera: #8f8a78; --choroid: #5b3d2e; --retina: #c0643c;
+  --horn-fill: rgba(120, 170, 220, .35); --horn-line: #2f6fa5;
+  --iris-fill: #3f7f8c; --iris-line: #1f5560;
+  --lens-fill: rgba(250, 220, 120, .65); --lens-line: #8a6a08;
+  --glas-fill: rgba(140, 195, 230, .28); --innen-fill: rgba(140, 195, 230, .10);
+  --cil-fill: #b98aa8; --cil-line: #6b3d5c;
+  --nerv-fill: #e6c75c; --nerv-line: #7a6512;
+  --gelb-fill: #f2d03b; --gelb-line: #7a5f00;
+  --ray: #b45309; --axis: #8a908a;
 }
-
 :root[data-theme="dark"] {
-  --lp-bg: #0e100f; --lp-flaeche: #181b19; --lp-gruppe: #131614; --lp-feld: #222624;
-  --lp-text: #f2f3f0; --lp-text2: #a9aea7; --lp-linie: #2a2e2b; --lp-rahmen: #7f847c;
-  --lp-glas: rgba(14, 16, 15, 0.74); --lp-fokus: #4da3ff; --lp-schatten: 0 24px 60px -16px rgba(0, 0, 0, 0.7);
-  --lp-bio-ink: #5fd3a3; --lp-bio-tint: rgba(95, 211, 163, 0.16);
-  --lp-geo-ink: #f0b068; --lp-geo-tint: rgba(240, 176, 104, 0.16);
+  --line-soft: #3a3f3a; --control: #8b928a;
+  --accent: #5fd4a6; --accent-2: #7fe0b9; --accent-hover: #86e3bd; --on-accent: #06241a; --accent-ink: #6fd9b0;
+  --hl: #ffa468; --ok: #6fd9b0; --bad: #ff9a8a;
+  --ok-bg: rgba(111, 217, 176, 0.14); --bad-bg: rgba(255, 154, 138, 0.14);
+  --sclera: #d8d4c4; --choroid: #a27d68; --retina: #ff9a6a;
+  --horn-fill: rgba(120, 170, 220, .30); --horn-line: #8ab8e8;
+  --iris-fill: #5aa7b5; --iris-line: #a9dce5;
+  --lens-fill: rgba(250, 220, 120, .35); --lens-line: #e8c860;
+  --glas-fill: rgba(140, 195, 230, .22); --innen-fill: rgba(140, 195, 230, .08);
+  --cil-fill: #8a5f7a; --cil-line: #e0b5d0;
+  --nerv-fill: #b89a30; --nerv-line: #f0dc8c;
+  --gelb-fill: #f2d03b; --gelb-line: #f6e48a;
+  --ray: #ffb066; --axis: #98a098;
 }
 @media (prefers-color-scheme: dark) {
   :root[data-theme="auto"], :root:not([data-theme]) {
-    --lp-bg: #0e100f; --lp-flaeche: #181b19; --lp-gruppe: #131614; --lp-feld: #222624;
-    --lp-text: #f2f3f0; --lp-text2: #a9aea7; --lp-linie: #2a2e2b; --lp-rahmen: #7f847c;
-    --lp-glas: rgba(14, 16, 15, 0.74); --lp-fokus: #4da3ff; --lp-schatten: 0 24px 60px -16px rgba(0, 0, 0, 0.7);
-    --lp-bio-ink: #5fd3a3; --lp-bio-tint: rgba(95, 211, 163, 0.16);
-    --lp-geo-ink: #f0b068; --lp-geo-tint: rgba(240, 176, 104, 0.16);
+    --line-soft: #3a3f3a; --control: #8b928a;
+    --accent: #5fd4a6; --accent-2: #7fe0b9; --accent-hover: #86e3bd; --on-accent: #06241a; --accent-ink: #6fd9b0;
+    --hl: #ffa468; --ok: #6fd9b0; --bad: #ff9a8a;
+    --ok-bg: rgba(111, 217, 176, 0.14); --bad-bg: rgba(255, 154, 138, 0.14);
+    --sclera: #d8d4c4; --choroid: #a27d68; --retina: #ff9a6a;
+    --horn-fill: rgba(120, 170, 220, .30); --horn-line: #8ab8e8;
+    --iris-fill: #5aa7b5; --iris-line: #a9dce5;
+    --lens-fill: rgba(250, 220, 120, .35); --lens-line: #e8c860;
+    --glas-fill: rgba(140, 195, 230, .22); --innen-fill: rgba(140, 195, 230, .08);
+    --cil-fill: #8a5f7a; --cil-line: #e0b5d0;
+    --nerv-fill: #b89a30; --nerv-line: #f0dc8c;
+    --gelb-fill: #f2d03b; --gelb-line: #f6e48a;
+    --ray: #ffb066; --axis: #98a098;
   }
 }
 
-/* Lesemodus: Zeilenabstand überall, Schriftgröße nur auf Vorlagenseiten (html.lp-vorlage)
-   bzw. in der Kopfleiste. Bestehende Materialien behalten ihr eigenes Layout. */
-:root[data-spacing="weit"] { --lp-lh: 1.8; }
-html.lp-vorlage[data-size="gross"] { font-size: 112.5%; }
-html.lp-vorlage[data-size="sehr-gross"] { font-size: 125%; }
+/* Seitenkopf der Materialseite */
+.material-page .hero { padding: 1rem 0 0.25rem; }
+.material-page .title { margin-bottom: 0.4rem; font-size: clamp(1.9rem, 6vw, 3rem); }
+.material-page .eyebrow { margin-bottom: 0.3rem; }
+.seite { padding-bottom: 3rem; }
 
-/* Fachfarben (Orientierung, nie alleiniger Informationsträger: Fach steht immer auch als Text da) */
-body[data-subject="Biologie"] {
-  --lp-akzent: var(--lp-bio-ink); --lp-akzent-tint: var(--lp-bio-tint);
-  --lp-v1: #1c9468; --lp-v2: #0c6a49;
-}
-body[data-subject="Geografie"] {
-  --lp-akzent: var(--lp-geo-ink); --lp-akzent-tint: var(--lp-geo-tint);
-  --lp-v1: #b8691c; --lp-v2: #8f4f0e;
-}
+/* Aufgabe: weiße Karte mit weichem Schatten */
+.aufgabe { margin: 1.25rem 0; padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 1.5rem; box-shadow: var(--shadow); }
+.aufgabe > h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.7rem; margin: 0 0 0.6rem; font-size: 1.3125rem; line-height: 1.35; letter-spacing: -0.015em; }
+.nr { flex: none; align-self: center; display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: linear-gradient(160deg, var(--accent-2), var(--accent)); color: var(--on-accent); font-size: 1rem; font-weight: 700; }
+.niveau { margin-left: auto; font-size: 1rem; letter-spacing: 0.15em; color: var(--muted); white-space: nowrap; }
+.aufgabe p { max-width: 75ch; }
+.aufgabe p:first-of-type { margin-top: 0; }
 
-/* ============ Kopfleiste ============ */
-.lp-kopf, .lp-kopf *, .lp-kopf *::before, .lp-kopf *::after { box-sizing: border-box; }
-.lp-kopf {
-  position: sticky; top: 0; z-index: 1000;
-  padding-top: env(safe-area-inset-top, 0px);
-  background: var(--lp-bg); color: var(--lp-text);
-  border-bottom: 1px solid var(--lp-linie);
-  font-family: var(--lp-schrift); font-size: 1rem; line-height: 1.4; text-align: left;
-}
-:root[data-size="gross"]:not(.lp-vorlage) .lp-kopf { font-size: 1.125rem; }
-:root[data-size="sehr-gross"]:not(.lp-vorlage) .lp-kopf { font-size: 1.25rem; }
-@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-  .lp-kopf {
-    background: var(--lp-glas);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-  }
-}
-@media (prefers-reduced-transparency: reduce) {
-  .lp-kopf { background: var(--lp-bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
-}
-/* feine Fachlinie, rein dekorativ */
-.lp-kopf::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px;
-  background: linear-gradient(90deg, var(--lp-v1, var(--lp-linie)), var(--lp-v2, var(--lp-linie)));
-  pointer-events: none;
-}
-.lp-kopf-innen {
-  display: flex; align-items: center; gap: 0.5em;
-  max-width: 68em; min-height: 3.5em; margin: 0 auto; padding: 0.25em clamp(0.5em, 3vw, 1.5em);
-}
-.lp-zurueck {
-  flex: none; display: inline-flex; align-items: center; gap: 0.2em;
-  min-width: 2.75em; min-height: 2.75em; padding: 0 0.6em 0 0.35em; border-radius: 0.75em;
-  color: var(--lp-text2); font-size: 0.9375em; font-weight: 600; text-decoration: none;
-}
-.lp-zurueck:hover { background: var(--lp-feld); color: var(--lp-text); }
-.lp-zurueck svg { flex: none; }
-.lp-zurueck .lp-lang { display: none; }
-@media (min-width: 40em) { .lp-zurueck .lp-lang { display: inline; } }
-.lp-kopf-titel { flex: 1; min-width: 0; }
-.lp-kopf .lp-titel { margin: 0; font-size: 1em; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; color: var(--lp-text); }
-.lp-kopf .lp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.15em 0.5em; margin: 0.15em 0 0; font-size: 0.875em; color: var(--lp-text2); }
-.lp-kopf .lp-fach {
-  padding: 0.05em 0.65em; border-radius: 1em; background: var(--lp-akzent-tint);
-  color: var(--lp-akzent); font-weight: 700;
-}
-.lp-werkzeuge { position: relative; flex: none; }
+/* Material: getönte Fläche. Hilfe: gestrichelter Kasten. */
+.material { margin: 1rem 0; padding: 0.85rem 1rem 1.1rem; background: var(--group); border: 1px solid var(--line); border-radius: 1.1rem; }
+.hilfe { margin: 1rem 0; padding: 0.7rem 1rem 0.9rem; background: var(--bio-tint); border: 1.5px dashed var(--control); border-radius: 1.1rem; }
+.box-label { display: block; margin: 0 0 0.45rem; font-size: 0.875rem; font-weight: 700; }
+.quelle { margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--muted); }
+.wortspeicher { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; margin: 0; padding: 0; list-style: none; }
+.wortspeicher li { padding: 0.2rem 0.65rem; background: var(--surface); border: 1px solid var(--control); border-radius: 0.6rem; }
+.schreib label { display: block; margin-bottom: 0.3rem; font-weight: 700; }
+textarea { width: 100%; max-width: 75ch; min-height: 6.5rem; padding: 0.7rem 0.85rem; font: inherit; line-height: 1.6; color: var(--text); background: var(--bg); border: 1.5px solid var(--control); border-radius: 0.9rem; resize: vertical; }
+.hinweis { margin: 0.25rem 0 0; font-size: 0.875rem; color: var(--muted); }
+.frage { margin: 1.25rem 0; padding: 1rem 1.25rem; background: linear-gradient(180deg, var(--bio-tint), transparent 75%), var(--surface); border: 1px solid var(--line); border-radius: 1.5rem; box-shadow: var(--shadow); }
+.frage label { display: block; margin-bottom: 0.35rem; font-size: 1.0625rem; font-weight: 700; }
+.frage textarea { min-height: 4.5rem; }
 
-/* Lesemodus-Panel (von prefs.js erzeugt), hier eigenständig gestaltet */
-.lp-kopf .icon-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  min-width: 2.75em; min-height: 2.75em; padding: 0 0.6em; margin: 0;
-  border: 0; border-radius: 0.75em; background: transparent; color: var(--lp-text); cursor: pointer;
-  font: inherit; font-size: 1.0625em; font-weight: 700; letter-spacing: -0.02em;
-}
-.lp-kopf .icon-btn:hover, .lp-kopf .icon-btn[aria-expanded="true"] { background: var(--lp-feld); }
-.lp-kopf .prefs-panel {
-  position: absolute; right: 0; top: calc(100% + 0.5em); z-index: 5;
-  width: min(22em, calc(100vw - 1.5em)); padding: 1.1em;
-  background: var(--lp-flaeche); color: var(--lp-text);
-  border: 1px solid var(--lp-linie); border-radius: 1.25em; box-shadow: var(--lp-schatten);
-}
-.lp-kopf .prefs-panel[hidden] { display: none; }
-.lp-kopf .prefs-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5em; }
-.lp-kopf .prefs-head h2 { margin: 0; font-size: 1.125em; font-weight: 700; color: var(--lp-text); }
-.lp-kopf .prefs-panel fieldset { margin: 0.9em 0 0; padding: 0; border: 0; min-width: 0; }
-.lp-kopf .prefs-panel legend { padding: 0; margin-bottom: 0.4em; font-size: 0.875em; color: var(--lp-text2); }
-.lp-kopf .segmented { display: flex; gap: 0.25em; padding: 0.25em; background: var(--lp-feld); border-radius: 0.875em; }
-.lp-kopf .segmented button {
-  flex: 1; min-height: 2.75em; padding: 0 0.5em; margin: 0; border: 0; border-radius: 0.625em;
-  background: transparent; color: var(--lp-text2); font: inherit; font-size: 0.9375em; cursor: pointer;
-}
-.lp-kopf .segmented button[aria-pressed="true"] { background: var(--lp-flaeche); color: var(--lp-text); font-weight: 700; box-shadow: 0 1px 3px rgba(20, 24, 20, 0.2); }
-.lp-kopf .prefs-reset {
-  width: 100%; min-height: 2.75em; margin-top: 1em; border: 1px solid var(--lp-rahmen); border-radius: 0.75em;
-  background: transparent; color: var(--lp-text); font: inherit; cursor: pointer;
-}
-.lp-kopf .prefs-reset:hover { background: var(--lp-feld); }
-.lp-kopf :focus-visible { outline: 3px solid var(--lp-fokus); outline-offset: 2px; }
+/* Schaltflächen */
+.btn { min-height: 2.75rem; padding: 0.5rem 1.2rem; font: inherit; font-weight: 700; color: var(--on-accent); background: linear-gradient(180deg, var(--accent-2), var(--accent)); border: 1.5px solid var(--accent); border-radius: 0.9rem; box-shadow: 0 10px 20px -14px var(--accent); cursor: pointer; }
+.btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn.zweit { color: var(--accent-ink); background: transparent; box-shadow: none; }
+.btn.zweit:hover { background: var(--group); }
+.btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; padding: 0.25rem; background: var(--field); border-radius: 0.95rem; }
+.seg button { min-height: 2.75rem; min-width: 2.75rem; padding: 0.4rem 0.95rem; font: inherit; color: var(--text); background: transparent; border: 0; border-radius: 0.7rem; cursor: pointer; }
+.seg button[aria-pressed="true"] { color: var(--on-accent); font-weight: 700; background: linear-gradient(180deg, var(--accent-2), var(--accent)); }
+.seg button[disabled] { opacity: 0.55; cursor: not-allowed; }
+.steuer { margin: 0 0 0.9rem; }
+.steuer > .box-label { margin-bottom: 0.3rem; }
 
-/* ============ Bausteine der Vorlage (body.lp-seite) ============ */
-body.lp-seite {
-  --lp-abstand: 1.5rem; --lp-radius: 1.1rem;
-  margin: 0; background: var(--lp-bg); color: var(--lp-text);
-  font-family: var(--lp-schrift); font-size: 1rem; line-height: var(--lp-lh);
-  -webkit-font-smoothing: antialiased;
-}
-/* Dichte nach Jahrgang: 7–8 freundlich-sachlich mit mehr Weißraum, 9–10 nüchtern und dichter */
-body.lp-seite[data-dichte="9-10"] { --lp-abstand: 1rem; --lp-radius: 0.5rem; }
-.lp-seite *, .lp-seite *::before, .lp-seite *::after { box-sizing: border-box; }
-.lp-seite :focus-visible { outline: 3px solid var(--lp-fokus); outline-offset: 2px; }
-.lp-seite img { max-width: 100%; display: block; }
+/* Abbildung und Infofeld */
+.zweispalt { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+@media (max-width: 48rem) { .zweispalt { grid-template-columns: minmax(0, 1fr); } }
+.abb { padding: 0.5rem; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 1rem; }
+.abb svg { display: block; width: 100%; height: auto; }
+.tg { cursor: pointer; }
+.hl * { fill: none !important; stroke: var(--hl) !important; stroke-width: 5; stroke-dasharray: 7 4; pointer-events: none; }
+.hl { pointer-events: none; }
+.info { min-height: 8rem; padding: 0.8rem 1rem; background: var(--surface); border: 1.5px solid var(--accent); border-radius: 1rem; }
+.info h3 { margin: 0 0 0.25rem; font-size: 1.125rem; }
+.info .silben { font-weight: 400; font-size: 1rem; color: var(--muted); }
+.info p { margin: 0.25rem 0; }
+.zaehler { margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--muted); }
+.teile { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0.4rem; margin: 0.75rem 0 0; padding: 0; list-style: none; }
+.teile button { width: 100%; min-height: 2.75rem; padding: 0.35rem 0.75rem; text-align: left; font: inherit; color: var(--text); background: var(--surface); border: 1.5px solid var(--control); border-radius: 0.8rem; cursor: pointer; }
+.teile button[aria-pressed="true"] { color: var(--on-accent); font-weight: 700; background: var(--accent); border-color: var(--accent); }
 
-.lp-inhalt {
-  display: grid; gap: var(--lp-abstand);
-  max-width: 68rem; margin: 0 auto; padding: var(--lp-abstand) clamp(1rem, 4vw, 1.5rem) 3rem;
-}
-.lp-inhalt > * { width: 100%; max-width: 48rem; margin: 0; }
-.lp-inhalt > .lp-breit { max-width: none; }
+/* Übung Benennen */
+.optionen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; margin: 0.75rem 0; }
+@media (max-width: 30rem) { .optionen { grid-template-columns: minmax(0, 1fr); } }
+.optionen button { min-height: 3rem; padding: 0.4rem 0.85rem; text-align: left; font: inherit; color: var(--text); background: var(--surface); border: 1.5px solid var(--control); border-radius: 0.8rem; cursor: pointer; }
+.optionen button[disabled] { cursor: default; }
+.optionen button.richtig { font-weight: 700; background: var(--ok-bg); border-color: var(--ok); }
+.optionen button.falsch { background: var(--bad-bg); border-color: var(--bad); border-style: dashed; }
+.rueck { display: flex; gap: 0.5rem; align-items: flex-start; margin: 0.5rem 0; font-weight: 700; }
+.rueck svg { flex: none; width: 1.5rem; height: 1.5rem; margin-top: 0.1rem; }
+.rueck.ok, .ergebnis-zeile.ok, .zeilen-rueck.ok { color: var(--ok); }
+.rueck.nok, .ergebnis-zeile.nok, .zeilen-rueck.nok { color: var(--bad); }
+.ergebnis-zeile { display: flex; align-items: center; gap: 0.5rem; margin: 0.25rem 0; }
+.ergebnis-zeile svg { flex: none; width: 1.5rem; height: 1.5rem; }
+.fortschritt { margin: 0 0 0.4rem; font-size: 0.875rem; color: var(--muted); }
 
-.lp-label { display: block; margin: 0 0 0.35rem; font-size: 0.875rem; font-weight: 700; color: var(--lp-text2); }
-.lp-seite p { margin: 0 0 0.75em; }
-.lp-seite p:last-child { margin-bottom: 0; }
-
-/* Einstieg / Leitfrage */
-.lp-leitfrage {
-  padding: 1.1rem 1.25rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius);
-  background: var(--lp-akzent-tint);
-}
-.lp-leitfrage p { font-size: 1.25rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.01em; max-width: 36rem; }
-
-/* Material: dünner neutraler Rahmen, Beschriftung M1, M2 … */
-.lp-material { border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); overflow: hidden; }
-.lp-material-kopf { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.6rem 1.1rem; border-bottom: 1px solid var(--lp-linie); background: var(--lp-gruppe); }
-.lp-material-kopf strong { font-size: 1rem; }
-.lp-material-kopf span { font-size: 0.9375rem; color: var(--lp-text2); }
-.lp-material-inhalt { padding: 1rem 1.1rem; }
-.lp-quelle { margin: 0; padding: 0.6rem 1.1rem; border-top: 1px solid var(--lp-linie); font-size: 0.875rem; color: var(--lp-text2); }
-
-/* Text mit Zeilennummern: jede Zeile ein <li> (ein Satz oder ein kurzer Sinnschritt), Nummer an jeder 5. Zeile */
-.lp-zeilen { counter-reset: lp-z; margin: 0; padding: 0; list-style: none; max-width: 70ch; }
-.lp-zeilen li { counter-increment: lp-z; position: relative; padding-left: 2.75rem; }
-.lp-zeilen li:nth-child(5n)::before {
-  content: counter(lp-z); position: absolute; left: 0; top: 0; width: 2rem; text-align: right;
-  font-size: 0.875rem; font-weight: 700; color: var(--lp-text2);
-}
-.lp-fett { font-weight: 700; }
-
-/* Tabellen und breite Inhalte scrollen im eigenen Container, nie die ganze Seite */
-.lp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.lp-scroll:focus-visible { outline: 3px solid var(--lp-fokus); outline-offset: -3px; }
-.lp-tabelle { width: 100%; min-width: 20rem; border-collapse: collapse; font-size: 1rem; }
-.lp-tabelle caption { padding: 0 0 0.5rem; text-align: left; font-size: 0.9375rem; color: var(--lp-text2); }
-.lp-tabelle th, .lp-tabelle td { padding: 0.6rem 0.75rem; border: 1px solid var(--lp-rahmen); text-align: left; vertical-align: top; }
-.lp-tabelle thead th { background: var(--lp-gruppe); font-weight: 700; }
-
-/* Abbildung mit festem Seitenverhältnis (kein Layoutsprung), Quelle darunter, kein Text über dem Bild */
-.lp-abbildung { margin: 0; }
-.lp-bildrahmen { aspect-ratio: 16 / 9; background: var(--lp-feld); display: grid; place-items: center; color: var(--lp-text2); font-size: 0.9375rem; }
-.lp-bildrahmen img { width: 100%; height: 100%; object-fit: contain; }
-
-/* Aufgabe: kräftiger Rahmen in der Fachfarbe */
-.lp-aufgabe { border: 2px solid var(--lp-akzent); border-radius: var(--lp-radius); background: var(--lp-flaeche); padding: 1rem 1.1rem 1.1rem; }
-.lp-aufgabe-kopf { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; }
-.lp-aufgabe-kopf .lp-label { margin: 0; font-size: 1rem; color: var(--lp-akzent); }
-.lp-op { font-weight: 700; }
-.lp-auftrag { max-width: 70ch; }
-
-/* Niveau-Markierung 1 bis 3 gefüllte Punkte, ohne Farbcodierung, ohne „leicht/schwer" */
-.lp-niveau { display: inline-flex; gap: 0.3rem; color: var(--lp-text); }
-.lp-niveau i { display: block; width: 0.8rem; height: 0.8rem; border: 2px solid currentColor; border-radius: 50%; }
-.lp-niveau[data-stufe="1"] i:nth-child(1),
-.lp-niveau[data-stufe="2"] i:nth-child(-n+2),
-.lp-niveau[data-stufe="3"] i { background: currentColor; }
-
-/* Teilaufgaben mit Abhak-Kästchen (Zustand wird nicht gespeichert) */
-.lp-teile { margin: 0.25rem 0 0; padding: 0; list-style: none; }
-.lp-teil { display: flex; gap: 0.75rem; align-items: flex-start; min-height: 2.75rem; padding: 0.3rem 0; cursor: pointer; max-width: 70ch; }
-.lp-teil input { flex: none; width: 1.5rem; height: 1.5rem; margin: 0.6rem 0 0; accent-color: var(--lp-akzent); cursor: pointer; }
-.lp-teil > span { padding-top: 0.5rem; }
-
-/* Hilfe: gestrichelter Rahmen, getönt, immer mit Beschriftung (Tipp, Wortspeicher, Satzbausteine) */
-.lp-hilfe { margin-top: 0.9rem; padding: 0.8rem 1rem; border: 2px dashed var(--lp-rahmen); border-radius: calc(var(--lp-radius) * 0.7); background: var(--lp-gruppe); }
-.lp-hilfe .lp-label { color: var(--lp-text); }
-.lp-hilfe p, .lp-hilfe li { max-width: 70ch; }
-.lp-woerter { display: flex; flex-wrap: wrap; gap: 0.5rem 0.6rem; margin: 0; padding: 0; list-style: none; }
-.lp-woerter li { padding: 0.25rem 0.7rem; border: 1px solid var(--lp-rahmen); border-radius: 0.6rem; background: var(--lp-flaeche); }
-.lp-wort { white-space: nowrap; }
-.lp-sr {
-  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
-  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-}
-.lp-bausteine { margin: 0; padding-left: 1.2rem; }
-
-/* Schreibraum mit Linien (Eingabe bleibt im Browser) */
-.lp-schreib {
-  display: block; width: 100%; min-height: 9rem; margin-top: 0.9rem; padding: 0.1rem 0.75rem;
-  border: 1px solid var(--lp-rahmen); border-radius: calc(var(--lp-radius) * 0.6);
-  background-color: var(--lp-flaeche); color: var(--lp-text);
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.25rem - 1px), var(--lp-linie) calc(2.25rem - 1px), var(--lp-linie) 2.25rem);
-  background-attachment: local;
-  font: inherit; line-height: 2.25rem; resize: vertical;
+/* Zuordnung (Kamera) */
+.zuordnung { width: 100%; margin: 0.5rem 0; border-collapse: collapse; }
+.zuordnung th, .zuordnung td { padding: 0.5rem 0.5rem 0.5rem 0; text-align: left; vertical-align: middle; border-bottom: 1px solid var(--line-soft); }
+.zuordnung thead th { font-size: 0.875rem; }
+select { min-height: 2.75rem; max-width: 100%; padding: 0.3rem 0.7rem; font: inherit; color: var(--text); background: var(--surface); border: 1.5px solid var(--control); border-radius: 0.8rem; }
+.zeilen-rueck { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; }
+.zeilen-rueck svg { flex: none; width: 1.375rem; height: 1.375rem; }
+@media (max-width: 36rem) {
+  .zuordnung, .zuordnung tbody, .zuordnung tr, .zuordnung td, .zuordnung th { display: block; }
+  .zuordnung thead { position: absolute; left: -9999px; }
+  .zuordnung tr { padding: 0.5rem 0; border-bottom: 1px solid var(--line-soft); }
+  .zuordnung td, .zuordnung th { padding: 0.15rem 0; border: 0; }
 }
 
-.lp-fuss { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--lp-linie); font-size: 0.875rem; color: var(--lp-text2); }
-.lp-noscript { margin: 0; padding: 0.75rem 1rem; background: var(--lp-gruppe); font-family: var(--lp-schrift); }
+/* Simulation */
+.regler { display: block; width: 100%; max-width: 34rem; min-height: 2.75rem; accent-color: var(--accent); }
+.wert { font-weight: 700; }
+.regler-zeile { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; max-width: 40rem; }
+.regler-zeile label { font-weight: 700; }
+.status { margin: 0.75rem 0; padding: 0.65rem 0.95rem; background: var(--surface); border: 1.5px solid var(--accent); border-radius: 1rem; }
+.status p { margin: 0.2rem 0; }
+.status .rueck { margin: 0.2rem 0; }
+.sehtafel { padding: 0.75rem; text-align: center; overflow: hidden; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 1rem; }
+.sehtafel .buchstaben { margin: 0; padding-left: 0.3em; font-size: clamp(1.5rem, 8vw, 2.25rem); font-weight: 700; letter-spacing: 0.3em; transition: filter 0.15s; }
+@media (prefers-reduced-motion: reduce) { .sehtafel .buchstaben { transition: none; } }
+.ray { fill: none; stroke: var(--ray); stroke-width: 3; stroke-linejoin: round; }
+.ray-weiter { fill: none; stroke: var(--ray); stroke-width: 2.5; stroke-dasharray: 5 5; opacity: 0.85; }
+.achse { stroke: var(--axis); stroke-width: 1.5; stroke-dasharray: 2 6; }
+.auge-umriss { fill: var(--glas-fill); stroke: var(--sclera); stroke-width: 4; }
+.netzhaut-l { stroke: var(--retina); stroke-width: 7; stroke-linecap: round; fill: none; }
+.linse-s { fill: var(--lens-fill); stroke: var(--lens-line); stroke-width: 3; }
+.iris-s { stroke: var(--iris-line); stroke-width: 7; stroke-linecap: round; }
+.brille-s { fill: rgba(130, 130, 130, .18); stroke: var(--text); stroke-width: 3; }
+.fokus-s { fill: var(--surface); stroke: var(--ray); stroke-width: 3.5; }
+.radio-gruppe { margin: 0.75rem 0; padding: 0; border: 0; }
+.radio-gruppe legend { margin-bottom: 0.25rem; padding: 0; font-weight: 700; }
+.radio-gruppe label { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; cursor: pointer; }
+.radio-gruppe input { flex: none; width: 1.375rem; height: 1.375rem; accent-color: var(--accent); }
+
+/* Simulationslayout: Anzeige bleibt beim Verstellen der Regler sichtbar */
+.sim-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; align-items: start; }
+@media (min-width: 56rem) {
+  .sim-layout { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+  .sim-anzeige { position: sticky; top: 4.5rem; }
+}
