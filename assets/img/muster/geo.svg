@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none" stroke="url(#f)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<defs><radialGradient id="f" gradientUnits="userSpaceOnUse" cx="400" cy="0" r="400"><stop offset="0" stop-color="#000" stop-opacity="1"/><stop offset="0.55" stop-color="#000" stop-opacity="0.75"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+<path d="M320 20C370 15 410 50 405 95C400 140 350 160 305 150C255 140 240 90 265 55C280 32 300 22 320 20Z" transform="translate(322 88) scale(1) translate(-322 -88)" vector-effect="non-scaling-stroke"/>
+<path d="M320 20C370 15 410 50 405 95C400 140 350 160 305 150C255 140 240 90 265 55C280 32 300 22 320 20Z" transform="translate(322 88) scale(0.78) translate(-322 -88)" vector-effect="non-scaling-stroke"/>
+<path d="M320 20C370 15 410 50 405 95C400 140 350 160 305 150C255 140 240 90 265 55C280 32 300 22 320 20Z" transform="translate(322 88) scale(0.58) translate(-322 -88)" vector-effect="non-scaling-stroke"/>
+<path d="M320 20C370 15 410 50 405 95C400 140 350 160 305 150C255 140 240 90 265 55C280 32 300 22 320 20Z" transform="translate(322 88) scale(0.38) translate(-322 -88)" vector-effect="non-scaling-stroke"/>
+<path d="M320 20C370 15 410 50 405 95C400 140 350 160 305 150C255 140 240 90 265 55C280 32 300 22 320 20Z" transform="translate(322 88) scale(0.2) translate(-322 -88)" vector-effect="non-scaling-stroke"/>
+<path d="M0 205Q200 168 400 205" stroke-width="1.8"/>
+<path d="M0 252Q200 215 400 252" stroke-width="1.8"/>
+<path d="M150 300Q196 160 170 0" stroke-width="1.8"/>
+<path d="M250 300Q276 170 262 0" stroke-width="1.8"/>
+<path d="M360 300Q366 180 352 100" stroke-width="1.8"/>
+</svg>

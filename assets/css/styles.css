@@ -289,3 +289,35 @@ body[data-subject="Geografie"] .hero::before {
 .prose a { text-decoration: underline; text-underline-offset: 0.2em; }
 .prose .kurz { margin: 1.5rem 0 0; padding: 1.1rem 1.25rem; background: var(--surface); border: 2px solid var(--text); border-radius: 1.25rem; }
 .prose .kurz h2 { margin-top: 0; }
+
+/* Fachgrafiken: rein dekorativ (kein Inhalt, kein Text darüber). Das SVG dient als Maske und wird in der
+   Fachfarbe eingefärbt, folgt also den Farbvariablen und dem Dunkelmodus. Der Verlauf im SVG blendet zur
+   Textseite hin aus. Fachseiten: rechts hinter der Überschrift. Startseite: oben rechts in den Fachflächen. */
+body[data-page="fach"][data-subject] .hero::after,
+.fach-tile::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: right top; mask-position: right top;
+}
+body[data-page="fach"][data-subject] .hero::after {
+  right: max(0px, calc(50% - 34rem)); top: -2rem; width: min(24rem, 85%); aspect-ratio: 4 / 3; opacity: 0.42;
+  -webkit-mask-size: 100% 100%, 100% 100%; mask-size: 100% 100%, 100% 100%;
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+}
+body[data-page="fach"][data-subject="Biologie"] .hero::after {
+  background: var(--bio-ink);
+  -webkit-mask-image: url("../img/muster/bio.svg"), linear-gradient(to left, transparent, #000 16%);
+  mask-image: url("../img/muster/bio.svg"), linear-gradient(to left, transparent, #000 16%);
+}
+body[data-page="fach"][data-subject="Geografie"] .hero::after {
+  background: var(--geo-ink);
+  -webkit-mask-image: url("../img/muster/geo.svg"), linear-gradient(to left, transparent, #000 16%);
+  mask-image: url("../img/muster/geo.svg"), linear-gradient(to left, transparent, #000 16%);
+}
+.fach-tile::before {
+  z-index: 0; inset: 0; background: #fff; opacity: 0.28;
+  -webkit-mask-size: auto 100%; mask-size: auto 100%;
+}
+.fach-tile.bio::before { -webkit-mask-image: url("../img/muster/bio.svg"); mask-image: url("../img/muster/bio.svg"); }
+.fach-tile.geo::before { -webkit-mask-image: url("../img/muster/geo.svg"); mask-image: url("../img/muster/geo.svg"); }
+@media (max-width: 40rem) { body[data-page="fach"][data-subject] .hero::after { opacity: 0.3; width: 80%; } }

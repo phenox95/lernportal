@@ -13,7 +13,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
 | `vorlage/` | Vorlage für Materialseiten mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
-| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste der Materialseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
+| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste der Materialseiten), `img/muster/` (Fachgrafiken als SVG), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
 
 ## Inhalte ergänzen
 
@@ -108,6 +108,10 @@ Eine Anwendung mit eigenem Aussehen bekommt nur die Kopfleiste. Im `<head>` erg�
 ```
 
 Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-grade` setzen. `material.css` ist eigenständig, alle Klassen tragen das Präfix `lp-`. Danach die Anwendung prüfen: Kopfleiste ist oben angeheftet, Vollbild-Layouts mit `100vh` können dadurch minimal überlaufen.
+
+## Fachgrafiken
+
+`assets/img/muster/bio.svg` (Zellverband) und `geo.svg` (Höhenlinien mit Gradnetz) sind rein dekorative Muster. Sie erscheinen hinter der Überschrift der Fachseiten, in den Fachflächen der Startseite und im Titelblock der Materialvorlage. Das SVG dient als CSS-Maske und wird in der Fachfarbe eingefärbt. Dadurch passen sich die Muster dem Dunkelmodus an. Sie blenden zur Textseite und zum Rand hin aus, tragen keinen Inhalt und brauchen keinen Alternativtext. Neue Muster nur selbst zeichnen oder mit klarer Lizenz verwenden. Die Maskenebenen stehen am Ende von `styles.css` und in `material.css`.
 
 ## Lesemodus
 
