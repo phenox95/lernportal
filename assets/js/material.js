@@ -36,7 +36,11 @@
       body.dataset.dichte = zahlen.length && zahlen.every(n => n >= 9) ? "9-10" : "7-8";
     }
 
-    const kopf = neu("header", "lp-kopf " + (FACHKLASSE[fach] || ""));
+    /* Vorlagenseiten (body.lp-seite): schmale Leiste (Zurück, Lesemodus) plus Titelblock mit Fachgrafik.
+       Eingehängte Anwendungen: eine einzige schmale Leiste mit Titel, ohne Titelblock. */
+    const mitBlock = body.classList.contains("lp-seite");
+
+    const kopf = neu("header", "lp-kopf " + (FACHKLASSE[fach] || "") + (mitBlock ? " lp-schlank" : ""));
     const innen = neu("div", "lp-kopf-innen");
 
     const zurueck = neu("a", "lp-zurueck");
@@ -46,21 +50,55 @@
     zurueck.appendChild(neu("span", "lp-lang", "Zurück zum\u00A0"));
     zurueck.appendChild(neu("span", "", "Portal"));
 
-    const block = neu("div", "lp-kopf-titel");
-    const hatH1 = !!document.querySelector("h1");
-    block.appendChild(neu(hatH1 ? "p" : "h1", "lp-titel", titel));
-    const meta = neu("p", "lp-meta");
-    if (fach) meta.appendChild(neu("span", "lp-fach", fach));
-    if (fach && klasse) meta.appendChild(document.createTextNode(" "));   // Leerraum für Vorlesegeräte
-    if (klasse) meta.appendChild(neu("span", "", klasse));
-    if (meta.childNodes.length) block.appendChild(meta);
+    function metaZeile() {
+      const meta = neu("p", "lp-meta");
+      if (fach) meta.appendChild(neu("span", "lp-fach", fach));
+      if (fach && klasse) meta.appendChild(document.createTextNode(" "));   // Leerraum für Vorlesegeräte
+      if (klasse) meta.appendChild(neu("span", "", klasse));
+      return meta.childNodes.length ? meta : null;
+    }
 
     const werkzeuge = neu("div", "lp-werkzeuge");
     werkzeuge.id = "prefs-slot";                            // prefs.js füllt diesen Platz
 
-    innen.append(zurueck, block, werkzeuge);
+    innen.appendChild(zurueck);
+    if (!mitBlock) {
+      const block = neu("div", "lp-kopf-titel");
+      block.appendChild(neu(document.querySelector("h1") ? "p" : "h1", "lp-titel", titel));
+      const meta = metaZeile();
+      if (meta) block.appendChild(meta);
+      innen.appendChild(block);
+    }
+    innen.appendChild(werkzeuge);
     kopf.appendChild(innen);
     body.insertBefore(kopf, body.firstChild);
+
+    if (mitBlock) {
+      const tb = neu("div", "lp-titelblock " + (fach === "Biologie" ? "lp-bio" : fach === "Geografie" ? "lp-geo" : ""));
+      const tbInnen = neu("div", "lp-titelblock-innen");
+      const meta = metaZeile();
+      const textblock = neu("div", "lp-titelblock-text");
+      if (meta) textblock.appendChild(meta);
+      textblock.appendChild(neu("h1", "lp-haupttitel", titel));
+      tbInnen.appendChild(textblock);
+
+      /* Themenbild (optional): data-bild = Pfad relativ zum Repository-Stamm, nur Bilddateien.
+         Ohne data-bild-alt gilt das Bild als Dekoration (alt=""). Lädt es nicht, verschwindet es. */
+      if (/^[A-Za-z0-9_][A-Za-z0-9_\-./]*\.(webp|jpe?g|png)$/.test(d.bild || "") && !/\.\./.test(d.bild)) {
+        const bild = neu("figure", "lp-titelbild");
+        const img = document.createElement("img");
+        img.src = wurzel(d.root) + d.bild;
+        img.alt = d.bildAlt || "";
+        img.width = 1200; img.height = 900; img.loading = "lazy";
+        img.addEventListener("error", () => { bild.remove(); tb.classList.remove("lp-mit-bild"); });
+        bild.appendChild(img);
+        if (d.bildQuelle) bild.appendChild(neu("figcaption", "", d.bildQuelle));
+        tbInnen.appendChild(bild);
+        tb.classList.add("lp-mit-bild");
+      }
+      tb.appendChild(tbInnen);
+      kopf.after(tb);
+    }
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", baue);
