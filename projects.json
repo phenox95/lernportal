@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Beispiel: Mitose",
+    "subject": "Biologie",
+    "grade": "Klasse 10",
+    "type": "Präsentation",
+    "description": "Eine Einführung in die Zellteilung.",
+    "path": "biologie/klasse-10/mitose/",
+    "status": "Beispiel"
+  },
+  {
+    "title": "Beispiel: Leben in Risikoräumen",
+    "subject": "Geografie",
+    "grade": "Klasse 7",
+    "type": "Lernmodul",
+    "description": "Mensch und Natur in gefährdeten Räumen.",
+    "path": "geografie/klasse-7/risikoraeume/",
+    "status": "Beispiel"
+  },
+  {
+    "title": "Beispiel: Interaktive Übung",
+    "subject": "Interaktiv",
+    "grade": "Verschiedene",
+    "type": "Interaktive Anwendung",
+    "description": "Ein Platzhalter für Quiz, Simulationen und Lernspiele.",
+    "path": "interaktiv/",
+    "status": "Beispiel"
+  }
+]

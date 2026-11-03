@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Digitales Unterrichtsportal für Biologie und Geografie.">
+  <title>Lernportal – Unterricht digital</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Lernportal Startseite">
+      <span class="brand-mark">L</span>
+      <span>Lernportal<span class="brand-dot">.</span></span>
+    </a>
+    <nav class="top-nav" aria-label="Hauptnavigation">
+      <a href="#faecher">Fächer</a>
+      <a href="#materialien">Materialien</a>
+      <a href="#portal-info">Über das Portal</a>
+    </nav>
+    <a class="header-link" href="#materialien">Zum Unterricht <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> DIGITALER UNTERRICHT</p>
+        <h1>Wissen entdecken.<br><em>Zusammenhänge</em> verstehen.</h1>
+        <p class="hero-text">Präsentationen, Lernmodule und interaktive Anwendungen für Biologie und Geografie – übersichtlich an einem Ort.</p>
+        <a class="primary-button" href="#faecher">Lerninhalte entdecken <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="hero-core">
+          <span class="core-small">LERNEN</span>
+          <span class="core-large">NEU<br>DENKEN</span>
+          <span class="core-index">BIO · GEO</span>
+        </div>
+        <span class="floating-note note-one">01 / ERKUNDEN</span>
+        <span class="floating-note note-two">FRAGEN STELLEN</span>
+        <span class="floating-dot"></span>
+      </div>
+      <div class="hero-bottom"><span>01 — DEIN LERNRAUM</span><span>WÄHLE EIN FACH, FINDE DEIN THEMA</span></div>
+    </section>
+
+    <section class="section subject-section" id="faecher">
+      <div class="section-heading">
+        <div><p class="eyebrow">DEINE FÄCHER</p><h2>Womit beschäftigen wir uns?</h2></div>
+        <p class="section-intro">Wähle ein Fach und steige direkt in die Themen und Materialien ein.</p>
+      </div>
+      <div class="subject-grid">
+        <a class="subject-card biology" href="biologie/">
+          <div class="subject-top"><span>FACH 01</span><span class="subject-symbol">BIO</span></div>
+          <div class="subject-illustration bio-illustration" aria-hidden="true"><span class="cell cell-a"></span><span class="cell cell-b"></span><span class="cell cell-c"></span><span class="cell cell-d"></span></div>
+          <div class="subject-bottom"><div><h3>Biologie</h3><p>Lebewesen verstehen. Leben erforschen.</p></div><span class="circle-arrow">↗</span></div>
+        </a>
+        <a class="subject-card geography" href="geografie/">
+          <div class="subject-top"><span>FACH 02</span><span class="subject-symbol">GEO</span></div>
+          <div class="subject-illustration geo-illustration" aria-hidden="true"><span class="contour contour-a"></span><span class="contour contour-b"></span><span class="contour contour-c"></span><span class="map-pin">+</span></div>
+          <div class="subject-bottom"><div><h3>Geografie</h3><p>Räume entdecken. Welt verstehen.</p></div><span class="circle-arrow">↗</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section material-section" id="materialien">
+      <div class="section-heading">
+        <div><p class="eyebrow">DIE SAMMLUNG</p><h2>Direkt zum Inhalt.</h2></div>
+        <p class="section-intro">Alle veröffentlichten Präsentationen und interaktiven Lernangebote erscheinen hier automatisch aus der Projektübersicht.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Materialien filtern">
+        <button class="filter-button active" data-filter="Alle">Alle</button>
+        <button class="filter-button" data-filter="Biologie">Biologie</button>
+        <button class="filter-button" data-filter="Geografie">Geografie</button>
+        <button class="filter-button" data-filter="Interaktiv">Interaktiv</button>
+      </div>
+      <div id="project-list" class="project-grid" aria-live="polite">
+        <p class="loading-message">Materialien werden geladen …</p>
+      </div>
+    </section>
+
+    <section class="portal-strip" id="portal-info">
+      <div><p class="eyebrow">EIN ORT. VIELE WEGE.</p><h2>Selbstständig arbeiten.<br><em>Neugierig bleiben.</em></h2></div>
+      <p>Dieses Portal bündelt digitale Unterrichtsmaterialien. Neue Inhalte werden ergänzt, sobald sie veröffentlicht sind.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="./"><span class="brand-mark">L</span><span>Lernportal<span class="brand-dot">.</span></span></a>
+    <span>Digitaler Lernraum · Biologie & Geografie</span>
+    <span>© <span id="year"></span></span>
+  </footer>
+</body>
+</html>
