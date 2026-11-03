@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="de" class="lp-vorlage">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex">
+  <title>Vorlage Materialseite – Lernportal</title>
+  <!-- Beim Kopieren nach biologie/klasse-N/thema/: in den fünf Zeilen mit Pfaden (link, zwei script, data-root, noscript) jeden Pfad um zwei Ordnerebenen verlängern, siehe README. -->
+  <link rel="stylesheet" href="../assets/css/material.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/material.js" defer></script>
+</head>
+<body class="lp-seite" data-root="../" data-title="Vorlage: Materialseite" data-subject="Biologie" data-grade="Klasse 8">
+  <noscript><p class="lp-noscript"><a href="../">Zurück zum Portal</a> · Diese Seite braucht JavaScript für die Kopfleiste.</p></noscript>
+
+  <!-- Die Kopfleiste (Zurück, Titel, Fach, Klasse, Lesemodus) erzeugt material.js aus den data-Attributen am body. -->
+  <!-- Lehrkrafthinweise und Erwartungshorizonte gehören NIE auf diese Seite. -->
+
+  <main class="lp-inhalt">
+
+    <!-- Einstieg oder Leitfrage -->
+    <aside class="lp-leitfrage" aria-labelledby="einstieg">
+      <span class="lp-label" id="einstieg">Einstieg</span>
+      <p>Warum sind Blätter grün?</p>
+    </aside>
+
+    <!-- Material 1: Text mit Zeilennummern (jede Zeile ein li, Nummer an jeder 5. Zeile) -->
+    <section class="lp-material" aria-labelledby="m1">
+      <div class="lp-material-kopf"><strong id="m1">M1</strong><span>Text: Licht im Blatt</span></div>
+      <div class="lp-material-inhalt">
+        <ol class="lp-zeilen">
+          <li>Pflanzen brauchen Licht zum Wachsen.</li>
+          <li>Das Licht trifft auf die Blätter.</li>
+          <li>In den Blattzellen liegen viele <span class="lp-fett">Chloroplasten</span>.</li>
+          <li>Chloroplasten enthalten den grünen Farbstoff <span class="lp-fett">Chlorophyll</span>.</li>
+          <li>Das Chlorophyll nimmt Licht auf.</li>
+          <li>Aus Wasser und Kohlenstoffdioxid entsteht Traubenzucker.</li>
+          <li>Dabei wird Sauerstoff frei.</li>
+          <li>Diesen Vorgang nennt man <span class="lp-fett">Photosynthese</span>.</li>
+        </ol>
+      </div>
+      <p class="lp-quelle">Quelle: eigener Text (Beispiel, bitte ersetzen)</p>
+    </section>
+
+    <!-- Material 2: Tabelle im eigenen Scroll-Container -->
+    <section class="lp-material" aria-labelledby="m2">
+      <div class="lp-material-kopf"><strong id="m2">M2</strong><span>Tabelle: Zellen im Vergleich</span></div>
+      <div class="lp-material-inhalt">
+        <div class="lp-scroll" tabindex="0" role="region" aria-label="Tabelle M2, seitlich wischbar">
+          <table class="lp-tabelle">
+            <thead><tr><th scope="col">Zellbestandteil</th><th scope="col">Pflanzenzelle</th><th scope="col">Tierzelle</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Zellwand</th><td>ja</td><td>nein</td></tr>
+              <tr><th scope="row">Chloroplasten</th><td>ja</td><td>nein</td></tr>
+              <tr><th scope="row">Zellkern</th><td>ja</td><td>ja</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="lp-quelle">Quelle: eigene Darstellung (Beispiel, bitte ersetzen)</p>
+    </section>
+
+    <!-- Material 3: Abbildung mit festem Seitenverhältnis. Für ein echtes Bild den Platzhalter ersetzen durch:
+         <img src="bild.webp" alt="Beschreibung dessen, was zu sehen ist" width="1280" height="720" loading="lazy">
+         Dekoration bekommt alt="". Kein Text über dem Bild. Lizenz und Urheber in die Quellenzeile. -->
+    <figure class="lp-material lp-abbildung" aria-labelledby="m3">
+      <div class="lp-material-kopf"><strong id="m3">M3</strong><span>Abbildung</span></div>
+      <div class="lp-bildrahmen"><span>Platz für eine Abbildung (WebP)</span></div>
+      <figcaption class="lp-quelle">Quelle: Urheber, Lizenz</figcaption>
+    </figure>
+
+    <!-- Aufgabe 1: Niveau 1 -->
+    <section class="lp-aufgabe" aria-labelledby="a1">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a1">Aufgabe 1</span>
+        <span class="lp-niveau" data-stufe="1" role="img" aria-label="Niveau 1 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Beschreibe</strong> mit M1, wo in der Pflanzenzelle das Licht aufgenommen wird.</p>
+    </section>
+
+    <!-- Aufgabe 2: Niveau 2, Teilaufgaben mit Abhak-Kästchen -->
+    <section class="lp-aufgabe" aria-labelledby="a2">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a2">Aufgabe 2</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <ul class="lp-teile">
+        <li><label class="lp-teil"><input type="checkbox"><span>a) <strong class="lp-op">Vergleiche</strong> Pflanzenzelle und Tierzelle mit M2.</span></label></li>
+        <li><label class="lp-teil"><input type="checkbox"><span>b) <strong class="lp-op">Erkläre</strong>, warum nur Pflanzenzellen Licht nutzen können.</span></label></li>
+      </ul>
+      <div class="lp-hilfe">
+        <span class="lp-label">Tipp</span>
+        <p>Schau in M2 auf die Zeile „Chloroplasten“.</p>
+      </div>
+    </section>
+
+    <!-- Aufgabe 3: Niveau 3, Zeilenbezug, Wortspeicher mit Silben, Schreibraum -->
+    <section class="lp-aufgabe" aria-labelledby="a3">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a3">Aufgabe 3</span>
+        <span class="lp-niveau" data-stufe="3" role="img" aria-label="Niveau 3 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Erkläre</strong> mit M1 (Z. 3–5), warum Blätter grün sind.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Wortspeicher</span>
+        <ul class="lp-woerter">
+          <li><span class="lp-wort" aria-hidden="true">Chlo-ro-plast</span><span class="lp-sr">Chloroplast</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Chlo-ro-phyll</span><span class="lp-sr">Chlorophyll</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Pho-to-syn-the-se</span><span class="lp-sr">Photosynthese</span></li>
+        </ul>
+      </div>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine">
+          <li>Blätter sind grün, weil …</li>
+          <li>Der Farbstoff … liegt in …</li>
+        </ul>
+      </div>
+      <label class="lp-sr" for="schreib3">Schreibraum für Aufgabe 3</label>
+      <textarea class="lp-schreib" id="schreib3" rows="5"></textarea>
+    </section>
+
+    <p class="lp-fuss">Eingaben bleiben auf diesem Gerät und werden nicht gespeichert oder übertragen.</p>
+  </main>
+</body>
+</html>
