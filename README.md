@@ -7,7 +7,8 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | Seite | Zweck |
 |---|---|
 | `index.html` | Startseite: Suche, zwei Fachbereiche, Impuls der Woche, Register nach Klassenstufe |
-| `biologie/`, `geografie/` | Fachseiten mit Suche und Filtern (Klassenstufe, Art, Themenfeld) |
+| `themenfelder.json` | Die offiziellen RLP-Themenfelder je Fach (Nummer, Titel, Doppeljahrgangsstufe, Ordnername). Steuert Themenfeld-Filter und Themenfelder-Überblick |
+| `biologie/`, `geografie/` | Fachseiten mit Themenfelder-Überblick, Suche und Filtern (Klassenstufe, Art, Themenfeld) |
 | `alle/` | Alle Materialien mit zusätzlichem Fachfilter. Das Register der Startseite verlinkt hierher (`alle/?klasse=8`) |
 | `impressum/`, `datenschutz/` | Rechtstexte, in der Fußzeile aller Seiten verlinkt. Laden bewusst kein `app.js`. **Platzhalter in eckigen Klammern vor der Veröffentlichung ausfüllen** |
 | `projects.json` | Metadaten aller Materialien |
@@ -50,7 +51,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `path` | ja | Relativer Pfad im Repository, z. B. `biologie/klasse-8/zelle/` |
 | `description` | nein | Wird durchsucht |
 | `reihe` | nein | Name der Unterrichtsreihe, z. B. `Risikoräume`. Ordner der Reihe: `geografie/klasse-7/risikoraeume/<stunde>/`. Wird noch nicht ausgewertet, dient der Ordnung |
-| `themenfeld` | nein | Erzeugt den Themenfeld-Filter. Gleiche Schreibweise für gleiche Themenfelder |
+| `themenfeld` | nein | Nummer des RLP-Themenfelds, z. B. `3.1`. Das Portal ergänzt den offiziellen Titel aus `themenfelder.json`. Freier Text geht weiterhin, erscheint dann unter „Weitere“ im Filter (gleiche Schreibweise für gleiche Themenfelder) |
 | `dauer` | nein | z. B. `Do Now`, `45 Min.`, `Doppelstunde` |
 | `niveau` | nein | Niveaustufen D–H, nur eintragen, wenn gesichert |
 | `datum` | nein | `JJJJ-MM-TT` |
@@ -123,6 +124,40 @@ Statt nur Typografie kann rechts neben dem Titel ein Themenbild stehen. Das Bild
 - **Anforderungen:** 4:3, WebP, möglichst unter ca. 150 KB, eigene Bilder oder klare Lizenz, Urheber und Lizenz in der Quelle, keine erkennbaren Personen (besonders keine Minderjährigen) ohne Einwilligung, aussagekräftiger Alternativtext. Ohne `data-bild-alt` gilt das Bild als Dekoration.
 
 Die Fachseiten zeigen Fotos (`assets/img/fach/biologie.webp`, `geografie.webp`), der Impuls der Woche ein Foto (`assets/img/impuls/blatt.webp`). Zum Ersetzen: Datei gleichen Namens überschreiben, Alternativtext und Bildunterschrift im HTML bzw. `bildAlt` und `bildQuelle` in `impuls.json` anpassen. **Vor der Veröffentlichung** müssen in den Bildunterschriften Urheber und Lizenz stehen (derzeit steht dort „Quelle und Lizenz ergänzen").
+
+## Themenfelder
+
+Die Themenfelder stammen aus dem Rahmenlehrplan Berlin-Brandenburg 2015, Teil C (RLP-Online, Kapitel „Themen und Inhalte“, Stand der veröffentlichten Fassung). Sie stehen in `themenfelder.json`. Die Fachseiten zeigen sie als Überblick nach Doppeljahrgangsstufe (7/8 und 9/10) mit der Anzahl der Materialien. Ein Klick wählt das Themenfeld im Filter, ein zweiter Klick hebt die Auswahl auf. Auch Themenfelder ohne Material erscheinen („Noch kein Material“), so ist die Struktur von Anfang an sichtbar.
+
+**Neues Material einem Themenfeld zuordnen:** im Eintrag in `projects.json` nur die Nummer eintragen, z. B. `"themenfeld": "3.7"`. Der Ordner folgt der Empfehlung aus der Tabelle (`biologie/klasse-10/genetik/` oder wie bisher mit eigenem Thema, z. B. `biologie/klasse-10/mitose/`). Der Ordnername ist nur eine Empfehlung und kein RLP-Bestandteil.
+
+### Biologie
+
+| Nr. | Themenfeld | Klassen | Ordnername (Empfehlung) |
+|---|---|---|---|
+| 3.1 | Die Zelle – kleinste Funktionseinheit des Lebendigen | 7/8 | `biologie/klasse-N/zelle/` |
+| 3.2 | Lebensräume und ihre Bewohner – vielfältige Wechselwirkungen | 7/8 | `biologie/klasse-N/lebensraeume/` |
+| 3.3 | Stoffwechsel des Menschen | 7/8 | `biologie/klasse-N/stoffwechsel/` |
+| 3.4 | Sexualität, Fortpflanzung und Entwicklung (Je nach Stundenvolumen auch in 9/10 möglich) | 7/8 | `biologie/klasse-N/sexualitaet/` |
+| 3.5 | Gesundheit – Krankheit | 9/10 | `biologie/klasse-N/gesundheit/` |
+| 3.6 | Bau und Funktion des Nervensystems | 9/10 | `biologie/klasse-N/nervensystem/` |
+| 3.7 | Genetik | 9/10 | `biologie/klasse-N/genetik/` |
+| 3.8 | Evolution | 9/10 | `biologie/klasse-N/evolution/` |
+
+### Geografie
+
+| Nr. | Themenfeld | Klassen | Ordnername (Empfehlung) |
+|---|---|---|---|
+| 3.1 | Leben in Risikoräumen | 7/8 | `geografie/klasse-N/risikoraeume/` |
+| 3.2 | Migration und Bevölkerung (Fächerverbund Gesellschaftswissenschaften) | 7/8 | `geografie/klasse-N/migration/` |
+| 3.3 | Vielfalt der Erde | 7/8 | `geografie/klasse-N/vielfalt-der-erde/` |
+| 3.4 | Armut und Reichtum (Fächerverbund Gesellschaftswissenschaften) | 7/8 | `geografie/klasse-N/armut-reichtum/` |
+| 3.5 | Umgang mit Ressourcen | 9/10 | `geografie/klasse-N/ressourcen/` |
+| 3.6 | Klimawandel und Klimaschutz als Beispiel für internationale Konflikte und Konfliktlösungen | 9/10 | `geografie/klasse-N/klimawandel/` |
+| 3.7 | Wirtschaftliche Verflechtungen und Globalisierung | 9/10 | `geografie/klasse-N/globalisierung/` |
+| 3.8 | Europa in der Welt (Fächerverbund Gesellschaftswissenschaften) | 9/10 | `geografie/klasse-N/europa/` |
+
+Hinweise: Das Wahlpflichtfach (3.9) ist nicht aufgeführt. Die Nummern 3.1 bis 3.8 gibt es in beiden Fächern, sie unterscheiden sich durch Fach und Titel. Beim Biologie-Themenfeld 3.4 sieht der RLP vor, dass es je nach Stundenvolumen der 7/8 oder 9/10 zugeordnet werden kann. Die Geografie-Themenfelder 3.2, 3.4 und 3.8 werden im gesellschaftswissenschaftlichen Fächerverbund unterrichtet. Wird der RLP überarbeitet, `themenfelder.json` anpassen, ohne dass sich der Code ändern muss.
 
 ## Lesemodus
 

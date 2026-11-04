@@ -85,11 +85,28 @@
   function textMatches(project, query) {
     const tokens = fold(query).split(/\s+/).filter(Boolean);
     if (!tokens.length) return true;
-    const haystack = fold([project.title, project.description, project.themenfeld, project.subject, project.type, project.grade].join(" "));
+    const haystack = fold([project.title, project.description, themeOf(project), project.subject, project.type, project.grade].join(" "));
     return tokens.every(token => haystack.includes(token));
   }
 
   let projects = [];
+  let themenfelder = {};   // themenfelder.json (RLP-Themenfelder je Fach), optional
+
+  function tfList(subject) {
+    return Array.isArray(themenfelder[subject]) ? themenfelder[subject] : [];
+  }
+  function tfLabel(tf) { return tf.nr + " " + tf.titel; }
+  /* Themenfeld eines Materials: Nummer ("3.1") wird zum offiziellen Titel aufgelöst, freier Text bleibt wie er ist */
+  function themeOf(project) {
+    const raw = String(project.themenfeld || "").trim();
+    if (!raw) return "";
+    const nr = raw.match(/^(\d+\.\d+)(?!\d)/);
+    if (nr) {
+      const hit = tfList(project.subject).find(tf => tf.nr === nr[1]);
+      if (hit) return tfLabel(hit);
+    }
+    return raw;
+  }
   const state = { subject: "Alle", grade: "Alle", art: "Alle", theme: "Alle", query: "" };
 
   function matches(project) {
@@ -98,7 +115,7 @@
     if (subject !== "Alle" && project.subject !== subject) return false;
     if (state.grade !== "Alle" && !gradesOf(project).includes(state.grade)) return false;
     if (state.art !== "Alle" && !ART_TESTS[state.art].test(project.type || "")) return false;
-    if (state.theme !== "Alle" && project.themenfeld !== state.theme) return false;
+    if (state.theme !== "Alle" && themeOf(project) !== state.theme) return false;
     return textMatches(project, state.query);
   }
 
@@ -164,18 +181,61 @@
       : '<p class="empty-message">Für diese Auswahl gibt es noch kein Material.</p>';
   }
 
+  /* Themenfeld-Auswahl: erst alle offiziellen Themenfelder des Fachs (auch ohne Material), dann weitere Schreibweisen aus projects.json */
   function buildThemes() {
     const select = $("#filter-theme");
     const themeRow = $("#theme-field");
     if (!select) return;
     const subject = pageSubject || state.subject;
-    const themes = [...new Set(projects
-      .filter(p => isVisible(p) && p.themenfeld && (subject === "Alle" || p.subject === subject))
-      .map(p => p.themenfeld))].sort((a, b) => a.localeCompare(b, "de"));
-    if (!themes.includes(state.theme)) state.theme = "Alle";
-    select.innerHTML = ["Alle", ...themes].map(theme =>
-      `<option value="${escapeHtml(theme)}"${theme === state.theme ? " selected" : ""}>${theme === "Alle" ? "Alle Themenfelder" : escapeHtml(theme)}</option>`).join("");
-    themeRow.hidden = !themes.length;
+    const subjects = subject === "Alle" ? ["Biologie", "Geografie"] : [subject];
+    const visible = projects.filter(isVisible);
+    const known = new Set();
+    const option = (label, n) =>
+      `<option value="${escapeHtml(label)}"${label === state.theme ? " selected" : ""}>${escapeHtml(label)}${n === undefined ? "" : " (" + n + ")"}</option>`;
+    const groups = subjects.map(sub => ({
+      subject: sub,
+      options: tfList(sub).map(tf => {
+        const label = tfLabel(tf);
+        known.add(label);
+        return option(label, visible.filter(p => p.subject === sub && themeOf(p) === label).length);
+      })
+    })).filter(g => g.options.length);
+    const extra = [...new Set(visible
+      .filter(p => p.themenfeld && (subject === "Alle" || p.subject === subject))
+      .map(themeOf).filter(t => t && !known.has(t)))].sort((a, b) => a.localeCompare(b, "de"));
+    const values = [...known, ...extra];
+    if (!values.includes(state.theme)) state.theme = "Alle";
+    const parts = ['<option value="Alle">Alle Themenfelder</option>'];
+    groups.forEach(g => parts.push(subjects.length > 1
+      ? `<optgroup label="${escapeHtml(g.subject)}">${g.options.join("")}</optgroup>` : g.options.join("")));
+    if (extra.length) parts.push(`<optgroup label="Weitere">${extra.map(t => option(t)).join("")}</optgroup>`);
+    select.innerHTML = parts.join("");
+    themeRow.hidden = !values.length;
+  }
+
+  /* Überblick über die Themenfelder des Fachs (nur Fachseiten): Klick wählt das Themenfeld im Filter */
+  function renderThemenfelder() {
+    const box = $("#themenfelder");
+    if (!box || !pageSubject) return;
+    const items = tfList(pageSubject);
+    if (!items.length) { box.hidden = true; return; }
+    const visible = projects.filter(isVisible);
+    const groups = ["7/8", "9/10"].map(k => ({ k, items: items.filter(tf => tf.klassen === k) })).filter(g => g.items.length);
+    box.innerHTML = `<p class="label">Themenfelder nach Rahmenlehrplan</p>` + groups.map(g => `
+      <div class="tf-group" role="group" aria-label="Klasse ${escapeHtml(g.k)}">
+        <p class="tf-head">Klasse ${escapeHtml(g.k)}</p>
+        ${g.items.map(tf => {
+          const label = tfLabel(tf);
+          const n = visible.filter(p => p.subject === pageSubject && themeOf(p) === label).length;
+          const note = [tf.verbund, tf.hinweis].filter(Boolean).map(escapeHtml).join(" · ");
+          return `<button type="button" class="tf-row" data-theme="${escapeHtml(label)}" aria-pressed="${state.theme === label}">
+            <span class="tf-nr">${escapeHtml(tf.nr)}</span>
+            <span class="tf-main"><span class="tf-title">${escapeHtml(tf.titel)}</span>${note ? `<span class="tf-note">${note}</span>` : ""}</span>
+            <span class="tf-count">${n ? countText(n) : "Noch kein Material"}</span>
+          </button>`;
+        }).join("")}
+      </div>`).join("");
+    box.hidden = false;
   }
 
   function setPressed(group, value) {
@@ -213,10 +273,27 @@
       });
     }
     $("#filter-art").addEventListener("change", event => { state.art = event.target.value; renderList(); });
-    $("#filter-theme").addEventListener("change", event => { state.theme = event.target.value; renderList(); });
+    $("#filter-theme").addEventListener("change", event => { state.theme = event.target.value; renderList(); renderThemenfelder(); });
+    const overview = $("#themenfelder");
+    if (overview) {
+      overview.addEventListener("click", event => {
+        const button = event.target.closest(".tf-row");
+        if (!button) return;
+        state.theme = state.theme === button.dataset.theme ? "Alle" : button.dataset.theme;
+        $("#filter-theme").value = state.theme;
+        renderList();
+        renderThemenfelder();
+        const target = $("#result-count");
+        if (state.theme !== "Alle" && target) {
+          const calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          target.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+        }
+      });
+    }
     $("#q").addEventListener("input", event => { state.query = event.target.value; renderList(); });
 
     buildThemes();
+    renderThemenfelder();
     renderList();
   }
 
@@ -225,13 +302,19 @@
   const year = $("#year");
   if (year) year.textContent = new Date().getFullYear();
 
-  fetch(root + "projects.json")
-    .then(response => {
+  const loadThemenfelder = page === "home" ? Promise.resolve({})
+    : fetch(root + "themenfelder.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}));
+
+  Promise.all([
+    fetch(root + "projects.json").then(response => {
       if (!response.ok) throw new Error("projects.json nicht ladbar");
       return response.json();
-    })
-    .then(data => {
+    }),
+    loadThemenfelder
+  ])
+    .then(([data, tf]) => {
       projects = Array.isArray(data) ? data : [];
+      themenfelder = tf && typeof tf === "object" ? tf : {};
       if (page === "home") { initHome(); initImpuls(); } else { initList(); }
     })
     .catch(() => {
