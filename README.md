@@ -49,6 +49,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `type` | ja | Enthält das Wort *Präsentation*, *Modul* oder *interaktiv/Spiel/Simulation/Quiz*, greift der Filter „Art". Das Wort bestimmt auch das Symbol. |
 | `path` | ja | Relativer Pfad im Repository, z. B. `biologie/klasse-8/zelle/` |
 | `description` | nein | Wird durchsucht |
+| `reihe` | nein | Name der Unterrichtsreihe, z. B. `Risikoräume`. Ordner der Reihe: `geografie/klasse-7/risikoraeume/<stunde>/`. Wird noch nicht ausgewertet, dient der Ordnung |
 | `themenfeld` | nein | Erzeugt den Themenfeld-Filter. Gleiche Schreibweise für gleiche Themenfelder |
 | `dauer` | nein | z. B. `Do Now`, `45 Min.`, `Doppelstunde` |
 | `niveau` | nein | Niveaustufen D–H, nur eintragen, wenn gesichert |

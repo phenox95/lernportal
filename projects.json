@@ -88,11 +88,12 @@
     "title": "Urlaub auf dem Vulkan – Tourismus am Ätna",
     "description": "Chancen und Risiken des Tourismus am Ätna: Impuls, Partnerpuzzle und begründetes Urteil.",
     "type": "Interaktive Präsentation",
-    "path": "geografie/klasse-7/aetna-tourismus/",
+    "path": "geografie/klasse-7/risikoraeume/aetna-tourismus/",
     "subject": "Geografie",
     "grade": "Klasse 7",
     "themenfeld": "Risikoräume",
     "dauer": "Doppelstunde",
-    "datum": "2026-11-04"
+    "datum": "2026-11-04",
+    "reihe": "Risikoräume"
   }
 ]
