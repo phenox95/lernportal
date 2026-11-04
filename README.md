@@ -121,6 +121,8 @@ Statt nur Typografie kann rechts neben dem Titel ein Themenbild stehen. Das Bild
 - **Materialseite:** Am `body` ergänzen: `data-bild="assets/img/<material>/titel.webp"` (Pfad ab Repository-Stamm), `data-bild-alt` und `data-bild-quelle`. Lädt das Bild nicht, verschwindet es.
 - **Anforderungen:** 4:3, WebP, möglichst unter ca. 150 KB, eigene Bilder oder klare Lizenz, Urheber und Lizenz in der Quelle, keine erkennbaren Personen (besonders keine Minderjährigen) ohne Einwilligung, aussagekräftiger Alternativtext. Ohne `data-bild-alt` gilt das Bild als Dekoration.
 
+Mitgeliefert sind zwei eigene Illustrationen für die Fachseiten (`assets/img/fach/biologie.webp`, `geografie.webp`, je ca. 25 KB). Sie lassen sich jederzeit durch Fotos ersetzen: Datei gleichen Namens überschreiben, Alternativtext und Bildunterschrift im HTML anpassen.
+
 ## Lesemodus
 
 Das Symbol „Aa" in der Kopfleiste (Portal und Materialseiten) öffnet die Einstellungen: Schriftgröße (3 Stufen), Zeilenabstand und Darstellung (Auto, Hell, Dunkel). Gespeichert wird nur im Browser (`localStorage`), ohne Konto und ohne Übertragung. Die Einstellung gilt portalweit. Auf Vorlagenseiten wirken Schriftgröße und Zeilenabstand auf den ganzen Inhalt, bei eingehängten Anwendungen auf die Kopfleiste.
