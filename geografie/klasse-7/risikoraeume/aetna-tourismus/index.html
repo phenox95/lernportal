@@ -10,10 +10,6 @@
 <script src="../../../../assets/js/prefs.js"></script>
 <script src="../../../../assets/js/material.js" defer></script>
 <style>
-/* Optional: OpenDyslexic als Datei neben diese Seite legen (fonts/OpenDyslexic-Regular.woff2, -Bold.woff2).
-   Fehlt die Datei, gilt die Systemschrift. */
-@font-face{font-family:"OpenDyslexic";src:url(fonts/OpenDyslexic-Regular.woff2) format("woff2");font-weight:400}
-@font-face{font-family:"OpenDyslexic";src:url(fonts/OpenDyslexic-Bold.woff2) format("woff2");font-weight:700}
 :root{--rost:#A9442B;--rost-d:#7C2F1C;--dunkel:#2B211E;--papier:#FBF6F0;--sand:#EFE3D6;--grau:#6F645D;--ok:#2F6B4F;
  --p:clamp(1.05rem,0.9rem + 1vw,1.6rem);--h:clamp(1.6rem,1.1rem + 2.4vw,2.75rem);--rand:clamp(1rem,4vw,3rem)}
 *{box-sizing:border-box}
@@ -45,12 +41,15 @@ p.klein{font-size:calc(var(--p)*.85)}
 .versteckt{display:none}
 .versteckt.show{display:block}
 .bildkarte{position:relative;border-radius:.9rem;overflow:hidden;border:3px solid var(--dunkel);background:#000;aspect-ratio:4/3;max-height:52vh;width:100%}
-.bildkarte img{display:block;width:100%;height:100%;object-fit:cover}
+.bildkarte img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .bildkarte.karte{aspect-ratio:400/470;width:min(100%,25rem);max-height:none;margin:0 auto}
 .bildkarte .cap{position:absolute;left:0;bottom:0;background:rgba(43,33,30,.85);color:#fff;padding:.3rem 1rem;font-size:clamp(.9rem,.85rem + .3vw,1.2rem)}
 .bildkarte.fehlt{background:var(--sand);display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem}
 .bildkarte.fehlt img{display:none}
 .bildkarte.fehlt:before{content:attr(data-fehlt);color:var(--dunkel);font-size:1.1rem}
+.ikone{flex:none;width:clamp(3rem,6vw,4.5rem);height:auto}
+.bild-klein{width:100%;max-width:22rem;height:auto;border-radius:.9rem;border:3px solid var(--dunkel);display:block}
+.mitikone{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
 .quelle{font-size:.9rem;color:var(--grau)}
 .fertig{align-self:flex-start;max-width:26rem;background:#fff;border:3px dashed var(--rost);border-radius:.9rem;padding:.8rem 1.1rem;font-size:clamp(.95rem,.9rem + .3vw,1.15rem)}
 .fertig b{color:var(--rost)}
@@ -106,11 +105,12 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Do Now (Wiederholung der Vorstunde).</b> Annahme: Vorstunde = Landwirtschaft am Ätna. Bei anderer Vorstunde die Aussage austauschen. Impuls läuft erst auf Folie 2. SuS mit LRS dürfen sich die Aussage vorlesen lassen. Danach kurz abgleichen (Lösung einblenden), währenddessen Anwesenheit.">
   <div class="kopf"><div class="badge">1</div><div class="ph">Do Now</div><div class="meta"><span>Einzelarbeit</span><span>3 Min.</span></div></div>
   <div class="inhalt">
-    <h1>Guten Morgen! Los geht’s.</h1>
+    <div class="mitikone"><img class="ikone" src="bilder/sonne.jpg" alt="" width="225" height="225"><h1>Guten Morgen! Los geht’s.</h1></div>
     <div class="karte sand"><p>Aussage aus der letzten Stunde:<br><b>„Am Ätna kann man keine Landwirtschaft betreiben. Die Lava zerstört alles.“</b></p></div>
     <p><span class="op">Erkläre</span>, warum die Aussage nicht ganz stimmt. Nenne eine Chance und ein Risiko für die Landwirtschaft am Ätna.</p>
     <div><button class="btn" data-reveal="l1">Lösung zeigen</button></div>
     <div class="karte versteckt" id="l1"><p><b>Chance:</b> Asche und Lava machen den Boden fruchtbar. Seit über 2 000 Jahren wird dort angebaut.<br><b>Risiko:</b> Ausbrüche können Felder und Häuser zerstören.</p></div>
+    <img class="bild-klein" src="bilder/kleinkind-muede.jpg" alt="Ein müdes Kleinkind mit zerzausten Haaren sitzt mit geschlossenen Augen am Tisch." width="301" height="168">
   </div>
 </section>
 
@@ -120,7 +120,7 @@ p.klein{font-size:calc(var(--p)*.85)}
   <div class="inhalt">
     <h1>Zwei Fotos, ein Berg</h1>
     <div class="reihe">
-      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-a.jpg"><img src="bilder/foto-a.jpg" alt="Zwei Busse fahren vor dem Ätna durch Schnee"><div class="cap">Foto A</div></div>
+      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-a.jpg"><img src="bilder/foto-a.jpg" style="object-position:50% 40%" alt="Zwei Busse fahren vor dem Ätna durch Schnee"><div class="cap">Foto A</div></div>
       <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-b.jpg"><img src="bilder/foto-b.jpg" alt="Ein Haus ist fast ganz von erstarrter Lava bedeckt"><div class="cap">Foto B</div></div>
     </div>
     <p><b>Was fällt euch auf?</b></p>
@@ -152,6 +152,7 @@ p.klein{font-size:calc(var(--p)*.85)}
           <button class="chip" data-t="Meer: Mittelmeer">Meer?</button>
         </div>
         <div><button class="btn hell" data-reveal="mk">Ätna auf der Karte zeigen</button></div>
+        <div class="bildkarte" style="aspect-ratio:1200/540;max-width:34rem" data-fehlt="Bild fehlt: bilder/europa-karte.jpg"><img src="bilder/europa-karte.jpg" alt="Politische Karte von Europa mit Staaten und Meeren"><div class="cap">Europa (politisch)</div></div>
       </div>
       <div class="bildkarte karte" style="flex:0 1 25rem" data-fehlt="Bild fehlt: bilder/karte-sizilien.jpg"><img src="bilder/karte-sizilien.jpg" alt="Reliefkarte von Sizilien"><div id="mk" class="versteckt" style="position:absolute;left:79.7%;top:32%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--rost);border:4px solid #fff"></div><div class="cap">Sizilien (Relief)</div></div>
     </div>
@@ -186,7 +187,7 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Einzelphase.</b> Stille Arbeit. Vorlesen anbieten (Mitschüler/in oder Lehrkraft), besonders M6. Lesestrategie: pro Absatz ein bis zwei Schlüsselwörter markieren. Beobachtung: Entnehmen die SuS Stichpunkte oder schreiben sie Sätze ab? Fertige: Sprinteraufgabe 4.">
   <div class="kopf"><div class="badge">7</div><div class="ph">Erarbeitung</div><div class="meta"><span>Einzelarbeit</span><span>12 Min.</span></div></div>
   <div class="inhalt">
-    <h1>Allein am Material</h1>
+    <div class="mitikone"><img class="ikone" src="bilder/icon-stift.svg" alt="" width="96" height="96"><h1>Allein am Material</h1></div>
     <div class="karte"><p><span class="op">Entnimm</span> deinem Material 3–4 Stichpunkte.<br>Gruppe A: Chancen (M1–M4) · Gruppe B: Risiken (M4–M7)</p></div>
     <p>Tipp: Markiere pro Absatz 1–2 Schlüsselwörter.</p>
     <div class="timer" data-min="12"><div class="z">12:00</div><button class="btn" data-t="start">Start</button><button class="btn hell" data-t="reset">Zurück</button></div>
@@ -198,7 +199,7 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Vierergruppe.</b> Jede Person erklärt ihre Stichpunkte, die anderen ergänzen die zweite Spalte. Moderation: Gruppen zuhören, nicht eingreifen. Beobachtungskriterien: Fachwörter genutzt, mit Material begründet, Spalten vollständig.">
   <div class="kopf"><div class="badge">8</div><div class="ph">Erarbeitung</div><div class="meta"><span>Vierergruppe</span><span>12 Min.</span></div></div>
   <div class="inhalt">
-    <h1>Erklärt euch eure Spalten</h1>
+    <div class="mitikone"><img class="ikone" src="bilder/icon-paar.svg" alt="" width="96" height="96"><img class="ikone" src="bilder/icon-gruppe.svg" alt="" width="96" height="96"><h1>Erklärt euch eure Spalten</h1></div>
     <div class="schritt"><div class="nr">1</div><p>Reihum: Jede Person <span class="op">erklärt</span> ihre Stichpunkte.</p></div>
     <div class="schritt"><div class="nr">2</div><p><span class="op">Ergänzt</span> die andere Spalte in eurer Tabelle.</p></div>
     <div class="schritt"><div class="nr">3</div><p><span class="op">Vergleicht</span>: Welche zwei Punkte sind für euch am wichtigsten?</p></div>
@@ -210,12 +211,12 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Sicherung.</b> SuS nennen Stichpunkte, Lehrkraft oder SuS tippen sie in die Spalten. Danach „Lösungsvorschlag“ nur zum Abgleich einblenden. Diskussionsanlass M4: Foto passt in beide Spalten. Überleitung: „Bleibt ihr bei eurer ersten Meinung?“">
   <div class="kopf"><div class="badge">9</div><div class="ph">Sicherung</div><div class="meta"><span>Plenum</span><span>10 Min.</span></div></div>
   <div class="inhalt">
-    <h1 class="klein">Die große Tabelle</h1>
+    <div class="mitikone"><img class="ikone" src="bilder/icon-frage.svg" alt="" width="96" height="96"><h1 class="klein">Die große Tabelle</h1></div>
     <div class="tab">
       <div><h2>Chancen</h2><div class="eingabe" contenteditable="true" id="tc" data-ph="Stichpunkte der Klasse …"></div></div>
       <div><h2>Risiken</h2><div class="eingabe" contenteditable="true" id="tr" data-ph="Stichpunkte der Klasse …"></div></div>
     </div>
-    <div class="zeile"><button class="btn hell" id="loes">Lösungsvorschlag einblenden</button><p class="klein"><b>Bleibt ihr bei eurer ersten Meinung?</b></p></div>
+    <div class="zeile"><button class="btn hell" id="loes">Lösungsvorschlag einblenden</button><p class="klein"><b>Bleibt ihr bei eurer ersten Meinung?</b></p><img class="ikone" style="width:clamp(4rem,9vw,6.5rem)" src="bilder/change-your-mind.jpg" alt="Grafik mit der englischen Aufschrift „Change your mind“" width="225" height="225"></div>
   </div>
 </section>
 
@@ -223,7 +224,7 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Begründetes Urteil.</b> Neues Kreuz setzen. Graue Kreuze = Spontanurteil von Folie 5, zum Vergleich ein-/ausblenden. Zwei bis drei SuS begründen mit Punkten aus der Tabelle. Hat sich etwas verschoben? Warum? Beutelsbacher Konsens: Jede begründete Position ist zulässig.">
   <div class="kopf"><div class="badge">10</div><div class="ph">Urteil</div><div class="meta"><span>Plenum</span><span>10 Min.</span></div></div>
   <div class="inhalt">
-    <h1 class="klein">Chance oder Risiko?</h1>
+    <div class="mitikone"><img class="ikone" src="bilder/icon-denken.svg" alt="" width="96" height="96"><h1 class="klein">Chance oder Risiko?</h1></div>
     <p><span class="op">Beurteile</span> den Tourismus am Ätna. Setze dein Kreuz neu und <span class="op">begründe</span> mit zwei Punkten aus der Tabelle.</p>
     <div class="pos" data-id="v2" data-alt="v1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="btn hell" data-reset="v2">Kreuze löschen</button><button class="btn hell" data-altschalter="1">Anfang ein/aus</button><small>Grau = Spontanurteil vom Anfang</small></div></div>
     <div class="karte sand"><p class="klein"><b>Satzbausteine:</b> Ich sehe den Tourismus eher als Chance / Risiko, weil … · Ein wichtiger Punkt ist … · Dagegen spricht, dass …</p></div>
@@ -245,11 +246,14 @@ p.klein{font-size:calc(var(--p)*.85)}
   <div class="kopf"><div class="badge">12</div><div class="ph">Reflexion</div><div class="meta"><span>Plenum</span><span>5 Min.</span></div></div>
   <div class="inhalt">
     <h1>Abschlussrunde</h1>
-    <p>Wähle einen Satzanfang und beende ihn.</p>
-    <div class="chips spalte">
+    <p>Ordne dich einem Bild zu und begründe deine Entscheidung. Wähle dann einen Satzanfang und beende ihn.</p>
+    <div class="reihe" style="align-items:center">
+      <div class="bildkarte" style="flex:0 1 20rem;aspect-ratio:494/528;max-height:50vh" data-fehlt="Bild fehlt: bilder/feedback-schafe.jpg"><img src="bilder/feedback-schafe.jpg" alt="Raster mit neun nummerierten Schaf-Fotos: zum Beispiel ein Schaf mit herausgestreckter Zunge, ein Lamm mit geschlossenen Augen, ein Schaf mit Eimer auf dem Kopf."></div>
+      <div style="flex:1 1 18rem"><div class="chips spalte">
       <button class="chip">Heute habe ich gelernt, dass …</button>
       <button class="chip">Schwer war für mich …</button>
       <button class="chip">Ich frage mich noch …</button>
+    </div></div>
     </div>
   </div>
 </section>
