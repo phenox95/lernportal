@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Themenfeld – digitale Unterrichtsmaterialien.">
+  <title>Themenfeld – Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/app.js" defer></script>
+</head>
+<body data-page="themenfeld" data-root="../">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href=".././" aria-label="Lernportal Startseite"><span class="brand-dot" aria-hidden="true"></span>Lernportal</a>
+      <nav class="top-nav" aria-label="Hauptnavigation">
+        <a href="../biologie/">Biologie</a>
+        <a href="../geografie/">Geografie</a>
+        <a href="../alle/">Alle Materialien</a>
+      </nav>
+      <div class="header-tools" id="prefs-slot"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="fach-intro">
+      <div class="wrap">
+        <a class="back-link" id="tf-back" href="../"><span data-icon="back" data-size="20" aria-hidden="true"></span>Fach</a>
+        <p class="eyebrow" id="tf-eyebrow">Themenfeld</p>
+        <div class="tf-kopf"><span class="tf-icon" id="tf-icon" aria-hidden="true"></span><h1 class="title" id="tf-title">Themenfeld</h1></div>
+        <p class="lead" id="tf-full"></p>
+      </div>
+    </section>
+    <div class="wrap">
+      <p class="result-count" id="result-count" aria-live="polite"></p>
+      <div id="project-list"><p class="loading-message">Materialien werden geladen …</p></div>
+    </div>
+  </main>
+
+  <div class="wrap">
+    <footer class="site-footer">
+      <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
+      <span class="footer-links"><a href="../impressum/">Impressum</a><a href="../datenschutz/">Datenschutz</a></span>
+    </footer>
+  </div>
+</body>
+</html>
