@@ -82,5 +82,44 @@
     "dauer": "Doppelstunde",
     "datum": "2026-11-04",
     "reihe": "Risikoräume"
+  },
+  {
+    "title": "Beispiel: Materialseite mit Dateien",
+    "description": "Zeigt, wie Präsentation, Arbeitsblätter, Übung und Exit-Game an einem Ort stehen.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/beispiel-materialseite/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "datum": "2026-11-04",
+    "status": "Beispiel",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/beispiel-materialseite/praesentation.pdf",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt",
+        "pfad": "biologie/klasse-9/beispiel-materialseite/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 1
+      },
+      {
+        "titel": "Arbeitsblatt",
+        "pfad": "biologie/klasse-9/beispiel-materialseite/arbeitsblatt-2.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      },
+      {
+        "titel": "Übung (Platzhalter)",
+        "pfad": "biologie/klasse-9/beispiel-materialseite/uebung/",
+        "art": "Übung"
+      },
+      {
+        "titel": "Exit-Game (Platzhalter)",
+        "pfad": "biologie/klasse-9/beispiel-materialseite/exitgame/",
+        "art": "Spiel"
+      }
+    ]
   }
 ]

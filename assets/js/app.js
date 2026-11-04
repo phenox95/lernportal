@@ -8,9 +8,17 @@
   const INTERACTIVE = /interaktiv|spiel|simulation|quiz/i;
   const ART_TESTS = {
     "Präsentation": /präsentation/i,
+    "Arbeitsblatt": /arbeitsblatt/i,
     "Lernmodul": /modul/i,
     "Interaktiv": INTERACTIVE
   };
+  /* Welche Filterart eine Datei aus "dateien" (Feld art) mitbringt */
+  const DATEI_FILTER = { "prasentation": "Präsentation", "arbeitsblatt": "Arbeitsblatt", "ubung": "Interaktiv", "spiel": "Interaktiv" };
+  /* Reihenfolge und Wortformen der Inhaltsangabe in der Kartenzeile */
+  const DATEI_ARTEN = [
+    ["prasentation", "Präsentation", "Präsentationen"], ["arbeitsblatt", "Arbeitsblatt", "Arbeitsblätter"],
+    ["ubung", "Übung", "Übungen"], ["spiel", "Spiel", "Spiele"], ["hilfe", "Hilfe", "Hilfen"]
+  ];
 
   /* Symbole: lokal als Inline-SVG, keine externen Dateien */
   const ICONS = {
@@ -72,6 +80,37 @@
   const isVisible = project => project.sichtbar !== false;
   const countText = n => n + (n === 1 ? " Material" : " Materialien");
 
+  /* Dateien eines Eintrags (optionales Feld "dateien"): nur gültige, sichtbare Zeilen mit Titel und sicherem Pfad */
+  function safeFilePath(path) {
+    const value = String(path || "").trim();
+    if (!value || /[\u0000-\u001f\\]/.test(value)) return false;
+    if (/^https:\/\//i.test(value)) return true;
+    if (/^[a-z][a-z0-9+.\-]*:/i.test(value) || value.startsWith("//")) return false;
+    return !/(^|\/)\.\.(\/|$)/.test(value);
+  }
+  function dateienOf(project) {
+    if (!Array.isArray(project.dateien)) return [];
+    return project.dateien.filter(d => d && typeof d === "object" && d.sichtbar !== false
+      && typeof d.titel === "string" && d.titel.trim() && safeFilePath(d.pfad));
+  }
+  /* "Präsentation", "Praesentation" und "präsentation" gelten gleich */
+  const artKey = art => fold(art).replace(/ae/g, "a").replace(/ue/g, "u").replace(/oe/g, "o");
+  function artMatches(project, art) {
+    if (ART_TESTS[art].test(project.type || "")) return true;
+    return dateienOf(project).some(d => DATEI_FILTER[artKey(d.art)] === art);
+  }
+  /* kurze Inhaltsangabe als reiner Text, z. B. "Präsentation · 2 Arbeitsblätter · Übung · Spiel" */
+  function inhaltOf(project) {
+    const files = dateienOf(project);
+    const parts = DATEI_ARTEN.map(([key, one, many]) => {
+      const n = files.filter(d => artKey(d.art) === key).length;
+      return n ? (n === 1 ? one : n + " " + many) : "";
+    });
+    const other = files.filter(d => !DATEI_ARTEN.some(a => a[0] === artKey(d.art))).length;
+    if (other) parts.push(other === 1 ? "Weiteres Material" : other + " weitere Materialien");
+    return parts.filter(Boolean).join(" · ");
+  }
+
   function typeIcon(project) {
     const type = project.type || "";
     if (INTERACTIVE.test(type)) return "play";
@@ -87,13 +126,15 @@
   function row(project, showSubject) {
     const meta = [showSubject ? project.subject : "", project.type, project.grade, project.dauer]
       .filter(Boolean).map(escapeHtml).join(" · ");
+    const inhalt = inhaltOf(project);
     const badge = project.status ? `<span class="badge">${escapeHtml(project.status)}</span>` : "";
     return `
       <a class="row" href="${escapeHtml(resolvePath(project.path))}">
         <span class="dot ${tileClass(project)}" aria-hidden="true"></span>
         <span class="row-main">
           <span class="row-title">${escapeHtml(project.title)}${badge}</span>
-          <span class="row-meta">${meta}</span>
+          <span class="row-meta">${meta}</span>${inhalt ? `
+          <span class="row-meta">${escapeHtml(inhalt)}</span>` : ""}
         </span>
         <span class="row-chev">${icon("chevron", 20)}</span>
       </a>`;
@@ -101,7 +142,8 @@
   function textMatches(project, query) {
     const tokens = fold(query).split(/\s+/).filter(Boolean);
     if (!tokens.length) return true;
-    const haystack = fold([project.title, project.description, themeOf(project), project.subject, project.type, project.grade].join(" "));
+    const haystack = fold([project.title, project.description, themeOf(project), project.subject, project.type, project.grade,
+      dateienOf(project).map(d => d.titel + " " + (d.art || "")).join(" ")].join(" "));
     return tokens.every(token => haystack.includes(token));
   }
 
@@ -130,7 +172,7 @@
     const subject = pageSubject || state.subject;
     if (subject !== "Alle" && project.subject !== subject) return false;
     if (state.grade !== "Alle" && !gradesOf(project).includes(state.grade)) return false;
-    if (state.art !== "Alle" && !ART_TESTS[state.art].test(project.type || "")) return false;
+    if (state.art !== "Alle" && !(ART_TESTS[state.art] && artMatches(project, state.art))) return false;
     if (state.theme !== "Alle" && themeOf(project) !== state.theme) return false;
     return textMatches(project, state.query);
   }

@@ -1,0 +1,29 @@
+/* Materialseite pro Thema (nach material.css laden). Nutzt nur die Variablen aus material.css. Alle Größen in rem. */
+.ms-gruppe { margin-top: 0.5rem; }
+.ms-gruppentitel { margin: 0 0 0.5rem; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; color: var(--lp-text); }
+.ms-liste { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--lp-linie); }
+.ms-zeile {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 0.5rem 0.9rem;
+  padding: 0.8rem 0.25rem; border-bottom: 1px solid var(--lp-linie);
+}
+.ms-symbol { display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border-radius: 0.75rem; background: var(--lp-feld); color: var(--lp-text); }
+.ms-text { min-width: 0; }
+.ms-titel { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; }
+.ms-art { margin: 0.1rem 0 0; font-size: 0.875rem; color: var(--lp-text2); }
+.ms-niveau { margin-left: 0.4rem; letter-spacing: 0.1em; white-space: nowrap; font-weight: 400; color: var(--lp-text2); }
+.ms-aktionen { grid-column: 2; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.ms-btn {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0 1rem;
+  border: 1.5px solid var(--lp-rahmen); border-radius: 0.75rem; background: var(--lp-flaeche); color: var(--lp-text);
+  font-size: 0.9375rem; font-weight: 600; text-decoration: none;
+}
+.ms-btn:hover { background: var(--lp-feld); }
+@media (min-width: 40rem) {
+  .ms-zeile { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .ms-aktionen { grid-column: auto; justify-content: flex-end; }
+}
+.ms-meldung { padding: 1.1rem 1.25rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); }
+.ms-link { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--lp-text); font-weight: 600; text-decoration: underline; text-underline-offset: 0.2em; }
+.ms-hinweis { margin-top: 0.5rem; }
+.ms-adresse { margin-top: 0.5rem; font-size: 0.9375rem; color: var(--lp-text2); }
+.ms-url { color: var(--lp-text); font-weight: 600; overflow-wrap: anywhere; user-select: all; }
