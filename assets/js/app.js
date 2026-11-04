@@ -23,6 +23,22 @@
     layers: '<path d="m12 3 9 4.5-9 4.5-9-4.5z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/>',
     play: '<circle cx="12" cy="12" r="9.5"/><path d="m10 8 6 4-6 4z"/>',
     file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/>',
+    cell: '<circle cx="12" cy="12" r="9.5"/><circle cx="10" cy="11" r="3"/><circle cx="16" cy="16" r="1"/><circle cx="16" cy="8" r="1"/>',
+    leaf: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/>',
+    cycle: '<path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M8 16H3v5"/>',
+    heart: '<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>',
+    cross: '<path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/>',
+    bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+    dna: '<path d="M7 3c0 6 10 6 10 9s-10 3-10 9"/><path d="M17 3c0 6-10 6-10 9s10 3 10 9"/><path d="M8.5 7h7"/><path d="M8.5 17h7"/>',
+    tree: '<path d="M12 21V11"/><path d="m12 11-6-5"/><path d="m12 14 6-6"/><circle cx="6" cy="5" r="1.6"/><circle cx="18" cy="7" r="1.6"/><circle cx="12" cy="3.5" r="1.6"/>',
+    mountain: '<path d="m8 3 4 8 5-5 5 15H2z"/>',
+    exchange: '<path d="m17 3 4 4-4 4"/><path d="M3 7h18"/><path d="m7 21-4-4 4-4"/><path d="M21 17H3"/>',
+    globe: '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.8 2.7 4 5.9 4 9.5s-1.2 6.8-4 9.5c-2.8-2.7-4-5.9-4-9.5s1.2-6.8 4-9.5z"/>',
+    scale: '<path d="M12 3v18"/><path d="M5 21h14"/><path d="M5 7h14"/><path d="m5 7-3 7a3.5 3.5 0 0 0 6 0z"/><path d="m19 7-3 7a3.5 3.5 0 0 0 6 0z"/>',
+    drop: '<path d="M12 2.5S5 10 5 14.5a7 7 0 0 0 14 0C19 10 12 2.5 12 2.5z"/>',
+    thermo: '<path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/>',
+    network: '<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="m12 7.5-6.2 9.2"/><path d="m12 7.5 6.2 9.2"/><path d="M7.5 19h9"/>',
+    flag: '<path d="M5 22V3"/><path d="M5 4h13l-2 4 2 4H5"/>',
     photo: '<rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.5-3.5a2 2 0 0 0-2.8 0L6 21"/>'
   };
   function icon(name, size) {
@@ -175,6 +191,10 @@
 
   function renderList() {
     const visible = projects.filter(matches);
+    const filtering = state.grade !== "Alle" || state.art !== "Alle" || state.theme !== "Alle" || state.query.trim() !== "";
+    const hide = page === "fach" && !filtering;
+    counter.hidden = hide;
+    list.hidden = hide;
     counter.textContent = countText(visible.length);
     list.innerHTML = visible.length
       ? `<div class="group">${visible.map(p => row(p, page === "alle")).join("")}</div>`
@@ -225,14 +245,13 @@
       <div class="tf-group" role="group" aria-label="Klasse ${escapeHtml(g.k)}">
         <p class="tf-head">Klasse ${escapeHtml(g.k)}</p>
         ${g.items.map(tf => {
-          const label = tfLabel(tf);
-          const n = visible.filter(p => p.subject === pageSubject && themeOf(p) === label).length;
-          const note = [tf.verbund, tf.hinweis].filter(Boolean).map(escapeHtml).join(" · ");
-          return `<button type="button" class="tf-row" data-theme="${escapeHtml(label)}" aria-pressed="${state.theme === label}">
-            <span class="tf-nr">${escapeHtml(tf.nr)}</span>
-            <span class="tf-main"><span class="tf-title">${escapeHtml(tf.titel)}</span>${note ? `<span class="tf-note">${note}</span>` : ""}</span>
+          const n = visible.filter(p => p.subject === pageSubject && themeOf(p) === tfLabel(tf)).length;
+          const href = root + "themenfeld/?fach=" + encodeURIComponent(pageSubject) + "&nr=" + encodeURIComponent(tf.nr);
+          return `<a class="tf-row" href="${escapeHtml(href)}" aria-label="${escapeHtml(tf.nr + " " + tf.titel)}">
+            <span class="tf-top"><span class="tf-icon">${icon(tf.icon, 22)}</span><span class="tf-nr">${escapeHtml(tf.nr)}</span></span>
+            <span class="tf-title">${escapeHtml(tf.kurz || tf.titel)}</span>
             <span class="tf-count">${n ? countText(n) : "Noch kein Material"}</span>
-          </button>`;
+          </a>`;
         }).join("")}
       </div>`).join("");
     box.hidden = false;
@@ -273,28 +292,38 @@
       });
     }
     $("#filter-art").addEventListener("change", event => { state.art = event.target.value; renderList(); });
-    $("#filter-theme").addEventListener("change", event => { state.theme = event.target.value; renderList(); renderThemenfelder(); });
-    const overview = $("#themenfelder");
-    if (overview) {
-      overview.addEventListener("click", event => {
-        const button = event.target.closest(".tf-row");
-        if (!button) return;
-        state.theme = state.theme === button.dataset.theme ? "Alle" : button.dataset.theme;
-        $("#filter-theme").value = state.theme;
-        renderList();
-        renderThemenfelder();
-        const target = $("#result-count");
-        if (state.theme !== "Alle" && target) {
-          const calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-          target.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
-        }
-      });
-    }
+    $("#filter-theme").addEventListener("change", event => { state.theme = event.target.value; renderList(); });
     $("#q").addEventListener("input", event => { state.query = event.target.value; renderList(); });
 
     buildThemes();
     renderThemenfelder();
     renderList();
+  }
+
+  /* ---------- Themenfeld-Seite: ?fach=Geografie&nr=3.1 ---------- */
+  function initThemenfeld() {
+    const params = new URLSearchParams(location.search);
+    const fach = params.get("fach") === "Biologie" ? "Biologie" : "Geografie";
+    const tf = tfList(fach).find(t => t.nr === params.get("nr"));
+    const back = $("#tf-back");
+    back.href = root + fach.toLowerCase() + "/";
+    back.lastChild.textContent = fach;
+    $("#tf-eyebrow").textContent = fach + (tf ? " · Klasse " + tf.klassen : "");
+    document.body.dataset.subject = fach;
+    if (!tf) {
+      $("#tf-title").textContent = "Themenfeld nicht gefunden";
+      list.innerHTML = '<p class="empty-message">Dieses Themenfeld gibt es nicht. Bitte die Fachseite öffnen.</p>';
+      return;
+    }
+    document.title = tf.kurz + " – Lernportal";
+    $("#tf-icon").innerHTML = icon(tf.icon, 28);
+    $("#tf-title").textContent = tf.kurz;
+    $("#tf-full").textContent = tf.nr + " " + tf.titel + [tf.verbund, tf.hinweis].filter(Boolean).map(x => " · " + x).join("");
+    const items = projects.filter(p => isVisible(p) && p.subject === fach && themeOf(p) === tfLabel(tf));
+    counter.textContent = items.length ? countText(items.length) : "";
+    list.innerHTML = items.length
+      ? `<div class="group">${items.map(p => row(p, false)).join("")}</div>`
+      : '<p class="empty-message">Für dieses Themenfeld gibt es noch kein Material.</p>';
   }
 
   /* ---------- Start ---------- */
@@ -315,7 +344,7 @@
     .then(([data, tf]) => {
       projects = Array.isArray(data) ? data : [];
       themenfelder = tf && typeof tf === "object" ? tf : {};
-      if (page === "home") { initHome(); initImpuls(); } else { initList(); }
+      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else { initList(); }
     })
     .catch(() => {
       if (list) list.innerHTML = '<p class="empty-message">Die Projektübersicht konnte nicht geladen werden. Bitte projects.json prüfen.</p>';

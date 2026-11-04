@@ -1,23 +1,139 @@
 {
   "quelle": "Rahmenlehrplan 1-10 Berlin-Brandenburg (2015), Teil C Biologie und Teil C Geografie, Kapitel Themen und Inhalte (RLP-Online, bildungsserver.berlin-brandenburg.de). Titel wörtlich übernommen. Der Ordnername (slug) ist nur eine Namensempfehlung für das Portal, kein RLP-Bestandteil.",
   "Biologie": [
-    { "nr": "3.1", "titel": "Die Zelle – kleinste Funktionseinheit des Lebendigen", "klassen": "7/8", "slug": "zelle" },
-    { "nr": "3.2", "titel": "Lebensräume und ihre Bewohner – vielfältige Wechselwirkungen", "klassen": "7/8", "slug": "lebensraeume" },
-    { "nr": "3.3", "titel": "Stoffwechsel des Menschen", "klassen": "7/8", "slug": "stoffwechsel" },
-    { "nr": "3.4", "titel": "Sexualität, Fortpflanzung und Entwicklung", "klassen": "7/8", "slug": "sexualitaet", "hinweis": "Je nach Stundenvolumen auch in 9/10 möglich" },
-    { "nr": "3.5", "titel": "Gesundheit – Krankheit", "klassen": "9/10", "slug": "gesundheit" },
-    { "nr": "3.6", "titel": "Bau und Funktion des Nervensystems", "klassen": "9/10", "slug": "nervensystem" },
-    { "nr": "3.7", "titel": "Genetik", "klassen": "9/10", "slug": "genetik" },
-    { "nr": "3.8", "titel": "Evolution", "klassen": "9/10", "slug": "evolution" }
+    {
+      "nr": "3.1",
+      "titel": "Die Zelle – kleinste Funktionseinheit des Lebendigen",
+      "klassen": "7/8",
+      "slug": "zelle",
+      "kurz": "Zelle",
+      "icon": "cell"
+    },
+    {
+      "nr": "3.2",
+      "titel": "Lebensräume und ihre Bewohner – vielfältige Wechselwirkungen",
+      "klassen": "7/8",
+      "slug": "lebensraeume",
+      "kurz": "Lebensräume",
+      "icon": "leaf"
+    },
+    {
+      "nr": "3.3",
+      "titel": "Stoffwechsel des Menschen",
+      "klassen": "7/8",
+      "slug": "stoffwechsel",
+      "kurz": "Stoffwechsel",
+      "icon": "cycle"
+    },
+    {
+      "nr": "3.4",
+      "titel": "Sexualität, Fortpflanzung und Entwicklung",
+      "klassen": "7/8",
+      "slug": "sexualitaet",
+      "hinweis": "Je nach Stundenvolumen auch in 9/10 möglich",
+      "kurz": "Fortpflanzung",
+      "icon": "heart"
+    },
+    {
+      "nr": "3.5",
+      "titel": "Gesundheit – Krankheit",
+      "klassen": "9/10",
+      "slug": "gesundheit",
+      "kurz": "Gesundheit",
+      "icon": "cross"
+    },
+    {
+      "nr": "3.6",
+      "titel": "Bau und Funktion des Nervensystems",
+      "klassen": "9/10",
+      "slug": "nervensystem",
+      "kurz": "Nervensystem",
+      "icon": "bolt"
+    },
+    {
+      "nr": "3.7",
+      "titel": "Genetik",
+      "klassen": "9/10",
+      "slug": "genetik",
+      "kurz": "Genetik",
+      "icon": "dna"
+    },
+    {
+      "nr": "3.8",
+      "titel": "Evolution",
+      "klassen": "9/10",
+      "slug": "evolution",
+      "kurz": "Evolution",
+      "icon": "tree"
+    }
   ],
   "Geografie": [
-    { "nr": "3.1", "titel": "Leben in Risikoräumen", "klassen": "7/8", "slug": "risikoraeume" },
-    { "nr": "3.2", "titel": "Migration und Bevölkerung", "klassen": "7/8", "slug": "migration", "verbund": "Fächerverbund Gesellschaftswissenschaften" },
-    { "nr": "3.3", "titel": "Vielfalt der Erde", "klassen": "7/8", "slug": "vielfalt-der-erde" },
-    { "nr": "3.4", "titel": "Armut und Reichtum", "klassen": "7/8", "slug": "armut-reichtum", "verbund": "Fächerverbund Gesellschaftswissenschaften" },
-    { "nr": "3.5", "titel": "Umgang mit Ressourcen", "klassen": "9/10", "slug": "ressourcen" },
-    { "nr": "3.6", "titel": "Klimawandel und Klimaschutz als Beispiel für internationale Konflikte und Konfliktlösungen", "klassen": "9/10", "slug": "klimawandel" },
-    { "nr": "3.7", "titel": "Wirtschaftliche Verflechtungen und Globalisierung", "klassen": "9/10", "slug": "globalisierung" },
-    { "nr": "3.8", "titel": "Europa in der Welt", "klassen": "9/10", "slug": "europa", "verbund": "Fächerverbund Gesellschaftswissenschaften" }
+    {
+      "nr": "3.1",
+      "titel": "Leben in Risikoräumen",
+      "klassen": "7/8",
+      "slug": "risikoraeume",
+      "kurz": "Risikoräume",
+      "icon": "mountain"
+    },
+    {
+      "nr": "3.2",
+      "titel": "Migration und Bevölkerung",
+      "klassen": "7/8",
+      "slug": "migration",
+      "verbund": "Fächerverbund Gesellschaftswissenschaften",
+      "kurz": "Migration",
+      "icon": "exchange"
+    },
+    {
+      "nr": "3.3",
+      "titel": "Vielfalt der Erde",
+      "klassen": "7/8",
+      "slug": "vielfalt-der-erde",
+      "kurz": "Vielfalt der Erde",
+      "icon": "globe"
+    },
+    {
+      "nr": "3.4",
+      "titel": "Armut und Reichtum",
+      "klassen": "7/8",
+      "slug": "armut-reichtum",
+      "verbund": "Fächerverbund Gesellschaftswissenschaften",
+      "kurz": "Arm und Reich",
+      "icon": "scale"
+    },
+    {
+      "nr": "3.5",
+      "titel": "Umgang mit Ressourcen",
+      "klassen": "9/10",
+      "slug": "ressourcen",
+      "kurz": "Ressourcen",
+      "icon": "drop"
+    },
+    {
+      "nr": "3.6",
+      "titel": "Klimawandel und Klimaschutz als Beispiel für internationale Konflikte und Konfliktlösungen",
+      "klassen": "9/10",
+      "slug": "klimawandel",
+      "kurz": "Klimawandel",
+      "icon": "thermo"
+    },
+    {
+      "nr": "3.7",
+      "titel": "Wirtschaftliche Verflechtungen und Globalisierung",
+      "klassen": "9/10",
+      "slug": "globalisierung",
+      "kurz": "Globalisierung",
+      "icon": "network"
+    },
+    {
+      "nr": "3.8",
+      "titel": "Europa in der Welt",
+      "klassen": "9/10",
+      "slug": "europa",
+      "verbund": "Fächerverbund Gesellschaftswissenschaften",
+      "kurz": "Europa",
+      "icon": "flag"
+    }
   ]
 }
