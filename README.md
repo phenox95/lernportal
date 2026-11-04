@@ -13,8 +13,8 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `impressum/`, `datenschutz/` | Rechtstexte, in der Fußzeile aller Seiten verlinkt. Laden bewusst kein `app.js`. **Platzhalter in eckigen Klammern vor der Veröffentlichung ausfüllen** |
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
-| `vorlage/` | Vorlage für Materialseiten mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
-| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
+| `vorlage/` | Vorlagen: `vorlage/` (Materialseite mit Aufgaben) und `vorlage/materialseite/` (Seite pro Thema mit Dateiliste). Beide mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
+| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten, `materialseite.js` Dateiliste der Themenseite), `css/materialseite.css` (Stile der Themenseite), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
 
 ## Inhalte ergänzen
 
@@ -47,7 +47,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `title` | ja | Titel der Zeile |
 | `subject` | ja | `Biologie` oder `Geografie` bestimmt die Fachseite. `Interaktiv` erscheint nur in der Suche und unter „Alle Materialien". |
 | `grade` | ja | z. B. `Klasse 8`. Die Zahl steuert Klassenfilter und Register. `Klasse 7/8` zählt für beide Klassen. |
-| `type` | ja | Enthält das Wort *Präsentation*, *Modul* oder *interaktiv/Spiel/Simulation/Quiz*, greift der Filter „Art". Das Wort bestimmt auch das Symbol. |
+| `type` | ja | Enthält das Wort *Präsentation*, *Arbeitsblatt*, *Modul* oder *interaktiv/Spiel/Simulation/Quiz*, greift der Filter „Art". Das Wort bestimmt auch das Symbol. `Materialseite` ist der Typ für ein Thema mit Dateiliste (siehe `dateien`). |
 | `path` | ja | Relativer Pfad im Repository, z. B. `biologie/klasse-8/zelle/` |
 | `description` | nein | Wird durchsucht |
 | `reihe` | nein | Name der Unterrichtsreihe, z. B. `Risikoräume`. Ordner der Reihe: `geografie/klasse-7/risikoraeume/<stunde>/`. Wird noch nicht ausgewertet, dient der Ordnung |
@@ -57,6 +57,66 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `datum` | nein | `JJJJ-MM-TT` |
 | `sichtbar` | nein | `false` blendet Entwürfe aus (auch aus Zählern und Suche) |
 | `status` | nein | Kleines Label, z. B. `Beispiel` |
+| `dateien` | nein | Liste der Dateien eines Themas (siehe unten). Fehlt das Feld, verhält sich der Eintrag wie bisher |
+
+### Feld `dateien` (Materialseite pro Thema)
+
+Ein Listeneintrag pro Thema, dahinter eine Materialseite mit allen Dateien: Präsentation, Arbeitsblätter, Übung, Exit-Game. Die Seite liest ihren Eintrag aus `projects.json`, die Dateiliste wird nirgends sonst gepflegt.
+
+```json
+{
+  "title": "Auge: Bau und Funktion",
+  "subject": "Biologie",
+  "grade": "Klasse 9",
+  "type": "Materialseite",
+  "path": "biologie/klasse-9/auge/",
+  "dateien": [
+    { "titel": "Präsentation zur Stunde", "pfad": "biologie/klasse-9/auge/praesentation.pdf", "art": "Präsentation" },
+    { "titel": "Arbeitsblatt Auge", "pfad": "biologie/klasse-9/auge/arbeitsblatt-1.pdf", "art": "Arbeitsblatt", "stufe": 1 },
+    { "titel": "Übung: Auge beschriften", "pfad": "biologie/klasse-9/auge/uebung/", "art": "Übung" },
+    { "titel": "Exit-Game", "pfad": "biologie/klasse-9/auge/exitgame/", "art": "Spiel" }
+  ]
+}
+```
+
+| Feld in `dateien` | Pflicht | Wirkung |
+|---|---|---|
+| `titel` | ja | Anzeigename der Zeile. Ohne Titel wird die Zeile nicht angezeigt |
+| `pfad` | ja | Relativ zum Repository-Stamm. Datei (`.pdf`) oder Ordner mit `index.html` (Schrägstrich am Ende). Erlaubt sind relative Pfade (ohne `..`) und `https://`. Alles andere (`javascript:`, `data:`) blendet die Zeile aus |
+| `art` | ja | `Präsentation`, `Arbeitsblatt`, `Übung`, `Spiel`, `Hilfe`. Bestimmt Gruppe und Symbol. Unbekannte Werte landen in „Weitere Materialien" |
+| `stufe` | nein | `1`, `2` oder `3`, angezeigt als ●○○ / ●●○ / ●●● (Mindest-/Regel-/Erweiterungsniveau) mit Text für Screenreader. Andere Werte werden ignoriert |
+| `sichtbar` | nein | `false` blendet die Zeile aus |
+
+Gruppen auf der Materialseite: **Zur Stunde** (Präsentation), **Arbeitsblätter**, **Üben** (Übung, Spiel), **Hilfen**, **Weitere Materialien**. Leere Gruppen fehlen. PDFs haben die Aktionen *Ansehen* (neuer Tab) und *Herunterladen*, Anwendungen öffnen im selben Tab. Bei Übung und Spiel steht der Hinweis, dass das Ergebnis nur auf dem Gerät bleibt.
+
+**Filter und Suche:** Die Arten eines Eintrags ergeben sich aus `type` und den `art`-Werten in `dateien`. Filter „Arbeitsblatt": mindestens ein Arbeitsblatt in `dateien`. Filter „Interaktiv": auch Einträge mit Übung oder Spiel. Filter „Präsentation": auch Einträge mit einer Präsentation. Die Suche findet zusätzlich `titel` und `art` der Dateien. Die Kartenzeile zeigt eine Inhaltsangabe, z. B. „Präsentation · 2 Arbeitsblätter · Übung · Spiel".
+
+**Ordnerkonvention** (Dateinamen klein, ohne Umlaute und Leerzeichen):
+
+```
+biologie/klasse-9/auge/
+├── index.html            Materialseite (aus vorlage/materialseite/ kopiert)
+├── praesentation.pdf
+├── arbeitsblatt-1.pdf    Niveau ●○○
+├── arbeitsblatt-2.pdf    Niveau ●●○
+├── uebung/index.html     eigenständige Anwendung
+└── exitgame/index.html   eigenständige Anwendung
+```
+
+**Ablauf pro Thema in drei Schritten:**
+
+1. Ordner `vorlage/materialseite/` nach `biologie/klasse-N/thema/` kopieren, PDFs hineinlegen. In der kopierten `index.html` die Pfade um eine Ebene verlängern (aus `../../` wird `../../../`, fünf Stellen) und den Kommentar löschen. Anwendungen bekommen ihre Kopfleiste wie unter „Bestehende Anwendung einhängen".
+2. Eintrag mit `dateien` in `projects.json` ergänzen (`path` muss zum Ordner passen).
+3. Hochladen und kontrollieren. Änderungen können bis etwa 10 Minuten brauchen, bis sie sichtbar sind.
+
+**Wichtig:**
+
+- **Alles im Repository ist öffentlich.** `sichtbar: false` blendet nur aus und schützt nicht. Nie hochladen: Erwartungshorizonte, Lehrkrafthinweise, Klassenarbeiten, Lösungen für die Lehrkraft.
+- **Rechte:** Nur eigene oder klar lizenzierte Bilder und Texte. Schulbuchabbildungen und Fremdmaterial nicht hochladen. Fremde Fundstellen nur verlinken.
+- **PDF-Export:** Foliennotizen vor dem Export entfernen. PDFs mit echtem Text exportieren (nicht als Bild), damit Vorlesefunktionen funktionieren. Bilder komprimieren, damit die Dateien schlank bleiben.
+- **Benennung:** Fassungen nur über das Niveau kennzeichnen (●○○ …). Keine Kennzeichnung „LRS" oder Ähnliches in Titeln oder Dateinamen.
+- **Exit-Games:** Ohne Konten gibt es keine Auswertung für die Lehrkraft. Ergebnisse bleiben im Browser der SuS.
+- Das Beispiel `biologie/klasse-9/beispiel-materialseite/` (Status „Beispiel") enthält nur Platzhalter. Löschen, sobald echtes Material da ist, samt Eintrag in `projects.json`.
 
 ## Impuls der Woche (`impuls.json`)
 
