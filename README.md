@@ -121,7 +121,7 @@ Statt nur Typografie kann rechts neben dem Titel ein Themenbild stehen. Das Bild
 - **Materialseite:** Am `body` ergänzen: `data-bild="assets/img/<material>/titel.webp"` (Pfad ab Repository-Stamm), `data-bild-alt` und `data-bild-quelle`. Lädt das Bild nicht, verschwindet es.
 - **Anforderungen:** 4:3, WebP, möglichst unter ca. 150 KB, eigene Bilder oder klare Lizenz, Urheber und Lizenz in der Quelle, keine erkennbaren Personen (besonders keine Minderjährigen) ohne Einwilligung, aussagekräftiger Alternativtext. Ohne `data-bild-alt` gilt das Bild als Dekoration.
 
-Mitgeliefert sind zwei eigene Illustrationen für die Fachseiten (`assets/img/fach/biologie.webp`, `geografie.webp`, je ca. 25 KB). Sie lassen sich jederzeit durch Fotos ersetzen: Datei gleichen Namens überschreiben, Alternativtext und Bildunterschrift im HTML anpassen.
+Die Fachseiten zeigen Fotos (`assets/img/fach/biologie.webp`, `geografie.webp`), der Impuls der Woche ein Foto (`assets/img/impuls/blatt.webp`). Zum Ersetzen: Datei gleichen Namens überschreiben, Alternativtext und Bildunterschrift im HTML bzw. `bildAlt` und `bildQuelle` in `impuls.json` anpassen. **Vor der Veröffentlichung** müssen in den Bildunterschriften Urheber und Lizenz stehen (derzeit steht dort „Quelle und Lizenz ergänzen").
 
 ## Lesemodus
 
