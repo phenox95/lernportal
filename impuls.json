@@ -3,8 +3,8 @@
   "label": "Impuls der Woche",
   "klasse": "Klasse 8",
   "frage": "Was fällt dir an diesem Blatt auf?",
-  "bild": "",
-  "bildAlt": "",
-  "bildQuelle": "",
+  "bild": "assets/img/impuls/blatt.webp",
+  "bildAlt": "Ein helles Blatt mit feinen Adern liegt auf dunklem Moos. Auf dem Blatt sitzen viele kleine Wassertropfen.",
+  "bildQuelle": "Foto: Quelle und Lizenz ergänzen",
   "link": "biologie/"
 }
