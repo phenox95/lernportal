@@ -45,7 +45,7 @@ p.klein{font-size:calc(var(--p)*.85)}
 .versteckt{display:none}
 .versteckt.show{display:block}
 .bildkarte{position:relative;border-radius:.9rem;overflow:hidden;border:3px solid var(--dunkel);background:#000;aspect-ratio:4/3;max-height:52vh;width:100%}
-.bildkarte img{display:block;width:100%;height:100%;object-fit:cover}
+.bildkarte img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
 .bildkarte.karte{aspect-ratio:400/470;width:min(100%,25rem);max-height:none;margin:0 auto}
 .bildkarte .cap{position:absolute;left:0;bottom:0;background:rgba(43,33,30,.85);color:#fff;padding:.3rem 1rem;font-size:clamp(.9rem,.85rem + .3vw,1.2rem)}
 .bildkarte.fehlt{background:var(--sand);display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem}
@@ -120,7 +120,7 @@ p.klein{font-size:calc(var(--p)*.85)}
   <div class="inhalt">
     <h1>Zwei Fotos, ein Berg</h1>
     <div class="reihe">
-      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-a.jpg"><img src="bilder/foto-a.jpg" alt="Zwei Busse fahren vor dem Ätna durch Schnee"><div class="cap">Foto A</div></div>
+      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-a.jpg"><img src="bilder/foto-a.jpg" style="object-position:50% 40%" alt="Zwei Busse fahren vor dem Ätna durch Schnee"><div class="cap">Foto A</div></div>
       <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-b.jpg"><img src="bilder/foto-b.jpg" alt="Ein Haus ist fast ganz von erstarrter Lava bedeckt"><div class="cap">Foto B</div></div>
     </div>
     <p><b>Was fällt euch auf?</b></p>
