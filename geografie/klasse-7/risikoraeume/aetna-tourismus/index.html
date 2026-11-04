@@ -10,89 +10,80 @@
 <script src="../../../../assets/js/prefs.js"></script>
 <script src="../../../../assets/js/material.js" defer></script>
 <style>
-:root{--rost:#A9442B;--rost-d:#7C2F1C;--dunkel:#2B211E;--papier:#FBF6F0;--sand:#EFE3D6;--grau:#6F645D;--ok:#2F6B4F;
- --p:clamp(1.05rem,0.9rem + 1vw,1.6rem);--h:clamp(1.6rem,1.1rem + 2.4vw,2.75rem);--rand:clamp(1rem,4vw,3rem)}
+:root{--rost:#A9442B;--rost-d:#7C2F1C;--dunkel:#2B211E;--papier:#FBF6F0;--sand:#EFE3D6;--grau:#8A7F78;--ok:#2F6B4F}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
-body{display:flex;flex-direction:column;background:var(--papier);overflow:hidden;font-family:"OpenDyslexic",Verdana,Arial,sans-serif;color:var(--dunkel)}
-#buehne{position:relative;flex:1;min-height:0;display:flex;flex-direction:column}
-#stage{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
-.slide{display:none;flex:1;min-height:0;flex-direction:column;overflow:auto;overscroll-behavior:contain}
+body{display:flex;flex-direction:column;background:#1b1514;overflow:hidden;font-family:"OpenDyslexic",Verdana,Arial,sans-serif;color:var(--dunkel)}
+#buehne{position:relative;flex:1;min-height:0;overflow:hidden}
+#stage{z-index:1;position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:var(--papier);overflow:hidden}
+.slide{position:absolute;inset:0;display:none;flex-direction:column}
 .slide.aktiv{display:flex}
-.kopf{background:var(--rost);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem;padding:.7rem var(--rand);flex:none}
-.badge{width:2.4rem;height:2.4rem;border-radius:50%;background:#fff;color:var(--rost);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.15rem;flex:none}
-.kopf .ph{font-weight:700;font-size:clamp(1.1rem,1rem + .5vw,1.4rem)}
-.kopf .meta{margin-left:auto;display:flex;gap:.6rem;font-size:clamp(.9rem,.85rem + .3vw,1.1rem)}
-.kopf .meta span{border:2px solid #fff;border-radius:1.5rem;padding:.1rem .8rem}
-.inhalt{flex:1 0 auto;padding:clamp(1rem,2.5vw,2rem) var(--rand) 4rem;display:flex;flex-direction:column;gap:clamp(.8rem,2vw,1.4rem);width:100%;max-width:80rem;margin:0 auto}
-h1{margin:0;font-size:var(--h);line-height:1.15}
-h1.klein{font-size:calc(var(--h)*.88)}
-h2{margin:0;font-size:clamp(1.2rem,1rem + 1vw,1.8rem)}
-p{margin:0;font-size:var(--p);line-height:1.45}
-p.klein{font-size:calc(var(--p)*.85)}
-.karte{background:#fff;border:3px solid var(--rost);border-radius:.9rem;padding:1rem 1.4rem}
+.kopf{height:64px;background:var(--rost);color:#fff;display:flex;align-items:center;gap:18px;padding:0 32px;flex:none}
+.badge{width:40px;height:40px;border-radius:50%;background:#fff;color:var(--rost);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;flex:none}
+.kopf .ph{font-weight:700;font-size:22px}
+.kopf .meta{margin-left:auto;display:flex;gap:12px;font-size:18px}
+.kopf .meta span{border:2px solid #fff;border-radius:20px;padding:3px 14px}
+.inhalt{flex:1;padding:28px 48px 40px;display:flex;flex-direction:column;gap:20px;min-height:0}
+h1{margin:0;font-size:44px;line-height:1.15}
+h2{margin:0;font-size:30px}
+p{margin:0;font-size:28px;line-height:1.4}
+.karte{background:#fff;border:3px solid var(--rost);border-radius:14px;padding:18px 24px}
 .karte.sand{background:var(--sand);border-color:var(--sand)}
 .op{color:var(--rost);font-weight:700}
-.reihe{display:flex;flex-wrap:wrap;gap:clamp(.8rem,2vw,1.5rem);align-items:stretch}
-.reihe>*{flex:1 1 18rem;min-width:0}
-.btn{font-family:inherit;font-size:clamp(1rem,.9rem + .4vw,1.25rem);min-height:2.75rem;background:var(--rost);color:#fff;border:3px solid var(--rost);border-radius:.65rem;padding:.5rem 1.2rem;cursor:pointer}
-.btn.hell{background:#fff;color:var(--rost)}
-.btn:focus-visible,.chip:focus-visible,.pfeil:focus-visible{outline:4px solid var(--dunkel);outline-offset:2px}
+.reihe{display:flex;gap:24px}
+.reihe>*{flex:1}
+.btn{font-family:inherit;font-size:20px;background:var(--rost);color:#fff;border:0;border-radius:10px;padding:10px 20px;cursor:pointer}
+.btn.hell{background:#fff;color:var(--rost);border:3px solid var(--rost)}
+.btn:focus-visible,.chip:focus-visible,.pfeil:focus-visible{outline:4px solid var(--dunkel)}
 .versteckt{display:none}
 .versteckt.show{display:block}
-.bildkarte{position:relative;border-radius:.9rem;overflow:hidden;border:3px solid var(--dunkel);background:#000;aspect-ratio:4/3;max-height:52vh;width:100%}
-.bildkarte img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
-.bildkarte.karte{aspect-ratio:400/470;width:min(100%,25rem);max-height:none;margin:0 auto}
-.bildkarte .cap{position:absolute;left:0;bottom:0;background:rgba(43,33,30,.85);color:#fff;padding:.3rem 1rem;font-size:clamp(.9rem,.85rem + .3vw,1.2rem)}
-.bildkarte.fehlt{background:var(--sand);display:flex;align-items:center;justify-content:center;text-align:center;padding:1.5rem}
+.bildkarte{position:relative;border-radius:14px;overflow:hidden;border:3px solid var(--dunkel);background:#000}
+.bildkarte img{display:block;width:100%;height:100%;object-fit:cover}
+.bildkarte .cap{position:absolute;left:0;bottom:0;background:rgba(43,33,30,.85);color:#fff;padding:6px 16px;font-size:20px}
+.bildkarte.fehlt{background:var(--sand);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
 .bildkarte.fehlt img{display:none}
-.bildkarte.fehlt:before{content:attr(data-fehlt);color:var(--dunkel);font-size:1.1rem}
-.ikone{flex:none;width:clamp(3rem,6vw,4.5rem);height:auto}
-.bild-klein{width:100%;max-width:22rem;height:auto;border-radius:.9rem;border:3px solid var(--dunkel);display:block}
-.mitikone{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.quelle{font-size:.9rem;color:var(--grau)}
-.fertig{align-self:flex-start;max-width:26rem;background:#fff;border:3px dashed var(--rost);border-radius:.9rem;padding:.8rem 1.1rem;font-size:clamp(.95rem,.9rem + .3vw,1.15rem)}
+.bildkarte.fehlt:before{content:attr(data-fehlt);color:var(--dunkel);font-size:22px}
+.deko{position:absolute;display:block;pointer-events:none}
+.deko.rund{border-radius:14px;border:3px solid var(--dunkel);pointer-events:auto}
+.quelle{font-size:15px;color:var(--grau)}
+.fertig{position:absolute;right:32px;bottom:56px;width:330px;background:#fff;border:3px dashed var(--rost);border-radius:14px;padding:12px 18px;font-size:19px}
 .fertig b{color:var(--rost)}
-.schritt{display:flex;gap:1rem;align-items:flex-start}
-.schritt .nr{width:2.6rem;height:2.6rem;border-radius:50%;background:var(--rost);color:#fff;font-weight:700;font-size:1.4rem;display:flex;align-items:center;justify-content:center;flex:none}
-.schritt p{font-size:calc(var(--p)*.95)}
-.eingabe{background:#fff;color:var(--dunkel);border:3px solid var(--dunkel);border-radius:.9rem;padding:1rem 1.3rem;font-size:clamp(1.1rem,1rem + 1vw,2rem);line-height:1.4;min-height:8rem;outline:none}
-.eingabe.gross{min-height:12rem;font-size:clamp(1.4rem,1rem + 2vw,2.5rem)}
+.schritt{display:flex;gap:18px;align-items:flex-start}
+.schritt .nr{width:48px;height:48px;border-radius:50%;background:var(--rost);color:#fff;font-weight:700;font-size:26px;display:flex;align-items:center;justify-content:center;flex:none}
+.schritt p{font-size:26px}
+.eingabe{background:#fff;border:3px solid var(--dunkel);border-radius:14px;padding:18px 24px;font-size:34px;line-height:1.4;min-height:140px;outline:none}
 .eingabe:empty:before{content:attr(data-ph);color:var(--grau)}
 .eingabe:focus{border-color:var(--rost)}
-.timer{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem}
-.timer .z{font-size:clamp(2.2rem,1.5rem + 3vw,3.5rem);font-weight:700;min-width:6ch;font-variant-numeric:tabular-nums}
+.timer{display:flex;align-items:center;gap:14px}
+.timer .z{font-size:56px;font-weight:700;min-width:170px;font-variant-numeric:tabular-nums}
 .timer .z.aus{color:var(--rost)}
-.pos{position:relative;margin:.5rem 0 0}
-.pos .linie{position:relative;height:clamp(5.5rem,12vh,7rem);border:3px solid var(--dunkel);border-radius:.9rem;background:#fff;cursor:crosshair;overflow:hidden}
-.pos .linie:before{content:"";position:absolute;left:1.5rem;right:1.5rem;top:50%;height:6px;margin-top:-3px;background:var(--dunkel)}
-.pos .ende{position:absolute;top:.4rem;font-weight:700;font-size:clamp(1rem,.9rem + .5vw,1.5rem)}
-.pos .ende.l{left:1.2rem}.pos .ende.r{right:1.2rem}
-.pos .m{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:2rem;font-weight:700;line-height:1;color:var(--rost);pointer-events:none}
-.pos .m.alt{color:var(--grau);top:28%}
-.pos .tools{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.6rem;align-items:center}
-.pos .tools small{font-size:1rem;color:var(--grau)}
-.tab{display:flex;flex-wrap:wrap;gap:1.2rem}
-.tab>div{flex:1 1 16rem;min-width:0}
-.tab h2{background:var(--rost);color:#fff;border-radius:.8rem .8rem 0 0;padding:.6rem 1.1rem}
-.tab .eingabe{border-radius:0 0 .8rem .8rem;min-height:12rem;border-top:0}
-.chips{display:flex;gap:.9rem;flex-wrap:wrap}
-.chips.spalte{flex-direction:column;align-items:flex-start}
-.chip{font-family:inherit;font-size:var(--p);min-height:2.75rem;background:#fff;border:3px solid var(--rost);border-radius:.8rem;padding:.6rem 1.2rem;cursor:pointer;color:var(--dunkel);text-align:left}
+.pos{position:relative;margin:10px 0 0}
+.pos .linie{position:relative;height:110px;border:3px solid var(--dunkel);border-radius:14px;background:#fff;cursor:crosshair;overflow:hidden}
+.pos .linie:before{content:"";position:absolute;left:24px;right:24px;top:55px;height:6px;background:var(--dunkel)}
+.pos .ende{position:absolute;top:6px;font-weight:700;font-size:24px}
+.pos .ende.l{left:22px}.pos .ende.r{right:22px}
+.pos .m{position:absolute;top:50px;transform:translateX(-50%);font-size:32px;font-weight:700;line-height:1;color:var(--rost);pointer-events:none}
+.pos .m.alt{color:var(--grau);top:20px;opacity:.9}
+.pos .tools{display:flex;gap:12px;margin-top:10px;align-items:center}
+.pos .tools small{font-size:17px;color:var(--grau)}
+.tab{display:flex;gap:24px}
+.tab>div{flex:1}
+.tab h2{background:var(--rost);color:#fff;border-radius:12px 12px 0 0;padding:10px 18px;font-size:26px}
+.tab .eingabe{border-radius:0 0 12px 12px;min-height:290px;font-size:24px;border-top:0}
+.chips{display:flex;gap:14px;flex-wrap:wrap}
+.chip{font-family:inherit;font-size:26px;background:#fff;border:3px solid var(--rost);border-radius:12px;padding:10px 20px;cursor:pointer;color:var(--dunkel)}
 .chip.an{background:var(--rost);color:#fff}
-.zeile{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
-.nav{position:absolute;bottom:.9rem;left:0;right:0;display:flex;justify-content:center;gap:6px;pointer-events:none;z-index:6}
-.nav i{width:.6rem;height:.6rem;border-radius:50%;background:#d5c6b8}
+.nav{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;pointer-events:none;z-index:6}
+.nav i{width:10px;height:10px;border-radius:50%;background:#d5c6b8}
 .nav i.a{background:var(--rost)}
-.pfeil{position:absolute;bottom:.4rem;width:2.75rem;height:2.75rem;border:0;border-radius:.6rem;background:rgba(169,68,43,.14);color:var(--rost);font-size:1.5rem;cursor:pointer;z-index:6}
-.pfeil.l{left:.8rem}.pfeil.r{right:.8rem}
-#notiz{position:fixed;left:0;right:0;bottom:0;background:#2B211E;color:#fff;padding:.9rem 1.5rem;font-size:1rem;line-height:1.45;max-height:40vh;overflow:auto;display:none;z-index:2000;font-family:Verdana,Arial,sans-serif}
+.pfeil{position:absolute;bottom:6px;width:44px;height:36px;border:0;border-radius:8px;background:rgba(169,68,43,.12);color:var(--rost);font-size:22px;cursor:pointer;z-index:6}
+.pfeil.l{left:14px}.pfeil.r{right:14px}
+#notiz{position:fixed;left:0;right:0;bottom:0;background:#2B211E;color:#fff;padding:14px 28px;font-size:17px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000;font-family:Verdana,Arial,sans-serif}
 #notiz.an{display:block}
 #notiz b{color:#ffb59f}
-#hilfe{display:none}
-@media (hover:hover) and (min-width:50rem){#hilfe{display:block;position:absolute;right:.8rem;bottom:.2rem;z-index:5;color:var(--grau);font-size:.8rem;font-family:Verdana,Arial,sans-serif;opacity:0;transition:opacity .3s}#buehne:hover #hilfe{opacity:.9}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media print{html,body{overflow:visible;height:auto;display:block}#buehne,#stage{display:block}.slide{display:flex!important;overflow:visible;page-break-after:always}.pfeil,.nav,#notiz,#hilfe{display:none}}
+#hilfe{position:absolute;right:12px;top:8px;z-index:0;color:#cdbfb5;font-size:13px;font-family:Verdana,Arial,sans-serif;opacity:0;transition:opacity .3s}
+#buehne:hover #hilfe{opacity:.8}
+@media print{html,body{overflow:visible;height:auto;background:#fff;display:block}#buehne{position:static;overflow:visible}#stage{position:static;transform:none!important;width:auto;height:auto}.slide{display:flex!important;position:relative;height:720px;width:1280px;page-break-after:always}.pfeil,.nav,#notiz,#hilfe{display:none}}
 </style>
 </head>
 <body data-root="../../../../" data-title="Urlaub auf dem Vulkan – Tourismus am Ätna" data-subject="Geografie" data-grade="Klasse 7">
@@ -105,12 +96,13 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Do Now (Wiederholung der Vorstunde).</b> Annahme: Vorstunde = Landwirtschaft am Ätna. Bei anderer Vorstunde die Aussage austauschen. Impuls läuft erst auf Folie 2. SuS mit LRS dürfen sich die Aussage vorlesen lassen. Danach kurz abgleichen (Lösung einblenden), währenddessen Anwesenheit.">
   <div class="kopf"><div class="badge">1</div><div class="ph">Do Now</div><div class="meta"><span>Einzelarbeit</span><span>3 Min.</span></div></div>
   <div class="inhalt">
-    <div class="mitikone"><img class="ikone" src="bilder/sonne.jpg" alt="" width="225" height="225"><h1>Guten Morgen! Los geht’s.</h1></div>
+    <img class="deko" src="bilder/sonne.jpg" alt="" style="left:640px;top:84px;width:64px;height:64px">
+    <img class="deko rund" src="bilder/kleinkind-muede.jpg" alt="Ein müdes Kleinkind mit zerzausten Haaren sitzt mit geschlossenen Augen am Tisch." style="right:48px;top:70px;width:156px;height:88px;object-fit:cover">
+    <h1>Guten Morgen! Los geht’s.</h1>
     <div class="karte sand"><p>Aussage aus der letzten Stunde:<br><b>„Am Ätna kann man keine Landwirtschaft betreiben. Die Lava zerstört alles.“</b></p></div>
     <p><span class="op">Erkläre</span>, warum die Aussage nicht ganz stimmt. Nenne eine Chance und ein Risiko für die Landwirtschaft am Ätna.</p>
     <div><button class="btn" data-reveal="l1">Lösung zeigen</button></div>
     <div class="karte versteckt" id="l1"><p><b>Chance:</b> Asche und Lava machen den Boden fruchtbar. Seit über 2 000 Jahren wird dort angebaut.<br><b>Risiko:</b> Ausbrüche können Felder und Häuser zerstören.</p></div>
-    <img class="bild-klein" src="bilder/kleinkind-muede.jpg" alt="Ein müdes Kleinkind mit zerzausten Haaren sitzt mit geschlossenen Augen am Tisch." width="301" height="168">
   </div>
 </section>
 
@@ -119,8 +111,8 @@ p.klein{font-size:calc(var(--p)*.85)}
   <div class="kopf"><div class="badge">2</div><div class="ph">Impuls</div><div class="meta"><span>Plenum</span><span>3 Min.</span></div></div>
   <div class="inhalt">
     <h1>Zwei Fotos, ein Berg</h1>
-    <div class="reihe">
-      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-a.jpg"><img src="bilder/foto-a.jpg" style="object-position:50% 40%" alt="Zwei Busse fahren vor dem Ätna durch Schnee"><div class="cap">Foto A</div></div>
+    <div class="reihe" style="height:380px">
+      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-a.jpg"><img src="bilder/foto-a.jpg" alt="Zwei Busse fahren vor dem Ätna durch Schnee"><div class="cap">Foto A</div></div>
       <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-b.jpg"><img src="bilder/foto-b.jpg" alt="Ein Haus ist fast ganz von erstarrter Lava bedeckt"><div class="cap">Foto B</div></div>
     </div>
     <p><b>Was fällt euch auf?</b></p>
@@ -134,7 +126,7 @@ p.klein{font-size:calc(var(--p)*.85)}
   <div class="inhalt">
     <h1>Unsere Frage für heute</h1>
     <p>Welche Frage stellt sich euch zu den Fotos? Sammelt Fragen und einigt euch auf eine.</p>
-    <div class="eingabe gross" contenteditable="true" data-ph="Hier tippen: unsere Frage …"></div>
+    <div class="eingabe" contenteditable="true" data-ph="Hier tippen: unsere Frage …" style="min-height:220px;font-size:40px"></div>
   </div>
 </section>
 
@@ -142,8 +134,8 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Lokalisieren (Sich orientieren, Niveau D–E).</b> Erst SuS lokalisieren lassen (Atlas oder Wandkarte), dann Chips und Marker einblenden. Die Reliefkarte hat niedrige Auflösung, gegebenenfalls Atlaskarte ergänzen.">
   <div class="kopf"><div class="badge">4</div><div class="ph">Orientierung</div><div class="meta"><span>Plenum</span><span>3 Min.</span></div></div>
   <div class="inhalt">
-    <div class="reihe">
-      <div style="flex:1.2 1 18rem;display:flex;flex-direction:column;gap:1rem">
+    <div class="reihe" style="align-items:flex-start">
+      <div style="flex:1.2;display:flex;flex-direction:column;gap:18px">
         <h1>Wo liegt der Ätna?</h1>
         <p><span class="op">Lokalisiere</span> den Ätna. Nenne Land, Insel und Meer.</p>
         <div class="chips" id="chips">
@@ -152,9 +144,9 @@ p.klein{font-size:calc(var(--p)*.85)}
           <button class="chip" data-t="Meer: Mittelmeer">Meer?</button>
         </div>
         <div><button class="btn hell" data-reveal="mk">Ätna auf der Karte zeigen</button></div>
-        <div class="bildkarte" style="aspect-ratio:1200/540;max-width:34rem" data-fehlt="Bild fehlt: bilder/europa-karte.jpg"><img src="bilder/europa-karte.jpg" alt="Politische Karte von Europa mit Staaten und Meeren"><div class="cap">Europa (politisch)</div></div>
+        <div class="bildkarte" style="width:560px;height:252px;flex:none"><img src="bilder/europa-karte.jpg" alt="Politische Karte von Europa mit Staaten und Meeren"><div class="cap">Europa (politisch)</div></div>
       </div>
-      <div class="bildkarte karte" style="flex:0 1 25rem" data-fehlt="Bild fehlt: bilder/karte-sizilien.jpg"><img src="bilder/karte-sizilien.jpg" alt="Reliefkarte von Sizilien"><div id="mk" class="versteckt" style="position:absolute;left:79.7%;top:32%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--rost);border:4px solid #fff"></div><div class="cap">Sizilien (Relief)</div></div>
+      <div class="bildkarte" style="width:400px;height:470px;flex:none" data-fehlt="Bild fehlt: bilder/karte-sizilien.jpg"><img src="bilder/karte-sizilien.jpg" alt="Reliefkarte von Sizilien"><div id="mk" class="versteckt" style="position:absolute;left:79.7%;top:32%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--rost);border:4px solid #fff"></div><div class="cap">Sizilien (Relief)</div></div>
     </div>
   </div>
 </section>
@@ -162,10 +154,10 @@ p.klein{font-size:calc(var(--p)*.85)}
 <!-- 5 Spontanurteil -->
 <section class="slide" data-n="<b>Spontanurteil.</b> Jede/r setzt ein Kreuz (Klick auf die Linie, mehrere Kreuze möglich). Zwei SuS begründen kurz ihre Position. Die Kreuze bleiben für den Vergleich auf Folie 10 gespeichert, solange die Seite offen ist. Nicht neu laden.">
   <div class="kopf"><div class="badge">5</div><div class="ph">Spontanurteil</div><div class="meta"><span>Plenum</span><span>3 Min.</span></div></div>
-  <div class="inhalt">
-    <div class="reihe">
+  <div class="inhalt" style="padding-top:20px">
+    <div class="reihe" style="align-items:stretch;height:300px">
       <div class="bildkarte" data-fehlt="Bild fehlt: bilder/aetna-stadt.jpg"><img src="bilder/aetna-stadt.jpg" alt="Der Ätna raucht über einer Stadt"><div class="cap">Der Ätna über einer Stadt in Sizilien</div></div>
-      <div style="display:flex;flex-direction:column;justify-content:center;gap:.9rem"><h1>Urlaub auf dem Vulkan?</h1><p>Würdet ihr hier Urlaub machen? Setzt ein Kreuz.</p></div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:14px"><h1>Urlaub auf dem Vulkan?</h1><p>Würdet ihr hier Urlaub machen? Setzt ein Kreuz.</p></div>
     </div>
     <div class="pos" data-id="v1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="btn hell" data-reset="v1">Kreuze löschen</button><small>Klick auf die Linie setzt ein Kreuz.</small></div></div>
   </div>
@@ -187,7 +179,8 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Einzelphase.</b> Stille Arbeit. Vorlesen anbieten (Mitschüler/in oder Lehrkraft), besonders M6. Lesestrategie: pro Absatz ein bis zwei Schlüsselwörter markieren. Beobachtung: Entnehmen die SuS Stichpunkte oder schreiben sie Sätze ab? Fertige: Sprinteraufgabe 4.">
   <div class="kopf"><div class="badge">7</div><div class="ph">Erarbeitung</div><div class="meta"><span>Einzelarbeit</span><span>12 Min.</span></div></div>
   <div class="inhalt">
-    <div class="mitikone"><img class="ikone" src="bilder/icon-stift.svg" alt="" width="96" height="96"><h1>Allein am Material</h1></div>
+    <img class="deko" src="bilder/icon-stift.svg" alt="" style="right:48px;top:74px;width:72px;height:72px">
+    <h1>Allein am Material</h1>
     <div class="karte"><p><span class="op">Entnimm</span> deinem Material 3–4 Stichpunkte.<br>Gruppe A: Chancen (M1–M4) · Gruppe B: Risiken (M4–M7)</p></div>
     <p>Tipp: Markiere pro Absatz 1–2 Schlüsselwörter.</p>
     <div class="timer" data-min="12"><div class="z">12:00</div><button class="btn" data-t="start">Start</button><button class="btn hell" data-t="reset">Zurück</button></div>
@@ -199,7 +192,9 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Vierergruppe.</b> Jede Person erklärt ihre Stichpunkte, die anderen ergänzen die zweite Spalte. Moderation: Gruppen zuhören, nicht eingreifen. Beobachtungskriterien: Fachwörter genutzt, mit Material begründet, Spalten vollständig.">
   <div class="kopf"><div class="badge">8</div><div class="ph">Erarbeitung</div><div class="meta"><span>Vierergruppe</span><span>12 Min.</span></div></div>
   <div class="inhalt">
-    <div class="mitikone"><img class="ikone" src="bilder/icon-paar.svg" alt="" width="96" height="96"><img class="ikone" src="bilder/icon-gruppe.svg" alt="" width="96" height="96"><h1>Erklärt euch eure Spalten</h1></div>
+    <img class="deko" src="bilder/icon-paar.svg" alt="" style="right:136px;top:74px;width:72px;height:72px">
+    <img class="deko" src="bilder/icon-gruppe.svg" alt="" style="right:48px;top:74px;width:72px;height:72px">
+    <h1>Erklärt euch eure Spalten</h1>
     <div class="schritt"><div class="nr">1</div><p>Reihum: Jede Person <span class="op">erklärt</span> ihre Stichpunkte.</p></div>
     <div class="schritt"><div class="nr">2</div><p><span class="op">Ergänzt</span> die andere Spalte in eurer Tabelle.</p></div>
     <div class="schritt"><div class="nr">3</div><p><span class="op">Vergleicht</span>: Welche zwei Punkte sind für euch am wichtigsten?</p></div>
@@ -210,13 +205,14 @@ p.klein{font-size:calc(var(--p)*.85)}
 <!-- 9 Sicherung -->
 <section class="slide" data-n="<b>Sicherung.</b> SuS nennen Stichpunkte, Lehrkraft oder SuS tippen sie in die Spalten. Danach „Lösungsvorschlag“ nur zum Abgleich einblenden. Diskussionsanlass M4: Foto passt in beide Spalten. Überleitung: „Bleibt ihr bei eurer ersten Meinung?“">
   <div class="kopf"><div class="badge">9</div><div class="ph">Sicherung</div><div class="meta"><span>Plenum</span><span>10 Min.</span></div></div>
-  <div class="inhalt">
-    <div class="mitikone"><img class="ikone" src="bilder/icon-frage.svg" alt="" width="96" height="96"><h1 class="klein">Die große Tabelle</h1></div>
+  <div class="inhalt" style="gap:14px">
+    <img class="deko" src="bilder/icon-frage.svg" alt="" style="right:48px;top:74px;width:64px;height:64px">
+    <h1 style="font-size:38px">Die große Tabelle</h1>
     <div class="tab">
       <div><h2>Chancen</h2><div class="eingabe" contenteditable="true" id="tc" data-ph="Stichpunkte der Klasse …"></div></div>
       <div><h2>Risiken</h2><div class="eingabe" contenteditable="true" id="tr" data-ph="Stichpunkte der Klasse …"></div></div>
     </div>
-    <div class="zeile"><button class="btn hell" id="loes">Lösungsvorschlag einblenden</button><p class="klein"><b>Bleibt ihr bei eurer ersten Meinung?</b></p><img class="ikone" style="width:clamp(4rem,9vw,6.5rem)" src="bilder/change-your-mind.jpg" alt="Grafik mit der englischen Aufschrift „Change your mind“" width="225" height="225"></div>
+    <div style="display:flex;gap:14px;align-items:center"><button class="btn hell" id="loes">Lösungsvorschlag einblenden</button><p style="font-size:24px"><b>Bleibt ihr bei eurer ersten Meinung?</b></p><img src="bilder/change-your-mind.jpg" alt="Grafik mit der englischen Aufschrift „Change your mind“" style="height:56px;width:56px;margin-left:auto"></div>
   </div>
 </section>
 
@@ -224,10 +220,11 @@ p.klein{font-size:calc(var(--p)*.85)}
 <section class="slide" data-n="<b>Begründetes Urteil.</b> Neues Kreuz setzen. Graue Kreuze = Spontanurteil von Folie 5, zum Vergleich ein-/ausblenden. Zwei bis drei SuS begründen mit Punkten aus der Tabelle. Hat sich etwas verschoben? Warum? Beutelsbacher Konsens: Jede begründete Position ist zulässig.">
   <div class="kopf"><div class="badge">10</div><div class="ph">Urteil</div><div class="meta"><span>Plenum</span><span>10 Min.</span></div></div>
   <div class="inhalt">
-    <div class="mitikone"><img class="ikone" src="bilder/icon-denken.svg" alt="" width="96" height="96"><h1 class="klein">Chance oder Risiko?</h1></div>
+    <img class="deko" src="bilder/icon-denken.svg" alt="" style="right:48px;top:74px;width:64px;height:64px">
+    <h1 style="font-size:38px">Chance oder Risiko?</h1>
     <p><span class="op">Beurteile</span> den Tourismus am Ätna. Setze dein Kreuz neu und <span class="op">begründe</span> mit zwei Punkten aus der Tabelle.</p>
     <div class="pos" data-id="v2" data-alt="v1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="btn hell" data-reset="v2">Kreuze löschen</button><button class="btn hell" data-altschalter="1">Anfang ein/aus</button><small>Grau = Spontanurteil vom Anfang</small></div></div>
-    <div class="karte sand"><p class="klein"><b>Satzbausteine:</b> Ich sehe den Tourismus eher als Chance / Risiko, weil … · Ein wichtiger Punkt ist … · Dagegen spricht, dass …</p></div>
+    <div class="karte sand"><p style="font-size:24px"><b>Satzbausteine:</b> Ich sehe den Tourismus eher als Chance / Risiko, weil … · Ein wichtiger Punkt ist … · Dagegen spricht, dass …</p></div>
   </div>
 </section>
 
@@ -247,13 +244,11 @@ p.klein{font-size:calc(var(--p)*.85)}
   <div class="inhalt">
     <h1>Abschlussrunde</h1>
     <p>Ordne dich einem Bild zu und begründe deine Entscheidung. Wähle dann einen Satzanfang und beende ihn.</p>
-    <div class="reihe" style="align-items:center">
-      <div class="bildkarte" style="flex:0 1 20rem;aspect-ratio:494/528;max-height:50vh" data-fehlt="Bild fehlt: bilder/feedback-schafe.jpg"><img src="bilder/feedback-schafe.jpg" alt="Raster mit neun nummerierten Schaf-Fotos: zum Beispiel ein Schaf mit herausgestreckter Zunge, ein Lamm mit geschlossenen Augen, ein Schaf mit Eimer auf dem Kopf."></div>
-      <div style="flex:1 1 18rem"><div class="chips spalte">
-      <button class="chip">Heute habe ich gelernt, dass …</button>
-      <button class="chip">Schwer war für mich …</button>
-      <button class="chip">Ich frage mich noch …</button>
-    </div></div>
+    <img class="deko rund" src="bilder/feedback-schafe.jpg" alt="Raster mit neun nummerierten Schaf-Fotos: zum Beispiel ein Schaf mit herausgestreckter Zunge, ein Lamm mit geschlossenen Augen, ein Schaf mit Eimer auf dem Kopf." style="right:48px;top:285px;width:318px;height:340px;object-fit:cover">
+    <div class="chips" style="flex-direction:column;align-items:flex-start">
+      <button class="chip" style="font-size:30px">Heute habe ich gelernt, dass …</button>
+      <button class="chip" style="font-size:30px">Schwer war für mich …</button>
+      <button class="chip" style="font-size:30px">Ich frage mich noch …</button>
     </div>
   </div>
 </section>
@@ -267,12 +262,16 @@ p.klein{font-size:calc(var(--p)*.85)}
 
 <script>
 (function(){
-    var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var buehne=document.getElementById('buehne');
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
   var nav=document.getElementById('nav');
   var notiz=document.getElementById('notiz');
   var cur=0, votes={v1:[],v2:[]}, altAn=true;
   slides.forEach(function(){var i=document.createElement('i');nav.appendChild(i)});
-    // fehlende Bilder: Hinweis statt leerer Fläche
+  function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+  window.addEventListener('resize',fit);fit();
+  // fehlende Bilder: Hinweis statt leerer Fläche
   [].forEach.call(document.querySelectorAll('.bildkarte img'),function(img){
     function weg(){img.parentNode.classList.add('fehlt')}
     img.addEventListener('error',weg);
@@ -285,7 +284,6 @@ p.klein{font-size:calc(var(--p)*.85)}
     notiz.innerHTML=slides[cur].getAttribute('data-n')||'';
     try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
     renderAll();
-    slides[cur].scrollTop=0;
   }
   function isEdit(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
   document.addEventListener('keydown',function(e){
@@ -346,6 +344,7 @@ p.klein{font-size:calc(var(--p)*.85)}
   function ausHash(){var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1)}
   window.addEventListener('hashchange',ausHash);
   ausHash();
+  setTimeout(fit,0);
 })();
 </script>
 </body>
