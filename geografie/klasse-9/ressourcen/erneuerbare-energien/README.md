@@ -84,3 +84,23 @@ Barrierefreiheit: Antworten werden nie nur über Farbe angezeigt (Haken und Kreu
 ## Prüfen
 
 Getestet mit Chromium bei 1024×768, 1280×720, 1366×768, 1600×900 und 1920×1080 (kein Überlauf auf den Folien) sowie bei 390×844 (Handy hochkant), 820×1180 (Tablet hochkant) und 844×390 (Handy quer) für Quiz und Präsentation (kein horizontaler Überlauf). Bitte vor dem Unterricht einmal am Beamer des Klassenraums öffnen.
+
+## Interaktive Bausteine
+
+`assets/interaktiv.js` und `assets/interaktiv.css` sind in beiden Präsentationen eingebunden und arbeiten ohne Speicherung und Auswertung. Sie laufen nicht in der Referentenansicht.
+
+| Folie | Baustein |
+|---|---|
+| Do Now | Richtig oder falsch antippen, Rückmeldung erscheint |
+| Fragenentwicklung | Fragefeld ist beschreibbar, Fragestarter fügen Text ein |
+| Fünf Quellen | Karten antippen: Beispiel aufklappen |
+| Sehauftrag | Tabelle direkt auf dem Beamer beschriften |
+| Auswertung | Aufgaben abhaken |
+| Pumpspeicher | Zustand „Zu viel Strom“ oder „Zu wenig Strom“ wählen |
+| Das nehmen wir mit | Inhalte erst verdeckt, antippen oder „Alles aufdecken“. Lückensatz mit Wortkarten |
+| So heizt / So fährt Deutschland | Abschnitt des Balkens antippen: Zahl dahinter |
+| Maßnahmen | Antippen gibt Stimmen, „Stimmen löschen“ setzt zurück |
+| Zusatz | Energiequelle auswählen |
+| alle Folien | Zeitanzeige oben rechts antippen: Countdown mit Signalton |
+
+Der Haus-Knopf im Dock führt zurück ins Portal. Die Portal-Kopfleiste ist in den Präsentationen ausgeblendet, weil sie die Kopfzeile der Folien verdeckt.

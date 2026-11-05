@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Doppelstunde Erneuerbare Energien, Geografie Jahrgang 9. Präsentation mit Referentenansicht.">
 <title>Erneuerbare Energien · Doppelstunde · Geografie 9</title>
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../assets/design.css">
 <link rel="stylesheet" href="praesentation.css">
-<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../assets/interaktiv.css">
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
 </head>
@@ -20,7 +21,7 @@
 <div class="b-donow">
   <article class="tile"><div class="row"><span class="num">1</span><p class="task"><b>Erkläre</b> in einem Satz: Warum steigt Deutschland aus der Kohle aus?</p></div></article>
   <article class="tile"><div class="row"><span class="num">2</span><p class="task"><b>Entscheide</b> und begründe: Beim Verbrennen von Kohle entsteht CO<sub>2</sub>.</p></div>
-    <div class="choices"><span class="choice">richtig</span><span class="choice">falsch</span></div></article>
+    <div class="choices" data-richtig="richtig" data-feedback="Beim Verbrennen von Kohle entsteht CO₂, ein Treibhausgas."><span class="choice">richtig</span><span class="choice">falsch</span></div></article>
   <aside class="tile accent side">
     <span class="bubble" style="background:rgba(16,39,43,.12);width:5em;height:5em"><svg class="ic " aria-hidden="true"><use href="#i-flame"/></svg></span>
     <div><p class="headline">Leise und allein.</p><p class="lead" style="color:inherit">3 Minuten.</p></div>
@@ -193,6 +194,7 @@
 </main>
 
 <nav class="dock" id="dock" aria-label="Folien steuern">
+  <a class="btn" href="../../../../../" aria-label="Zum Portal"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg></a>
   <button class="btn" id="prev" aria-label="Vorherige Folie"><svg class="ic " aria-hidden="true"><use href="#i-chevronl"/></svg></button>
   <span class="count" id="count" aria-live="polite">1 / 12</span>
   <button class="btn" id="next" aria-label="Nächste Folie"><svg class="ic " aria-hidden="true"><use href="#i-chevron"/></svg></button>
@@ -218,5 +220,6 @@
 <script src="../assets/icons.js"></script>
 <script src="../assets/qrcode.js"></script>
 <script src="praesentation.js"></script>
+<script src="../assets/interaktiv.js"></script>
 </body>
 </html>
