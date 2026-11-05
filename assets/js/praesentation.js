@@ -124,6 +124,50 @@
       p.style.top = Math.max(0, Math.min(innerHeight - 40, r.top)) + "px";
     });
 
+    /* Größe frei verstellbar: Griff unten rechts (Maus, Finger, Stift), die Größe bleibt im Browser gemerkt */
+    const griff = knopf("lp-pr-groesse", "", titel + ": Größe ändern (ziehen)");
+    griff.title = "Größe ändern";
+    p.appendChild(griff);
+    const GR = "lp-pr-fenster";
+    const alt = (laden(GR, {}) || {})[id];
+    if (alt && alt.w >= 220 && alt.h >= 140) { p.style.width = Math.min(alt.w, innerWidth - 16) + "px"; p.style.height = Math.min(alt.h, innerHeight - 16) + "px"; }
+    let rz = null;
+    griff.addEventListener("pointerdown", (e) => {
+      const r = p.getBoundingClientRect();
+      p.style.left = r.left + "px"; p.style.top = r.top + "px"; p.style.right = "auto";
+      rz = { id: e.pointerId, x: e.clientX, y: e.clientY, w: r.width, h: r.height, l: r.left, t: r.top };
+      griff.setPointerCapture(e.pointerId); p.style.zIndex = ++zTop; e.preventDefault(); e.stopPropagation();
+    });
+    griff.addEventListener("pointermove", (e) => {
+      if (!rz || rz.id !== e.pointerId) return;
+      p.style.width = Math.max(220, Math.min(innerWidth - rz.l - 4, rz.w + e.clientX - rz.x)) + "px";
+      p.style.height = Math.max(140, Math.min(innerHeight - rz.t - 4, rz.h + e.clientY - rz.y)) + "px";
+    });
+    const rzEnde = () => {
+      if (!rz) return; rz = null;
+      const r = p.getBoundingClientRect(), gesamt = laden(GR, {}) || {};
+      gesamt[id] = { w: Math.round(r.width), h: Math.round(r.height) }; speichern(GR, gesamt);
+    };
+    griff.addEventListener("pointerup", rzEnde);
+    griff.addEventListener("pointercancel", rzEnde);
+    griff.addEventListener("dblclick", () => { p.style.height = ""; p.style.width = breite + "px"; const g = laden(GR, {}) || {}; delete g[id]; speichern(GR, g); });   // Doppelklick: Standardgröße
+
+    /* Fenster immer vollständig im Bild halten: Höhe auf den sichtbaren Rest begrenzen, ggf. nach oben schieben */
+    function einpassen() {
+      if (p.hidden) return;
+      p.style.maxHeight = "";
+      let r = p.getBoundingClientRect();
+      const top = Math.max(8, Math.min(r.top, innerHeight - 8 - Math.min(r.height, innerHeight - 16)));
+      if (Math.abs(top - r.top) > 0.5) { p.style.left = r.left + "px"; p.style.right = "auto"; p.style.top = top + "px"; }
+      r = p.getBoundingClientRect();
+      p.style.maxHeight = Math.max(140, innerHeight - 8 - r.top) + "px";
+    }
+    p.einpassen = einpassen;
+    addEventListener("resize", einpassen);
+    kopf.addEventListener("pointerup", einpassen);
+    griff.addEventListener("pointerup", einpassen);
+    inhalt.addEventListener("toggle", () => setTimeout(einpassen, 0), true);
+
     const o = { el: p, inhalt, zu, taste: null, beimOeffnen: null, beimSchliessen: null };
     zu.addEventListener("click", () => schalte(id, false));
     panels[id] = o;
@@ -135,7 +179,7 @@
     if (!o) return;
     const zeigen = an === undefined ? o.el.hidden : an;
     o.el.hidden = !zeigen;
-    if (zeigen) o.el.style.zIndex = ++zTop;
+    if (zeigen) { o.el.style.zIndex = ++zTop; if (o.el.einpassen) o.el.einpassen(); }
     if (o.taste) { o.taste.setAttribute("aria-pressed", String(zeigen)); o.taste.classList.toggle("on", zeigen); }
     if (zeigen && o.beimOeffnen) o.beimOeffnen();
     if (!zeigen && o.beimSchliessen) o.beimSchliessen();
@@ -155,7 +199,7 @@
   /* =====================================================================
      STIFT
      ===================================================================== */
-  const pen = panelBauen("stift", "Stift", 60, 260);
+  const pen = panelBauen("stift", "Stift", 60, 280);
   const FARBEN = [["#d62828", "Rot"], ["#111111", "Schwarz"], ["#2E7DBA", "Blau"], ["#F4B400", "Gelb"], ["#ffffff", "Weiß"]];
   const DICKEN = [["klein", 3], ["mittel", 6], ["groß", 12]];
   const cv = neu("canvas", "lp-pr-canvas");
@@ -265,7 +309,7 @@
   /* =====================================================================
      TIMER
      ===================================================================== */
-  const tim = panelBauen("timer", "Timer", 60, 280);
+  const tim = panelBauen("timer", "Timer", 60, 300);
   let rest = 300, gesamt = 300, uhr = null, ende = 0, audio = null;
   const anzeige = neu("div", "lp-pr-zeit", "05:00");
   const status = neu("p", "lp-pr-hinweis", "");
@@ -351,10 +395,28 @@
   /* =====================================================================
      LÄRMAMPEL
      ===================================================================== */
-  const lae = panelBauen("laerm", "Lärmampel", 60, 220);
+  const lae = panelBauen("laerm", "Lärmampel", 60, 280);
   const SCHL = "lp-pr-laerm";
-  const cfg = laden(SCHL, { gelb: -42, rot: -32 });         // Grenzen in dBFS, je Gerät kalibrierbar
-  let strom = null, ctxA = null, analyser = null, daten = null, raf = 0, glatt = -90, stufe = 0, rotBis = 0, kalib = null;
+  const cfg = laden(SCHL, { gelb: -42, rot: -32, ton: true });   // Grenzen in dBFS, je Gerät kalibrierbar; ton = Signaltöne
+  let strom = null, ctxA = null, analyser = null, daten = null, raf = 0, glatt = -90, stufe = 0, rotBis = 0, kalib = null, stummBis = 0, rotTonBis = 0;
+  /* Signaltöne: Rot = sanfter, fallender Zweiklang, Stern = kurzer Ding, Ziel = Dreiklang.
+     Während und kurz nach einem Ton wird die Ampel nicht neu bewertet, damit der Lautsprecher die Messung nicht auslöst. */
+  function ton(noten) {
+    if (!cfg.ton) return;
+    try {
+      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+      audio.resume();
+      let t = audio.currentTime + 0.02, gesamt = 0;
+      noten.forEach(([f, d]) => {
+        const o = audio.createOscillator(), g = audio.createGain();
+        o.type = "sine"; o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.28, t + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+        o.connect(g); g.connect(audio.destination); o.start(t); o.stop(t + d + 0.05);
+        t += d * 0.8; gesamt += d * 0.8;
+      });
+      stummBis = Date.now() + gesamt * 1000 + 1200;
+    } catch (e) { /* ohne Ton weiter */ }
+  }
   const lampen = neu("div", "lp-pr-lampen");
   lampen.setAttribute("aria-hidden", "true");
   const lg = neu("i", "g"), ly = neu("i", "y"), lr = neu("i", "r");
@@ -368,7 +430,6 @@
   const lStart = knopf("lp-pr-gross", "Start", "Lärmmessung starten");
   const lKal = knopf("lp-pr-klein", "Kalibrieren", "Mit der jetzigen Lautstärke als ruhig kalibrieren");
   lKal.disabled = true;
-  const lGross = knopf("lp-pr-klein", "Größer", "Ampel vergrößern");
   const emp = document.createElement("input");
   emp.type = "range"; emp.min = "-60"; emp.max = "-15"; emp.step = "1"; emp.value = String(cfg.gelb);
   emp.id = "lp-pr-emp"; emp.className = "lp-pr-regler";
@@ -405,7 +466,10 @@
     let s = glatt >= cfg.rot ? 2 : glatt >= cfg.gelb ? 1 : 0;
     if (s === 2) rotBis = jetzt + 1500;                    // Rot bleibt kurz stehen, sonst flackert die Ampel
     else if (jetzt < rotBis) s = 2;
+    if (jetzt < stummBis && lae.el.dataset.stufe !== "aus") s = stufe;   // während eines Signaltons nicht neu bewerten
+    const neuRot = s === 2 && stufe !== 2;
     if (s !== stufe || lae.el.dataset.stufe === "aus") ampelSetzen(s, false);
+    if (neuRot && jetzt >= rotTonBis) { rotTonBis = jetzt + 8000; ton([[660, 0.45], [494, 0.7]]); }   // höchstens alle 8 Sekunden
     ruheTick(jetzt, s);
     raf = requestAnimationFrame(messen);
   }
@@ -434,7 +498,10 @@
     if (kalib || sterne >= pk.ziel) return;                 // beim Kalibrieren und nach dem Ziel wird nicht gezählt
     if (s === 0) ruhe += dt;                                // Grün: Balken füllt sich
     else if (s === 2) ruhe = 0;                             // Rot: Balken beginnt von vorn, Sterne bleiben
-    if (ruhe >= pk.takt) { ruhe = 0; sterne++; }
+    if (ruhe >= pk.takt) {
+      ruhe = 0; sterne++;
+      ton(sterne >= pk.ziel ? [[523, 0.25], [659, 0.25], [784, 0.6]] : [[880, 0.18], [1175, 0.4]]);   // Ding, beim Ziel ein Dreiklang
+    }
     sterneZeigen();
   }
   function laermAus(nachricht) {
@@ -478,7 +545,14 @@
     const z = lae.inhalt;
     z.appendChild(lampen); z.appendChild(text); z.appendChild(balken);
     const r = neu("div", "lp-pr-reihe"); r.appendChild(lStart); z.appendChild(r);
-    const r2 = neu("div", "lp-pr-reihe"); r2.appendChild(lKal); r2.appendChild(lGross); z.appendChild(r2);
+    const tonBtn = knopf("lp-pr-klein", cfg.ton ? "Ton: an" : "Ton: aus", "Signaltöne ein- oder ausschalten");
+    tonBtn.setAttribute("aria-pressed", String(!!cfg.ton));
+    tonBtn.addEventListener("click", () => {
+      cfg.ton = !cfg.ton; speichern(SCHL, cfg);
+      tonBtn.textContent = cfg.ton ? "Ton: an" : "Ton: aus"; tonBtn.setAttribute("aria-pressed", String(cfg.ton));
+      if (cfg.ton) ton([[660, 0.3]]);                       // Hörprobe
+    });
+    const r2 = neu("div", "lp-pr-reihe"); r2.appendChild(lKal); r2.appendChild(tonBtn); z.appendChild(r2);
     const rg = neu("div", "lp-pr-regelzeile"); rg.appendChild(empLabel); rg.appendChild(emp); z.appendChild(rg);
     /* Sterne und Einstellungen */
     z.appendChild(sternAnz); z.appendChild(sternBalken); z.appendChild(spielBtn);
@@ -486,12 +560,14 @@
     det.appendChild(neu("summary", "", "Sterne einstellen"));
     function stepper(label, wert, min, max, schritt, setze) {
       const zeile = neu("div", "lp-pr-step");
-      zeile.appendChild(neu("span", "", label));
+      zeile.appendChild(neu("span", "lp-pr-steptext", label));
       const m = knopf("lp-pr-klein", "−", label + " verringern"), pl = knopf("lp-pr-klein", "+", label + " erhöhen");
       const w = neu("b", "", String(wert));
       m.addEventListener("click", () => { const v = Math.max(min, +w.textContent - schritt); w.textContent = v; setze(v); });
       pl.addEventListener("click", () => { const v = Math.min(max, +w.textContent + schritt); w.textContent = v; setze(v); });
-      zeile.appendChild(m); zeile.appendChild(w); zeile.appendChild(pl);
+      const reglerZeile = neu("div", "lp-pr-stepreihe");
+      reglerZeile.appendChild(m); reglerZeile.appendChild(w); reglerZeile.appendChild(pl);
+      zeile.appendChild(reglerZeile);
       return zeile;
     }
     det.appendChild(stepper("Sekunden pro Stern", pk.takt, 10, 120, 5, (v) => { pk.takt = v; speichern(SPK, pk); sterneZeigen(); }));
@@ -510,12 +586,6 @@
     grenzen(); ampelSetzen(0, true);
     lStart.addEventListener("click", () => { if (strom) laermAus("Messung beendet."); else laermAn(); });
     lKal.addEventListener("click", () => { if (analyser) { kalib = { summe: 0, n: 0, bis: Date.now() + 3000 }; meld.textContent = "Messe 3 Sekunden …"; } });
-    lGross.addEventListener("click", () => {
-      const gross = lae.el.classList.toggle("gross");
-      lae.el.style.width = (gross ? 340 : 220) + "px";
-      lGross.textContent = gross ? "Kleiner" : "Größer";
-      lGross.setAttribute("aria-label", gross ? "Ampel verkleinern" : "Ampel vergrößern");
-    });
     emp.addEventListener("input", () => { cfg.gelb = +emp.value; cfg.rot = cfg.gelb + 10; speichern(SCHL, cfg); grenzen(); });
     lae.beimSchliessen = () => laermAus("Das Mikrofon ist aus.");   // Schließen beendet die Messung
   })();
