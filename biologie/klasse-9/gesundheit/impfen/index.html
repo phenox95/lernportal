@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Impfen – ja oder nein? Biologie Jahrgang 9, Gesundheit – Krankheit: Impuls, Ausbruchsspiel, Herdenimmunität, Debatte in vier Rollen.">
+<title>Impfen – ja oder nein?</title>
+<link rel="stylesheet" href="../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../assets/css/praesentation.css">
+<script src="../../../../assets/js/prefs.js"></script>
+<script src="../../../../assets/js/material.js" defer></script>
+<style>
+:root{
+  --bg:#f4f6f5; --stage:#ffffff; --ink:#1f2d28; --muted:#5b6b65;
+  --green:#2f5d50; --orange:#c96d38; --lg:#eaf1ee; --lo:#fbebdd; --line:#9aa9a3; --ph:#f7f7f7; --onacc:#ffffff; --grey:#b9c3bf; --blue:#4a7fa0;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1513;--stage:#18211e;--ink:#e8efec;--muted:#a3b3ad;--green:#8cc4b2;--orange:#f0a272;--lg:#223229;--lo:#3a2c21;--line:#5d6f68;--ph:#1d2724;--onacc:#10201a;--grey:#55655f;--blue:#7fb2d0;}
+}
+:root[data-theme="dark"]{--bg:#0f1513;--stage:#18211e;--ink:#e8efec;--muted:#a3b3ad;--green:#8cc4b2;--orange:#f0a272;--lg:#223229;--lo:#3a2c21;--line:#5d6f68;--ph:#1d2724;--onacc:#10201a;--grey:#55655f;--blue:#7fb2d0;}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Calibri,"Segoe UI",Arial,sans-serif;overflow:hidden}
+/* Die Portal-Kopfleiste würde die Folienköpfe verdecken. Zurück zum Portal geht über den Haus-Knopf im Dock. */
+body .lp-kopf{display:none}
+#wrap{position:fixed;inset:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);display:flex;align-items:center;justify-content:center}
+#stage{width:1280px;height:720px;background:var(--stage);position:relative;transform-origin:center center;box-shadow:0 6px 30px rgba(0,0,0,.18);overflow:hidden;flex:none}
+.slide{position:absolute;inset:0;padding:56px 64px;display:none}
+.slide.on{display:block}
+h1{font-family:Cambria,Georgia,serif;font-size:50px;color:var(--green);margin:0;line-height:1.1}
+.card{border-radius:20px;background:var(--lg);padding:30px 36px}
+.card.o{background:var(--lo)}
+.abs{position:absolute}
+.q{font-size:34px;line-height:1.35}
+.who{font-size:22px;font-weight:700;color:var(--green)}
+.who.o{color:var(--orange)}
+.hl{color:var(--green);font-weight:700}
+.muted{color:var(--muted)}
+button{font-family:inherit}
+.badge{position:absolute;right:64px;top:40px;width:104px;height:104px;border-radius:50%;background:var(--orange);color:var(--onacc);font-weight:700;font-size:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:0;cursor:pointer;line-height:1.2}
+.badge small{display:block;font-size:13px;font-weight:400}
+.btn{background:var(--green);color:var(--onacc);border:0;border-radius:12px;padding:10px 20px;font-size:20px;font-weight:700;cursor:pointer;min-height:48px}
+.btn.sec{background:var(--lg);color:var(--ink);border:2px solid var(--line)}
+.btn.o{background:var(--orange)}
+.btn:disabled{opacity:.45;cursor:default}
+.step{display:flex;align-items:center;gap:18px;font-size:24px;margin:0 0 20px}
+.num{width:44px;height:44px;border-radius:50%;background:var(--green);color:var(--onacc);font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;font-size:22px}
+.num.o{background:var(--orange)}
+.rule{font-size:23px;margin:0 0 18px;line-height:1.3}
+.rule b{color:var(--orange);margin-right:10px}
+.leg{display:flex;align-items:center;gap:14px;font-size:22px;margin-bottom:12px}
+.cell{width:44px;height:44px;border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;flex:none}
+.cG{background:var(--green);color:var(--onacc)} .cU{background:var(--orange);color:var(--onacc);border-color:var(--orange)} .cN{border:4px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:22px}
+th{background:var(--green);color:var(--onacc);padding:12px;font-size:22px}
+td{border:1.5px solid var(--line);padding:0 12px;height:66px;text-align:center}
+td:first-child{background:var(--lg);text-align:left;font-weight:700;font-size:19px}
+td[contenteditable]{outline:none;font-size:28px;color:var(--orange);font-weight:700}
+td[contenteditable]:focus{background:var(--lo)}
+.rnd{width:376px;height:200px;border-radius:20px;background:var(--lg);padding:22px 28px;position:absolute;top:150px}
+.rnd.o{background:var(--lo)}
+.rnd h3{font-family:Cambria,Georgia,serif;font-size:28px;color:var(--green);margin:0 0 4px}
+.rnd .t{font-size:24px;font-weight:700;color:var(--orange);margin-bottom:6px}
+.rnd p{margin:0;font-size:22px;line-height:1.3}
+.rolebtn{display:flex;align-items:center;gap:12px;font-size:22px;position:absolute;top:390px;background:var(--lg);border:2px solid var(--line);border-radius:16px;padding:10px 18px 10px 10px;cursor:pointer;color:var(--ink);font-weight:600;min-height:68px}
+.rolebtn .num{width:48px;height:48px;font-size:24px}
+/* Navigation links unten: das Dock des Portals liegt rechts, deshalb steht die Folienleiste hier links */
+.tb{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));display:flex;gap:8px;z-index:5}
+.tb button{background:var(--green);color:var(--onacc);border:0;border-radius:10px;padding:10px 16px;font:600 15px Calibri,"Segoe UI",Arial,sans-serif;cursor:pointer;min-height:44px}
+.tb button.sec{background:var(--lg);color:var(--ink)}
+.cnt{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(max(14px,env(safe-area-inset-bottom,0px)) + 56px);font:600 15px Calibri,"Segoe UI",Arial,sans-serif;color:var(--muted);z-index:5}
+#notes{position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;background:var(--lo);color:var(--ink);padding:16px 22px calc(16px + env(safe-area-inset-bottom,0px));font-size:17px;line-height:1.45;border-top:3px solid var(--orange);display:none;z-index:2000}
+#notes.on{display:block}
+#notes b{color:var(--orange)}
+.hint{font-size:19px;color:var(--muted)}
+/* Impuls */
+.w{cursor:pointer;border-radius:6px;padding:0 2px;transition:background .12s}
+.w.mark{background:var(--orange);color:var(--onacc)}
+/* Fragen */
+#qin{font:22px Calibri,"Segoe UI",Arial,sans-serif;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:var(--stage);color:var(--ink);width:430px;min-height:48px}
+#qlist{overflow:auto;height:300px;padding-right:6px}
+.qc{display:flex;align-items:center;gap:10px;background:var(--lg);border-radius:14px;padding:10px 14px;margin-bottom:10px;font-size:21px;line-height:1.25}
+.qc span.t{flex:1}
+.qc button{border:2px solid var(--line);background:var(--stage);color:var(--ink);border-radius:10px;font-size:18px;font-weight:700;padding:6px 10px;cursor:pointer;min-height:44px}
+.qc button.pick{background:var(--orange);color:var(--onacc);border-color:var(--orange)}
+#lf{font-family:Cambria,Georgia,serif;font-size:27px;line-height:1.3;min-height:76px;outline:none;border-bottom:2px solid var(--line);padding-bottom:6px}
+/* Spielfeld */
+#grid{display:grid;grid-template-columns:repeat(5,100px);grid-auto-rows:100px;gap:6px}
+.gc{border:2px solid var(--green);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:34px;font-weight:700;cursor:pointer;user-select:none;position:relative;background:var(--stage);color:var(--ink)}
+.gc.G{background:var(--lg)}
+.gc.N{border:5px solid var(--ink)}
+.gc.inf{background:var(--orange);color:var(--onacc);border-color:var(--orange)}
+.gc small{font-size:18px;font-weight:700;line-height:1}
+.gc .ci{position:absolute;top:2px;left:6px;font-size:13px;color:var(--muted);font-weight:400}
+.gc.inf .ci{color:var(--onacc)}
+.stat{font-size:24px;margin:0 0 8px}
+.stat b{font-size:34px;color:var(--orange);margin-left:8px}
+.seg{display:flex;gap:8px;margin-bottom:14px}
+.seg button{flex:1}
+.seg button.on{background:var(--green);color:var(--onacc);border-color:var(--green)}
+/* Labor */
+#dots{display:grid;grid-template-columns:repeat(10,22px);gap:4px}
+#dots i{width:22px;height:22px;border-radius:50%;background:var(--green)}
+#dots i.U{background:var(--grey)} #dots i.I{background:var(--orange)}
+input[type=range]{width:100%;accent-color:var(--orange);height:32px}
+.lab label{display:block;font-size:20px;font-weight:700;margin:8px 0 0}
+/* Blitzlicht */
+.bar-area{display:flex;gap:18px;align-items:flex-end;height:230px;margin-top:6px}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bcol .bar{width:100%;border-radius:10px 10px 0 0;min-height:6px;transition:height .25s}
+.bcol .n{font-size:34px;font-weight:700;margin-bottom:4px}
+.bl{display:flex;gap:8px;margin-top:8px}
+.bl button{flex:1;border:2px solid var(--line);background:var(--stage);color:var(--ink);border-radius:10px;font-size:22px;font-weight:700;min-height:48px;cursor:pointer}
+.bl button.p{background:var(--green);color:var(--onacc);border-color:var(--green)}
+.lbl{font-size:20px;font-weight:700;text-align:center;margin-top:8px;min-height:52px}
+/* Exit */
+.chk{display:flex;align-items:center;gap:18px;font-size:26px;margin-bottom:16px;cursor:pointer;user-select:none}
+.box{width:44px;height:44px;border:3px solid var(--green);border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--onacc)}
+.chk.on .box{background:var(--green)}
+/* Reveal */
+.rv.hide{filter:blur(9px);cursor:pointer;user-select:none}
+.rv{cursor:pointer;transition:filter .2s}
+/* Modal */
+.modal{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:20;padding:40px}
+.modal.on{display:flex}
+.mcard{background:var(--stage);border:3px solid var(--green);border-radius:22px;padding:26px 38px;width:900px;max-height:640px;overflow:auto;font-size:21px;line-height:1.35;position:relative}
+.mclose{position:absolute;right:18px;top:14px;border:0;background:var(--lg);color:var(--ink);border-radius:10px;font-size:20px;font-weight:700;padding:8px 14px;cursor:pointer;min-height:44px}
+.mcard h2{font-family:Cambria,Georgia,serif;color:var(--green);margin:0 0 6px;font-size:34px}
+.mcard h4{margin:10px 0 3px;font-size:20px;color:var(--orange)}
+.mcard ul{margin:0;padding-left:26px}
+.mcard li{margin-bottom:4px}
+svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
+</style>
+</head>
+<body data-root="../../../../" data-title="Impfen – ja oder nein?" data-subject="Biologie" data-grade="Klasse 9">
+<div id="wrap"><div id="stage">
+
+<!-- 1 Do Now -->
+<section class="slide" data-min="3" data-note="<b>Do Now (0–3 Min.):</b> Wiederholung aus Std. 10. SuS bearbeiten die Aufgabe beim Betreten still und schriftlich ins Heft. Anwesenheit prüfen. <b>Abgleich (3–5 Min.):</b> zwei SuS lesen vor; danach klicken SuS das Schema rechts mit „Weiter“ Schritt für Schritt durch. Tafel: „Gedächtniszellen → schnelle Antikörper → keine Erkrankung“. Falls die Vorstunde anders war: Aufgabe anpassen.">
+  <h1>Do Now</h1>
+  <button class="badge" data-timer="180" title="Timer starten">3 Min.<small>Start</small></button>
+  <div class="card abs" style="left:64px;top:160px;width:600px;height:290px;display:flex;align-items:center">
+    <div class="q" style="font-size:36px"><span class="hl">Erkläre</span> in zwei Sätzen, warum ein geimpfter Mensch bei Kontakt mit dem Erreger nicht erkrankt.</div>
+  </div>
+  <div class="abs" style="left:64px;top:480px;font-size:26px;font-weight:700;color:var(--orange)">Nutze: Gedächtniszellen · Antikörper</div>
+  <div class="abs muted" style="left:64px;top:540px;font-size:20px">Schreibe ins Heft. Du darfst dir die Aufgabe vorlesen lassen.</div>
+  <div class="abs" style="left:700px;top:150px;width:516px">
+    <svg id="imm" viewBox="0 0 440 340" width="516" height="398" role="img" aria-label="Schema: Impfung, Gedächtniszellen, Erreger, Antikörper">
+      <rect x="6" y="8" width="428" height="324" rx="40" fill="var(--lg)" stroke="var(--green)" stroke-width="3"/>
+      <text x="26" y="40" font-size="17" font-weight="700" fill="var(--green)">Körper</text>
+      <g class="st s1" opacity="0">
+        <circle cx="80" cy="95" r="17" fill="var(--grey)"/>
+        <g stroke="var(--grey)" stroke-width="4" stroke-linecap="round"><line x1="80" y1="68" x2="80" y2="76"/><line x1="80" y1="114" x2="80" y2="122"/><line x1="53" y1="95" x2="61" y2="95"/><line x1="99" y1="95" x2="107" y2="95"/></g>
+        <text x="24" y="148" font-size="16" fill="var(--ink)">Impfstoff</text>
+        <text x="24" y="167" font-size="13" fill="var(--muted)">(macht nicht krank)</text>
+        <path d="M118 112 L172 195" stroke="var(--ink)" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+      </g>
+      <g class="st s2" opacity="0">
+        <circle cx="185" cy="225" r="24" fill="var(--green)"/><circle cx="240" cy="255" r="24" fill="var(--green)"/><circle cx="165" cy="285" r="24" fill="var(--green)"/>
+        <text x="185" y="231" font-size="20" font-weight="700" text-anchor="middle" fill="var(--onacc)">G</text>
+        <text x="240" y="261" font-size="20" font-weight="700" text-anchor="middle" fill="var(--onacc)">G</text>
+        <text x="165" y="291" font-size="20" font-weight="700" text-anchor="middle" fill="var(--onacc)">G</text>
+        <text x="198" y="318" font-size="16" font-weight="700" fill="var(--green)">Gedächtniszellen</text>
+      </g>
+      <g class="st s3" opacity="0">
+        <circle cx="360" cy="120" r="26" fill="var(--orange)"/>
+        <g stroke="var(--orange)" stroke-width="5" stroke-linecap="round"><line x1="360" y1="86" x2="360" y2="94"/><line x1="360" y1="146" x2="360" y2="154"/><line x1="326" y1="120" x2="334" y2="120"/><line x1="386" y1="120" x2="394" y2="120"/><line x1="336" y1="96" x2="342" y2="102"/><line x1="378" y1="138" x2="384" y2="144"/><line x1="384" y1="96" x2="378" y2="102"/><line x1="342" y1="138" x2="336" y2="144"/></g>
+        <text x="360" y="198" font-size="17" font-weight="700" text-anchor="middle" fill="var(--orange)">Erreger</text>
+      </g>
+      <g class="st s4" opacity="0">
+        <g stroke="var(--blue)" stroke-width="5" stroke-linecap="round" fill="none">
+          <g transform="translate(300 105) rotate(-70)"><path d="M0 0 V16 M0 16 L-9 28 M0 16 L9 28"/></g>
+          <g transform="translate(305 160) rotate(-110)"><path d="M0 0 V16 M0 16 L-9 28 M0 16 L9 28"/></g>
+          <g transform="translate(360 62) rotate(180)"><path d="M0 0 V16 M0 16 L-9 28 M0 16 L9 28"/></g>
+          <g transform="translate(415 130) rotate(70)"><path d="M0 0 V16 M0 16 L-9 28 M0 16 L9 28"/></g>
+          <g transform="translate(360 180) rotate(0)"><path d="M0 0 V16 M0 16 L-9 28 M0 16 L9 28"/></g>
+        </g>
+        <text x="352" y="262" font-size="16" font-weight="700" text-anchor="middle" fill="var(--blue)">Viele Antikörper</text>
+        <text x="352" y="282" font-size="16" font-weight="700" text-anchor="middle" fill="var(--blue)">– schnell!</text>
+        <path d="M335 95 L385 145 M385 95 L335 145" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>
+      </g>
+      <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--ink)"/></marker></defs>
+    </svg>
+    <div id="immcap" style="font-size:21px;min-height:60px;line-height:1.3;margin-top:4px">Zum Abgleich: Tippe auf „Weiter“.</div>
+    <div style="display:flex;gap:10px;margin-top:8px"><button class="btn sec" id="immBack">←</button><button class="btn" id="immNext">Weiter →</button></div>
+  </div>
+</section>
+
+<!-- 2 Impuls -->
+<section class="slide" data-min="2" data-note="<b>Impuls (5–7 Min.):</b> 1 Minute stumm lesen lassen. SuS tippen die Schlüsselwörter an (Markierung wird orange). Dann Partneraustausch. Impulsfragen: „Was fällt euch auf?“ „Was passt hier nicht zusammen?“ Die Leitfrage NICHT nennen. Beide Aussagen sind fiktiv; die Figuren sind gezeichnete Symbolfiguren.">
+  <h1>Zwei Aussagen</h1>
+  <div class="abs hint" style="left:420px;top:76px">Tippe die wichtigsten Wörter an.</div>
+  <div class="card abs" style="left:64px;top:160px;width:550px;height:440px">
+    <svg viewBox="0 0 120 120" width="110" height="110" class="abs" style="right:28px;top:22px" role="img" aria-label="Herr Lehmann, Symbolfigur">
+      <circle cx="60" cy="40" r="24" fill="var(--grey)"/><path d="M36 36 Q60 8 84 36 Q60 24 36 36z" fill="var(--ink)"/>
+      <rect x="24" y="68" width="72" height="48" rx="22" fill="var(--green)"/>
+      <path d="M46 84 Q60 94 74 84" stroke="var(--onacc)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="q wordify" style="width:350px">„Masern? Die hatten wir früher alle. Mein Sohn braucht keine Impfung.“</div>
+    <div class="who abs" style="left:36px;bottom:30px">Herr Lehmann, Vater</div>
+  </div>
+  <div class="card o abs" style="left:666px;top:160px;width:550px;height:440px">
+    <svg viewBox="0 0 120 120" width="110" height="110" class="abs" style="right:28px;top:22px" role="img" aria-label="Mia, Symbolfigur">
+      <rect x="22" y="62" width="76" height="54" rx="20" fill="var(--blue)"/>
+      <circle cx="60" cy="40" r="22" fill="var(--grey)"/><path d="M38 38 Q40 14 60 14 Q80 14 82 38 Q60 24 38 38z" fill="var(--orange)"/>
+      <rect x="82" y="72" width="22" height="30" rx="7" fill="var(--orange)"/>
+    </svg>
+    <div class="q wordify" style="width:350px">„Wegen meiner Behandlung darf ich nicht gegen Masern geimpft werden. Ab Montag gehe ich wieder zur Schule.“</div>
+    <div class="who o abs" style="left:36px;bottom:30px">Mia, 8 Jahre</div>
+  </div>
+  <div class="abs muted" style="left:64px;top:628px;font-size:18px">Fiktive Aussagen und Symbolfiguren für den Unterricht</div>
+</section>
+
+<!-- 3 Fragen -->
+<section class="slide" data-min="3" data-note="<b>Fragenentwicklung (7–10 Min.):</b> SuS nennen Fragen, die Lehrkraft (oder ein/e Schüler/in) tippt sie ein. Mit 👍 priorisiert die Klasse (Handzeichen). Mit „→ Leitfrage“ wird die Favoritin unten eingetragen; der Text unten ist anklickbar und kann gemeinsam umformuliert werden. Zielkorridor (nicht verkünden): „Warum geht die Impfentscheidung eines Einzelnen auch andere etwas an – und darf der Staat deshalb eine Impfpflicht festlegen?“ Tragfähige Abweichungen aufgreifen. Nachsteuern: „Wer entscheidet hier – und wer ist davon betroffen?“ Impuls plus Fragenentwicklung höchstens 5 Minuten.">
+  <h1>Eure Fragen</h1>
+  <div class="abs" style="left:64px;top:160px;width:400px">
+    <div class="step"><span class="num">1</span>Was fällt euch auf?</div>
+    <div class="step"><span class="num">2</span>Was passt hier nicht zusammen?</div>
+    <div class="step"><span class="num">3</span>Wer hängt hier von wem ab?</div>
+    <div class="step"><span class="num o">4</span>Welche Frage stellt sich euch?</div>
+  </div>
+  <div class="abs" style="left:500px;top:150px;width:716px">
+    <div style="display:flex;gap:10px"><input id="qin" type="text" placeholder="Eure Frage eintippen …" maxlength="140" aria-label="Frage eintippen"><button class="btn" id="qadd">Hinzufügen</button></div>
+    <div id="qlist" style="margin-top:14px"></div>
+  </div>
+  <div class="card abs" style="left:64px;top:470px;width:1152px;height:150px;border:3px solid var(--green);padding:18px 30px">
+    <div style="font-family:Cambria,Georgia,serif;font-size:24px;font-weight:700;color:var(--green)">Unsere Frage für heute:</div>
+    <div id="lf" contenteditable="true" spellcheck="false"></div>
+  </div>
+</section>
+
+<!-- 4 Regeln -->
+<section class="slide" data-min="2" data-note="<b>Spiel (10–17 Min.):</b> Regeln in 1 Minute. Dann Partnerarbeit am Papier-Spielblatt (Feld 1, dann Feld 2, je ca. 2,5 Minuten, Protokoll). Offen sagen: vereinfachtes Modell (Impfschutz 100 %, nur Nachbarkontakte). Auf der nächsten Folie kann die Klasse das Spiel digital nachspielen.">
+  <h1>Spiel: Der Ausbruch</h1>
+  <div class="abs" style="left:64px;top:160px;width:700px">
+    <p class="rule"><b>1</b>Die Person mit „Start“ ist krank. Schreibe 0 hinein.</p>
+    <p class="rule"><b>2</b>Kranke Personen stecken ihre Nachbarn an: oben, unten, links, rechts.</p>
+    <p class="rule"><b>3</b>U und N werden krank. Schreibe die Nummer der Runde hinein.</p>
+    <p class="rule"><b>4</b>G wird nie krank und gibt nichts weiter.</p>
+    <p class="rule"><b>5</b>Stopp, wenn niemand neu erkrankt.</p>
+  </div>
+  <div class="abs" style="left:830px;top:160px">
+    <div class="leg"><span class="cell cG">G</span>geimpft</div>
+    <div class="leg"><span class="cell cU">U</span>ungeimpft</div>
+    <div class="leg"><span class="cell cN">N</span>nicht impfbar</div>
+  </div>
+  <svg class="abs" style="left:830px;top:380px" viewBox="0 0 330 250" width="330" height="250" role="img" aria-label="Beispiel: Ansteckung auf vier Nachbarfelder">
+    <g fill="var(--lg)" stroke="var(--green)" stroke-width="2.5">
+      <rect x="95" y="10" width="60" height="60"/><rect x="25" y="80" width="60" height="60"/><rect x="165" y="80" width="60" height="60"/><rect x="95" y="150" width="60" height="60"/>
+    </g>
+    <rect x="95" y="80" width="60" height="60" fill="var(--orange)"/>
+    <text x="125" y="116" font-size="15" font-weight="700" text-anchor="middle" fill="var(--onacc)">krank</text>
+    <g stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"><path d="M125 76 V72"/><path d="M91 110 H87"/><path d="M159 110 H163"/><path d="M125 144 V148"/></g>
+    <g fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="5 4"><rect x="25" y="10" width="60" height="60"/><rect x="165" y="10" width="60" height="60"/><rect x="25" y="150" width="60" height="60"/><rect x="165" y="150" width="60" height="60"/></g>
+    <text x="125" y="238" font-size="18" text-anchor="middle" fill="var(--muted)">nicht schräg</text>
+  </svg>
+</section>
+
+<!-- 5 Spielfeld digital -->
+<section class="slide" data-min="5" data-note="<b>Spielfeld digital:</b> Feld 1 und Feld 2 entsprechen dem Papier-Spielblatt. Mit „Nächste Runde“ klicken SuS die Ansteckung Schritt für Schritt (Zahl im Feld = Runde). Erwartet: Feld 1 → 7 Erkrankte, 4 Runden, 2 N erkrankt. Feld 2 → 1 Erkrankter, 0 Runden, 0 N erkrankt. <b>Experiment (freiwillig, Erweiterung):</b> auf ein Feld tippen ändert G → U → N → G. „Zufallsfeld“ mischt eine Impfquote per Regler. Zufallsfelder können sehr unterschiedlich ausgehen: das ist gewollt (Zufall der Anordnung).">
+  <h1>Spielfeld digital</h1>
+  <div class="abs" style="left:64px;top:150px">
+    <div id="grid"></div>
+    <div class="hint" style="margin-top:10px">Tippe auf ein Feld, um G → U → N zu ändern (das Startfeld bleibt).</div>
+  </div>
+  <div class="abs" style="left:700px;top:150px;width:516px">
+    <div class="seg" id="fsel">
+      <button class="btn sec on" data-f="1">Feld 1</button><button class="btn sec" data-f="2">Feld 2</button><button class="btn sec" data-f="r">Zufallsfeld</button>
+    </div>
+    <div id="rq" style="display:none;margin-bottom:10px">
+      <label style="font-size:20px;font-weight:700">Impfquote: <span id="rqv">60</span> %</label>
+      <input type="range" id="rqs" min="0" max="100" step="5" value="60">
+      <button class="btn sec" id="rnew" style="margin-top:4px">Neu mischen</button>
+    </div>
+    <div style="display:flex;gap:10px;margin-bottom:16px">
+      <button class="btn" id="gstep">Nächste Runde</button>
+      <button class="btn o" id="gplay">Abspielen</button>
+      <button class="btn sec" id="greset">Zurück</button>
+    </div>
+    <p class="stat">Erkrankte (mit Start)<b id="sE">1</b></p>
+    <p class="stat">Runden mit neuen Fällen<b id="sR">0</b></p>
+    <p class="stat">Erkrankte mit N<b id="sN">0</b></p>
+    <div id="gmsg" style="font-size:22px;font-weight:700;color:var(--green);min-height:60px;line-height:1.3"></div>
+  </div>
+</section>
+
+<!-- 6 Auswertung + Labor -->
+<section class="slide" data-min="6" data-note="<b>Sicherung (17–23 Min.):</b> Ergebnisse in die Tabelle eintragen lassen (Felder anklickbar). Lösungen mit „Lösung zeigen“. Danach Arbeitsblatt S. 2, Aufgabe 1 (Beschreibe) und 2 (Erkläre). <b>Herdenimmunität-Labor (rechts):</b> 100 Personen, jede hat k zufällige Kontakte; Ansteckung bei jedem Kontakt mit Ungeimpften. SuS probieren Impfquote und Kontakte aus. Beobachtung: Je mehr Kontakte, desto höher muss die Impfquote sein, damit Ausbrüche klein bleiben. Das erklärt, warum für Masern etwa 95 % nötig sind (RKI). Masern gehören zu den ansteckendsten Krankheiten (Größenordnung: eine kranke Person ohne Schutz steckt im Schnitt rund 12 bis 18 andere an, bitte vor der Stunde gegenprüfen). Das Labor ist ein Modell, keine Vorhersage. Aktuelle Impfquoten: https://www.rki.de/masern-impfung (Zahl selbst nachsehen, nicht aus dem Gedächtnis eintragen).">
+  <h1>Was zeigt das Spiel?</h1>
+  <table class="abs" style="left:64px;top:150px;width:560px">
+    <tr><th style="width:240px"></th><th>Feld 1</th><th>Feld 2</th></tr>
+    <tr><td>Impfquote</td><td>60 %</td><td>90 %</td></tr>
+    <tr><td>Erkrankte (mit Start)</td><td contenteditable id="a1"></td><td contenteditable id="b1"></td></tr>
+    <tr><td>Runden mit neuen Fällen</td><td contenteditable id="a2"></td><td contenteditable id="b2"></td></tr>
+    <tr><td>Erkrankte mit N</td><td contenteditable id="a3"></td><td contenteditable id="b3"></td></tr>
+  </table>
+  <button class="btn sec abs" id="sol" style="left:64px;top:520px">Lösung zeigen</button>
+  <div class="card abs lab" style="left:660px;top:135px;width:556px;height:500px;padding:18px 26px">
+    <div style="font-family:Cambria,Georgia,serif;font-size:26px;font-weight:700;color:var(--green)">Herdenimmunität-Labor</div>
+    <div style="display:flex;gap:20px;margin-top:8px">
+      <div id="dots"></div>
+      <div style="flex:1;font-size:17px;line-height:1.4">
+        <div><span style="color:var(--green)">●</span> geimpft</div>
+        <div><span style="color:var(--grey)">●</span> ungeimpft, gesund</div>
+        <div><span style="color:var(--orange)">●</span> erkrankt</div>
+        <button class="btn" id="lgo" style="margin:8px 0 6px;padding:6px 12px;font-size:18px;min-height:44px">Neuer Ausbruch</button>
+        <div id="lres" style="font-size:17px;line-height:1.3"></div>
+      </div>
+    </div>
+    <label>Impfquote: <span id="lq">60</span> %</label><input type="range" id="lqs" min="0" max="100" step="1" value="60">
+    <label>Kontakte pro Person: <span id="lk">4</span></label><input type="range" id="lks" min="1" max="20" step="1" value="4">
+  </div>
+  </section>
+
+<!-- 7 Debatte -->
+<section class="slide" data-min="15" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollenkarten ziehen (Papier) oder hier A–D antippen: Die Karte öffnet sich im Vollbild-Fenster. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
+  <h1>Debatte in vier Rollen</h1>
+  <button class="badge" data-timer="180,270,90" title="Timer: Runde 1, 2, 3">Timer<small>Runde 1</small></button>
+  <div class="rnd" style="left:64px;top:150px"><h3>Runde 1</h3><div class="t">3 Min.</div><p>Statements: jede Rolle 45 Sekunden</p></div>
+  <div class="rnd" style="left:452px;top:150px"><h3>Runde 2</h3><div class="t">4,5 Min.</div><p>Diskussion: geht auf andere ein</p></div>
+  <div class="rnd o" style="left:840px;top:150px"><h3>Runde 3</h3><div class="t">1,5 Min.</div><p>Entscheidung der Gruppe</p></div>
+  <div class="abs hint" style="left:64px;top:372px">Tippe auf eine Rolle, um die Rollenkarte zu lesen:</div>
+  <button class="rolebtn" style="left:64px;top:410px" data-role="A"><span class="num">A</span>Mutter</button>
+  <button class="rolebtn" style="left:330px;top:410px" data-role="B"><span class="num">B</span>Kinderärztin</button>
+  <button class="rolebtn" style="left:640px;top:410px" data-role="C"><span class="num">C</span>Vater von Mia</button>
+  <button class="rolebtn" style="left:980px;top:410px" data-role="D"><span class="num">D</span>Jurist</button>
+  <div class="abs" style="left:64px;top:545px;font-size:24px;font-weight:700;color:var(--orange)">Argumente statt Meinungen. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
+  <div class="modal" id="rmodal"><div class="mcard" id="rcard"></div></div>
+</section>
+
+<!-- 8 Blitzlicht -->
+<section class="slide" data-min="1" data-note="<b>Blitzlicht (38–39 Min.):</b> Obere Zählung am besten schon nach dem Impuls (Bauchgefühl) mit Handzeichen erfassen, die zweite nach der Debatte (Gruppenentscheidungen oder Einzelmeinungen). Tippen auf „+“ zählt hoch, „−“ korrigiert. Auswertung: Hat sich etwas verändert? Warum? Es gibt keine richtige Position, bewertet wird die Begründung.">
+  <h1>Blitzlicht: Wie entscheidet ihr?</h1>
+  <div class="abs" id="bz1" style="left:64px;top:150px;width:560px"></div>
+  <div class="abs" id="bz2" style="left:660px;top:150px;width:556px"></div>
+</section>
+
+<!-- 9 Exit -->
+<section class="slide" data-min="5" data-note="<b>Exit (39–45 Min.):</b> Exit-Ticket (A5) schreiben lassen und einsammeln. Die Checkliste hilft beim Selbstcheck. Bewertet wird die Begründung, nicht die Position.">
+  <h1>Exit-Ticket</h1>
+  <button class="badge" data-timer="300" title="Timer starten">5 Min.<small>Start</small></button>
+  <div class="card abs" style="left:64px;top:150px;width:1152px;height:230px;display:flex;align-items:center">
+    <div class="q" style="font-size:34px"><span class="hl">Beurteile</span>, ob eine Impfpflicht gegen Masern in Schulen gerechtfertigt ist. Begründe mit dem Begriff <b>Herdenimmunität</b> und nenne ein Gegenargument, das du ernst nimmst.</div>
+  </div>
+  <div class="abs" style="left:64px;top:410px;width:700px" id="chks"></div>
+  <div class="abs" id="done" style="left:800px;top:430px;font-family:Cambria,Georgia,serif;font-size:40px;font-weight:700;color:var(--green);display:none">✔ Geschafft!</div>
+  <div class="abs muted" style="left:800px;top:520px;width:416px;font-size:19px;line-height:1.35">Satzbausteine: Ich halte eine Impfpflicht für (nicht) gerechtfertigt, weil … · Ein wichtiges Gegenargument ist …, aber …</div>
+</section>
+
+<!-- 10 Tafelbild -->
+<section class="slide" data-min="2" data-note="<b>Tafelbild/Sicherung:</b> Die Inhalte sind unscharf. Die Klasse erarbeitet sie, dann wird zum Aufdecken getippt. Links Begriff Herdenimmunität, rechts Pro/Contra aus der Debatte. Das Bild oben rechts zeigt: Die Person in der Mitte kann nicht geimpft werden, wird aber von geimpften Nachbarn geschützt. Schlüsselsatz ins Heft.">
+  <h1>Herdenimmunität</h1>
+  <svg class="abs" style="right:64px;top:18px" viewBox="0 0 150 130" width="190" height="165" role="img" aria-label="Eine nicht impfbare Person in der Mitte, umgeben von geimpften Personen">
+    <g id="ppl"></g>
+  </svg>
+  <div class="card abs" style="left:64px;top:190px;width:560px;height:400px;font-size:27px;line-height:1.35">
+    <ul style="margin:0;padding-left:28px">
+      <li class="rv hide" style="margin-bottom:14px">Viele Menschen sind geimpft.</li>
+      <li class="rv hide" style="margin-bottom:14px">Der Erreger findet kaum Ansteckungswege.</li>
+      <li class="rv hide" style="margin-bottom:14px">Auch Menschen, die nicht geimpft werden können, sind geschützt.</li>
+      <li class="rv hide">Masern: etwa 95 % Geimpfte nötig (RKI).</li>
+    </ul>
+  </div>
+  <div class="card o abs" style="left:656px;top:190px;width:560px;height:400px;font-size:27px;line-height:1.35">
+    <p class="rv hide" style="margin:0 0 16px"><b class="hl">Pro:</b> Schutz für Schwache, hohe Quote nötig</p>
+    <p class="rv hide" style="margin:0 0 16px"><b style="color:var(--orange)">Contra:</b> Selbstbestimmung, Sorge vor Nebenwirkungen</p>
+    <p class="rv hide" style="margin:0"><b>Rahmen:</b> keine Zwangsimpfung, aber Nachweispflicht</p>
+  </div>
+  <div class="abs rv hide" style="left:64px;top:620px;font-family:Cambria,Georgia,serif;font-size:30px;font-weight:700;color:var(--green)">Impfen schützt mich und andere.</div>
+  <div class="abs hint" style="left:700px;top:630px">Tippe auf unscharfe Stellen zum Aufdecken.</div>
+</section>
+
+</div></div>
+
+<div class="cnt" id="cnt"></div>
+<div class="tb">
+  <button class="sec" id="bPrev" aria-label="Zurück">←</button>
+  <button class="sec" id="bNext" aria-label="Weiter">→</button>
+  <button class="sec" id="bNotes">Notizen (N)</button>
+</div>
+<div id="notes"></div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var slides=$$('.slide'), cur=0, stage=$('#stage'), notes=$('#notes'), cnt=$('#cnt');
+  function fit(){var s=Math.min(window.innerWidth/1280,window.innerHeight/720);stage.style.transform='scale('+s+')';}
+  window.addEventListener('resize',fit);fit();
+  function show(i,fromHash){
+    cur=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===cur);});
+    notes.innerHTML='<b>Lehrkraft, Folie '+(cur+1)+':</b> '+(slides[cur].getAttribute('data-note')||'');
+    cnt.textContent=(cur+1)+' / '+slides.length;
+    stopTimer(); stopPlay();
+    if(!fromHash){try{history.replaceState(null,'','#folie'+(cur+1));}catch(e){}}
+  }
+  function fromHash(){var m=/^#folie(\d+)$/.exec(location.hash);show(m?parseInt(m[1],10)-1:0,true);}
+  function go(d){show(cur+d);}
+  $('#bNext').onclick=function(){go(1)}; $('#bPrev').onclick=function(){go(-1)};
+  $('#bNotes').onclick=function(){notes.classList.toggle('on')};
+  /* Vollbild (F) übernimmt das Dock des Portals */
+  function typing(t){return t&&(t.isContentEditable||/^(INPUT|TEXTAREA)$/.test(t.tagName));}
+  document.addEventListener('keydown',function(e){
+    if(typing(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key;
+    if(k==='Escape'){$$('.modal').forEach(function(m){m.classList.remove('on')});return;}
+    if(k==='ArrowRight'||k===' '||k==='PageDown'){e.preventDefault();go(1);}
+    else if(k==='ArrowLeft'||k==='PageUp'){go(-1);}
+    else if(k==='n'||k==='N'){notes.classList.toggle('on');}
+    else if(k==='Home'){show(0);}else if(k==='End'){show(slides.length-1);}
+  });
+  var sx=null;
+  document.addEventListener('touchstart',function(e){sx=typing(e.target)||e.target.closest('input,button,.gc,#qlist,.modal')?null:e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>80)go(dx<0?1:-1);sx=null;},{passive:true});
+
+  /* Timer */
+  var tmr=null, activeBtn=null, orig='';
+  function fmt(s){var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r;}
+  function stopTimer(){if(tmr){clearInterval(tmr);tmr=null;}if(activeBtn){activeBtn.innerHTML=orig;activeBtn=null;}}
+  $$('[data-timer]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(activeBtn===b){stopTimer();return;}
+      stopTimer();
+      var steps=b.getAttribute('data-timer').split(',').map(Number), idx=0, left=steps[0];
+      activeBtn=b;orig=b.innerHTML;
+      function paint(){b.innerHTML=fmt(left)+'<small>'+(steps.length>1?'Runde '+(idx+1):'läuft')+'</small>';}
+      paint();
+      tmr=setInterval(function(){left--;if(left<0){idx++;if(idx>=steps.length){stopTimer();return;}left=steps[idx];}paint();},1000);
+    });
+  });
+
+  /* 1 Immunschema */
+  var caps=['Zum Abgleich: Tippe auf „Weiter“.','1 · Impfung: Der Impfstoff enthält Erreger-Teile. Er macht nicht krank.','2 · Das Immunsystem lernt den Erreger kennen und bildet Gedächtniszellen.','3 · Später: Der echte Erreger dringt in den Körper ein.','4 · Die Gedächtniszellen sorgen schnell für viele Antikörper. Der Erreger wird bekämpft.'];
+  var st=0;
+  function imm(){$$('#imm .st').forEach(function(g,i){g.setAttribute('opacity',i<st?'1':'0');});$('#immcap').textContent=caps[st];$('#immNext').disabled=st>=4;$('#immBack').disabled=st<=0;}
+  $('#immNext').onclick=function(){st=Math.min(4,st+1);imm();}; $('#immBack').onclick=function(){st=Math.max(0,st-1);imm();}; imm();
+
+  /* 2 Wörter markieren */
+  $$('.wordify').forEach(function(el){
+    var parts=el.textContent.split(' '); el.innerHTML='';
+    parts.forEach(function(p,i){var s=document.createElement('span');s.className='w';s.textContent=p;s.onclick=function(){s.classList.toggle('mark');};el.appendChild(s);if(i<parts.length-1)el.appendChild(document.createTextNode(' '));});
+  });
+
+  /* 3 Fragen */
+  var qs=[];
+  function renderQ(){
+    var l=$('#qlist');l.innerHTML='';
+    qs.slice().sort(function(a,b){return b.v-a.v||a.id-b.id;}).forEach(function(q){
+      var d=document.createElement('div');d.className='qc';
+      var t=document.createElement('span');t.className='t';t.textContent=q.t;
+      var v=document.createElement('button');v.textContent='👍 '+q.v;v.setAttribute('aria-label','Stimme für diese Frage');v.onclick=function(){q.v++;renderQ();};
+      var p=document.createElement('button');p.className='pick';p.textContent='→ Leitfrage';p.onclick=function(){$('#lf').textContent=q.t;};
+      d.appendChild(t);d.appendChild(v);d.appendChild(p);l.appendChild(d);
+    });
+  }
+  function addQ(){var i=$('#qin'),t=i.value.trim();if(!t)return;qs.push({id:qs.length,t:t,v:0});i.value='';renderQ();i.focus();}
+  $('#qadd').onclick=addQ; $('#qin').addEventListener('keydown',function(e){if(e.key==='Enter')addQ();});
+
+  /* 5 Spielfeld */
+  var F1='GGNGGNGUGUGGUUNGGGUG', F2;
+  F2='GGGGG'+'GUGGG'+'GGNGG'+'GGGGG';
+  var types=[],inf=[],start=-1,round=0,stopped=false,mode='1',play=null;
+  function nbrs(i){var r=Math.floor(i/5),c=i%5,o=[];if(r>0)o.push(i-5);if(r<3)o.push(i+5);if(c>0)o.push(i-1);if(c<4)o.push(i+1);return o;}
+  function resetInf(){inf=types.map(function(){return -1;});round=0;stopped=false;if(start>=0)inf[start]=0;stopPlay();paint();}
+  function loadField(){
+    if(mode==='1'){types=F1.split('');start=7;}
+    else if(mode==='2'){types=F2.split('');start=6;}
+    else{
+      var q=parseInt($('#rqs').value,10),g=Math.round(q/100*20),rest=20-g,n=Math.min(Math.floor(rest/4),Math.max(rest-1,0));
+      var a=[];for(var i=0;i<g;i++)a.push('G');for(i=0;i<n;i++)a.push('N');while(a.length<20)a.push('U');
+      for(i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+      types=a;var us=[];a.forEach(function(x,k){if(x==='U')us.push(k);});start=us.length?us[Math.floor(Math.random()*us.length)]:-1;
+    }
+    resetInf();
+  }
+  function paint(){
+    var g=$('#grid');g.innerHTML='';
+    types.forEach(function(t,i){
+      var d=document.createElement('div');d.className='gc '+t+(inf[i]>=0?' inf':'');
+      var lab=String.fromCharCode(65+Math.floor(i/5))+(i%5+1);
+      d.innerHTML='<span class="ci">'+lab+'</span><span>'+t+'</span>'+(inf[i]>=0?'<small>'+(inf[i]===0?'Start':inf[i])+'</small>':'');
+      d.onclick=function(){if(i===start)return;types[i]=t==='G'?'U':t==='U'?'N':'G';resetInf();};
+      g.appendChild(d);
+    });
+    var e=0,n=0;inf.forEach(function(v,i){if(v>=0){e++;if(types[i]==='N')n++;}});
+    $('#sE').textContent=start<0?0:e;$('#sR').textContent=round;$('#sN').textContent=n;
+    $('#gmsg').textContent=start<0?'Keine ungeimpfte Person: Es gibt keinen Ausbruch.':(stopped?'Stopp: In dieser Runde ist niemand neu erkrankt.':'');
+    $('#gstep').disabled=stopped||start<0;$('#gplay').disabled=stopped||start<0;
+  }
+  function step(){
+    if(stopped||start<0)return;var nw=[];
+    inf.forEach(function(v,i){if(v===round)nbrs(i).forEach(function(k){if(types[k]!=='G'&&inf[k]<0&&nw.indexOf(k)<0)nw.push(k);});});
+    if(!nw.length){stopped=true;stopPlay();}else{round++;nw.forEach(function(k){inf[k]=round;});}
+    paint();
+  }
+  function stopPlay(){if(play){clearInterval(play);play=null;}var b=$('#gplay');if(b)b.textContent='Abspielen';}
+  $('#gstep').onclick=step;
+  $('#gplay').onclick=function(){if(play){stopPlay();return;}$('#gplay').textContent='Pause';play=setInterval(step,900);step();};
+  $('#greset').onclick=resetInf;
+  $$('#fsel button').forEach(function(b){b.onclick=function(){mode=b.getAttribute('data-f');$$('#fsel button').forEach(function(x){x.classList.toggle('on',x===b);});$('#rq').style.display=mode==='r'?'block':'none';loadField();};});
+  $('#rqs').oninput=function(){$('#rqv').textContent=this.value;loadField();};
+  $('#rnew').onclick=loadField;
+  loadField();
+
+  /* 6 Auswertung */
+  var sol=$('#sol'),shown=false,ids=['a1','b1','a2','b2','a3','b3'],vals=['7','1','4','0','2','0'],mine={};
+  sol.onclick=function(){shown=!shown;ids.forEach(function(id,i){var el=document.getElementById(id);if(shown){mine[id]=el.textContent;el.textContent=vals[i];}else{el.textContent=mine[id]||'';}});sol.textContent=shown?'Lösung verbergen':'Lösung zeigen';};
+  /* Labor */
+  var N=100;
+  function outbreak(q,k){
+    var V=Math.round(q/100*N),vac=new Array(N).fill(false),idx=[],i;
+    for(i=0;i<N;i++)idx.push(i);
+    for(i=N-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=idx[i];idx[i]=idx[j];idx[j]=t;}
+    for(i=0;i<V;i++)vac[idx[i]]=true;
+    var adj=[];for(i=0;i<N;i++)adj.push([]);
+    for(i=0;i<N;i++)for(var c=0;c<k;c++){var o=Math.floor(Math.random()*(N-1));if(o>=i)o++;adj[i].push(o);adj[o].push(i);}
+    var un=[];for(i=0;i<N;i++)if(!vac[i])un.push(i);
+    var sick=new Array(N).fill(false),count=0;
+    if(un.length){var s=un[Math.floor(Math.random()*un.length)];sick[s]=true;count=1;var qu=[s];
+      while(qu.length){var x=qu.shift();adj[x].forEach(function(y){if(!vac[y]&&!sick[y]){sick[y]=true;count++;qu.push(y);}});}}
+    return {vac:vac,sick:sick,count:count,un:un.length};
+  }
+  function lab(){
+    var q=parseInt($('#lqs').value,10),k=parseInt($('#lks').value,10);
+    $('#lq').textContent=q;$('#lk').textContent=k;
+    var r=outbreak(q,k),d=$('#dots');d.innerHTML='';
+    for(var i=0;i<N;i++){var e=document.createElement('i');e.className=r.vac[i]?'':(r.sick[i]?'I':'U');d.appendChild(e);}
+    var sum=0,runs=100;for(var m=0;m<runs;m++)sum+=outbreak(q,k).count;
+    var avg=sum/runs;
+    $('#lres').innerHTML='Dieser Ausbruch:<br><b>'+r.count+'</b> von '+N+' erkrankt<br>Ø aus '+runs+' Ausbrüchen:<br><b>'+avg.toFixed(1)+'</b>';
+  }
+  $('#lqs').oninput=lab;$('#lks').oninput=lab;$('#lgo').onclick=lab;lab();
+
+  /* 7 Rollen */
+  var roles={
+    A:{n:'Frau Wagner, Mutter',p:'gegen eine Impfpflicht',w:'Du bist die Mutter von Leon (6 Jahre). Du liebst dein Kind und willst es schützen. Du willst selbst entscheiden, was in seinen Körper kommt.',t:'Masern hatten früher viele Kinder. Sie haben es überstanden. Du hast von Nebenwirkungen bei Impfungen gelesen und bist unsicher.',h:'Deine Argumente',a:['Eine Impfung ist ein Eingriff in den Körper. Eltern sollen darüber entscheiden.','Auch Impfungen können Nebenwirkungen haben, zum Beispiel Fieber oder Schmerzen an der Einstichstelle.','Eine Pflicht kann Misstrauen schaffen. Besser sind gute Aufklärung und ein Gespräch mit dem Arzt.'],q:'„Warum soll der Staat entscheiden und nicht ich?“'},
+    B:{n:'Dr. Kaya, Kinderärztin',p:'für eine Impfpflicht. Du nimmst die Sorgen der Eltern ernst.',w:'Du behandelst Kinder in einer Praxis. Du siehst, wie Infektionen verlaufen.',t:'',h:'Deine Fakten',a:['Masern sind sehr ansteckend. Sie können Komplikationen haben: Mittelohrentzündung, Lungenentzündung, selten eine Gehirnentzündung.','Zwei Impfungen schützen sehr gut vor Masern.','Impfreaktionen sind meist leicht und kurz, zum Beispiel Rötung oder Fieber. Schwere Nebenwirkungen sind sehr selten.','Um Masern auszurotten, braucht man laut RKI etwa 95 % Geimpfte.'],q:'„Was würden Sie sagen, wenn ein ungeimpftes Kind ein krankes Kind ansteckt?“'},
+    C:{n:'Herr Brandt, Vater von Mia',p:'für eine Impfpflicht',w:'Deine Tochter Mia ist 8 Jahre alt. Wegen ihrer Behandlung ist ihr Immunsystem sehr schwach. Sie darf im Moment nicht gegen Masern geimpft werden.',t:'Mia geht gern zur Schule. Du hast Angst, dass sie sich ansteckt.',h:'Deine Argumente',a:['Mia kann sich nicht selbst schützen. Sie ist auf andere angewiesen.','Wenn viele Kinder geimpft sind, erreicht der Erreger Mia nicht (Herdenimmunität).','Eine Masernerkrankung kann für Mia sehr gefährlich sein.','Die Entscheidung gegen eine Impfung betrifft nicht nur das eigene Kind.'],q:'„Welche Verantwortung haben wir für Menschen, die sich nicht selbst schützen können?“'},
+    D:{n:'Herr Okafor, Jurist',p:'abwägend. Du bist für keine Seite.',w:'Du kennst dich mit Gesetzen aus. Du bewertest beide Seiten und ordnest ein.',t:'',h:'Deine Fakten',a:['Das Masernschutzgesetz gilt seit dem 1. März 2020. Kinder in Kita und Schule brauchen einen Nachweis: Impfung, Immunität oder ein ärztliches Attest, dass sie nicht geimpft werden dürfen.','Eine Zwangsimpfung gibt es nicht. Ohne Nachweis kann ein Bußgeld drohen.','Zwei Rechte stehen sich gegenüber: das Recht auf Selbstbestimmung über den eigenen Körper und der Schutz der Gesundheit anderer.','Ein Gesetz muss verhältnismäßig sein. Gibt es mildere Mittel, zum Beispiel mehr Aufklärung?'],q:'„Wie weit darf der Staat in die Entscheidung von Eltern eingreifen?“'}
+  };
+  function openRole(k){
+    var r=roles[k],h='<button class="mclose" id="rclose">✕ Schließen</button><h2>Rolle '+k+': '+r.n+'</h2><div><b>Deine Position:</b> '+r.p+'</div><h4>Wer bist du?</h4><div>'+r.w+'</div>';
+    if(r.t)h+='<h4>Das denkst du</h4><div>'+r.t+'</div>';
+    h+='<h4>'+r.h+'</h4><ul>'+r.a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><h4>Deine Frage an die anderen</h4><div>'+r.q+'</div>';
+    $('#rcard').innerHTML=h;$('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
+  }
+  $$('.rolebtn').forEach(function(b){b.onclick=function(){openRole(b.getAttribute('data-role'));};});
+  $('#rmodal').onclick=function(e){if(e.target===this)this.classList.remove('on');};
+
+  /* 8 Blitzlicht */
+  function bz(host,title){
+    var opts=[['Impfpflicht ja','var(--green)'],['keine Pflicht','var(--orange)'],['andere Lösung','var(--blue)']],cnts=[0,0,0];
+    host.innerHTML='<div style="font-family:Cambria,Georgia,serif;font-size:28px;font-weight:700;color:var(--green)">'+title+'</div><div class="bar-area"></div><div class="bl-wrap"></div>';
+    var area=host.querySelector('.bar-area'),wrap=host.querySelector('.bl-wrap');
+    var cols=opts.map(function(o,i){var c=document.createElement('div');c.className='bcol';c.innerHTML='<div class="n">0</div><div class="bar" style="background:'+o[1]+';height:6px"></div>';area.appendChild(c);return c;});
+    var row=document.createElement('div');row.style.display='flex';row.style.gap='18px';wrap.appendChild(row);
+    opts.forEach(function(o,i){
+      var c=document.createElement('div');c.style.flex='1';
+      c.innerHTML='<div class="lbl">'+o[0]+'</div><div class="bl"><button class="p" aria-label="plus eins">+</button><button aria-label="minus eins">−</button></div>';
+      var b=c.querySelectorAll('button');b[0].onclick=function(){cnts[i]++;draw();};b[1].onclick=function(){cnts[i]=Math.max(0,cnts[i]-1);draw();};row.appendChild(c);
+    });
+    function draw(){var mx=Math.max.apply(null,cnts.concat([1]));cols.forEach(function(c,i){c.querySelector('.n').textContent=cnts[i];c.querySelector('.bar').style.height=Math.max(6,cnts[i]/mx*170)+'px';});}
+  }
+  bz($('#bz1'),'Nach dem Impuls');bz($('#bz2'),'Nach der Debatte');
+
+  /* 9 Checkliste */
+  var items=['Ich habe mich für eine Position entschieden.','Ich habe Herdenimmunität erklärt.','Ich habe einen Fakt als Beleg genannt.','Ich habe ein Gegenargument ernst genommen.'];
+  var host=$('#chks');
+  items.forEach(function(t){var d=document.createElement('div');d.className='chk';d.setAttribute('role','checkbox');d.setAttribute('aria-checked','false');d.tabIndex=0;d.innerHTML='<span class="box"></span><span>'+t+'</span>';
+    function tg(){d.classList.toggle('on');var on=d.classList.contains('on');d.setAttribute('aria-checked',on);d.querySelector('.box').textContent=on?'✓':'';$('#done').style.display=$$('.chk.on',host).length===items.length?'block':'none';}
+    d.onclick=tg;d.onkeydown=function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();tg();}};host.appendChild(d);});
+
+  /* 10 Reveal + Herdenbild */
+  $$('.rv').forEach(function(el){el.onclick=function(){el.classList.toggle('hide');};});
+  var pg=$('#ppl'),html='';
+  for(var r=0;r<3;r++)for(var c=0;c<3;c++){
+    var mid=(r===1&&c===1),x=34+c*40,y=8+r*40,fill=mid?'var(--orange)':'var(--green)';
+    html+='<g><circle cx="'+x+'" cy="'+(y+6)+'" r="7" fill="'+fill+'"/><rect x="'+(x-9)+'" y="'+(y+15)+'" width="18" height="16" rx="7" fill="'+fill+'"/></g>';
+  }
+  html+='<rect x="57" y="45" width="34" height="40" rx="12" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="4 3"/>';
+  pg.innerHTML=html;
+
+  window.addEventListener('hashchange',fromHash);fromHash();
+})();
+</script>
+<!-- Spielinhalte für die Belohnungsspiele. ENTWURF: bitte fachlich gegenlesen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Impfen",
+ "paare": [
+ ["Impfstoff", "Mittel mit Erreger-Teilen, das nicht krank macht", "Impf-stoff"],
+ ["Gedächtniszelle", "Zelle, die sich an einen Erreger erinnert", "Ge-dächt-nis-zel-le"],
+ ["Antikörper", "Eiweiß, das einen Erreger erkennt und bekämpft", "An-ti-kör-per"],
+ ["Erreger", "Winziges Lebewesen oder Virus, das krank macht", "Er-re-ger"],
+ ["Herdenimmunität", "Viele Geimpfte schützen auch Menschen ohne Impfung", "Her-den-im-mu-ni-tät"],
+ ["Impfquote", "Anteil der Geimpften in einer Gruppe", "Impf-quo-te"],
+ ["Immunsystem", "Abwehr des Körpers gegen Krankheitserreger", "Im-mun-sys-tem"],
+ ["Impfpflicht", "Gesetz, das einen Impfnachweis verlangt", "Impf-pflicht"]
+ ],
+ "spiele": ["memory", "quiz", "zuordnen"]
+}
+</script>
+<script src="../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>

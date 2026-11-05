@@ -173,5 +173,17 @@
     "datum": "2026-11-05",
     "reihe": "Umgang mit Ressourcen",
     "sichtbar": true
+  },
+  {
+    "title": "Impfen – ja oder nein?",
+    "description": "Impuls mit zwei Aussagen, Ausbruchsspiel, Herdenimmunität-Labor und Debatte in vier Rollen. Mit Do Now und Exit-Ticket.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-9/gesundheit/impfen/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "45 Min.",
+    "datum": "2026-11-05",
+    "sichtbar": true
   }
 ]
