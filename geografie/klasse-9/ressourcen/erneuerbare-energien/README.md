@@ -31,7 +31,7 @@ Die Datei `.nojekyll` sorgt dafür, dass GitHub die Dateien unverändert auslief
 |---|---|
 | `→`, `Leertaste`, Bild ab | nächste Folie (funktioniert auch mit Presenter-Klicker) |
 | `←`, Bild auf | vorherige Folie |
-| `P` | Referentenansicht in neuem Fenster (Notizen, Uhr, Zeitplan), bleibt mit dem Beamer-Fenster synchron |
+| `R` | Referentenansicht in neuem Fenster (Notizen, Uhr, Zeitplan), bleibt mit dem Beamer-Fenster synchron |
 | `N` | Notizen als Schublade |
 | `F` | Vollbild |
 | `?` | Hilfe |
@@ -101,6 +101,15 @@ Getestet mit Chromium bei 1024×768, 1280×720, 1366×768, 1600×900 und 1920×1
 | So heizt / So fährt Deutschland | Abschnitt des Balkens antippen: Zahl dahinter |
 | Maßnahmen | Antippen gibt Stimmen, „Stimmen löschen“ setzt zurück |
 | Zusatz | Energiequelle auswählen |
-| alle Folien | Zeitanzeige oben rechts antippen: Countdown mit Signalton |
+| Zuordnen (Stunde 1, neu) | Aussagen den Quellen Wind, Sonne, Wasser zuordnen |
+| Schätzen (Stunde 2, neu) | Zwei Anteile mit dem Regler schätzen, dann auflösen und die Abweichung sehen |
+| Kette bauen (Stunde 2, neu) | Wirkungsketten Heizen und Verkehr in die richtige Reihenfolge bringen |
+| Selbsteinschätzung (beide, neu) | Drei „Ich kann“-Aussagen mit Sicher, Fast, Noch nicht einschätzen, nichts wird gespeichert |
 
 Der Haus-Knopf im Dock führt zurück ins Portal. Die Portal-Kopfleiste ist in den Präsentationen ausgeblendet, weil sie die Kopfzeile der Folien verdeckt.
+
+## Werkzeuge des Portals
+
+Beide Präsentationen laden die Portal-Werkzeuge (`assets/js/praesentation.js`): **Stift (P), Timer (T), Lärmampel (L)** mit Ruhe-Sternen und Belohnungsspielen, Haus-Knopf und Vollbild am rechten Rand. Der Timer kennt die Dauer jeder Folie (`data-min`). Striche gehören zur Folie. In der Referentenansicht (jetzt Taste **R**, weil P der Stift ist) laden die Werkzeuge nicht. Die Spielinhalte stehen als `lp-spiel-daten` am Ende jeder Präsentation.
+
+Die Zeitplanung steht in den Folien (`data-start`, `data-time`) und wird in der Referentenansicht angezeigt. Stunde 1 und Stunde 2 passen mit den neuen Folien weiterhin in 90 Minuten.

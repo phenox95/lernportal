@@ -44,6 +44,8 @@
   const slides = () => [].slice.call(stage.querySelectorAll(".slide"));
   function aktuelleFolie() {
     const liste = slides();
+    /* Präsentationen mit Übergängen blenden Folien per visibility aus: die Klasse .active oder .on zeigt die aktuelle Folie */
+    for (let i = 0; i < liste.length; i++) if (liste[i].classList.contains("active") || liste[i].classList.contains("on")) return i;
     for (let i = 0; i < liste.length; i++) if (getComputedStyle(liste[i]).display !== "none") return i;
     return 0;
   }
