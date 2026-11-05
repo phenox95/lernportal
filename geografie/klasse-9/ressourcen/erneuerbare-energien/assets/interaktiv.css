@@ -82,3 +82,16 @@
 .tone-dark .ia-row{background:var(--surface-2)}
 /* Portal-Werkzeuge: Stift-Ebene auf die ganze Folie legen (die Präsentation ist fließend und nicht 1280 × 720 groß) */
 .lp-pr-canvas{position:fixed!important;left:50%!important;top:50%!important;width:min(100vw,177.78vh)!important;height:min(100vh,56.25vw)!important;transform:translate(-50%,-50%)}
+
+/* Große Blätterpfeile */
+.dock #prev,.dock #next{display:none}
+.ia-nav{position:fixed;bottom:max(14px,env(safe-area-inset-bottom));z-index:30;width:68px;height:68px;border-radius:50%;border:3px solid rgba(255,255,255,.85);background:rgba(7,27,31,.82);color:#fff;display:grid;place-items:center;padding:0;cursor:pointer;touch-action:manipulation;box-shadow:0 6px 18px -6px rgba(0,0,0,.5);transition:transform var(--t-press) var(--ease-out),background-color 160ms,opacity 160ms}
+.ia-nav.l{left:max(14px,env(safe-area-inset-left))}.ia-nav.r{right:max(14px,env(safe-area-inset-right))}
+.ia-nav svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.ia-nav:active:not(:disabled){transform:scale(var(--press))}
+.ia-nav:disabled{opacity:.2;cursor:default}
+.ia-nav.r:not(:disabled){background:var(--accent);color:var(--accent-ink);border-color:var(--accent-ink)}
+.ia-nav:focus-visible{outline:4px solid var(--focus);outline-offset:3px}
+@media (hover:hover) and (pointer:fine){.ia-nav:hover:not(:disabled){background:var(--accent);color:var(--accent-ink)}}
+body.presenter .ia-nav{display:none}
+@media print{.ia-nav{display:none}}
