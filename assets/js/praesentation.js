@@ -20,6 +20,8 @@
   const ICON = {
     stift: SVG('<path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 0 1 3 3L8 19z"/><path d="M14.5 6.5l3 3"/>'),
     timer: SVG('<circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5"/><path d="M9.5 3h5"/>'),
+    haus: SVG('<path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/>'),
+    voll: SVG('<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>'),
     ampel: SVG('<rect x="7" y="2.5" width="10" height="19" rx="3"/><circle cx="12" cy="7.5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="16.5" r="1.4"/>')
   };
 
@@ -51,6 +53,24 @@
   dock.setAttribute("role", "toolbar");
   dock.setAttribute("aria-label", "Werkzeuge");
   document.body.appendChild(dock);
+
+  /* Zurück zum Portal (ersetzt die ausgeblendete Kopfleiste) und Vollbild */
+  (function randKnoepfe() {
+    const wurzel = /^(\.\.\/|\.\/)+$/.test(document.body.dataset.root || "") ? document.body.dataset.root : "./";
+    const haus = neu("a", "lp-pr-btn");
+    haus.href = wurzel;
+    haus.innerHTML = ICON.haus;                           // feste, eigene Zeichenkette
+    haus.setAttribute("aria-label", "Zurück zum Portal");
+    haus.title = "Zurück zum Portal";
+    dock.appendChild(haus);
+    const voll = knopf("lp-pr-btn", "", "Vollbild (Taste F)");
+    voll.innerHTML = ICON.voll;
+    voll.title = "Vollbild (F)";
+    voll.addEventListener("click", () => {
+      try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch (e) { /* ok */ }
+    });
+    dock.appendChild(voll);
+  })();
 
   let zTop = 3100;
   const panels = {};

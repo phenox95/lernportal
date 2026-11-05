@@ -8,35 +8,22 @@
 <!-- Beim Kopieren nach biologie/klasse-N/thema/stunde/praesentation/: jeden Pfad "../../" um die Ordnertiefe verlängern
      (link, zwei script, data-root, das Werkzeug-Skript am Ende), siehe README. -->
 <link rel="stylesheet" href="../../assets/css/material.css">
+<link rel="stylesheet" href="../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../assets/css/praesentation.css">
 <script src="../../assets/js/prefs.js"></script>
 <script src="../../assets/js/material.js" defer></script>
 <style>
-:root{--fach:#0F6E56;--dunkel:#0B4F3C;--hell:#E8F3EC;--ink:#1A2B24}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{display:flex;flex-direction:column;background:#111;overflow:hidden;font-family:Verdana,Arial,sans-serif;color:var(--ink)}
-#buehne{position:relative;flex:1;min-height:0;overflow:hidden}
-/* Bühne: feste Größe 1280 × 720, wird per Skript skaliert. Stift, Timer und Lärmampel brauchen genau diese Kennung. */
-#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:#fff;overflow:hidden}
-.slide{position:absolute;inset:0;display:none;padding:56px 64px 64px;flex-direction:column;gap:20px}
-.slide.on{display:flex}
-.slide.dunkel{background:var(--dunkel);color:#fff}
-h1{margin:0;font-size:46px;line-height:1.15;color:var(--dunkel)}
-.slide.dunkel h1{color:#fff}
-p{margin:0;font-size:30px;line-height:1.4}
-.op{font-weight:700;color:var(--fach)}
-.kasten{background:var(--hell);border-radius:16px;padding:20px 26px}
-#nav{position:absolute;left:0;right:0;bottom:0;height:6px;background:rgba(0,0,0,.12)}
-#nav i{display:block;height:100%;width:0;background:var(--fach);transition:width .2s}
-.pf{position:absolute;bottom:14px;width:48px;height:40px;border:0;border-radius:10px;background:rgba(15,110,86,.15);color:var(--fach);font-size:24px;cursor:pointer}
+/* Das Aussehen (Farben, Schrift, Folien, Überschriften, Aufgaben, Hilfen, Kästen) steht in praesentation-design.css.
+   Hier nur, was diese Vorlage zusätzlich braucht. */
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+.pf{position:absolute;bottom:14px;width:48px;height:44px;border:0;border-radius:12px;background:rgba(15,110,86,.15);color:var(--g);font-size:26px;cursor:pointer;z-index:6}
 .pf.l{left:16px}.pf.r{right:16px}
 #notiz{position:fixed;left:0;right:0;bottom:0;background:#1A2B24;color:#fff;padding:14px 28px;font-size:17px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000}
 #notiz.an{display:block}
-@media print{html,body{overflow:visible;height:auto;background:#fff;display:block}#buehne{position:static;overflow:visible}#stage{position:static;transform:none!important;width:auto;height:auto}.slide{display:flex!important;position:relative;width:1280px;height:720px;page-break-after:always}.pf,#nav,#notiz{display:none}}
 </style>
 </head>
-<body data-root="../../" data-title="Vorlage Präsentation" data-subject="Biologie" data-grade="Klasse 8">
+<body class="lp-pres" data-root="../../" data-title="Vorlage Präsentation" data-subject="Biologie" data-grade="Klasse 8">
 <noscript><p style="padding:1rem;font-size:1rem;background:#fff">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
 <div id="buehne">
 <div id="stage">
@@ -47,18 +34,18 @@ p{margin:0;font-size:30px;line-height:1.4}
 
 <section class="slide" data-min="3" data-notes="Do Now: Wiederholung der Vorstunde, schriftlich, ohne Erklärung der Lehrkraft.">
   <h1>Do Now</h1>
-  <p><span class="op">Erkläre</span> in einem Satz einen Begriff aus der letzten Stunde.</p>
-  <div class="kasten"><p>Schreibe in dein Heft. Vorlesen lassen ist erlaubt.</p></div>
+  <p class="lead"><b>Erkläre</b> in einem Satz einen Begriff aus der letzten Stunde.</p>
+  <div class="shilfe">Schreibe in dein Heft. Vorlesen lassen ist erlaubt.</div>
 </section>
 
-<section class="slide dunkel" data-notes="Impuls stumm zeigen, höchstens 5 Minuten mit Fragenentwicklung. Frage nicht vorgeben.">
+<section class="slide dark" data-notes="Impuls stumm zeigen, höchstens 5 Minuten mit Fragenentwicklung. Frage nicht vorgeben.">
   <h1>Impuls</h1>
-  <p>Platz für Bild, Karte oder Diagramm.</p>
+  <p class="lead">Platz für Bild, Karte oder Diagramm.</p>
 </section>
 
 <section class="slide" data-min="10" data-notes="Erarbeitung. Jede Aufgabe beginnt mit einem Operator.">
   <h1>Erarbeitung</h1>
-  <p><span class="op">Beschreibe</span> die Abbildung in zwei Sätzen.</p>
+  <p class="lead"><b>Beschreibe</b> die Abbildung in zwei Sätzen.</p>
 </section>
 
 <div id="nav"><i></i></div>

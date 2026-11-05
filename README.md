@@ -143,16 +143,19 @@ Ein Foto mit einer Frage, die die SuS zum Material führt. Das Bild soll fachlic
 
 Jede Präsentation (HTML) hat denselben Grundaufbau und bekommt dieselben Werkzeuge aus **einer** Datei (`assets/js/praesentation.js` mit `assets/css/praesentation.css`). Eine Änderung dort gilt für alle Präsentationen. Startpunkt für neue Präsentationen ist `vorlage/praesentation/index.html`.
 
+**Einheitliches Design:** `assets/css/praesentation-design.css` enthält das gemeinsame Aussehen aller Präsentationen (Vorbild: Fotosynthese Stunde 1): Schrift Andika (lokal in `assets/fonts/`, SIL Open Font License), Farben als Variablen (`--g`, `--dk`, `--mint`, `--y`, `--grey`, `--ink`), die Fachfarbe je Fach über `data-subject` am `<body>` (Biologie Grün, Geografie Rostrot; ein weiteres Fach oder Thema bekommt einen eigenen Block in der Datei), große Überschriften, Pill-Badge oben rechts, Aufgabenzeilen mit Niveau-Marke (`.task`, `.lvl`), Hilfekästen (`.shilfe`), Rahmen (`.frame`), Karten (`.chip`) und Schaltflächen (`.b`). Orientierung an den Apple Human Interface Guidelines: ruhige Fläche, ein Schriftschnitt, klare Hierarchie, weiche Rundungen, Bedienelemente mindestens 44 px. Neue Präsentationen nutzen diese Klassen, eigene Farben und Schriften entfallen. Die Portal-Kopfleiste ist in Präsentationen ausgeblendet, damit die Folie die ganze Fläche bekommt. Der Weg zurück steht als Haus-Knopf im Werkzeugrand, daneben der Vollbild-Knopf (Taste F).
+
 **Grundaufbau:** `#buehne` (füllt das Fenster) enthält `#stage` (feste Größe 1280 × 720, wird per Skript skaliert) mit den Folien als `<section class="slide">`. Die sichtbare Folie hat `display` ungleich `none`. Optional steht an einer Folie `data-min="5"`, das schlägt dem Timer 5 Minuten vor.
 
-**Einbinden** (Pfade je nach Tiefe anpassen, `defer` ist Pflicht): im `<head>` `praesentation.css`, am Ende des `<body>` `praesentation.js`.
+**Einbinden** (Pfade je nach Tiefe anpassen, `defer` ist Pflicht): im `<head>` `praesentation-design.css` und `praesentation.css`, am Ende des `<body>` `praesentation.js`. Am `<body>` steht `class="lp-pres"`.
 
 ```html
+<link rel="stylesheet" href="../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../assets/css/praesentation.css">
 <script src="../../../../assets/js/praesentation.js" defer></script>
 ```
 
-Am rechten Bildrand erscheinen drei Knöpfe. Jeder öffnet ein Fenster, das sich am Kopf frei verschieben lässt und mit × schließt.
+Am rechten Bildrand stehen Haus (zurück zum Portal), Vollbild und die drei Werkzeuge. Jeder öffnet ein Fenster, das sich am Kopf frei verschieben lässt und mit × schließt.
 
 | Werkzeug | Taste | Funktion |
 |---|---|---|
