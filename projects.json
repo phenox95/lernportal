@@ -164,7 +164,7 @@
   {
     "title": "Erneuerbare Energien – Strom, Wärme, Verkehr",
     "description": "Zwei Doppelstunden: Energiewende beim Strom, Heizen und Verkehr. Präsentationen, Quiz und Arbeitsblatt.",
-    "type": "Interaktive Präsentation",
+    "type": "Materialseite",
     "path": "geografie/klasse-9/ressourcen/erneuerbare-energien/",
     "subject": "Geografie",
     "grade": "Klasse 9",
@@ -172,6 +172,29 @@
     "dauer": "2 Doppelstunden",
     "datum": "2026-11-05",
     "reihe": "Umgang mit Ressourcen",
-    "sichtbar": true
+    "sichtbar": true,
+    "dateien": [
+      {
+        "titel": "Stunde 1: Erneuerbare Energien (Präsentation)",
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Stunde 2: Strom, Wärme, Verkehr (Präsentation)",
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/heizen-verkehr/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt Strom, Wärme, Verkehr",
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/heizen-verkehr/material/AB_Strom_Waerme_Verkehr.docx",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      },
+      {
+        "titel": "Quiz: Erneuerbare Energien",
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/quiz/",
+        "art": "Spiel"
+      }
+    ]
   }
 ]
