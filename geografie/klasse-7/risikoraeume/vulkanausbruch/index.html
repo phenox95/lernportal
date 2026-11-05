@@ -1,9 +1,5 @@
-<!doctype html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Feuerwerk aus der Tiefe – Vulkanausbrüche</title>
 <meta name="description" content="Geografie Klasse 7: Kräfte der Natur. Entstehung und Ausbruch von Vulkanen, Schicht- und Schildvulkan vergleichen, Kurzprojekt.">
 <link rel="stylesheet" href="../../../../assets/css/material.css">
@@ -12,282 +8,110 @@
 <script src="../../../../assets/js/prefs.js"></script>
 <script src="../../../../assets/js/material.js" defer></script>
 <style>
-body{--rost:var(--g);--rost-d:var(--dk);--dunkel:var(--ink);--papier:#fff;--sand:var(--mint);--grau:var(--grey);--ok:#2e9e4f}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{display:flex;flex-direction:column;background:#111;overflow:hidden;font-family:Andika,Verdana,sans-serif;color:var(--dunkel)}
-#buehne{position:relative;flex:1;min-height:0;overflow:hidden}
-#stage{z-index:1;position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:var(--papier);overflow:hidden}
-.slide{position:absolute;inset:0;display:none;flex-direction:column}
-.slide.aktiv{display:flex}
-.slide{padding:0;background:#fff;overflow:visible}
-.kopf .badge{position:static;right:auto;top:auto;font-size:20px;padding:0;border-radius:50%}
-.kopf{height:76px;background:transparent;color:var(--dk);display:flex;align-items:center;gap:16px;padding:20px 64px 0;flex:none}
-.badge{width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;flex:none}
-.kopf .ph{font-weight:700;font-size:24px;color:var(--dk)}
-.kopf .meta{margin-left:auto;display:flex;gap:12px;font-size:18px}
-.kopf .meta span{background:var(--g);color:#fff;font-weight:700;border-radius:12px;padding:6px 18px}
-.inhalt{flex:1;padding:8px 64px 56px;display:flex;flex-direction:column;gap:20px;min-height:0}
-h1{margin:0;font-size:46px;line-height:1.15;color:var(--dk)}
-h2{margin:0;font-size:30px}
-p{margin:0;font-size:28px;line-height:1.4}
-.karte{background:#fff;border:3px solid var(--g);border-radius:16px;padding:18px 24px}
-.karte.sand{background:var(--mint);border-color:var(--mint)}
-.op{color:var(--rost);font-weight:700}
-.reihe{display:flex;gap:24px}
-.reihe>*{flex:1}
-.btn{font-family:inherit;font-size:20px;background:var(--rost);color:#fff;border:0;border-radius:10px;padding:10px 20px;cursor:pointer}
-.btn.hell{background:#fff;color:var(--rost);border:3px solid var(--rost)}
-.btn:focus-visible,.chip:focus-visible,.pfeil:focus-visible{outline:4px solid var(--dunkel)}
-.versteckt{display:none}
-.versteckt.show{display:block}
-.bildkarte{position:relative;border-radius:14px;overflow:hidden;border:3px solid var(--dunkel);background:#000}
-.bildkarte img{display:block;width:100%;height:100%;object-fit:cover}
-.bildkarte .cap{position:absolute;left:0;bottom:0;background:rgba(43,33,30,.85);color:#fff;padding:6px 16px;font-size:20px}
-.bildkarte.fehlt{background:var(--sand);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
-.bildkarte.fehlt img{display:none}
-.bildkarte.fehlt:before{content:attr(data-fehlt);color:var(--dunkel);font-size:22px}
-.deko{position:absolute;display:block;pointer-events:none}
-.deko.rund{border-radius:14px;border:3px solid var(--dunkel);pointer-events:auto}
-.quelle{font-size:15px;color:var(--grau)}
-.fertig{position:absolute;right:32px;bottom:56px;width:330px;background:#fff;border:3px dashed var(--rost);border-radius:14px;padding:12px 18px;font-size:19px}
-.fertig b{color:var(--rost)}
-.schritt{display:flex;gap:18px;align-items:flex-start}
-.schritt .nr{width:48px;height:48px;border-radius:50%;background:var(--rost);color:#fff;font-weight:700;font-size:26px;display:flex;align-items:center;justify-content:center;flex:none}
-.schritt p{font-size:26px}
-.eingabe{background:#fff;border:3px solid var(--dunkel);border-radius:14px;padding:18px 24px;font-size:34px;line-height:1.4;min-height:140px;outline:none}
-.eingabe:empty:before{content:attr(data-ph);color:var(--grau)}
-.eingabe:focus{border-color:var(--rost)}
-.timer{display:flex;align-items:center;gap:14px}
-.timer .z{font-size:56px;font-weight:700;min-width:170px;font-variant-numeric:tabular-nums}
-.timer .z.aus{color:var(--rost)}
-.pos{position:relative;margin:10px 0 0}
-.pos .linie{position:relative;height:110px;border:3px solid var(--dunkel);border-radius:14px;background:#fff;cursor:crosshair;overflow:hidden}
-.pos .linie:before{content:"";position:absolute;left:24px;right:24px;top:55px;height:6px;background:var(--dunkel)}
-.pos .ende{position:absolute;top:6px;font-weight:700;font-size:24px}
-.pos .ende.l{left:22px}.pos .ende.r{right:22px}
-.pos .m{position:absolute;top:50px;transform:translateX(-50%);font-size:32px;font-weight:700;line-height:1;color:var(--rost);pointer-events:none}
-.pos .m.alt{color:var(--grau);top:20px;opacity:.9}
-.pos .tools{display:flex;gap:12px;margin-top:10px;align-items:center}
-.pos .tools small{font-size:17px;color:var(--grau)}
-.tab{display:flex;gap:24px}
-.tab>div{flex:1}
-.tab h2{background:var(--rost);color:#fff;border-radius:12px 12px 0 0;padding:10px 18px;font-size:26px}
-.tab .eingabe{border-radius:0 0 12px 12px;min-height:290px;font-size:24px;border-top:0}
-.chips{display:flex;gap:14px;flex-wrap:wrap}
-.chip{font-family:inherit;font-size:26px;background:#fff;border:3px solid var(--rost);border-radius:12px;padding:10px 20px;cursor:pointer;color:var(--dunkel)}
-.chip.an{background:var(--rost);color:#fff}
-.nav{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;pointer-events:none;z-index:6}
-.nav i{width:10px;height:10px;border-radius:50%;background:#dccfc6}
-.nav i.a{background:var(--rost)}
-.pfeil{position:absolute;bottom:6px;width:44px;height:36px;border:0;border-radius:8px;background:rgba(var(--fach-rgb),.14);color:var(--rost);font-size:22px;cursor:pointer;z-index:6}
-.pfeil.l{left:14px}.pfeil.r{right:14px}
-#notiz{position:fixed;left:0;right:0;bottom:0;background:#2B211E;color:#fff;padding:14px 28px;font-size:17px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000;font-family:Verdana,Arial,sans-serif}
-#notiz.an{display:block}
-#notiz b{color:#ffb59f}
-#hilfe{position:absolute;right:12px;top:8px;z-index:0;color:#cdbfb5;font-size:13px;font-family:Andika,Verdana,sans-serif;opacity:0;transition:opacity .3s}
-#buehne:hover #hilfe{opacity:.8}
-@media print{html,body{overflow:visible;height:auto;background:#fff;display:block}#buehne{position:static;overflow:visible}#stage{position:static;transform:none!important;width:auto;height:auto}.slide{display:flex!important;position:relative;height:720px;width:1280px;page-break-after:always}.pfeil,.nav,#notiz,#hilfe{display:none}}
-</style>
-</head>
-<body class="lp-pres" data-root="../../../../" data-title="Feuerwerk aus der Tiefe – Vulkanausbrüche" data-subject="Geografie" data-grade="Klasse 7">
+.split{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:start}.mint{background:var(--mint);border-radius:16px}
+.frame img{max-height:430px;object-fit:contain}.rv{display:none}.rv.show{display:block}
+.shilfe.sm{font-size:20px;padding:12px 16px}.onDark{font-size:26px;margin-top:30px}.row3{display:grid}
+.fragefeld{height:250px;background:#fff;border:6px dashed var(--y);border-radius:20px;margin-bottom:36px;font-size:40px;line-height:1.3;color:var(--ink);padding:18px 26px;outline:none;overflow:hidden}.fragefeld:empty:before{content:attr(data-ph);color:#9aa8a1;font-size:30px}
+.task.s{font-size:24px;margin:0 0 10px}.lead.s{font-size:26px;margin:0 0 12px}
+#help{position:absolute;left:12px;top:6px;color:#9ab;font-size:13px;z-index:20}
+</style></head><body class="lp-pres" data-root="../../../../" data-title="Feuerwerk aus der Tiefe – Vulkanausbrüche" data-subject="Geografie" data-grade="Klasse 7">
 <noscript><p style="color:#fff;padding:1rem;font-size:1rem">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
 <div id="buehne">
-<div id="hilfe">← → blättern · N Lehrkraft-Notizen · F Vollbild · P Stift · T Timer · L Lärmampel</div>
 <div id="stage">
-
-<section class="slide" data-min="3" data-n="<b>Do Now (Wiederholung der Vorstunde: Plattenbewegungen).</b> Schriftlich, ohne Erklärung. Vorlesen anbieten. Danach kurz abgleichen (Lösung zeigen), währenddessen Anwesenheit.">
-  <div class="kopf"><div class="badge">1</div><div class="ph">Do Now</div><div class="meta"><span>Einzelarbeit</span><span>3 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Erinnerst du dich?</h1>
-    <div class="karte sand"><p><b>1</b>&nbsp; <span class="op">Nenne</span> die drei Arten, wie sich Erdplatten gegeneinander bewegen können.</p></div>
-    <div class="karte sand"><p><b>2</b>&nbsp; „Die Erdplatten liegen fest und bewegen sich nie.“<br><span class="op">Entscheide</span>, ob die Aussage richtig oder falsch ist. <span class="op">Begründe</span> deine Entscheidung.</p></div>
-    <p class="quelle">Du darfst dir die Aufgaben vorlesen lassen.</p>
-    <div><button class="btn" data-reveal="l1">Lösung zeigen</button></div>
-    <div class="karte versteckt" id="l1"><p><b>1</b> Die Platten driften auseinander, stoßen zusammen oder gleiten aneinander vorbei.<br><b>2</b> Falsch. Die Platten bewegen sich langsam, einige Zentimeter pro Jahr.</p></div>
-  </div>
+<section class="slide light" data-min="3" data-notes="Do Now zur Wiederholung der Vorstunde (Plattenbewegungen). Schriftlich, ohne Erklärung. Vorlesen anbieten. Kurz abgleichen, währenddessen Anwesenheit.">
+  <h1>Do Now: Erinnerst du dich?</h1><span class="badge">3 Min. · allein</span>
+  <div class="mint pad"><p class="task"><span class="snr">1</span><span><b>Nenne</b> die drei Arten, wie sich Erdplatten gegeneinander bewegen können.</span><i class="lvl">D</i></p><p class="task"><span class="snr">2</span><span>„Die Erdplatten liegen fest und bewegen sich nie.“<br><b>Entscheide</b>, ob die Aussage richtig oder falsch ist. <b>Begründe</b> deine Entscheidung.</span><i class="lvl">E</i></p></div>
+  <div class="shilfe sm">Du darfst dir die Aufgaben vorlesen lassen.</div>
+  <p style="margin-top:22px"><button class="b" data-reveal="l1">Lösung zeigen</button></p>
+  <div class="shilfe rv" id="l1" style="margin-top:16px"><b>1</b> Auseinander, aufeinander zu, aneinander vorbei.<br><b>2</b> Falsch. Die Platten bewegen sich langsam, einige Zentimeter pro Jahr.</div>
 </section>
-
-<section class="slide" data-min="5" data-n="<b>Impuls (Impuls plus Fragenentwicklung höchstens 5 Min.).</b> Beide Fotos stumm zeigen. Frage nicht vorgeben. Moderationsfragen: „Was fällt euch auf?“ – „Was überrascht euch?“ – „Welche Frage stellt sich euch?“ Zielkorridor (nicht nennen): Wie entsteht ein Vulkanausbruch und was richtet er an? Die Frage fixieren: Folie 3.">
-  <div class="kopf"><div class="badge">2</div><div class="ph">Impuls</div><div class="meta"><span>Plenum</span><span>5 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Feuerwerk aus der Tiefe</h1>
-    <div class="bildkarte" style="height:360px;background:#fff"><img src="bilder/impuls-fotos.png" alt="Zwei Fotos: Aschewolke über einem Hof auf Island 2010 und Lavastrom an einer Straße am Ätna 1998" style="object-fit:contain"></div>
-    <p><b>Was fällt euch auf? Welche Frage stellt sich euch?</b></p>
-  </div>
+<section class="slide dark" data-min="5" data-notes="Impuls stumm zeigen, Impuls plus Fragenentwicklung höchstens 5 Minuten. Frage nicht vorgeben. Moderationsfragen: Was fällt euch auf? Was überrascht euch? Welche Frage stellt sich euch? Zielkorridor: Wie entsteht ein Vulkanausbruch und was richtet er an?">
+  <h1>Feuerwerk aus der Tiefe</h1><span class="badge">5 Min. · Plenum</span>
+  <div class="frame white" style="text-align:center"><img src="bilder/impuls-fotos.png" alt="Zwei Fotos: Aschewolke über einem Hof auf Island 2010 und Lavastrom an einer Straße am Ätna 1998" style="width:auto;max-height:340px;margin:0 auto"></div>
+  <p class="onDark" style="margin-top:20px">Was fällt euch auf? Was überrascht euch?</p>
 </section>
-
-<section class="slide" data-min="3" data-n="<b>Fragenentwicklung.</b> Fragen sammeln, Klasse einigt sich auf eine. Ins Feld tippen. Abweichende, tragfähige Fragen aufgreifen. Danach Aufgabe an der Folie: Auswirkungen beschreiben, mündlich.">
-  <div class="kopf"><div class="badge">3</div><div class="ph">Fragenentwicklung</div><div class="meta"><span>Plenum</span><span>3 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Unsere Frage für heute</h1>
-    <div class="eingabe" contenteditable="true" data-ph="Hier tippen: unsere Frage …" style="min-height:200px;font-size:40px"></div>
-    <div class="karte"><p><span class="op">Beschreibe</span> die Auswirkungen von Vulkanausbrüchen.</p></div>
-  </div>
+<section class="slide dark" data-notes="Die Klassenfrage ins Feld tippen oder mit dem Stift (P) schreiben. Abweichende, tragfähige Fragen aufgreifen. Danach mündlich: Auswirkungen beschreiben.">
+  <h1>Unsere Frage für heute:</h1><span class="badge">Plenum</span>
+  <div class="fragefeld" contenteditable="true" data-ph="Hier tippen: unsere Frage …"></div>
+  <p class="onDark"><b>Beschreibe</b> die Auswirkungen von Vulkanausbrüchen.</p>
 </section>
-
-<section class="slide" data-min="5" data-n="<b>Erarbeitung 1 (Fachwissen, Basiskonzept Struktur und Funktion).</b> Animation im Klett-Buch S. 38 öffnen. Danach Partnererklärung, 2 Min. Wortspeicher an Tafel: Magmakammer, Schlot, Krater.">
-  <div class="kopf"><div class="badge">4</div><div class="ph">Erarbeitung · Animation</div><div class="meta"><span>Plenum / Partnerarbeit</span><span>5 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Entstehung eines Schichtvulkans</h1>
-    <div class="reihe" style="align-items:stretch">
-      <div class="bildkarte" style="flex:1.4;height:400px" data-fehlt="Bild einfügen: bilder/schichtvulkan-animation.jpg (Animation im GL-Buch S. 38)"><img src="bilder/schichtvulkan-animation.jpg" alt="Aufgeschnittener Schichtvulkan mit Magmakammer und Schlot"><div class="cap">Animation im GL-Buch S. 38</div></div>
-      <div class="karte sand" style="flex:1"><p><b>Aufgabe</b></p><p>Sieh dir die Animation im GL-Buch (S. 38) an.</p><p style="margin-top:14px"><span class="op">Beschreibe</span> danach deinem Partner / deiner Partnerin den Weg des Magmas.</p></div>
-    </div>
-  </div>
+<section class="slide light" data-min="5" data-notes="Animation im GL-Buch S. 38 zeigen. Danach Partnererklärung. Wortspeicher an der Tafel: Magmakammer, Schlot, Krater.">
+  <h1>Entstehung eines Schichtvulkans</h1><span class="badge">5 Min. · Plenum, Partner</span>
+  <div class="split"><div class="frame"><img src="bilder/schichtvulkan-animation.jpg" alt="Aufgeschnittener Schichtvulkan mit Magmakammer und Schlot, Animation im GL-Buch S. 38"></div>
+  <div class="mint pad"><p class="task"><span class="snr"></span><span>Sieh dir die Animation im GL-Buch (S. 38) an.</span><span></span></p><p class="task"><span class="snr"></span><span><b>Beschreibe</b> danach deinem Partner / deiner Partnerin den Weg des Magmas.</span><i class="lvl">E</i></p></div></div>
 </section>
-
-<section class="slide" data-min="20" data-n="<b>Erarbeitung 2 (KV5, Einzelarbeit).</b> Vorlesen von T1 und T2 anbieten. Aufgabe 1 Beschreiben (E–F), 2 Zuordnen (D–E), 3 Vergleichen (F). Fertige: Partnervergleich, dann Aufgabe 5 (Buch S. 163). Timer mit Taste T.">
-  <div class="kopf"><div class="badge">5</div><div class="ph">Erarbeitung · KV5</div><div class="meta"><span>Einzelarbeit</span><span>20 Min.</span><span>Buch S. 162–163</span></div></div>
-  <div class="inhalt">
-    <h1>Feuerwerk aus der Tiefe</h1>
-    <div class="karte"><p><b>Einzelarbeit: KV5.</b> Lies T1 und T2 (Buch S. 162–163). Du darfst dir den Text vorlesen lassen.</p>
-      <p style="font-size:26px;margin-top:8px"><b>1</b> <span class="op">Beschreibe</span> die Vorgänge bei einem Vulkanausbruch in ganzen Sätzen. Nutze den Kasten mit Fachbegriffen.<br><b>2</b> <span class="op">Ordne</span> den Zahlen und Buchstaben auf der Abbildung die richtigen Begriffe zu.<br><b>3</b> <span class="op">Vergleiche</span> Schichtvulkane und Schildvulkane in der Tabelle (M5, M6).</p></div>
-    <div class="karte sand"><p><b>Fertig?</b> <span class="op">Vergleiche</span> deine Ergebnisse mit deinem Partner / deiner Partnerin und <span class="op">verbessere</span> gegebenenfalls.<br>Dann: Bearbeitet gemeinsam Aufgabe 5 im Buch, Seite 163.</p></div>
-  </div>
+<section class="slide light" data-min="20" data-notes="KV5 in Einzelarbeit. Vorlesen von T1 und T2 anbieten. Fertige: Partnervergleich, dann Aufgabe 5 im Buch. Timer mit Taste T.">
+  <h1>Feuerwerk aus der Tiefe: KV5</h1><span class="badge">20 Min. · allein · Buch S. 162–163</span>
+  <div class="mint pad"><p class="lead s"><b>Lies</b> T1 und T2 im GL-Buch (S. 162–163). Du darfst dir den Text vorlesen lassen.</p><p class="task"><span class="snr">1</span><span><b>Beschreibe</b> die Vorgänge bei einem Vulkanausbruch in ganzen Sätzen. Nutze den Kasten mit Fachbegriffen.</span><i class="lvl">E–F</i></p><p class="task"><span class="snr">2</span><span><b>Ordne</b> den Zahlen und Buchstaben auf der Abbildung die richtigen Begriffe zu.</span><i class="lvl">D–E</i></p><p class="task"><span class="snr">3</span><span><b>Vergleiche</b> Schichtvulkane und Schildvulkane in der Tabelle (M5, M6).</span><i class="lvl">F</i></p></div>
+  <div class="shilfe"><b>Fertig?</b><br><b>Vergleiche</b> deine Ergebnisse mit deinem Partner / deiner Partnerin und <b>verbessere</b> gegebenenfalls. Dann: Bearbeitet gemeinsam Aufgabe 5 im Buch, Seite 163.</div>
 </section>
-
-<section class="slide" data-min="5" data-n="<b>Sicherung KV5.</b> Lösung der Aufgaben 1 bis 3 an der Tafel oder Folie zeigen. SuS korrigieren in anderer Farbe. Selbstkontrolle statt Frontalvortrag.">
-  <div class="kopf"><div class="badge">6</div><div class="ph">Sicherung · KV5</div><div class="meta"><span>Plenum</span><span>5 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Gemeinsames Vergleichen</h1>
-    <div class="karte sand"><p><b>a)</b> <span class="op">Vergleiche</span> deine Lösungen zu den Aufgaben 1 bis 3 mit der Lösung an der Tafel.<br><b>b)</b> <span class="op">Verbessere</span> deine Fehler mit einer anderen Farbe.</p></div>
-  </div>
+<section class="slide light" data-min="5" data-notes="Lösung der Aufgaben 1 bis 3 an der Tafel oder Folie. SuS korrigieren in anderer Farbe.">
+  <h1>Gemeinsames Vergleichen</h1><span class="badge">5 Min. · Plenum</span>
+  <div class="mint pad"><p class="task"><span class="snr">a)</span><span><b>Vergleiche</b> deine Lösungen zu den Aufgaben 1 bis 3 mit der Lösung an der Tafel.</span><span></span></p><p class="task"><span class="snr">b)</span><span><b>Verbessere</b> deine Fehler mit einer anderen Farbe.</span><span></span></p></div>
 </section>
-
-<section class="slide" data-min="5" data-n="<b>Sicherung Aufgabe 3 (Vergleichen, Niveau F).</b> Abbildung (Buch M5/M6) zeigen. Die Tabelle erst nach dem Vergleich der SuS aufdecken. ENTWURF: fachlich gegenlesen, Formulierungen an das Tafelbild anpassen.">
-  <div class="kopf"><div class="badge">7</div><div class="ph">Sicherung · KV5 Aufgabe 3</div><div class="meta"><span>Plenum</span><span>5 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Vulkan ist nicht gleich Vulkan</h1>
-    <p><span class="op">Vergleiche</span> Schichtvulkan und Schildvulkan nach Art des Ausbruchs, Lava, Form und Ausdehnung.</p>
-    <div class="reihe" style="align-items:flex-start;gap:24px"><div class="bildkarte" style="flex:none;width:520px;height:330px;background:#fff"><img src="bilder/vulkantypen.png" alt="Abbildung: Asche- und Schlackenkegel, Schichtvulkan, Schildvulkan und Caldera im Querschnitt" style="object-fit:contain"></div><div style="flex:1;display:flex;flex-direction:column;gap:14px"><div><button class="btn hell" data-reveal="tb">Tabelle zeigen</button></div><table class="versteckt" id="tb" style="border-collapse:collapse;font-size:20px;width:100%;flex:1">
-      <tr><th style="border:3px solid var(--g);padding:8px 12px;text-align:left"></th><th style="border:3px solid var(--g);padding:8px 12px;text-align:left">Schichtvulkan</th><th style="border:3px solid var(--g);padding:8px 12px;text-align:left">Schildvulkan</th></tr>
-      <tr><td style="border:3px solid var(--g);padding:8px 12px"><b>Ausbruch</b></td><td style="border:3px solid var(--g);padding:8px 12px">explosiv, mit Asche</td><td style="border:3px solid var(--g);padding:8px 12px">ruhig, Lava fließt aus</td></tr>
-      <tr><td style="border:3px solid var(--g);padding:8px 12px"><b>Lava</b></td><td style="border:3px solid var(--g);padding:8px 12px">zähflüssig</td><td style="border:3px solid var(--g);padding:8px 12px">dünnflüssig</td></tr>
-      <tr><td style="border:3px solid var(--g);padding:8px 12px"><b>Form</b></td><td style="border:3px solid var(--g);padding:8px 12px">steiler Kegel, Schichten aus Lava und Asche</td><td style="border:3px solid var(--g);padding:8px 12px">flacher Schild</td></tr>
-      <tr><td style="border:3px solid var(--g);padding:8px 12px"><b>Ausdehnung</b></td><td style="border:3px solid var(--g);padding:8px 12px">kleinere Fläche</td><td style="border:3px solid var(--g);padding:8px 12px">sehr große Fläche</td></tr>
-    </table></div></div>
-  </div>
+<section class="slide light" data-min="5" data-notes="Abbildung aus dem Buch (M5, M6). Tabelle erst nach dem Vergleich der SuS einblenden. ENTWURF: fachlich gegenlesen.">
+  <h1>Vulkan ist nicht gleich Vulkan</h1><span class="badge">5 Min. · Plenum</span>
+  <div class="split" style="grid-template-columns:1fr 1.3fr;align-items:center"><div class="frame"><img src="bilder/vulkantypen.png" alt="Asche- und Schlackenkegel, Schichtvulkan, Schildvulkan und Caldera im Querschnitt" style="max-height:200px;width:auto;margin:0 auto"></div>
+  <div><div class="mint pad" style="margin-bottom:14px"><p class="task" style="margin:0"><span class="snr"></span><span><b>Vergleiche</b> Schichtvulkan und Schildvulkan nach Art des Ausbruchs, Lava, Form und Ausdehnung.</span><i class="lvl">F</i></p></div><button class="b" data-reveal="tb">Tabelle zeigen</button></div></div>
+  <div style="margin-top:8px"><table class="rv" id="tb" style="border-collapse:collapse;font-size:20px;width:100%"><tr><th style="border:3px solid var(--g);padding:5px 12px;text-align:left"></th><th style="border:3px solid var(--g);padding:5px 12px;text-align:left">Schichtvulkan</th><th style="border:3px solid var(--g);padding:5px 12px;text-align:left">Schildvulkan</th></tr><tr><td style="border:3px solid var(--g);padding:5px 12px;text-align:left"><b>Ausbruch</b></td><td style="border:3px solid var(--g);padding:5px 12px;text-align:left">explosiv, mit Asche</td><td style="border:3px solid var(--g);padding:5px 12px;text-align:left">ruhig, Lava fließt aus</td></tr><tr><td style="border:3px solid var(--g);padding:5px 12px;text-align:left"><b>Lava</b></td><td style="border:3px solid var(--g);padding:5px 12px;text-align:left">zähflüssig</td><td style="border:3px solid var(--g);padding:5px 12px;text-align:left">dünnflüssig</td></tr><tr><td style="border:3px solid var(--g);padding:5px 12px;text-align:left"><b>Form</b></td><td style="border:3px solid var(--g);padding:5px 12px;text-align:left">steiler Kegel aus Lava und Asche</td><td style="border:3px solid var(--g);padding:5px 12px;text-align:left">flacher Schild</td></tr><tr><td style="border:3px solid var(--g);padding:5px 12px;text-align:left"><b>Ausdehnung</b></td><td style="border:3px solid var(--g);padding:5px 12px;text-align:left">kleinere Fläche</td><td style="border:3px solid var(--g);padding:5px 12px;text-align:left">sehr große Fläche</td></tr></table></div>
 </section>
-
-<section class="slide" data-min="5" data-n="<b>Sprinteraufgabe (Aufgabe 5, Buch S. 163).</b> Karte Ausbreitung der Aschewolke 2010 im Buch. 1–2 SuS stellen ihre Lösung vor, Karte per Visualizer oder Beamer.">
-  <div class="kopf"><div class="badge">8</div><div class="ph">Sprinteraufgabe · Aufgabe 5</div><div class="meta"><span>Plenum</span><span>5 Min.</span><span>Buch S. 163</span></div></div>
-  <div class="inhalt">
-    <h1>Ausbreitung der Aschewolke 2010</h1>
-    <div class="reihe" style="align-items:stretch">
-      <div class="bildkarte" style="flex:1.2;height:410px;background:#fff" data-fehlt="Bild einfügen: bilder/karte-aschewolke.png (Ausbreitung der Aschewolke 2010)"><img style="object-fit:contain" src="bilder/karte-aschewolke.png" alt="Karte Europa mit der Ausbreitung der Aschewolke im April 2010"></div>
-      <div class="karte sand" style="flex:1"><p><b>Sprinteraufgabe</b></p><p style="margin-top:14px"><span class="op">Stelle</span> deine Lösung zu Aufgabe 5 (GL-Buch S. 163) <span class="op">vor</span>.</p></div>
-    </div>
-  </div>
+<section class="slide light" data-min="5" data-notes="Sprinteraufgabe 5 (Buch S. 163). 1 bis 2 SuS stellen ihre Lösung vor, Karte zeigen.">
+  <h1>Ausbreitung der Aschewolke 2010</h1><span class="badge">5 Min. · Plenum · Buch S. 163</span>
+  <div class="split"><div class="frame"><img src="bilder/karte-aschewolke.png" alt="Karte von Europa mit der Ausbreitung der Aschewolke im April 2010" style="max-height:420px;width:auto;margin:0 auto"></div>
+  <div class="mint pad"><p class="lead s"><b>Sprinteraufgabe</b></p><p class="task"><span class="snr"></span><span><b>Stelle</b> deine Lösung zu Aufgabe 5 (GL-Buch S. 163) <b>vor</b>.</span><span></span></p></div></div>
 </section>
-
-<section class="slide" data-min="3" data-n="<b>Reflexion.</b> Selbsteinschätzung: Daumen oder Fünf-Finger-Skala. Nicht erreichte Punkte als Wiederholung für die nächste Stunde notieren.">
-  <div class="kopf"><div class="badge">9</div><div class="ph">Reflexion</div><div class="meta"><span>Plenum</span><span>3 Min.</span></div></div>
-  <div class="inhalt">
-    <img class="deko" src="bilder/reflexion.png" alt="" style="right:64px;top:90px;width:150px"><h1>Jetzt kannst du …</h1>
-    <div class="karte sand" style="margin-right:220px"><p>● Vulkan- und Erdbebengebiete auf der Erde <span class="op">nennen</span>.</p></div>
-    <div class="karte sand" style="margin-right:220px"><p>● <span class="op">erläutern</span>, inwiefern Europa von Naturkatastrophen betroffen sein kann.</p></div>
-    <div class="karte sand" style="margin-right:220px"><p>● verschiedene Arten von Vulkanen <span class="op">unterscheiden</span>.</p></div>
-    <div class="karte sand" style="margin-right:220px"><p>● die Vorgänge bei einem Vulkanausbruch <span class="op">beschreiben</span>.</p></div>
-  </div>
+<section class="slide light" data-min="3" data-notes="Selbsteinschätzung per Daumen oder Fünf-Finger-Skala. Offene Punkte für die nächste Stunde notieren.">
+  <h1>Jetzt kannst du …</h1><span class="badge">3 Min. · Plenum</span>
+  <div class="split" style="grid-template-columns:1.6fr 1fr;align-items:center"><div class="mint pad"><p class="task big"><span class="snr">●</span><span>Vulkan- und Erdbebengebiete auf der Erde <b>nennen</b>.</span><span></span></p><p class="task big"><span class="snr">●</span><span><b>erläutern</b>, inwiefern Europa von Naturkatastrophen betroffen sein kann.</span><span></span></p><p class="task big"><span class="snr">●</span><span>verschiedene Arten von Vulkanen <b>unterscheiden</b>.</span><span></span></p><p class="task big"><span class="snr">●</span><span>die Vorgänge bei einem Vulkanausbruch <b>beschreiben</b>.</span><span></span></p></div><img src="bilder/reflexion.png" alt="" style="width:100%;max-height:420px;object-fit:contain"></div>
 </section>
-
-<section class="slide" data-min="0" data-n="<b>Vertiefung: Kurzprojekt (Hausaufgabe oder Projekt).</b> Auswahl der Beispiele auf Folie 11. Produkt (Plakat, Steckbrief oder Kurzvortrag) mit der Klasse festlegen. Beobachtungskriterien vorab transparent machen.">
-  <div class="kopf"><div class="badge">10</div><div class="ph">Vertiefung · Kurzprojekt</div><div class="meta"><span>Hausaufgabe / Projekt</span></div></div>
-  <div class="inhalt">
-    <h1>Kurzprojekt: Vulkan oder Erdbeben vorstellen</h1>
-    <div class="reihe" style="align-items:stretch">
-      <div class="karte sand"><h2 style="color:var(--g)"><img src="bilder/vulkan.png" alt="" style="height:70px;vertical-align:middle;margin-right:14px">Vulkan</h2><p style="font-size:24px;margin-top:8px"><b>Lage</b> (Kontinent, Land)<br><b>Tektonik der Region</b> (Welche Platten bewegen sich wie?)<br><b>Aussehen</b> (Höhe, Vulkanart, …)<br><b>Letzter Ausbruch und Schäden</b> (Geschichte des Vulkans)<br><b>Aktueller Status</b> (aktiv, inaktiv, ruhend, …)</p></div>
-      <div class="karte sand"><h2 style="color:var(--g)"><img src="bilder/erdbeben.png" alt="" style="height:70px;vertical-align:middle;margin-right:14px">Erdbeben</h2><p style="font-size:24px;margin-top:8px"><b>Lage</b> (Kontinent, Land)<br><b>Tektonik der Region</b> (Welche Plattenbewegungen verursachten das Beben?)<br><b>Stärke und Verlauf</b> (gegebenenfalls Tsunamis in der Folge)<br><b>Schäden und Opferzahlen</b><br><b>Aktueller Status</b> (Kämpft der Ort noch mit den Folgen?)</p></div>
-    </div>
-  </div>
+<section class="slide light" data-notes="Kurzprojekt als Hausaufgabe oder Projekt. Produkt und Beobachtungskriterien vorab mit der Klasse klären.">
+  <h1>Kurzprojekt: Vulkan oder Erdbeben</h1><span class="badge">Hausaufgabe · Projekt</span>
+  <div class="split" style="align-items:stretch"><div class="mint pad"><p class="lead s" style="color:var(--dk)"><img src="bilder/vulkan.png" alt="" style="height:64px;vertical-align:middle;margin-right:12px"><b>Vulkan</b></p><p class="task s" style="display:block"><b>Lage</b> (Kontinent, Land)<br><b>Tektonik der Region</b> (Welche Platten bewegen sich wie?)<br><b>Aussehen</b> (Höhe, Vulkanart, …)<br><b>Letzter Ausbruch und Schäden</b> (Geschichte des Vulkans)<br><b>Aktueller Status</b> (aktiv, inaktiv, ruhend, …)</p></div>
+  <div class="mint pad"><p class="lead s" style="color:var(--dk)"><img src="bilder/erdbeben.png" alt="" style="height:64px;vertical-align:middle;margin-right:12px"><b>Erdbeben</b></p><p class="task s" style="display:block"><b>Lage</b> (Kontinent, Land)<br><b>Tektonik der Region</b> (Welche Plattenbewegungen verursachten das Beben?)<br><b>Stärke und Verlauf</b> (gegebenenfalls Tsunamis in der Folge)<br><b>Schäden und Opferzahlen</b><br><b>Aktueller Status</b> (Kämpft der Ort noch mit den Folgen?)</p></div></div>
 </section>
-
-<section class="slide" data-min="0" data-n="<b>Auswahl der Beispiele.</b> Jede Gruppe wählt ein Beispiel, jedes Beispiel nur einmal. Auswahl an der Tafel eintragen.">
-  <div class="kopf"><div class="badge">11</div><div class="ph">Vertiefung · Kurzprojekt</div><div class="meta"><span>Auswahl</span></div></div>
-  <div class="inhalt">
-    <h1>Kurzprojekt: Wähle ein Beispiel</h1>
-    <div class="reihe" style="align-items:stretch">
-      <div class="karte sand" style="flex:1.4"><h2 style="color:var(--g)">Vulkane</h2><div class="reihe" style="margin-top:10px"><p style="font-size:26px">Ätna<br>Eyjafjallajökull<br>Hekla<br>Stromboli<br>Vesuv</p><p style="font-size:26px">Mauna Loa<br>Llaima<br>Mount St. Helens<br>Anak Krakatau<br>Sakurajima</p></div></div>
-      <div class="karte sand"><h2 style="color:var(--g)">Erdbeben</h2><p style="font-size:26px;margin-top:10px">Türkei und Syrien 2023<br>Indischer Ozean 2004<br>Tōhoku-Erdbeben 2011<br>Karfreitagsbeben 1964<br>Valdivia 1960<br>Kamtschatka 1952</p></div>
-    </div>
-  </div>
+<section class="slide light" data-notes="Jede Gruppe wählt ein Beispiel, jedes nur einmal. Auswahl an der Tafel eintragen.">
+  <h1>Kurzprojekt: Wähle ein Beispiel</h1><span class="badge">Auswahl</span>
+  <div class="split" style="grid-template-columns:1.4fr 1fr;align-items:stretch"><div class="mint pad"><p class="lead s" style="color:var(--dk)"><b>Vulkane</b></p><div class="row3" style="grid-template-columns:1fr 1fr;gap:10px"><p class="task s" style="display:block;font-size:26px">Ätna<br>Eyjafjallajökull<br>Hekla<br>Stromboli<br>Vesuv</p><p class="task s" style="display:block;font-size:26px">Mauna Loa<br>Llaima<br>Mount St. Helens<br>Anak Krakatau<br>Sakurajima</p></div></div>
+  <div class="mint pad"><p class="lead s" style="color:var(--dk)"><b>Erdbeben</b></p><p class="task s" style="display:block;font-size:26px">Türkei und Syrien 2023<br>Indischer Ozean 2004<br>Tōhoku-Erdbeben 2011<br>Karfreitagsbeben 1964<br>Valdivia 1960<br>Kamtschatka 1952</p></div></div>
 </section>
-
-<div class="nav" id="nav"></div>
-<button class="pfeil l" id="zur" aria-label="zurück">‹</button>
-<button class="pfeil r" id="vor" aria-label="weiter">›</button>
+<div id="foot"><span>Geografie · Kräfte der Natur · Vulkane</span><span id="date"></span><span id="num"></span></div>
+<div id="tools"><button id="prev" title="zurück">‹</button><button id="next" title="weiter">›</button></div><div id="bar"></div><div id="notes"></div></div>
+<div id="help">← → blättern · P Stift · T Timer · L Lärmampel · F Vollbild · N Notizen</div>
 </div>
-</div>
-<div id="notiz"></div>
-
 <script>
-(function(){
-  var buehne=document.getElementById('buehne'),stage=document.getElementById('stage'),nav=document.getElementById('nav'),notiz=document.getElementById('notiz');
-  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
-  slides.forEach(function(){nav.appendChild(document.createElement('i'))});
-  function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
-  window.addEventListener('resize',fit);fit();
-  [].forEach.call(document.querySelectorAll('.bildkarte img'),function(img){
-    function weg(){img.parentNode.classList.add('fehlt')}
-    img.addEventListener('error',weg);
-    if(img.complete&&img.naturalWidth===0)weg();
-  });
-  function show(n){
-    cur=Math.max(0,Math.min(slides.length-1,n));
-    slides.forEach(function(s,i){s.classList.toggle('aktiv',i===cur)});
-    [].forEach.call(nav.children,function(d,i){d.classList.toggle('a',i===cur)});
-    notiz.innerHTML=slides[cur].getAttribute('data-n')||'';
-    try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
-  }
-  function isEdit(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
-  document.addEventListener('keydown',function(e){
-    if(isEdit(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
-    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();show(cur+1)}
-    else if(e.key===' '&&!/BUTTON|A/.test(e.target.tagName)){e.preventDefault();show(cur+1)}
-    else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(cur-1)}
-    else if(e.key==='n'||e.key==='N'){notiz.classList.toggle('an')}
-    else if(e.key==='f'||e.key==='F'){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(x){}}
-  });
-  document.getElementById('vor').onclick=function(){show(cur+1)};
-  document.getElementById('zur').onclick=function(){show(cur-1)};
-  var tx=null;
-  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX});
-  document.addEventListener('touchend',function(e){if(tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>70)show(cur+(d<0?1:-1));tx=null});
-  document.addEventListener('click',function(e){
-    var r=e.target.closest('[data-reveal]');
-    if(r){document.getElementById(r.getAttribute('data-reveal')).classList.toggle('show')}
-  });
-  [].forEach.call(document.querySelectorAll('.timer'),function(t){
-    var z=t.querySelector('.z'),min=+t.getAttribute('data-min'),rest=min*60,iv=null,bt=t.querySelector('[data-t=start]');
-    function fmt(){var m=Math.floor(rest/60),s=rest%60;z.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;z.classList.toggle('aus',rest===0)}
-    bt.onclick=function(){
-      if(iv){clearInterval(iv);iv=null;bt.textContent='Weiter';return}
-      bt.textContent='Pause';
-      iv=setInterval(function(){if(rest>0){rest--;fmt()}else{clearInterval(iv);iv=null;bt.textContent='Start'}},1000)
-    };
-    t.querySelector('[data-t=reset]').onclick=function(){clearInterval(iv);iv=null;rest=min*60;bt.textContent='Start';fmt()};
-  });
-  function ausHash(){var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1)}
-  window.addEventListener('hashchange',ausHash);ausHash();setTimeout(fit,0);
-})();
+const S=[...document.querySelectorAll('.slide')];let i=0,K=1;
+const st=document.getElementById('stage'),bar=document.getElementById('bar'),nt=document.getElementById('notes'),bu=document.getElementById('buehne');
+function fit(){K=Math.min(bu.clientWidth/1280,bu.clientHeight/720);st.style.transform='translate(-50%,-50%) scale('+K+')'}
+function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,k){s.classList.toggle('on',k===i)});
+ document.getElementById('num').textContent=(i+1)+' / '+S.length;bar.style.width=((i+1)/S.length*100)+'%';
+ nt.textContent=S[i].dataset.notes||'';document.getElementById('foot').className=S[i].classList.contains('dark')?'ondark':'';try{location.hash=i+1}catch(x){}}
+function typing(e){const t=e.target;return t&&(t.isContentEditable||t.tagName==='TEXTAREA'||t.tagName==='INPUT')}
+addEventListener('keydown',function(e){if(typing(e))return;
+ if(['ArrowRight','PageDown',' '].indexOf(e.key)>=0){e.preventDefault();show(i+1)}else if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){show(i-1)}
+ else if(e.key==='Home')show(0);else if(e.key==='End')show(S.length-1);
+ else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+ else if(e.key==='n'||e.key==='N'){nt.style.display=nt.style.display==='block'?'none':'block'}});
+document.getElementById('prev').onclick=function(){show(i-1)};document.getElementById('next').onclick=function(){show(i+1)};
+document.addEventListener('click',function(e){var r=e.target.closest('[data-reveal]');if(r)document.getElementById(r.getAttribute('data-reveal')).classList.toggle('show')});
+addEventListener('resize',fit);fit();addEventListener('load',fit);if(window.ResizeObserver)new ResizeObserver(fit).observe(bu);setTimeout(function(){const h=document.getElementById('help');if(h)h.style.display='none'},6000);
+document.getElementById('date').textContent=new Date().toLocaleDateString('de-DE');
+var h0=1;try{h0=parseInt(location.hash.slice(1))||1}catch(x){}show(h0-1);
+addEventListener('hashchange',function(){var h=parseInt(location.hash.slice(1))||1;if(h-1!==i)show(h-1)});
 </script>
 <!-- Spielinhalte für die Belohnungsspiele. ENTWURF: bitte fachlich gegenlesen. -->
 <script type="application/json" id="lp-spiel-daten">
 {
  "titel": "Vulkanausbrüche",
  "paare": [
- ["Magma", "geschmolzenes Gestein im Erdinneren"],
- ["Lava", "Magma, das an der Erdoberfläche austritt"],
- ["Magmakammer", "Hohlraum unter dem Vulkan, in dem sich Magma sammelt"],
- ["Schlot", "Kanal, durch den das Magma nach oben steigt"],
- ["Krater", "trichterförmige Öffnung am Gipfel des Vulkans"],
- ["Schichtvulkan", "steiler Vulkan mit zähflüssiger Lava und explosiven Ausbrüchen"],
- ["Schildvulkan", "flacher Vulkan mit dünnflüssiger Lava"],
- ["Aschewolke", "Wolke aus feinem Gesteinsstaub nach einem Ausbruch"]
+ ["Magma", "geschmolzenes Gestein im Erdinneren", "Mag-ma"],
+ ["Lava", "Magma, das an der Erdoberfläche austritt", "La-va"],
+ ["Magmakammer", "Hohlraum unter dem Vulkan, in dem sich Magma sammelt", "Mag-ma-kam-mer"],
+ ["Schlot", "Kanal, durch den das Magma nach oben steigt", "Schlot"],
+ ["Krater", "trichterförmige Öffnung am Gipfel des Vulkans", "Kra-ter"],
+ ["Schichtvulkan", "steiler Vulkan mit zähflüssiger Lava und explosiven Ausbrüchen", "Schicht-vul-kan"],
+ ["Schildvulkan", "flacher Vulkan mit dünnflüssiger Lava", "Schild-vul-kan"],
+ ["Aschewolke", "Wolke aus feinem Gesteinsstaub nach einem Ausbruch", "A-sche-wol-ke"]
  ]
 }
 </script>
-<script src="../../../../assets/js/praesentation.js" defer></script>
-</body>
-</html>
+<script src="../../../../assets/js/praesentation.js" defer></script></body></html>
