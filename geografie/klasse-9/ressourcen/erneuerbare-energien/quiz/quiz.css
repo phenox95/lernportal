@@ -144,3 +144,9 @@
 .stage { animation: rise var(--t-enter) var(--ease-out) both; }
 .stagger > * { animation: rise var(--t-enter) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 50ms); }
 .foot { text-align: center; color: var(--ink-2); margin-top: 36px; font-size: 0.85em; }
+
+/* Die Portal-Datei material.css setzt gleichnamige Variablen (--accent, --surface ...). Die Quiz-Farben gelten deshalb nur im Quiz (#app). */
+#app{   --bg: #f3f6f5;   --surface: #ffffff;   --surface-2: #e8f0ee;   --ink: #10272b;   --ink-2: #4a5e64;   --line: rgba(16, 39, 43, 0.12);   --accent: #f2a900;   --accent-ink: #10272b;   --water: #1c7c8c;   --leaf: #3f8a4d;   --earth: #c4492a;   --ok: #17703a;   --ok-bg: #e2f3e8;   --bad: #a82a22;   --bad-bg: #fbe7e3;   --glass: rgba(243, 246, 245, 0.74);   --thumb: #ffffff;   --shadow: 0 1px 2px rgba(16, 39, 43, 0.06), 0 14px 36px -18px rgba(16, 39, 43, 0.28);   --focus: #1c7c8c;   }
+:root[data-theme="dark"] #app,#app .tone-dark{   --bg: #071b1f;   --surface: #0f2f35;   --surface-2: #153a41;   --ink: #f1f6f5;   --ink-2: #a9bfc3;   --line: rgba(241, 246, 245, 0.16);   --water: #62c4d3;   --leaf: #7cc58a;   --earth: #ff9a7c;   --ok: #86e0a6;   --ok-bg: #153a26;   --bad: #ff9b8a;   --bad-bg: #43201e;   --glass: rgba(7, 27, 31, 0.7);   --thumb: #2b5d66;   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 14px 36px -18px rgba(0, 0, 0, 0.7);   --focus: #62c4d3;   }
+#app{--accent-2:var(--accent);--accent-hover:var(--accent);--on-accent:var(--accent-ink)}
+:root[data-theme="dark"] #app{--accent-2:var(--accent);--on-accent:var(--accent-ink)}
