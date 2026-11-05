@@ -81,6 +81,19 @@
   var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1);
 })();
 </script>
+<!-- Spielinhalte für die Belohnungsspiele (Memory, Quiz, Zuordnen, Wortsalat). Beispiel, bitte ersetzen.
+     Jedes Paar: ["Begriff", "kurze Erklärung", "Silben (optional)"]. Mindestens 4 Paare, besser 8. Nur Inhalte dieser Stunde. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Thema der Stunde",
+ "paare": [
+ ["Begriff 1", "Erklärung 1"],
+ ["Begriff 2", "Erklärung 2"],
+ ["Begriff 3", "Erklärung 3"],
+ ["Begriff 4", "Erklärung 4"]
+ ]
+}
+</script>
 <!-- Werkzeuge für alle Präsentationen: Stift (P), Timer (T), Lärmampel (L). Pflicht, am Ende des body. -->
 <script src="../../assets/js/praesentation.js" defer></script>
 </body>

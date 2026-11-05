@@ -406,10 +406,39 @@
     if (s === 2) rotBis = jetzt + 1500;                    // Rot bleibt kurz stehen, sonst flackert die Ampel
     else if (jetzt < rotBis) s = 2;
     if (s !== stufe || lae.el.dataset.stufe === "aus") ampelSetzen(s, false);
+    ruheTick(jetzt, s);
     raf = requestAnimationFrame(messen);
   }
+
+  /* ---------- Ruhe-Sterne: die Klasse sammelt gemeinsam, Rot kostet nie Sterne ---------- */
+  const SPK = "lp-pr-sterne";
+  const pk = laden(SPK, { takt: 30, ziel: 8 });
+  let sterne = 0, ruhe = 0, ruheLetzt = 0;
+  const sternAnz = neu("p", "lp-pr-sterne", "");
+  sternAnz.setAttribute("role", "img");
+  const sternBalken = neu("div", "lp-pr-balken lp-pr-ruhebalken");
+  const sternFuell = neu("i"); sternBalken.appendChild(sternFuell);
+  const spielBtn = knopf("lp-pr-gross on", "Spiel starten", "Belohnungsspiel starten");
+  spielBtn.hidden = true;
+  const sternLabel = neu("span", "lp-pr-dockzeit");
+  function sterneZeigen() {
+    sternAnz.textContent = "★".repeat(Math.min(sterne, pk.ziel)) + "☆".repeat(Math.max(0, pk.ziel - sterne));
+    sternAnz.setAttribute("aria-label", sterne + " von " + pk.ziel + " Sternen");
+    sternFuell.style.width = Math.min(100, ruhe / pk.takt * 100) + "%";
+    spielBtn.hidden = sterne < pk.ziel;
+    sternLabel.textContent = (strom || sterne) ? "★ " + sterne + "/" + pk.ziel : "";
+  }
+  function ruheTick(jetzt, s) {
+    const dt = ruheLetzt ? Math.min(0.5, (jetzt - ruheLetzt) / 1000) : 0;
+    ruheLetzt = jetzt;
+    if (kalib || sterne >= pk.ziel) return;                 // beim Kalibrieren und nach dem Ziel wird nicht gezählt
+    if (s === 0) ruhe += dt;                                // Grün: Balken füllt sich
+    else if (s === 2) ruhe = 0;                             // Rot: Balken beginnt von vorn, Sterne bleiben
+    if (ruhe >= pk.takt) { ruhe = 0; sterne++; }
+    sterneZeigen();
+  }
   function laermAus(nachricht) {
-    cancelAnimationFrame(raf); raf = 0; kalib = null;
+    cancelAnimationFrame(raf); raf = 0; kalib = null; ruheLetzt = 0;
     if (strom) { strom.getTracks().forEach((t) => t.stop()); strom = null; }
     if (ctxA) { try { ctxA.close(); } catch (e) { /* ok */ } ctxA = null; }
     analyser = null; glatt = -90; fuell.style.width = "0%";
@@ -451,6 +480,32 @@
     const r = neu("div", "lp-pr-reihe"); r.appendChild(lStart); z.appendChild(r);
     const r2 = neu("div", "lp-pr-reihe"); r2.appendChild(lKal); r2.appendChild(lGross); z.appendChild(r2);
     const rg = neu("div", "lp-pr-regelzeile"); rg.appendChild(empLabel); rg.appendChild(emp); z.appendChild(rg);
+    /* Sterne und Einstellungen */
+    z.appendChild(sternAnz); z.appendChild(sternBalken); z.appendChild(spielBtn);
+    const det = document.createElement("details"); det.className = "lp-pr-details";
+    det.appendChild(neu("summary", "", "Sterne einstellen"));
+    function stepper(label, wert, min, max, schritt, setze) {
+      const zeile = neu("div", "lp-pr-step");
+      zeile.appendChild(neu("span", "", label));
+      const m = knopf("lp-pr-klein", "−", label + " verringern"), pl = knopf("lp-pr-klein", "+", label + " erhöhen");
+      const w = neu("b", "", String(wert));
+      m.addEventListener("click", () => { const v = Math.max(min, +w.textContent - schritt); w.textContent = v; setze(v); });
+      pl.addEventListener("click", () => { const v = Math.min(max, +w.textContent + schritt); w.textContent = v; setze(v); });
+      zeile.appendChild(m); zeile.appendChild(w); zeile.appendChild(pl);
+      return zeile;
+    }
+    det.appendChild(stepper("Sekunden pro Stern", pk.takt, 10, 120, 5, (v) => { pk.takt = v; speichern(SPK, pk); sterneZeigen(); }));
+    det.appendChild(stepper("Sterne bis Spiel", pk.ziel, 1, 20, 1, (v) => { pk.ziel = v; speichern(SPK, pk); sterneZeigen(); }));
+    const von = knopf("lp-pr-klein", "+1 Stern", "Einen Stern geben"), weg = knopf("lp-pr-klein", "−1 Stern", "Einen Stern wegnehmen"), nul = knopf("lp-pr-klein", "Neu beginnen", "Alle Sterne löschen");
+    von.addEventListener("click", () => { sterne = Math.min(pk.ziel, sterne + 1); sterneZeigen(); });
+    weg.addEventListener("click", () => { sterne = Math.max(0, sterne - 1); sterneZeigen(); });
+    nul.addEventListener("click", () => { sterne = 0; ruhe = 0; sterneZeigen(); });
+    const hand = neu("div", "lp-pr-reihe"); hand.appendChild(von); hand.appendChild(weg); hand.appendChild(nul);
+    det.appendChild(hand);
+    det.appendChild(neu("p", "lp-pr-hinweis", "Gezählt wird nur bei laufender Ampel und Grün. Bei Gelb pausiert der Balken, bei Rot beginnt er von vorn. Sterne gehen nie verloren, außer du nimmst sie weg."));
+    z.appendChild(det);
+    spielBtn.addEventListener("click", () => { sterne = 0; ruhe = 0; sterneZeigen(); spielStarten(); });
+    sterneZeigen();
     z.appendChild(meld);
     grenzen(); ampelSetzen(0, true);
     lStart.addEventListener("click", () => { if (strom) laermAus("Messung beendet."); else laermAn(); });
@@ -464,8 +519,77 @@
     emp.addEventListener("input", () => { cfg.gelb = +emp.value; cfg.rot = cfg.gelb + 10; speichern(SCHL, cfg); grenzen(); });
     lae.beimSchliessen = () => laermAus("Das Mikrofon ist aus.");   // Schließen beendet die Messung
   })();
-  dockKnopf("laerm", ICON.ampel, "Lärmampel", "L");
+  dockKnopf("laerm", ICON.ampel, "Lärmampel", "L").appendChild(sternLabel);
 
+
+  /* =====================================================================
+     SPIELE (Belohnung): allgemeine Spiele in assets/games/, Inhalte liefert jede Präsentation selbst
+     ===================================================================== */
+  const BASIS = (document.currentScript && document.currentScript.src || "").replace(/js\/praesentation\.js.*$/, "");
+  const LP = window.LPSpiele = window.LPSpiele || {};
+  LP.reg = LP.reg || {};
+  LP.hilfe = {
+    el: neu,
+    knopf,
+    mischen(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; },
+    zeit(sek) { return Math.floor(sek / 60) + ":" + String(Math.floor(sek % 60)).padStart(2, "0"); }
+  };
+  const SPIELE = ["memory", "quiz", "zuordnen", "wortsalat"];
+  const EIGNUNG = {                                        // Mindestanzahl brauchbarer Paare je Spiel
+    memory: (p) => p.length >= 4, quiz: (p) => p.length >= 4, zuordnen: (p) => p.length >= 4,
+    wortsalat: (p) => p.filter((x) => /^[A-Za-zÄÖÜäöüß]{3,14}$/.test(x.b)).length >= 3
+  };
+  let letztesSpiel = "";
+  function spielDaten() {
+    const el = document.getElementById("lp-spiel-daten");
+    if (!el) return null;
+    try {
+      const d = JSON.parse(el.textContent);
+      const paare = (d.paare || []).filter((x) => Array.isArray(x) && x[0] && x[1]).map((x) => ({ b: String(x[0]), e: String(x[1]), s: x[2] ? String(x[2]) : "" }));
+      return { titel: d.titel || "", paare, erlaubt: Array.isArray(d.spiele) ? d.spiele : SPIELE };
+    } catch (e) { return null; }
+  }
+  function ladeSpiel(name) {
+    return new Promise((ok, nein) => {
+      if (LP.reg[name]) return ok(LP.reg[name]);
+      const sk = document.createElement("script");
+      sk.src = BASIS + "games/" + name + ".js";
+      sk.onload = () => (LP.reg[name] ? ok(LP.reg[name]) : nein(new Error("leer")));
+      sk.onerror = () => nein(new Error("fehlt"));
+      document.head.appendChild(sk);
+    });
+  }
+  function spielStarten() {
+    const d = spielDaten();
+    const flaeche = neu("div", "lp-pr-spiel");
+    flaeche.setAttribute("role", "dialog"); flaeche.setAttribute("aria-label", "Belohnungsspiel");
+    const kopf = neu("div", "lp-pr-spielkopf");
+    const titel = neu("strong", "", "Belohnung: Spiel");
+    const zu = knopf("lp-pr-klein", "Schließen", "Spiel schließen");
+    kopf.appendChild(titel); kopf.appendChild(zu);
+    const feld = neu("div", "lp-pr-spielfeld");
+    flaeche.appendChild(kopf); flaeche.appendChild(feld);
+    document.body.appendChild(flaeche);
+    let aktiv = true;
+    const ende = () => { aktiv = false; flaeche.remove(); document.removeEventListener("keydown", esc, true); };
+    const esc = (e) => { if (e.key === "Escape") ende(); };
+    document.addEventListener("keydown", esc, true);
+    zu.addEventListener("click", ende);
+    if (!d || !d.paare.length) { feld.appendChild(neu("p", "lp-pr-spieltext", "Für diese Präsentation sind noch keine Spielinhalte hinterlegt.")); return; }
+    const frei = SPIELE.filter((n) => d.erlaubt.indexOf(n) >= 0 && EIGNUNG[n](d.paare));
+    const wahl = frei.filter((n) => n !== letztesSpiel);
+    const name = (wahl.length ? wahl : frei)[Math.floor(Math.random() * (wahl.length ? wahl.length : frei.length))];
+    if (!name) { feld.appendChild(neu("p", "lp-pr-spieltext", "Es sind zu wenige Spielinhalte hinterlegt (mindestens 4 Paare).")); return; }
+    letztesSpiel = name;
+    feld.appendChild(neu("p", "lp-pr-spieltext", "Spiel wird geladen …"));
+    ladeSpiel(name).then((spiel) => {
+      if (!aktiv) return;
+      feld.textContent = "";
+      titel.textContent = "Belohnung: " + spiel.titel;
+      spiel.start({ feld, paare: d.paare, hilfe: LP.hilfe, ende });
+    }).catch(() => { if (aktiv) { feld.textContent = ""; feld.appendChild(neu("p", "lp-pr-spieltext", "Das Spiel konnte nicht geladen werden.")); } });
+  }
+  window.Praesentation = window.Praesentation || {};
   /* ---------- Folienwechsel erkennen (Striche gehören zur Folie) ---------- */
   function folieAktualisieren() {
     const n = aktuelleFolie();
@@ -488,5 +612,5 @@
     else if (k === "escape" && penAn) { stiftSetzen(false); }
   });
 
-  window.Praesentation = { stift: stiftSetzen, schalte, folie: () => folie };
+  Object.assign(window.Praesentation, { stift: stiftSetzen, schalte, folie: () => folie, spiel: spielStarten });
 })();

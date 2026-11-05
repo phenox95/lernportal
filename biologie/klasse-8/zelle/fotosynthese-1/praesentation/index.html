@@ -195,4 +195,21 @@ document.querySelectorAll('#tally .tc').forEach(function(c){const n=c.querySelec
 addEventListener('resize',fit);fit();addEventListener('load',fit);if(window.ResizeObserver)new ResizeObserver(fit).observe(bu);setTimeout(function(){const h=document.getElementById('help');if(h)h.style.display='none'},6000);
 document.getElementById('date').textContent=new Date().toLocaleDateString('de-DE');
 var h0=1;try{h0=parseInt(location.hash.slice(1))||1}catch(x){}show(h0-1);</script>
+<!-- Spielinhalte für die Belohnungsspiele (Memory, Quiz, Zuordnen, Wortsalat). ENTWURF: bitte fachlich gegenlesen.
+     Jedes Paar: ["Begriff", "kurze Erklärung", "Silben (optional)"]. Mindestens 4 Paare, besser 8. Nur Inhalte dieser Stunde. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Fotosynthese",
+ "paare": [
+ ["Chloroplast", "Ort der Fotosynthese in der Pflanzenzelle", "Chlo-ro-plast"],
+ ["Chlorophyll", "grüner Farbstoff, der Licht aufnimmt", "Chlo-ro-phyll"],
+ ["Traubenzucker", "Stoff, den die Pflanze bei der Fotosynthese herstellt", "Trau-ben-zu-cker"],
+ ["Sauerstoff", "Gas, das bei der Fotosynthese frei wird", "Sauer-stoff"],
+ ["Kohlenstoffdioxid", "Gas aus der Luft, das die Pflanze aufnimmt", "Koh-len-stoff-di-oxid"],
+ ["Lichtenergie", "Energie, die die Fotosynthese antreibt", "Licht-en-er-gie"],
+ ["Wasser", "Ausgangsstoff, den die Wurzel aufnimmt", "Was-ser"],
+ ["Zellwand", "fester Rand um die Pflanzenzelle", "Zell-wand"]
+ ]
+}
+</script>
 <script src="../../../../../assets/js/praesentation.js" defer></script></body></html>

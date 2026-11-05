@@ -161,7 +161,30 @@ Am rechten Bildrand stehen Haus (zurück zum Portal), Vollbild und die drei Werk
 |---|---|---|
 | Stift | P | Schreiben mit Maus, Finger oder Stift in 5 Farben und 3 Stärken, Radierer, Strich zurück, Folie leeren. Striche gehören zur Folie und bleiben beim Blättern erhalten. Solange der Stift an ist, lässt sich die Folie nicht bedienen (Esc oder P schaltet ihn aus, die Striche bleiben sichtbar) |
 | Timer | T | Countdown mit 1, 3, 5, 10, 15 Min., ±1 Min., +30 s, Start/Pause/Zurücksetzen und Signalton. Hat die Folie `data-min`, gibt es den Knopf „Dauer dieser Folie“. Die Restzeit steht auch am Knopf, wenn das Fenster zu ist |
-| Lärmampel | L | Ampel (Ruhig, Etwas laut, Zu laut) mit Pegelbalken. Erst nach Klick auf „Start“ fragt der Browser nach dem Mikrofon. „Kalibrieren“ misst 3 Sekunden und setzt die jetzige Lautstärke als ruhig. Der Regler stellt die Empfindlichkeit ein. Fenster schließen beendet die Messung und gibt das Mikrofon frei |
+| Lärmampel | L | Ampel (Ruhig, Etwas laut, Zu laut) mit Pegelbalken und Ruhe-Sternen (siehe unten). Erst nach Klick auf „Start“ fragt der Browser nach dem Mikrofon. „Kalibrieren“ misst 3 Sekunden und setzt die jetzige Lautstärke als ruhig. Der Regler stellt die Empfindlichkeit ein. Fenster schließen beendet die Messung und gibt das Mikrofon frei |
+
+### Ruhe-Sterne und Belohnungsspiele
+
+Die Klasse sammelt **gemeinsam** Sterne, solange die Lärmampel läuft und grün ist (Standard: 30 Sekunden Ruhe = 1 Stern, 8 Sterne bis zum Spiel, beides im Lärmampel-Fenster unter „Sterne einstellen“ änderbar). Bei Gelb pausiert der Balken, bei Rot beginnt er von vorn. **Sterne gehen nie verloren**, die Lehrkraft kann von Hand geben und wegnehmen. Es werden keine Namen oder Gruppen erfasst, nichts wird gespeichert (nur die Einstellungen). Beim Ziel erscheint „Spiel starten“.
+
+**Merkregel: Spiele sind allgemein, Inhalte gehören immer zu Fach und Thema.** Die Spiele (`assets/games/memory.js`, `quiz.js`, `zuordnen.js`, `wortsalat.js`) enthalten keine Fachinhalte. Jede Präsentation bringt ihre eigenen Inhalte als Datenblock mit, nie fachübergreifend wiederverwenden. Aus denselben Paaren bauen alle Spiele ihre Runden. Beim Start wird zufällig ein Spiel gewählt, das zu den Daten passt, und nicht dasselbe zweimal hintereinander.
+
+```html
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Fotosynthese",
+ "paare": [
+  ["Chloroplast", "Ort der Fotosynthese in der Pflanzenzelle", "Chlo-ro-plast"],
+  ["Wasser", "Ausgangsstoff, den die Wurzel aufnimmt"]
+ ],
+ "spiele": ["memory", "quiz"]
+}
+</script>
+```
+
+- Ein Paar besteht aus Begriff, kurzer Erklärung und optional den Silben des Begriffs. Mindestens 4 Paare, besser 8, nur Inhalte der Stunde. Fachliche Entwürfe vor dem Einsatz gegenlesen.
+- `spiele` (optional) begrenzt die Auswahl. Fehlt es, kommen alle in Frage. Wortsalat braucht mindestens 3 einteilige Begriffe (3 bis 14 Buchstaben, ohne Leerzeichen und Bindestrich).
+- Die Spieldateien werden erst geladen, wenn das Spiel startet. Ein neues Spiel ist eine Datei in `assets/games/`, die sich mit `window.LPSpiele.reg.<name> = { titel, start({ feld, paare, hilfe, ende }) }` anmeldet, und ein Eintrag in der Liste `SPIELE` in `praesentation.js`.
 
 **Hinweise:**
 
