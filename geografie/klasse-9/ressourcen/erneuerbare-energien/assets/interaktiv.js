@@ -12,6 +12,22 @@
   }
   function mk(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; if (txt) n.textContent = txt; return n; }
 
+
+  /* 0. Große Blätterpfeile in den unteren Ecken (die kleinen Pfeile im Dock bleiben für die Tastenhilfe, sind aber ausgeblendet) */
+  (function () {
+    var prev = document.getElementById("prev"), next = document.getElementById("next"); if (!prev || !next) return;
+    function pfeil(cls, label, rich, target) {
+      var b = mk("button", "ia-nav " + cls); b.type = "button"; b.setAttribute("aria-label", label);
+      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + (rich ? "M9 4.5 16.5 12 9 19.5" : "M15 4.5 7.5 12 15 19.5") + '"/></svg>';
+      b.addEventListener("click", function () { target.click(); b.blur(); });
+      document.body.appendChild(b); return b;
+    }
+    var l = pfeil("l", "Vorherige Folie", false, prev), r = pfeil("r", "Nächste Folie", true, next);
+    function sync() { l.disabled = prev.disabled; r.disabled = next.disabled; }
+    new MutationObserver(sync).observe(prev, { attributes: true, attributeFilter: ["disabled"] });
+    new MutationObserver(sync).observe(next, { attributes: true, attributeFilter: ["disabled"] }); sync();
+  })();
+
   /* Beim Schreiben dürfen Leertaste und Pfeile die Folie nicht wechseln */
   document.addEventListener("keydown", function (e) { if (e.target && e.target.isContentEditable) e.stopPropagation(); }, true);
 
