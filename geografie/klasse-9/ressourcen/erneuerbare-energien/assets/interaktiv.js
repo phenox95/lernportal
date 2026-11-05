@@ -146,18 +146,76 @@
   /* 11. Auswählen (Zusatzaufgabe) */
   $$(".chips .chip5").forEach(function (c, _, all) { press(c, function () { all.forEach(function (x) { x.classList.remove("sel"); x.setAttribute("aria-pressed", "false"); }); c.classList.add("sel"); c.setAttribute("aria-pressed", "true"); }); });
 
-  /* 12. Zeitanzeige antippen: Countdown */
-  var ctx = null;
-  function beep() { try { ctx = ctx || new (window.AudioContext || window.webkitAudioContext)(); [0, .25, .5].forEach(function (t, i) { var o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = 660 + i * 110; g.gain.value = .08; o.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + .18); }); } catch (e) {} }
-  $$(".slide .topbar .time").forEach(function (t) {
-    var m = /(\d+)\s*Min/.exec(t.textContent); if (!m) return;
-    var total = +m[1] * 60, left = total, iv = null, base = t.innerHTML;
-    t.classList.add("ia-timer"); t.setAttribute("title", "Antippen: Countdown starten, nochmal antippen: zurücksetzen");
-    function draw() { var mm = Math.floor(left / 60), ss = left % 60; t.innerHTML = base.replace(/\d+\s*Min\./, mm + ":" + (ss < 10 ? "0" : "") + ss); t.classList.toggle("alarm", left === 0); }
-    press(t, function () {
-      if (iv) { clearInterval(iv); iv = null; left = total; t.innerHTML = base; t.classList.remove("alarm", "run"); return; }
-      t.classList.add("run"); draw();
-      iv = setInterval(function () { left--; draw(); if (left <= 0) { clearInterval(iv); iv = null; beep(); } }, 1000);
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function shake(el) { el.classList.add("ia-shake"); setTimeout(function () { el.classList.remove("ia-shake"); }, 400); }
+
+  /* 12. Zuordnen: Aussage antippen, dann die passende Kategorie */
+  $$(".ia-sort").forEach(function (box) {
+    var chips = $$(".ia-chip", box), cats = $$(".ia-cat", box), fb = box.querySelector(".ia-fb"), sel = null, wrong = 0, done = 0;
+    var pool = box.querySelector(".ia-chips");
+    shuffle(chips.slice()).forEach(function (c) { pool.appendChild(c); });
+    chips.forEach(function (c) { press(c, function () { if (c.classList.contains("placed")) return; if (sel) sel.classList.remove("sel"); sel = c === sel ? null : c; if (sel) sel.classList.add("sel"); fb.textContent = sel ? "Welche Quelle passt zu dieser Aussage?" : ""; fb.className = "ia-fb"; }); });
+    cats.forEach(function (cat) {
+      press(cat, function () {
+        if (!sel) { fb.textContent = "Tippe zuerst eine Aussage an."; fb.className = "ia-fb"; return; }
+        if (sel.dataset.k === cat.dataset.k) {
+          sel.classList.remove("sel"); sel.classList.add("placed"); cat.querySelector(".ia-drop").appendChild(sel); sel.removeAttribute("tabindex"); sel.removeAttribute("role"); sel = null; done++;
+          fb.className = "ia-fb ok"; fb.textContent = done === chips.length ? "✓ Alles zugeordnet. Fehlversuche: " + wrong + "." : "✓ Passt.";
+        } else { wrong++; shake(sel); fb.className = "ia-fb bad"; fb.textContent = "✗ Das passt nicht zu " + cat.querySelector("b").textContent + ". Versuche es noch einmal."; }
+      });
     });
+  });
+
+  /* 13. Reihenfolge: Karten in der richtigen Reihenfolge antippen */
+  $$(".ia-order").forEach(function (box) {
+    var items = $$("ol li", box).map(function (li) { return li.textContent; }); box.querySelector("ol").remove();
+    var slots = mk("ol", "ia-slots"), pool = mk("div", "ia-pool"), fb = mk("p", "ia-fb"); fb.setAttribute("aria-live", "polite");
+    var names = ["Neues", "Bestand", "Folge"], next = 0;
+    items.forEach(function (t, i) { var s = mk("li", "ia-slot"); s.innerHTML = '<b>' + (names[i] || (i + 1)) + '</b><span></span>'; slots.appendChild(s); });
+    var cards = items.map(function (t, i) {
+      var c = mk("span", "ia-ocard", t); c.dataset.i = i;
+      press(c, function () {
+        if (c.classList.contains("placed")) return;
+        if (+c.dataset.i === next) { c.classList.add("placed"); slots.children[next].querySelector("span").appendChild(c); c.removeAttribute("tabindex"); c.removeAttribute("role"); next++; fb.className = "ia-fb ok"; fb.textContent = next === items.length ? "✓ Die Kette stimmt." : "✓ Weiter mit dem nächsten Schritt."; }
+        else { shake(c); fb.className = "ia-fb bad"; fb.textContent = "✗ Das ist noch nicht dran. Welcher Schritt kommt zuerst?"; }
+      });
+      return c;
+    });
+    shuffle(cards.slice()).forEach(function (c) { pool.appendChild(c); });
+    var reset = mk("button", "ia-btn", "Neu mischen"); reset.type = "button";
+    reset.addEventListener("click", function () { next = 0; cards.forEach(function (c) { c.classList.remove("placed"); c.setAttribute("tabindex", "0"); c.setAttribute("role", "button"); }); shuffle(cards.slice()).forEach(function (c) { pool.appendChild(c); }); fb.textContent = ""; fb.className = "ia-fb"; reset.blur(); });
+    box.appendChild(slots); box.appendChild(pool); box.appendChild(fb); box.appendChild(reset);
+  });
+
+  /* 14. Schätzen mit Regler, dann auflösen */
+  $$(".ia-guess").forEach(function (g) {
+    var real = parseFloat(g.dataset.real), val = 50;
+    var out = mk("p", "ia-val", "50 %"), rng = document.createElement("input");
+    rng.type = "range"; rng.min = 0; rng.max = 100; rng.step = 1; rng.value = 50; rng.setAttribute("aria-label", "Dein Schätzwert in Prozent");
+    var track = mk("div", "ia-track"); track.appendChild(rng); var mark = mk("span", "ia-real"); mark.hidden = true; track.appendChild(mark);
+    var res = mk("p", "ia-res"); res.setAttribute("aria-live", "polite");
+    var btn = mk("button", "ia-btn on", "Auflösen"); btn.type = "button";
+    rng.addEventListener("input", function () { val = +rng.value; out.textContent = val + " %"; });
+    rng.addEventListener("keydown", function (e) { e.stopPropagation(); });
+    btn.addEventListener("click", function () {
+      var fmt = String(real).replace(".", ","), diff = Math.round(Math.abs(val - real) * 10) / 10;
+      mark.hidden = false; mark.style.left = real + "%"; mark.setAttribute("data-t", fmt + " %");
+      res.innerHTML = "<b>Tatsächlich: " + fmt + " %</b><br>" + (diff <= 2 ? "Fast genau. Du lagst " + String(diff).replace(".", ",") + " Prozentpunkte daneben." : (val > real ? "Du hast den Anteil überschätzt, um " : "Du hast den Anteil unterschätzt, um ") + String(diff).replace(".", ",") + " Prozentpunkte.");
+      rng.disabled = true; btn.blur();
+    });
+    g.appendChild(out); g.appendChild(track); g.appendChild(btn); g.appendChild(res);
+  });
+
+  /* 15. Selbsteinschätzung (bleibt nur auf dem Bildschirm, keine Speicherung) */
+  $$(".ia-self .ia-row").forEach(function (row) {
+    row.appendChild(mk("p", "ia-stmt", row.dataset.t));
+    var opts = mk("div", "ia-opts");
+    [["Sicher", "3"], ["Fast", "2"], ["Noch nicht", "1"]].forEach(function (o) {
+      var b = mk("button", "ia-opt l" + o[1]); b.type = "button"; b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="ia-mk" aria-hidden="true">' + (o[1] === "3" ? "●●●" : o[1] === "2" ? "●●○" : "●○○") + "</span> " + o[0];
+      b.addEventListener("click", function () { $$(".ia-opt", opts).forEach(function (x) { x.classList.remove("on"); x.setAttribute("aria-pressed", "false"); }); b.classList.add("on"); b.setAttribute("aria-pressed", "true"); b.blur(); });
+      opts.appendChild(b);
+    });
+    row.appendChild(opts);
   });
 })();

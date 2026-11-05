@@ -1,6 +1,6 @@
 /* Präsentation · Steuerung
    - Pfeiltasten, Leertaste, Klicker (Bild auf/ab), Wischen, Knöpfe
-   - P: Referentenansicht (Notizen, Uhr, Zeitplan) in neuem Fenster, synchron
+   - R: Referentenansicht (Notizen, Uhr, Zeitplan) in neuem Fenster, synchron
    - N: Notizen als Schublade, F: Vollbild, ?: Hilfe
    Tastaturaktionen werden nicht animiert, Zeigereingaben schon (kurz, ease-out). */
 (function () {
@@ -102,7 +102,7 @@
     else if (k === "End") go(slides.length - 1);
     else if (k === "n" || k === "N") toggleNotes();
     else if (k === "f" || k === "F") { if (document.fullscreenElement) document.exitFullscreen(); else if (root.requestFullscreen) root.requestFullscreen(); }
-    else if (k === "p" || k === "P") openPresenter();
+    else if (k === "r" || k === "R") openPresenter();
     else if (k === "?") toggleHelp();
     else if (k === "Escape" && drawer.classList.contains("open")) toggleNotes();
   });

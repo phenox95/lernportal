@@ -38,3 +38,47 @@
 /* Die Portal-Kopfleiste verdeckt die Kopfzeile der Folien. In Präsentationen fehlt sie, der Weg zurück ist der Haus-Knopf im Dock. */
 .lp-kopf{display:none}
 .b-schema .stats{gap:.8em}.b-schema .stat .n{font-size:3em}.b-schema .stat p{font-size:1em}.b-schema .ia-toggle{margin-top:0}.b-schema .ia-info{min-height:2.6em;margin:0}
+
+/* Zuordnen */
+.ia-sort{display:grid;gap:.9em;margin-top:.6em}
+.ia-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:1em}
+.ia-cat{background:var(--surface-2);border-radius:1.2em;padding:.7em .9em;min-height:9.5em;cursor:pointer;transition:transform var(--t-press) var(--ease-out),box-shadow 160ms}
+.ia-cat:active{transform:scale(var(--press))}.ia-cat-hd{display:flex;align-items:center;gap:.6em;font-size:1.2em;margin-bottom:.4em}.ia-cat-hd .bubble{width:2.4em;height:2.4em}.ia-cat-hd .bubble .ic{width:1.2em;height:1.2em}
+.ia-drop{display:grid;gap:.4em}
+.ia-chips{display:flex;flex-wrap:wrap;gap:.6em}
+.ia-chip{padding:.45em 1em;border-radius:999px;background:var(--surface);box-shadow:inset 0 0 0 2px var(--ink-2);font-weight:700;font-size:.95em;line-height:1.2;transition:background-color 160ms,color 160ms}
+.ia-chip.sel{background:var(--accent);color:var(--accent-ink);box-shadow:none}
+.ia-chip.placed{background:var(--ok-bg);color:var(--ok);box-shadow:inset 0 0 0 2px var(--ok);border-radius:.8em;cursor:default}
+.ia-chip.placed::before{content:"✓ "}
+.ia-chip{cursor:pointer}
+/* Reihenfolge */
+.ia-order-row{display:grid;grid-template-columns:1fr 1fr;gap:1em;margin-top:.5em}
+.ia-order{display:grid;gap:.5em;align-content:start;padding:1em 1.2em}.ia-order h2{margin:0}
+.ia-slots{list-style:none;margin:0;padding:0;display:grid;gap:.4em}
+.ia-slot{display:grid;grid-template-columns:5.2em 1fr;align-items:center;gap:.6em;min-height:2.6em;border-radius:.8em;border:2px dashed var(--ink-2);padding:.15em .5em;font-size:.85em}
+.ia-slot b{color:var(--ink-2)}.ia-slot span:empty::after{content:"…";color:var(--ink-2)}
+.ia-pool{display:flex;flex-wrap:wrap;gap:.45em}
+.ia-ocard{padding:.4em .8em;border-radius:.8em;background:var(--surface);box-shadow:var(--shadow);font-weight:700;font-size:.8em;line-height:1.2;cursor:pointer}
+.ia-ocard.placed{background:var(--ok-bg);color:var(--ok);box-shadow:none;cursor:default}
+.ia-ocard.placed::before{content:"✓ "}
+/* Schätzen */
+.ia-guess-row{display:grid;grid-template-columns:1fr 1fr;gap:1em;margin-top:.6em}
+.ia-guess{display:grid;gap:.6em;align-content:start}.ia-guess .q{margin:0;font-size:1.1em;font-weight:700}
+.ia-val{margin:0;font-size:2.4em;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.ia-track{position:relative;padding:.7em 0 1.8em}
+.ia-track input{width:100%;height:2.2em;accent-color:var(--accent)}
+.ia-real{position:absolute;bottom:.2em;width:0;height:0}.ia-real::before{content:"";position:absolute;left:-2px;bottom:1.1em;width:4px;height:2.4em;background:var(--ok);border-radius:2px}
+.ia-real::after{content:attr(data-t);position:absolute;left:0;transform:translateX(-50%);bottom:-.6em;background:var(--ok);color:#fff;font-weight:700;font-size:.8em;padding:.1em .6em;border-radius:.6em;white-space:nowrap}
+.ia-res{margin:0;min-height:3.2em;font-size:1em;line-height:1.3}.ia-res b{color:var(--ok)}
+.ia-guess .ia-btn{justify-self:start}
+/* Selbsteinschätzung */
+.ia-self{display:grid;gap:.9em;margin-top:.6em}
+.ia-row{display:grid;grid-template-columns:1.25fr 1fr;gap:1em;align-items:center;background:var(--surface);box-shadow:var(--shadow);border-radius:1.1em;padding:.7em 1em}
+.ia-stmt{margin:0;font-size:1.15em;font-weight:700;line-height:1.25}
+.ia-opts{display:flex;gap:.5em;flex-wrap:wrap}
+.ia-opt{font:inherit;font-size:.85em;font-weight:700;min-height:44px;padding:.2em .8em;border:0;border-radius:999px;background:var(--surface-2);color:var(--ink);cursor:pointer;touch-action:manipulation;transition:transform var(--t-press) var(--ease-out)}
+.ia-opt:active{transform:scale(var(--press))}.ia-mk{letter-spacing:.05em}
+.ia-opt.on{background:var(--ink);color:var(--surface)}.ia-opt.on.l3{background:var(--ok);color:#fff}.ia-opt.on.l2{background:var(--accent);color:var(--accent-ink)}.ia-opt.on.l1{background:var(--earth);color:#fff}
+.tone-dark .ia-row{background:var(--surface-2)}
+/* Portal-Werkzeuge: Stift-Ebene auf die ganze Folie legen (die Präsentation ist fließend und nicht 1280 × 720 groß) */
+.lp-pr-canvas{position:fixed!important;left:50%!important;top:50%!important;width:min(100vw,177.78vh)!important;height:min(100vh,56.25vw)!important;transform:translate(-50%,-50%)}
