@@ -160,5 +160,18 @@
     "datum": "2026-11-05",
     "reihe": "Risikoräume",
     "status": "Entwurf"
+  },
+  {
+    "title": "Erneuerbare Energien – Strom, Wärme, Verkehr",
+    "description": "Zwei Doppelstunden: Energiewende beim Strom, Heizen und Verkehr. Präsentationen, Quiz und Arbeitsblatt.",
+    "type": "Interaktive Präsentation",
+    "path": "geografie/klasse-9/ressourcen/erneuerbare-energien/",
+    "subject": "Geografie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "2 Doppelstunden",
+    "datum": "2026-11-05",
+    "reihe": "Umgang mit Ressourcen",
+    "sichtbar": true
   }
 ]
