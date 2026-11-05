@@ -6,103 +6,101 @@
 <meta name="description" content="Impfen – ja oder nein? Biologie Jahrgang 9, Gesundheit – Krankheit: Impuls, Ausbruchsspiel, Herdenimmunität, Debatte in vier Rollen.">
 <title>Impfen – ja oder nein?</title>
 <link rel="stylesheet" href="../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../assets/css/praesentation.css">
 <script src="../../../../assets/js/prefs.js"></script>
 <script src="../../../../assets/js/material.js" defer></script>
 <style>
-:root{
-  --bg:#f4f6f5; --stage:#ffffff; --ink:#1f2d28; --muted:#5b6b65;
-  --green:#2f5d50; --orange:#c96d38; --lg:#eaf1ee; --lo:#fbebdd; --line:#9aa9a3; --ph:#f7f7f7; --onacc:#ffffff; --grey:#b9c3bf; --blue:#4a7fa0;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#0f1513;--stage:#18211e;--ink:#e8efec;--muted:#a3b3ad;--green:#8cc4b2;--orange:#f0a272;--lg:#223229;--lo:#3a2c21;--line:#5d6f68;--ph:#1d2724;--onacc:#10201a;--grey:#55655f;--blue:#7fb2d0;}
-}
-:root[data-theme="dark"]{--bg:#0f1513;--stage:#18211e;--ink:#e8efec;--muted:#a3b3ad;--green:#8cc4b2;--orange:#f0a272;--lg:#223229;--lo:#3a2c21;--line:#5d6f68;--ph:#1d2724;--onacc:#10201a;--grey:#55655f;--blue:#7fb2d0;}
-*{box-sizing:border-box}
-html,body{height:100%;margin:0}
-body{background:var(--bg);color:var(--ink);font-family:Calibri,"Segoe UI",Arial,sans-serif;overflow:hidden}
-/* Die Portal-Kopfleiste würde die Folienköpfe verdecken. Zurück zum Portal geht über den Haus-Knopf im Dock. */
-body .lp-kopf{display:none}
-#wrap{position:fixed;inset:0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);display:flex;align-items:center;justify-content:center}
-#stage{width:1280px;height:720px;background:var(--stage);position:relative;transform-origin:center center;box-shadow:0 6px 30px rgba(0,0,0,.18);overflow:hidden;flex:none}
-.slide{position:absolute;inset:0;padding:56px 64px;display:none}
-.slide.on{display:block}
-h1{font-family:Cambria,Georgia,serif;font-size:50px;color:var(--green);margin:0;line-height:1.1}
+/* Aussehen: gemeinsames Präsentationsdesign (praesentation-design.css, Fach Biologie = Grün).
+   Hier nur, was diese Stunde zusätzlich braucht. Orange als Text ist abgedunkelt (--ot), damit es lesbar bleibt. */
+:root{--green:var(--g);--orange:var(--o);--ot:#B3560A;--blue:var(--b);--lg:var(--mint);--lo:#FDF0D8;--line:#9FB3AA;--lgrey:#B9C3BF;--onacc:#fff;--muted:var(--grey)}
+.slide{background:#fff}
+.slide.dark{background:var(--dk)}
+.slide.dark h1{color:#fff}
+.slide.dark .card{color:var(--ink)}
+.slide.dark .hint,.slide.dark .muted{color:#D5E8DF}
 .card{border-radius:20px;background:var(--lg);padding:30px 36px}
 .card.o{background:var(--lo)}
 .abs{position:absolute}
 .q{font-size:34px;line-height:1.35}
 .who{font-size:22px;font-weight:700;color:var(--green)}
-.who.o{color:var(--orange)}
+.who.o{color:var(--ot)}
 .hl{color:var(--green);font-weight:700}
-.muted{color:var(--muted)}
 button{font-family:inherit}
-.badge{position:absolute;right:64px;top:40px;width:104px;height:104px;border-radius:50%;background:var(--orange);color:var(--onacc);font-weight:700;font-size:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:0;cursor:pointer;line-height:1.2}
-.badge small{display:block;font-size:13px;font-weight:400}
-.btn{background:var(--green);color:var(--onacc);border:0;border-radius:12px;padding:10px 20px;font-size:20px;font-weight:700;cursor:pointer;min-height:48px}
+.tmr{position:absolute;right:64px;top:40px;width:104px;height:104px;border-radius:50%;background:var(--y);color:var(--ink);font-weight:700;font-size:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:0;cursor:pointer;line-height:1.2;touch-action:manipulation}
+.tmr small{display:block;font-size:13px;font-weight:400;color:var(--ink)}
+.btn{background:var(--green);color:#fff;border:0;border-radius:12px;padding:10px 20px;font-size:20px;font-weight:700;cursor:pointer;min-height:48px;touch-action:manipulation}
 .btn.sec{background:var(--lg);color:var(--ink);border:2px solid var(--line)}
-.btn.o{background:var(--orange)}
+.btn.o{background:var(--y);color:var(--ink)}
 .btn:disabled{opacity:.45;cursor:default}
 .step{display:flex;align-items:center;gap:18px;font-size:24px;margin:0 0 20px}
-.num{width:44px;height:44px;border-radius:50%;background:var(--green);color:var(--onacc);font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;font-size:22px}
-.num.o{background:var(--orange)}
+.num{width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;font-size:22px}
+.num.o{background:var(--y);color:var(--ink)}
 .rule{font-size:23px;margin:0 0 18px;line-height:1.3}
-.rule b{color:var(--orange);margin-right:10px}
+.rule b{color:var(--ot);margin-right:10px}
 .leg{display:flex;align-items:center;gap:14px;font-size:22px;margin-bottom:12px}
 .cell{width:44px;height:44px;border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;flex:none}
-.cG{background:var(--green);color:var(--onacc)} .cU{background:var(--orange);color:var(--onacc);border-color:var(--orange)} .cN{border:4px solid var(--ink)}
+.cG{background:var(--green);color:#fff} .cU{background:var(--o);color:var(--ink);border-color:var(--o)} .cN{border:4px solid var(--ink)}
 table{border-collapse:collapse;width:100%;font-size:22px}
-th{background:var(--green);color:var(--onacc);padding:12px;font-size:22px}
+th{background:var(--green);color:#fff;padding:12px;font-size:22px}
 td{border:1.5px solid var(--line);padding:0 12px;height:66px;text-align:center}
 td:first-child{background:var(--lg);text-align:left;font-weight:700;font-size:19px}
-td[contenteditable]{outline:none;font-size:28px;color:var(--orange);font-weight:700}
+td[contenteditable]{outline:none;font-size:28px;color:var(--ot);font-weight:700}
 td[contenteditable]:focus{background:var(--lo)}
 .rnd{width:376px;height:200px;border-radius:20px;background:var(--lg);padding:22px 28px;position:absolute;top:150px}
 .rnd.o{background:var(--lo)}
-.rnd h3{font-family:Cambria,Georgia,serif;font-size:28px;color:var(--green);margin:0 0 4px}
-.rnd .t{font-size:24px;font-weight:700;color:var(--orange);margin-bottom:6px}
+.rnd h3{color:var(--green);margin:0 0 4px;font-size:28px}
+.rnd .t{font-size:24px;font-weight:700;color:var(--ot);margin-bottom:6px}
 .rnd p{margin:0;font-size:22px;line-height:1.3}
-.rolebtn{display:flex;align-items:center;gap:12px;font-size:22px;position:absolute;top:390px;background:var(--lg);border:2px solid var(--line);border-radius:16px;padding:10px 18px 10px 10px;cursor:pointer;color:var(--ink);font-weight:600;min-height:68px}
+.rolebtn{display:flex;align-items:center;gap:12px;font-size:22px;position:absolute;top:390px;background:var(--lg);border:2px solid var(--line);border-radius:16px;padding:10px 18px 10px 10px;cursor:pointer;color:var(--ink);font-weight:700;min-height:68px;touch-action:manipulation}
 .rolebtn .num{width:48px;height:48px;font-size:24px}
-/* Navigation links unten: das Dock des Portals liegt rechts, deshalb steht die Folienleiste hier links */
-.tb{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:max(14px,env(safe-area-inset-bottom,0px));display:flex;gap:8px;z-index:5}
-.tb button{background:var(--green);color:var(--onacc);border:0;border-radius:10px;padding:10px 16px;font:600 15px Calibri,"Segoe UI",Arial,sans-serif;cursor:pointer;min-height:44px}
-.tb button.sec{background:var(--lg);color:var(--ink)}
-.cnt{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(max(14px,env(safe-area-inset-bottom,0px)) + 56px);font:600 15px Calibri,"Segoe UI",Arial,sans-serif;color:var(--muted);z-index:5}
-#notes{position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;background:var(--lo);color:var(--ink);padding:16px 22px calc(16px + env(safe-area-inset-bottom,0px));font-size:17px;line-height:1.45;border-top:3px solid var(--orange);display:none;z-index:2000}
+.hint{font-size:19px;color:var(--grey)}
+/* Fortschrittsbalken (wie in der Vorlage) */
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+/* Blätterpfeile für das Board: groß, in beiden unteren Ecken, ohne Wischen oder Tastatur bedienbar */
+.pfeil{position:fixed;bottom:max(12px,env(safe-area-inset-bottom));z-index:30;width:84px;height:84px;border-radius:50%;border:4px solid #fff;background:var(--dk);color:#fff;display:grid;place-items:center;padding:0;cursor:pointer;touch-action:manipulation;box-shadow:0 6px 18px -6px rgba(0,0,0,.5)}
+.pfeil.l{left:max(12px,env(safe-area-inset-left))}.pfeil.r{right:max(12px,env(safe-area-inset-right));background:var(--y);color:var(--ink);border-color:var(--ink)}
+.pfeil svg{width:44px;height:44px;fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.pfeil:active:not(:disabled){transform:scale(.95)}
+.pfeil:disabled{opacity:.2;cursor:default}
+.pfeil:focus-visible{outline:4px solid var(--b);outline-offset:3px}
+/* Fußzeile mittig zwischen den Pfeilen */
+#fuss{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));display:flex;gap:14px;align-items:center;z-index:30;font-size:17px;color:#fff;background:rgba(26,43,36,.78);border-radius:12px;padding:4px 6px 4px 14px}
+#fuss button{border:0;border-radius:10px;background:rgba(255,255,255,.18);color:#fff;font-size:16px;font-weight:700;padding:0 14px;min-height:44px;cursor:pointer}
+#notes{position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;background:#1A2B24;color:#fff;padding:16px 110px calc(16px + env(safe-area-inset-bottom,0px));font-size:17px;line-height:1.45;border-top:3px solid var(--y);display:none;z-index:2000}
 #notes.on{display:block}
-#notes b{color:var(--orange)}
-.hint{font-size:19px;color:var(--muted)}
+#notes b{color:var(--y)}
 /* Impuls */
 .w{cursor:pointer;border-radius:6px;padding:0 2px;transition:background .12s}
-.w.mark{background:var(--orange);color:var(--onacc)}
+.w.mark{background:var(--y);color:var(--ink)}
 /* Fragen */
-#qin{font:22px Calibri,"Segoe UI",Arial,sans-serif;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:var(--stage);color:var(--ink);width:430px;min-height:48px}
+#qin{font:22px Andika,Verdana,sans-serif;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);width:430px;min-height:48px}
 #qlist{overflow:auto;height:300px;padding-right:6px}
 .qc{display:flex;align-items:center;gap:10px;background:var(--lg);border-radius:14px;padding:10px 14px;margin-bottom:10px;font-size:21px;line-height:1.25}
 .qc span.t{flex:1}
-.qc button{border:2px solid var(--line);background:var(--stage);color:var(--ink);border-radius:10px;font-size:18px;font-weight:700;padding:6px 10px;cursor:pointer;min-height:44px}
-.qc button.pick{background:var(--orange);color:var(--onacc);border-color:var(--orange)}
-#lf{font-family:Cambria,Georgia,serif;font-size:27px;line-height:1.3;min-height:76px;outline:none;border-bottom:2px solid var(--line);padding-bottom:6px}
+.qc button{border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;font-size:18px;font-weight:700;padding:6px 10px;cursor:pointer;min-height:44px}
+.qc button.pick{background:var(--y);color:var(--ink);border-color:var(--y)}
+#lf{font-size:27px;line-height:1.3;min-height:76px;outline:none;border-bottom:2px solid var(--line);padding-bottom:6px}
 /* Spielfeld */
 #grid{display:grid;grid-template-columns:repeat(5,100px);grid-auto-rows:100px;gap:6px}
-.gc{border:2px solid var(--green);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:34px;font-weight:700;cursor:pointer;user-select:none;position:relative;background:var(--stage);color:var(--ink)}
+.gc{border:2px solid var(--green);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:34px;font-weight:700;cursor:pointer;user-select:none;position:relative;background:#fff;color:var(--ink)}
 .gc.G{background:var(--lg)}
 .gc.N{border:5px solid var(--ink)}
-.gc.inf{background:var(--orange);color:var(--onacc);border-color:var(--orange)}
-.gc small{font-size:18px;font-weight:700;line-height:1}
-.gc .ci{position:absolute;top:2px;left:6px;font-size:13px;color:var(--muted);font-weight:400}
-.gc.inf .ci{color:var(--onacc)}
+.gc.inf{background:var(--o);color:var(--ink);border-color:var(--o)}
+.gc small{font-size:18px;font-weight:700;line-height:1;color:inherit}
+.gc .ci{position:absolute;top:2px;left:6px;font-size:13px;color:var(--grey);font-weight:400}
+.gc.inf .ci{color:var(--ink)}
 .stat{font-size:24px;margin:0 0 8px}
-.stat b{font-size:34px;color:var(--orange);margin-left:8px}
+.stat b{font-size:34px;color:var(--ot);margin-left:8px}
 .seg{display:flex;gap:8px;margin-bottom:14px}
 .seg button{flex:1}
-.seg button.on{background:var(--green);color:var(--onacc);border-color:var(--green)}
+.seg button.on{background:var(--green);color:#fff;border-color:var(--green)}
 /* Labor */
 #dots{display:grid;grid-template-columns:repeat(10,22px);gap:4px}
 #dots i{width:22px;height:22px;border-radius:50%;background:var(--green)}
-#dots i.U{background:var(--grey)} #dots i.I{background:var(--orange)}
-input[type=range]{width:100%;accent-color:var(--orange);height:32px}
+#dots i.U{background:var(--lgrey)} #dots i.I{background:var(--o)}
+input[type=range]{width:100%;accent-color:var(--green);height:32px}
 .lab label{display:block;font-size:20px;font-weight:700;margin:8px 0 0}
 /* Blitzlicht */
 .bar-area{display:flex;gap:18px;align-items:flex-end;height:230px;margin-top:6px}
@@ -110,47 +108,47 @@ input[type=range]{width:100%;accent-color:var(--orange);height:32px}
 .bcol .bar{width:100%;border-radius:10px 10px 0 0;min-height:6px;transition:height .25s}
 .bcol .n{font-size:34px;font-weight:700;margin-bottom:4px}
 .bl{display:flex;gap:8px;margin-top:8px}
-.bl button{flex:1;border:2px solid var(--line);background:var(--stage);color:var(--ink);border-radius:10px;font-size:22px;font-weight:700;min-height:48px;cursor:pointer}
-.bl button.p{background:var(--green);color:var(--onacc);border-color:var(--green)}
+.bl button{flex:1;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;font-size:22px;font-weight:700;min-height:48px;cursor:pointer}
+.bl button.p{background:var(--green);color:#fff;border-color:var(--green)}
 .lbl{font-size:20px;font-weight:700;text-align:center;margin-top:8px;min-height:52px}
 /* Exit */
-.chk{display:flex;align-items:center;gap:18px;font-size:26px;margin-bottom:16px;cursor:pointer;user-select:none}
-.box{width:44px;height:44px;border:3px solid var(--green);border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--onacc)}
+.chk{display:flex;align-items:center;gap:18px;font-size:25px;margin-bottom:8px;cursor:pointer;user-select:none}
+.box{width:44px;height:44px;border:3px solid var(--green);border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff}
 .chk.on .box{background:var(--green)}
-/* Reveal */
+/* Aufdecken */
 .rv.hide{filter:blur(9px);cursor:pointer;user-select:none}
 .rv{cursor:pointer;transition:filter .2s}
-/* Modal */
+/* Rollenkarten */
 .modal{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:20;padding:40px}
 .modal.on{display:flex}
-.mcard{background:var(--stage);border:3px solid var(--green);border-radius:22px;padding:26px 38px;width:900px;max-height:640px;overflow:auto;font-size:21px;line-height:1.35;position:relative}
+.mcard{background:#fff;border:3px solid var(--green);border-radius:22px;padding:26px 38px;width:900px;max-height:640px;overflow:auto;font-size:21px;line-height:1.35;position:relative}
 .mclose{position:absolute;right:18px;top:14px;border:0;background:var(--lg);color:var(--ink);border-radius:10px;font-size:20px;font-weight:700;padding:8px 14px;cursor:pointer;min-height:44px}
-.mcard h2{font-family:Cambria,Georgia,serif;color:var(--green);margin:0 0 6px;font-size:34px}
-.mcard h4{margin:10px 0 3px;font-size:20px;color:var(--orange)}
+.mcard h2{color:var(--green);margin:0 0 6px;font-size:34px}
+.mcard h4{margin:10px 0 3px;font-size:20px;color:var(--ot)}
 .mcard ul{margin:0;padding-left:26px}
 .mcard li{margin-bottom:4px}
-svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
+svg text{font-family:Andika,Verdana,sans-serif}
 </style>
 </head>
-<body data-root="../../../../" data-title="Impfen – ja oder nein?" data-subject="Biologie" data-grade="Klasse 9">
-<div id="wrap"><div id="stage">
+<body class="lp-pres" data-root="../../../../" data-title="Impfen – ja oder nein?" data-subject="Biologie" data-grade="Klasse 9">
+<div id="buehne"><div id="stage">
 
 <!-- 1 Do Now -->
 <section class="slide" data-min="3" data-note="<b>Do Now (0–3 Min.):</b> Wiederholung aus Std. 10. SuS bearbeiten die Aufgabe beim Betreten still und schriftlich ins Heft. Anwesenheit prüfen. <b>Abgleich (3–5 Min.):</b> zwei SuS lesen vor; danach klicken SuS das Schema rechts mit „Weiter“ Schritt für Schritt durch. Tafel: „Gedächtniszellen → schnelle Antikörper → keine Erkrankung“. Falls die Vorstunde anders war: Aufgabe anpassen.">
   <h1>Do Now</h1>
-  <button class="badge" data-timer="180" title="Timer starten">3 Min.<small>Start</small></button>
+  <button class="tmr" data-timer="180" title="Timer starten">3 Min.<small>Start</small></button>
   <div class="card abs" style="left:64px;top:160px;width:600px;height:290px;display:flex;align-items:center">
     <div class="q" style="font-size:36px"><span class="hl">Erkläre</span> in zwei Sätzen, warum ein geimpfter Mensch bei Kontakt mit dem Erreger nicht erkrankt.</div>
   </div>
-  <div class="abs" style="left:64px;top:480px;font-size:26px;font-weight:700;color:var(--orange)">Nutze: Gedächtniszellen · Antikörper</div>
+  <div class="abs" style="left:64px;top:480px;font-size:26px;font-weight:700;color:var(--ot)">Nutze: Gedächtniszellen · Antikörper</div>
   <div class="abs muted" style="left:64px;top:540px;font-size:20px">Schreibe ins Heft. Du darfst dir die Aufgabe vorlesen lassen.</div>
   <div class="abs" style="left:700px;top:150px;width:516px">
-    <svg id="imm" viewBox="0 0 440 340" width="516" height="398" role="img" aria-label="Schema: Impfung, Gedächtniszellen, Erreger, Antikörper">
+    <svg id="imm" viewBox="0 0 440 340" width="440" height="340" role="img" aria-label="Schema: Impfung, Gedächtniszellen, Erreger, Antikörper">
       <rect x="6" y="8" width="428" height="324" rx="40" fill="var(--lg)" stroke="var(--green)" stroke-width="3"/>
       <text x="26" y="40" font-size="17" font-weight="700" fill="var(--green)">Körper</text>
       <g class="st s1" opacity="0">
-        <circle cx="80" cy="95" r="17" fill="var(--grey)"/>
-        <g stroke="var(--grey)" stroke-width="4" stroke-linecap="round"><line x1="80" y1="68" x2="80" y2="76"/><line x1="80" y1="114" x2="80" y2="122"/><line x1="53" y1="95" x2="61" y2="95"/><line x1="99" y1="95" x2="107" y2="95"/></g>
+        <circle cx="80" cy="95" r="17" fill="var(--lgrey)"/>
+        <g stroke="var(--lgrey)" stroke-width="4" stroke-linecap="round"><line x1="80" y1="68" x2="80" y2="76"/><line x1="80" y1="114" x2="80" y2="122"/><line x1="53" y1="95" x2="61" y2="95"/><line x1="99" y1="95" x2="107" y2="95"/></g>
         <text x="24" y="148" font-size="16" fill="var(--ink)">Impfstoff</text>
         <text x="24" y="167" font-size="13" fill="var(--muted)">(macht nicht krank)</text>
         <path d="M118 112 L172 195" stroke="var(--ink)" stroke-width="3" fill="none" marker-end="url(#ar)"/>
@@ -165,7 +163,7 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
       <g class="st s3" opacity="0">
         <circle cx="360" cy="120" r="26" fill="var(--orange)"/>
         <g stroke="var(--orange)" stroke-width="5" stroke-linecap="round"><line x1="360" y1="86" x2="360" y2="94"/><line x1="360" y1="146" x2="360" y2="154"/><line x1="326" y1="120" x2="334" y2="120"/><line x1="386" y1="120" x2="394" y2="120"/><line x1="336" y1="96" x2="342" y2="102"/><line x1="378" y1="138" x2="384" y2="144"/><line x1="384" y1="96" x2="378" y2="102"/><line x1="342" y1="138" x2="336" y2="144"/></g>
-        <text x="360" y="198" font-size="17" font-weight="700" text-anchor="middle" fill="var(--orange)">Erreger</text>
+        <text x="360" y="198" font-size="17" font-weight="700" text-anchor="middle" fill="var(--ot)">Erreger</text>
       </g>
       <g class="st s4" opacity="0">
         <g stroke="var(--blue)" stroke-width="5" stroke-linecap="round" fill="none">
@@ -187,12 +185,12 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
 </section>
 
 <!-- 2 Impuls -->
-<section class="slide" data-min="2" data-note="<b>Impuls (5–7 Min.):</b> 1 Minute stumm lesen lassen. SuS tippen die Schlüsselwörter an (Markierung wird orange). Dann Partneraustausch. Impulsfragen: „Was fällt euch auf?“ „Was passt hier nicht zusammen?“ Die Leitfrage NICHT nennen. Beide Aussagen sind fiktiv; die Figuren sind gezeichnete Symbolfiguren.">
+<section class="slide dark" data-min="2" data-note="<b>Impuls (5–7 Min.):</b> 1 Minute stumm lesen lassen. SuS tippen die Schlüsselwörter an (Markierung wird orange). Dann Partneraustausch. Impulsfragen: „Was fällt euch auf?“ „Was passt hier nicht zusammen?“ Die Leitfrage NICHT nennen. Beide Aussagen sind fiktiv; die Figuren sind gezeichnete Symbolfiguren.">
   <h1>Zwei Aussagen</h1>
   <div class="abs hint" style="left:420px;top:76px">Tippe die wichtigsten Wörter an.</div>
   <div class="card abs" style="left:64px;top:160px;width:550px;height:440px">
     <svg viewBox="0 0 120 120" width="110" height="110" class="abs" style="right:28px;top:22px" role="img" aria-label="Herr Lehmann, Symbolfigur">
-      <circle cx="60" cy="40" r="24" fill="var(--grey)"/><path d="M36 36 Q60 8 84 36 Q60 24 36 36z" fill="var(--ink)"/>
+      <circle cx="60" cy="40" r="24" fill="var(--lgrey)"/><path d="M36 36 Q60 8 84 36 Q60 24 36 36z" fill="var(--ink)"/>
       <rect x="24" y="68" width="72" height="48" rx="22" fill="var(--green)"/>
       <path d="M46 84 Q60 94 74 84" stroke="var(--onacc)" stroke-width="3" fill="none" stroke-linecap="round"/>
     </svg>
@@ -202,13 +200,13 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
   <div class="card o abs" style="left:666px;top:160px;width:550px;height:440px">
     <svg viewBox="0 0 120 120" width="110" height="110" class="abs" style="right:28px;top:22px" role="img" aria-label="Mia, Symbolfigur">
       <rect x="22" y="62" width="76" height="54" rx="20" fill="var(--blue)"/>
-      <circle cx="60" cy="40" r="22" fill="var(--grey)"/><path d="M38 38 Q40 14 60 14 Q80 14 82 38 Q60 24 38 38z" fill="var(--orange)"/>
+      <circle cx="60" cy="40" r="22" fill="var(--lgrey)"/><path d="M38 38 Q40 14 60 14 Q80 14 82 38 Q60 24 38 38z" fill="var(--orange)"/>
       <rect x="82" y="72" width="22" height="30" rx="7" fill="var(--orange)"/>
     </svg>
     <div class="q wordify" style="width:350px">„Wegen meiner Behandlung darf ich nicht gegen Masern geimpft werden. Ab Montag gehe ich wieder zur Schule.“</div>
     <div class="who o abs" style="left:36px;bottom:30px">Mia, 8 Jahre</div>
   </div>
-  <div class="abs muted" style="left:64px;top:628px;font-size:18px">Fiktive Aussagen und Symbolfiguren für den Unterricht</div>
+  <div class="abs muted" style="left:110px;top:606px;font-size:18px">Fiktive Aussagen und Symbolfiguren für den Unterricht</div>
 </section>
 
 <!-- 3 Fragen -->
@@ -225,7 +223,7 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
     <div id="qlist" style="margin-top:14px"></div>
   </div>
   <div class="card abs" style="left:64px;top:470px;width:1152px;height:150px;border:3px solid var(--green);padding:18px 30px">
-    <div style="font-family:Cambria,Georgia,serif;font-size:24px;font-weight:700;color:var(--green)">Unsere Frage für heute:</div>
+    <div style="font-size:24px;font-weight:700;color:var(--green)">Unsere Frage für heute:</div>
     <div id="lf" contenteditable="true" spellcheck="false"></div>
   </div>
 </section>
@@ -296,14 +294,14 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
     <tr><td>Erkrankte mit N</td><td contenteditable id="a3"></td><td contenteditable id="b3"></td></tr>
   </table>
   <button class="btn sec abs" id="sol" style="left:64px;top:520px">Lösung zeigen</button>
-  <div class="card abs lab" style="left:660px;top:135px;width:556px;height:500px;padding:18px 26px">
-    <div style="font-family:Cambria,Georgia,serif;font-size:26px;font-weight:700;color:var(--green)">Herdenimmunität-Labor</div>
+  <div class="card abs lab" style="left:660px;top:135px;width:556px;height:480px;padding:18px 26px">
+    <div style="font-size:26px;font-weight:700;color:var(--green)">Herdenimmunität-Labor</div>
     <div style="display:flex;gap:20px;margin-top:8px">
       <div id="dots"></div>
       <div style="flex:1;font-size:17px;line-height:1.4">
         <div><span style="color:var(--green)">●</span> geimpft</div>
-        <div><span style="color:var(--grey)">●</span> ungeimpft, gesund</div>
-        <div><span style="color:var(--orange)">●</span> erkrankt</div>
+        <div><span style="color:var(--lgrey)">●</span> ungeimpft, gesund</div>
+        <div><span style="color:var(--ot)">●</span> erkrankt</div>
         <button class="btn" id="lgo" style="margin:8px 0 6px;padding:6px 12px;font-size:18px;min-height:44px">Neuer Ausbruch</button>
         <div id="lres" style="font-size:17px;line-height:1.3"></div>
       </div>
@@ -316,7 +314,7 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
 <!-- 7 Debatte -->
 <section class="slide" data-min="15" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollenkarten ziehen (Papier) oder hier A–D antippen: Die Karte öffnet sich im Vollbild-Fenster. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
   <h1>Debatte in vier Rollen</h1>
-  <button class="badge" data-timer="180,270,90" title="Timer: Runde 1, 2, 3">Timer<small>Runde 1</small></button>
+  <button class="tmr" data-timer="180,270,90" title="Timer: Runde 1, 2, 3">Timer<small>Runde 1</small></button>
   <div class="rnd" style="left:64px;top:150px"><h3>Runde 1</h3><div class="t">3 Min.</div><p>Statements: jede Rolle 45 Sekunden</p></div>
   <div class="rnd" style="left:452px;top:150px"><h3>Runde 2</h3><div class="t">4,5 Min.</div><p>Diskussion: geht auf andere ein</p></div>
   <div class="rnd o" style="left:840px;top:150px"><h3>Runde 3</h3><div class="t">1,5 Min.</div><p>Entscheidung der Gruppe</p></div>
@@ -325,7 +323,7 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
   <button class="rolebtn" style="left:330px;top:410px" data-role="B"><span class="num">B</span>Kinderärztin</button>
   <button class="rolebtn" style="left:640px;top:410px" data-role="C"><span class="num">C</span>Vater von Mia</button>
   <button class="rolebtn" style="left:980px;top:410px" data-role="D"><span class="num">D</span>Jurist</button>
-  <div class="abs" style="left:64px;top:545px;font-size:24px;font-weight:700;color:var(--orange)">Argumente statt Meinungen. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
+  <div class="abs" style="left:64px;top:545px;font-size:24px;font-weight:700;color:var(--ot)">Argumente statt Meinungen. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
   <div class="modal" id="rmodal"><div class="mcard" id="rcard"></div></div>
 </section>
 
@@ -339,12 +337,12 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
 <!-- 9 Exit -->
 <section class="slide" data-min="5" data-note="<b>Exit (39–45 Min.):</b> Exit-Ticket (A5) schreiben lassen und einsammeln. Die Checkliste hilft beim Selbstcheck. Bewertet wird die Begründung, nicht die Position.">
   <h1>Exit-Ticket</h1>
-  <button class="badge" data-timer="300" title="Timer starten">5 Min.<small>Start</small></button>
+  <button class="tmr" data-timer="300" title="Timer starten">5 Min.<small>Start</small></button>
   <div class="card abs" style="left:64px;top:150px;width:1152px;height:230px;display:flex;align-items:center">
     <div class="q" style="font-size:34px"><span class="hl">Beurteile</span>, ob eine Impfpflicht gegen Masern in Schulen gerechtfertigt ist. Begründe mit dem Begriff <b>Herdenimmunität</b> und nenne ein Gegenargument, das du ernst nimmst.</div>
   </div>
-  <div class="abs" style="left:64px;top:410px;width:700px" id="chks"></div>
-  <div class="abs" id="done" style="left:800px;top:430px;font-family:Cambria,Georgia,serif;font-size:40px;font-weight:700;color:var(--green);display:none">✔ Geschafft!</div>
+  <div class="abs" style="left:64px;top:402px;width:700px" id="chks"></div>
+  <div class="abs" id="done" style="left:800px;top:430px;font-size:40px;font-weight:700;color:var(--green);display:none">✔ Geschafft!</div>
   <div class="abs muted" style="left:800px;top:520px;width:416px;font-size:19px;line-height:1.35">Satzbausteine: Ich halte eine Impfpflicht für (nicht) gerechtfertigt, weil … · Ein wichtiges Gegenargument ist …, aber …</div>
 </section>
 
@@ -364,34 +362,34 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
   </div>
   <div class="card o abs" style="left:656px;top:190px;width:560px;height:400px;font-size:27px;line-height:1.35">
     <p class="rv hide" style="margin:0 0 16px"><b class="hl">Pro:</b> Schutz für Schwache, hohe Quote nötig</p>
-    <p class="rv hide" style="margin:0 0 16px"><b style="color:var(--orange)">Contra:</b> Selbstbestimmung, Sorge vor Nebenwirkungen</p>
+    <p class="rv hide" style="margin:0 0 16px"><b style="color:var(--ot)">Contra:</b> Selbstbestimmung, Sorge vor Nebenwirkungen</p>
     <p class="rv hide" style="margin:0"><b>Rahmen:</b> keine Zwangsimpfung, aber Nachweispflicht</p>
   </div>
-  <div class="abs rv hide" style="left:64px;top:620px;font-family:Cambria,Georgia,serif;font-size:30px;font-weight:700;color:var(--green)">Impfen schützt mich und andere.</div>
-  <div class="abs hint" style="left:700px;top:630px">Tippe auf unscharfe Stellen zum Aufdecken.</div>
+  <div class="abs rv hide" style="left:110px;top:602px;font-size:30px;font-weight:700;color:var(--green)">Impfen schützt mich und andere.</div>
+  <div class="abs hint" style="left:700px;top:606px">Tippe auf unscharfe Stellen zum Aufdecken.</div>
 </section>
 
+<div id="nav"><i></i></div>
 </div></div>
 
-<div class="cnt" id="cnt"></div>
-<div class="tb">
-  <button class="sec" id="bPrev" aria-label="Zurück">←</button>
-  <button class="sec" id="bNext" aria-label="Weiter">→</button>
-  <button class="sec" id="bNotes">Notizen (N)</button>
-</div>
+<button class="pfeil l" id="bPrev" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="bNext" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+<div id="fuss"><span id="cnt"></span><button id="bNotes" type="button">Notizen (N)</button></div>
 <div id="notes"></div>
 
 <script>
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
-  var slides=$$('.slide'), cur=0, stage=$('#stage'), notes=$('#notes'), cnt=$('#cnt');
-  function fit(){var s=Math.min(window.innerWidth/1280,window.innerHeight/720);stage.style.transform='scale('+s+')';}
+  var slides=$$('.slide'), cur=0, stage=$('#stage'), buehne=$('#buehne'), notes=$('#notes'), cnt=$('#cnt'), balken=$('#nav i');
+  function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')';}
   window.addEventListener('resize',fit);fit();
   function show(i,fromHash){
     cur=Math.max(0,Math.min(slides.length-1,i));
     slides.forEach(function(s,k){s.classList.toggle('on',k===cur);});
     notes.innerHTML='<b>Lehrkraft, Folie '+(cur+1)+':</b> '+(slides[cur].getAttribute('data-note')||'');
     cnt.textContent=(cur+1)+' / '+slides.length;
+    balken.style.width=((cur+1)/slides.length*100)+'%';
+    $('#bPrev').disabled=cur===0;$('#bNext').disabled=cur===slides.length-1;
     stopTimer(); stopPlay();
     if(!fromHash){try{history.replaceState(null,'','#folie'+(cur+1));}catch(e){}}
   }
@@ -551,7 +549,7 @@ svg text{font-family:Calibri,"Segoe UI",Arial,sans-serif}
   /* 8 Blitzlicht */
   function bz(host,title){
     var opts=[['Impfpflicht ja','var(--green)'],['keine Pflicht','var(--orange)'],['andere Lösung','var(--blue)']],cnts=[0,0,0];
-    host.innerHTML='<div style="font-family:Cambria,Georgia,serif;font-size:28px;font-weight:700;color:var(--green)">'+title+'</div><div class="bar-area"></div><div class="bl-wrap"></div>';
+    host.innerHTML='<div style="font-size:28px;font-weight:700;color:var(--green)">'+title+'</div><div class="bar-area"></div><div class="bl-wrap"></div>';
     var area=host.querySelector('.bar-area'),wrap=host.querySelector('.bl-wrap');
     var cols=opts.map(function(o,i){var c=document.createElement('div');c.className='bcol';c.innerHTML='<div class="n">0</div><div class="bar" style="background:'+o[1]+';height:6px"></div>';area.appendChild(c);return c;});
     var row=document.createElement('div');row.style.display='flex';row.style.gap='18px';wrap.appendChild(row);
