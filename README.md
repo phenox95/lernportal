@@ -314,7 +314,7 @@ Die Einträge in `projects.json` und `impuls.json` sind Beispiele. Vor dem produ
 
 ## Beispiel: Erneuerbare Energien (Geografie 9)
 
-Ordner `geografie/klasse-9/ressourcen/erneuerbare-energien/`, Themenfeld 3.5 „Umgang mit Ressourcen“. Zwei Doppelstunden als Materialseite (`index.html` mit `dateien` in `projects.json`): Stunde 1 (`praesentation/`), Stunde 2 Strom, Wärme, Verkehr (`heizen-verkehr/`, dazu `material/AB_Strom_Waerme_Verkehr.docx`) und ein Quiz (`quiz/`). **Der Erwartungshorizont liegt bewusst nicht im Repository.**
+Ordner `geografie/klasse-9/ressourcen/erneuerbare-energien/`, Themenfeld 3.5 „Umgang mit Ressourcen“. Zwei Doppelstunden als Materialseite (`index.html` mit `dateien` in `projects.json`): Stunde 1 (`praesentation/`), Stunde 2 Strom, Wärme, Verkehr (`heizen-verkehr/`, dazu `material/AB_Strom_Waerme_Verkehr.docx`, ein vierseitiges Materialheft) und ein Quiz (`quiz/`). **Der Erwartungshorizont liegt bewusst nicht im Repository.**
 
 Beide Präsentationen folgen dem gemeinsamen Aufbau (Bühne 1280 × 720, `praesentation-design.css`, Fachfarbe Geografie, Andika) und haben Stift (P), Timer (T), Lärmampel (L) und Belohnungsspiele aus `assets/js/praesentation.js`. Eigene Ergänzungen für diese Stunden: `assets/energie.css` (nur Layout und Zustände, keine eigenen Farben), `assets/interaktiv.js` (interaktive Bausteine, arbeitet mit `data-ia`-Attributen, keine Speicherung), `assets/icons.js` (lokale Linien-Symbole) und `assets/qrcode.js` (QR-Code zum Quiz).
 
