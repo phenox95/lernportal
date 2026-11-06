@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Rollenkarte – Impfen</title>
+<style>
+@font-face{font-family:Andika;src:url(../../../../../assets/fonts/andika-regular.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Andika;src:url(../../../../../assets/fonts/andika-bold.woff2) format('woff2');font-weight:700;font-display:swap}
+:root{--dk:#0B4F3C;--g:#0F6E56;--mint:#E8F3EC;--y:#F4B400;--ink:#1A2B24;--ot:#B3560A}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Andika,Verdana,sans-serif;font-size:20px;line-height:1.5;text-align:left}
+header{background:var(--dk);color:#fff;padding:18px 16px}
+header p{margin:0;font-size:16px;color:#D5E8DF}
+header h1{margin:2px 0 0;font-size:28px;line-height:1.2}
+main{max-width:40em;margin:0 auto;padding:18px 16px 40px}
+.pos{background:var(--mint);border-radius:14px;padding:14px 16px;margin:0 0 8px}
+h2{font-size:20px;color:var(--ot);margin:22px 0 6px}
+ul{margin:0;padding-left:1.2em}
+li{margin-bottom:10px}
+.frage{border:3px solid var(--g);border-radius:14px;padding:14px 16px;font-weight:700}
+.fehler{padding:24px 16px}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+nav a{display:inline-flex;align-items:center;justify-content:center;min-width:56px;min-height:56px;border-radius:12px;background:var(--g);color:#fff;font-weight:700;text-decoration:none;font-size:22px}
+nav a[aria-current="page"]{background:var(--y);color:var(--ink)}
+.hinweis{font-size:16px;color:#4d5d56;margin-top:24px}
+</style>
+</head>
+<body>
+<header><p>Debatte: Impfen – ja oder nein?</p><h1 id="titel">Rollenkarte</h1></header>
+<main id="inhalt"><p class="fehler">Die Rollenkarte wird geladen. Dafür braucht die Seite JavaScript.</p></main>
+<script src="../assets/rollen.js"></script>
+<script>
+(function(){
+  var R=window.IMPF_ROLLEN||{}, k=((/[?&]r=([A-Da-d])\b/.exec(location.search)||[])[1]||'').toUpperCase();
+  var main=document.getElementById('inhalt');
+  function el(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!==undefined)n.textContent=x;return n;}
+  main.textContent='';
+  if(!R[k]){
+    main.appendChild(el('p','fehler','Diese Rollenkarte gibt es nicht. Scanne den QR-Code auf der Folie noch einmal.'));
+    return;
+  }
+  var r=R[k];
+  document.title='Rolle '+k+': '+r.n+' – Impfen';
+  document.getElementById('titel').textContent='Rolle '+k+': '+r.n;
+  var pos=el('p','pos'); pos.appendChild(el('b','','Deine Position: ')); pos.appendChild(document.createTextNode(r.p)); main.appendChild(pos);
+  main.appendChild(el('h2','','Wer bist du?')); main.appendChild(el('p','',r.w));
+  if(r.t){main.appendChild(el('h2','','Das denkst du')); main.appendChild(el('p','',r.t));}
+  main.appendChild(el('h2','',r.h));
+  var ul=el('ul'); r.a.forEach(function(x){ul.appendChild(el('li','',x));}); main.appendChild(ul);
+  main.appendChild(el('h2','','Deine Frage an die anderen')); main.appendChild(el('p','frage',r.q));
+  main.appendChild(el('p','hinweis','Fiktive Rolle für den Unterricht. Du kannst dir den Text vorlesen lassen.'));
+})();
+</script>
+</body>
+</html>
