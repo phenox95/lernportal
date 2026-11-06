@@ -33,6 +33,26 @@ small{font-size:20px;color:var(--grey)}.center{text-align:center}.muted{color:va
 body[data-subject="Geografie"]{--g:#A9442B;--dk:#7C2F1C;--mint:#F5EBE1;--grey:#7D726B;--ink:#2B211E;--fach-rgb:169,68,43}
 body[data-subject="Biologie"]{--fach-rgb:15,110,86}
 
+/* Fragenfeld (Fragenentwicklung): <div data-fragenfeld></div>, gebaut von praesentation.js */
+.fragen{display:grid;grid-template-columns:400px 1fr;gap:20px 40px;margin-top:6px}
+.fragen-hilfe{display:grid;gap:14px;align-content:start;margin:0;padding:0;list-style:none}
+.fragen-hilfe li{display:flex;gap:14px;align-items:center;font-size:24px;line-height:1.3}
+.fragen-hilfe b{flex:none;width:44px;height:44px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-size:24px}
+.fragen-hilfe li:last-child b{background:var(--y);color:var(--ink)}
+.fragen-rechts{min-width:0}
+.fragen-neu{display:flex;gap:10px}
+.fragen-neu input{flex:1;min-width:0;font:22px Andika,Verdana,sans-serif;padding:10px 14px;border:2px solid var(--grey);border-radius:12px;min-height:48px;background:#fff;color:var(--ink)}
+.fragen-neu input:focus-visible,.fragen-text:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.lp-pr-aktion{font-family:inherit;font-size:20px;font-weight:700;border:0;border-radius:12px;padding:0 22px;min-height:48px;background:var(--g);color:#fff;cursor:pointer;touch-action:manipulation}
+.fragen-liste{height:250px;overflow:auto;margin-top:12px;display:grid;gap:10px;align-content:start;padding-right:6px}
+.fragen-karte{display:flex;gap:10px;align-items:center;background:var(--mint);border-radius:14px;padding:8px 12px;font-size:22px;line-height:1.25}
+.fragen-karte span{flex:1;min-width:0;overflow-wrap:anywhere}
+.fragen-karte button{min-height:44px;min-width:44px;border:2px solid var(--grey);background:#fff;color:var(--ink);border-radius:10px;font:700 18px Andika,Verdana,sans-serif;padding:4px 10px;cursor:pointer;touch-action:manipulation}
+.fragen-karte button.leit{background:var(--y);border-color:var(--y)}
+.fragen-leit{grid-column:1/-1;border:3px solid var(--g);border-radius:20px;background:var(--mint);padding:14px 26px}
+.fragen-label{font-size:22px;font-weight:700;color:var(--g)}
+.fragen-text{font-size:28px;line-height:1.3;min-height:64px;outline:none;border-bottom:2px solid var(--grey);padding-bottom:6px;color:var(--ink)}
+
 /* Bedienelemente der Folien (Blättern): groß genug zum Antippen */
 #tools{position:absolute;left:64px;bottom:50px;display:flex;gap:10px;align-items:center;z-index:12}
 #tools button{font-family:inherit;border:0;border-radius:12px;background:rgba(var(--fach-rgb,15,110,86),.92);color:#fff;font-size:24px;font-weight:700;height:44px;min-width:44px;padding:0 14px;cursor:pointer;touch-action:manipulation}
