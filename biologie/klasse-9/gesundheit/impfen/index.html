@@ -55,6 +55,10 @@ td[contenteditable]:focus{background:var(--lo)}
 .rolebtn{display:flex;align-items:center;gap:12px;font-size:22px;position:absolute;top:390px;background:var(--lg);border:2px solid var(--line);border-radius:16px;padding:10px 18px 10px 10px;cursor:pointer;color:var(--ink);font-weight:700;min-height:68px;touch-action:manipulation}
 .rolebtn .num{width:48px;height:48px;font-size:24px}
 .hint{font-size:19px;color:var(--grey)}
+.rolle{position:absolute;top:392px;width:270px;height:216px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.rolle .rolebtn{position:static;width:100%;justify-content:flex-start}
+.qr{width:140px;height:140px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:9px}
+.qr svg{display:block;width:100%;height:100%}
 /* Fortschrittsbalken (wie in der Vorlage) */
 #nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
 #nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
@@ -312,18 +316,18 @@ svg text{font-family:Andika,Verdana,sans-serif}
   </section>
 
 <!-- 7 Debatte -->
-<section class="slide" data-min="15" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollenkarten ziehen (Papier) oder hier A–D antippen: Die Karte öffnet sich im Vollbild-Fenster. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
+<section class="slide" data-min="15" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollen verteilen: SuS scannen den QR-Code ihrer Rolle mit dem Handy (Seite rolle/, nur über die Portal-Adresse, nicht aus einer lokalen Datei) oder tippen hier A–D an, dann öffnet sich die Karte im Fenster. Ohne Handys: Rollenkarten auf Papier. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
   <h1>Debatte in vier Rollen</h1>
   <button class="tmr" data-timer="180,270,90" title="Timer: Runde 1, 2, 3">Timer<small>Runde 1</small></button>
   <div class="rnd" style="left:64px;top:150px"><h3>Runde 1</h3><div class="t">3 Min.</div><p>Statements: jede Rolle 45 Sekunden</p></div>
   <div class="rnd" style="left:452px;top:150px"><h3>Runde 2</h3><div class="t">4,5 Min.</div><p>Diskussion: geht auf andere ein</p></div>
   <div class="rnd o" style="left:840px;top:150px"><h3>Runde 3</h3><div class="t">1,5 Min.</div><p>Entscheidung der Gruppe</p></div>
-  <div class="abs hint" style="left:64px;top:372px">Tippe auf eine Rolle, um die Rollenkarte zu lesen:</div>
-  <button class="rolebtn" style="left:64px;top:410px" data-role="A"><span class="num">A</span>Mutter</button>
-  <button class="rolebtn" style="left:330px;top:410px" data-role="B"><span class="num">B</span>Kinderärztin</button>
-  <button class="rolebtn" style="left:640px;top:410px" data-role="C"><span class="num">C</span>Vater von Mia</button>
-  <button class="rolebtn" style="left:980px;top:410px" data-role="D"><span class="num">D</span>Jurist</button>
-  <div class="abs" style="left:64px;top:545px;font-size:24px;font-weight:700;color:var(--ot)">Argumente statt Meinungen. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
+  <div class="abs hint" style="left:64px;top:358px">Scanne den Code deiner Rolle mit dem Handy oder tippe auf die Rolle.</div>
+  <div class="rolle" style="left:64px"><button class="rolebtn" data-role="A"><span class="num">A</span>Mutter</button><div class="qr" data-qr="A" role="img" aria-label="QR-Code zur Rollenkarte A"></div></div>
+  <div class="rolle" style="left:358px"><button class="rolebtn" data-role="B"><span class="num">B</span>Kinderärztin</button><div class="qr" data-qr="B" role="img" aria-label="QR-Code zur Rollenkarte B"></div></div>
+  <div class="rolle" style="left:652px"><button class="rolebtn" data-role="C"><span class="num">C</span>Vater von Mia</button><div class="qr" data-qr="C" role="img" aria-label="QR-Code zur Rollenkarte C"></div></div>
+  <div class="rolle" style="left:946px"><button class="rolebtn" data-role="D"><span class="num">D</span>Jurist</button><div class="qr" data-qr="D" role="img" aria-label="QR-Code zur Rollenkarte D"></div></div>
+  <div class="abs" style="left:110px;top:622px;font-size:22px;font-weight:700;color:var(--ot)">Argumente statt Meinungen. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
   <div class="modal" id="rmodal"><div class="mcard" id="rcard"></div></div>
 </section>
 
@@ -377,6 +381,8 @@ svg text{font-family:Andika,Verdana,sans-serif}
 <div id="fuss"><span id="cnt"></span><button id="bNotes" type="button">Notizen (N)</button></div>
 <div id="notes"></div>
 
+<script src="assets/rollen.js"></script>
+<script src="assets/qrcode.js"></script>
 <script>
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
@@ -531,18 +537,17 @@ svg text{font-family:Andika,Verdana,sans-serif}
   $('#lqs').oninput=lab;$('#lks').oninput=lab;$('#lgo').onclick=lab;lab();
 
   /* 7 Rollen */
-  var roles={
-    A:{n:'Frau Wagner, Mutter',p:'gegen eine Impfpflicht',w:'Du bist die Mutter von Leon (6 Jahre). Du liebst dein Kind und willst es schützen. Du willst selbst entscheiden, was in seinen Körper kommt.',t:'Masern hatten früher viele Kinder. Sie haben es überstanden. Du hast von Nebenwirkungen bei Impfungen gelesen und bist unsicher.',h:'Deine Argumente',a:['Eine Impfung ist ein Eingriff in den Körper. Eltern sollen darüber entscheiden.','Auch Impfungen können Nebenwirkungen haben, zum Beispiel Fieber oder Schmerzen an der Einstichstelle.','Eine Pflicht kann Misstrauen schaffen. Besser sind gute Aufklärung und ein Gespräch mit dem Arzt.'],q:'„Warum soll der Staat entscheiden und nicht ich?“'},
-    B:{n:'Dr. Kaya, Kinderärztin',p:'für eine Impfpflicht. Du nimmst die Sorgen der Eltern ernst.',w:'Du behandelst Kinder in einer Praxis. Du siehst, wie Infektionen verlaufen.',t:'',h:'Deine Fakten',a:['Masern sind sehr ansteckend. Sie können Komplikationen haben: Mittelohrentzündung, Lungenentzündung, selten eine Gehirnentzündung.','Zwei Impfungen schützen sehr gut vor Masern.','Impfreaktionen sind meist leicht und kurz, zum Beispiel Rötung oder Fieber. Schwere Nebenwirkungen sind sehr selten.','Um Masern auszurotten, braucht man laut RKI etwa 95 % Geimpfte.'],q:'„Was würden Sie sagen, wenn ein ungeimpftes Kind ein krankes Kind ansteckt?“'},
-    C:{n:'Herr Brandt, Vater von Mia',p:'für eine Impfpflicht',w:'Deine Tochter Mia ist 8 Jahre alt. Wegen ihrer Behandlung ist ihr Immunsystem sehr schwach. Sie darf im Moment nicht gegen Masern geimpft werden.',t:'Mia geht gern zur Schule. Du hast Angst, dass sie sich ansteckt.',h:'Deine Argumente',a:['Mia kann sich nicht selbst schützen. Sie ist auf andere angewiesen.','Wenn viele Kinder geimpft sind, erreicht der Erreger Mia nicht (Herdenimmunität).','Eine Masernerkrankung kann für Mia sehr gefährlich sein.','Die Entscheidung gegen eine Impfung betrifft nicht nur das eigene Kind.'],q:'„Welche Verantwortung haben wir für Menschen, die sich nicht selbst schützen können?“'},
-    D:{n:'Herr Okafor, Jurist',p:'abwägend. Du bist für keine Seite.',w:'Du kennst dich mit Gesetzen aus. Du bewertest beide Seiten und ordnest ein.',t:'',h:'Deine Fakten',a:['Das Masernschutzgesetz gilt seit dem 1. März 2020. Kinder in Kita und Schule brauchen einen Nachweis: Impfung, Immunität oder ein ärztliches Attest, dass sie nicht geimpft werden dürfen.','Eine Zwangsimpfung gibt es nicht. Ohne Nachweis kann ein Bußgeld drohen.','Zwei Rechte stehen sich gegenüber: das Recht auf Selbstbestimmung über den eigenen Körper und der Schutz der Gesundheit anderer.','Ein Gesetz muss verhältnismäßig sein. Gibt es mildere Mittel, zum Beispiel mehr Aufklärung?'],q:'„Wie weit darf der Staat in die Entscheidung von Eltern eingreifen?“'}
-  };
+  var roles=window.IMPF_ROLLEN;
   function openRole(k){
     var r=roles[k],h='<button class="mclose" id="rclose">✕ Schließen</button><h2>Rolle '+k+': '+r.n+'</h2><div><b>Deine Position:</b> '+r.p+'</div><h4>Wer bist du?</h4><div>'+r.w+'</div>';
     if(r.t)h+='<h4>Das denkst du</h4><div>'+r.t+'</div>';
     h+='<h4>'+r.h+'</h4><ul>'+r.a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><h4>Deine Frage an die anderen</h4><div>'+r.q+'</div>';
     $('#rcard').innerHTML=h;$('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
   }
+  /* QR-Codes: zeigen auf rolle/?r=A usw., relativ zur Adresse dieser Seite (läuft also unter GitHub Pages, nicht aus dem Dateisystem) */
+  $$('.qr').forEach(function(h){
+    try{var url=new URL('rolle/?r='+h.getAttribute('data-qr'),location.href).href;var q=qrcode(0,'M');q.addData(url);q.make();h.innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true});h.title=url;}catch(e){h.textContent='QR nicht verfügbar';}
+  });
   $$('.rolebtn').forEach(function(b){b.onclick=function(){openRole(b.getAttribute('data-role'));};});
   $('#rmodal').onclick=function(e){if(e.target===this)this.classList.remove('on');};
 
