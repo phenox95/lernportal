@@ -194,6 +194,10 @@ Die Klasse sammelt **gemeinsam** Sterne, solange die Lärmampel läuft und grün
 - Die Werkzeuge liegen außerhalb der Folie und werden nicht gedruckt. Striche gibt es nur im Browser und sie sind beim Neuladen weg.
 - Eigene Stift-, Timer- oder Ampelknöpfe in einer Präsentation entfallen, sonst gibt es sie doppelt. Vorhandene Timer, die Teil einer Aufgabenfolie sind (Ätna, Einzel- und Gruppenphase), dürfen bleiben.
 
+## Favicon
+
+Das Portal-Icon (weißes L auf Grün und Rostrot, den beiden Fachfarben) liegt in `assets/favicon/`: `favicon.svg` (Vorlage, scharf in jeder Größe), `favicon.ico` (16, 32, 48 px), `favicon-32.png`, `favicon-48.png`, `favicon-192.png` und `apple-touch-icon.png` (180 px, deckender Hintergrund für iPad und iPhone). Jede HTML-Seite bindet es mit drei `<link>`-Zeilen im `<head>` ein, mit dem Weg zum Repository-Stamm davor (`../../assets/favicon/…`). Neue Seiten aus den Vorlagen haben die Zeilen schon. Fehlen sie, ergänzt `material.js` sie über `data-root`. Das Icon ändern: `favicon.svg` anpassen und die PNG- und ICO-Dateien daraus neu erzeugen (SVG in der Größe 32, 48, 180 und 192 px als PNG exportieren).
+
 ## Materialseiten und Kopfleiste
 
 Jede Anwendung bekommt dieselbe Kopfleiste mit **Zurück zum Portal** und dem Lesemodus „Aa". Auf Vorlagenseiten (`class="lp-seite"` am `body`) folgt darunter ein Titelblock mit Fach, Klasse, Titel und optional einem Themenbild. Bei eingehängten Anwendungen steht der Titel direkt in der schmalen Leiste. Alles erzeugt `assets/js/material.js` aus den `data`-Attributen am `body`. Ändert sich die Kopfleiste, ändert sich nur diese eine Datei.

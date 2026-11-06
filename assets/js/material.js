@@ -21,7 +21,21 @@
     return knoten;
   }
 
+  /* Favicon-Fallback: Seiten ohne eigenen Icon-Link (z. B. neue Materialien) bekommen das Portal-Icon über data-root */
+  function icon() {
+    if (document.querySelector('link[rel~="icon"]') || !document.body) return;
+    const w = wurzel(document.body.dataset.root);
+    [["icon", "favicon.svg", "image/svg+xml", ""], ["icon", "favicon.ico", "", "48x48"], ["apple-touch-icon", "apple-touch-icon.png", "", ""]].forEach(([rel, datei, typ, groesse]) => {
+      const l = document.createElement("link");
+      l.rel = rel; l.href = w + "assets/favicon/" + datei;
+      if (typ) l.type = typ;
+      if (groesse) l.sizes = groesse;
+      document.head.appendChild(l);
+    });
+  }
+
   function baue() {
+    icon();
     const body = document.body;
     if (!body || document.querySelector(".lp-kopf")) return;
     const d = body.dataset;
