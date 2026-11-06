@@ -152,3 +152,6 @@
 .ia-slot { min-height: 44px; grid-template-columns: 100px 1fr; } .ia-slots { gap: 4px; }
 .ia-ocard { padding: 4px 12px; }
 .ia-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; } .ia-foot .ia-fb { margin: 0; min-height: 0; font-size: 22px; } .ia-foot .ia-btn { flex: none; }
+/* Folien mit drei Balken (Berlin-Zeile): etwas kompakter */
+.sbar { height: 48px; } .srow { margin-bottom: 14px; } .sl { font-size: 26px; margin-bottom: 6px; } .leg { margin-top: 6px; }
+.ia-track { padding: 8px 0 30px; } .ia-res { min-height: 54px; }
