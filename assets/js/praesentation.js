@@ -593,6 +593,73 @@
 
 
   /* =====================================================================
+     FRAGENFELD (Fragenentwicklung): <div data-fragenfeld></div> in einer Folie genügt.
+     Die Klasse nennt Fragen, die Lehrkraft tippt sie ein, die Klasse priorisiert mit 👍,
+     „→ Leitfrage“ trägt die gewählte Frage unten ein (dort frei umformulierbar).
+     Optional: data-impulse="Frage 1|Frage 2|Frage 3" ersetzt die Moderationsfragen links (die letzte wird hervorgehoben).
+     Jedes Element mit data-leitfrage zeigt später in der Präsentation die Leitfrage an.
+     Es wird nichts gespeichert; die Fragen verschwinden beim Neuladen.
+     ===================================================================== */
+  const STANDARD_IMPULSE = ["Was fällt euch auf?", "Was überrascht euch?", "Was wollt ihr herausfinden?", "Welche Frage stellt sich euch?"];
+  let leitfrageText = "";
+  function leitfrageSpiegeln() {
+    [].forEach.call(document.querySelectorAll("[data-leitfrage]"), (e) => { e.textContent = leitfrageText || "…"; });
+  }
+  [].forEach.call(document.querySelectorAll("[data-fragenfeld]"), (feld) => {
+    feld.classList.add("fragen");
+    feld.textContent = "";
+    const hilfe = neu("ol", "fragen-hilfe");
+    const impulse = (feld.dataset.impulse ? feld.dataset.impulse.split("|") : STANDARD_IMPULSE).map((t) => t.trim()).filter(Boolean);
+    impulse.forEach((t, i) => {
+      const li = neu("li"); li.appendChild(neu("b", "", String(i + 1))); li.appendChild(neu("span", "", t)); hilfe.appendChild(li);
+    });
+    const rechts = neu("div", "fragen-rechts");
+    const neuZeile = neu("div", "fragen-neu");
+    const eingabe = document.createElement("input");
+    eingabe.type = "text"; eingabe.maxLength = 140; eingabe.placeholder = "Eure Frage eintippen …"; eingabe.setAttribute("aria-label", "Frage eintippen");
+    eingabe.spellcheck = false;
+    const hinzu = knopf("lp-pr-aktion", "Hinzufügen", "Frage hinzufügen");
+    neuZeile.appendChild(eingabe); neuZeile.appendChild(hinzu);
+    const liste = neu("div", "fragen-liste");
+    liste.setAttribute("aria-live", "polite");
+    rechts.appendChild(neuZeile); rechts.appendChild(liste);
+    const leit = neu("div", "fragen-leit");
+    leit.appendChild(neu("div", "fragen-label", "Unsere Frage für heute:"));
+    const text = neu("div", "fragen-text");
+    text.contentEditable = "true"; text.spellcheck = false;
+    text.setAttribute("role", "textbox"); text.setAttribute("aria-label", "Unsere Frage für heute, anklickbar zum Umformulieren");
+    leit.appendChild(text);
+    feld.appendChild(hilfe); feld.appendChild(rechts); feld.appendChild(leit);
+
+    const fragen = [];
+    function zeige() {
+      liste.textContent = "";
+      fragen.slice().sort((a, b) => b.v - a.v || a.id - b.id).forEach((q) => {
+        const k = neu("div", "fragen-karte");
+        k.appendChild(neu("span", "", q.t));
+        const stimme = knopf("", "👍 " + q.v, "Stimme für diese Frage, bisher " + q.v);
+        stimme.addEventListener("click", () => { q.v++; zeige(); });
+        const wahl = knopf("leit", "→ Leitfrage", "Als Leitfrage übernehmen");
+        wahl.addEventListener("click", () => { text.textContent = q.t; leitfrageText = q.t; leitfrageSpiegeln(); });
+        const weg = knopf("", "✕", "Frage entfernen");
+        weg.addEventListener("click", () => { fragen.splice(fragen.indexOf(q), 1); zeige(); });
+        k.appendChild(stimme); k.appendChild(wahl); k.appendChild(weg);
+        liste.appendChild(k);
+      });
+    }
+    function hinzufuegen() {
+      const t = eingabe.value.trim();
+      if (!t) return;
+      fragen.push({ id: fragen.length ? fragen[fragen.length - 1].id + 1 : 0, t, v: 0 });
+      eingabe.value = ""; zeige(); eingabe.focus();
+    }
+    hinzu.addEventListener("click", hinzufuegen);
+    eingabe.addEventListener("keydown", (e) => { if (e.key === "Enter") hinzufuegen(); });
+    text.addEventListener("input", () => { leitfrageText = text.textContent.trim(); leitfrageSpiegeln(); });
+  });
+  leitfrageSpiegeln();
+
+  /* =====================================================================
      SPIELE (Belohnung): allgemeine Spiele in assets/games/, Inhalte liefert jede Präsentation selbst
      ===================================================================== */
   const BASIS = (document.currentScript && document.currentScript.src || "").replace(/js\/praesentation\.js.*$/, "");

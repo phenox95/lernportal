@@ -165,6 +165,22 @@ Am rechten Bildrand stehen Haus (zurück zum Portal), Vollbild und die drei Werk
 | Timer | T | Countdown mit 1, 3, 5, 10, 15 Min., ±1 Min., +30 s, Start/Pause/Zurücksetzen und Signalton. Hat die Folie `data-min`, gibt es den Knopf „Dauer dieser Folie“. Die Restzeit steht auch am Knopf, wenn das Fenster zu ist |
 | Lärmampel | L | Ampel (Ruhig, Etwas laut, Zu laut) mit Pegelbalken und Ruhe-Sternen (siehe unten). Erst nach Klick auf „Start“ fragt der Browser nach dem Mikrofon. „Kalibrieren“ misst 3 Sekunden und setzt die jetzige Lautstärke als ruhig. Der Regler stellt die Empfindlichkeit ein. Fenster schließen beendet die Messung und gibt das Mikrofon frei. **Töne** (Schalter „Ton: an/aus“): sanfter fallender Zweiklang, wenn die Ampel auf Rot springt (höchstens alle 8 Sekunden), kurzes Ding bei jedem Stern, Dreiklang beim Ziel. Während eines Tons wird die Ampel nicht neu bewertet, damit der Lautsprecher die Messung nicht auslöst |
 
+### Fragenfeld (Fragenentwicklung)
+
+Standardbaustein für den Einstieg nach Impuls (Abschnitt „Impuls und Fragenentwicklung“ der Planungsvorgaben): Die Klasse nennt Fragen, die Lehrkraft tippt sie ein, die Klasse priorisiert mit 👍, „→ Leitfrage“ übernimmt die gewählte Frage ins Feld „Unsere Frage für heute“, dort lässt sie sich gemeinsam umformulieren. Eine Folie braucht nur:
+
+```html
+<section class="slide" data-min="4">
+  <h1>Eure Fragen</h1>
+  <div data-fragenfeld></div>
+</section>
+```
+
+- Links stehen die Moderationsfragen (Standard: Was fällt euch auf? Was überrascht euch? Was wollt ihr herausfinden? Welche Frage stellt sich euch?). `data-impulse="Frage 1|Frage 2|Frage 3"` am `div` ersetzt sie, die letzte wird hervorgehoben.
+- Jedes Element mit `data-leitfrage` zeigt später in der Präsentation die Leitfrage der Klasse an (zum Beispiel in der Sicherung oder im Exit-Ticket).
+- Fragen lassen sich entfernen (✕). Es wird nichts gespeichert, beim Neuladen sind sie weg.
+- Aussehen und Verhalten stehen zentral in `praesentation-design.css` und `praesentation.js`, nicht in der einzelnen Präsentation. Eigene Bauweisen entfallen.
+
 ### Ruhe-Sterne und Belohnungsspiele
 
 Die Klasse sammelt **gemeinsam** Sterne, solange die Lärmampel läuft und grün ist (Standard: 30 Sekunden Ruhe = 1 Stern, 8 Sterne bis zum Spiel, beides im Lärmampel-Fenster unter „Sterne einstellen“ änderbar). Bei Gelb pausiert der Balken, bei Rot beginnt er von vorn. **Sterne gehen nie verloren**, die Lehrkraft kann von Hand geben und wegnehmen. Es werden keine Namen oder Gruppen erfasst, nichts wird gespeichert (nur die Einstellungen). Beim Ziel erscheint „Spiel starten“.

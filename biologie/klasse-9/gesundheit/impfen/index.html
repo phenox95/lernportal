@@ -81,14 +81,6 @@ td[contenteditable]:focus{background:var(--lo)}
 /* Impuls */
 .w{cursor:pointer;border-radius:6px;padding:0 2px;transition:background .12s}
 .w.mark{background:var(--y);color:var(--ink)}
-/* Fragen */
-#qin{font:22px Andika,Verdana,sans-serif;padding:10px 14px;border:2px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);width:430px;min-height:48px}
-#qlist{overflow:auto;height:300px;padding-right:6px}
-.qc{display:flex;align-items:center;gap:10px;background:var(--lg);border-radius:14px;padding:10px 14px;margin-bottom:10px;font-size:21px;line-height:1.25}
-.qc span.t{flex:1}
-.qc button{border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;font-size:18px;font-weight:700;padding:6px 10px;cursor:pointer;min-height:44px}
-.qc button.pick{background:var(--y);color:var(--ink);border-color:var(--y)}
-#lf{font-size:27px;line-height:1.3;min-height:76px;outline:none;border-bottom:2px solid var(--line);padding-bottom:6px}
 /* Spielfeld */
 #grid{display:grid;grid-template-columns:repeat(5,100px);grid-auto-rows:100px;gap:6px}
 .gc{border:2px solid var(--green);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:34px;font-weight:700;cursor:pointer;user-select:none;position:relative;background:#fff;color:var(--ink)}
@@ -219,20 +211,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
 <!-- 3 Fragen -->
 <section class="slide" data-min="3" data-note="<b>Fragenentwicklung (7–10 Min.):</b> SuS nennen Fragen, die Lehrkraft (oder ein/e Schüler/in) tippt sie ein. Mit 👍 priorisiert die Klasse (Handzeichen). Mit „→ Leitfrage“ wird die Favoritin unten eingetragen; der Text unten ist anklickbar und kann gemeinsam umformuliert werden. Zielkorridor (nicht verkünden): „Warum geht die Impfentscheidung eines Einzelnen auch andere etwas an – und darf der Staat deshalb eine Impfpflicht festlegen?“ Tragfähige Abweichungen aufgreifen. Nachsteuern: „Wer entscheidet hier – und wer ist davon betroffen?“ Impuls plus Fragenentwicklung höchstens 5 Minuten.">
   <h1>Eure Fragen</h1>
-  <div class="abs" style="left:64px;top:160px;width:400px">
-    <div class="step"><span class="num">1</span>Was fällt euch auf?</div>
-    <div class="step"><span class="num">2</span>Was passt hier nicht zusammen?</div>
-    <div class="step"><span class="num">3</span>Wer hängt hier von wem ab?</div>
-    <div class="step"><span class="num o">4</span>Welche Frage stellt sich euch?</div>
-  </div>
-  <div class="abs" style="left:500px;top:150px;width:716px">
-    <div style="display:flex;gap:10px"><input id="qin" type="text" placeholder="Eure Frage eintippen …" maxlength="140" aria-label="Frage eintippen"><button class="btn" id="qadd">Hinzufügen</button></div>
-    <div id="qlist" style="margin-top:14px"></div>
-  </div>
-  <div class="card abs" style="left:64px;top:470px;width:1152px;height:150px;border:3px solid var(--green);padding:18px 30px">
-    <div style="font-size:24px;font-weight:700;color:var(--green)">Unsere Frage für heute:</div>
-    <div id="lf" contenteditable="true" spellcheck="false"></div>
-  </div>
+  <div data-fragenfeld data-impulse="Was fällt euch auf?|Was passt hier nicht zusammen?|Wer hängt hier von wem ab?|Welche Frage stellt sich euch?"></div>
 </section>
 
 <!-- 4 Regeln -->
@@ -418,7 +397,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
     else if(k==='Home'){show(0);}else if(k==='End'){show(slides.length-1);}
   });
   var sx=null;
-  document.addEventListener('touchstart',function(e){sx=typing(e.target)||e.target.closest('input,button,.gc,#qlist,.modal')?null:e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchstart',function(e){sx=typing(e.target)||e.target.closest('input,button,.gc,.fragen,.modal')?null:e.touches[0].clientX;},{passive:true});
   document.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>80)go(dx<0?1:-1);sx=null;},{passive:true});
 
   /* Timer */
@@ -448,21 +427,6 @@ svg text{font-family:Andika,Verdana,sans-serif}
     var parts=el.textContent.split(' '); el.innerHTML='';
     parts.forEach(function(p,i){var s=document.createElement('span');s.className='w';s.textContent=p;s.onclick=function(){s.classList.toggle('mark');};el.appendChild(s);if(i<parts.length-1)el.appendChild(document.createTextNode(' '));});
   });
-
-  /* 3 Fragen */
-  var qs=[];
-  function renderQ(){
-    var l=$('#qlist');l.innerHTML='';
-    qs.slice().sort(function(a,b){return b.v-a.v||a.id-b.id;}).forEach(function(q){
-      var d=document.createElement('div');d.className='qc';
-      var t=document.createElement('span');t.className='t';t.textContent=q.t;
-      var v=document.createElement('button');v.textContent='👍 '+q.v;v.setAttribute('aria-label','Stimme für diese Frage');v.onclick=function(){q.v++;renderQ();};
-      var p=document.createElement('button');p.className='pick';p.textContent='→ Leitfrage';p.onclick=function(){$('#lf').textContent=q.t;};
-      d.appendChild(t);d.appendChild(v);d.appendChild(p);l.appendChild(d);
-    });
-  }
-  function addQ(){var i=$('#qin'),t=i.value.trim();if(!t)return;qs.push({id:qs.length,t:t,v:0});i.value='';renderQ();i.focus();}
-  $('#qadd').onclick=addQ; $('#qin').addEventListener('keydown',function(e){if(e.key==='Enter')addQ();});
 
   /* 5 Spielfeld */
   var F1='GGNGGNGUGUGGUUNGGGUG', F2;
