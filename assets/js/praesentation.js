@@ -44,8 +44,6 @@
   const slides = () => [].slice.call(stage.querySelectorAll(".slide"));
   function aktuelleFolie() {
     const liste = slides();
-    /* Präsentationen mit Übergängen blenden Folien per visibility aus: die Klasse .active oder .on zeigt die aktuelle Folie */
-    for (let i = 0; i < liste.length; i++) if (liste[i].classList.contains("active") || liste[i].classList.contains("on")) return i;
     for (let i = 0; i < liste.length; i++) if (getComputedStyle(liste[i]).display !== "none") return i;
     return 0;
   }
@@ -202,7 +200,7 @@
      STIFT
      ===================================================================== */
   const pen = panelBauen("stift", "Stift", 60, 280);
-  const FARBEN = [["#d62828", "Rot"], ["#111111", "Schwarz"], ["#2E7DBA", "Blau"], ["#F4B400", "Gelb"], ["#ffffff", "Weiß"]];
+  const FARBEN = [["#d62828", "Rot"], ["#111111", "Schwarz"], ["#1F6BA5", "Blau"], ["#F4B400", "Gelb"], ["#ffffff", "Weiß"]];
   const DICKEN = [["klein", 3], ["mittel", 6], ["groß", 12]];
   const cv = neu("canvas", "lp-pr-canvas");
   const SKAL = 2;                                           // doppelte Auflösung, bleibt auch bei Vollbild scharf

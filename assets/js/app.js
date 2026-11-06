@@ -290,7 +290,7 @@
           const n = visible.filter(p => p.subject === pageSubject && themeOf(p) === tfLabel(tf)).length;
           const href = root + "themenfeld/?fach=" + encodeURIComponent(pageSubject) + "&nr=" + encodeURIComponent(tf.nr);
           return `<a class="tf-row" href="${escapeHtml(href)}" aria-label="${escapeHtml(tf.nr + " " + tf.titel)}">
-            <span class="tf-top"><span class="tf-icon">${icon(tf.icon, 22)}</span><span class="tf-nr">${escapeHtml(tf.nr)}</span></span>
+            <span class="tf-top" data-tf-fach="${escapeHtml(pageSubject)}" data-tf-nr="${escapeHtml(tf.nr)}"><span class="tf-icon">${icon(tf.icon, 22)}</span><span class="tf-nr">${escapeHtml(tf.nr)}</span></span>
             <span class="tf-title">${escapeHtml(tf.kurz || tf.titel)}</span>
             <span class="tf-count">${n ? countText(n) : "Noch kein Material"}</span>
           </a>`;
@@ -359,6 +359,7 @@
     }
     document.title = tf.kurz + " – Lernportal";
     $("#tf-icon").innerHTML = icon(tf.icon, 28);
+    $("#tf-icon").dataset.tfFach = fach; $("#tf-icon").dataset.tfNr = tf.nr;
     $("#tf-title").textContent = tf.kurz;
     $("#tf-full").textContent = tf.nr + " " + tf.titel + [tf.verbund, tf.hinweis].filter(Boolean).map(x => " · " + x).join("");
     const items = projects.filter(p => isVisible(p) && p.subject === fach && themeOf(p) === tfLabel(tf));

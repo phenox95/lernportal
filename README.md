@@ -14,7 +14,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
 | `vorlage/` | Vorlagen: `vorlage/` (Materialseite mit Aufgaben), `vorlage/materialseite/` (Seite pro Thema mit Dateiliste) und `vorlage/praesentation/` (Grundaufbau einer Präsentation mit Stift, Timer und Lärmampel). Alle mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
-| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten, `materialseite.js` Dateiliste der Themenseite), `css/materialseite.css` (Stile der Themenseite), `js/praesentation.js` und `css/praesentation.css` (Werkzeuge für Präsentationen), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), keine Schriftdateien, es wird die Systemschrift des Geräts genutzt |
+| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten, `materialseite.js` Dateiliste der Themenseite), `css/materialseite.css` (Stile der Themenseite), `js/praesentation.js` und `css/praesentation.css` (Werkzeuge für Präsentationen), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), `fonts/` (Andika, **nur für Präsentationen**), `games/` (Belohnungsspiele ohne Fachinhalte). Portal und Materialseiten laden keine Schriftdatei und nutzen die Systemschrift des Geräts |
 
 ## Inhalte ergänzen
 
@@ -143,9 +143,11 @@ Ein Foto mit einer Frage, die die SuS zum Material führt. Das Bild soll fachlic
 
 Jede Präsentation (HTML) hat denselben Grundaufbau und bekommt dieselben Werkzeuge aus **einer** Datei (`assets/js/praesentation.js` mit `assets/css/praesentation.css`). Eine Änderung dort gilt für alle Präsentationen. Startpunkt für neue Präsentationen ist `vorlage/praesentation/index.html`.
 
-**Einheitliches Design:** `assets/css/praesentation-design.css` enthält das gemeinsame Aussehen aller Präsentationen (Vorbild: Fotosynthese Stunde 1): Schrift Andika (lokal in `assets/fonts/`, SIL Open Font License), Farben als Variablen (`--g`, `--dk`, `--mint`, `--y`, `--grey`, `--ink`), die Fachfarbe je Fach über `data-subject` am `<body>` (Biologie Grün, Geografie Rostrot; ein weiteres Fach oder Thema bekommt einen eigenen Block in der Datei), große Überschriften, Pill-Badge oben rechts, Aufgabenzeilen mit Niveau-Marke (`.task`, `.lvl`), Hilfekästen (`.shilfe`), Rahmen (`.frame`), Karten (`.chip`) und Schaltflächen (`.b`). Orientierung an den Apple Human Interface Guidelines: ruhige Fläche, ein Schriftschnitt, klare Hierarchie, weiche Rundungen, Bedienelemente mindestens 44 px. Neue Präsentationen nutzen diese Klassen, eigene Farben und Schriften entfallen. Die Portal-Kopfleiste ist in Präsentationen ausgeblendet, damit die Folie die ganze Fläche bekommt. Der Weg zurück steht als Haus-Knopf im Werkzeugrand, daneben der Vollbild-Knopf (Taste F).
+**Einheitliches Design:** `assets/css/praesentation-design.css` enthält das gemeinsame Aussehen aller Präsentationen (Vorbild: Fotosynthese Stunde 1): Schrift Andika (lokal in `assets/fonts/`, SIL Open Font License), Farben als Variablen (`--g`, `--dk`, `--mint`, `--y`, `--grey`, `--ink`, Werte siehe „Fachfarben“), die Fachfarbe je Fach über `data-subject` am `<body>` (Biologie Grün, Geografie Rostrot; ein weiteres Fach oder Thema bekommt einen eigenen Block in der Datei), große Überschriften, Pill-Badge oben rechts, Aufgabenzeilen mit Niveau-Marke (`.task`, `.lvl`), Hilfekästen (`.shilfe`), Rahmen (`.frame`), Karten (`.chip`) und Schaltflächen (`.b`). Orientierung an den Apple Human Interface Guidelines: ruhige Fläche, ein Schriftschnitt, klare Hierarchie, weiche Rundungen, Bedienelemente mindestens 44 px. Neue Präsentationen nutzen diese Klassen, eigene Farben und Schriften entfallen. Die Portal-Kopfleiste ist in Präsentationen ausgeblendet, damit die Folie die ganze Fläche bekommt. Der Weg zurück steht als Haus-Knopf im Werkzeugrand, daneben der Vollbild-Knopf (Taste F).
 
 **Grundaufbau:** `#buehne` (füllt das Fenster) enthält `#stage` (feste Größe 1280 × 720, wird per Skript skaliert) mit den Folien als `<section class="slide">`. Die sichtbare Folie hat `display` ungleich `none`. Optional steht an einer Folie `data-min="5"`, das schlägt dem Timer 5 Minuten vor.
+
+**Blätterpfeile:** Große runde Pfeile in den unteren Ecken (`.pfeil`, 84 px, Weiter in Gelb) stehen in `praesentation-design.css`. Das Markup steht in der Vorlage. **Ein- und Ausblenden der Folien nur über `display`** (Klasse `.on`), nicht über `opacity` oder `visibility`, sonst erkennen Stift und Timer die aktuelle Folie nicht.
 
 **Einbinden** (Pfade je nach Tiefe anpassen, `defer` ist Pflicht): im `<head>` `praesentation-design.css` und `praesentation.css`, am Ende des `<body>` `praesentation.js`. Am `<body>` steht `class="lp-pres"`.
 
@@ -226,7 +228,19 @@ Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-gr
 
 ## Gestaltung
 
-Stil „Digital Library" mit warmer Fachfarbe: Der Aufbau ist ruhig (warmes Weiß `#f7f7f4`, dunkler Text, große Typografie, Linien in Listen). Die Wärme kommt aus flachen Fachtönungen (Biologie grün, Geografie ocker), dezenten Fachmustern (`assets/img/muster/`), optionalen Themenbildern und weichen Schatten. Es gibt keine Verläufe, kein Glas und keine harten Schatten. Fachfarbe ist Punkt, Linie, Rahmen, Tönung oder Muster, der Text bleibt in Textfarbe. Alle Farben, Radien, Tönungen und Schatten stehen als Variablen am Anfang von `styles.css` bzw. `material.css`. Die Fachmuster sind rein dekorativ und werden per CSS-Maske in der Fachfarbe eingefärbt, sie folgen deshalb dem Dunkelmodus.
+Stil „Digital Library" mit warmer Fachfarbe: Der Aufbau ist ruhig (warmes Weiß `#f7f7f4`, dunkler Text, große Typografie, Linien in Listen). Die Wärme kommt aus flachen Fachtönungen (Biologie grün, Geografie rostrot, Werte unten), dezenten Fachmustern (`assets/img/muster/`), optionalen Themenbildern und weichen Schatten. Es gibt keine Verläufe, kein Glas und keine harten Schatten. Fachfarbe ist Punkt, Linie, Rahmen, Tönung oder Muster, der Text bleibt in Textfarbe. Alle Farben, Radien, Tönungen und Schatten stehen als Variablen am Anfang von `styles.css` bzw. `material.css`. Die Fachmuster sind rein dekorativ und werden per CSS-Maske in der Fachfarbe eingefärbt, sie folgen deshalb dem Dunkelmodus.
+
+**Fachfarben (ein Satz für Portal, Materialseiten und Folien):**
+
+| Rolle | Biologie | Geografie | Verwendung |
+|---|---|---|---|
+| Vollton | `#0F6E56` | `#A9442B` | Flächen mit weißem Text, Akzente (Schaltflächen, Aufgabenmarken) |
+| Dunkel | `#0B4F3C` | `#7C2F1C` | dunkle Folien, Titel auf Weiß, Hover |
+| Tint | `#E8F3EC` | `#F5EBE1` | Hilfe-, Karten- und Titelflächen |
+| Ink | `#1A2B24` | `#2B211E` | Text auf Weiß und Tint |
+| Grau | `#5B6A63` | `#7D726B` | Nebentext, nur auf weißem Grund |
+
+Im Dunkelmodus gelten hellere Varianten (Biologie `#5FC8A4`, Geografie `#EE9A7F`, Tint `#1E322A` bzw. `#352A24`). Neue Farben vor der Verwendung auf Kontrast prüfen (Text 4,5:1, Bedienelemente 3:1). Es gibt keine Verläufe, kein Glas und keine Schatten hinter Text. Ausnahme: die Linien des Schreibraums (`.lp-schreib`) sind ein technisches Linienmuster, keine Farbfläche.
 
 ## Themenbilder (optional)
 
@@ -243,6 +257,8 @@ Die Fachseiten zeigen Fotos (`assets/img/fach/biologie.webp`, `geografie.webp`),
 Die Themenfelder stammen aus dem Rahmenlehrplan Berlin-Brandenburg 2015, Teil C (RLP-Online, Kapitel „Themen und Inhalte“, Stand der veröffentlichten Fassung). Sie stehen in `themenfelder.json`. Die Fachseiten zeigen sie als Überblick nach Doppeljahrgangsstufe (7/8 und 9/10) mit der Anzahl der Materialien. Ein Klick wählt das Themenfeld im Filter, ein zweiter Klick hebt die Auswahl auf. Auch Themenfelder ohne Material erscheinen („Noch kein Material“), so ist die Struktur von Anfang an sichtbar.
 
 **Neues Material einem Themenfeld zuordnen:** im Eintrag in `projects.json` nur die Nummer eintragen, z. B. `"themenfeld": "3.7"`. Der Ordner folgt der Empfehlung aus der Tabelle (`biologie/klasse-10/genetik/` oder wie bisher mit eigenem Thema, z. B. `biologie/klasse-10/mitose/`). Der Ordnername ist nur eine Empfehlung und kein RLP-Bestandteil.
+
+**Themenfeldfarben:** Jedes Themenfeld hat Tint und Ink aus der Farbfamilie seines Fachs (Biologie Blaugrün bis Gelbgrün, Geografie Rotbraun bis Ocker). Sie hängen an Fach und Nummer, stehen als CSS-Variablen (`--tf-tint`, `--tf-ink`) am Ende von `assets/css/styles.css` und färben nur das Symbolfeld und die Nummer (Themenfelder-Überblick, Themenseite). Ink auf Tint hat mindestens 5:1, im Dunkelmodus gelten eigene Werte. Farbe ist Zugabe: Nummer, Symbol und Titel tragen die Information.
 
 ### Biologie
 
@@ -295,3 +311,28 @@ In `impressum/index.html` und `datenschutz/index.html` stehen Platzhalter in eck
 ## Hinweis
 
 Die Einträge in `projects.json` und `impuls.json` sind Beispiele. Vor dem produktiven Einsatz durch echte Inhalte ersetzen oder löschen.
+
+## Beispiel: Erneuerbare Energien (Geografie 9)
+
+Ordner `geografie/klasse-9/ressourcen/erneuerbare-energien/`, Themenfeld 3.5 „Umgang mit Ressourcen“. Zwei Doppelstunden als Materialseite (`index.html` mit `dateien` in `projects.json`): Stunde 1 (`praesentation/`), Stunde 2 Strom, Wärme, Verkehr (`heizen-verkehr/`, dazu `material/AB_Strom_Waerme_Verkehr.docx`) und ein Quiz (`quiz/`). **Der Erwartungshorizont liegt bewusst nicht im Repository.**
+
+Beide Präsentationen folgen dem gemeinsamen Aufbau (Bühne 1280 × 720, `praesentation-design.css`, Fachfarbe Geografie, Andika) und haben Stift (P), Timer (T), Lärmampel (L) und Belohnungsspiele aus `assets/js/praesentation.js`. Eigene Ergänzungen für diese Stunden: `assets/energie.css` (nur Layout und Zustände, keine eigenen Farben), `assets/interaktiv.js` (interaktive Bausteine, arbeitet mit `data-ia`-Attributen, keine Speicherung), `assets/icons.js` (lokale Linien-Symbole) und `assets/qrcode.js` (QR-Code zum Quiz).
+
+| Baustein (`data-ia`) | Wirkung |
+|---|---|
+| `tf` | Richtig oder falsch antippen, Rückmeldung erscheint (Do Now) |
+| `qfield` | Fragefeld ist beschreibbar, Fragestarter fügen Text ein |
+| `cards` | Karten antippen: Beispiel klappt auf |
+| `cells` | Tabelle direkt auf dem Beamer beschriften |
+| `tick` | Aufgaben abhaken |
+| `toggle` | Pumpspeicher: Zustand „zu viel“ oder „zu wenig Strom“ wählen |
+| `cover`, `gap` | Inhalte verdeckt, antippen zum Aufdecken. Lückensatz mit Wortkarten |
+| `seg` | Balkenabschnitt antippen: Zahl dahinter |
+| `vote` | Antippen gibt Stimmen für Maßnahmen |
+| `sort` | Aussagen den Energiequellen zuordnen |
+| `order` | Wirkungsketten in die richtige Reihenfolge bringen |
+| `guess` | Anteile mit dem Regler schätzen, dann auflösen |
+| `self` | Selbsteinschätzung (Sicher, Fast, Noch nicht), nichts wird gespeichert |
+| `select` | Eine Möglichkeit auswählen |
+
+Die Zeiten der Folien (`data-min`) ergeben je Stunde etwa 90 Minuten. Die Spielinhalte (`lp-spiel-daten`) sind ein Entwurf und gehören fachlich gegengelesen. Das Quiz ist eine eigene Anwendung mit Fragen in `quiz/fragen.js` (Format: siehe Kommentar in der Datei) und nutzt Farben und Dunkelmodus der Materialseite.

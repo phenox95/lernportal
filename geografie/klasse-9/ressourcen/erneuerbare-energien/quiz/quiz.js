@@ -71,11 +71,7 @@
 
   /* ---------- Hülle (Leiste) ---------- */
   function shell(inner, inGame) {
-    return '<header class="bar glass"><div class="brand"><span class="mark">' + icon("bolt") + '</span><span>Energie-Quiz</span></div>' +
-      '<div class="bar-actions">' +
-      (inGame ? '<button class="btn ghost" data-act="quit">Beenden</button>' : "") +
-      '<button class="btn ghost" data-act="theme" aria-label="Hell oder dunkel umschalten">' + icon("moon") + '<span class="sr-only">Hell oder dunkel</span></button>' +
-      '</div></header><main class="shell">' + inner + "</main>";
+    return '<main class="shell">' + (inGame ? '<div class="quitrow"><button class="btn ghost" data-act="quit">Beenden</button></div>' : "") + inner + "</main>";
   }
 
   /* ---------- Start ---------- */
@@ -329,12 +325,6 @@
   }
 
   /* ---------- Ereignisse ---------- */
-  function toggleTheme() {
-    var cur = root.getAttribute("data-theme") ||
-      ((window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light");
-    root.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
-  }
-
   app.addEventListener("click", function (e) {
     var seg = e.target.closest(".seg button");
     if (seg && !G) {
@@ -352,7 +342,7 @@
     if (!b || b.disabled) return;
     var act = b.dataset.act;
     if (act !== "quit" && G && G.cq) { G.cq = false; var q = $('[data-act="quit"]'); if (q) q.textContent = "Beenden"; }
-    if (act === "theme") toggleTheme();
+    
     else if (act === "start" || act === "again") { startGame(); window.scrollTo(0, 0); }
     else if (act === "home") { renderStart(); window.scrollTo(0, 0); }
     else if (act === "quit") {
