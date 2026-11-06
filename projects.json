@@ -208,5 +208,19 @@
     "dauer": "45 Min.",
     "datum": "2026-11-05",
     "sichtbar": true
+  },
+  {
+    "title": "Globalisierung als Netz",
+    "description": "Impuls Containerhafen, Wirkungsgefüge aus 12 Begriffskarten legen, Transfer am Weg eines Smartphones. Mit Do Now und Reflexion.",
+    "type": "Interaktive Präsentation",
+    "path": "geografie/klasse-10/globalisierung/globalisierung-als-netz/",
+    "subject": "Geografie",
+    "grade": "Klasse 10",
+    "themenfeld": "3.7",
+    "dauer": "45 Min.",
+    "niveau": "F–H",
+    "datum": "2026-11-06",
+    "reihe": "Globalisierung",
+    "sichtbar": true
   }
 ]
