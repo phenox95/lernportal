@@ -14,10 +14,10 @@
   --line: #e1e2dc;
   --rahmen: #7d837e;
   --focus: #0a6fe0;
-  --bio: #557a5c;
-  --geo: #a58c61;
-  --bio-tint: rgba(85, 122, 92, 0.15);
-  --geo-tint: rgba(165, 140, 97, 0.17);
+  --bio: #0F6E56;
+  --geo: #A9442B;
+  --bio-tint: #E8F3EC;
+  --geo-tint: #F5EBE1;
   --shadow: 0 1px 2px rgba(31, 36, 32, 0.06), 0 14px 30px -18px rgba(31, 36, 32, 0.3);
   --shadow-hover: 0 2px 4px rgba(31, 36, 32, 0.08), 0 20px 36px -18px rgba(31, 36, 32, 0.38);
   --radius: 0.75rem;
@@ -27,15 +27,15 @@
 }
 :root[data-theme="dark"] {
   --bg: #121513; --surface: #1a1e1b; --field: #222723; --text: #f0f2ee; --text-2: #a6ada7;
-  --line: #2c312d; --rahmen: #7f867f; --focus: #4da3ff; --bio: #8db894; --geo: #d1b685;
-  --bio-tint: rgba(141, 184, 148, 0.16); --geo-tint: rgba(209, 182, 133, 0.16);
+  --line: #2c312d; --rahmen: #7f867f; --focus: #4da3ff; --bio: #5FC8A4; --geo: #EE9A7F;
+  --bio-tint: #1E322A; --geo-tint: #352A24;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 30px -16px rgba(0, 0, 0, 0.75); --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 36px -16px rgba(0, 0, 0, 0.85);
 }
 @media (prefers-color-scheme: dark) {
   :root[data-theme="auto"], :root:not([data-theme]) {
     --bg: #121513; --surface: #1a1e1b; --field: #222723; --text: #f0f2ee; --text-2: #a6ada7;
-    --line: #2c312d; --rahmen: #7f867f; --focus: #4da3ff; --bio: #8db894; --geo: #d1b685;
-    --bio-tint: rgba(141, 184, 148, 0.16); --geo-tint: rgba(209, 182, 133, 0.16);
+    --line: #2c312d; --rahmen: #7f867f; --focus: #4da3ff; --bio: #5FC8A4; --geo: #EE9A7F;
+    --bio-tint: #1E322A; --geo-tint: #352A24;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 30px -16px rgba(0, 0, 0, 0.75); --shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 36px -16px rgba(0, 0, 0, 0.85);
   }
 }
@@ -112,16 +112,16 @@ body[data-subject="Geografie"] .eyebrow::before { background: var(--geo); }
 
 /* Fachseiten: Einleitung auf flacher Fachtönung mit dezentem Fachmuster, optional ein Themenbild neben dem Titel */
 .fach-intro { position: relative; isolation: isolate; overflow: hidden; padding: 0.25rem 0 2rem; border-bottom: 1px solid var(--line); }
-body[data-subject="Biologie"] .fach-intro { background: linear-gradient(var(--bio-tint), var(--bio-tint)), var(--bg); }
-body[data-subject="Geografie"] .fach-intro { background: linear-gradient(var(--geo-tint), var(--geo-tint)), var(--bg); }
+body[data-subject="Biologie"] .fach-intro { background: var(--bio-tint); }
+body[data-subject="Geografie"] .fach-intro { background: var(--geo-tint); }
 .fach-intro::after {
   content: ""; position: absolute; z-index: -1; pointer-events: none; opacity: 0.32;
   right: max(0px, calc(50% - 31rem)); top: 0; width: min(26rem, 90%); height: 100%; min-height: 10rem;
   -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: right top; mask-position: right top;
-  -webkit-mask-size: auto 100%, 100% 100%; mask-size: auto 100%, 100% 100%; -webkit-mask-composite: source-in; mask-composite: intersect;
+  -webkit-mask-size: auto 100%; mask-size: auto 100%;
 }
-body[data-subject="Biologie"] .fach-intro::after { background: var(--bio); -webkit-mask-image: url("../img/muster/bio.svg"), linear-gradient(to left, transparent, #000 16%); mask-image: url("../img/muster/bio.svg"), linear-gradient(to left, transparent, #000 16%); }
-body[data-subject="Geografie"] .fach-intro::after { background: var(--geo); -webkit-mask-image: url("../img/muster/geo.svg"), linear-gradient(to left, transparent, #000 16%); mask-image: url("../img/muster/geo.svg"), linear-gradient(to left, transparent, #000 16%); }
+body[data-subject="Biologie"] .fach-intro::after { background: var(--bio); -webkit-mask-image: url("../img/muster/bio.svg"); mask-image: url("../img/muster/bio.svg"); }
+body[data-subject="Geografie"] .fach-intro::after { background: var(--geo); -webkit-mask-image: url("../img/muster/geo.svg"); mask-image: url("../img/muster/geo.svg"); }
 /* Nebentext auf getönter Fläche etwas dunkler (heller im Dunkelmodus), damit er auch über dem Muster 4,5:1 hält */
 .fach-intro, .fach-tile { --text-2: color-mix(in srgb, var(--text) 80%, var(--bg)); }
 @media (max-width: 40rem) { .fach-intro::after { opacity: 0.22; } }
@@ -157,8 +157,8 @@ body[data-subject="Geografie"] .fach-intro::after { background: var(--geo); -web
   min-height: 6.5rem; padding: 1rem 1.25rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow);
   transition: box-shadow 0.15s ease;
 }
-.fach-tile.bio { background: linear-gradient(var(--bio-tint), var(--bio-tint)), var(--surface); }
-.fach-tile.geo { background: linear-gradient(var(--geo-tint), var(--geo-tint)), var(--surface); }
+.fach-tile.bio { background: var(--bio-tint); }
+.fach-tile.geo { background: var(--geo-tint); }
 .fach-tile::before { content: ""; grid-row: 1 / span 2; grid-column: 1; width: 0.85rem; height: 0.85rem; border-radius: 50%; }
 .fach-tile.bio::before { background: var(--bio); }
 .fach-tile.geo::before { background: var(--geo); }
@@ -244,8 +244,8 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
   border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: inherit; text-decoration: none;
 }
 .tf-top { display: flex; align-items: center; justify-content: space-between; width: 100%; }
-.tf-icon { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; background: var(--field); }
-.tf-nr { font-size: 0.8125rem; font-weight: 700; color: var(--text-2); }
+.tf-icon { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; }
+.tf-nr { font-size: 0.8125rem; font-weight: 700; }
 .tf-title { flex: 1; font-size: 1rem; font-weight: 700; line-height: 1.25; }
 .tf-count { font-size: 0.8125rem; color: var(--text-2); }
 .tf-row:hover { border-color: var(--rahmen); }
@@ -255,3 +255,74 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .tf-kopf { display: flex; align-items: center; gap: 0.9rem; }
 .tf-kopf .tf-icon { width: 3.5rem; height: 3.5rem; flex: none; border-radius: 1rem; }
 .tf-kopf .title { margin: 0; }
+
+/* Themenfeldfarben (Master 5.3): je Themenfeld Tint (Fläche des Symbolfelds) und Ink (Symbol und Nummer), gebunden an Fach und Nummer.
+   Ink auf Tint mindestens 5:1. Nur für Symbolfeld und Nummer, nie für Flächen mit Text. */
+[data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #d3eaf0; --tf-ink: #1f687a; }
+[data-tf-fach="Biologie"][data-tf-nr="3.2"] { --tf-tint: #d3f0ed; --tf-ink: #1c6e66; }
+[data-tf-fach="Biologie"][data-tf-nr="3.3"] { --tf-tint: #d3f0e5; --tf-ink: #1c6e4d; }
+[data-tf-fach="Biologie"][data-tf-nr="3.4"] { --tf-tint: #d3f0dc; --tf-ink: #1c6e34; }
+[data-tf-fach="Biologie"][data-tf-nr="3.5"] { --tf-tint: #d3f0d4; --tf-ink: #1c6e1e; }
+[data-tf-fach="Biologie"][data-tf-nr="3.6"] { --tf-tint: #daf0d3; --tf-ink: #2f6e1c; }
+[data-tf-fach="Biologie"][data-tf-nr="3.7"] { --tf-tint: #e1f0d3; --tf-ink: #426e1c; }
+[data-tf-fach="Biologie"][data-tf-nr="3.8"] { --tf-tint: #e8f0d3; --tf-ink: #526a1b; }
+[data-tf-fach="Geografie"][data-tf-nr="3.1"] { --tf-tint: #f4cfd6; --tf-ink: #952336; }
+[data-tf-fach="Geografie"][data-tf-nr="3.2"] { --tf-tint: #f4d1cf; --tf-ink: #952723; }
+[data-tf-fach="Geografie"][data-tf-nr="3.3"] { --tf-tint: #f4d7cf; --tf-ink: #953c23; }
+[data-tf-fach="Geografie"][data-tf-nr="3.4"] { --tf-tint: #f4decf; --tf-ink: #8c4c21; }
+[data-tf-fach="Geografie"][data-tf-nr="3.5"] { --tf-tint: #f4e4cf; --tf-ink: #80561e; }
+[data-tf-fach="Geografie"][data-tf-nr="3.6"] { --tf-tint: #f4eacf; --tf-ink: #785e1c; }
+[data-tf-fach="Geografie"][data-tf-nr="3.7"] { --tf-tint: #f4eecf; --tf-ink: #70631a; }
+[data-tf-fach="Geografie"][data-tf-nr="3.8"] { --tf-tint: #f4f3cf; --tf-ink: #6b6a19; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #23454d; --tf-ink: #94cddb; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.2"] { --tf-tint: #234d49; --tf-ink: #94dbd4; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.3"] { --tf-tint: #234d3c; --tf-ink: #94dbbf; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.4"] { --tf-tint: #234d30; --tf-ink: #94dba9; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.5"] { --tf-tint: #234d24; --tf-ink: #94db96; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.6"] { --tf-tint: #2d4d23; --tf-ink: #a5db94; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.7"] { --tf-tint: #374d23; --tf-ink: #b5db94; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.8"] { --tf-tint: #414d23; --tf-ink: #c6db94; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.1"] { --tf-tint: #4d232a; --tf-ink: #db94a0; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.2"] { --tf-tint: #4d2423; --tf-ink: #db9694; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.3"] { --tf-tint: #4d2c23; --tf-ink: #dba394; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.4"] { --tf-tint: #4d3423; --tf-ink: #dbb094; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.5"] { --tf-tint: #4d3b23; --tf-ink: #dbbc94; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.6"] { --tf-tint: #4d4123; --tf-ink: #dbc794; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.7"] { --tf-tint: #4d4723; --tf-ink: #dbd194; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.8"] { --tf-tint: #4d4d23; --tf-ink: #dbda94; }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #23454d; --tf-ink: #94cddb; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #23454d; --tf-ink: #94cddb; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.2"] { --tf-tint: #234d49; --tf-ink: #94dbd4; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.2"] { --tf-tint: #234d49; --tf-ink: #94dbd4; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.3"] { --tf-tint: #234d3c; --tf-ink: #94dbbf; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.3"] { --tf-tint: #234d3c; --tf-ink: #94dbbf; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.4"] { --tf-tint: #234d30; --tf-ink: #94dba9; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.4"] { --tf-tint: #234d30; --tf-ink: #94dba9; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.5"] { --tf-tint: #234d24; --tf-ink: #94db96; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.5"] { --tf-tint: #234d24; --tf-ink: #94db96; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.6"] { --tf-tint: #2d4d23; --tf-ink: #a5db94; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.6"] { --tf-tint: #2d4d23; --tf-ink: #a5db94; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.7"] { --tf-tint: #374d23; --tf-ink: #b5db94; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.7"] { --tf-tint: #374d23; --tf-ink: #b5db94; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.8"] { --tf-tint: #414d23; --tf-ink: #c6db94; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.8"] { --tf-tint: #414d23; --tf-ink: #c6db94; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.1"] { --tf-tint: #4d232a; --tf-ink: #db94a0; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.1"] { --tf-tint: #4d232a; --tf-ink: #db94a0; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.2"] { --tf-tint: #4d2423; --tf-ink: #db9694; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.2"] { --tf-tint: #4d2423; --tf-ink: #db9694; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.3"] { --tf-tint: #4d2c23; --tf-ink: #dba394; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.3"] { --tf-tint: #4d2c23; --tf-ink: #dba394; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.4"] { --tf-tint: #4d3423; --tf-ink: #dbb094; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.4"] { --tf-tint: #4d3423; --tf-ink: #dbb094; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.5"] { --tf-tint: #4d3b23; --tf-ink: #dbbc94; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.5"] { --tf-tint: #4d3b23; --tf-ink: #dbbc94; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.6"] { --tf-tint: #4d4123; --tf-ink: #dbc794; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.6"] { --tf-tint: #4d4123; --tf-ink: #dbc794; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.7"] { --tf-tint: #4d4723; --tf-ink: #dbd194; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.7"] { --tf-tint: #4d4723; --tf-ink: #dbd194; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.8"] { --tf-tint: #4d4d23; --tf-ink: #dbda94; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.8"] { --tf-tint: #4d4d23; --tf-ink: #dbda94; }
+}
+.tf-icon { background: var(--tf-tint, var(--field)); color: var(--tf-ink, currentColor); }
+.tf-nr { color: var(--tf-ink, var(--text-2)); }

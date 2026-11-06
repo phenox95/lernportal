@@ -7,9 +7,9 @@
   --muted: var(--text-2);
   --line-soft: #c9ccc6;
   --control: #7d837c;
-  --accent: #0c6a49;
-  --accent-2: #0f7a55;
-  --accent-hover: #0a5a3e;
+  --accent: #0F6E56;
+  --accent-2: #0F6E56;
+  --accent-hover: #0B4F3C;
   --on-accent: #ffffff;
   --accent-ink: var(--accent);
   --group: var(--field);
@@ -62,6 +62,14 @@
   }
 }
 
+/* Akzent je Fach (Master 5.3): Biologie Grün (Standard), Geografie Rostrot. Aufgabenmarken, Schaltflächen und Hilfekästen folgen dem Fach. */
+body { --fach-tint: var(--bio-tint, var(--lp-bio-tint)); }
+body[data-subject="Geografie"] { --accent: #A9442B; --accent-2: #A9442B; --accent-hover: #7C2F1C; --accent-ink: #A9442B; --fach-tint: var(--geo-tint, var(--lp-geo-tint)); }
+:root[data-theme="dark"] body[data-subject="Geografie"] { --accent: #EE9A7F; --accent-2: #EE9A7F; --accent-hover: #F4B5A0; --accent-ink: #F2A98F; --on-accent: #2B1209; }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] body[data-subject="Geografie"], :root:not([data-theme]) body[data-subject="Geografie"] { --accent: #EE9A7F; --accent-2: #EE9A7F; --accent-hover: #F4B5A0; --accent-ink: #F2A98F; --on-accent: #2B1209; }
+}
+
 /* Seitenkopf der Materialseite */
 .material-page .hero { padding: 1rem 0 0.25rem; }
 .material-page .title { margin-bottom: 0.4rem; font-size: clamp(1.9rem, 6vw, 3rem); }
@@ -71,14 +79,14 @@
 /* Aufgabe: weiße Karte mit weichem Schatten */
 .aufgabe { margin: 1.25rem 0; padding: 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 1.5rem; box-shadow: var(--shadow); }
 .aufgabe > h2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.7rem; margin: 0 0 0.6rem; font-size: 1.3125rem; line-height: 1.35; letter-spacing: -0.015em; }
-.nr { flex: none; align-self: center; display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: linear-gradient(160deg, var(--accent-2), var(--accent)); color: var(--on-accent); font-size: 1rem; font-weight: 700; }
+.nr { flex: none; align-self: center; display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-size: 1rem; font-weight: 700; }
 .niveau { margin-left: auto; font-size: 1rem; letter-spacing: 0.15em; color: var(--muted); white-space: nowrap; }
 .aufgabe p { max-width: 75ch; }
 .aufgabe p:first-of-type { margin-top: 0; }
 
 /* Material: getönte Fläche. Hilfe: gestrichelter Kasten. */
 .material { margin: 1rem 0; padding: 0.85rem 1rem 1.1rem; background: var(--group); border: 1px solid var(--line); border-radius: 1.1rem; }
-.hilfe { margin: 1rem 0; padding: 0.7rem 1rem 0.9rem; background: var(--bio-tint); border: 1.5px dashed var(--control); border-radius: 1.1rem; }
+.hilfe { margin: 1rem 0; padding: 0.7rem 1rem 0.9rem; background: var(--fach-tint, var(--bio-tint)); border: 1.5px dashed var(--control); border-radius: 1.1rem; }
 .box-label { display: block; margin: 0 0 0.45rem; font-size: 0.875rem; font-weight: 700; }
 .quelle { margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--muted); }
 .wortspeicher { display: flex; flex-wrap: wrap; gap: 0.4rem 0.6rem; margin: 0; padding: 0; list-style: none; }
@@ -86,19 +94,19 @@
 .schreib label { display: block; margin-bottom: 0.3rem; font-weight: 700; }
 textarea { width: 100%; max-width: 75ch; min-height: 6.5rem; padding: 0.7rem 0.85rem; font: inherit; line-height: 1.6; color: var(--text); background: var(--bg); border: 1.5px solid var(--control); border-radius: 0.9rem; resize: vertical; }
 .hinweis { margin: 0.25rem 0 0; font-size: 0.875rem; color: var(--muted); }
-.frage { margin: 1.25rem 0; padding: 1rem 1.25rem; background: linear-gradient(180deg, var(--bio-tint), transparent 75%), var(--surface); border: 1px solid var(--line); border-radius: 1.5rem; box-shadow: var(--shadow); }
+.frage { margin: 1.25rem 0; padding: 1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: 1.5rem; box-shadow: var(--shadow); }
 .frage label { display: block; margin-bottom: 0.35rem; font-size: 1.0625rem; font-weight: 700; }
 .frage textarea { min-height: 4.5rem; }
 
 /* Schaltflächen */
-.btn { min-height: 2.75rem; padding: 0.5rem 1.2rem; font: inherit; font-weight: 700; color: var(--on-accent); background: linear-gradient(180deg, var(--accent-2), var(--accent)); border: 1.5px solid var(--accent); border-radius: 0.9rem; box-shadow: 0 10px 20px -14px var(--accent); cursor: pointer; }
+.btn { min-height: 2.75rem; padding: 0.5rem 1.2rem; font: inherit; font-weight: 700; color: var(--on-accent); background: var(--accent); border: 1.5px solid var(--accent); border-radius: 0.9rem; cursor: pointer; }
 .btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 .btn.zweit { color: var(--accent-ink); background: transparent; box-shadow: none; }
 .btn.zweit:hover { background: var(--group); }
 .btn[disabled] { opacity: 0.55; cursor: not-allowed; }
 .seg { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; padding: 0.25rem; background: var(--field); border-radius: 0.95rem; }
 .seg button { min-height: 2.75rem; min-width: 2.75rem; padding: 0.4rem 0.95rem; font: inherit; color: var(--text); background: transparent; border: 0; border-radius: 0.7rem; cursor: pointer; }
-.seg button[aria-pressed="true"] { color: var(--on-accent); font-weight: 700; background: linear-gradient(180deg, var(--accent-2), var(--accent)); }
+.seg button[aria-pressed="true"] { color: var(--on-accent); font-weight: 700; background: var(--accent); }
 .seg button[disabled] { opacity: 0.55; cursor: not-allowed; }
 .steuer { margin: 0 0 0.9rem; }
 .steuer > .box-label { margin-bottom: 0.3rem; }
@@ -201,10 +209,10 @@ select { min-height: 2.75rem; max-width: 100%; padding: 0.3rem 0.7rem; font: inh
   --lp-linie: #e1e2dc;
   --lp-rahmen: #7d837e;
   --lp-fokus: #0a6fe0;
-  --lp-bio: #557a5c;
-  --lp-geo: #a58c61;
-  --lp-bio-tint: rgba(85, 122, 92, 0.15);
-  --lp-geo-tint: rgba(165, 140, 97, 0.17);
+  --lp-bio: #0F6E56;
+  --lp-geo: #A9442B;
+  --lp-bio-tint: #E8F3EC;
+  --lp-geo-tint: #F5EBE1;
   --lp-akzent: var(--lp-text2);
   --lp-schatten: 0 1px 2px rgba(31, 36, 32, 0.06), 0 14px 30px -18px rgba(31, 36, 32, 0.3);
   --lp-schatten-stark: 0 2px 4px rgba(31, 36, 32, 0.08), 0 20px 36px -18px rgba(31, 36, 32, 0.38);
@@ -212,16 +220,16 @@ select { min-height: 2.75rem; max-width: 100%; padding: 0.3rem 0.7rem; font: inh
 :root[data-theme="dark"] {
   --lp-bg: #121513; --lp-flaeche: #1a1e1b; --lp-gruppe: #151815; --lp-feld: #222723;
   --lp-text: #f0f2ee; --lp-text2: #a6ada7; --lp-linie: #2c312d; --lp-rahmen: #7f867f; --lp-fokus: #4da3ff;
-  --lp-bio: #8db894; --lp-geo: #d1b685;
-  --lp-bio-tint: rgba(141, 184, 148, 0.16); --lp-geo-tint: rgba(209, 182, 133, 0.16);
+  --lp-bio: #5FC8A4; --lp-geo: #EE9A7F;
+  --lp-bio-tint: #1E322A; --lp-geo-tint: #352A24;
   --lp-schatten: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 30px -16px rgba(0, 0, 0, 0.75); --lp-schatten-stark: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 36px -16px rgba(0, 0, 0, 0.85);
 }
 @media (prefers-color-scheme: dark) {
   :root[data-theme="auto"], :root:not([data-theme]) {
     --lp-bg: #121513; --lp-flaeche: #1a1e1b; --lp-gruppe: #151815; --lp-feld: #222723;
     --lp-text: #f0f2ee; --lp-text2: #a6ada7; --lp-linie: #2c312d; --lp-rahmen: #7f867f; --lp-fokus: #4da3ff;
-    --lp-bio: #8db894; --lp-geo: #d1b685;
-    --lp-bio-tint: rgba(141, 184, 148, 0.16); --lp-geo-tint: rgba(209, 182, 133, 0.16);
+    --lp-bio: #5FC8A4; --lp-geo: #EE9A7F;
+    --lp-bio-tint: #1E322A; --lp-geo-tint: #352A24;
     --lp-schatten: 0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 30px -16px rgba(0, 0, 0, 0.75); --lp-schatten-stark: 0 2px 4px rgba(0, 0, 0, 0.5), 0 20px 36px -16px rgba(0, 0, 0, 0.85);
   }
 }
@@ -274,16 +282,16 @@ body[data-subject="Geografie"] { --lp-akzent: var(--lp-geo); }
 /* Titelblock auf Vorlagenseiten: flache Fachtönung mit dezentem Fachmuster (rein dekorativ), Text in Textfarbe.
    Optional ein Themenbild neben dem Titel, nie darunter oder dahinter. Keine Verläufe, keine Schatten. */
 .lp-titelblock { position: relative; isolation: isolate; overflow: hidden; font-family: var(--lp-schrift); color: var(--lp-text); border-bottom: 1px solid var(--lp-linie); }
-.lp-titelblock.lp-bio { background: linear-gradient(var(--lp-bio-tint), var(--lp-bio-tint)), var(--lp-bg); }
-.lp-titelblock.lp-geo { background: linear-gradient(var(--lp-geo-tint), var(--lp-geo-tint)), var(--lp-bg); }
+.lp-titelblock.lp-bio { background: var(--lp-bio-tint); }
+.lp-titelblock.lp-geo { background: var(--lp-geo-tint); }
 .lp-titelblock-innen { position: relative; display: grid; gap: 1.25rem; align-items: center; max-width: 68rem; margin: 0 auto; padding: 1.75rem clamp(1rem, 4vw, 1.5rem) 1.75rem; }
 .lp-titelblock-innen::after {
   content: ""; position: absolute; z-index: -1; pointer-events: none; right: 0; top: 0; width: min(26rem, 80%); height: 100%; min-height: 8rem; opacity: 0.32;
   -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: right top; mask-position: right top;
-  -webkit-mask-size: auto 100%, 100% 100%; mask-size: auto 100%, 100% 100%; -webkit-mask-composite: source-in; mask-composite: intersect;
+  -webkit-mask-size: auto 100%; mask-size: auto 100%;
 }
-.lp-titelblock.lp-bio .lp-titelblock-innen::after { background: var(--lp-bio); -webkit-mask-image: url("../img/muster/bio.svg"), linear-gradient(to left, transparent, #000 16%); mask-image: url("../img/muster/bio.svg"), linear-gradient(to left, transparent, #000 16%); }
-.lp-titelblock.lp-geo .lp-titelblock-innen::after { background: var(--lp-geo); -webkit-mask-image: url("../img/muster/geo.svg"), linear-gradient(to left, transparent, #000 16%); mask-image: url("../img/muster/geo.svg"), linear-gradient(to left, transparent, #000 16%); }
+.lp-titelblock.lp-bio .lp-titelblock-innen::after { background: var(--lp-bio); -webkit-mask-image: url("../img/muster/bio.svg"); mask-image: url("../img/muster/bio.svg"); }
+.lp-titelblock.lp-geo .lp-titelblock-innen::after { background: var(--lp-geo); -webkit-mask-image: url("../img/muster/geo.svg"); mask-image: url("../img/muster/geo.svg"); }
 .lp-titelblock { --lp-text2: color-mix(in srgb, var(--lp-text) 80%, var(--lp-bg)); }
 @media (max-width: 40rem) { .lp-titelblock-innen::after { opacity: 0.22; } }
 .lp-titelblock .lp-meta { margin: 0 0 0.6rem; font-size: 0.9375rem; }

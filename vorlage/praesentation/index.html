@@ -17,8 +17,6 @@
    Hier nur, was diese Vorlage zusätzlich braucht. */
 #nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
 #nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
-.pf{position:absolute;bottom:14px;width:48px;height:44px;border:0;border-radius:12px;background:rgba(15,110,86,.15);color:var(--g);font-size:26px;cursor:pointer;z-index:6}
-.pf.l{left:16px}.pf.r{right:16px}
 #notiz{position:fixed;left:0;right:0;bottom:0;background:#1A2B24;color:#fff;padding:14px 28px;font-size:17px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000}
 #notiz.an{display:block}
 </style>
@@ -49,8 +47,8 @@
 </section>
 
 <div id="nav"><i></i></div>
-<button class="pf l" id="zur" aria-label="zurück">‹</button>
-<button class="pf r" id="vor" aria-label="weiter">›</button>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
 </div>
 </div>
 <div id="notiz"></div>
@@ -64,6 +62,7 @@
     cur=Math.max(0,Math.min(slides.length-1,n));
     slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
     balken.style.width=((cur+1)/slides.length*100)+'%';
+    document.getElementById('zur').disabled=cur===0;document.getElementById('vor').disabled=cur===slides.length-1;
     notiz.textContent=slides[cur].getAttribute('data-notes')||'';
     try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
   }

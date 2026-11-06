@@ -5,7 +5,7 @@
    Einbinden zusammen mit praesentation.css. Schrift: Andika (SIL OFL), lokal in assets/fonts/. */
 @font-face{font-family:Andika;src:url(../fonts/andika-regular.woff2) format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:Andika;src:url(../fonts/andika-bold.woff2) format('woff2');font-weight:700;font-display:swap}
-:root{--dk:#0B4F3C;--g:#0F6E56;--mint:#E8F3EC;--y:#F4B400;--b:#2E7DBA;--o:#E67E22;--p:#C2527A;--grey:#6B7B74;--ink:#1A2B24}
+:root{--dk:#0B4F3C;--g:#0F6E56;--mint:#E8F3EC;--y:#F4B400;--b:#1F6BA5;--o:#E67E22;--p:#B03F69;--grey:#5B6A63;--ink:#1A2B24}
 *{box-sizing:border-box}html,body{margin:0;height:100%;background:#111;font-family:Andika,Verdana,sans-serif;color:var(--ink);overflow:hidden}body{display:flex;flex-direction:column}#buehne{position:relative;flex:1;min-height:0;overflow:hidden}
 #stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center;}
 .slide{position:absolute;inset:0;display:none;padding:56px 64px 64px;background:#fff;overflow:hidden}
@@ -22,7 +22,7 @@ small{font-size:20px;color:var(--grey)}.center{text-align:center}.muted{color:va
 .chips{display:grid;gap:18px}.chip{display:block;text-align:center;font-weight:700;font-size:28px;padding:14px 10px;border-radius:14px;color:#fff}
 .c1{background:var(--grey)}.c2{background:var(--b)}.c3{background:var(--y);color:var(--ink)}.c4{background:var(--o);color:var(--ink)}.c5{background:var(--p)}
 .merk{margin-top:22px;padding:22px 28px;font-size:28px;line-height:1.4}.merk b{color:var(--g)}
-#foot{position:absolute;left:64px;right:64px;bottom:20px;display:flex;justify-content:space-between;font-size:17px;color:var(--grey);z-index:5}#foot.ondark{color:#cfe}
+#foot{position:absolute;left:64px;right:64px;bottom:20px;display:flex;justify-content:space-between;font-size:18px;color:var(--grey);z-index:5}#foot.ondark{color:#cfe}
 #bar{position:absolute;left:0;bottom:0;height:6px;background:var(--y);z-index:6;transition:width .25s}
 #notes{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);color:#fff;font-size:22px;padding:18px 64px 30px;z-index:9;display:none}
 .b{font-family:inherit;font-size:22px;font-weight:700;border:0;border-radius:12px;padding:10px 24px;background:var(--g);color:#fff;cursor:pointer;touch-action:manipulation}.b.sec{background:var(--grey)}.b.s{font-size:16px;padding:4px 14px;margin-left:10px}
@@ -38,4 +38,11 @@ body[data-subject="Biologie"]{--fach-rgb:15,110,86}
 #tools button{font-family:inherit;border:0;border-radius:12px;background:rgba(var(--fach-rgb,15,110,86),.92);color:#fff;font-size:24px;font-weight:700;height:44px;min-width:44px;padding:0 14px;cursor:pointer;touch-action:manipulation}
 /* Die Portal-Kopfleiste verdeckt die Folie. In Präsentationen fehlt sie, der Weg zurück steht im Werkzeugrand (Haus-Knopf). */
 body.lp-pres .lp-kopf{display:none}
+/* Große Blätterpfeile in den unteren Ecken (Board und Beamer): 84 px, Weiter in Gelb. Markup siehe vorlage/praesentation/index.html */
+.pfeil{position:fixed;bottom:max(12px,env(safe-area-inset-bottom));z-index:30;width:84px;height:84px;border-radius:50%;border:4px solid #fff;background:var(--dk);color:#fff;display:grid;place-items:center;padding:0;cursor:pointer;touch-action:manipulation}
+.pfeil.l{left:max(12px,env(safe-area-inset-left))}.pfeil.r{right:max(12px,env(safe-area-inset-right));background:var(--y);color:var(--ink);border-color:var(--ink)}
+.pfeil svg{width:44px;height:44px;fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.pfeil:active:not(:disabled){transform:scale(.95)}.pfeil:disabled{opacity:.2;cursor:default}
+.pfeil:focus-visible{outline:4px solid var(--y);outline-offset:3px}
+@media print{.pfeil{display:none}}
 @media print{html,body{overflow:visible;height:auto;background:#fff;display:block}#buehne{position:static;overflow:visible}#stage{position:static;transform:none!important;width:auto;height:auto}.slide{display:block!important;position:relative;height:720px;width:1280px;page-break-after:always}#tools,#notes,#help,#bar,#foot,.lp-kopf{display:none!important}}
