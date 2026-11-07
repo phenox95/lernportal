@@ -68,6 +68,13 @@ for i, p in enumerate(projekte):
                 err(f"{n}: Klasse passt nicht zum Pfad „{pa}“")
         elif p.get("subject") in ("Biologie", "Geografie"):
             wrn(f"{n}: Pfad „{pa}“ folgt nicht <fach>/klasse-<n>/…")
+        # Ordnerregel: <fach>/klasse-<n>/<themenfeld-slug>/…
+        th0 = str(p.get("themenfeld") or "")
+        if m and th0 in {t["nr"] for t in tf.get(p.get("subject"), [])}:
+            slug = next(t["slug"] for t in tf[p["subject"]] if t["nr"] == th0)
+            teile = pa.split("/")
+            if len(teile) < 4 or teile[2] != slug:
+                wrn(f"{n}: Pfad „{pa}“ sollte unter …/klasse-{m.group(2)}/{slug}/ liegen (Themenfeld {th0})")
     th = p.get("themenfeld")
     if th and re.match(r"^\d+\.\d+$", str(th)) and p.get("subject") in nummern:
         if th not in nummern[p["subject"]]:
@@ -91,6 +98,8 @@ for i, p in enumerate(projekte):
 eintraege = {p.get("path") for p in projekte}
 for idx in ROOT.glob("*/klasse-*/**/index.html"):
     ordner = idx.parent.relative_to(ROOT).as_posix() + "/"
+    if 'http-equiv="refresh"' in idx.read_text(encoding="utf-8", errors="ignore")[:800]:
+        continue  # Weiterleitung von einer alten Adresse
     if any(e and (ordner.startswith(e) or e.startswith(ordner)) for e in eintraege):
         continue
     wrn(f"Ordner „{ordner}“ hat index.html, aber keinen Eintrag in projects.json")

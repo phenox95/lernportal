@@ -16,6 +16,16 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `vorlage/` | Vorlagen: `vorlage/` (Materialseite mit Aufgaben), `vorlage/materialseite/` (Seite pro Thema mit Dateiliste) und `vorlage/praesentation/` (Grundaufbau einer Präsentation mit Stift, Timer und Lärmampel). Alle mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
 | `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`qrcode.js` QR-Codes für Präsentationen, `app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten, `materialseite.js` Dateiliste der Themenseite), `css/materialseite.css` (Stile der Themenseite), `js/praesentation.js` und `css/praesentation.css` (Werkzeuge für Präsentationen), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), `fonts/` (Andika, **nur für Präsentationen**), `games/` (Belohnungsspiele ohne Fachinhalte). Portal und Materialseiten laden keine Schriftdatei und nutzen die Systemschrift des Geräts |
 
+## Ordnerregel
+
+```
+<fach>/klasse-<n>/<themenfeld-ordner>/[<reihe>/]<stunde>/
+```
+
+- `<themenfeld-ordner>` ist der `slug` des Themenfelds aus `themenfelder.json` (z. B. `nervensystem` für 3.6). Er muss zur Nummer in `themenfeld` passen. `tools/check.py` warnt sonst.
+- `<reihe>` ist optional (z. B. `risikoraeume`). Die Stunde ist die unterste Ebene mit einer eigenen Materialseite oder Anwendung.
+- Zieht ein Ordner um, bleibt an der alten Adresse eine `index.html` mit Weiterleitung (`<meta http-equiv="refresh">`), damit gedruckte QR-Codes und Lesezeichen funktionieren. Beispiel: `biologie/klasse-9/auge-bau/`.
+
 ## Prüfen vor dem Hochladen
 
 ```bash
