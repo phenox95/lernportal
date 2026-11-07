@@ -15,269 +15,197 @@
 <script src="../../../../assets/js/prefs.js"></script>
 <script src="../../../../assets/js/material.js" defer></script>
 <style>
-body{--rost:var(--g);--rost-d:var(--dk);--dunkel:var(--ink);--papier:#fff;--sand:var(--mint);--grau:var(--grey);--ok:#2e9e4f}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{display:flex;flex-direction:column;background:#111;overflow:hidden;font-family:Andika,Verdana,sans-serif;color:var(--dunkel)}
-#buehne{position:relative;flex:1;min-height:0;overflow:hidden}
-#stage{z-index:1;position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center;background:var(--papier);overflow:hidden}
-.slide{position:absolute;inset:0;display:none;flex-direction:column}
-.slide.aktiv{display:flex}
-.slide{padding:0;background:#fff;overflow:visible}
-.kopf .badge{position:static;right:auto;top:auto;font-size:20px;padding:0;border-radius:50%}
-.kopf{height:76px;background:transparent;color:var(--dk);display:flex;align-items:center;gap:16px;padding:20px 64px 0;flex:none}
-.badge{width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;flex:none}
-.kopf .ph{font-weight:700;font-size:24px;color:var(--dk)}
-.kopf .meta{margin-left:auto;display:flex;gap:12px;font-size:18px}
-.kopf .meta span{background:var(--g);color:#fff;font-weight:700;border-radius:12px;padding:6px 18px}
-.inhalt{flex:1;padding:8px 64px 56px;display:flex;flex-direction:column;gap:20px;min-height:0}
-h1{margin:0;font-size:46px;line-height:1.15;color:var(--dk)}
-h2{margin:0;font-size:30px}
-p{margin:0;font-size:28px;line-height:1.4}
-.karte{background:#fff;border:3px solid var(--g);border-radius:16px;padding:18px 24px}
-.karte.sand{background:var(--mint);border-color:var(--mint)}
-.op{color:var(--rost);font-weight:700}
-.reihe{display:flex;gap:24px}
-.reihe>*{flex:1}
-.btn{font-family:inherit;font-size:20px;background:var(--rost);color:#fff;border:0;border-radius:10px;padding:10px 20px;cursor:pointer}
-.btn.hell{background:#fff;color:var(--rost);border:3px solid var(--rost)}
-.btn:focus-visible,.chip:focus-visible,.pfeil:focus-visible{outline:4px solid var(--dunkel)}
-.versteckt{display:none}
-.versteckt.show{display:block}
-.bildkarte{position:relative;border-radius:14px;overflow:hidden;border:3px solid var(--dunkel);background:#000}
+/* Aussehen (Farben, Schrift, Folien, Überschriften, Aufgaben, Hilfen, Kästen) steht in praesentation-design.css, Fach Geografie = Rostrot.
+   Hier nur, was diese Stunde zusätzlich braucht. */
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+#notiz{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding:14px 28px;font-size:17px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000}
+#notiz.an{display:block}
+.mint{background:var(--mint);border-radius:16px}
+.lead.s{font-size:28px;margin:0 0 12px}.shilfe.sm{font-size:20px;padding:12px 16px}
+.split{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:start}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.show-no{display:none}.show-no.show{display:block}
+.bildkarte{position:relative;border-radius:14px;overflow:hidden;border:3px solid var(--g);background:#000}
 .bildkarte img{display:block;width:100%;height:100%;object-fit:cover}
 .bildkarte .cap{position:absolute;left:0;bottom:0;background:rgba(43,33,30,.85);color:#fff;padding:6px 16px;font-size:20px}
-.bildkarte.fehlt{background:var(--sand);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
+.bildkarte.fehlt{background:var(--mint);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
 .bildkarte.fehlt img{display:none}
-.bildkarte.fehlt:before{content:attr(data-fehlt);color:var(--dunkel);font-size:22px}
-.deko{position:absolute;display:block;pointer-events:none}
-.deko.rund{border-radius:14px;border:3px solid var(--dunkel);pointer-events:auto}
-.quelle{font-size:15px;color:var(--grau)}
-.fertig{position:absolute;right:32px;bottom:56px;width:330px;background:#fff;border:3px dashed var(--rost);border-radius:14px;padding:12px 18px;font-size:19px}
-.fertig b{color:var(--rost)}
-.schritt{display:flex;gap:18px;align-items:flex-start}
-.schritt .nr{width:48px;height:48px;border-radius:50%;background:var(--rost);color:#fff;font-weight:700;font-size:26px;display:flex;align-items:center;justify-content:center;flex:none}
-.schritt p{font-size:26px}
-.eingabe{background:#fff;border:3px solid var(--dunkel);border-radius:14px;padding:18px 24px;font-size:34px;line-height:1.4;min-height:140px;outline:none}
-.eingabe:empty:before{content:attr(data-ph);color:var(--grau)}
-.eingabe:focus{border-color:var(--rost)}
-.timer{display:flex;align-items:center;gap:14px}
-.timer .z{font-size:56px;font-weight:700;min-width:170px;font-variant-numeric:tabular-nums}
-.timer .z.aus{color:var(--rost)}
+.bildkarte.fehlt:before{content:attr(data-fehlt);color:var(--ink);font-size:22px}
+.dark .bildkarte{border-color:#fff}
+.chips .chip{background:var(--g);color:#fff}
+.wahlen{display:flex;gap:14px;flex-wrap:wrap}
+.wahl{font-family:inherit;font-size:26px;font-weight:700;background:#fff;border:3px solid var(--g);border-radius:14px;min-height:56px;padding:8px 22px;cursor:pointer;color:var(--ink);touch-action:manipulation}
+.wahl.an{background:var(--g);color:#fff}
+.wahl:focus-visible,.b:focus-visible{outline:4px solid var(--y);outline-offset:3px}
+.b.sec.hell{background:#fff;color:var(--g);border:3px solid var(--g)}
+.eingabe{background:#fff;border:3px solid var(--g);border-radius:14px;padding:18px 24px;font-size:28px;line-height:1.4;min-height:140px;outline:none;color:var(--ink)}
+.eingabe:empty:before{content:attr(data-ph);color:var(--grey)}
+.eingabe:focus{border-color:var(--y)}
 .pos{position:relative;margin:10px 0 0}
-.pos .linie{position:relative;height:110px;border:3px solid var(--dunkel);border-radius:14px;background:#fff;cursor:crosshair;overflow:hidden}
-.pos .linie:before{content:"";position:absolute;left:24px;right:24px;top:55px;height:6px;background:var(--dunkel)}
+.pos .linie{position:relative;height:110px;border:3px solid var(--g);border-radius:14px;background:#fff;cursor:crosshair;overflow:hidden}
+.pos .linie:before{content:"";position:absolute;left:24px;right:24px;top:55px;height:6px;background:var(--ink)}
 .pos .ende{position:absolute;top:6px;font-weight:700;font-size:24px}
 .pos .ende.l{left:22px}.pos .ende.r{right:22px}
-.pos .m{position:absolute;top:50px;transform:translateX(-50%);font-size:32px;font-weight:700;line-height:1;color:var(--rost);pointer-events:none}
-.pos .m.alt{color:var(--grau);top:20px;opacity:.9}
-.pos .tools{display:flex;gap:12px;margin-top:10px;align-items:center}
-.pos .tools small{font-size:17px;color:var(--grau)}
-.tab{display:flex;gap:24px}
-.tab>div{flex:1}
-.tab h2{background:var(--rost);color:#fff;border-radius:12px 12px 0 0;padding:10px 18px;font-size:26px}
-.tab .eingabe{border-radius:0 0 12px 12px;min-height:290px;font-size:24px;border-top:0}
-.chips{display:flex;gap:14px;flex-wrap:wrap}
-.chip{font-family:inherit;font-size:26px;background:#fff;border:3px solid var(--rost);border-radius:12px;padding:10px 20px;cursor:pointer;color:var(--dunkel)}
-.chip.an{background:var(--rost);color:#fff}
-.nav{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px;pointer-events:none;z-index:6}
-.nav i{width:10px;height:10px;border-radius:50%;background:#dccfc6}
-.nav i.a{background:var(--rost)}
-.pfeil{position:absolute;bottom:6px;width:44px;height:36px;border:0;border-radius:8px;background:rgba(var(--fach-rgb),.14);color:var(--rost);font-size:22px;cursor:pointer;z-index:6}
-.pfeil.l{left:14px}.pfeil.r{right:14px}
-#notiz{position:fixed;left:0;right:0;bottom:0;background:#2B211E;color:#fff;padding:14px 28px;font-size:17px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000;font-family:Verdana,Arial,sans-serif}
-#notiz.an{display:block}
-#notiz b{color:#ffb59f}
-#hilfe{position:absolute;right:12px;top:8px;z-index:0;color:#cdbfb5;font-size:13px;font-family:Andika,Verdana,sans-serif;opacity:0;transition:opacity .3s}
-#buehne:hover #hilfe{opacity:.8}
-@media print{html,body{overflow:visible;height:auto;background:#fff;display:block}#buehne{position:static;overflow:visible}#stage{position:static;transform:none!important;width:auto;height:auto}.slide{display:flex!important;position:relative;height:720px;width:1280px;page-break-after:always}.pfeil,.nav,#notiz,#hilfe{display:none}}
+.pos .m{position:absolute;top:50px;transform:translateX(-50%);font-size:32px;font-weight:700;line-height:1;color:var(--g);pointer-events:none}
+.pos .m.alt{color:var(--grey);top:20px;opacity:.9}
+.pos .tools{display:flex;gap:12px;margin-top:14px;align-items:center}
+.pos .tools small{font-size:20px}
+.tab h2{background:var(--g);color:#fff;border-radius:12px 12px 0 0;padding:10px 18px;font-size:26px}
+.tab .eingabe{border-radius:0 0 12px 12px;min-height:270px;font-size:24px;border-top:0}
+.deko{position:absolute;display:block;pointer-events:none}
+.deko.rund{border-radius:14px;border:3px solid var(--g);pointer-events:auto}
+.zeit{position:absolute;left:64px;right:64px;bottom:44px}
+.onDark{font-size:26px;margin-top:22px}
+@media print{#nav,#notiz{display:none}}
 </style>
 </head>
 <body class="lp-pres" data-root="../../../../" data-title="Urlaub auf dem Vulkan – Tourismus am Ätna" data-subject="Geografie" data-grade="Klasse 7">
 <noscript><p style="color:#fff;padding:1rem;font-size:1rem">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
 <div id="buehne">
-<div id="hilfe">← → blättern · N Lehrkraft-Notizen · F Vollbild · P Stift · T Timer · L Lärmampel</div>
 <div id="stage">
 
 <!-- 1 Do Now -->
-<section class="slide" data-min="3" data-n="<b>Do Now (Wiederholung der Vorstunde).</b> Annahme: Vorstunde = Landwirtschaft am Ätna. Bei anderer Vorstunde die Aussage austauschen. Impuls läuft erst auf Folie 2. SuS mit LRS dürfen sich die Aussage vorlesen lassen. Danach kurz abgleichen (Lösung einblenden), währenddessen Anwesenheit.">
-  <div class="kopf"><div class="badge">1</div><div class="ph">Do Now</div><div class="meta"><span>Einzelarbeit</span><span>3 Min.</span></div></div>
-  <div class="inhalt">
-    <img class="deko" src="bilder/sonne.jpg" alt="" style="left:640px;top:84px;width:64px;height:64px">
-    <img class="deko rund" src="bilder/kleinkind-muede.jpg" alt="Ein müdes Kleinkind mit zerzausten Haaren sitzt mit geschlossenen Augen am Tisch." style="right:64px;top:70px;width:156px;height:88px;object-fit:cover">
-    <h1>Guten Morgen! Los geht’s.</h1>
-    <div class="karte sand"><p>Aussage aus der letzten Stunde:<br><b>„Am Ätna kann man keine Landwirtschaft betreiben. Die Lava zerstört alles.“</b></p></div>
-    <p><span class="op">Erkläre</span>, warum die Aussage nicht ganz stimmt. Nenne eine Chance und ein Risiko für die Landwirtschaft am Ätna.</p>
-    <div><button class="btn" data-reveal="l1">Lösung zeigen</button></div>
-    <div class="karte versteckt" id="l1"><p><b>Chance:</b> Asche und Lava machen den Boden fruchtbar. Seit über 2 000 Jahren wird dort angebaut.<br><b>Risiko:</b> Ausbrüche können Felder und Häuser zerstören.</p></div>
+<section class="slide" data-min="3" data-notes="Do Now (Wiederholung der Vorstunde). Annahme: Vorstunde = Landwirtschaft am Ätna. Bei anderer Vorstunde die Aussage austauschen. Impuls läuft erst auf Folie 2. SuS mit LRS dürfen sich die Aussage vorlesen lassen. Danach kurz abgleichen (Lösung einblenden), währenddessen Anwesenheit.">
+  <h1>Do Now: Erinnerst du dich?</h1><span class="badge">3 Min. · allein</span>
+  <div class="split" style="grid-template-columns:1fr 250px;align-items:stretch">
+    <div class="mint pad" style="margin:0">
+      <p class="lead s" style="margin-bottom:14px">Aussage aus der letzten Stunde:<br><b>„Am Ätna kann man keine Landwirtschaft betreiben. Die Lava zerstört alles.“</b></p>
+      <p class="task"><span class="snr">1</span><span><b>Erkläre</b>, warum die Aussage nicht ganz stimmt. <b>Nenne</b> eine Chance und ein Risiko für die Landwirtschaft am Ätna.</span><span></span></p>
+    </div>
+    <img class="deko rund" src="bilder/kleinkind-muede.jpg" alt="Ein müdes Kleinkind mit zerzausten Haaren sitzt mit geschlossenen Augen am Tisch." style="position:static;width:250px;height:100%;max-height:250px;object-fit:cover;align-self:start">
   </div>
+  <div class="shilfe sm" style="margin-top:22px">Du darfst dir die Aufgabe vorlesen lassen.</div>
+  <p style="margin-top:22px"><button class="b" data-reveal="l1">Lösung zeigen</button></p>
+  <div class="shilfe show-no" id="l1" style="margin-top:16px"><b>Chance:</b> Asche und Lava machen den Boden fruchtbar. Seit über 2 000 Jahren wird dort angebaut.<br><b>Risiko:</b> Ausbrüche können Felder und Häuser zerstören.</div>
 </section>
 
 <!-- 2 Impuls -->
-<section class="slide" data-min="3" data-n="<b>Impuls (max. 3 Min.).</b> Frage nicht vorgeben. Moderationsfragen: „Was fällt euch auf?“ – „Was passt für euch nicht zusammen?“ – „Was überrascht euch?“ – „Welche Frage stellt sich euch?“ <b>Zielkorridor (nicht nennen):</b> Welche Chancen und Risiken bietet der Ätna für den Tourismus? Fokus auf Foto B: Das Haus unter der Lava zeigt die Gefahr, Foto A zeigt Touristen mitten im Gebiet. Zeitvorgabe: Impuls plus Fragenentwicklung höchstens 10 Min. in der Doppelstunde.">
-  <div class="kopf"><div class="badge">2</div><div class="ph">Impuls</div><div class="meta"><span>Plenum</span><span>3 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Zwei Fotos, ein Berg</h1>
-    <div class="reihe" style="height:380px">
-      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-a.jpg"><img src="bilder/foto-a.jpg" alt="Zwei Busse fahren vor dem Ätna durch Schnee"><div class="cap">Foto A</div></div>
-      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-b.jpg"><img src="bilder/foto-b.jpg" alt="Ein Haus ist fast ganz von erstarrter Lava bedeckt"><div class="cap">Foto B</div></div>
-    </div>
-    <p><b>Was fällt euch auf?</b></p>
-    <div class="quelle">Fotos: Quelle aus der Originalfolie ergänzen</div>
+<section class="slide dark" data-min="3" data-notes="Impuls (max. 3 Min.). Frage nicht vorgeben. Moderationsfragen: „Was fällt euch auf?“ – „Was passt für euch nicht zusammen?“ – „Was überrascht euch?“ – „Welche Frage stellt sich euch?“ Zielkorridor (nicht nennen): Welche Chancen und Risiken bietet der Ätna für den Tourismus? Fokus auf Foto B: Das Haus unter der Lava zeigt die Gefahr, Foto A zeigt Touristen mitten im Gebiet. Zeitvorgabe: Impuls plus Fragenentwicklung höchstens 10 Min. in der Doppelstunde.">
+  <h1>Zwei Fotos, ein Berg</h1><span class="badge">3 Min. · Plenum</span>
+  <div class="row2" style="height:380px">
+    <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-a.jpg"><img src="bilder/foto-a.jpg" alt="Zwei Busse fahren vor dem Ätna durch Schnee"><div class="cap">Foto A</div></div>
+    <div class="bildkarte" data-fehlt="Bild fehlt: bilder/foto-b.jpg"><img src="bilder/foto-b.jpg" alt="Ein Haus ist fast ganz von erstarrter Lava bedeckt"><div class="cap">Foto B</div></div>
   </div>
+  <p class="onDark" style="margin-top:20px">Was fällt euch auf? Was überrascht euch?</p>
+  <small style="color:#E6D3C8">Fotos: Quelle aus der Originalfolie ergänzen</small>
 </section>
 
 <!-- 3 Fragenentwicklung -->
-<section class="slide" data-min="4" data-n="<b>Fragenentwicklung.</b> SuS nennen Fragen, die Klasse einigt sich auf eine. In das Feld tippen und für alle sichtbar lassen. Tragfähig sind alle Fragen, die nach Nutzen und Gefahr für Touristen oder Einheimische fragen. Weicht die Frage leicht ab, aufgreifen. Kommt nichts, nachfragen: „Wer kommt hierher? Was kann dort passieren?“ Erst zuletzt selbst ergänzen.">
-  <div class="kopf"><div class="badge">3</div><div class="ph">Fragenentwicklung</div><div class="meta"><span>Plenum</span><span>4 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Unsere Frage für heute</h1>
-    <p>Welche Frage stellt sich euch zu den Fotos? Sammelt Fragen und einigt euch auf eine.</p>
-    <div class="eingabe" contenteditable="true" data-ph="Hier tippen: unsere Frage …" style="min-height:220px;font-size:40px"></div>
-  </div>
+<section class="slide" data-min="4" data-notes="Fragenentwicklung. SuS nennen Fragen, die Lehrkraft tippt sie ein, die Klasse priorisiert mit 👍 und einigt sich auf eine (→ Leitfrage). Tragfähig sind alle Fragen, die nach Nutzen und Gefahr für Touristen oder Einheimische fragen. Weicht die Frage leicht ab, aufgreifen. Kommt nichts, nachfragen: „Wer kommt hierher? Was kann dort passieren?“ Erst zuletzt selbst ergänzen.">
+  <h1>Eure Fragen</h1><span class="badge">4 Min. · Plenum</span>
+  <div data-fragenfeld data-impulse="Was fällt euch auf?|Was passt für euch nicht zusammen?|Was überrascht euch?|Welche Frage stellt sich euch?"></div>
 </section>
 
 <!-- 4 Lokalisierung -->
-<section class="slide" data-min="3" data-n="<b>Lokalisieren (Sich orientieren, Niveau D–E).</b> Erst SuS lokalisieren lassen (Atlas oder Wandkarte), dann Chips und Marker einblenden. Die Reliefkarte hat niedrige Auflösung, gegebenenfalls Atlaskarte ergänzen.">
-  <div class="kopf"><div class="badge">4</div><div class="ph">Orientierung</div><div class="meta"><span>Plenum</span><span>3 Min.</span></div></div>
-  <div class="inhalt">
-    <div class="reihe" style="align-items:flex-start">
-      <div style="flex:1.2;display:flex;flex-direction:column;gap:18px">
-        <h1>Wo liegt der Ätna?</h1>
-        <p><span class="op">Lokalisiere</span> den Ätna. Nenne Land, Insel und Meer.</p>
-        <div class="chips" id="chips">
-          <button class="chip" data-t="Land: Italien">Land?</button>
-          <button class="chip" data-t="Insel: Sizilien">Insel?</button>
-          <button class="chip" data-t="Meer: Mittelmeer">Meer?</button>
-        </div>
-        <div><button class="btn hell" data-reveal="mk">Ätna auf der Karte zeigen</button></div>
-        <div class="bildkarte" style="width:560px;height:252px;flex:none"><img src="bilder/europa-karte.jpg" alt="Politische Karte von Europa mit Staaten und Meeren"><div class="cap">Europa (politisch)</div></div>
+<section class="slide" data-min="3" data-notes="Lokalisieren (Sich orientieren, Niveau D–E). Erst SuS lokalisieren lassen (Atlas oder Wandkarte), dann Wahlfelder und Marker einblenden. Die Reliefkarte hat niedrige Auflösung, gegebenenfalls Atlaskarte ergänzen.">
+  <h1>Wo liegt der Ätna?</h1><span class="badge">3 Min. · Plenum</span>
+  <div class="split" style="grid-template-columns:1.2fr 400px;align-items:start">
+    <div>
+      <p class="task"><span class="snr">1</span><span><b>Lokalisiere</b> den Ätna. <b>Nenne</b> Land, Insel und Meer.</span><i class="lvl">D–E</i></p>
+      <div class="wahlen" id="wahlen">
+        <button class="wahl" data-t="Land: Italien">Land?</button>
+        <button class="wahl" data-t="Insel: Sizilien">Insel?</button>
+        <button class="wahl" data-t="Meer: Mittelmeer">Meer?</button>
       </div>
-      <div class="bildkarte" style="width:400px;height:470px;flex:none" data-fehlt="Bild fehlt: bilder/karte-sizilien.jpg"><img src="bilder/karte-sizilien.jpg" alt="Reliefkarte von Sizilien"><div id="mk" class="versteckt" style="position:absolute;left:79.7%;top:32%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--rost);border:4px solid #fff"></div><div class="cap">Sizilien (Relief)</div></div>
+      <p style="margin-top:20px"><button class="b sec hell" data-reveal="mk">Ätna auf der Karte zeigen</button></p>
+      <div class="bildkarte" style="width:470px;height:212px;margin-top:16px"><img src="bilder/europa-karte.jpg" alt="Politische Karte von Europa mit Staaten und Meeren"><div class="cap">Europa (politisch)</div></div>
     </div>
+    <div class="bildkarte" style="width:400px;height:470px" data-fehlt="Bild fehlt: bilder/karte-sizilien.jpg"><img src="bilder/karte-sizilien.jpg" alt="Reliefkarte von Sizilien"><div id="mk" class="show-no" style="position:absolute;left:79.7%;top:32%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--g);border:4px solid #fff"></div><div class="cap">Sizilien (Relief)</div></div>
   </div>
 </section>
 
 <!-- 5 Spontanurteil -->
-<section class="slide" data-min="3" data-n="<b>Spontanurteil.</b> Jede/r setzt ein Kreuz (Klick auf die Linie, mehrere Kreuze möglich). Zwei SuS begründen kurz ihre Position. Die Kreuze bleiben für den Vergleich auf Folie 10 gespeichert, solange die Seite offen ist. Nicht neu laden.">
-  <div class="kopf"><div class="badge">5</div><div class="ph">Spontanurteil</div><div class="meta"><span>Plenum</span><span>3 Min.</span></div></div>
-  <div class="inhalt" style="padding-top:20px">
-    <div class="reihe" style="align-items:stretch;height:300px">
-      <div class="bildkarte" data-fehlt="Bild fehlt: bilder/aetna-stadt.jpg"><img src="bilder/aetna-stadt.jpg" alt="Der Ätna raucht über einer Stadt"><div class="cap">Der Ätna über einer Stadt in Sizilien</div></div>
-      <div style="display:flex;flex-direction:column;justify-content:center;gap:14px"><h1>Urlaub auf dem Vulkan?</h1><p>Würdet ihr hier Urlaub machen? Setzt ein Kreuz.</p></div>
-    </div>
-    <div class="pos" data-id="v1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="btn hell" data-reset="v1">Kreuze löschen</button><small>Klick auf die Linie setzt ein Kreuz.</small></div></div>
+<section class="slide" data-min="3" data-notes="Spontanurteil. Jede/r setzt ein Kreuz (Klick auf die Linie, mehrere Kreuze möglich). Zwei SuS begründen kurz ihre Position. Die Kreuze bleiben für den Vergleich auf Folie 10 gespeichert, solange die Seite offen ist. Nicht neu laden.">
+  <h1>Urlaub auf dem Vulkan?</h1><span class="badge">3 Min. · Plenum</span>
+  <div class="split" style="grid-template-columns:1fr 1fr;align-items:center">
+    <div class="bildkarte" style="height:270px" data-fehlt="Bild fehlt: bilder/aetna-stadt.jpg"><img src="bilder/aetna-stadt.jpg" alt="Der Ätna raucht über einer Stadt"><div class="cap">Der Ätna über einer Stadt in Sizilien</div></div>
+    <p class="lead">Würdet ihr hier Urlaub machen? Setzt ein Kreuz.</p>
   </div>
+  <div class="pos" data-id="v1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="b sec hell" data-reset="v1">Kreuze löschen</button><small>Klick auf die Linie setzt ein Kreuz.</small></div></div>
 </section>
 
 <!-- 6 Aufgabe -->
-<section class="slide" data-min="4" data-n="<b>Aufgabe.</b> Partnerpuzzle: Gruppen A und B einteilen (je zwei A, zwei B pro Vierergruppe). M4 haben beide. Arbeitsblatt in drei Niveaus (●○○ ●●○ ●●●) bereitlegen; die SuS wählen oder werden zugeteilt. Die Frage von Folie 3 steht oben auf dem Blatt (SuS schreiben sie ab). Die Folie wird nur vorgestellt, nicht vorgelesen.">
-  <div class="kopf"><div class="badge">6</div><div class="ph">Aufgabe</div><div class="meta"><span>Plenum</span><span>4 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Partnerpuzzle</h1>
-    <div class="schritt"><div class="nr">1</div><p><b>Einzelarbeit.</b> Gruppe A: Chancen (M1–M4). Gruppe B: Risiken (M4–M7). <span class="op">Entnimm</span> 3–4 Stichpunkte.</p></div>
-    <div class="schritt"><div class="nr">2</div><p><b>Vierergruppe.</b> <span class="op">Erkläre</span> deine Stichpunkte. <span class="op">Ergänze</span> die andere Spalte.</p></div>
-    <div class="schritt"><div class="nr">3</div><p><b>Urteil.</b> <span class="op">Beurteile</span> den Tourismus am Ätna. Kreuz auf der Linie und Begründung.</p></div>
-    <div class="karte sand"><p>Arbeitsblatt in drei Niveaus: ●○○ · ●●○ · ●●● . Nimm das Blatt, das zu dir passt.</p></div>
-  </div>
+<section class="slide" data-min="4" data-notes="Aufgabe. Partnerpuzzle: Gruppen A und B einteilen (je zwei A, zwei B pro Vierergruppe). M4 haben beide. Arbeitsblatt in drei Niveaus (●○○ ●●○ ●●●) bereitlegen; die SuS wählen oder werden zugeteilt. Die Frage von Folie 3 steht oben auf dem Blatt (SuS schreiben sie ab). Die Folie wird nur vorgestellt, nicht vorgelesen.">
+  <h1>Partnerpuzzle</h1><span class="badge">4 Min. · Plenum</span>
+  <p class="task big"><span class="snr">1</span><span><b>Einzelarbeit.</b> Gruppe A: Chancen (M1–M4). Gruppe B: Risiken (M4–M7). <b>Entnimm</b> 3–4 Stichpunkte.</span><span></span></p>
+  <p class="task big"><span class="snr">2</span><span><b>Vierergruppe.</b> <b>Erkläre</b> deine Stichpunkte. <b>Ergänze</b> die andere Spalte.</span><span></span></p>
+  <p class="task big"><span class="snr">3</span><span><b>Urteil.</b> <b>Beurteile</b> den Tourismus am Ätna. Kreuz auf der Linie und Begründung.</span><span></span></p>
+  <div class="shilfe">Arbeitsblatt in drei Niveaus: ●○○ · ●●○ · ●●● . Nimm das Blatt, das zu dir passt.</div>
 </section>
 
 <!-- 7 Einzelphase -->
-<section class="slide" data-min="12" data-n="<b>Einzelphase.</b> Stille Arbeit. Vorlesen anbieten (Mitschüler/in oder Lehrkraft), besonders M6. Lesestrategie: pro Absatz ein bis zwei Schlüsselwörter markieren. Beobachtung: Entnehmen die SuS Stichpunkte oder schreiben sie Sätze ab? Fertige: Sprinteraufgabe 4.">
-  <div class="kopf"><div class="badge">7</div><div class="ph">Erarbeitung</div><div class="meta"><span>Einzelarbeit</span><span>12 Min.</span></div></div>
-  <div class="inhalt">
-    <img class="deko" src="bilder/icon-stift.svg" alt="" style="right:64px;top:74px;width:72px;height:72px">
-    <h1>Allein am Material</h1>
-    <div class="karte"><p><span class="op">Entnimm</span> deinem Material 3–4 Stichpunkte.<br>Gruppe A: Chancen (M1–M4) · Gruppe B: Risiken (M4–M7)</p></div>
-    <p>Tipp: Markiere pro Absatz 1–2 Schlüsselwörter.</p>
-    <div class="timer" data-min="12"><div class="z">12:00</div><button class="btn" data-t="start">Start</button><button class="btn hell" data-t="reset">Zurück</button></div>
-    <div class="fertig"><b>Fertig?</b> Sprinteraufgabe 4: <span class="op">Entwickle</span> zwei Regeln für Touristen am Ätna.</div>
+<section class="slide" data-min="12" data-notes="Einzelphase. Stille Arbeit. Vorlesen anbieten (Mitschüler/in oder Lehrkraft), besonders M6. Lesestrategie: pro Absatz ein bis zwei Schlüsselwörter markieren. Beobachtung: Entnehmen die SuS Stichpunkte oder schreiben sie Sätze ab? Fertige: Sprinteraufgabe 4.">
+  <h1>Allein am Material</h1><span class="badge">12 Min. · allein</span>
+  <div class="mint pad">
+    <p class="task big" style="margin:0"><span class="snr">1</span><span><b>Entnimm</b> deinem Material 3–4 Stichpunkte.<br>Gruppe A: Chancen (M1–M4) · Gruppe B: Risiken (M4–M7)</span><span></span></p>
   </div>
+  <div class="shilfe"><b>Tipp:</b> Markiere pro Absatz 1–2 Schlüsselwörter. Du darfst dir den Text vorlesen lassen.</div>
+  <div class="shilfe" style="margin-top:24px;background:#fff;border:3px dashed var(--g)"><b>Fertig?</b> Sprinteraufgabe 4: <b>Entwickle</b> zwei Regeln für Touristen am Ätna.</div>
+  <img class="deko" src="bilder/icon-stift.svg" alt="" style="right:64px;top:120px;width:72px;height:72px">
 </section>
 
 <!-- 8 Vierergruppe -->
-<section class="slide" data-min="12" data-n="<b>Vierergruppe.</b> Jede Person erklärt ihre Stichpunkte, die anderen ergänzen die zweite Spalte. Moderation: Gruppen zuhören, nicht eingreifen. Beobachtungskriterien: Fachwörter genutzt, mit Material begründet, Spalten vollständig.">
-  <div class="kopf"><div class="badge">8</div><div class="ph">Erarbeitung</div><div class="meta"><span>Vierergruppe</span><span>12 Min.</span></div></div>
-  <div class="inhalt">
-    <img class="deko" src="bilder/icon-paar.svg" alt="" style="right:136px;top:74px;width:72px;height:72px">
-    <img class="deko" src="bilder/icon-gruppe.svg" alt="" style="right:64px;top:74px;width:72px;height:72px">
-    <h1>Erklärt euch eure Spalten</h1>
-    <div class="schritt"><div class="nr">1</div><p>Reihum: Jede Person <span class="op">erklärt</span> ihre Stichpunkte.</p></div>
-    <div class="schritt"><div class="nr">2</div><p><span class="op">Ergänzt</span> die andere Spalte in eurer Tabelle.</p></div>
-    <div class="schritt"><div class="nr">3</div><p><span class="op">Vergleicht</span>: Welche zwei Punkte sind für euch am wichtigsten?</p></div>
-    <div class="timer" data-min="12"><div class="z">12:00</div><button class="btn" data-t="start">Start</button><button class="btn hell" data-t="reset">Zurück</button></div>
+<section class="slide" data-min="12" data-notes="Vierergruppe. Jede Person erklärt ihre Stichpunkte, die anderen ergänzen die zweite Spalte. Moderation: Gruppen zuhören, nicht eingreifen. Beobachtungskriterien: Fachwörter genutzt, mit Material begründet, Spalten vollständig.">
+  <h1>Erklärt euch eure Spalten</h1><span class="badge">12 Min. · Vierergruppe</span>
+  <div class="mint pad">
+    <p class="task big"><span class="snr">1</span><span>Reihum: Jede Person <b>erklärt</b> ihre Stichpunkte.</span><span></span></p>
+    <p class="task big"><span class="snr">2</span><span><b>Ergänzt</b> die andere Spalte in eurer Tabelle.</span><span></span></p>
+    <p class="task big" style="margin:0"><span class="snr">3</span><span><b>Vergleicht</b>: Welche zwei Punkte sind für euch am wichtigsten?</span><span></span></p>
   </div>
+  <img class="deko" src="bilder/icon-paar.svg" alt="" style="right:64px;top:380px;width:96px;height:96px">
+  <img class="deko" src="bilder/icon-gruppe.svg" alt="" style="right:180px;top:380px;width:96px;height:96px">
 </section>
 
 <!-- 9 Sicherung -->
-<section class="slide" data-min="10" data-n="<b>Sicherung.</b> SuS nennen Stichpunkte, Lehrkraft oder SuS tippen sie in die Spalten. Danach „Lösungsvorschlag“ nur zum Abgleich einblenden. Diskussionsanlass M4: Foto passt in beide Spalten. Überleitung: „Bleibt ihr bei eurer ersten Meinung?“">
-  <div class="kopf"><div class="badge">9</div><div class="ph">Sicherung</div><div class="meta"><span>Plenum</span><span>10 Min.</span></div></div>
-  <div class="inhalt" style="gap:14px">
-    <img class="deko" src="bilder/icon-frage.svg" alt="" style="right:64px;top:74px;width:64px;height:64px">
-    <h1 style="font-size:38px">Die große Tabelle</h1>
-    <div class="tab">
-      <div><h2>Chancen</h2><div class="eingabe" contenteditable="true" id="tc" data-ph="Stichpunkte der Klasse …"></div></div>
-      <div><h2>Risiken</h2><div class="eingabe" contenteditable="true" id="tr" data-ph="Stichpunkte der Klasse …"></div></div>
-    </div>
-    <div style="display:flex;gap:14px;align-items:center"><button class="btn hell" id="loes">Lösungsvorschlag einblenden</button><p style="font-size:24px"><b>Bleibt ihr bei eurer ersten Meinung?</b></p><img src="bilder/change-your-mind.jpg" alt="Grafik mit der englischen Aufschrift „Change your mind“" style="height:56px;width:56px;margin-left:auto"></div>
+<section class="slide" data-min="10" data-notes="Sicherung. SuS nennen Stichpunkte, Lehrkraft oder SuS tippen sie in die Spalten. Danach „Lösungsvorschlag“ nur zum Abgleich einblenden. Diskussionsanlass M4: Foto passt in beide Spalten. Überleitung: „Bleibt ihr bei eurer ersten Meinung?“">
+  <h1>Die große Tabelle</h1><span class="badge">10 Min. · Plenum</span>
+  <div class="row2 tab">
+    <div><h2>Chancen</h2><div class="eingabe" contenteditable="true" id="tc" data-ph="Stichpunkte der Klasse …"></div></div>
+    <div><h2>Risiken</h2><div class="eingabe" contenteditable="true" id="tr" data-ph="Stichpunkte der Klasse …"></div></div>
   </div>
+  <div style="display:flex;gap:18px;align-items:center;margin-top:16px"><button class="b sec hell" id="loes">Lösungsvorschlag einblenden</button><p class="fb" style="color:var(--ink)">Bleibt ihr bei eurer ersten Meinung?</p><img src="bilder/change-your-mind.jpg" alt="Grafik mit der englischen Aufschrift „Change your mind“" style="height:56px;width:56px;margin-left:auto;border-radius:10px"></div>
 </section>
 
 <!-- 10 Urteil -->
-<section class="slide" data-min="10" data-n="<b>Begründetes Urteil.</b> Neues Kreuz setzen. Graue Kreuze = Spontanurteil von Folie 5, zum Vergleich ein-/ausblenden. Zwei bis drei SuS begründen mit Punkten aus der Tabelle. Hat sich etwas verschoben? Warum? Beutelsbacher Konsens: Jede begründete Position ist zulässig.">
-  <div class="kopf"><div class="badge">10</div><div class="ph">Urteil</div><div class="meta"><span>Plenum</span><span>10 Min.</span></div></div>
-  <div class="inhalt">
-    <img class="deko" src="bilder/icon-denken.svg" alt="" style="right:64px;top:74px;width:64px;height:64px">
-    <h1 style="font-size:38px">Chance oder Risiko?</h1>
-    <p><span class="op">Beurteile</span> den Tourismus am Ätna. Setze dein Kreuz neu und <span class="op">begründe</span> mit zwei Punkten aus der Tabelle.</p>
-    <div class="pos" data-id="v2" data-alt="v1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="btn hell" data-reset="v2">Kreuze löschen</button><button class="btn hell" data-altschalter="1">Anfang ein/aus</button><small>Grau = Spontanurteil vom Anfang</small></div></div>
-    <div class="karte sand"><p style="font-size:24px"><b>Satzbausteine:</b> Ich sehe den Tourismus eher als Chance / Risiko, weil … · Ein wichtiger Punkt ist … · Dagegen spricht, dass …</p></div>
-  </div>
+<section class="slide" data-min="10" data-notes="Begründetes Urteil. Neues Kreuz setzen. Graue Kreuze = Spontanurteil von Folie 5, zum Vergleich ein-/ausblenden. Zwei bis drei SuS begründen mit Punkten aus der Tabelle. Hat sich etwas verschoben? Warum? Beutelsbacher Konsens: Jede begründete Position ist zulässig.">
+  <h1>Chance oder Risiko?</h1><span class="badge">10 Min. · Plenum</span>
+  <p class="task big"><span class="snr">1</span><span><b>Beurteile</b> den Tourismus am Ätna. Setze dein Kreuz neu und <b>begründe</b> mit zwei Punkten aus der Tabelle.</span><span></span></p>
+  <div class="pos" data-id="v2" data-alt="v1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="b sec hell" data-reset="v2">Kreuze löschen</button><button class="b sec hell" data-altschalter="1">Anfang ein/aus</button><small>Grau = Spontanurteil vom Anfang</small></div></div>
+  <div class="shilfe" style="margin-top:22px;font-size:22px"><b>Satzbausteine:</b> Ich sehe den Tourismus eher als Chance / Risiko, weil … · Ein wichtiger Punkt ist … · Dagegen spricht, dass …</div>
 </section>
 
 <!-- 11 Hefteintrag -->
-<section class="slide" data-min="5" data-n="<b>Hefteintrag.</b> Einzelarbeit, danach zwei Lesungen. Basis: Lückensatz abschreiben und ergänzen. Erweiterung: eigene Formulierung mit zwei Sichten (Hotelbesitzerin, Bergführer).">
-  <div class="kopf"><div class="badge">11</div><div class="ph">Hefteintrag</div><div class="meta"><span>Einzelarbeit</span><span>5 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Das schreibe ich ins Heft</h1>
-    <p><span class="op">Beschreibe</span> in zwei bis drei Sätzen den Tourismus am Ätna.</p>
-    <div class="karte sand"><p>Der Tourismus am Ätna ist eine <b>Chance</b>, weil … <br>Er ist aber auch ein <b>Risiko</b>, weil … <br>Ich beurteile ihn eher als …, weil …</p></div>
-  </div>
+<section class="slide" data-min="5" data-notes="Hefteintrag. Einzelarbeit, danach zwei Lesungen. Basis: Lückensatz abschreiben und ergänzen. Erweiterung: eigene Formulierung mit zwei Sichten (Hotelbesitzerin, Bergführer).">
+  <h1>Das schreibe ich ins Heft</h1><span class="badge">5 Min. · allein</span>
+  <p class="task big"><span class="snr">1</span><span><b>Beschreibe</b> in zwei bis drei Sätzen den Tourismus am Ätna.</span><span></span></p>
+  <div class="mint pad"><p class="lead" style="margin:0">Der Tourismus am Ätna ist eine <b>Chance</b>, weil … <br>Er ist aber auch ein <b>Risiko</b>, weil … <br>Ich beurteile ihn eher als …, weil …</p></div>
 </section>
 
 <!-- 12 Abschlussrunde -->
-<section class="slide" data-min="5" data-n="<b>Abschlussrunde (Blitzlicht).</b> Drei Satzanfänge, SuS wählen einen und sprechen reihum. Mitnahme für die Folgestunde: Fragen sammeln, Fehlvorstellungen notieren („Der Tourismus macht den Vulkan gefährlich.“ – richtig: Der Ätna ist die Gefahr, der Tourismus bringt Menschen hinein).">
-  <div class="kopf"><div class="badge">12</div><div class="ph">Reflexion</div><div class="meta"><span>Plenum</span><span>5 Min.</span></div></div>
-  <div class="inhalt">
-    <h1>Abschlussrunde</h1>
-    <p>Ordne dich einem Bild zu und begründe deine Entscheidung. Wähle dann einen Satzanfang und beende ihn.</p>
-    <img class="deko rund" src="bilder/feedback-schafe.jpg" alt="Raster mit neun nummerierten Schaf-Fotos: zum Beispiel ein Schaf mit herausgestreckter Zunge, ein Lamm mit geschlossenen Augen, ein Schaf mit Eimer auf dem Kopf." style="right:64px;top:285px;width:318px;height:340px;object-fit:cover">
-    <div class="chips" style="flex-direction:column;align-items:flex-start">
-      <button class="chip" style="font-size:30px">Heute habe ich gelernt, dass …</button>
-      <button class="chip" style="font-size:30px">Schwer war für mich …</button>
-      <button class="chip" style="font-size:30px">Ich frage mich noch …</button>
-    </div>
+<section class="slide" data-min="5" data-notes="Abschlussrunde (Blitzlicht). Drei Satzanfänge, SuS wählen einen und sprechen reihum. Mitnahme für die Folgestunde: Fragen sammeln, Fehlvorstellungen notieren („Der Tourismus macht den Vulkan gefährlich.“ – richtig: Der Ätna ist die Gefahr, der Tourismus bringt Menschen hinein).">
+  <h1>Abschlussrunde</h1><span class="badge">5 Min. · Plenum</span>
+  <p class="lead" style="max-width:760px">Ordne dich einem Bild zu und begründe deine Entscheidung. Wähle dann einen Satzanfang und beende ihn.</p>
+  <div class="chips" style="max-width:700px">
+    <span class="chip">Heute habe ich gelernt, dass …</span>
+    <span class="chip">Schwer war für mich …</span>
+    <span class="chip">Ich frage mich noch …</span>
   </div>
+  <img class="deko rund" src="bilder/feedback-schafe.jpg" alt="Raster mit neun nummerierten Schaf-Fotos: zum Beispiel ein Schaf mit herausgestreckter Zunge, ein Lamm mit geschlossenen Augen, ein Schaf mit Eimer auf dem Kopf." style="right:64px;top:215px;width:318px;height:340px;object-fit:cover">
 </section>
 
-<div class="nav" id="nav"></div>
-<button class="pfeil l" id="zur" aria-label="zurück">‹</button>
-<button class="pfeil r" id="vor" aria-label="weiter">›</button>
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
 </div>
 </div>
 <div id="notiz"></div>
 
 <script>
 (function(){
-  var buehne=document.getElementById('buehne');
-  var stage=document.getElementById('stage');
-  var slides=[].slice.call(document.querySelectorAll('.slide'));
-  var nav=document.getElementById('nav');
-  var notiz=document.getElementById('notiz');
-  var cur=0, votes={v1:[],v2:[]}, altAn=true;
-  slides.forEach(function(){var i=document.createElement('i');nav.appendChild(i)});
+  var buehne=document.getElementById('buehne'),stage=document.getElementById('stage'),notiz=document.getElementById('notiz'),balken=document.querySelector('#nav i');
+  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0,votes={v1:[],v2:[]},altAn=true;
   function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
-  window.addEventListener('resize',fit);fit();
   // fehlende Bilder: Hinweis statt leerer Fläche
   [].forEach.call(document.querySelectorAll('.bildkarte img'),function(img){
     function weg(){img.parentNode.classList.add('fehlt')}
@@ -286,26 +214,23 @@ p{margin:0;font-size:28px;line-height:1.4}
   });
   function show(n){
     cur=Math.max(0,Math.min(slides.length-1,n));
-    slides.forEach(function(s,i){s.classList.toggle('aktiv',i===cur)});
-    [].forEach.call(nav.children,function(d,i){d.classList.toggle('a',i===cur)});
-    notiz.innerHTML=slides[cur].getAttribute('data-n')||'';
+    slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
+    balken.style.width=((cur+1)/slides.length*100)+'%';
+    document.getElementById('zur').disabled=cur===0;document.getElementById('vor').disabled=cur===slides.length-1;
+    notiz.textContent=slides[cur].getAttribute('data-notes')||'';
     try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
     renderAll();
   }
-  function isEdit(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
+  function tippt(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
   document.addEventListener('keydown',function(e){
-    if(isEdit(e.target))return;
-    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();show(cur+1)}
-    else if(e.key===' '&&!/BUTTON|A/.test(e.target.tagName)){e.preventDefault();show(cur+1)}
+    if(tippt(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&e.target.tagName!=='BUTTON')){e.preventDefault();show(cur+1)}
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(cur-1)}
     else if(e.key==='n'||e.key==='N'){notiz.classList.toggle('an')}
     else if(e.key==='f'||e.key==='F'){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(x){}}
   });
   document.getElementById('vor').onclick=function(){show(cur+1)};
   document.getElementById('zur').onclick=function(){show(cur-1)};
-  var tx=null;
-  document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX});
-  document.addEventListener('touchend',function(e){if(tx===null)return;var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>70)show(cur+(d<0?1:-1));tx=null});
 
   document.addEventListener('click',function(e){
     var r=e.target.closest('[data-reveal]');
@@ -313,7 +238,7 @@ p{margin:0;font-size:28px;line-height:1.4}
     var rs=e.target.closest('[data-reset]');
     if(rs){votes[rs.getAttribute('data-reset')]=[];renderAll()}
     if(e.target.closest('[data-altschalter]')){altAn=!altAn;renderAll()}
-    var ch=e.target.closest('#chips .chip');
+    var ch=e.target.closest('#wahlen .wahl');
     if(ch){ch.classList.toggle('an');ch.textContent=ch.classList.contains('an')?ch.getAttribute('data-t'):ch.getAttribute('data-t').split(':')[0]+'?'}
   });
 
@@ -332,26 +257,15 @@ p{margin:0;font-size:28px;line-height:1.4}
     });
   });
 
-  [].forEach.call(document.querySelectorAll('.timer'),function(t){
-    var z=t.querySelector('.z'),min=+t.getAttribute('data-min'),rest=min*60,iv=null,bt=t.querySelector('[data-t=start]');
-    function fmt(){var m=Math.floor(rest/60),s=rest%60;z.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;z.classList.toggle('aus',rest===0)}
-    bt.onclick=function(){
-      if(iv){clearInterval(iv);iv=null;bt.textContent='Weiter';return}
-      bt.textContent='Pause';
-      iv=setInterval(function(){if(rest>0){rest--;fmt()}else{clearInterval(iv);iv=null;bt.textContent='Start'}},1000)
-    };
-    t.querySelector('[data-t=reset]').onclick=function(){clearInterval(iv);iv=null;rest=min*60;bt.textContent='Start';fmt()};
-  });
-
   document.getElementById('loes').onclick=function(){
     document.getElementById('tc').innerHTML='Hunderttausende Besucher, Einnahmen<br>Arbeitsplätze in Hotels, Gaststätten, Reisebüros<br>Orte rund um den Vulkan verdienen mit<br>weniger Abhängigkeit von Landwirtschaft<br>Angebote im Sommer und im Winter';
     document.getElementById('tr').innerHTML='Ausbrüche, Explosionen, heiße Lava<br>Ausbrüche werden stärker<br>Wanderunfälle, Stürze<br>giftige Gase<br>Kälte und Wetter in der Höhe<br>Hilfe kann zu spät kommen (2008)';
   };
 
+  window.addEventListener('resize',fit);fit();
   function ausHash(){var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1)}
   window.addEventListener('hashchange',ausHash);
   ausHash();
-  setTimeout(fit,0);
 })();
 </script>
 <!-- Spielinhalte für die Belohnungsspiele (Memory, Quiz, Zuordnen, Wortsalat). ENTWURF: bitte fachlich gegenlesen.
