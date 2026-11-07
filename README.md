@@ -14,7 +14,17 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
 | `vorlage/` | Vorlagen: `vorlage/` (Materialseite mit Aufgaben), `vorlage/materialseite/` (Seite pro Thema mit Dateiliste) und `vorlage/praesentation/` (Grundaufbau einer Präsentation mit Stift, Timer und Lärmampel). Alle mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
-| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten, `materialseite.js` Dateiliste der Themenseite), `css/materialseite.css` (Stile der Themenseite), `js/praesentation.js` und `css/praesentation.css` (Werkzeuge für Präsentationen), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), `fonts/` (Andika, **nur für Präsentationen**), `games/` (Belohnungsspiele ohne Fachinhalte). Portal und Materialseiten laden keine Schriftdatei und nutzen die Systemschrift des Geräts |
+| `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`qrcode.js` QR-Codes für Präsentationen, `app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten, `materialseite.js` Dateiliste der Themenseite), `css/materialseite.css` (Stile der Themenseite), `js/praesentation.js` und `css/praesentation.css` (Werkzeuge für Präsentationen), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), `fonts/` (Andika, **nur für Präsentationen**), `games/` (Belohnungsspiele ohne Fachinhalte). Portal und Materialseiten laden keine Schriftdatei und nutzen die Systemschrift des Geräts |
+
+## Prüfen vor dem Hochladen
+
+```bash
+python3 tools/check.py
+```
+
+Das Skript prüft `projects.json` und `themenfelder.json`: Pflichtfelder, Format von Klasse und Datum, Passung von Fach und Klasse zum Pfad, Themenfeld-Nummern, vorhandene Ordner und Dateien (auch in `dateien`), doppelte Pfade und doppelte Hilfsdateien. Fehler lassen den Lauf scheitern, Warnungen nicht. Dieselbe Prüfung läuft bei jedem Pull Request als GitHub Action (`.github/workflows/check.yml`).
+
+**Gemeinsame Bausteine** liegen zentral in `assets/js/` (z. B. `qrcode.js` für QR-Codes). Reihen bringen nur ihre Inhalte mit, keine Kopien.
 
 ## Inhalte ergänzen
 
