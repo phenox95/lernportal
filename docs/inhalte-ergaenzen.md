@@ -161,7 +161,7 @@ Am `<body>` die Attribute `data-root`, `data-title`, `data-subject` und `data-gr
 
 Die Themenfelder stammen aus dem Rahmenlehrplan Berlin-Brandenburg 2015, Teil C (RLP-Online, Kapitel „Themen und Inhalte“, Stand der veröffentlichten Fassung). Sie stehen in `themenfelder.json`. Die Fachseiten zeigen sie als Überblick nach Doppeljahrgangsstufe (7/8 und 9/10) mit der Anzahl der Materialien. Ein Klick wählt das Themenfeld im Filter, ein zweiter Klick hebt die Auswahl auf. Auch Themenfelder ohne Material erscheinen („Noch kein Material“), so ist die Struktur von Anfang an sichtbar.
 
-**Neues Material einem Themenfeld zuordnen:** im Eintrag in `projects.json` nur die Nummer eintragen, z. B. `"themenfeld": "3.7"`. Der Ordner folgt der Empfehlung aus der Tabelle (`biologie/klasse-10/genetik/` oder wie bisher mit eigenem Thema, z. B. `biologie/klasse-10/mitose/`). Der Ordnername ist nur eine Empfehlung und kein RLP-Bestandteil.
+**Neues Material einem Themenfeld zuordnen:** im Eintrag in `projects.json` nur die Nummer eintragen, z. B. `"themenfeld": "3.7"`. Der Ordner folgt der Ordnerregel: erst der Themenfeld-Ordner aus der Tabelle, darunter das Thema (z. B. `biologie/klasse-10/genetik/mitose/`). Der Ordnername ist nur eine Empfehlung und kein RLP-Bestandteil.
 
 **Themenfeldfarben:** Jedes Themenfeld hat Tint und Ink aus der Farbfamilie seines Fachs (Biologie Blaugrün bis Gelbgrün, Geografie Rotbraun bis Ocker). Sie hängen an Fach und Nummer, stehen als CSS-Variablen (`--tf-tint`, `--tf-ink`) am Ende von `assets/css/styles.css` und färben nur das Symbolfeld und die Nummer (Themenfelder-Überblick, Themenseite). Ink auf Tint hat mindestens 5:1, im Dunkelmodus gelten eigene Werte. Farbe ist Zugabe: Nummer, Symbol und Titel tragen die Information.
 

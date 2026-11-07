@@ -1,44 +1,5 @@
 [
   {
-    "title": "Die Zelle – Aufbau und Funktion",
-    "subject": "Biologie",
-    "grade": "Klasse 8",
-    "type": "Interaktive Präsentation",
-    "description": "Zellbestandteile kennenlernen und ihre Aufgaben verstehen.",
-    "path": "biologie/klasse-8/zelle/",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "datum": "2026-11-03",
-    "sichtbar": true,
-    "status": "Beispiel"
-  },
-  {
-    "title": "Mitose",
-    "subject": "Biologie",
-    "grade": "Klasse 10",
-    "type": "Präsentation",
-    "description": "Eine Einführung in die Zellteilung.",
-    "path": "biologie/klasse-10/mitose/",
-    "themenfeld": "3.7",
-    "dauer": "45 Min.",
-    "datum": "2026-11-03",
-    "sichtbar": true,
-    "status": "Beispiel"
-  },
-  {
-    "title": "Klimazonen der Erde",
-    "subject": "Geografie",
-    "grade": "Klasse 7/8",
-    "type": "Interaktive Karte",
-    "description": "Klima und Vegetation verschiedener Räume vergleichen.",
-    "path": "geografie/klasse-7/klimazonen/",
-    "themenfeld": "3.3",
-    "dauer": "45 Min.",
-    "datum": "2026-11-03",
-    "sichtbar": true,
-    "status": "Beispiel"
-  },
-  {
     "title": "Interaktive Übung",
     "subject": "Interaktiv",
     "grade": "Verschiedene",
