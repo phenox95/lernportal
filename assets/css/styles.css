@@ -243,18 +243,20 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 
 /* Themenfelder-Überblick der Fachseiten: kompakte Kacheln (Links zur Themenfeld-Seite) */
 .tf { margin-top: 1.5rem; }
-.tf-group { margin-top: 0.75rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.tf-group { margin-top: 0.6rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.45rem; }
 @media (max-width: 40rem) { .tf-group { grid-template-columns: repeat(2, 1fr); } }
 .tf-head { grid-column: 1 / -1; margin: 0; font-size: 0.875rem; font-weight: 700; color: var(--text-2); }
 .tf-row {
-  display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem; min-height: 7rem; padding: 0.75rem;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.15rem; min-height: 4.5rem; padding: 0.5rem 0.65rem;
   border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: inherit; text-decoration: none;
 }
 .tf-top { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 .tf-icon { display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; }
 .tf-nr { font-size: 0.8125rem; font-weight: 700; }
-.tf-title { flex: 1; font-size: 1rem; font-weight: 700; line-height: 1.25; }
-.tf-count { font-size: 0.8125rem; color: var(--text-2); }
+.tf-title { flex: 1; font-size: 0.9375rem; font-weight: 700; line-height: 1.25; }
+.tf-row .tf-icon { width: 1.75rem; height: 1.75rem; border-radius: 0.5rem; }
+.tf-row .tf-icon svg { width: 16px; height: 16px; }
+.tf-count { font-size: 0.75rem; color: var(--text-2); }
 .tf-row:hover { border-color: var(--rahmen); }
 .tf-row:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
