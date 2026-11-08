@@ -60,8 +60,14 @@
     const haus = neu("a", "lp-pr-btn");
     haus.href = wurzel;
     haus.innerHTML = ICON.haus;                           // feste, eigene Zeichenkette
-    haus.setAttribute("aria-label", "Zurück zum Portal");
-    haus.title = "Zurück zum Portal";
+    haus.setAttribute("aria-label", "Zurück zur vorherigen Seite");
+    haus.title = "Zurück zur vorherigen Seite";
+    /* Zur Seite, von der die Präsentation geöffnet wurde (gleiche Herkunft). Ohne Vorgängerseite, etwa bei direktem Aufruf: Portal-Startseite (href). */
+    haus.addEventListener("click", (e) => {
+      let ref = "";
+      try { const r = new URL(document.referrer); if (r.origin === location.origin && r.pathname !== location.pathname) ref = r.href; } catch (x) { /* kein Referrer */ }
+      if (ref) { e.preventDefault(); location.href = ref; }
+    });
     dock.appendChild(haus);
     const voll = knopf("lp-pr-btn", "", "Vollbild (Taste F)");
     voll.innerHTML = ICON.voll;
@@ -311,6 +317,7 @@
      ===================================================================== */
   const tim = panelBauen("timer", "Timer", 60, 300);
   let rest = 300, gesamt = 300, uhr = null, ende = 0, audio = null;
+  const MIN_RE = /^\s*(\d+)\s*Min\./;
   const anzeige = neu("div", "lp-pr-zeit", "05:00");
   const status = neu("p", "lp-pr-hinweis", "");
   status.setAttribute("aria-live", "polite");
@@ -318,6 +325,9 @@
   const folieBtn = knopf("lp-pr-klein", "", "Dauer der Folie übernehmen");
   folieBtn.hidden = true;
   const bild = neu("span", "lp-pr-dockzeit");
+  /* Minutenangaben auf den Folien (z. B. „5 Min. · allein“) sind antippbar und starten den Timer; */
+  let aktivChip = null;                                     // die Minutenangabe, die gerade herunterzählt
+  const chips = [];
 
   function fmt(s) { return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0"); }
   function zeitZeigen() {
@@ -325,6 +335,16 @@
     bild.textContent = (uhr || rest === 0) ? fmt(Math.max(0, rest)) : "";
     tim.taste && tim.taste.classList.toggle("lp-pr-lauf", !!uhr);
     anzeige.classList.toggle("aus", rest === 0);
+    chipsZeigen();
+  }
+  function chipsZeigen() {
+    chips.forEach((c) => {
+      const mein = c === aktivChip && (uhr || rest < gesamt || rest === 0);
+      const zustand = !mein ? "aus" : uhr ? "an" : rest === 0 ? "ende" : "pause";
+      c.el.dataset.lauf = zustand;
+      const text = mein ? c.orig.replace(MIN_RE, fmt(Math.max(0, rest))) + (rest === 0 ? " Zeit!" : "") : c.orig;
+      if (c.el.textContent !== text) c.el.textContent = text;
+    });
   }
   function piep() {
     try {
@@ -338,7 +358,7 @@
     } catch (e) { /* ohne Ton weiter */ }
   }
   function timerStop() { clearInterval(uhr); uhr = null; startBtn.textContent = rest > 0 && rest < gesamt ? "Weiter" : "Start"; }
-  function setze(sek) { timerStop(); gesamt = rest = Math.max(0, Math.min(99 * 60 + 59, sek)); startBtn.textContent = "Start"; status.textContent = ""; zeitZeigen(); }
+  function setze(sek, behalten) { if (!behalten) aktivChip = null; timerStop(); gesamt = rest = Math.max(0, Math.min(99 * 60 + 59, sek)); startBtn.textContent = "Start"; status.textContent = ""; zeitZeigen(); }
   function timerStart() {
     if (uhr) { timerStop(); zeitZeigen(); return; }
     if (rest <= 0) rest = gesamt;
@@ -367,9 +387,9 @@
     const minus = knopf("lp-pr-klein", "−1 Min.", "Eine Minute abziehen");
     const plus = knopf("lp-pr-klein", "+1 Min.", "Eine Minute addieren");
     const plus30 = knopf("lp-pr-klein", "+30 s", "30 Sekunden addieren");
-    minus.addEventListener("click", () => { const w = uhr; setze(Math.max(0, rest - 60)); if (w) timerStart(); });
-    plus.addEventListener("click", () => { const w = uhr; setze(rest + 60); if (w) timerStart(); });
-    plus30.addEventListener("click", () => { const w = uhr; setze(rest + 30); if (w) timerStart(); });
+    minus.addEventListener("click", () => { const w = uhr; setze(Math.max(0, rest - 60), true); if (w) timerStart(); });
+    plus.addEventListener("click", () => { const w = uhr; setze(rest + 60, true); if (w) timerStart(); });
+    plus30.addEventListener("click", () => { const w = uhr; setze(rest + 30, true); if (w) timerStart(); });
     fein.appendChild(minus); fein.appendChild(plus30); fein.appendChild(plus);
     z.appendChild(fein);
     z.appendChild(folieBtn);
@@ -382,6 +402,25 @@
     z.appendChild(status);
     folieBtn.addEventListener("click", () => { const m = parseFloat(folieBtn.dataset.min); if (m > 0) setze(Math.round(m * 60)); });
   })();
+  /* Minutenangaben antippbar machen: erstes Wort der Angabe muss „N Min.“ sein (Badge, Meta-Chip oder data-minuten) */
+  [].forEach.call(stage.querySelectorAll(".slide .badge, .slide .meta span, .slide [data-minuten]"), (el) => {
+    if (el.closest("button, a, [data-timer], .lp-pr-minuten") || el.children.length) return;
+    const m = MIN_RE.exec(el.textContent);
+    if (!m) return;
+    const c = { el, orig: el.textContent, sek: +m[1] * 60 };
+    chips.push(c);
+    el.classList.add("lp-pr-minuten");
+    el.tabIndex = 0; el.setAttribute("role", "button");
+    el.setAttribute("aria-label", "Timer starten: " + m[1] + " Minuten");
+    el.title = "Antippen startet den Timer (" + m[1] + " Min.)";
+    const klick = () => {
+      if (aktivChip === c && (uhr || (rest > 0 && rest < gesamt))) { timerStart(); return; }   // Pause bzw. Weiter
+      setze(c.sek); aktivChip = c; timerStart();                                               // neu starten
+    };
+    el.addEventListener("click", klick);
+    el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); klick(); } });
+  });
+  chipsZeigen();
   const timerTaste = dockKnopf("timer", ICON.timer, "Timer", "T");
   timerTaste.appendChild(bild);
   function folienMinuten() {
