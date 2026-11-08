@@ -336,25 +336,37 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 
 /* Vernetzung und BNE: nur Text und Linien in den vorhandenen Tokens, keine eigene Farbe */
 .bne-nr { min-width: 2.25rem; text-align: center; color: var(--text); }
-.tf-verbindungen { margin-top: 2rem; }
+.tf-verbindungen { margin-top: 1.25rem; }
 .tf-verbindungen .label { margin-top: 1.5rem; }
 .tf-verbindungen .label:first-child { margin-top: 0; }
 #project-list .label { margin-top: 1.5rem; }
 
 /* Vernetzungskarte (Themenfeld-Seite): Themenfeld links, Äste rechts. Linien in --rahmen, keine eigene Farbe */
 .vn-titel, .vm-titel, .reihe-titel { margin: 0 0 0.75rem; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+/* Vernetzung: zugeklappt eine Zeile, aufgeklappt kompakte Äste */
+.vn-details { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.vn-details[open] { padding-bottom: 1rem; }
+.vn-summary { display: flex; align-items: center; flex-wrap: wrap; gap: 0.25rem 0.9rem; min-height: 3rem; padding: 0.5rem 0; cursor: pointer; list-style: none; }
+.vn-summary::-webkit-details-marker { display: none; }
+.vn-summary::after { content: ""; flex: none; width: 0.55rem; height: 0.55rem; margin: 0 0.4rem 0.25rem auto; border-right: 2px solid var(--text-2); border-bottom: 2px solid var(--text-2); transform: rotate(45deg); }
+.vn-details[open] .vn-summary::after { margin-bottom: 0; transform: rotate(-135deg); }
+.vn-summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.vn-summary .vn-titel { margin: 0; font-size: 1.125rem; }
+.vn-count { font-size: 0.875rem; color: var(--text-2); }
+.vn-details .vn { margin-top: 0.5rem; }
 .vn { display: grid; grid-template-columns: minmax(8rem, 12rem) 1fr; gap: 0 1.25rem; align-items: center; }
-.vn-mitte { display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem; padding: 0.9rem; border: 2px solid var(--text); border-radius: var(--radius); background: var(--surface); }
+.vn-mitte { display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; padding: 0.7rem; border: 2px solid var(--text); border-radius: var(--radius); background: var(--surface); }
 .vn-name { font-weight: 700; line-height: 1.25; }
 .vn-sub { display: block; font-size: 0.875rem; color: var(--text-2); }
-.vn-grund { display: block; margin-top: 0.2rem; font-size: 0.875rem; color: var(--text); max-width: 60ch; }
-.vn-aeste { list-style: none; margin: 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--rahmen); display: grid; gap: 0.5rem; }
+.vn-grund { display: block; margin-top: 0.1rem; font-size: 0.8125rem; line-height: 1.4; color: var(--text); max-width: 60ch; }
+.vn-aeste { list-style: none; margin: 0; padding: 0 0 0 1.5rem; border-left: 2px solid var(--rahmen); display: grid; gap: 0.35rem; }
 .vn-ast { position: relative; }
 .vn-ast::before { content: ""; position: absolute; left: -1.5rem; top: 50%; width: 1.5rem; border-top: 2px solid var(--rahmen); }
-.vn-knoten { display: flex; align-items: flex-start; gap: 0.75rem; min-height: 2.75rem; padding: 0.7rem 0.8rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: inherit; text-decoration: none; }
+.vn-knoten { display: flex; align-items: flex-start; gap: 0.75rem; min-height: 2.75rem; padding: 0.5rem 0.7rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: inherit; text-decoration: none; gap: 0.65rem; }
 .vn-knoten:hover { border-color: var(--rahmen); }
 .vn-knoten:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-.vn-knoten .tf-icon { flex: none; }
+.vn-knoten .tf-icon { flex: none; width: 2rem; height: 2rem; border-radius: 0.6rem; }
+.vn-knoten .tf-icon svg { width: 18px; height: 18px; }
 .vn-bne .vn-knoten { border-style: dashed; }
 .vn-legende, .vm-legende { margin: 0.75rem 0 0; font-size: 0.875rem; color: var(--text-2); }
 @media (max-width: 40rem) {
