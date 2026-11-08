@@ -124,6 +124,27 @@ Ein Foto mit einer Frage, die die SuS zum Material führt. Das Bild soll fachlic
 }
 ```
 
+### Wochenplan zu den Nachhaltigkeitszielen
+
+Statt eines einzelnen Impulses kann `impuls.json` eine Liste `wochen` tragen, pro Woche ein Thema mit Bezug zu einem Nachhaltigkeitsziel:
+
+```json
+{ "aktiv": true, "label": "Impuls der Woche",
+  "wochen": [ {
+    "ab": "2026-11-09", "klasse": "Klasse 10", "bne": [12],
+    "frage": "Was steckt alles in deinem Handy?",
+    "erklaerung": "Zwei bis drei kurze Sätze, worum es geht.",
+    "material": ["geografie/klasse-10/globalisierung/globalisierung-als-netz/"]
+  } ] }
+```
+
+- Es gilt der letzte Eintrag, dessen Datum `ab` erreicht ist (Montag der Woche). Neue Wochen hängst du einfach an.
+- `bne`: Zielnummern aus `bne.json`. Sie erscheinen als Chips mit Link zur Zielseite. Ohne `bild` zeigt die Karte Symbol und Name des ersten Ziels.
+- `material`: Pfade wie in `projects.json` (Feld `path`). Titel und Link kommen von dort. Ohne Material bleibt `link` als Ersatz.
+- Optional je Woche: `bild`, `bildAlt`, `bildQuelle` (Regeln unten).
+- Vorschau einer Woche: `index.html?impuls=2026-11-23`.
+- Ohne `wochen` gilt weiter der einzelne Impuls mit `frage`, `bild` und `link` auf oberster Ebene.
+
 - `"aktiv": false` blendet den Baustein aus. Ohne `bild` erscheint ein Platzhalter „Platz für eigenes Foto".
 - Bilder als WebP, möglichst unter ca. 150 KB. Keine erkennbaren Personen. Bildquelle und Lizenz angeben.
 - Ohne `bildAlt` gilt das Bild als Dekoration. Für Impulsbilder besser eine Beschreibung ergänzen.
