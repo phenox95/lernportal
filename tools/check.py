@@ -82,6 +82,10 @@ for i, p in enumerate(projekte):
     if th and re.match(r"^\d+\.\d+$", str(th)) and p.get("subject") in nummern:
         if th not in nummern[p["subject"]]:
             err(f"{n}: Themenfeld {th} steht nicht in themenfelder.json ({p['subject']})")
+    if "folge" in p and (isinstance(p["folge"], bool) or not isinstance(p["folge"], (int, float))):
+        err(f"{n}: folge muss eine Zahl sein")
+    if "folge" in p and not p.get("reihe"):
+        wrn(f"{n}: folge ohne reihe hat keine Wirkung")
     if p.get("datum") and not re.match(r"^\d{4}-\d{2}-\d{2}$", p["datum"]):
         err(f"{n}: datum nicht im Format JJJJ-MM-TT")
     # Querbezüge (optional): bne = Zielnummern 1–17, verweise = Pfade anderer Einträge

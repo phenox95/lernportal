@@ -144,7 +144,7 @@
   function textMatches(project, query) {
     const tokens = fold(query).split(/\s+/).filter(Boolean);
     if (!tokens.length) return true;
-    const haystack = fold([project.title, project.description, themeOf(project), project.subject, project.type, project.grade,
+    const haystack = fold([project.title, project.description, project.reihe, themeOf(project), project.subject, project.type, project.grade,
       bneOf(project).length ? "bne nachhaltigkeit " + bneText(project) : "",
       dateienOf(project).map(d => d.titel + " " + (d.art || "")).join(" ")].join(" "));
     return tokens.every(token => haystack.includes(token));
@@ -427,7 +427,7 @@
     const items = projects.filter(p => isVisible(p) && p.subject === fach && themeOf(p) === tfLabel(tf));
     counter.textContent = items.length ? countText(items.length) : "";
     list.innerHTML = items.length
-      ? `<div class="group">${items.map(p => row(p, false)).join("")}</div>`
+      ? reihenHtml(items, tf)
       : '<p class="empty-message">Für dieses Themenfeld gibt es noch kein Material.</p>';
     renderVerbindungen(tf, fach, items);
   }
@@ -496,6 +496,41 @@
         <span class="row-main"><span class="row-title">${escapeHtml(z.kurz)}</span><span class="row-meta">${escapeHtml(meta)}</span></span>
         <span class="row-chev">${icon("chevron", 20)}</span></a>`;
     }).join("")}</div>`;
+  }
+
+  /* Materialien eines Themenfelds nach Unterrichtsreihe (Feld "reihe") gliedern.
+     Reihen nach kleinster Klassenstufe, dann nach erstem Auftreten in projects.json.
+     Innerhalb einer Reihe sortiert das optionale Feld "folge" (Zahl), sonst gilt die Reihenfolge in projects.json.
+     Ohne Reihe oder bei nur einer Reihe mit dem Namen des Themenfelds bleibt die Liste flach wie bisher. */
+  function reihenHtml(items, tf) {
+    const flat = `<div class="group">${items.map(p => row(p, false)).join("")}</div>`;
+    const nameOf = p => String(p.reihe || "").trim();
+    const tfNames = [tf.kurz, tf.titel].map(fold);
+    const groups = [];
+    items.forEach((p, i) => {
+      const name = nameOf(p);
+      let g = groups.find(x => x.name === name);
+      if (!g) { g = { name, items: [], first: i }; groups.push(g); }
+      g.items.push({ p, i });
+    });
+    if (groups.length === 1 && (!groups[0].name || tfNames.includes(fold(groups[0].name)))) return flat;
+    const gradeOf = g => Math.min(...g.items.flatMap(x => gradesOf(x.p).map(Number)).concat(99));
+    const folgeOf = x => (typeof x.p.folge === "number" && isFinite(x.p.folge)) ? x.p.folge : Infinity;
+    groups.sort((a, b) => (!a.name) - (!b.name) || gradeOf(a) - gradeOf(b) || a.first - b.first);
+    return groups.map(g => {
+      const sorted = g.items.slice().sort((a, b) => (folgeOf(a) - folgeOf(b)) || (a.i - b.i)).map(x => x.p);
+      const grades = [...new Set(sorted.flatMap(p => gradesOf(p)))];
+      const meta = [grades.length ? "Klasse " + grades.join("/") : "", countText(sorted.length)].filter(Boolean).join(" · ");
+      const id = "reihe-" + groups.indexOf(g);
+      return `
+      <section class="reihe" aria-labelledby="${id}">
+        <div class="reihe-kopf">
+          <h2 class="reihe-titel" id="${id}">${escapeHtml(g.name || "Weitere Materialien")}</h2>
+          <p class="reihe-meta">${escapeHtml(meta)}</p>
+        </div>
+        <div class="group">${sorted.map(p => row(p, false)).join("")}</div>
+      </section>`;
+    }).join("");
   }
 
   /* ---------- Start ---------- */
