@@ -8,6 +8,8 @@ Jede Präsentation (HTML) hat denselben Grundaufbau und bekommt dieselben Werkze
 
 **Grundaufbau:** `#buehne` (füllt das Fenster) enthält `#stage` (feste Größe 1280 × 720, wird per Skript skaliert) mit den Folien als `<section class="slide">`. Die sichtbare Folie hat `display` ungleich `none`. Optional steht an einer Folie `data-min="5"`, das schlägt dem Timer 5 Minuten vor.
 
+**Überschriften:** Jeder Folientitel bleibt im Quelltext eine `<h1>`. `praesentation.js` lässt nur die erste `h1` der Präsentation als Hauptüberschrift stehen und markiert alle weiteren per `role="heading"` und `aria-level="2"` als Ebene 2. Aussehen und CSS ändern sich nicht, eigene Anpassungen in der einzelnen Präsentation sind nicht nötig.
+
 **Blätterpfeile:** Große runde Pfeile in den unteren Ecken (`.pfeil`, 84 px, Weiter in Gelb) stehen in `praesentation-design.css`. Das Markup steht in der Vorlage. **Ein- und Ausblenden der Folien nur über `display`** (Klasse `.on`), nicht über `opacity` oder `visibility`, sonst erkennen Stift und Timer die aktuelle Folie nicht.
 
 **Einbinden** (Pfade je nach Tiefe anpassen, `defer` ist Pflicht): im `<head>` `praesentation-design.css` und `praesentation.css`, am Ende des `<body>` `praesentation.js`. Am `<body>` steht `class="lp-pres"`.
