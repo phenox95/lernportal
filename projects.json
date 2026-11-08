@@ -110,6 +110,31 @@
     ]
   },
   {
+    "title": "Von der Zelle zum Organismus",
+    "description": "Bildreihen zu Magen und Pflanze ordnen, Zelle, Gewebe, Organ und Organismus unterscheiden, Tafelbild, Tisch-Quiz. Mit Präsentation und Arbeitsblatt.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-7/zelle/zelle-zum-organismus/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-08",
+    "reihe": "Zelle",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt Zelle, Gewebe, Organ, Organismus",
+        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt"
+      }
+    ]
+  },
+  {
     "title": "Feuerwerk aus der Tiefe – Vulkanausbrüche",
     "description": "Entstehung und Ausbruch von Vulkanen, Schicht- und Schildvulkan vergleichen, Kurzprojekt zu Vulkanen und Erdbeben.",
     "type": "Interaktive Präsentation",
