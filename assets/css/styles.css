@@ -217,7 +217,7 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 /* Filter */
 .filters { display: grid; gap: 1rem; margin: 1.75rem 0 0; }
 .filter-label { display: block; margin: 0 0 0.35rem; font-size: 0.875rem; color: var(--text-2); }
-.filter-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+.filter-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0.6rem; }
 .filter-row[hidden], .filters [hidden] { display: none; }
 .select-wrap { position: relative; }
 .select-wrap select { width: 100%; min-height: 2.75rem; padding: 0 2.25rem 0 0.9rem; border: 0; border-radius: var(--radius); background: var(--field); appearance: none; -webkit-appearance: none; cursor: pointer; }
