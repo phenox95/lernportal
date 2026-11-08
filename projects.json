@@ -118,9 +118,22 @@
   },
   {
     "title": "Die Zelle – Stunde 3: Warum sind Zellen so unterschiedlich groß?",
-    "description": "Wer bin ich?, Zellen nach Größe ordnen, Größenstrahl, Form und Funktion, Nervenzelle.",
+    "description": "Wer bin ich?, acht Zelltypen aus M1 im Größenstrahl ordnen, Form und Funktion, Nervenzelle.",
     "type": "Interaktive Präsentation",
     "path": "biologie/klasse-7/zelle/zellgroesse-und-form/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-08",
+    "reihe": "Zelle"
+  },
+  {
+    "title": "Die Zelle – Stunde 4: Mikroskopieren leicht gemacht",
+    "description": "Bauteile des Mikroskops beschriften, Bedienung ordnen, am Mikroskop-Trainer scharf stellen.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/mikroskopieren-leicht-gemacht/",
     "subject": "Biologie",
     "grade": "Klasse 7",
     "themenfeld": "3.1",
