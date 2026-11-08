@@ -42,7 +42,10 @@
     "themenfeld": "3.1",
     "dauer": "Doppelstunde",
     "datum": "2026-11-04",
-    "reihe": "Vulkanismus"
+    "reihe": "Vulkanismus",
+    "bne": [
+      8
+    ]
   },
   {
     "title": "Beispiel: Materialseite mit Dateien",
@@ -181,6 +184,10 @@
         "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/quiz/",
         "art": "Spiel"
       }
+    ],
+    "bne": [
+      7,
+      13
     ]
   },
   {
@@ -193,7 +200,10 @@
     "themenfeld": "3.5",
     "dauer": "45 Min.",
     "datum": "2026-11-05",
-    "sichtbar": true
+    "sichtbar": true,
+    "bne": [
+      3
+    ]
   },
   {
     "title": "Globalisierung als Netz",
@@ -207,7 +217,12 @@
     "niveau": "F–H",
     "datum": "2026-11-06",
     "reihe": "Globalisierung",
-    "sichtbar": true
+    "sichtbar": true,
+    "bne": [
+      8,
+      9,
+      12
+    ]
   },
   {
     "title": "Leben am Ätna: Chancen und Risiken für die Landwirtschaft",
@@ -232,6 +247,9 @@
         "pfad": "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/arbeitsblatt-1.pdf",
         "art": "Arbeitsblatt"
       }
+    ],
+    "bne": [
+      2
     ]
   }
 ]
