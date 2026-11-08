@@ -426,41 +426,105 @@
     $("#tf-full").textContent = tf.nr + " " + tf.titel + [tf.verbund, tf.hinweis].filter(Boolean).map(x => " · " + x).join("");
     const items = projects.filter(p => isVisible(p) && p.subject === fach && themeOf(p) === tfLabel(tf));
     counter.textContent = items.length ? countText(items.length) : "";
-    list.innerHTML = items.length
-      ? reihenHtml(items, tf)
-      : '<p class="empty-message">Für dieses Themenfeld gibt es noch kein Material.</p>';
+    list.innerHTML = items.length ? reihenListe(items) : '<p class="empty-message">Für dieses Themenfeld gibt es noch kein Material.</p>';
     renderVerbindungen(tf, fach, items);
   }
 
-  /* Verbindungen eines Themenfelds: optionales Feld "bezuege" in themenfelder.json (Fach, Nummer, Grund)
-     und die Nachhaltigkeitsziele, die Materialien dieses Themenfelds tragen */
+  /* Materialien eines Themenfelds nach Unterrichtsreihe (Sequenz) gruppiert, mit den Zielen der Reihe */
+  function reihenListe(items) {
+    /* optionales Feld "folge" (Zahl): Reihenfolge innerhalb einer Reihe, Einträge ohne folge behalten ihre Reihenfolge */
+    const key = p => Number.isFinite(p.folge) ? p.folge : Infinity;
+    items = [...items].sort((a, b) => key(a) === key(b) ? 0 : key(a) < key(b) ? -1 : 1);
+    const namen = [...new Set(items.map(p => String(p.reihe || "").trim()).filter(Boolean))];
+    if (!namen.length) return `<div class="group">${items.map(p => row(p, false)).join("")}</div>`;
+    const gruppe = (titel, mine) => {
+      const nrs = [...new Set(mine.flatMap(bneOf))].sort((a, b) => a - b);
+      const ziele = nrs.length ? `<span class="reihe-ziele">${nrs.map(n => `<a class="reihe-ziel" href="${root}bne/?ziel=${n}" aria-label="Nachhaltigkeitsziel ${n} ${escapeHtml((bneZiel(n) || {}).kurz || "")}">${n}</a>`).join("")}</span>` : "";
+      return `<section class="reihe"><div class="reihe-kopf"><h2 class="reihe-titel">${escapeHtml(titel)}</h2><span class="reihe-zahl">${countText(mine.length)}</span>${ziele}</div>
+        <div class="group">${mine.map(p => row(p, false)).join("")}</div></section>`;
+    };
+    const parts = namen.map(n => gruppe("Reihe: " + n, items.filter(p => String(p.reihe || "").trim() === n)));
+    const ohne = items.filter(p => !String(p.reihe || "").trim());
+    if (ohne.length) parts.push(gruppe("Einzelne Stunden", ohne));
+    return parts.join("");
+  }
+
+  /* Verbindungen eines Themenfelds: Feld "bezuege" in themenfelder.json, wechselseitig aufgelöst
+     (steht die Verbindung nur an einem Themenfeld, erscheint sie an beiden) */
+  function bezuegeOf(fach, tf) {
+    const out = new Map();
+    const add = (f, nr, grund) => {
+      const ziel = tfList(f).find(t => t.nr === String(nr));
+      const key = f + "|" + nr;
+      if (!ziel || out.has(key) || (f === fach && ziel.nr === tf.nr)) return;
+      out.set(key, { fach: f, tf: ziel, grund: typeof grund === "string" ? grund.trim() : "" });
+    };
+    (Array.isArray(tf.bezuege) ? tf.bezuege : []).forEach(b => b && typeof b === "object" && add(b.fach, b.nr, b.grund));
+    ["Biologie", "Geografie"].forEach(f => tfList(f).forEach(t => {
+      (Array.isArray(t.bezuege) ? t.bezuege : []).forEach(b => {
+        if (b && b.fach === fach && String(b.nr) === tf.nr) add(f, t.nr, b.grund);
+      });
+    }));
+    return [...out.values()];
+  }
+
+  /* Vernetzungskarte: links das Themenfeld, rechts Äste zu verbundenen Themenfeldern und Nachhaltigkeitszielen */
   function renderVerbindungen(tf, fach, items) {
     const box = $("#tf-verbindungen");
     if (!box) return;
-    const parts = [];
-    const links = (Array.isArray(tf.bezuege) ? tf.bezuege : []).map(b => {
-      if (!b || typeof b !== "object") return null;
-      const ziel = tfList(b.fach).find(t => t.nr === String(b.nr));
-      if (!ziel) return null;
-      const href = root + "themenfeld/?fach=" + encodeURIComponent(b.fach) + "&nr=" + encodeURIComponent(ziel.nr);
-      const grund = typeof b.grund === "string" && b.grund.trim() ? `<span class="row-meta">${escapeHtml(b.grund.trim())}</span>` : "";
-      return `<a class="row" href="${escapeHtml(href)}"><span class="dot ${b.fach === "Biologie" ? "bio" : "geo"}" aria-hidden="true"></span>
-        <span class="row-main"><span class="row-title">${escapeHtml(b.fach + " " + ziel.nr + " " + (ziel.kurz || ziel.titel))}</span>${grund}</span>
-        <span class="row-chev">${icon("chevron", 20)}</span></a>`;
-    }).filter(Boolean);
-    if (links.length) parts.push(`<p class="label">Verbunden mit anderen Themenfeldern</p><div class="group">${links.join("")}</div>`);
-    const nrs = [...new Set(items.flatMap(bneOf))].sort((a, b) => a - b);
-    if (nrs.length) {
-      parts.push(`<p class="label">Nachhaltigkeitsziele in diesem Themenfeld</p><div class="group">${nrs.map(n => {
-        const z = bneZiel(n);
-        const href = root + "bne/?ziel=" + n;
-        return `<a class="row" href="${href}"><span class="numeral bne-nr">${n}</span>
-          <span class="row-main"><span class="row-title">${escapeHtml(z ? z.kurz : "Ziel " + n)}</span><span class="row-meta">Materialien beider Fächer ansehen</span></span>
-          <span class="row-chev">${icon("chevron", 20)}</span></a>`;
-      }).join("")}</div>`);
-    }
-    box.innerHTML = parts.join("");
-    box.hidden = !parts.length;
+    const links = bezuegeOf(fach, tf);
+    const zaehler = new Map();
+    items.forEach(p => bneOf(p).forEach(n => zaehler.set(n, (zaehler.get(n) || 0) + 1)));
+    const nrs = [...zaehler.keys()].sort((a, b) => a - b);
+    if (!links.length && !nrs.length) { box.hidden = true; return; }
+
+    const mitte = `<div class="vn-mitte"><span class="tf-icon" data-tf-fach="${escapeHtml(fach)}" data-tf-nr="${escapeHtml(tf.nr)}">${icon(tf.icon, 24)}</span>
+      <span class="vn-name">${escapeHtml(tf.kurz || tf.titel)}</span><span class="vn-sub">${escapeHtml(fach + " " + tf.nr)}</span></div>`;
+    const ast = (inner, klasse) => `<li class="vn-ast ${klasse}">${inner}</li>`;
+    const tfAeste = links.map(l => {
+      const href = root + "themenfeld/?fach=" + encodeURIComponent(l.fach) + "&nr=" + encodeURIComponent(l.tf.nr);
+      return ast(`<a class="vn-knoten" href="${escapeHtml(href)}">
+        <span class="tf-icon" data-tf-fach="${escapeHtml(l.fach)}" data-tf-nr="${escapeHtml(l.tf.nr)}">${icon(l.tf.icon, 22)}</span>
+        <span class="vn-text"><span class="vn-name">${escapeHtml(l.tf.kurz || l.tf.titel)}</span>
+        <span class="vn-sub">${escapeHtml(l.fach + " " + l.tf.nr)}${l.fach !== fach ? " · anderes Fach" : ""}</span>
+        ${l.grund ? `<span class="vn-grund">${escapeHtml(l.grund)}</span>` : ""}</span></a>`, "vn-tf");
+    });
+    const bneAeste = nrs.map(n => {
+      const z = bneZiel(n);
+      return ast(`<a class="vn-knoten" href="${root}bne/?ziel=${n}">
+        <span class="numeral bne-nr">${n}</span>
+        <span class="vn-text"><span class="vn-name">${escapeHtml(z ? z.kurz : "Ziel " + n)}</span>
+        <span class="vn-sub">Nachhaltigkeit · ${countText(zaehler.get(n))} hier</span></span></a>`, "vn-bne");
+    });
+    box.innerHTML = `<h2 class="vn-titel">Vernetzung</h2>
+      <div class="vn">${mitte}<ul class="vn-aeste">${tfAeste.join("")}${bneAeste.join("")}</ul></div>
+      <p class="vn-legende">Oben verbundene Themenfelder, darunter Nachhaltigkeitsziele (BNE) der Materialien dieses Themenfelds.</p>`;
+    box.hidden = false;
+  }
+
+  /* Übersicht Themenfelder × Ziele: eine Tabelle, Zelle = Anzahl Materialien (Zahl und Punkt, nie nur Farbe) */
+  function bneMatrix(visible) {
+    const faecher = ["Biologie", "Geografie"].filter(f => tfList(f).length);
+    if (!faecher.length) return "";
+    const kopf = bneZiele.map(z => `<th scope="col" class="vm-nr" title="${escapeHtml(z.titel)}"><span aria-hidden="true">${z.nr}</span><span class="sr-only">Ziel ${z.nr} ${escapeHtml(z.kurz)}</span></th>`).join("");
+    const zeilen = faecher.map(f => {
+      const rows = tfList(f).map(tf => {
+        const mine = visible.filter(p => p.subject === f && themeOf(p) === tfLabel(tf));
+        const zellen = bneZiele.map(z => {
+          const n = mine.filter(p => bneOf(p).includes(z.nr)).length;
+          return n ? `<td class="vm-zelle"><a class="vm-punkt ${f === "Biologie" ? "bio" : "geo"}" href="?ziel=${z.nr}" aria-label="${escapeHtml(f + " " + tf.nr + " " + (tf.kurz || tf.titel) + ", Ziel " + z.nr + " " + z.kurz + ": " + countText(n))}">${n}</a></td>` : '<td class="vm-zelle"></td>';
+        }).join("");
+        const href = root + "themenfeld/?fach=" + encodeURIComponent(f) + "&nr=" + encodeURIComponent(tf.nr);
+        return `<tr><th scope="row" class="vm-tf"><a href="${escapeHtml(href)}"><span class="tf-icon" data-tf-fach="${escapeHtml(f)}" data-tf-nr="${escapeHtml(tf.nr)}">${icon(tf.icon, 18)}</span><span>${escapeHtml(tf.nr + " " + (tf.kurz || tf.titel))}</span></a></th>${zellen}</tr>`;
+      }).join("");
+      return `<tr class="vm-fach"><th scope="rowgroup" colspan="${bneZiele.length + 1}">${escapeHtml(f)}</th></tr>${rows}`;
+    }).join("");
+    return `<h2 class="vm-titel">Übersicht: Themenfelder und Ziele</h2>
+      <div class="vm-scroll" tabindex="0" role="region" aria-label="Übersicht Themenfelder und Nachhaltigkeitsziele, seitlich scrollbar">
+        <table class="vm"><caption class="sr-only">Anzahl der Materialien je Themenfeld und Nachhaltigkeitsziel</caption>
+        <thead><tr><th scope="col" class="vm-tf"><span class="sr-only">Themenfeld</span></th>${kopf}</tr></thead><tbody>${zeilen}</tbody></table>
+      </div>
+      <p class="vm-legende">Ein Punkt mit Zahl zeigt, wie viele Materialien das Ziel in diesem Themenfeld behandeln. Antippen öffnet das Ziel.</p>`;
   }
 
   /* ---------- BNE-Seite: Überblick der Ziele, mit ?ziel=13 die Materialien beider Fächer ---------- */
@@ -488,7 +552,8 @@
       return;
     }
     counter.textContent = "";
-    list.innerHTML = `<div class="group">${bneZiele.map(z => {
+    const matrix = bneMatrix(visible);
+    list.innerHTML = matrix + `<h2 class="vm-titel">Alle Ziele</h2><div class="group">${bneZiele.map(z => {
       const mine = visible.filter(p => bneOf(p).includes(z.nr));
       const bio = mine.filter(p => p.subject === "Biologie").length, geo = mine.filter(p => p.subject === "Geografie").length;
       const meta = mine.length ? [bio ? "Biologie " + bio : "", geo ? "Geografie " + geo : ""].filter(Boolean).join(" · ") : "Noch kein Material";
@@ -496,41 +561,6 @@
         <span class="row-main"><span class="row-title">${escapeHtml(z.kurz)}</span><span class="row-meta">${escapeHtml(meta)}</span></span>
         <span class="row-chev">${icon("chevron", 20)}</span></a>`;
     }).join("")}</div>`;
-  }
-
-  /* Materialien eines Themenfelds nach Unterrichtsreihe (Feld "reihe") gliedern.
-     Reihen nach kleinster Klassenstufe, dann nach erstem Auftreten in projects.json.
-     Innerhalb einer Reihe sortiert das optionale Feld "folge" (Zahl), sonst gilt die Reihenfolge in projects.json.
-     Ohne Reihe oder bei nur einer Reihe mit dem Namen des Themenfelds bleibt die Liste flach wie bisher. */
-  function reihenHtml(items, tf) {
-    const flat = `<div class="group">${items.map(p => row(p, false)).join("")}</div>`;
-    const nameOf = p => String(p.reihe || "").trim();
-    const tfNames = [tf.kurz, tf.titel].map(fold);
-    const groups = [];
-    items.forEach((p, i) => {
-      const name = nameOf(p);
-      let g = groups.find(x => x.name === name);
-      if (!g) { g = { name, items: [], first: i }; groups.push(g); }
-      g.items.push({ p, i });
-    });
-    if (groups.length === 1 && (!groups[0].name || tfNames.includes(fold(groups[0].name)))) return flat;
-    const gradeOf = g => Math.min(...g.items.flatMap(x => gradesOf(x.p).map(Number)).concat(99));
-    const folgeOf = x => (typeof x.p.folge === "number" && isFinite(x.p.folge)) ? x.p.folge : Infinity;
-    groups.sort((a, b) => (!a.name) - (!b.name) || gradeOf(a) - gradeOf(b) || a.first - b.first);
-    return groups.map(g => {
-      const sorted = g.items.slice().sort((a, b) => (folgeOf(a) - folgeOf(b)) || (a.i - b.i)).map(x => x.p);
-      const grades = [...new Set(sorted.flatMap(p => gradesOf(p)))];
-      const meta = [grades.length ? "Klasse " + grades.join("/") : "", countText(sorted.length)].filter(Boolean).join(" · ");
-      const id = "reihe-" + groups.indexOf(g);
-      return `
-      <section class="reihe" aria-labelledby="${id}">
-        <div class="reihe-kopf">
-          <h2 class="reihe-titel" id="${id}">${escapeHtml(g.name || "Weitere Materialien")}</h2>
-          <p class="reihe-meta">${escapeHtml(meta)}</p>
-        </div>
-        <div class="group">${sorted.map(p => row(p, false)).join("")}</div>
-      </section>`;
-    }).join("");
   }
 
   /* ---------- Start ---------- */
