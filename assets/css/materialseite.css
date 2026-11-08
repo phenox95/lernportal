@@ -27,3 +27,7 @@
 .ms-hinweis { margin-top: 0.5rem; }
 .ms-adresse { margin-top: 0.5rem; font-size: 0.9375rem; color: var(--lp-text2); }
 .ms-url { color: var(--lp-text); font-weight: 600; overflow-wrap: anywhere; user-select: all; }
+
+/* Verbindungen (Querbezüge) */
+.ms-bne { margin: 0 0 0.75rem; font-size: 1rem; }
+.ms-verweis { grid-template-columns: minmax(0, 1fr); }

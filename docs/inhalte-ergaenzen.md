@@ -43,6 +43,8 @@ Anleitung für neue Materialien, die Felder in `projects.json`, Materialseiten, 
 | `datum` | nein | `JJJJ-MM-TT` |
 | `sichtbar` | nein | `false` blendet Entwürfe aus (auch aus Zählern und Suche) |
 | `status` | nein | Kleines Label, z. B. `Beispiel` |
+| `bne` | nein | Liste von Nachhaltigkeitszielen (Zahlen 1–17, Titel in `bne.json`), z. B. `[13, 15]`. Wirkt als Filter „Nachhaltigkeit (BNE)“ auf Fachseiten und „Alle Materialien“, als Zeile „Nachhaltigkeit: …“ in der Liste, auf der Seite `bne/` und in „Verbindungen“ der Materialseite. Materialien beider Fächer mit gleichem Ziel gelten automatisch als verwandt |
+| `verweise` | nein | Liste von Pfaden anderer Einträge (wie `path`), optional mit Grund: `["biologie/klasse-9/auge/", { "pfad": "geografie/klasse-7/risikoraeume/aetna-tourismus/", "grund": "Ein Satz, warum beide zusammengehören" }]`. Wirkt wechselseitig: Der Verweis erscheint auch beim Ziel. Sichtbar unter „Verbindungen“ auf der Materialseite |
 | `dateien` | nein | Liste der Dateien eines Themas (siehe unten). Fehlt das Feld, verhält sich der Eintrag wie bisher |
 
 ### Feld `dateien` (Materialseite pro Thema)
@@ -217,3 +219,12 @@ Beide Präsentationen folgen dem gemeinsamen Aufbau (Bühne 1280 × 720, `praese
 | `select` | Eine Möglichkeit auswählen |
 
 Die Zeiten der Folien (`data-min`) ergeben je Stunde etwa 90 Minuten. Die Spielinhalte (`lp-spiel-daten`) sind ein Entwurf und gehören fachlich gegengelesen. Das Quiz ist eine eigene Anwendung mit Fragen in `quiz/fragen.js` (Format: siehe Kommentar in der Datei) und nutzt Farben und Dunkelmodus der Materialseite.
+
+
+## Vernetzung und Nachhaltigkeit (BNE)
+
+- **Nachhaltigkeitsziele:** `bne.json` enthält die 17 Ziele (UN-Agenda 2030) mit Kurztitel. Bezug im RLP: übergreifendes Thema „Nachhaltige Entwicklung/Lernen in globalen Zusammenhängen“ (Teil B). Die Zuordnung zu einem Material trägst du selbst über das Feld `bne` ein. Nichts wird automatisch zugeordnet. Kurztitel in `bne.json` vor der Veröffentlichung gegenlesen.
+- **Seite `bne/`:** Überblick der 17 Ziele mit Zähler je Fach. `bne/?ziel=13` zeigt die Materialien beider Fächer, nach Fach gruppiert. Das Ziel lässt sich auch über die Adresse vorbelegen (`alle/?bne=13`).
+- **Themenfelder verbinden:** In `themenfelder.json` kann jedes Themenfeld das optionale Feld `bezuege` tragen, z. B. `"bezuege": [{ "fach": "Geografie", "nr": "3.6", "grund": "Ein Satz" }]`. Es erscheint auf der Themenfeld-Seite unter „Verbunden mit anderen Themenfeldern“. Verbindungen nur eintragen, wenn sie fachlich gesichert sind.
+- **Prüfen:** `python3 tools/check.py` prüft `bne` (Zahlen 1–17), `verweise` (Pfad muss in `projects.json` stehen) und `bezuege` (Fach und Nummer müssen existieren).
+- Präsentationen bleiben unverändert. Die Vernetzung erscheint nur in Portal, Listen und Materialseiten.

@@ -1,0 +1,90 @@
+{
+  "quelle": "Ziele für nachhaltige Entwicklung (SDG) der Vereinten Nationen, Agenda 2030. Bezug im RLP: übergreifendes Thema „Nachhaltige Entwicklung/Lernen in globalen Zusammenhängen“ (Teil B). Die Zuordnung der Ziele zu Materialien trägt die Lehrkraft in projects.json ein (Feld bne). ENTWURF: Kurztitel bitte gegenlesen.",
+  "ziele": [
+    {
+      "nr": 1,
+      "titel": "Keine Armut",
+      "kurz": "Armut"
+    },
+    {
+      "nr": 2,
+      "titel": "Kein Hunger",
+      "kurz": "Hunger"
+    },
+    {
+      "nr": 3,
+      "titel": "Gesundheit und Wohlergehen",
+      "kurz": "Gesundheit"
+    },
+    {
+      "nr": 4,
+      "titel": "Hochwertige Bildung",
+      "kurz": "Bildung"
+    },
+    {
+      "nr": 5,
+      "titel": "Geschlechtergleichheit",
+      "kurz": "Geschlechtergleichheit"
+    },
+    {
+      "nr": 6,
+      "titel": "Sauberes Wasser und Sanitäreinrichtungen",
+      "kurz": "Wasser"
+    },
+    {
+      "nr": 7,
+      "titel": "Bezahlbare und saubere Energie",
+      "kurz": "Energie"
+    },
+    {
+      "nr": 8,
+      "titel": "Menschenwürdige Arbeit und Wirtschaftswachstum",
+      "kurz": "Arbeit und Wirtschaft"
+    },
+    {
+      "nr": 9,
+      "titel": "Industrie, Innovation und Infrastruktur",
+      "kurz": "Industrie und Infrastruktur"
+    },
+    {
+      "nr": 10,
+      "titel": "Weniger Ungleichheiten",
+      "kurz": "Ungleichheiten"
+    },
+    {
+      "nr": 11,
+      "titel": "Nachhaltige Städte und Gemeinden",
+      "kurz": "Städte und Gemeinden"
+    },
+    {
+      "nr": 12,
+      "titel": "Nachhaltiger Konsum und Produktion",
+      "kurz": "Konsum und Produktion"
+    },
+    {
+      "nr": 13,
+      "titel": "Maßnahmen zum Klimaschutz",
+      "kurz": "Klimaschutz"
+    },
+    {
+      "nr": 14,
+      "titel": "Leben unter Wasser",
+      "kurz": "Leben unter Wasser"
+    },
+    {
+      "nr": 15,
+      "titel": "Leben an Land",
+      "kurz": "Leben an Land"
+    },
+    {
+      "nr": 16,
+      "titel": "Frieden, Gerechtigkeit und starke Institutionen",
+      "kurz": "Frieden und Gerechtigkeit"
+    },
+    {
+      "nr": 17,
+      "titel": "Partnerschaften zur Erreichung der Ziele",
+      "kurz": "Partnerschaften"
+    }
+  ]
+}
