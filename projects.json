@@ -399,7 +399,7 @@
   },
   {
     "title": "Gesundheit – Krankheit – Stunde 1: Was unterscheidet gesund von krank?",
-    "description": "Fallimpuls, Fragenentwicklung, WHO-Definition, zwei Fälle, Gesundheitsrad, Merksatz. Mit Arbeitsblättern auf drei Niveaus.",
+    "description": "Fallimpuls, Fragenentwicklung, WHO-Definition, zwei Fälle, Gesundheitsrad, Merksatz.",
     "type": "Materialseite",
     "path": "biologie/klasse-9/gesundheit/gesund-oder-krank/",
     "subject": "Biologie",
@@ -414,30 +414,6 @@
         "titel": "Präsentation zur Stunde",
         "pfad": "biologie/klasse-9/gesundheit/gesund-oder-krank/praesentation/",
         "art": "Präsentation"
-      },
-      {
-        "titel": "Arbeitsblatt Gesundheit – Basis",
-        "pfad": "biologie/klasse-9/gesundheit/gesund-oder-krank/arbeitsblatt-1.pdf",
-        "art": "Arbeitsblatt",
-        "stufe": 1
-      },
-      {
-        "titel": "Arbeitsblatt Gesundheit – Regel",
-        "pfad": "biologie/klasse-9/gesundheit/gesund-oder-krank/arbeitsblatt-2.pdf",
-        "art": "Arbeitsblatt",
-        "stufe": 2
-      },
-      {
-        "titel": "Arbeitsblatt Gesundheit – Regel, verkürzt (große Schrift)",
-        "pfad": "biologie/klasse-9/gesundheit/gesund-oder-krank/arbeitsblatt-2-kurz.pdf",
-        "art": "Arbeitsblatt",
-        "stufe": 2
-      },
-      {
-        "titel": "Arbeitsblatt Gesundheit – Erweiterung",
-        "pfad": "biologie/klasse-9/gesundheit/gesund-oder-krank/arbeitsblatt-3.pdf",
-        "art": "Arbeitsblatt",
-        "stufe": 3
       }
     ]
   }
