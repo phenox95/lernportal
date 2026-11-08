@@ -367,28 +367,10 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .reihe-ziel { display: inline-flex; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; border: 1px solid var(--rahmen); border-radius: 50%; font-size: 0.875rem; font-weight: 700; color: var(--text); text-decoration: none; }
 .reihe-ziel:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
-/* Übersicht Themenfelder × Ziele (BNE-Seite) */
-.vm-titel { margin: 1.75rem 0 0.75rem; }
-.vm-titel:first-child { margin-top: 0; }
-.vm-scroll { position: relative; overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
-.vm-scroll:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-.vm { border-collapse: collapse; width: max-content; min-width: 100%; }
-.vm th, .vm td { padding: 0; border-bottom: 1px solid var(--line); text-align: center; }
-.vm-nr { min-width: 2.75rem; height: 2.75rem; font-size: 0.875rem; font-weight: 700; }
-.vm-tf { position: sticky; left: 0; background: var(--surface); text-align: left; z-index: 1; min-width: 10.5rem; }
-.vm-tf a { display: flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0 0.75rem; font-size: 0.875rem; font-weight: 700; color: var(--text); text-decoration: none; }
-.vm-tf a:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
-.vm-tf .tf-icon { width: 1.75rem; height: 1.75rem; border-radius: 0.5rem; flex: none; }
-.vm-fach th { padding: 0.5rem 0.75rem; background: var(--field); font-size: 0.875rem; text-align: left; color: var(--text-2); }
-.vm-zelle { width: 2.75rem; height: 2.75rem; }
-.vm-punkt { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--text-2); color: var(--surface); font-size: 0.875rem; font-weight: 700; text-decoration: none; }
-.vm-punkt.bio { background: var(--bio); }
-.vm-punkt.geo { background: var(--geo); }
-.vm-punkt:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
 /* BNE-Seite: Einstieg, Fragen, klickbare Grafik der 17 Ziele. Nur vorhandene Tokens, Fachfarbe nur als Punkt */
-.bne-hero .title { max-width: 16ch; }
-.bne-hero .lead { max-width: 36rem; color: var(--text); }
+.bne-hero .title { font-size: clamp(1.875rem, 5.2vw, 2.875rem); }
+.bne-hero .lead { max-width: none; color: var(--text); }
 .bne-cta { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.75rem; margin-top: 1.25rem; padding: 0 1.1rem; border-radius: var(--radius); background: var(--text); color: var(--surface); font-weight: 700; }
 .bne-cta:hover { opacity: 0.88; }
 .bne-block { margin-top: 2.5rem; }
@@ -451,7 +433,6 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .bne-lehrkraft { margin-top: 1.25rem; font-size: 0.9375rem; color: var(--text-2); }
 .bne-lehrkraft summary { display: flex; align-items: center; min-height: 2.75rem; cursor: pointer; font-weight: 700; color: var(--text); }
 .bne-lehrkraft p { max-width: 42rem; margin: 0.25rem 0 0; }
-#bne-matrix .vm-titel { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) { .bne-frage, .z-kachel { transition: none; } .bne-frage:hover, .z-kachel:hover { transform: none; } }
 
 /* BNE-Seite, schlanke Fassung: Erklärung oben, Ziele mit farbiger Zahl darunter */
@@ -465,3 +446,14 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .z-leer { font-size: 0.875rem; font-weight: 400; }
 .bne-sub .z-z { margin-left: 0.6rem; }
 .bne-sub .z-badge { width: 1.5rem; min-width: 1.5rem; height: 1.5rem; font-size: 0.8125rem; }
+
+/* BNE-Seite: Themenfelder mit ihren Zielen */
+#bne-matrix .label { margin-top: 1.25rem; }
+.tz-zeile { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
+.tz-tf { display: flex; align-items: center; gap: 0.6rem; flex: 0 0 13rem; max-width: 100%; min-height: 2.75rem; font-weight: 700; }
+.tz-tf:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.tz-tf .tf-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.75rem; height: 1.75rem; border-radius: 0.5rem; }
+.tz-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; flex: 1; min-width: 0; }
+.tz-chip { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.75rem; padding: 0 0.8rem 0 0.5rem; border: 1px solid var(--line); border-radius: 2rem; background: var(--surface); font-size: 0.9375rem; }
+.tz-chip:hover { border-color: var(--text); }
+@media (max-width: 40rem) { .tz-tf { flex-basis: 100%; } .tz-chips { flex-basis: 100%; } .tz-chip { max-width: 100%; } }
