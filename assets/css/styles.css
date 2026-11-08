@@ -327,3 +327,10 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 }
 .tf-icon { background: var(--tf-tint, var(--field)); color: var(--tf-ink, currentColor); }
 .tf-nr { color: var(--tf-ink, var(--text-2)); }
+
+/* Vernetzung und BNE: nur Text und Linien in den vorhandenen Tokens, keine eigene Farbe */
+.bne-nr { min-width: 2.25rem; text-align: center; color: var(--text); }
+.tf-verbindungen { margin-top: 2rem; }
+.tf-verbindungen .label { margin-top: 1.5rem; }
+.tf-verbindungen .label:first-child { margin-top: 0; }
+#project-list .label { margin-top: 1.5rem; }

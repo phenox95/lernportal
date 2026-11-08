@@ -167,7 +167,74 @@
     return li;
   }
 
-  function zeigen(eintrag) {
+  /* Querbezüge (optional): Felder "verweise" und "bne" in projects.json, Titel der Ziele aus bne.json */
+  const normPfad = p => { const v = String(p || "").trim().replace(/^\.?\//, ""); return v && !v.endsWith("/") ? v + "/" : v; };
+  const bneNummern = p => Array.isArray(p && p.bne)
+    ? [...new Set(p.bne.map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 17))].sort((a, b) => a - b) : [];
+  const verweisListe = p => (Array.isArray(p && p.verweise) ? p.verweise : [])
+    .map(v => typeof v === "string" ? { pfad: v } : v)
+    .filter(v => v && typeof v === "object" && typeof v.pfad === "string" && v.pfad.trim())
+    .map(v => ({ pfad: normPfad(v.pfad), grund: typeof v.grund === "string" ? v.grund.trim() : "" }));
+  function verwandte(eintrag, alle) {
+    const ich = normPfad(eintrag.path), aus = new Map();
+    const zufuegen = (p, grund) => {
+      const k = normPfad(p && p.path);
+      if (!p || p === eintrag || p.sichtbar === false || !p.title || !sicherer(p.path) || aus.has(k)) return;
+      aus.set(k, { titel: String(p.title), fach: p.subject, klasse: p.grade, pfad: p.path, grund });
+    };
+    verweisListe(eintrag).forEach(v => zufuegen(alle.find(p => normPfad(p.path) === v.pfad), v.grund));
+    alle.forEach(p => { const v = verweisListe(p).find(x => x.pfad === ich); if (v) zufuegen(p, v.grund); });
+    const meine = bneNummern(eintrag);
+    const fach = f => f === "Biologie" || f === "Geografie";
+    if (meine.length && fach(eintrag.subject)) {
+      alle.forEach(p => {
+        if (p.subject === eintrag.subject || !fach(p.subject)) return;
+        if (bneNummern(p).some(n => meine.includes(n))) zufuegen(p, "Gemeinsames Nachhaltigkeitsziel");
+      });
+    }
+    return [...aus.values()];
+  }
+  function querbezuege(eintrag, alle, bne) {
+    const ziele = Array.isArray(bne && bne.ziele) ? bne.ziele : [];
+    const nrs = bneNummern(eintrag), rel = verwandte(eintrag, alle);
+    if (!nrs.length && !rel.length) return;
+    const abschnitt = neu("section", "ms-gruppe");
+    const h = neu("h2", "ms-gruppentitel", "Verbindungen");
+    h.id = "ms-querbezuege";
+    abschnitt.appendChild(h);
+    if (nrs.length) {
+      const p = neu("p", "ms-bne");
+      p.appendChild(document.createTextNode("Nachhaltigkeit (BNE): "));
+      nrs.forEach((n, i) => {
+        const z = ziele.find(x => x && x.nr === n);
+        const a = neu("a", "ms-link", "Ziel " + n + (z && z.kurz ? " " + z.kurz : ""));
+        a.href = root + "bne/?ziel=" + n;
+        if (i) p.appendChild(document.createTextNode(" · "));
+        p.appendChild(a);
+      });
+      abschnitt.appendChild(p);
+    }
+    if (rel.length) {
+      const ul = neu("ul", "ms-liste");
+      ul.setAttribute("aria-labelledby", h.id);
+      rel.forEach(r => {
+        const li = neu("li", "ms-zeile ms-verweis");
+        const text = neu("div", "ms-text");
+        const kopf = neu("p", "ms-titel");
+        const a = neu("a", "ms-link", r.titel);
+        a.href = sicherer(r.pfad);
+        kopf.appendChild(a);
+        text.appendChild(kopf);
+        text.appendChild(neu("p", "ms-art", [r.fach, r.klasse, r.grund].filter(Boolean).join(" · ")));
+        li.appendChild(text);
+        ul.appendChild(li);
+      });
+      abschnitt.appendChild(ul);
+    }
+    main.appendChild(abschnitt);
+  }
+
+  function zeigen(eintrag, alle, bne) {
     kopfSetzen(eintrag);
     const roh = Array.isArray(eintrag.dateien) ? eintrag.dateien : [];
     const dateien = roh.map(d => {
@@ -195,6 +262,8 @@
       main.appendChild(abschnitt);
     });
 
+    querbezuege(eintrag, Array.isArray(alle) ? alle : [], bne);
+
     if (dateien.some(d => d.gruppe === "ueben")) {
       const hinweis = neu("aside", "lp-hilfe ms-hinweis");
       hinweis.appendChild(neu("span", "lp-label", "Hinweis"));
@@ -209,12 +278,14 @@
     main.appendChild(fuss);
   }
 
-  fetch(root + "projects.json")
-    .then(r => { if (!r.ok) throw new Error("projects.json nicht ladbar"); return r.json(); })
-    .then(daten => {
+  Promise.all([
+    fetch(root + "projects.json").then(r => { if (!r.ok) throw new Error("projects.json nicht ladbar"); return r.json(); }),
+    fetch(root + "bne.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}))
+  ])
+    .then(([daten, bne]) => {
       const eintrag = Array.isArray(daten) ? eigenerEintrag(daten) : null;
       if (!eintrag) { meldung("Zu dieser Seite gibt es keinen Eintrag in der Materialliste.", true); return; }
-      zeigen(eintrag);
+      zeigen(eintrag, daten, bne);
     })
     .catch(() => meldung("Die Materialien konnten nicht geladen werden.", true));
 })();

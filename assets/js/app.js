@@ -1,7 +1,7 @@
 (() => {
   const body = document.body;
   const root = body.dataset.root || "";           // "" auf der Startseite, "../" in Unterordnern
-  const page = body.dataset.page || "home";        // home | fach | alle
+  const page = body.dataset.page || "home";        // home | fach | alle | themenfeld | bne
   const pageSubject = body.dataset.subject || "";  // nur auf Fachseiten
   const $ = selector => document.querySelector(selector);
   const GRADES = ["7", "8", "9", "10"];
@@ -127,6 +127,7 @@
     const meta = [showSubject ? project.subject : "", project.type, project.grade, project.dauer]
       .filter(Boolean).map(escapeHtml).join(" · ");
     const inhalt = inhaltOf(project);
+    const bne = bneText(project);
     const badge = project.status ? `<span class="badge">${escapeHtml(project.status)}</span>` : "";
     return `
       <a class="row" href="${escapeHtml(resolvePath(project.path))}">
@@ -134,7 +135,8 @@
         <span class="row-main">
           <span class="row-title">${escapeHtml(project.title)}${badge}</span>
           <span class="row-meta">${meta}</span>${inhalt ? `
-          <span class="row-meta">${escapeHtml(inhalt)}</span>` : ""}
+          <span class="row-meta">${escapeHtml(inhalt)}</span>` : ""}${bne ? `
+          <span class="row-meta">Nachhaltigkeit: ${escapeHtml(bne)}</span>` : ""}
         </span>
         <span class="row-chev">${icon("chevron", 20)}</span>
       </a>`;
@@ -143,12 +145,14 @@
     const tokens = fold(query).split(/\s+/).filter(Boolean);
     if (!tokens.length) return true;
     const haystack = fold([project.title, project.description, themeOf(project), project.subject, project.type, project.grade,
+      bneOf(project).length ? "bne nachhaltigkeit " + bneText(project) : "",
       dateienOf(project).map(d => d.titel + " " + (d.art || "")).join(" ")].join(" "));
     return tokens.every(token => haystack.includes(token));
   }
 
   let projects = [];
   let themenfelder = {};   // themenfelder.json (RLP-Themenfelder je Fach), optional
+  let bneZiele = [];       // bne.json (17 Nachhaltigkeitsziele), optional
 
   function tfList(subject) {
     return Array.isArray(themenfelder[subject]) ? themenfelder[subject] : [];
@@ -165,7 +169,45 @@
     }
     return raw;
   }
-  const state = { subject: "Alle", grade: "Alle", art: "Alle", theme: "Alle", query: "" };
+  /* BNE (optionales Feld "bne": Liste von Zielnummern 1–17) und Verweise (optionales Feld "verweise") */
+  function bneZiel(nr) { return bneZiele.find(z => z.nr === nr) || null; }
+  function bneOf(project) {
+    if (!Array.isArray(project.bne)) return [];
+    const nrs = project.bne.map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 17);
+    return [...new Set(nrs)].sort((a, b) => a - b);
+  }
+  function bneText(project) {
+    return bneOf(project).map(n => { const z = bneZiel(n); return z ? z.kurz : "Ziel " + n; }).join(" · ");
+  }
+  const normPath = p => { const v = String(p || "").trim().replace(/^\.?\//, ""); return v && !v.endsWith("/") ? v + "/" : v; };
+  function verweiseOf(project) {
+    if (!Array.isArray(project.verweise)) return [];
+    return project.verweise.map(v => typeof v === "string" ? { pfad: v } : v)
+      .filter(v => v && typeof v === "object" && typeof v.pfad === "string" && v.pfad.trim())
+      .map(v => ({ pfad: normPath(v.pfad), grund: typeof v.grund === "string" ? v.grund.trim() : "" }));
+  }
+  /* Verwandte Materialien: eigene Verweise, Verweise anderer auf dieses Material (wechselseitig)
+     und Materialien des anderen Fachs mit gemeinsamem Nachhaltigkeitsziel */
+  function relatedOf(project) {
+    const me = normPath(project.path);
+    const out = new Map();
+    const add = (p, grund) => {
+      if (!p || p === project || !isVisible(p) || out.has(normPath(p.path))) return;
+      out.set(normPath(p.path), { project: p, grund });
+    };
+    verweiseOf(project).forEach(v => add(projects.find(p => normPath(p.path) === v.pfad), v.grund));
+    projects.forEach(p => { const v = verweiseOf(p).find(x => x.pfad === me); if (v) add(p, v.grund); });
+    const mine = bneOf(project);
+    if (mine.length && (project.subject === "Biologie" || project.subject === "Geografie")) {
+      projects.forEach(p => {
+        if (p.subject === project.subject || (p.subject !== "Biologie" && p.subject !== "Geografie")) return;
+        const shared = bneOf(p).filter(n => mine.includes(n));
+        if (shared.length) add(p, "Gemeinsames Ziel: " + shared.map(n => { const z = bneZiel(n); return z ? z.kurz : "Ziel " + n; }).join(", "));
+      });
+    }
+    return [...out.values()];
+  }
+  const state = { subject: "Alle", grade: "Alle", art: "Alle", theme: "Alle", bne: "Alle", query: "" };
 
   function matches(project) {
     if (!isVisible(project)) return false;
@@ -174,6 +216,7 @@
     if (state.grade !== "Alle" && !gradesOf(project).includes(state.grade)) return false;
     if (state.art !== "Alle" && !(ART_TESTS[state.art] && artMatches(project, state.art))) return false;
     if (state.theme !== "Alle" && themeOf(project) !== state.theme) return false;
+    if (state.bne !== "Alle" && !bneOf(project).includes(Number(state.bne))) return false;
     return textMatches(project, state.query);
   }
 
@@ -233,7 +276,7 @@
 
   function renderList() {
     const visible = projects.filter(matches);
-    const filtering = state.grade !== "Alle" || state.art !== "Alle" || state.theme !== "Alle" || state.query.trim() !== "";
+    const filtering = state.grade !== "Alle" || state.art !== "Alle" || state.theme !== "Alle" || state.bne !== "Alle" || state.query.trim() !== "";
     const hide = page === "fach" && !filtering;
     counter.hidden = hide;
     list.hidden = hide;
@@ -275,6 +318,19 @@
     themeRow.hidden = !values.length;
   }
 
+  /* BNE-Auswahl: alle 17 Ziele, Zähler passend zum gewählten Fach */
+  function buildBne() {
+    const select = $("#filter-bne");
+    const field = $("#bne-field");
+    if (!select) return;
+    if (!bneZiele.length) { if (field) field.hidden = true; return; }
+    const subject = pageSubject || state.subject;
+    const visible = projects.filter(p => isVisible(p) && (subject === "Alle" || p.subject === subject));
+    select.innerHTML = '<option value="Alle">Alle Ziele</option>' + bneZiele.map(z =>
+      `<option value="${z.nr}"${String(z.nr) === state.bne ? " selected" : ""}>${escapeHtml(z.nr + " " + z.kurz)} (${visible.filter(p => bneOf(p).includes(z.nr)).length})</option>`).join("");
+    if (field) field.hidden = false;
+  }
+
   /* Überblick über die Themenfelder des Fachs (nur Fachseiten): Klick wählt das Themenfeld im Filter */
   function renderThemenfelder() {
     const box = $("#themenfelder");
@@ -310,6 +366,8 @@
     if (GRADES.includes(grade)) state.grade = grade;
     const fach = params.get("fach");
     if (page === "alle" && (fach === "Biologie" || fach === "Geografie")) state.subject = fach;
+    const bne = params.get("bne");
+    if (/^\d{1,2}$/.test(bne || "") && Number(bne) >= 1 && Number(bne) <= 17) state.bne = String(Number(bne));
 
     const gradeControl = $("#grade-control");
     const subjectControl = $("#subject-control");
@@ -330,14 +388,18 @@
         state.subject = button.dataset.value;
         setPressed(subjectControl, state.subject);
         buildThemes();
+        buildBne();
         renderList();
       });
     }
     $("#filter-art").addEventListener("change", event => { state.art = event.target.value; renderList(); });
     $("#filter-theme").addEventListener("change", event => { state.theme = event.target.value; renderList(); });
+    const bneSelect = $("#filter-bne");
+    if (bneSelect) bneSelect.addEventListener("change", event => { state.bne = event.target.value; renderList(); });
     $("#q").addEventListener("input", event => { state.query = event.target.value; renderList(); });
 
     buildThemes();
+    buildBne();
     renderThemenfelder();
     renderList();
   }
@@ -367,6 +429,73 @@
     list.innerHTML = items.length
       ? `<div class="group">${items.map(p => row(p, false)).join("")}</div>`
       : '<p class="empty-message">Für dieses Themenfeld gibt es noch kein Material.</p>';
+    renderVerbindungen(tf, fach, items);
+  }
+
+  /* Verbindungen eines Themenfelds: optionales Feld "bezuege" in themenfelder.json (Fach, Nummer, Grund)
+     und die Nachhaltigkeitsziele, die Materialien dieses Themenfelds tragen */
+  function renderVerbindungen(tf, fach, items) {
+    const box = $("#tf-verbindungen");
+    if (!box) return;
+    const parts = [];
+    const links = (Array.isArray(tf.bezuege) ? tf.bezuege : []).map(b => {
+      if (!b || typeof b !== "object") return null;
+      const ziel = tfList(b.fach).find(t => t.nr === String(b.nr));
+      if (!ziel) return null;
+      const href = root + "themenfeld/?fach=" + encodeURIComponent(b.fach) + "&nr=" + encodeURIComponent(ziel.nr);
+      const grund = typeof b.grund === "string" && b.grund.trim() ? `<span class="row-meta">${escapeHtml(b.grund.trim())}</span>` : "";
+      return `<a class="row" href="${escapeHtml(href)}"><span class="dot ${b.fach === "Biologie" ? "bio" : "geo"}" aria-hidden="true"></span>
+        <span class="row-main"><span class="row-title">${escapeHtml(b.fach + " " + ziel.nr + " " + (ziel.kurz || ziel.titel))}</span>${grund}</span>
+        <span class="row-chev">${icon("chevron", 20)}</span></a>`;
+    }).filter(Boolean);
+    if (links.length) parts.push(`<p class="label">Verbunden mit anderen Themenfeldern</p><div class="group">${links.join("")}</div>`);
+    const nrs = [...new Set(items.flatMap(bneOf))].sort((a, b) => a - b);
+    if (nrs.length) {
+      parts.push(`<p class="label">Nachhaltigkeitsziele in diesem Themenfeld</p><div class="group">${nrs.map(n => {
+        const z = bneZiel(n);
+        const href = root + "bne/?ziel=" + n;
+        return `<a class="row" href="${href}"><span class="numeral bne-nr">${n}</span>
+          <span class="row-main"><span class="row-title">${escapeHtml(z ? z.kurz : "Ziel " + n)}</span><span class="row-meta">Materialien beider Fächer ansehen</span></span>
+          <span class="row-chev">${icon("chevron", 20)}</span></a>`;
+      }).join("")}</div>`);
+    }
+    box.innerHTML = parts.join("");
+    box.hidden = !parts.length;
+  }
+
+  /* ---------- BNE-Seite: Überblick der Ziele, mit ?ziel=13 die Materialien beider Fächer ---------- */
+  function initBne() {
+    const params = new URLSearchParams(location.search);
+    const raw = params.get("ziel");
+    const nr = /^\d{1,2}$/.test(raw || "") ? Number(raw) : 0;
+    const visible = projects.filter(isVisible);
+    const head = $("#bne-title"), lead = $("#bne-lead"), back = $("#bne-back");
+    if (!bneZiele.length) { list.innerHTML = '<p class="empty-message">Die Nachhaltigkeitsziele konnten nicht geladen werden. Bitte bne.json prüfen.</p>'; return; }
+    const ziel = bneZiel(nr);
+    if (ziel) {
+      document.title = "Ziel " + ziel.nr + " " + ziel.kurz + " – Lernportal";
+      head.textContent = "Ziel " + ziel.nr + ": " + ziel.kurz;
+      lead.textContent = ziel.titel;
+      back.href = "./"; back.lastChild.textContent = "Alle Ziele";
+      const found = visible.filter(p => bneOf(p).includes(nr));
+      counter.textContent = found.length ? countText(found.length) : "";
+      const groups = ["Biologie", "Geografie"].map(f => ({ f, items: found.filter(p => p.subject === f) })).filter(g => g.items.length);
+      const rest = found.filter(p => p.subject !== "Biologie" && p.subject !== "Geografie");
+      if (rest.length) groups.push({ f: "Weitere", items: rest });
+      list.innerHTML = groups.length
+        ? groups.map(g => `<p class="label">${escapeHtml(g.f)}</p><div class="group">${g.items.map(p => row(p, false)).join("")}</div>`).join("")
+        : '<p class="empty-message">Für dieses Ziel gibt es noch kein Material.</p>';
+      return;
+    }
+    counter.textContent = "";
+    list.innerHTML = `<div class="group">${bneZiele.map(z => {
+      const mine = visible.filter(p => bneOf(p).includes(z.nr));
+      const bio = mine.filter(p => p.subject === "Biologie").length, geo = mine.filter(p => p.subject === "Geografie").length;
+      const meta = mine.length ? [bio ? "Biologie " + bio : "", geo ? "Geografie " + geo : ""].filter(Boolean).join(" · ") : "Noch kein Material";
+      return `<a class="row" href="?ziel=${z.nr}"><span class="numeral bne-nr">${z.nr}</span>
+        <span class="row-main"><span class="row-title">${escapeHtml(z.kurz)}</span><span class="row-meta">${escapeHtml(meta)}</span></span>
+        <span class="row-chev">${icon("chevron", 20)}</span></a>`;
+    }).join("")}</div>`;
   }
 
   /* ---------- Start ---------- */
@@ -377,17 +506,22 @@
   const loadThemenfelder = page === "home" ? Promise.resolve({})
     : fetch(root + "themenfelder.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}));
 
+  const loadBne = page === "home" ? Promise.resolve({})
+    : fetch(root + "bne.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}));
+
   Promise.all([
     fetch(root + "projects.json").then(response => {
       if (!response.ok) throw new Error("projects.json nicht ladbar");
       return response.json();
     }),
-    loadThemenfelder
+    loadThemenfelder,
+    loadBne
   ])
-    .then(([data, tf]) => {
+    .then(([data, tf, bne]) => {
       projects = Array.isArray(data) ? data : [];
       themenfelder = tf && typeof tf === "object" ? tf : {};
-      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else { initList(); }
+      bneZiele = bne && Array.isArray(bne.ziele) ? bne.ziele.filter(z => z && Number.isInteger(z.nr) && z.kurz) : [];
+      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else { initList(); }
     })
     .catch(() => {
       if (list) list.innerHTML = '<p class="empty-message">Die Projektübersicht konnte nicht geladen werden. Bitte projects.json prüfen.</p>';
