@@ -42,7 +42,10 @@
     "themenfeld": "3.1",
     "dauer": "Doppelstunde",
     "datum": "2026-11-04",
-    "reihe": "Risikoräume"
+    "reihe": "Vulkanismus",
+    "bne": [
+      8
+    ]
   },
   {
     "title": "Beispiel: Materialseite mit Dateien",
@@ -87,9 +90,9 @@
     "title": "Fotosynthese – Stunde 1: Woher nimmt die Pflanze ihre Masse?",
     "description": "Impuls Van-Helmont-Versuch, Hypothesen, Wortgleichung der Fotosynthese und Aufgabe der Chloroplasten.",
     "type": "Materialseite",
-    "path": "biologie/klasse-8/zelle/fotosynthese-1/",
+    "path": "biologie/klasse-7/zelle/fotosynthese-1/",
     "subject": "Biologie",
-    "grade": "Klasse 8",
+    "grade": "Klasse 7",
     "themenfeld": "3.1",
     "dauer": "45 Min.",
     "niveau": "D–F",
@@ -98,14 +101,39 @@
     "dateien": [
       {
         "titel": "Präsentation zur Stunde",
-        "pfad": "biologie/klasse-8/zelle/fotosynthese-1/praesentation/",
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-1/praesentation/",
         "art": "Präsentation"
       },
       {
         "titel": "Arbeitsblatt Fotosynthese",
-        "pfad": "biologie/klasse-8/zelle/fotosynthese-1/arbeitsblatt-2.pdf",
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-1/arbeitsblatt-2.pdf",
         "art": "Arbeitsblatt",
         "stufe": 2
+      }
+    ]
+  },
+  {
+    "title": "Von der Zelle zum Organismus",
+    "description": "Bildreihen zu Magen und Pflanze ordnen, Zelle, Gewebe, Organ und Organismus unterscheiden, Tafelbild, Tisch-Quiz. Mit Präsentation und Arbeitsblatt.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-7/zelle/zelle-zum-organismus/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-08",
+    "reihe": "Zelle",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt Zelle, Gewebe, Organ, Organismus",
+        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt"
       }
     ]
   },
@@ -119,7 +147,7 @@
     "themenfeld": "3.1",
     "dauer": "45 Min.",
     "datum": "2026-11-05",
-    "reihe": "Risikoräume",
+    "reihe": "Vulkanismus",
     "status": "Entwurf"
   },
   {
@@ -156,6 +184,10 @@
         "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/quiz/",
         "art": "Spiel"
       }
+    ],
+    "bne": [
+      7,
+      13
     ]
   },
   {
@@ -168,7 +200,10 @@
     "themenfeld": "3.5",
     "dauer": "45 Min.",
     "datum": "2026-11-05",
-    "sichtbar": true
+    "sichtbar": true,
+    "bne": [
+      3
+    ]
   },
   {
     "title": "Globalisierung als Netz",
@@ -182,7 +217,40 @@
     "niveau": "F–H",
     "datum": "2026-11-06",
     "reihe": "Globalisierung",
-    "sichtbar": true
+    "sichtbar": true,
+    "bne": [
+      8,
+      9,
+      12
+    ]
+  },
+  {
+    "title": "Leben am Ätna: Chancen und Risiken für die Landwirtschaft",
+    "description": "Impuls, Lokalisierung, Spontanurteil, Partnerpuzzle zu Chancen und Risiken der Landwirtschaft am Ätna und begründetes Urteil. Mit Präsentation und Arbeitsblatt.",
+    "type": "Materialseite",
+    "path": "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/",
+    "subject": "Geografie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "Doppelstunde",
+    "niveau": "E–F",
+    "datum": "2026-11-08",
+    "reihe": "Vulkanismus",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt Chancen und Risiken für die Landwirtschaft",
+        "pfad": "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt"
+      }
+    ],
+    "bne": [
+      2
+    ]
   },
   {
     "title": "Die Zelle – Stunde 1: Kennzeichen des Lebendigen",

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Von der Zelle zum Organismus – Biologie Klasse 7</title>
+<meta name="description" content="Biologie Klasse 7, Themenfeld Zelle: Von der Zelle zum Organismus. Bildreihen ordnen, Zelle, Gewebe, Organ und Organismus unterscheiden, Tafelbild, Tisch-Quiz.">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+<style>
+/* Aussehen: gemeinsames Präsentationsdesign (praesentation-design.css, Fach Biologie = Grün).
+   Hier nur, was diese Stunde zusätzlich braucht. */
+:root{--ac:var(--g);--lt:var(--mint);--or:#B4460B;--tx:var(--ink);--gr:var(--grey);--ok:#2E7D32;--bad:#C62828}
+.slide{padding:26px 70px 0 40px}
+h1{margin:0;font-size:36px;line-height:1.15;height:56px}
+.lf{margin:0 0 8px 0;height:28px;font-size:16px;color:var(--gr);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lf b{color:var(--ac)}
+.card{background:var(--lt);border-radius:14px;padding:18px 22px}
+.card.dark{background:var(--ac);color:#fff}
+.btn{font:inherit;font-size:17px;background:var(--ac);color:#fff;border:2px solid var(--ac);border-radius:10px;padding:9px 16px;cursor:pointer;touch-action:manipulation}
+.btn:hover{filter:brightness(1.1)}
+.btn.alt{background:#fff;color:var(--ac)}
+.btn.sm{font-size:14px;padding:6px 11px}
+.badge{position:static;display:inline-block;background:var(--ac);color:#fff;border-radius:16px;padding:4px 12px;font-size:13px;font-weight:bold;white-space:nowrap}
+.badge.or{background:var(--or)}
+.num{width:44px;height:44px;border-radius:50%;background:var(--ac);color:#fff;font-weight:bold;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none}
+.num.or{background:var(--or)}
+.row{display:flex;align-items:center;gap:16px}
+.hidden{display:none!important}
+.muted{color:var(--gr)}
+.ed{outline:none;border-radius:6px}
+body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
+/* Timer */
+.timer{display:inline-flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--ac);border-radius:12px;padding:6px 12px}
+.timer .t{font-size:30px;font-weight:bold;color:var(--dk);min-width:92px;text-align:center;font-variant-numeric:tabular-nums}
+.timer.done{background:#fde7e7;border-color:var(--bad)}
+.timer.done .t{color:var(--bad);animation:blink .6s infinite alternate}
+@keyframes blink{to{opacity:.25}}
+/* Kacheln und Leiter */
+.tile{position:relative;width:132px;height:150px;background:#fff;border:2px solid #222;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:grab;user-select:none}
+.tile img{max-width:112px;max-height:124px;pointer-events:none}
+.tile .n{position:absolute;left:5px;top:5px;width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid #222;font-weight:bold;font-size:14px;display:flex;align-items:center;justify-content:center}
+.tile.sel{outline:4px solid var(--or);outline-offset:2px}
+.slotImg{width:112px;height:112px;border:3px dashed #9aa5a0;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center}
+.slotImg .tile{width:106px;height:106px;border-width:1px}
+.slotImg .tile img{max-width:90px;max-height:86px}
+.slotImg .tile .n{width:22px;height:22px;font-size:12px}
+.slotTerm{width:300px;height:56px;border:3px dashed #9aa5a0;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center}
+.chip{display:inline-block;background:var(--ac);color:#fff;border-radius:20px;padding:8px 16px;font-size:18px;font-weight:bold;cursor:grab;user-select:none}
+.chip.sel{outline:4px solid var(--or);outline-offset:2px}
+.ok{border-color:var(--ok)!important;background:#eaf6ea!important;border-style:solid!important}
+.bad{border-color:var(--bad)!important;background:#fdeaea!important;border-style:solid!important}
+.ladder .lrow{display:flex;align-items:center;gap:14px;height:118px}
+.ladder .arrow{height:22px;margin-left:46px;color:var(--ac);font-size:22px;line-height:22px}
+.small{font-size:13px;color:var(--gr)}
+/* Tafelbild */
+.tb{display:grid;grid-template-columns:230px 1fr 1fr;gap:10px 14px;align-items:center}
+.tb .lab{background:var(--ac);color:#fff;border-radius:12px;padding:0 16px;font-size:24px;font-weight:bold;height:78px;display:flex;align-items:center}
+.tb .ex{background:var(--lt);border-radius:12px;height:78px;display:flex;align-items:center;gap:14px;padding:0 14px;font-size:18px}
+.tb .ex img{height:66px;max-width:84px;object-fit:contain;background:#fff;border-radius:6px}
+.tb .cell{transition:opacity .4s,transform .4s}
+.tb .cell.off{opacity:0;transform:translateY(14px);pointer-events:none}
+.gap{display:inline-block;min-width:130px;border-bottom:3px solid var(--ac);text-align:center;cursor:pointer;color:transparent;font-weight:bold}
+.gap.on{color:var(--ac)}
+/* Punktetafel (links und rechts Platz für die Blätterpfeile) */
+.sb{position:absolute;left:110px;right:110px;bottom:20px;height:74px;display:flex;gap:8px;align-items:stretch}
+.team{flex:1;background:var(--lt);border-radius:10px;padding:4px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}
+.team .nm{font-size:12px;color:var(--gr)}
+.team .sc{font-size:26px;font-weight:bold;color:var(--dk);line-height:1}
+.team .bt{display:flex;gap:4px;margin-top:2px}
+.team button{font:inherit;font-weight:bold;font-size:15px;width:34px;height:28px;border:0;border-radius:6px;background:var(--ac);color:#fff;cursor:pointer;padding:0}
+.team button.minus{background:#fff;color:var(--ac);border:2px solid var(--ac)}
+/* Ampel */
+.lamp{width:130px;height:130px;border-radius:50%;border:0;color:#fff;font:inherit;font-size:54px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center}
+/* Fortschritt, Notizfeld und Bildansicht */
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:70;display:none;align-items:center;justify-content:center;cursor:zoom-out}
+#lightbox.on{display:flex}
+#lightbox img{max-width:92vw;max-height:92vh;background:#fff;border-radius:10px;padding:14px}
+#lf:empty:before{content:attr(data-ph);color:#9aa5a0}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Von der Zelle zum Organismus" data-subject="Biologie" data-grade="Klasse 7">
+<noscript><p style="padding:1rem;font-size:1rem;background:#fff">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+<div id="buehne">
+<div id="stage">
+
+<!-- 1 Do Now -->
+<section class="slide" data-min="3">
+  <h1>Do Now</h1>
+  <p class="lf">&nbsp;</p>
+  <div class="row" style="align-items:flex-start;gap:24px">
+    <div style="width:440px;flex:none">
+      <img src="bilder/zwiebelzellen.png" alt="Schematische Zwiebelzellen mit Zellwand und Zellkern" style="width:440px;border:2px solid #222;border-radius:6px;display:block">
+      <div class="small" style="margin-top:6px">Zwiebelzellen (schematisch)</div>
+    </div>
+    <div class="card" style="flex:1;height:318px">
+      <div class="ed" data-k="donow" style="font-size:26px;line-height:1.4"><b>Begründe</b>, ob die Aussage stimmt: „Zwiebelzellen haben Chloroplasten.“ Schreibe ein bis zwei Sätze.</div>
+      <div class="ed muted" data-k="donowhelp" style="font-size:17px;margin-top:22px">Satzanfang: Die Aussage stimmt (nicht), weil …</div>
+    </div>
+  </div>
+  <div class="row" style="margin-top:20px;gap:18px">
+    <div class="timer" data-key="donow" data-sec="180"><span class="t">3:00</span><button class="btn sm">Start</button><button class="btn sm alt">↺</button></div>
+    <button class="btn reveal" data-target="donowans">Lösung zeigen</button>
+    <span class="muted" style="font-size:15px">allein · ohne Absprache · schriftlich</span>
+  </div>
+  <div id="donowans" class="row hidden" style="margin-top:14px;gap:18px;align-items:stretch">
+    <div class="card dark" style="width:200px;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:bold">Falsch.</div>
+    <div class="card ed" data-k="donowsol" style="flex:1;font-size:18px;line-height:1.45;padding:12px 22px">Chloroplasten kommen in grünen Pflanzenteilen vor, zum Beispiel in Blättern. Das Zwiebelhäutchen ist nicht grün und wächst unter der Erde. Im Bild sieht man nur Zellwand und Zellkern.</div>
+  </div>
+</section>
+
+<!-- 2 Impuls -->
+<section class="slide">
+  <div class="row" style="justify-content:space-between"><h1>Was fällt euch auf?</h1>
+    <div class="row" style="gap:8px"><button class="btn sm alt impSw" data-m="m1">Bildreihe Magen</button><button class="btn sm alt impSw" data-m="m2">Bildreihe Pflanze</button></div></div>
+  <p class="lf">&nbsp;</p>
+  <div id="impTiles" class="row" style="gap:20px;justify-content:center;margin-top:6px"></div>
+  <div class="row" style="margin-top:22px;gap:26px">
+    <button class="btn" id="bigBtn">Zahl zeigen</button>
+    <div id="bigNum" style="font-size:46px;font-weight:bold;color:var(--ac);min-width:360px"></div>
+    <div id="bigTxt" class="hidden" style="font-size:22px">Zellen stecken im Körper eines Menschen.</div>
+  </div>
+  <div class="small" style="margin-top:14px">Quelle: Lehrbuch Klasse 7, Kapitel „Die Zelle“ (Abbildungen ohne Beschriftung zugeschnitten). Bild anklicken zum Vergrößern.</div>
+</section>
+
+<!-- 3 Frage -->
+<section class="slide" data-min="4">
+  <h1>Eure Fragen</h1>
+  <p class="lf">&nbsp;</p>
+  <div data-fragenfeld data-impulse="Was fällt euch auf?|Was überrascht euch?|Welche Frage stellt sich euch?"></div>
+</section>
+
+<!-- 4 Aufgaben 1-2 -->
+<section class="slide">
+  <h1>Aufgaben 1 und 2</h1>
+  <p class="lf"><b>Unsere Frage:</b> <span data-leitfrage>…</span></p>
+  <div class="row" style="align-items:flex-start;gap:20px">
+    <div style="width:350px;flex:none;display:flex;flex-direction:column;gap:14px">
+      <div class="card" style="padding:14px 16px"><div class="row" style="align-items:flex-start;gap:12px"><div class="num">1</div><div style="font-size:18px;line-height:1.4"><b>Ordne</b> die vier Bilder von M1 oder M2 vom Kleinsten zum Größten. Schreibe die Bildnummern in die Kästchen.</div></div><div style="text-align:right;margin-top:6px"><span class="badge">Niveau E–F</span></div></div>
+      <div class="card" style="padding:14px 16px"><div class="row" style="align-items:flex-start;gap:12px"><div class="num">2</div><div style="font-size:18px;line-height:1.4"><b>Benenne</b> jede Stufe mit dem passenden Fachbegriff aus dem Wortspeicher.</div></div><div style="text-align:right;margin-top:6px"><span class="badge">Niveau E</span></div></div>
+      <div class="row" style="gap:8px"><button class="btn sm modeSw" data-m="m1">M1 Magen</button><button class="btn sm alt modeSw" data-m="m2">M2 Pflanze</button></div>
+      <div class="timer" data-key="erarb" data-sec="900"><span class="t">15:00</span><button class="btn sm">Start</button><button class="btn sm alt">↺</button></div>
+    </div>
+    <div style="width:290px;flex:none">
+      <div style="font-size:14px;color:var(--gr);margin-bottom:6px">Bilder (antippen oder ziehen)</div>
+      <div id="pool" class="row" style="flex-wrap:wrap;gap:10px;min-height:322px;align-content:flex-start"></div>
+      <div style="font-size:14px;color:var(--gr);margin:10px 0 6px">Fachbegriffe</div>
+      <div id="chips" class="row" style="flex-wrap:wrap;gap:8px"></div>
+    </div>
+    <div class="ladder" id="ladder" style="flex:1"></div>
+  </div>
+  <div class="row" style="position:absolute;left:110px;bottom:20px;gap:10px">
+    <button class="btn" id="chk">Prüfen</button><button class="btn alt" id="sol">Lösung zeigen</button><button class="btn alt" id="rst">Zurücksetzen</button><span id="chkRes" style="font-size:18px;font-weight:bold;margin-left:10px"></span>
+  </div>
+</section>
+
+<!-- 5 Aufgabe 3 + Zusatz -->
+<section class="slide">
+  <div class="row" style="justify-content:space-between"><h1>Aufgabe 3</h1><div class="timer" data-key="erarb" data-sec="900"><span class="t">15:00</span><button class="btn sm">Start</button><button class="btn sm alt">↺</button></div></div>
+  <p class="lf"><b>Unsere Frage:</b> <span data-leitfrage>…</span></p>
+  <div class="card row" style="gap:18px;padding:16px 22px"><div class="num">3</div><div style="font-size:22px;line-height:1.4;flex:1"><b>Erkläre</b>, warum ein Organ mehr leisten kann als eine einzelne Zelle. Nutze M1 oder M2 als Beispiel.</div><span class="badge">Niveau F</span></div>
+  <div class="card dark" style="margin-top:14px;padding:12px 22px"><div style="font-size:13px;font-weight:bold">Wortspeicher</div><div style="font-size:26px;font-weight:bold;margin-top:2px">Zel-le &nbsp;·&nbsp; Ge-we-be &nbsp;·&nbsp; Or-gan &nbsp;·&nbsp; Or-ga-nis-mus</div></div>
+  <div class="row" style="margin-top:14px;gap:14px;align-items:flex-start">
+    <button class="btn alt reveal" data-target="bst3" style="flex:none">Satzbausteine zeigen</button>
+    <div id="bst3" class="card hidden" style="flex:1;padding:12px 18px;font-size:16px;line-height:1.5"><b style="color:var(--ac)">Zu Aufgabe 3:</b> Eine einzelne Zelle kann nur … · In einem Organ übernimmt jedes Gewebe … · Dadurch kann das Organ …</div>
+  </div>
+  <div class="card row" style="margin-top:16px;gap:18px;padding:14px 22px;border-left:8px solid var(--or)">
+    <div style="flex:none"><div style="font-size:13px;font-weight:bold;color:var(--or);margin-bottom:4px">Zusatz für Schnelle</div><div class="num or">4</div></div>
+    <div style="font-size:19px;line-height:1.4;flex:1"><b>Beurteile</b>, ob die Leiter aus Aufgabe 1 und 2 auch für das Pantoffeltierchen passt. Es besteht nur aus einer Zelle.</div>
+    <img src="bilder/pantoffeltierchen.png" alt="Schematisches Pantoffeltierchen" style="height:120px;border:1px solid #222;border-radius:6px;background:#fff">
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end"><span class="badge">Niveau F–G</span><button class="btn sm alt reveal" data-target="bst4">Satzbausteine</button></div>
+  </div>
+  <div id="bst4" class="card hidden" style="margin-top:8px;padding:8px 18px;font-size:15px"><b style="color:var(--ac)">Zu Aufgabe 4 (Zusatz):</b> Das Pantoffeltierchen hat nur … · Es hat keine … · Die Leiter passt (nicht), weil …</div>
+</section>
+
+<!-- 6 Tafelbild -->
+<section class="slide">
+  <h1>Tafelbild</h1>
+  <p class="lf"><b>Unsere Frage:</b> <span data-leitfrage>…</span></p>
+  <div class="tb" id="tb">
+    <div></div><div class="small" style="text-align:center;font-weight:bold">Beispiel Magen (Mensch)</div><div class="small" style="text-align:center;font-weight:bold">Beispiel Pflanze (Baum)</div>
+  </div>
+  <div class="row" style="position:absolute;left:40px;top:504px;gap:10px"><button class="btn" id="tbNext">Nächste Stufe ▲</button><button class="btn alt" id="tbAll">Alle zeigen</button><button class="btn alt" id="tbRst">↺</button></div>
+  <div class="card" style="position:absolute;left:110px;right:110px;top:556px;height:84px;padding:10px 22px;font-size:20px;line-height:1.5">
+    <b>Merksatz:</b> Zellen mit gleicher Aufgabe bilden ein <span class="gap" data-w="Gewebe">Gewebe</span>. Mehrere Gewebe bilden ein <span class="gap" data-w="Organ">Organ</span>. Zusammenarbeitende Organe bilden einen <span class="gap" data-w="Organismus">Organismus</span>.
+  </div>
+</section>
+
+<!-- 7 Quiz-Regeln -->
+<section class="slide">
+  <h1>Tisch-Quiz: Wiederholung</h1>
+  <p class="lf">&nbsp;</p>
+  <div class="row" style="gap:20px;align-items:stretch">
+    <div class="card" style="flex:1;height:250px"><div class="num" style="margin-bottom:12px">1</div><div style="font-size:19px;line-height:1.45">Lest die Frage und schreibt Stichworte auf euer Schmierblatt.</div></div>
+    <div class="card" style="flex:1;height:250px"><div class="num" style="margin-bottom:12px">2</div><div style="font-size:19px;line-height:1.45">Sprecht kurz im Team ab. Alle sagen ihre Antwort.</div></div>
+    <div class="card" style="flex:1;height:250px"><div class="num" style="margin-bottom:12px">3</div><div style="font-size:19px;line-height:1.45">Vergleicht mit der Lösung. Gebt euch einen Punkt, wenn es passt.</div></div>
+  </div>
+  <div class="row" style="margin-top:22px;gap:14px"><span style="font-size:18px">4 Fragen · ca. 7 Minuten · am Platz im Team · Anzahl Teams:</span>
+    <button class="btn sm alt" id="tMinus">−</button><b id="tCount" style="font-size:22px;min-width:24px;text-align:center">6</b><button class="btn sm alt" id="tPlus">+</button><button class="btn sm alt" id="tReset">Punkte zurücksetzen</button></div>
+  <div class="sb"></div>
+</section>
+
+<!-- Quiz 1 -->
+<section class="slide">
+  <h1>Frage 1 von 4</h1>
+  <p class="lf">&nbsp;</p>
+  <div class="card row" style="gap:22px;height:170px;padding:18px 26px"><div class="num" style="width:64px;height:64px;font-size:32px">1</div><div class="ed" data-k="q1" style="font-size:30px;line-height:1.35;flex:1"><b>Erkläre</b>, warum Zellen unterschiedlich geformt sind.</div></div>
+  <div class="row" style="margin-top:16px;gap:18px"><div class="timer" data-key="q1" data-sec="90"><span class="t">1:30</span><button class="btn sm">Start</button><button class="btn sm alt">↺</button></div><button class="btn reveal" data-target="qa1">Lösung zeigen</button><span class="muted" style="font-size:15px">Stichworte aufs Schmierblatt, dann kurz im Team absprechen.</span></div>
+  <div id="qa1" class="card dark hidden ed" data-k="qa1" style="margin-top:14px;height:150px;font-size:22px;line-height:1.4;display:flex;align-items:center">Zellen sind unterschiedlich groß und unterschiedlich geformt, weil ihre Struktur zu ihrer Funktion passt. Beispiel: Eine Nervenzelle ist lang und hat Fortsätze, weil sie Signale weiterleitet.</div>
+  <div class="sb"></div>
+</section>
+<!-- Quiz 2 -->
+<section class="slide">
+  <h1>Frage 2 von 4</h1>
+  <p class="lf">&nbsp;</p>
+  <div class="card row" style="gap:22px;height:170px;padding:18px 26px"><div class="num" style="width:64px;height:64px;font-size:32px">2</div><div class="ed" data-k="q2" style="font-size:30px;line-height:1.35;flex:1"><b>Nenne</b> vier Teile des Mikroskops.</div></div>
+  <div class="row" style="margin-top:16px;gap:18px"><div class="timer" data-key="q2" data-sec="90"><span class="t">1:30</span><button class="btn sm">Start</button><button class="btn sm alt">↺</button></div><button class="btn reveal" data-target="qa2">Lösung zeigen</button><span class="muted" style="font-size:15px">Stichworte aufs Schmierblatt, dann kurz im Team absprechen.</span></div>
+  <div id="qa2" class="card dark hidden ed" data-k="qa2" style="margin-top:14px;height:150px;font-size:22px;line-height:1.4;display:flex;align-items:center">Okular, Objektiv, Objekttisch, Tubus, Stativ, Grobtrieb, Feintrieb, Blende, Lichtquelle, Objektivrevolver (je nach Modell).</div>
+  <div class="sb"></div>
+</section>
+<!-- Quiz 3 -->
+<section class="slide">
+  <h1>Frage 3 von 4</h1>
+  <p class="lf">&nbsp;</p>
+  <div class="card row" style="gap:22px;height:170px;padding:18px 26px"><div class="num" style="width:64px;height:64px;font-size:32px">3</div><div class="ed" data-k="q3" style="font-size:30px;line-height:1.35;flex:1"><b>Beschreibe</b> in drei Schritten, wie man ein Zwiebelpräparat herstellt.</div></div>
+  <div class="row" style="margin-top:16px;gap:18px"><div class="timer" data-key="q3" data-sec="90"><span class="t">1:30</span><button class="btn sm">Start</button><button class="btn sm alt">↺</button></div><button class="btn reveal" data-target="qa3">Lösung zeigen</button><span class="muted" style="font-size:15px">Stichworte aufs Schmierblatt, dann kurz im Team absprechen.</span></div>
+  <div id="qa3" class="card dark hidden ed" data-k="qa3" style="margin-top:14px;height:150px;font-size:22px;line-height:1.4;display:flex;align-items:center">1. Zwiebelhäutchen mit der Pinzette abziehen. 2. In einen Wassertropfen auf den Objektträger legen und glatt ausbreiten. 3. Deckglas schräg auflegen, ohne Luftblasen. (Mit den Schritten aus dem Heft abgleichen.)</div>
+  <div class="sb"></div>
+</section>
+<!-- Quiz 4 -->
+<section class="slide">
+  <h1>Frage 4 von 4</h1>
+  <p class="lf">&nbsp;</p>
+  <div class="card row" style="gap:22px;height:170px;padding:18px 26px"><div class="num" style="width:64px;height:64px;font-size:32px">4</div><div class="ed" data-k="q4" style="font-size:30px;line-height:1.35;flex:1"><b>Vergleiche</b> Pflanzenzelle und Tierzelle. Nenne zwei Gemeinsamkeiten und zwei Unterschiede.</div></div>
+  <div class="row" style="margin-top:16px;gap:18px"><div class="timer" data-key="q4" data-sec="90"><span class="t">1:30</span><button class="btn sm">Start</button><button class="btn sm alt">↺</button></div><button class="btn reveal" data-target="qa4">Lösung zeigen</button><span class="muted" style="font-size:15px">Stichworte aufs Schmierblatt, dann kurz im Team absprechen.</span></div>
+  <div id="qa4" class="card dark hidden ed" data-k="qa4" style="margin-top:14px;height:150px;font-size:22px;line-height:1.4;display:flex;align-items:center">Gemeinsam: Zellkern, Zellplasma, Zellmembran (auch Mitochondrien). Unterschied: Nur die Pflanzenzelle hat Zellwand, große Vakuole und (in grünen Teilen) Chloroplasten.</div>
+  <div class="sb"></div>
+</section>
+
+<!-- Reserve -->
+<section class="slide">
+  <h1>Reservefragen</h1>
+  <p class="lf">&nbsp;</p>
+  <div class="card" style="margin-bottom:16px;padding:16px 24px"><div class="row" style="gap:18px"><div class="num or">R1</div><div style="font-size:26px;flex:1"><b>Nenne</b> drei Kennzeichen des Lebendigen.</div><button class="btn alt reveal" data-target="ra1">Lösung zeigen</button></div><div id="ra1" class="card dark hidden" style="margin-top:12px;font-size:20px;line-height:1.4">Zum Beispiel: Wachstum, Fortpflanzung, Stoffwechsel, Reizbarkeit, Bewegung, Entwicklung. (Mit dem Hefteintrag abgleichen.)</div></div>
+  <div class="card" style="margin-bottom:16px;padding:16px 24px"><div class="row" style="gap:18px"><div class="num or">R2</div><div style="font-size:26px;flex:1"><b>Beschreibe</b>, wie die Zelle entdeckt wurde.</div><button class="btn alt reveal" data-target="ra2">Lösung zeigen</button></div><div id="ra2" class="card dark hidden" style="margin-top:12px;font-size:20px;line-height:1.4">Robert Hooke betrachtete im 17. Jahrhundert (1665) dünne Korkscheiben mit einem Mikroskop. Er sah kleine Kammern und nannte sie „Zellen“.</div></div>
+</section>
+
+<!-- Ampel -->
+<section class="slide">
+  <h1>Ampel-Check</h1>
+  <p class="lf">&nbsp;</p>
+  <div class="row" style="align-items:flex-start;gap:34px">
+    <div class="card" style="flex:1;height:420px">
+      <div style="font-size:22px;font-weight:bold;color:var(--ac);margin-bottom:12px">Ich kann …</div>
+      <div style="font-size:20px;line-height:1.8">1&nbsp; die vier Ebenen Zelle, Gewebe, Organ und Organismus nennen<br>2&nbsp; Bilder den Ebenen zuordnen<br>3&nbsp; erklären, warum ein Organ mehr leistet als eine Zelle<br>4&nbsp; Beispiele für Mensch und Pflanze nennen</div>
+      <div class="muted" style="margin-top:16px;font-size:15px">Kreuze die Ampel auf dem Arbeitsblatt an (Seite 2).</div>
+    </div>
+    <div style="width:440px;flex:none">
+      <div class="card" style="padding:14px 18px">
+        <div style="font-size:16px;font-weight:bold;margin-bottom:8px">Meinungsbild per Handzeichen</div>
+        <div class="row" style="justify-content:space-around">
+          <div style="text-align:center"><button class="lamp lampBtn" data-c="r" style="background:#C62828">0</button><div style="margin-top:6px;font-size:15px">rot: üben</div></div>
+          <div style="text-align:center"><button class="lamp lampBtn" data-c="y" style="background:#F9A825;color:#1A1A1A">0</button><div style="margin-top:6px;font-size:15px">gelb: wiederholen</div></div>
+        </div>
+        <div class="row" style="justify-content:space-around;margin-top:12px">
+          <div style="text-align:center"><button class="lamp lampBtn" data-c="g" style="background:#2E7D32">0</button><div style="margin-top:6px;font-size:15px">grün: kann ich</div></div>
+          <button class="btn alt sm" id="lampRst">Zähler zurücksetzen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card dark" style="margin-top:14px;padding:12px 22px;font-size:20px"><b>Hausaufgabe (freiwillig):</b> <span class="ed" data-k="hw">Wiederhole die roten und gelben Punkte mit M3 und deinem Heft.</span></div>
+</section>
+
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+<div id="lightbox"><img alt=""></div>
+
+<script>
+"use strict";
+var DATA = {
+ "m1": [{"n":1,"level":3,"src":"bilder/m1-1.png"},{"n":2,"level":1,"src":"bilder/m1-2.png"},{"n":3,"level":0,"src":"bilder/m1-3.png"},{"n":4,"level":2,"src":"bilder/m1-4.png"}],
+ "m2": [{"n":1,"level":3,"src":"bilder/m2-1.png"},{"n":2,"level":0,"src":"bilder/m2-2.png"},{"n":3,"level":2,"src":"bilder/m2-3.png"},{"n":4,"level":1,"src":"bilder/m2-4.png"}]
+};
+var LEVELS = ["Zelle","Gewebe","Organ","Organismus"];
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var slides=$$(".slide"), cur=0;
+function store(k,v){try{localStorage.setItem("bio7zo:"+k,v)}catch(e){}}
+function load(k){try{return localStorage.getItem("bio7zo:"+k)}catch(e){return null}}
+
+/* ---------- Skalierung ---------- */
+var buehne=$("#buehne"),stage=$("#stage");
+function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform="translate(-50%,-50%) scale("+s+")"}
+window.addEventListener("resize",fit);fit();
+
+/* ---------- Navigation ---------- */
+function show(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach(function(s,k){s.classList.toggle("on",k===cur)});
+  $("#nav i").style.width=((cur+1)/slides.length*100)+"%";
+  $("#zur").disabled=cur===0;$("#vor").disabled=cur===slides.length-1;
+  try{history.replaceState(null,"","#"+(cur+1))}catch(e){}
+}
+function next(){show(cur+1)}function prev(){show(cur-1)}
+$("#vor").onclick=next;$("#zur").onclick=prev;
+function typing(){var a=document.activeElement;return a&&(a.isContentEditable||a.tagName==="INPUT"||a.tagName==="TEXTAREA")}
+document.addEventListener("keydown",function(e){
+  if(typing()||e.ctrlKey||e.metaKey||e.altKey)return;
+  var k=e.key;
+  if(k===" "&&e.target&&e.target.tagName==="BUTTON")return;
+  if(k==="ArrowRight"||k==="PageDown"||k===" "){e.preventDefault();next()}
+  else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();prev()}
+  else if(k==="Home")show(0);else if(k==="End")show(slides.length-1);
+  else if(k==="e"||k==="E")toggleEdit();
+  else if(k==="Escape"){$("#lightbox").classList.remove("on")}
+});
+$("#lightbox").onclick=function(){this.classList.remove("on")};
+
+/* ---------- Bearbeiten-Modus (Taste E, im Browser gespeichert) ---------- */
+var editing=false;
+function toggleEdit(){editing=!editing;document.body.classList.toggle("editing",editing);
+  $$(".ed").forEach(function(el){el.contentEditable=editing?"true":"false"});
+  if(!editing){$$(".ed").forEach(function(el){store("ed:"+el.dataset.k,el.innerHTML)})}}
+$$(".ed").forEach(function(el){var v=load("ed:"+el.dataset.k);if(v!==null)el.innerHTML=v;el.addEventListener("input",function(){store("ed:"+el.dataset.k,el.innerHTML)})});
+
+/* ---------- Aufdecken ---------- */
+$$(".reveal").forEach(function(b){b.onclick=function(){var t=document.getElementById(b.dataset.target);var h=t.classList.toggle("hidden");b.dataset.t=b.dataset.t||b.textContent;b.textContent=h?b.dataset.t:b.dataset.t.replace("zeigen","verbergen")}});
+
+/* ---------- Timer ---------- */
+var timers={};
+function fmt(s){s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2)}
+function beep(){try{var C=window.AudioContext||window.webkitAudioContext,c=new C(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.15;o.start();setTimeout(function(){o.stop();c.close()},600)}catch(e){}}
+function tstate(k,sec){return timers[k]||(timers[k]={total:sec,left:sec,run:false,t0:0,done:false})}
+$$(".timer").forEach(function(el){
+  var st=tstate(el.dataset.key,+el.dataset.sec),b=$$("button",el);
+  b[0].onclick=function(){if(st.run){st.left=st.left-(Date.now()-st.t0)/1000;st.run=false}else{if(st.left<=0){st.left=st.total;st.done=false}st.t0=Date.now();st.run=true}};
+  b[1].onclick=function(){st.run=false;st.left=st.total;st.done=false};
+});
+setInterval(function(){
+  Object.keys(timers).forEach(function(k){var st=timers[k];if(st.run){var l=st.left-(Date.now()-st.t0)/1000;if(l<=0){st.run=false;st.left=0;st.done=true;beep()}}});
+  $$(".timer").forEach(function(el){var st=timers[el.dataset.key];var l=st.run?st.left-(Date.now()-st.t0)/1000:st.left;
+    $(".t",el).textContent=fmt(l);el.classList.toggle("done",st.done);$$("button",el)[0].textContent=st.run?"Pause":"Start"});
+},250);
+
+/* ---------- Impuls ---------- */
+var impMode="m1";
+function renderImp(){
+  var box=$("#impTiles");box.innerHTML="";
+  DATA[impMode].forEach(function(t){
+    var d=document.createElement("div");d.className="tile";d.style.cssText="width:270px;height:350px;cursor:zoom-in";
+    d.innerHTML='<span class="n" style="width:34px;height:34px;font-size:18px">'+t.n+'</span><img src="'+t.src+'" alt="Abbildung '+t.n+'" style="max-width:236px;max-height:312px">';
+    d.onclick=function(){var lb=$("#lightbox");$("img",lb).src=t.src;lb.classList.add("on")};
+    box.appendChild(d)});
+  $$(".impSw").forEach(function(b){b.classList.toggle("alt",b.dataset.m!==impMode)});
+}
+$$(".impSw").forEach(function(b){b.onclick=function(){impMode=b.dataset.m;renderImp()}});
+$("#bigBtn").onclick=function(){
+  var el=$("#bigNum"),t0=Date.now();$("#bigTxt").classList.remove("hidden");$("#bigBtn").classList.add("hidden");
+  (function step(){var p=Math.min(1,(Date.now()-t0)/1600),v=Math.round(30*p);el.textContent="etwa "+v+" Billionen";if(p<1)requestAnimationFrame(step)})();
+};
+
+/* ---------- Leiter (Aufgaben 1 und 2) ---------- */
+var mode="m1",selItem=null;
+function renderLeiter(){
+  selItem=null;$("#chkRes").textContent="";
+  var pool=$("#pool"),chips=$("#chips"),lad=$("#ladder");pool.innerHTML="";chips.innerHTML="";lad.innerHTML="";
+  DATA[mode].forEach(function(t){
+    var d=document.createElement("div");d.className="tile";d.draggable=true;d.dataset.kind="img";d.dataset.level=t.level;d.id="tile"+t.n;
+    d.innerHTML='<span class="n">'+t.n+'</span><img src="'+t.src+'" alt="Abbildung '+t.n+'">';pool.appendChild(d);wire(d)});
+  LEVELS.forEach(function(n,i){var c=document.createElement("span");c.className="chip";c.draggable=true;c.dataset.kind="term";c.dataset.level=i;c.id="chip"+i;c.textContent=n;chips.appendChild(c);wire(c)});
+  for(var L=3;L>=0;L--){
+    var row=document.createElement("div");row.className="lrow";
+    row.innerHTML='<div class="slotImg" data-kind="img" data-level="'+L+'"></div><div class="slotTerm" data-kind="term" data-level="'+L+'"></div><div class="small" style="width:90px">'+(L===3?"größte Stufe":L===0?"kleinste Stufe":"")+'</div>';
+    lad.appendChild(row);
+    if(L>0){var a=document.createElement("div");a.className="arrow";a.textContent="▲ besteht aus";a.style.fontSize="13px";lad.appendChild(a)}
+  }
+  $$(".slotImg,.slotTerm",lad).forEach(function(s){
+    s.addEventListener("click",function(){place(s)});
+    s.addEventListener("dragover",function(e){e.preventDefault()});
+    s.addEventListener("drop",function(e){e.preventDefault();var id=e.dataTransfer.getData("text/plain");var it=document.getElementById(id);if(it){select(it);place(s)}});
+  });
+  $$(".modeSw").forEach(function(b){b.classList.toggle("alt",b.dataset.m!==mode)});
+}
+function home(it){return it.dataset.kind==="img"?$("#pool"):$("#chips")}
+function wire(it){
+  it.addEventListener("click",function(e){e.stopPropagation();
+    if(it.parentNode.classList.contains("slotImg")||it.parentNode.classList.contains("slotTerm")){clearMarks();home(it).appendChild(it);select(null);return}
+    select(selItem===it?null:it)});
+  it.addEventListener("dragstart",function(e){e.dataTransfer.setData("text/plain",it.id);select(it)});
+}
+function select(it){if(selItem)selItem.classList.remove("sel");selItem=it;if(it)it.classList.add("sel")}
+function clearMarks(){$$(".slotImg,.slotTerm").forEach(function(s){s.classList.remove("ok","bad")});$("#chkRes").textContent=""}
+function place(slot){
+  if(!selItem||selItem.dataset.kind!==slot.dataset.kind)return;
+  clearMarks();
+  var old=slot.firstElementChild;if(old&&old!==selItem)home(old).appendChild(old);
+  slot.appendChild(selItem);select(null);
+}
+$("#chk").onclick=function(){
+  var good=0,total=8;
+  $$(".slotImg,.slotTerm").forEach(function(s){var it=s.firstElementChild;s.classList.remove("ok","bad");if(!it)return;
+    if(it.dataset.level===s.dataset.level){s.classList.add("ok");good++}else s.classList.add("bad")});
+  var r=$("#chkRes");r.textContent=good+" von "+total+" richtig";r.style.color=good===total?"#2E7D32":"#B4460B";
+};
+$("#sol").onclick=function(){
+  renderLeiter();
+  $$(".slotImg").forEach(function(s){var it=$$("#pool .tile").filter(function(t){return t.dataset.level===s.dataset.level})[0];if(it)s.appendChild(it)});
+  $$(".slotTerm").forEach(function(s){var it=$$("#chips .chip").filter(function(t){return t.dataset.level===s.dataset.level})[0];if(it)s.appendChild(it)});
+  $$(".slotImg,.slotTerm").forEach(function(s){s.classList.add("ok")});
+};
+$("#rst").onclick=renderLeiter;
+$$(".modeSw").forEach(function(b){b.onclick=function(){mode=b.dataset.m;renderLeiter()}});
+
+/* ---------- Tafelbild ---------- */
+var tbNames={m1:["Mensch","Magen","Magenschleimhaut","Drüsenzelle"],m2:["Baum","Blatt","Schwammgewebe","Schwammzelle"]};
+var tbStep=0;
+function buildTb(){
+  var tb=$("#tb");$$(".cell",tb).forEach(function(c){c.remove()});
+  for(var L=3;L>=0;L--){
+    var step=4-L;
+    var a=document.createElement("div");a.className="lab cell off";a.dataset.step=step;a.textContent=LEVELS[L];tb.appendChild(a);
+    ["m1","m2"].forEach(function(m){
+      var t=DATA[m].filter(function(x){return x.level===L})[0];
+      var d=document.createElement("div");d.className="ex cell off";d.dataset.step=step;
+      d.innerHTML='<img src="'+t.src+'" alt=""><span>'+tbNames[m][3-L]+'</span>';tb.appendChild(d)});
+  }
+  tbStep=0;
+}
+/* Stufe 1 = Zelle (unterste Zeile), Zeilen werden von unten nach oben sichtbar */
+function setTb(n){tbStep=n;$$("#tb .cell").forEach(function(c){var order=5-(+c.dataset.step);c.classList.toggle("off",order>n)})}
+$("#tbNext").onclick=function(){setTb(Math.min(4,tbStep+1))};
+$("#tbAll").onclick=function(){setTb(4);$$(".gap").forEach(function(g){g.classList.add("on")})};
+$("#tbRst").onclick=function(){setTb(0);$$(".gap").forEach(function(g){g.classList.remove("on")})};
+$$(".gap").forEach(function(g){g.onclick=function(){g.classList.toggle("on")}});
+
+/* ---------- Punktetafel ---------- */
+var teams=[0,0,0,0,0,0];
+function renderSb(){
+  $$(".sb").forEach(function(sb){sb.innerHTML="";
+    teams.forEach(function(p,i){var d=document.createElement("div");d.className="team";
+      d.innerHTML='<div class="nm">Team '+(i+1)+'</div><div class="sc">'+p+'</div><div class="bt"><button class="minus">−</button><button>+</button></div>';
+      var b=$$("button",d);b[0].onclick=function(){teams[i]=Math.max(0,teams[i]-1);renderSb()};b[1].onclick=function(){teams[i]++;renderSb()};
+      sb.appendChild(d)})});
+  $("#tCount").textContent=teams.length;
+}
+$("#tMinus").onclick=function(){if(teams.length>2){teams.pop();renderSb()}};
+$("#tPlus").onclick=function(){if(teams.length<8){teams.push(0);renderSb()}};
+$("#tReset").onclick=function(){teams=teams.map(function(){return 0});renderSb()};
+
+/* ---------- Ampel-Zähler ---------- */
+var lamp={r:0,y:0,g:0};
+$$(".lampBtn").forEach(function(b){b.onclick=function(){lamp[b.dataset.c]++;b.textContent=lamp[b.dataset.c]}});
+$("#lampRst").onclick=function(){lamp={r:0,y:0,g:0};$$(".lampBtn").forEach(function(b){b.textContent="0"})};
+
+/* ---------- Start ---------- */
+renderImp();renderLeiter();buildTb();setTb(0);renderSb();
+function ausHash(){var h=parseInt((location.hash||"").replace("#",""),10);show(isNaN(h)?0:h-1)}
+window.addEventListener("hashchange",ausHash);ausHash();
+</script>
+<!-- Spielinhalte für die Belohnungsspiele. ENTWURF: bitte fachlich gegenlesen.
+     Jedes Paar: ["Begriff", "kurze Erklärung", "Silben (optional)"]. Nur Inhalte dieser Stunde. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Von der Zelle zum Organismus",
+ "paare": [
+ ["Zelle", "kleinste lebende Einheit eines Lebewesens", "Zel-le"],
+ ["Gewebe", "Zellen mit der gleichen Aufgabe", "Ge-we-be"],
+ ["Organ", "mehrere Gewebe erfüllen zusammen eine Aufgabe", "Or-gan"],
+ ["Organismus", "ein ganzes Lebewesen, in dem viele Organe zusammenarbeiten", "Or-ga-nis-mus"],
+ ["Zellkern", "enthält die Erbinformation der Zelle", "Zell-kern"],
+ ["Zellwand", "festigt die Pflanzenzelle von außen", "Zell-wand"],
+ ["Chloroplast", "Ort der Fotosynthese in grünen Pflanzenteilen", "Chlo-ro-plast"],
+ ["Mikroskop", "Gerät, mit dem man kleine Dinge vergrößert sieht", "Mi-kro-skop"]
+ ]
+}
+</script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>

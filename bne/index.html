@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Nachhaltigkeit (BNE) – Materialien beider Fächer nach Nachhaltigkeitszielen.">
+  <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+  <title>Nachhaltigkeit (BNE) – Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/app.js" defer></script>
+</head>
+<body data-page="bne" data-root="../">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href=".././" aria-label="Lernportal Startseite"><span class="brand-dot" aria-hidden="true"></span>Lernportal</a>
+      <nav class="top-nav" aria-label="Hauptnavigation">
+        <a href="../biologie/">Biologie</a>
+        <a href="../geografie/">Geografie</a>
+        <a href="../alle/">Alle Materialien</a>
+        <a href="../bne/" aria-current="page">Nachhaltigkeit</a>
+      </nav>
+      <div class="header-tools" id="prefs-slot"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="fach-intro bne-hero">
+      <div class="wrap">
+        <a class="back-link" id="bne-back" href="../"><span data-icon="back" data-size="20" aria-hidden="true"></span>Lernportal</a>
+        <p class="eyebrow" id="bne-eyebrow">Nachhaltigkeit (BNE)</p>
+        <h1 class="title" id="bne-title">17 Ziele. Nur eins heißt Klimaschutz.</h1>
+        <p class="lead" id="bne-lead">Es geht um Handy, Hunger, Schule, Jobs und die Frage, wer was bekommt. Ohne Moralpredigt.</p>
+      </div>
+    </section>
+    <div class="wrap">
+      <p class="result-count" id="result-count" aria-live="polite"></p>
+
+      <div id="bne-overview">
+        <section class="bne-block bne-erkl-block" aria-labelledby="h-erklaerung">
+          <h2 class="bne-h" id="h-erklaerung">Worum geht es?</h2>
+          <div class="bne-erkl">
+            <article>
+              <h3>Die 17 Ziele</h3>
+              <p>2015 haben 193 Staaten der UN 17 Ziele für eine bessere Welt bis 2030 beschlossen. <strong>Nachhaltig</strong> heißt: Heute so leben und wirtschaften, dass es für alle reicht. Und für alle nach uns auch.</p>
+            </article>
+            <article>
+              <h3>BNE</h3>
+              <p><strong>Bildung für nachhaltige Entwicklung.</strong> Du lernst nicht, was du denken sollst. Du prüfst Fälle, vergleichst Interessen und bildest dir ein eigenes Urteil.</p>
+            </article>
+            <article>
+              <h3>Warum wichtig?</h3>
+              <p>Die meisten Ziele handeln von Menschen: Essen, Gesundheit, Schule, Arbeit, Frieden. Du entscheidest schon jetzt mit. <span id="bne-jahre">Das Zieljahr ist 2030.</span></p>
+            </article>
+          </div>
+          <p class="bne-satt-zeile"><strong>Keine Moralpredigt:</strong> Hier gibt es Fälle, Zahlen und zwei Seiten. Du darfst widersprechen.</p>
+        </section>
+
+        <section class="bne-block" id="ziele" aria-labelledby="h-ziele">
+          <h2 class="bne-h" id="h-ziele">Die 17 Ziele und das Material dazu</h2>
+          <p class="bne-sub" id="bne-legende"></p>
+          <div id="bne-grafik"><p class="loading-message">Ziele werden geladen …</p></div>
+        </section>
+
+        <section class="bne-block">
+          <div id="bne-matrix"></div>
+          <details class="bne-lehrkraft">
+            <summary>Für Lehrkräfte</summary>
+            <p>Bezug im RLP: übergreifendes Thema „Nachhaltige Entwicklung/Lernen in globalen Zusammenhängen“ (Teil B). Kontroverse Themen werden nach dem Beutelsbacher Konsens behandelt. Ein Ziel steht nur bei einem Material, wenn Aufgabe oder Urteil der Stunde es selbst behandeln.</p>
+          </details>
+        </section>
+      </div>
+
+      <div id="project-list"></div>
+    </div>
+  </main>
+
+  <div class="wrap">
+    <footer class="site-footer">
+      <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
+      <span class="footer-links"><a href="../impressum/">Impressum</a><a href="../datenschutz/">Datenschutz</a></span>
+    </footer>
+  </div>
+</body>
+</html>

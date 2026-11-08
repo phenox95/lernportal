@@ -1,5 +1,5 @@
 {
-  "quelle": "Rahmenlehrplan 1-10 Berlin-Brandenburg (2015), Teil C Biologie und Teil C Geografie, Kapitel Themen und Inhalte (RLP-Online, bildungsserver.berlin-brandenburg.de). Titel wörtlich übernommen. Der Ordnername (slug) ist nur eine Namensempfehlung für das Portal, kein RLP-Bestandteil.",
+  "quelle": "Rahmenlehrplan 1-10 Berlin-Brandenburg (2015), Teil C Biologie und Teil C Geografie, Kapitel Themen und Inhalte (RLP-Online, bildungsserver.berlin-brandenburg.de). Titel wörtlich übernommen. Der Ordnername (slug) ist nur eine Namensempfehlung für das Portal, kein RLP-Bestandteil. Das Feld bezuege (Verbindungen zwischen Themenfeldern) ist eine fachliche Zuordnung der Lehrkraft, kein RLP-Bestandteil. ENTWURF: bitte gegenlesen.",
   "Biologie": [
     {
       "nr": "3.1",
@@ -7,7 +7,14 @@
       "klassen": "7/8",
       "slug": "zelle",
       "kurz": "Zelle",
-      "icon": "cell"
+      "icon": "cell",
+      "bezuege": [
+        {
+          "fach": "Geografie",
+          "nr": "3.6",
+          "grund": "Fotosynthese und Kohlenstoffkreislauf: Pflanzen nehmen CO₂ auf, der Klimawandel verändert die Bedingungen."
+        }
+      ]
     },
     {
       "nr": "3.2",
@@ -15,7 +22,19 @@
       "klassen": "7/8",
       "slug": "lebensraeume",
       "kurz": "Lebensräume",
-      "icon": "leaf"
+      "icon": "leaf",
+      "bezuege": [
+        {
+          "fach": "Geografie",
+          "nr": "3.3",
+          "grund": "Lebensräume liegen in Klima- und Vegetationszonen."
+        },
+        {
+          "fach": "Geografie",
+          "nr": "3.6",
+          "grund": "Der Klimawandel verändert Lebensräume und ihre Bewohner."
+        }
+      ]
     },
     {
       "nr": "3.3",
@@ -23,7 +42,14 @@
       "klassen": "7/8",
       "slug": "stoffwechsel",
       "kurz": "Stoffwechsel",
-      "icon": "cycle"
+      "icon": "cycle",
+      "bezuege": [
+        {
+          "fach": "Geografie",
+          "nr": "3.4",
+          "grund": "Ernährung und Hunger hängen mit Armut und Reichtum zusammen."
+        }
+      ]
     },
     {
       "nr": "3.4",
@@ -40,7 +66,19 @@
       "klassen": "9/10",
       "slug": "gesundheit",
       "kurz": "Gesundheit",
-      "icon": "cross"
+      "icon": "cross",
+      "bezuege": [
+        {
+          "fach": "Geografie",
+          "nr": "3.4",
+          "grund": "Gesundheitsversorgung und Impfzugang sind weltweit ungleich verteilt."
+        },
+        {
+          "fach": "Geografie",
+          "nr": "3.7",
+          "grund": "Krankheiten verbreiten sich über weltweite Verbindungen."
+        }
+      ]
     },
     {
       "nr": "3.6",

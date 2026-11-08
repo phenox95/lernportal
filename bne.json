@@ -1,0 +1,107 @@
+{
+  "quelle": "Ziele für nachhaltige Entwicklung (SDG) der Vereinten Nationen, Agenda 2030. Bezug im RLP: übergreifendes Thema „Nachhaltige Entwicklung/Lernen in globalen Zusammenhängen“ (Teil B). Die Zuordnung der Ziele zu Materialien trägt die Lehrkraft in projects.json ein (Feld bne). ENTWURF: Kurztitel und Fragen (Feld frage) bitte gegenlesen.",
+  "ziele": [
+    {
+      "nr": 1,
+      "titel": "Keine Armut",
+      "kurz": "Armut",
+      "frage": "Wie viel Geld braucht man für ein gutes Leben?"
+    },
+    {
+      "nr": 2,
+      "titel": "Kein Hunger",
+      "kurz": "Hunger",
+      "frage": "Warum hungern Menschen, obwohl es genug Essen auf der Welt gibt?"
+    },
+    {
+      "nr": 3,
+      "titel": "Gesundheit und Wohlergehen",
+      "kurz": "Gesundheit",
+      "frage": "Was hält dich gesund, und wer zahlt, wenn du krank wirst?"
+    },
+    {
+      "nr": 4,
+      "titel": "Hochwertige Bildung",
+      "kurz": "Bildung",
+      "frage": "Warum geht nicht jedes Kind auf der Welt zur Schule?"
+    },
+    {
+      "nr": 5,
+      "titel": "Geschlechtergleichheit",
+      "kurz": "Geschlechtergleichheit",
+      "frage": "Gleiche Chancen für alle Geschlechter: Wo fehlen sie noch?"
+    },
+    {
+      "nr": 6,
+      "titel": "Sauberes Wasser und Sanitäreinrichtungen",
+      "kurz": "Wasser",
+      "frage": "Warum ist sauberes Wasser nicht überall selbstverständlich?"
+    },
+    {
+      "nr": 7,
+      "titel": "Bezahlbare und saubere Energie",
+      "kurz": "Energie",
+      "frage": "Woher kommt der Strom, wenn du dein Handy lädst?"
+    },
+    {
+      "nr": 8,
+      "titel": "Menschenwürdige Arbeit und Wirtschaftswachstum",
+      "kurz": "Arbeit und Wirtschaft",
+      "frage": "Wer verdient an deinem Urlaub, deinem T-Shirt, deinem Handy?"
+    },
+    {
+      "nr": 9,
+      "titel": "Industrie, Innovation und Infrastruktur",
+      "kurz": "Industrie und Infrastruktur",
+      "frage": "Was braucht ein Land, damit Firmen und neue Ideen wachsen können?"
+    },
+    {
+      "nr": 10,
+      "titel": "Weniger Ungleichheiten",
+      "kurz": "Ungleichheiten",
+      "frage": "Warum haben manche Menschen mehr Chancen als andere?"
+    },
+    {
+      "nr": 11,
+      "titel": "Nachhaltige Städte und Gemeinden",
+      "kurz": "Städte und Gemeinden",
+      "frage": "Wie wollen wir in Berlin in 20 Jahren wohnen und fahren?"
+    },
+    {
+      "nr": 12,
+      "titel": "Nachhaltiger Konsum und Produktion",
+      "kurz": "Konsum und Produktion",
+      "frage": "Wo kommt dein Handy her, und wohin geht es, wenn du es nicht mehr brauchst?"
+    },
+    {
+      "nr": 13,
+      "titel": "Maßnahmen zum Klimaschutz",
+      "kurz": "Klimaschutz",
+      "frage": "Was ändert sich schon heute, und wer muss etwas tun?"
+    },
+    {
+      "nr": 14,
+      "titel": "Leben unter Wasser",
+      "kurz": "Leben unter Wasser",
+      "frage": "Was landet im Meer, auch wenn du weit weg wohnst?"
+    },
+    {
+      "nr": 15,
+      "titel": "Leben an Land",
+      "kurz": "Leben an Land",
+      "frage": "Wälder, Wiesen, Tiere: Was würde uns fehlen, wenn sie weg wären?"
+    },
+    {
+      "nr": 16,
+      "titel": "Frieden, Gerechtigkeit und starke Institutionen",
+      "kurz": "Frieden und Gerechtigkeit",
+      "frage": "Wann fühlst du dich sicher, und wer sorgt dafür?"
+    },
+    {
+      "nr": 17,
+      "titel": "Partnerschaften zur Erreichung der Ziele",
+      "kurz": "Partnerschaften",
+      "frage": "Kann ein Land allein die Probleme der Welt lösen?"
+    }
+  ]
+}

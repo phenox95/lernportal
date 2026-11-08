@@ -133,3 +133,13 @@
 .lp-pr-sterne { font-size: clamp(18px, 7cqw, 52px); }
 .lp-pr-zeit { font-size: clamp(40px, 22cqw, 180px); }
 .lp-pr-balken { height: clamp(14px, 3cqw, 28px); }
+
+/* ---------- Minutenangaben auf den Folien: antippen startet den Timer ---------- */
+.lp-pr-minuten { cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+.lp-pr-minuten::before { content: ""; display: inline-block; width: .6em; height: .7em; margin-right: .4em; background: currentColor; clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.lp-pr-minuten[data-lauf="an"]::before { clip-path: none; background: linear-gradient(90deg, currentColor 0 36%, transparent 36% 64%, currentColor 64%); }
+.lp-pr-minuten[data-lauf="ende"] { background: #d62828 !important; color: #fff !important; animation: lp-pr-blink 1s steps(2) infinite; }
+.lp-pr-minuten[data-lauf="ende"]::before { display: none; }
+.lp-pr-minuten:focus-visible { outline: 4px solid #F4B400; outline-offset: 2px; }
+.lp-pr-minuten[data-lauf="an"], .lp-pr-minuten[data-lauf="pause"] { font-variant-numeric: tabular-nums; }
+@media print { .lp-pr-minuten::before { content: none; } }

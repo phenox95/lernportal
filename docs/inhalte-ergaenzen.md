@@ -36,13 +36,16 @@ Anleitung für neue Materialien, die Felder in `projects.json`, Materialseiten, 
 | `type` | ja | Enthält das Wort *Präsentation*, *Arbeitsblatt*, *Modul* oder *interaktiv/Spiel/Simulation/Quiz*, greift der Filter „Art". Das Wort bestimmt auch das Symbol. `Materialseite` ist der Typ für ein Thema mit Dateiliste (siehe `dateien`). |
 | `path` | ja | Relativer Pfad im Repository, z. B. `biologie/klasse-8/zelle/` |
 | `description` | nein | Wird durchsucht |
-| `reihe` | nein | Name der Unterrichtsreihe, z. B. `Risikoräume`. Ordner der Reihe: `geografie/klasse-7/risikoraeume/<stunde>/`. Wird noch nicht ausgewertet, dient der Ordnung |
+| `reihe` | nein | Name der Unterrichtsreihe (Sequenz), z. B. `Vulkanismus`. Die Themenfeld-Seite gliedert ihre Materialien danach: je Reihe eine Überschrift mit Klasse und Anzahl, Reihen nach Klassenstufe sortiert, Materialien ohne Reihe unter „Weitere Materialien“. Gibt es nur eine Reihe und trägt sie den Namen des Themenfelds (oder fehlt `reihe`), bleibt die Liste flach. Die Reihe wird auch durchsucht. Ordner der Reihe: `geografie/klasse-7/risikoraeume/<stunde>/`. Gleiche Schreibweise für dieselbe Reihe verwenden |
+| `folge` | nein | Zahl (1, 2, 3 …): Reihenfolge innerhalb einer Reihe. Ohne `folge` gilt die Reihenfolge in `projects.json` |
 | `themenfeld` | nein | Nummer des RLP-Themenfelds, z. B. `3.1`. Das Portal ergänzt den offiziellen Titel aus `themenfelder.json`. Freier Text geht weiterhin, erscheint dann unter „Weitere“ im Filter (gleiche Schreibweise für gleiche Themenfelder) |
 | `dauer` | nein | z. B. `Do Now`, `45 Min.`, `Doppelstunde` |
 | `niveau` | nein | Niveaustufen D–H, nur eintragen, wenn gesichert |
 | `datum` | nein | `JJJJ-MM-TT` |
 | `sichtbar` | nein | `false` blendet Entwürfe aus (auch aus Zählern und Suche) |
 | `status` | nein | Kleines Label, z. B. `Beispiel` |
+| `bne` | nein | Liste von Nachhaltigkeitszielen (Zahlen 1–17, Titel in `bne.json`), z. B. `[13, 15]`. Wirkt als Filter „Nachhaltigkeit (BNE)“ auf Fachseiten und „Alle Materialien“, als Zeile „Nachhaltigkeit: …“ in der Liste, auf der Seite `bne/` und in „Verbindungen“ der Materialseite. Materialien beider Fächer mit gleichem Ziel gelten automatisch als verwandt |
+| `verweise` | nein | Liste von Pfaden anderer Einträge (wie `path`), optional mit Grund: `["biologie/klasse-9/auge/", { "pfad": "geografie/klasse-7/risikoraeume/aetna-tourismus/", "grund": "Ein Satz, warum beide zusammengehören" }]`. Wirkt wechselseitig: Der Verweis erscheint auch beim Ziel. Sichtbar unter „Verbindungen“ auf der Materialseite |
 | `dateien` | nein | Liste der Dateien eines Themas (siehe unten). Fehlt das Feld, verhält sich der Eintrag wie bisher |
 
 ### Feld `dateien` (Materialseite pro Thema)
@@ -120,6 +123,27 @@ Ein Foto mit einer Frage, die die SuS zum Material führt. Das Bild soll fachlic
   "link": "biologie/klasse-8/zelle/"
 }
 ```
+
+### Wochenplan zu den Nachhaltigkeitszielen
+
+Statt eines einzelnen Impulses kann `impuls.json` eine Liste `wochen` tragen, pro Woche ein Thema mit Bezug zu einem Nachhaltigkeitsziel:
+
+```json
+{ "aktiv": true, "label": "Impuls der Woche",
+  "wochen": [ {
+    "ab": "2026-11-09", "klasse": "Klasse 10", "bne": [12],
+    "frage": "Was steckt alles in deinem Handy?",
+    "erklaerung": "Zwei bis drei kurze Sätze, worum es geht.",
+    "material": ["geografie/klasse-10/globalisierung/globalisierung-als-netz/"]
+  } ] }
+```
+
+- Es gilt der letzte Eintrag, dessen Datum `ab` erreicht ist (Montag der Woche). Neue Wochen hängst du einfach an.
+- `bne`: Zielnummern aus `bne.json`. Sie erscheinen als Chips mit Link zur Zielseite. Ohne `bild` zeigt die Karte Symbol und Name des ersten Ziels.
+- `material`: Pfade wie in `projects.json` (Feld `path`). Titel und Link kommen von dort. Ohne Material bleibt `link` als Ersatz.
+- Optional je Woche: `bild`, `bildAlt`, `bildQuelle` (Regeln unten).
+- Vorschau einer Woche: `index.html?impuls=2026-11-23`.
+- Ohne `wochen` gilt weiter der einzelne Impuls mit `frage`, `bild` und `link` auf oberster Ebene.
 
 - `"aktiv": false` blendet den Baustein aus. Ohne `bild` erscheint ein Platzhalter „Platz für eigenes Foto".
 - Bilder als WebP, möglichst unter ca. 150 KB. Keine erkennbaren Personen. Bildquelle und Lizenz angeben.
@@ -217,3 +241,14 @@ Beide Präsentationen folgen dem gemeinsamen Aufbau (Bühne 1280 × 720, `praese
 | `select` | Eine Möglichkeit auswählen |
 
 Die Zeiten der Folien (`data-min`) ergeben je Stunde etwa 90 Minuten. Die Spielinhalte (`lp-spiel-daten`) sind ein Entwurf und gehören fachlich gegengelesen. Das Quiz ist eine eigene Anwendung mit Fragen in `quiz/fragen.js` (Format: siehe Kommentar in der Datei) und nutzt Farben und Dunkelmodus der Materialseite.
+
+
+## Vernetzung und Nachhaltigkeit (BNE)
+
+- **Nachhaltigkeitsziele:** `bne.json` enthält die 17 Ziele (UN-Agenda 2030) mit Kurztitel. Bezug im RLP: übergreifendes Thema „Nachhaltige Entwicklung/Lernen in globalen Zusammenhängen“ (Teil B). Die Zuordnung zu einem Material trägst du selbst über das Feld `bne` ein. Nichts wird automatisch zugeordnet. Kurztitel in `bne.json` vor der Veröffentlichung gegenlesen.
+- **Seite `bne/`:** kurze Erklärung (Ziele, BNE, Warum) oben, darunter die klickbare Grafik der 17 Ziele mit farbiger Zahl je Fach (grün Biologie, rot Geografie), unten „Nach Themenfeld“ (nur Themenfelder mit Material, je Zeile die Ziele als Chips). Die Frage je Ziel steht in `bne.json` (Feld `frage`) und erscheint auf der Zielseite. `bne/?ziel=13` zeigt die Materialien beider Fächer, nach Fach gruppiert. Das Ziel lässt sich auch über die Adresse vorbelegen (`alle/?bne=13`).
+- **Themenfelder verbinden:** In `themenfelder.json` kann jedes Themenfeld das optionale Feld `bezuege` tragen, z. B. `"bezuege": [{ "fach": "Geografie", "nr": "3.6", "grund": "Ein Satz" }]`. Es genügt, die Verbindung an einem der beiden Themenfelder einzutragen, sie erscheint an beiden. Verbindungen nur eintragen, wenn sie fachlich gesichert sind.
+- **Darstellung:** Auf jeder Themenfeld-Seite zeigt die **Vernetzungskarte** das Themenfeld links und rechts Äste zu verbundenen Themenfeldern (auch des anderen Fachs) und zu den Nachhaltigkeitszielen seiner Materialien. Darunter sind die Materialien nach **Reihe** (Feld `reihe`) gruppiert, jede Reihe mit den Zielen ihrer Materialien. Die Seite `bne/` zeigt unten „Nach Themenfeld“ mit den Zielen je Themenfeld.
+- **Zuordnungsregel für `bne`:** Ein Ziel nur eintragen, wenn die Aufgabe oder das Urteil der Stunde es selbst behandelt, höchstens drei je Material. Materialien ohne Handlungs- oder Gesellschaftsbezug bekommen kein Ziel.
+- **Prüfen:** `python3 tools/check.py` prüft `bne` (Zahlen 1–17), `verweise` (Pfad muss in `projects.json` stehen) und `bezuege` (Fach und Nummer müssen existieren).
+- Präsentationen bleiben unverändert. Die Vernetzung erscheint nur in Portal, Listen und Materialseiten.

@@ -36,6 +36,9 @@ def pfad_ok(p):
 
 
 projekte = laden("projects.json") or []
+bne = laden("bne.json") or {}
+bne_nrn = {z.get("nr") for z in bne.get("ziele", [])}
+alle_pfade = {p.get("path") for p in projekte}
 tf = laden("themenfelder.json") or {}
 nummern = {f: {t["nr"] for t in tf.get(f, [])} for f in ("Biologie", "Geografie")}
 
@@ -79,8 +82,32 @@ for i, p in enumerate(projekte):
     if th and re.match(r"^\d+\.\d+$", str(th)) and p.get("subject") in nummern:
         if th not in nummern[p["subject"]]:
             err(f"{n}: Themenfeld {th} steht nicht in themenfelder.json ({p['subject']})")
+    if "folge" in p and (isinstance(p["folge"], bool) or not isinstance(p["folge"], (int, float))):
+        err(f"{n}: folge muss eine Zahl sein")
+    if "folge" in p and not p.get("reihe"):
+        wrn(f"{n}: folge ohne reihe hat keine Wirkung")
     if p.get("datum") and not re.match(r"^\d{4}-\d{2}-\d{2}$", p["datum"]):
         err(f"{n}: datum nicht im Format JJJJ-MM-TT")
+    # Querbezüge (optional): bne = Zielnummern 1–17, verweise = Pfade anderer Einträge
+    b = p.get("bne")
+    if b is not None:
+        if not isinstance(b, list) or not all(isinstance(x, int) and 1 <= x <= 17 for x in b):
+            err(f"{n}: bne muss eine Liste von Zahlen 1–17 sein")
+        elif bne_nrn and not set(b) <= bne_nrn:
+            err(f"{n}: bne enthält Ziele, die nicht in bne.json stehen")
+    v = p.get("verweise")
+    if v is not None:
+        if not isinstance(v, list):
+            err(f"{n}: verweise muss eine Liste sein")
+        else:
+            for k, x in enumerate(v):
+                ziel = x if isinstance(x, str) else (x.get("pfad") if isinstance(x, dict) else None)
+                if not ziel:
+                    err(f"{n} verweise[{k}]: Pfad fehlt")
+                elif ziel not in alle_pfade:
+                    err(f"{n} verweise[{k}]: „{ziel}“ steht nicht in projects.json")
+                elif ziel == p.get("path"):
+                    err(f"{n} verweise[{k}]: Verweis auf sich selbst")
     for j, d in enumerate(p.get("dateien", [])):
         dn = f"{n} dateien[{j}] „{d.get('titel', '?')}“"
         for f in ("titel", "pfad", "art"):
@@ -115,6 +142,18 @@ for f, liste in tf.items():
         if t.get("slug") in slugs:
             err(f"themenfelder.json {f}: slug „{t['slug']}“ doppelt")
         slugs.add(t.get("slug"))
+
+# Themenfeld-Verbindungen (optional): bezuege = [{fach, nr, grund}]
+for f, liste in tf.items():
+    if f == "quelle":
+        continue
+    for t in liste:
+        for k, bz in enumerate(t.get("bezuege", [])):
+            ok = isinstance(bz, dict) and bz.get("nr") in nummern.get(bz.get("fach"), set())
+            if not ok:
+                err(f"themenfelder.json {f} {t.get('nr')} bezuege[{k}]: Fach oder Nummer unbekannt")
+            elif bz["fach"] == f and bz["nr"] == t["nr"]:
+                err(f"themenfelder.json {f} {t.get('nr')} bezuege[{k}]: Verweis auf sich selbst")
 
 vorkommen = {}
 for ext in ("js", "css"):
