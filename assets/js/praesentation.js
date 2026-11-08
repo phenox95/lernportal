@@ -42,6 +42,16 @@
   function tippt(t) { return t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)); }
 
   const slides = () => [].slice.call(stage.querySelectorAll(".slide"));
+  /* Eine Hauptüberschrift je Präsentation: die erste h1 bleibt h1, alle weiteren Folientitel gelten für
+     Hilfstechnik als Überschrift der Ebene 2 (Tag und Aussehen bleiben unverändert) */
+  (function () {
+    let erste = true;
+    slides().forEach((s) => [].forEach.call(s.querySelectorAll("h1"), (h) => {
+      if (erste) { erste = false; return; }
+      h.setAttribute("role", "heading");
+      h.setAttribute("aria-level", "2");
+    }));
+  })();
   function aktuelleFolie() {
     const liste = slides();
     for (let i = 0; i < liste.length; i++) if (getComputedStyle(liste[i]).display !== "none") return i;

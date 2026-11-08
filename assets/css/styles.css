@@ -185,6 +185,12 @@ body[data-subject="Geografie"] .fach-intro::after { background: var(--geo); -web
 .row:hover .row-title { text-decoration: underline; text-underline-offset: 0.2em; }
 .row-meta { display: block; margin-top: 0.25rem; font-size: 0.875rem; color: var(--text-2); }
 .row-chev { flex: none; color: var(--text-2); }
+/* Material als Symbol-Marken und Stundennummer in Reihen */
+.chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.45rem; }
+.chip { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.15rem 0.65rem 0.15rem 0.5rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); color: var(--text); font-size: 0.8125rem; line-height: 1.4; }
+.chip svg { flex: none; color: var(--text-2); }
+.chip-niveau { letter-spacing: 0.08em; color: var(--text-2); }
+.row-nr { flex: none; align-self: flex-start; min-width: 2.25rem; text-align: center; color: var(--text); }
 .badge { display: inline-block; margin-left: 0.5rem; padding: 0.05rem 0.6rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); color: var(--text-2); font-size: 0.75rem; font-weight: 400; vertical-align: 0.1em; letter-spacing: 0; }
 
 /* Klassenstufen als kompakte Auswahl */

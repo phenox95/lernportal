@@ -141,19 +141,62 @@
     if (project.subject === "Geografie") return "geo";
     return "";
   }
-  function row(project, showSubject) {
-    const meta = [showSubject ? project.subject : "", project.type, project.grade, project.dauer]
+  /* Material einer Zeile als kleine Symbol-Marken: Art der Anwendung (aus type) und Dateien aus "dateien".
+     Niveau (Feld stufe) nur, wenn genau ein Arbeitsblatt vorhanden ist. */
+  const CHIP_ICON = { prasentation: "presentation", arbeitsblatt: "file", ubung: "play", spiel: "play", hilfe: "layers" };
+  function chipsOf(project) {
+    const files = dateienOf(project);
+    const type = String(project.type || "").trim();
+    const hasPres = files.some(d => artKey(d.art) === "prasentation");
+    const chips = [];
+    const chip = (ic, text, extra) => chips.push(`<span class="chip">${icon(ic, 14)}<span>${escapeHtml(text)}</span>${extra || ""}</span>`);
+    if (type && !/^materialseite$/i.test(type) && !(/präsentation/i.test(type) && hasPres)) {
+      chip(/präsentation/i.test(type) ? "presentation" : INTERACTIVE.test(type) ? "play" : "layers", type);
+    }
+    DATEI_ARTEN.forEach(([key, one, many]) => {
+      const list = files.filter(d => artKey(d.art) === key);
+      if (!list.length) return;
+      const stufe = list.length === 1 && [1, 2, 3].includes(list[0].stufe) ? list[0].stufe : 0;
+      const extra = stufe ? `<span class="chip-niveau" aria-hidden="true">${"●".repeat(stufe)}${"○".repeat(3 - stufe)}</span><span class="sr-only">Niveau ${stufe} von 3</span>` : "";
+      chip(CHIP_ICON[key], list.length === 1 ? one : list.length + " " + many, extra);
+    });
+    const other = files.filter(d => !DATEI_ARTEN.some(a => a[0] === artKey(d.art))).length;
+    if (other) chip("layers", other === 1 ? "Weiteres Material" : other + " weitere Materialien");
+    return chips.length ? `<span class="chips">${chips.join("")}</span>` : "";
+  }
+  /* Stundennummer einer Reihe: Feld folge, sonst "Stunde N" im Titel */
+  const STUNDE_VORSATZ = /^.*?\bStunde\s+\d+\s*:\s*/i;
+  function stundeNr(project) {
+    if (Number.isFinite(project.folge)) return project.folge;
+    const m = String(project.title || "").match(/\bStunde\s+(\d+)\s*:/i);
+    return m ? Number(m[1]) : null;
+  }
+  /* Nummer nur, wenn sie zur Reihe gehört: Feld folge, oder "<Vorsatz> Stunde N:" im Titel, wenn der Vorsatz den Reihennamen enthält
+     (so bleibt "Fotosynthese – Stunde 1" in der Reihe "Zelle" ohne Nummer und mit vollem Titel) */
+  function reihenNr(project, name) {
+    if (Number.isFinite(project.folge)) return project.folge;
+    const m = String(project.title || "").match(/^(.*?)\bStunde\s+(\d+)\s*:/i);
+    return m && fold(m[1]).includes(fold(name)) ? Number(m[2]) : null;
+  }
+  /* opts.nr: Stundennummer statt Punkt (Reihe), opts.ohne: Felder, die der Reihenkopf schon nennt */
+  function row(project, showSubject, opts) {
+    opts = opts || {};
+    const ohne = opts.ohne || [];
+    const meta = [showSubject ? project.subject : "", ohne.includes("grade") ? "" : project.grade, ohne.includes("dauer") ? "" : project.dauer]
       .filter(Boolean).map(escapeHtml).join(" · ");
-    const inhalt = inhaltOf(project);
+    const chips = chipsOf(project);
     const bne = bneText(project);
     const badge = project.status ? `<span class="badge">${escapeHtml(project.status)}</span>` : "";
+    const nr = opts.nr;
+    const kurz = nr != null && STUNDE_VORSATZ.test(project.title) ? String(project.title).replace(STUNDE_VORSATZ, "") : project.title;
+    const vorsatz = nr != null ? `<span class="sr-only">Stunde ${nr}: </span>` : "";
+    const lead = nr != null ? `<span class="numeral row-nr" aria-hidden="true">${nr}</span>` : `<span class="dot ${tileClass(project)}" aria-hidden="true"></span>`;
     return `
       <a class="row" href="${escapeHtml(resolvePath(project.path))}">
-        <span class="dot ${tileClass(project)}" aria-hidden="true"></span>
+        ${lead}
         <span class="row-main">
-          <span class="row-title">${escapeHtml(project.title)}${badge}</span>
-          <span class="row-meta">${meta}</span>${inhalt ? `
-          <span class="row-meta">${escapeHtml(inhalt)}</span>` : ""}${bne ? `
+          <span class="row-title">${vorsatz}${escapeHtml(kurz)}${badge}</span>${meta ? `
+          <span class="row-meta">${meta}</span>` : ""}${chips}${bne ? `
           <span class="row-meta">Nachhaltigkeit: ${escapeHtml(bne)}</span>` : ""}
         </span>
         <span class="row-chev">${icon("chevron", 20)}</span>
@@ -480,15 +523,19 @@
     items = [...items].sort((a, b) => key(a) === key(b) ? 0 : key(a) < key(b) ? -1 : 1);
     const namen = [...new Set(items.map(p => String(p.reihe || "").trim()).filter(Boolean))];
     if (!namen.length) return `<div class="group">${items.map(p => row(p, false)).join("")}</div>`;
-    const gruppe = (titel, mine) => {
+    const gruppe = (titel, mine, name) => {
       const nrs = [...new Set(mine.flatMap(bneOf))].sort((a, b) => a - b);
       const ziele = nrs.length ? `<span class="reihe-ziele">${nrs.map(n => `<a class="reihe-ziel" href="${root}bne/?ziel=${n}" aria-label="Nachhaltigkeitsziel ${n} ${escapeHtml((bneZiel(n) || {}).kurz || "")}">${n}</a>`).join("")}</span>` : "";
-      return `<section class="reihe"><div class="reihe-kopf"><h2 class="reihe-titel">${escapeHtml(titel)}</h2><span class="reihe-zahl">${countText(mine.length)}</span>${ziele}</div>
-        <div class="group">${mine.map(p => row(p, false)).join("")}</div></section>`;
+      /* Klasse und Dauer einmal im Kopf, wenn sie bei allen Einträgen gleich sind */
+      const gleich = f => mine.length > 1 && mine.every(p => p[f] && p[f] === mine[0][f]);
+      const ohne = ["grade", "dauer"].filter(gleich);
+      const kopfMeta = [countText(mine.length), ...ohne.map(f => mine[0][f])].map(escapeHtml).join(" · ");
+      return `<section class="reihe"><div class="reihe-kopf"><h2 class="reihe-titel">${escapeHtml(titel)}</h2><span class="reihe-zahl">${kopfMeta}</span>${ziele}</div>
+        <div class="group">${mine.map(p => row(p, false, { nr: name ? reihenNr(p, name) : null, ohne })).join("")}</div></section>`;
     };
-    const parts = namen.map(n => gruppe("Reihe: " + n, items.filter(p => String(p.reihe || "").trim() === n)));
+    const parts = namen.map(n => gruppe("Reihe: " + n, items.filter(p => String(p.reihe || "").trim() === n), n));
     const ohne = items.filter(p => !String(p.reihe || "").trim());
-    if (ohne.length) parts.push(gruppe("Einzelne Stunden", ohne));
+    if (ohne.length) parts.push(gruppe("Einzelne Stunden", ohne, ""));
     return parts.join("");
   }
 
