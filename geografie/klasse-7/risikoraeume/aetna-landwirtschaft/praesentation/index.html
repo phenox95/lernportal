@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Leben am Ätna – Landwirtschaft: Chancen und Risiken</title>
+<meta name="description" content="Doppelstunde Geografie Klasse 7: Chancen und Risiken für die Landwirtschaft am Ätna, Lokalisierung, Partnerpuzzle und begründetes Urteil.">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+<style>
+/* Aussehen (Farben, Schrift, Folien, Überschriften, Aufgaben, Hilfen, Kästen) steht in praesentation-design.css, Fach Geografie = Rostrot.
+   Hier nur, was diese Stunde zusätzlich braucht. */
+:root{--ok:#2E7D32;--bad:#C62828}
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+.mint{background:var(--mint);border-radius:16px}
+.hidden{display:none!important}
+.show-no{display:none}.show-no.show{display:block}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.b{min-height:46px}
+.b.hell{background:#fff;color:var(--g);border:3px solid var(--g)}
+.b:focus-visible,.tab:focus-visible,.mitem:focus-visible,.step:focus-visible,.cell:focus-visible,.zoom:focus-visible{outline:4px solid var(--y);outline-offset:3px}
+.lfb{margin:0 0 14px;padding:10px 18px;background:var(--mint);border-left:10px solid var(--g);border-radius:10px;font-size:24px;line-height:1.3;min-height:52px}
+.lfb b{color:var(--g)}
+/* Bilder */
+.bildkarte{position:relative;border-radius:14px;overflow:hidden;border:3px solid var(--g);background:#000}
+.bildkarte img{display:block;width:100%;height:100%;object-fit:cover}
+.bildkarte .cap{position:absolute;left:0;bottom:0;background:rgba(43,33,30,.85);color:#fff;padding:5px 14px;font-size:18px}
+.dark .bildkarte{border-color:#fff}
+.zoom{cursor:zoom-in}
+#lightbox{position:absolute;inset:0;background:rgba(20,14,12,.93);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
+#lightbox.an{display:flex}
+#lightbox img{max-width:94%;max-height:92%;border-radius:8px}
+/* Do Now */
+.tabs{display:flex;gap:10px}
+.tab{font:700 22px Andika,Verdana,sans-serif;min-height:46px;padding:6px 20px;border-radius:12px 12px 0 0;border:3px solid var(--g);border-bottom:0;background:var(--mint);color:var(--dk);cursor:pointer;touch-action:manipulation}
+.tab.on{background:var(--g);color:#fff}
+.pane{display:none;border-top:4px solid var(--g);padding-top:16px}.pane.on{display:block}
+.acro{display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;margin-bottom:12px}
+.acro .row{display:flex;align-items:center;gap:12px}
+.acro .L{flex:none;width:52px;height:52px;border-radius:10px;background:var(--g);color:#fff;font-size:32px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.acro .sol{font-size:22px;color:var(--grey);visibility:hidden}.acro .sol.show{visibility:visible}
+.acro .strich{flex:1;border-bottom:3px dashed var(--grey);height:36px;min-width:60px}
+.match{display:grid;grid-template-columns:260px 1fr;gap:12px 130px;position:relative;margin-top:6px}
+.mcol{display:flex;flex-direction:column;gap:10px}
+.mitem{background:#fff;border:3px solid var(--g);border-radius:12px;padding:6px 16px;font-size:21px;cursor:pointer;min-height:52px;display:flex;align-items:center;position:relative;z-index:2;font-family:inherit;text-align:left;color:var(--ink);touch-action:manipulation}
+.mitem b{margin-right:10px}
+.mitem.sel{background:var(--mint);box-shadow:0 0 0 4px var(--y)}
+.mitem.right{border-color:var(--ok);background:#E6F3E2}
+.mitem.wrong{border-color:var(--bad);background:#FBE6E0}
+#matchSvg{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:visible}
+.volcano-wrap{display:grid;grid-template-columns:1fr 470px;gap:24px;align-items:start}
+.volcano-wrap svg text{font-family:Andika,Verdana,sans-serif}
+.vchips{display:flex;flex-wrap:wrap;gap:8px}
+.vchip{font:700 20px Andika,Verdana,sans-serif;min-height:44px;padding:6px 16px;border-radius:999px;border:3px solid var(--g);background:#fff;color:var(--dk);cursor:pointer;touch-action:manipulation}
+.vchip.on{background:var(--g);color:#fff}
+.lbl{opacity:0;transition:opacity .3s}.lbl.show{opacity:1}
+.part.hl{filter:drop-shadow(0 0 6px #ffcc00)}
+#magmaRise{transform-box:fill-box;transform-origin:bottom;transform:scaleY(0)}
+.erupt #magmaRise{animation:rise 1.6s ease-in forwards}
+@keyframes rise{to{transform:scaleY(1)}}
+#ash{opacity:0}.erupt #ash{animation:ash 1.4s 1.5s ease-out forwards}
+@keyframes ash{to{opacity:.9}}
+.lavaflow{stroke-dasharray:400;stroke-dashoffset:400}
+.erupt .lavaflow{animation:flow 2s 1.7s ease-out forwards}
+@keyframes flow{to{stroke-dashoffset:0}}
+.druck{opacity:0}.erupt .druck{animation:pulse .5s 0s 3 alternate}
+@keyframes pulse{from{opacity:0}to{opacity:1}}
+.mustersatz{font-size:21px;background:var(--mint);border-radius:10px;padding:10px 14px;margin-top:12px;line-height:1.4}
+@media (prefers-reduced-motion:reduce){.erupt #magmaRise,.erupt #ash,.erupt .lavaflow,.erupt .druck{animation-duration:.01s;animation-delay:0s}}
+/* Karte */
+.maplayout{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start}
+.mapbox{position:relative;overflow:hidden;border-radius:12px;border:3px solid var(--g);cursor:crosshair;background:#cfe4f2}
+.mapbox img{width:100%;height:100%;display:block;object-fit:fill;pointer-events:none}
+.pin{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--y);border:4px solid var(--ink);pointer-events:none}
+.ring{position:absolute;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;border:9px solid var(--bad);pointer-events:none}
+/* Positionslinie */
+.pos{position:relative;margin:8px 0 0}
+.pos .linie{position:relative;height:150px;border:3px solid var(--g);border-radius:14px;background:#fff;cursor:crosshair;overflow:hidden}
+.pos .linie:before{content:"";position:absolute;left:24px;right:24px;top:72px;height:6px;background:var(--ink)}
+.pos .ende{position:absolute;bottom:8px;font-weight:700;font-size:26px}
+.pos .ende.l{left:22px}.pos .ende.r{right:22px}
+.pos .m{position:absolute;top:56px;transform:translateX(-50%);font-size:36px;font-weight:700;line-height:1;color:var(--g);pointer-events:none}
+.pos .m.alt{color:var(--grey);top:24px}
+.pos .avg{position:absolute;top:0;bottom:0;width:0;border-left:4px solid var(--g);pointer-events:none}
+.pos .avg span{position:absolute;left:8px;font-size:18px;font-weight:700;white-space:nowrap}
+.pos .avg.a1{border-left-color:var(--grey)}.pos .avg.a1 span{top:4px;color:var(--grey)}
+.pos .avg.a2 span{bottom:4px;color:var(--g)}
+.pos .tools{display:flex;gap:12px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.pos .tools small{font-size:20px}
+/* Aufgabe und Arbeitsphase */
+.sitz{display:grid;grid-template-columns:86px 86px;gap:16px 26px;margin:6px 0 16px 30px}
+.seat{width:86px;height:86px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;color:#fff}
+.seat.A,.tag.A{background:var(--b)}.seat.B,.tag.B{background:var(--g)}
+.tag{display:inline-block;padding:2px 12px;border-radius:8px;color:#fff;font-weight:700;margin-right:6px}
+.pz{display:grid;grid-template-columns:400px 1fr;gap:40px;align-items:start}
+.steps{display:flex;flex-direction:column;gap:12px}
+.step{border:3px solid #cfc6bf;border-radius:14px;padding:12px 18px;font-size:24px;line-height:1.35;cursor:pointer;background:#fff;text-align:left;font-family:inherit;color:var(--ink);opacity:.62;touch-action:manipulation}
+.step.on{border-color:var(--g);background:var(--mint);opacity:1}
+.step .meta{display:block;font-size:18px;color:var(--grey);margin-bottom:2px}
+.step b{color:var(--g)}
+.tps{display:flex;flex-direction:column;gap:14px}
+.tpsrow{display:grid;grid-template-columns:1fr 90px;align-items:center;border:3px solid #cfc6bf;border-radius:14px;overflow:hidden;cursor:pointer;background:#fff;opacity:.7}
+.tpsrow .hd{grid-column:1/3;background:var(--mint);padding:6px 18px;font-size:22px;font-weight:700;color:var(--dk)}
+.tpsrow ul{margin:8px 0 10px;font-size:23px;line-height:1.35;padding-left:38px}
+.tpsrow img{width:64px;justify-self:center}
+.tpsrow.on{border-color:var(--g);opacity:1}.tpsrow.on .hd{background:var(--g);color:#fff}
+/* Sicherung */
+.ttable{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--g);border-radius:14px;overflow:hidden}
+.tcol{display:flex;flex-direction:column;min-height:0}.tcol+.tcol{border-left:3px solid var(--g)}
+.tcol h2{margin:0;padding:8px 16px;font-size:26px;color:#fff}
+.tcol.c h2{background:var(--b)}.tcol.r h2{background:var(--g)}
+.cards{height:210px;overflow:auto;padding:10px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:8px}
+.card{background:#fff;border:2px solid #cfc6bf;border-radius:10px;padding:5px 10px;font-size:20px;line-height:1.25;display:flex;gap:8px;align-items:flex-start}
+.card.hint{border-style:dashed;background:var(--mint)}
+.card .del{flex:none;min-width:30px;min-height:30px;border:0;background:none;font:700 20px Andika,Verdana,sans-serif;color:var(--grey);cursor:pointer}
+.addrow{display:flex;gap:8px;padding:8px;border-top:2px solid var(--mint)}
+.addrow input{flex:1;min-width:0;font:20px Andika,Verdana,sans-serif;min-height:46px;padding:6px 12px;border:2px solid var(--grey);border-radius:10px;background:#fff;color:var(--ink)}
+.addrow input:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.addrow .b{padding:0 16px}
+/* Feedback */
+.sheeplayout{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start}
+.sheepbox{position:relative;width:760px;height:428px;border-radius:12px;overflow:hidden;border:3px solid var(--g)}
+.sheepbox>img{width:100%;height:100%;display:block}
+.cell{position:absolute;cursor:pointer;background:transparent;border:0;padding:0}
+.cell:hover{box-shadow:inset 0 0 0 4px var(--y)}
+.cell .cnt{position:absolute;right:6px;bottom:6px;background:var(--g);color:#fff;border-radius:999px;min-width:34px;height:34px;display:none;align-items:center;justify-content:center;font-weight:700;font-size:20px;padding:0 8px}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Leben am Ätna – Landwirtschaft" data-subject="Geografie" data-grade="Klasse 7">
+<noscript><p style="padding:1rem;font-size:1rem;background:#fff">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+<div id="buehne">
+<div id="stage">
+
+<!-- 1 Do Now -->
+<section class="slide" data-min="3">
+  <h1>Do Now: Erinnerst du dich?</h1><span class="badge">3 Min. · allein</span>
+  <div class="tabs" role="tablist" aria-label="Aufgabe wählen">
+    <button class="tab on" role="tab" data-pane="dn1">A · VULKAN</button>
+    <button class="tab" role="tab" data-pane="dn2">B · Begriffe zuordnen</button>
+    <button class="tab" role="tab" data-pane="dn3">C · Vulkanausbruch</button>
+  </div>
+  <div class="pane on" id="dn1">
+    <p class="task"><span class="snr">1</span><span><b>Nenne</b> zu jedem Buchstaben von VULKAN einen Fachbegriff oder ein Beispiel aus dem Vulkanismus. Schreibe auf dein Mini-Whiteboard.</span><span></span></p>
+    <div class="acro" id="acro"></div>
+    <div class="btnrow"><button class="b hell" id="acroSol">Beispiele zeigen</button></div>
+  </div>
+  <div class="pane" id="dn2">
+    <p class="task"><span class="snr">1</span><span><b>Ordne</b> die Begriffe den Erklärungen zu. Tippe erst auf einen Begriff, dann auf die passende Erklärung.</span><span></span></p>
+    <div class="btnrow" style="margin-bottom:12px"><button class="b" id="mCheck">Prüfen</button><button class="b hell" id="mReset">Neu</button><button class="b hell" id="mSolve">Lösung zeigen</button></div>
+    <div class="match" id="match">
+      <svg id="matchSvg" aria-hidden="true"></svg>
+      <div class="mcol" id="mLeft"></div>
+      <div class="mcol" id="mRight"></div>
+    </div>
+  </div>
+  <div class="pane" id="dn3">
+    <div class="volcano-wrap">
+      <div>
+        <p class="task" style="margin-bottom:14px"><span class="snr">1</span><span><b>Beschreibe</b> in höchstens 2 Sätzen, was bei einem Vulkanausbruch passiert. Nutze mindestens 3 Fachbegriffe.</span><span></span></p>
+        <div class="vchips" id="vchips"></div>
+        <div class="btnrow" style="margin-top:14px"><button class="b" id="erupt">Ausbruch zeigen</button><button class="b hell" id="allLbl">Alle Begriffe</button><button class="b hell" id="muster">Mustersatz</button></div>
+        <div class="mustersatz show-no" id="musterTxt">In der <b>Magmakammer</b> steigt der <b>Druck</b>. Das <b>Magma</b> steigt durch den <b>Schlot</b> nach oben und tritt am <b>Krater</b> als <b>Lava</b> und <b>Asche</b> aus.</div>
+      </div>
+      <svg id="volcano" viewBox="0 0 560 470" width="470" height="394" role="img" aria-label="Schnittbild eines Vulkans mit Magmakammer, Schlot, Krater, Lava und Aschewolke">
+        <rect x="0" y="0" width="560" height="470" fill="#EAF3F8"/>
+        <g id="ash" class="part" data-k="Asche"><circle cx="282" cy="62" r="34" fill="#8C8C8C"/><circle cx="246" cy="78" r="26" fill="#9B9B9B"/><circle cx="318" cy="80" r="28" fill="#7D7D7D"/><circle cx="270" cy="34" r="24" fill="#A5A5A5"/><circle cx="302" cy="40" r="22" fill="#969696"/></g>
+        <rect x="0" y="300" width="560" height="170" fill="#C9A77C"/>
+        <rect x="0" y="360" width="560" height="110" fill="#B48C60"/>
+        <polygon class="part" data-k="Vulkan" points="40,300 250,128 314,128 520,300" fill="#8E7A62"/>
+        <polygon points="250,128 314,128 300,140 264,140" fill="#5B4A3A"/>
+        <ellipse class="part" id="kammer" data-k="Magmakammer" cx="282" cy="410" rx="130" ry="42" fill="#E0451F"/>
+        <rect class="part" id="schlot" data-k="Schlot" x="270" y="140" width="24" height="232" fill="#5B4A3A"/>
+        <rect id="magmaRise" x="270" y="140" width="24" height="232" fill="#F06A2B"/>
+        <path class="lavaflow part" data-k="Lava" d="M300 138 C 330 170, 360 200, 400 236 S 450 280, 470 296" stroke="#F4511E" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path class="lavaflow" d="M264 138 C 240 170, 210 210, 170 246" stroke="#F4511E" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <g class="druck" fill="#FFE27A"><polygon points="282,372 272,388 292,388"/><polygon points="230,404 246,396 246,412"/><polygon points="334,404 318,396 318,412"/></g>
+        <g class="lbl" data-k="Krater"><line x1="300" y1="132" x2="400" y2="112" stroke="#222" stroke-width="2"/><text x="404" y="117" font-size="22" font-weight="700">Krater</text></g>
+        <g class="lbl" data-k="Schlot"><line x1="294" y1="250" x2="400" y2="250" stroke="#222" stroke-width="2"/><text x="404" y="257" font-size="22" font-weight="700">Schlot</text></g>
+        <g class="lbl" data-k="Magmakammer"><line x1="400" y1="430" x2="430" y2="446" stroke="#222" stroke-width="2"/><text x="552" y="464" text-anchor="end" font-size="22" font-weight="700">Magmakammer</text></g>
+        <g class="lbl" data-k="Magma"><line x1="282" y1="300" x2="160" y2="330" stroke="#222" stroke-width="2"/><text x="60" y="336" font-size="22" font-weight="700">Magma</text></g>
+        <g class="lbl" data-k="Lava"><line x1="420" y1="250" x2="470" y2="200" stroke="#222" stroke-width="2"/><text x="474" y="198" font-size="22" font-weight="700">Lava</text></g>
+        <g class="lbl" data-k="Asche"><line x1="320" y1="60" x2="380" y2="40" stroke="#222" stroke-width="2"/><text x="384" y="44" font-size="22" font-weight="700">Asche</text></g>
+        <g class="lbl" data-k="Druck"><text x="96" y="404" font-size="22" font-weight="700">Druck ↑</text><line x1="190" y1="400" x2="226" y2="404" stroke="#222" stroke-width="2"/></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 2 Impuls -->
+<section class="slide dark" data-min="3">
+  <h1>Leben am Ätna</h1><span class="badge">3 Min. · Plenum</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;height:400px">
+    <div class="bildkarte zoom" tabindex="0" role="button" aria-label="Foto A vergrößern"><img src="bilder/haus-in-lava.jpg" alt="Ein Haus ist bis zum Dach von erstarrter Lava bedeckt, nur das Dach ragt heraus."><div class="cap">Foto A</div></div>
+    <div class="bildkarte zoom" tabindex="0" role="button" aria-label="Foto B vergrößern"><img src="bilder/weinbauer.jpg" alt="Ein Mann trägt eine Kiste durch einen Weinberg, im Hintergrund der schneebedeckte Ätna."><div class="cap">Foto B</div></div>
+  </div>
+  <p class="lead" style="margin-top:24px">Was fällt euch auf? Was passt für euch nicht zusammen?</p>
+  <!-- Bildquellen der Fotos ergänzen (Original: Lehrkraft). -->
+</section>
+
+<!-- 3 Fragenentwicklung -->
+<section class="slide" data-min="4">
+  <h1>Eure Fragen</h1><span class="badge">4 Min. · Plenum</span>
+  <div data-fragenfeld data-impulse="Was fällt euch auf?|Was passt für euch nicht zusammen?|Was wollt ihr herausfinden?|Welche Frage stellt sich euch?"></div>
+</section>
+
+<!-- 4 Lokalisierung -->
+<section class="slide" data-min="3">
+  <h1>Wo liegt der Ätna?</h1><span class="badge">3 Min. · Plenum</span>
+  <div class="maplayout">
+    <div class="mapbox" id="mapBox" style="width:700px;height:315px"><img id="mapImg" src="bilder/europa-karte.jpg" alt="Politische Karte von Europa mit Staaten und Meeren"></div>
+    <div>
+      <p class="task" id="mapTask" style="grid-template-columns:1fr auto"><span><b>Lokalisiere</b> auf der Karte: Wo liegt Italien?</span><i class="lvl">D–E</i></p>
+      <p class="fb" id="mapFb" aria-live="polite" style="min-height:64px"></p>
+      <div class="btnrow" style="flex-direction:column;align-items:flex-start">
+        <button class="b" id="mapNext">Weiter: Sizilien</button>
+        <button class="b hell" id="mapSolve">Auflösen</button>
+        <button class="b hell" id="mapReset">Von vorn</button>
+      </div>
+      <p class="tip">Schritt <span id="mapStep">1</span> von 2</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 Spontanurteil -->
+<section class="slide" data-min="3">
+  <h1>Leitfrage und Spontanurteil</h1><span class="badge">3 Min. · Plenum</span>
+  <p class="lfb"><b>Unsere Frage:</b> <span data-leitfrage>…</span></p>
+  <p class="task big" style="margin-bottom:10px"><span class="snr">1</span><span><b>Beurteile</b> spontan: Würdest du am Ätna Landwirtschaft betreiben? Setze ein Kreuz.</span><span></span></p>
+  <div class="pos" data-id="p1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="b hell" data-undo="p1">Rückgängig</button><button class="b hell" data-reset="p1">Kreuze löschen</button><small><span data-count="p1">0 Kreuze</span> · Klick auf die Linie setzt ein Kreuz.</small></div></div>
+</section>
+
+<!-- 6 Aufgabe -->
+<section class="slide" data-min="4">
+  <h1>Partnerpuzzle</h1><span class="badge">4 Min. · Plenum</span>
+  <div class="pz">
+    <div>
+      <p class="lead" style="margin-bottom:12px"><b>Du bist A oder B.</b></p>
+      <div class="sitz" aria-hidden="true"><div class="seat A">A</div><div class="seat B">B</div><div class="seat A">A</div><div class="seat B">B</div></div>
+      <p style="font-size:24px;line-height:1.5;margin:0"><span class="tag A">A + A</span> <b>Chancen</b> · M1–M4<br><span class="tag B">B + B</span> <b>Risiken</b> · M4–M7</p>
+    </div>
+    <div class="steps" id="steps">
+      <button class="step on"><span class="meta">1 · Allein, dann mit deinem Partner (A+A bzw. B+B)</span><b>Analysiere</b> dein Material. Notiere Chancen (A) bzw. Risiken (B) in Stichpunkten in deiner Spalte der Tabelle.</button>
+      <button class="step"><span class="meta">2 · In der Vierergruppe</span><b>Vergleicht</b> eure Ergebnisse. Ergänzt die zweite Spalte der Tabelle.</button>
+      <button class="step"><span class="meta">3 · Allein</span><b>Beurteile:</b> Chance oder Risiko? Setze dein Kreuz auf der Positionslinie und begründe es mit 2 Argumenten aus der Tabelle.</button>
+    </div>
+  </div>
+</section>
+
+<!-- 7 Arbeitsphase -->
+<section class="slide" data-min="15">
+  <h1>Arbeitsphase</h1><span class="badge">15 Min. · allein, Partner, Gruppe</span>
+  <p class="lead" style="margin-bottom:14px"><b>Bearbeite</b> jetzt das Arbeitsblatt.</p>
+  <div class="tps" id="tps">
+    <div class="tpsrow on" tabindex="0"><div class="hd">Think · allein</div><ul><li>Lies das Material, markiere Schlüsselwörter.</li><li>Notiere Stichpunkte.</li></ul><img src="bilder/icon-denken.svg" alt=""></div>
+    <div class="tpsrow" tabindex="0"><div class="hd">Pair · mit deinem Partner</div><ul><li>Tauscht euch über eure Stichpunkte aus.</li><li>Notiert Punkte, die euch noch fehlen.</li></ul><img src="bilder/icon-paar.svg" alt=""></div>
+    <div class="tpsrow" tabindex="0"><div class="hd">Share · in der Vierergruppe</div><ul><li>Stellt eure Ergebnisse vor und diskutiert.</li><li>Ergänzt, was fehlt.</li></ul><img src="bilder/icon-gruppe.svg" alt=""></div>
+  </div>
+</section>
+
+<!-- 8 Sicherung -->
+<section class="slide" data-min="10">
+  <h1>Präsentation und Sicherung</h1><span class="badge">10 Min. · Plenum</span>
+  <p class="lfb"><b>Unsere Frage:</b> <span data-leitfrage>…</span></p>
+  <div class="ttable">
+    <div class="tcol c"><h2>Chancen und Potenziale</h2><div class="cards" id="cardsC"></div>
+      <div class="addrow"><input id="inC" aria-label="Stichpunkt zu Chancen" placeholder="Stichpunkt eintippen …"><button class="b" data-add="C" aria-label="Chance hinzufügen">+</button></div></div>
+    <div class="tcol r"><h2>Risiken und Gefahren</h2><div class="cards" id="cardsR"></div>
+      <div class="addrow"><input id="inR" aria-label="Stichpunkt zu Risiken" placeholder="Stichpunkt eintippen …"><button class="b" data-add="R" aria-label="Risiko hinzufügen">+</button></div></div>
+  </div>
+  <div class="btnrow" style="margin-top:14px;padding-right:110px"><button class="b hell" id="hintC">Lösungsvorschlag Chance</button><button class="b hell" id="hintR">Lösungsvorschlag Risiko</button><img src="bilder/change-your-mind.jpg" alt="Grafik mit der englischen Aufschrift „Change your mind“" style="height:52px;width:52px;border-radius:10px;margin-left:auto"></div>
+</section>
+
+<!-- 9 Begründetes Urteil -->
+<section class="slide" data-min="10">
+  <h1>Begründetes Urteil</h1><span class="badge">10 Min. · Plenum</span>
+  <p class="lfb"><b>Unsere Frage:</b> <span data-leitfrage>…</span></p>
+  <p class="task big" style="margin-bottom:10px"><span class="snr">1</span><span><b>Beurteile</b> jetzt mit deinen Ergebnissen: Chance oder Risiko? Setze ein neues Kreuz.</span><span></span></p>
+  <div class="pos" data-id="p2" data-alt="p1"><div class="linie"><span class="ende l">Risiko</span><span class="ende r">Chance</span></div><div class="tools"><button class="b hell" data-altschalter="1">1. Runde ein/aus</button><button class="b hell" data-vergleich="1">Vergleich</button><button class="b hell" data-undo="p2">Rückgängig</button><button class="b hell" data-reset="p2">Kreuze löschen</button><small><span data-count="p2">0 Kreuze</span></small></div></div>
+  <div class="shilfe" style="margin-top:16px;font-size:21px;padding:12px 18px;margin-right:110px"><b>Satzbausteine:</b> Ich sehe die Landwirtschaft am Ätna eher als Chance / Risiko, weil … · Das wichtigste Argument ist … · Zwar …, aber …</div>
+</section>
+
+<!-- 10 Feedback -->
+<section class="slide" data-min="5">
+  <h1>Feedback</h1><span class="badge">5 Min. · Plenum</span>
+  <div class="sheeplayout">
+    <div class="sheepbox" id="sheep"><img src="bilder/feedback-schafe.jpg" alt="Raster mit neun nummerierten Schaf-Fotos, zum Beispiel ein Schaf mit Eimer auf dem Kopf, ein Lamm mit geschlossenen Augen und ein Schaf im Sprung."></div>
+    <div>
+      <p class="task" style="grid-template-columns:1fr"><span><b>Ordne</b> dich einem Bild zu und <b>begründe</b> deine Entscheidung.</span></p>
+      <div class="btnrow"><button class="b hell" id="sheepReset">Zähler leeren</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 Ausblick -->
+<section class="slide dark" style="padding:0">
+  <img src="bilder/aetna-ort.jpg" alt="Der Ätna raucht über einer Stadt am Berghang." style="position:absolute;left:0;top:0;width:1280px;height:450px;object-fit:cover">
+  <div style="position:absolute;left:64px;right:64px;top:480px">
+    <h1 style="margin-bottom:12px">Ausblick</h1>
+    <p class="lead" style="margin:0">Würdet ihr Urlaub am Ätna machen? In der nächsten Stunde <b>beurteilt</b> ihr den Tourismus am Ätna.</p>
+  </div>
+</section>
+
+<div id="lightbox" aria-hidden="true"><img alt=""></div>
+
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var buehne=$('#buehne'),stage=$('#stage'),balken=$('#nav i');
+  var slides=$$('.slide'),cur=0;
+  // Eingaben der Klasse bleiben nur im Speicher, beim Neuladen sind sie weg.
+  var votes={p1:[],p2:[]},altAn=true,vglAn=false,cards={C:[],R:[]},hints={C:0,R:0},sheep={};
+
+  function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+  function show(n){
+    cur=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
+    balken.style.width=((cur+1)/slides.length*100)+'%';
+    $('#zur').disabled=cur===0;$('#vor').disabled=cur===slides.length-1;
+    try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
+    renderAll();requestAnimationFrame(drawLines);
+  }
+  function tippt(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&$('#lightbox').classList.contains('an')){$('#lightbox').classList.remove('an');return}
+    if(tippt(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&e.target.tagName!=='BUTTON')){e.preventDefault();show(cur+1)}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(cur-1)}
+    else if(e.key==='f'||e.key==='F'){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(x){}}
+  });
+  $('#vor').onclick=function(){show(cur+1)};
+  $('#zur').onclick=function(){show(cur-1)};
+
+  /* Bilder vergrößern */
+  $$('.zoom').forEach(function(z){
+    function auf(){$('#lightbox img').src=$('img',z).src;$('#lightbox img').alt=$('img',z).alt;$('#lightbox').classList.add('an')}
+    z.onclick=auf;z.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();auf()}};
+  });
+  $('#lightbox').onclick=function(){this.classList.remove('an')};
+
+  /* Do Now: Reiter */
+  $$('.tab').forEach(function(t){t.onclick=function(){
+    $$('.tab').forEach(function(x){x.classList.remove('on')});$$('.pane').forEach(function(x){x.classList.remove('on')});
+    t.classList.add('on');$('#'+t.getAttribute('data-pane')).classList.add('on');requestAnimationFrame(drawLines);
+  }});
+
+  /* A: Akrostichon */
+  [['V','Vulkanausbruch, Vulkankegel'],['U','Unterwasservulkan'],['L','Lava, Lavastrom'],['K','Krater, Kontinentalplatte'],['A','Asche, Ätna'],['N','Naturgefahr']].forEach(function(p){
+    var r=document.createElement('div');r.className='row';
+    r.innerHTML='<div class="L" tabindex="0" role="button" aria-label="Beispiel zu '+p[0]+' zeigen">'+p[0]+'</div><span class="strich"></span><span class="sol">'+p[1]+'</span>';
+    var L=$('.L',r),sol=$('.sol',r);
+    L.onclick=function(){sol.classList.toggle('show')};L.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();L.onclick()}};
+    $('#acro').appendChild(r);
+  });
+  $('#acroSol').onclick=function(){var offen=$$('#acro .sol:not(.show)').length>0;$$('#acro .sol').forEach(function(s){s.classList.toggle('show',offen)})};
+
+  /* B: Zuordnen */
+  var ML=[['1','Plattengrenze'],['2','Tsunami'],['3','Krater'],['4','Erdbeben']];
+  var MR=[['A','Öffnung in der Erdkruste, durch die Lava austritt.'],['B','Bereich, an dem zwei Erdplatten aufeinandertreffen.'],['C','Entsteht durch Erdbeben unter dem Meer und verursacht Flutwellen.'],['D','Wird durch die Bewegung von Erdplatten ausgelöst und führt zu Erschütterungen.']];
+  var MSOL={'1':'B','2':'C','3':'A','4':'D'},pairs={},selL=null;
+  function mitems(){return $$('.mitem')}
+  function mclear(){mitems().forEach(function(x){x.classList.remove('sel','right','wrong')})}
+  ML.forEach(function(p){var d=document.createElement('button');d.className='mitem';d.setAttribute('data-k',p[0]);d.innerHTML='<b>'+p[0]+'</b>'+p[1];
+    d.onclick=function(){$$('#mLeft .mitem').forEach(function(x){x.classList.remove('sel')});selL=p[0];d.classList.add('sel')};$('#mLeft').appendChild(d)});
+  MR.forEach(function(p){var d=document.createElement('button');d.className='mitem';d.setAttribute('data-k',p[0]);d.innerHTML='<b>'+p[0]+'</b>'+p[1];
+    d.onclick=function(){if(!selL)return;for(var a in pairs)if(pairs[a]===p[0])delete pairs[a];pairs[selL]=p[0];selL=null;mclear();drawLines()};$('#mRight').appendChild(d)});
+  function drawLines(){
+    var m=$('#match');if(!m||!m.offsetWidth)return;
+    var svg=$('#matchSvg'),box=m.getBoundingClientRect(),sc=box.width/m.offsetWidth||1,h='';
+    for(var a in pairs){
+      var L=$('#mLeft .mitem[data-k="'+a+'"]').getBoundingClientRect(),R=$('#mRight .mitem[data-k="'+pairs[a]+'"]').getBoundingClientRect();
+      var x1=(L.right-box.left)/sc,y1=(L.top+L.height/2-box.top)/sc,x2=(R.left-box.left)/sc,y2=(R.top+R.height/2-box.top)/sc;
+      h+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="#7C2F1C" stroke-width="5" stroke-linecap="round"/><circle cx="'+x1+'" cy="'+y1+'" r="7" fill="#7C2F1C"/><circle cx="'+x2+'" cy="'+y2+'" r="7" fill="#7C2F1C"/>';
+    }
+    svg.innerHTML=h;
+  }
+  function pruefen(){for(var a in pairs){var ok=MSOL[a]===pairs[a];$('#mLeft .mitem[data-k="'+a+'"]').classList.add(ok?'right':'wrong');$('#mRight .mitem[data-k="'+pairs[a]+'"]').classList.add(ok?'right':'wrong')}}
+  $('#mCheck').onclick=pruefen;
+  $('#mReset').onclick=function(){pairs={};selL=null;mclear();drawLines()};
+  $('#mSolve').onclick=function(){pairs={};for(var k in MSOL)pairs[k]=MSOL[k];mclear();drawLines();pruefen()};
+  window.addEventListener('resize',function(){requestAnimationFrame(drawLines)});
+
+  /* C: Vulkan */
+  ['Magma','Magmakammer','Druck','Schlot','Krater','Asche','Lava'].forEach(function(t){
+    var c=document.createElement('button');c.className='vchip';c.textContent=t;
+    c.onclick=function(){
+      c.classList.toggle('on');var on=c.classList.contains('on');
+      $$('#volcano .lbl[data-k="'+t+'"]').forEach(function(l){l.classList.toggle('show',on)});
+      $$('#volcano .part').forEach(function(p){p.classList.remove('hl')});
+      if(on)$$('#volcano .part[data-k="'+t+'"]').forEach(function(p){p.classList.add('hl')});
+      if(t==='Magma'&&on)$('#kammer').classList.add('hl');
+    };
+    $('#vchips').appendChild(c);
+  });
+  $('#erupt').onclick=function(){var v=$('#volcano');v.classList.remove('erupt');void v.getBoundingClientRect();v.classList.add('erupt')};
+  $('#allLbl').onclick=function(){var alle=$$('#vchips .vchip:not(.on)').length>0;$$('#vchips .vchip').forEach(function(c){c.classList.toggle('on',alle)});$$('#volcano .lbl').forEach(function(l){l.classList.toggle('show',alle)})};
+  $('#muster').onclick=function(){$('#musterTxt').classList.toggle('show')};
+
+  /* Karte lokalisieren: Treffer als Anteil am Bild (unabhängig von der Anzeigegröße) */
+  var MAPS=[
+    {src:'bilder/europa-karte.jpg',alt:'Politische Karte von Europa mit Staaten und Meeren',w:700,h:315,task:'<b>Lokalisiere</b> auf der Karte: Wo liegt Italien?',hit:function(x,y){return x>.37&&x<.53&&y>.66},sol:[.445,.78],ok:'Richtig: Das ist Italien. Weiter nach Sizilien.'},
+    {src:'bilder/karte-sizilien.jpg',alt:'Reliefkarte von Sizilien',w:408,h:480,task:'<b>Lokalisiere</b> auf der Karte von Sizilien den Ätna.',hit:function(x,y){return Math.hypot(x-.804,(y-.323)*1.17)<.075},sol:[.804,.323],ok:'Genau: Hier liegt der Ätna, der größte aktive Vulkan Europas.'}
+  ];
+  var ms=0,mb=$('#mapBox');
+  function ring(p){var r=document.createElement('div');r.className='ring';r.style.left=p[0]*100+'%';r.style.top=p[1]*100+'%';mb.appendChild(r)}
+  function loadMap(i){
+    ms=i;var M=MAPS[i];$('#mapImg').src=M.src;$('#mapImg').alt=M.alt;mb.style.width=M.w+'px';mb.style.height=M.h+'px';
+    $('#mapTask').firstChild.innerHTML=M.task;$('#mapFb').textContent='';$('#mapStep').textContent=i+1;
+    $$('.pin,.ring',mb).forEach(function(p){p.remove()});$('#mapNext').style.display=i===0?'':'none';
+  }
+  mb.addEventListener('click',function(e){
+    var b=mb.getBoundingClientRect(),x=(e.clientX-b.left)/b.width,y=(e.clientY-b.top)/b.height;
+    $$('.pin',mb).forEach(function(p){p.remove()});
+    var p=document.createElement('div');p.className='pin';p.style.left=x*100+'%';p.style.top=y*100+'%';mb.appendChild(p);
+    var fb=$('#mapFb');
+    if(MAPS[ms].hit(x,y)){fb.textContent=MAPS[ms].ok;fb.className='fb good';if(ms===1&&!$('.ring',mb))ring(MAPS[1].sol)}
+    else{fb.textContent='Noch nicht. Versuche es noch einmal.';fb.className='fb warn'}
+  });
+  $('#mapNext').onclick=function(){loadMap(1)};$('#mapReset').onclick=function(){loadMap(0)};
+  $('#mapSolve').onclick=function(){$$('.ring',mb).forEach(function(p){p.remove()});ring(MAPS[ms].sol);var fb=$('#mapFb');fb.textContent=MAPS[ms].ok;fb.className='fb good'};
+  loadMap(0);
+
+  /* Positionslinie */
+  function renderPos(p){
+    var id=p.getAttribute('data-id'),alt=p.getAttribute('data-alt'),lin=$('.linie',p);
+    $$('.m,.avg',lin).forEach(function(m){m.remove()});
+    function mark(x,cls){var m=document.createElement('span');m.className='m'+(cls?' '+cls:'');m.textContent='✕';m.style.left=x+'%';lin.appendChild(m)}
+    function mean(arr,cls,txt){if(!arr.length)return;var a=document.createElement('span');a.className='avg '+cls;a.style.left=(arr.reduce(function(s,v){return s+v},0)/arr.length)+'%';a.innerHTML='<span>'+txt+'</span>';lin.appendChild(a)}
+    if(alt&&altAn)votes[alt].forEach(function(x){mark(x,'alt')});
+    votes[id].forEach(function(x){mark(x,'')});
+    if(alt&&vglAn){mean(votes[alt],'a1','Ø vorher');mean(votes[id],'a2','Ø jetzt')}
+    $$('[data-count="'+id+'"]',p).forEach(function(c){var n=votes[id].length;c.textContent=n+(n===1?' Kreuz':' Kreuze')});
+  }
+  function renderAll(){$$('.pos').forEach(renderPos)}
+  $$('.pos').forEach(function(p){
+    $('.linie',p).addEventListener('click',function(e){
+      var r=this.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*100;
+      votes[p.getAttribute('data-id')].push(Math.max(3,Math.min(97,x)));renderAll();
+    });
+  });
+  document.addEventListener('click',function(e){
+    var t;
+    if((t=e.target.closest('[data-reset]'))){votes[t.getAttribute('data-reset')]=[];renderAll()}
+    if((t=e.target.closest('[data-undo]'))){votes[t.getAttribute('data-undo')].pop();renderAll()}
+    if(e.target.closest('[data-altschalter]')){altAn=!altAn;renderAll()}
+    if(e.target.closest('[data-vergleich]')){vglAn=!vglAn;renderAll()}
+  });
+
+  /* Aufgabe und Arbeitsphase: Schritt hervorheben */
+  $$('#steps .step').forEach(function(s){s.onclick=function(){$$('#steps .step').forEach(function(x){x.classList.remove('on')});s.classList.add('on')}});
+  $$('#tps .tpsrow').forEach(function(s){
+    s.onclick=function(){$$('#tps .tpsrow').forEach(function(x){x.classList.remove('on')});s.classList.add('on')};
+    s.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();s.onclick()}};
+  });
+
+  /* Sicherung: Stichpunkte der Klasse */
+  var HINTS={
+    C:['fruchtbare Böden aus Vulkanasche und Lava (M1, M3)','Asche enthält viele Nährstoffe (M3)','Boden speichert Wasser, auch in den trockenen Monaten (M3)','Anbau von Wein, Zitrusfrüchten, Oliven und Obst (M4)','Sizilien: 70 % der Zitrusfrüchte Italiens (M2)','Arbeit in der Lebensmittelindustrie: Wein, Olivenöl (M2)','Lava fließt meist langsam aus den Flanken (M1)'],
+    R:['Lavaströme zerstören Felder und Häuser (M4, M6)','Ascheregen bedeckt Felder und Pflanzen (M7)','Erdbeben (M7)','Evakuierungen: Menschen müssen ihre Höfe verlassen (M7)','Schutzwälle halten Lava nur kurze Zeit auf (M6)','Ausbrüche werden explosiver und gefährlicher (M1)']};
+  function renderCards(k){
+    var box=$('#cards'+k);box.innerHTML='';
+    HINTS[k].slice(0,hints[k]).forEach(function(t){var c=document.createElement('div');c.className='card hint';c.textContent=t;box.appendChild(c)});
+    cards[k].forEach(function(t,i){
+      var c=document.createElement('div');c.className='card';var s=document.createElement('span');s.textContent=t;c.appendChild(s);
+      var d=document.createElement('button');d.className='del';d.textContent='×';d.setAttribute('aria-label','Stichpunkt entfernen');d.onclick=function(){cards[k].splice(i,1);renderCards(k)};c.appendChild(d);box.appendChild(c);
+    });
+    box.scrollTop=box.scrollHeight;
+  }
+  ['C','R'].forEach(function(k){
+    var inp=$('#in'+k);
+    function add(){var v=inp.value.trim();if(!v)return;cards[k].push(v);inp.value='';renderCards(k)}
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')add()});
+    $('[data-add="'+k+'"]').onclick=add;
+    $('#hint'+k).onclick=function(){if(hints[k]<HINTS[k].length){hints[k]++;renderCards(k)}};
+    renderCards(k);
+  });
+
+  /* Feedback: Zähler je Bild */
+  var gx=[.431,.601,.771,.962],gy=[.01,.335,.66,.96],sb=$('#sheep');
+  for(var r=0;r<3;r++)for(var c=0;c<3;c++)(function(n,c,r){
+    var d=document.createElement('button');d.className='cell';d.setAttribute('aria-label','Bild '+n+' wählen');
+    d.style.left=gx[c]*100+'%';d.style.top=gy[r]*100+'%';d.style.width=(gx[c+1]-gx[c])*100+'%';d.style.height=(gy[r+1]-gy[r])*100+'%';
+    d.innerHTML='<span class="cnt"></span>';
+    d._u=function(){var v=sheep[n]||0,s=$('.cnt',d);s.textContent=v;s.style.display=v?'flex':'none'};
+    d.onclick=function(){sheep[n]=(sheep[n]||0)+1;d._u()};sb.appendChild(d);
+  })(r*3+c+1,c,r);
+  $('#sheepReset').onclick=function(){sheep={};$$('.cell',sb).forEach(function(c){c._u()})};
+
+  window.addEventListener('resize',fit);fit();
+  var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1);
+})();
+</script>
+<!-- Spielinhalte für die Belohnungsspiele (Memory, Quiz, Zuordnen, Wortsalat). ENTWURF: bitte fachlich gegenlesen.
+     Jedes Paar: ["Begriff", "kurze Erklärung", "Silben (optional)"]. Mindestens 4 Paare, besser 8. Nur Inhalte dieser Stunde. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Landwirtschaft am Ätna",
+ "paare": [
+ ["Ätna", "aktiver Vulkan auf Sizilien"],
+ ["fruchtbar", "Auf dem Boden wachsen viele Pflanzen gut", "frucht-bar"],
+ ["Nährstoffe", "Stoffe, die Pflanzen zum Wachsen brauchen", "Nähr-stof-fe"],
+ ["Mineralien", "Stoffe in Asche und Gestein, die den Boden fruchtbar machen", "Mi-ne-ra-li-en"],
+ ["Lavastrom", "Lava, die den Hang hinunterfließt", "Lava-strom"],
+ ["Ascheregen", "Vulkanasche fällt vom Himmel", "Asche-re-gen"],
+ ["Evakuierung", "Menschen verlassen ihre Häuser wegen einer Gefahr", "Eva-ku-ie-rung"],
+ ["Schutzwall", "Wall, der Lava aufhalten oder umlenken soll", "Schutz-wall"]
+ ]
+}
+</script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>
