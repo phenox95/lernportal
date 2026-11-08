@@ -520,29 +520,23 @@
     box.hidden = false;
   }
 
-  /* Übersicht Themenfelder × Ziele: eine Tabelle, Zelle = Anzahl Materialien (Zahl und Punkt, nie nur Farbe) */
-  function bneMatrix(visible) {
-    const faecher = ["Biologie", "Geografie"].filter(f => tfList(f).length);
-    if (!faecher.length) return "";
-    const kopf = bneZiele.map(z => `<th scope="col" class="vm-nr" title="${escapeHtml(z.titel)}"><span aria-hidden="true">${z.nr}</span><span class="sr-only">Ziel ${z.nr} ${escapeHtml(z.kurz)}</span></th>`).join("");
-    const zeilen = faecher.map(f => {
-      const rows = tfList(f).map(tf => {
+  /* Nach Themenfeld: nur Themenfelder mit Material, je Zeile die Ziele als Chips (Zahl in Fachfarbe, Name daneben) */
+  function bneNachThemenfeld(visible) {
+    const gruppen = ["Biologie", "Geografie"].map(f => {
+      const zeilen = tfList(f).map(tf => {
         const mine = visible.filter(p => p.subject === f && themeOf(p) === tfLabel(tf));
-        const zellen = bneZiele.map(z => {
-          const n = mine.filter(p => bneOf(p).includes(z.nr)).length;
-          return n ? `<td class="vm-zelle"><a class="vm-punkt ${f === "Biologie" ? "bio" : "geo"}" href="?ziel=${z.nr}" aria-label="${escapeHtml(f + " " + tf.nr + " " + (tf.kurz || tf.titel) + ", Ziel " + z.nr + " " + z.kurz + ": " + countText(n))}">${n}</a></td>` : '<td class="vm-zelle"></td>';
-        }).join("");
+        const nrs = [...new Set(mine.flatMap(bneOf))].sort((x, y) => x - y);
+        if (!nrs.length) return "";
         const href = root + "themenfeld/?fach=" + encodeURIComponent(f) + "&nr=" + encodeURIComponent(tf.nr);
-        return `<tr><th scope="row" class="vm-tf"><a href="${escapeHtml(href)}"><span class="tf-icon" data-tf-fach="${escapeHtml(f)}" data-tf-nr="${escapeHtml(tf.nr)}">${icon(tf.icon, 18)}</span><span>${escapeHtml(tf.nr + " " + (tf.kurz || tf.titel))}</span></a></th>${zellen}</tr>`;
+        const chips = nrs.map(n => {
+          const z = bneZiel(n);
+          return `<a class="tz-chip" href="?ziel=${n}"><span class="z-badge ${f === "Biologie" ? "bio" : "geo"}" aria-hidden="true">${n}</span>${escapeHtml(z ? z.kurz : "Ziel " + n)}<span class="sr-only"> (Ziel ${n}, ${escapeHtml(f)})</span></a>`;
+        }).join("");
+        return `<div class="tz-zeile"><a class="tz-tf" href="${escapeHtml(href)}"><span class="tf-icon" data-tf-fach="${escapeHtml(f)}" data-tf-nr="${escapeHtml(tf.nr)}">${icon(tf.icon, 18)}</span><span>${escapeHtml(tf.nr + " " + (tf.kurz || tf.titel))}</span></a><span class="tz-chips">${chips}</span></div>`;
       }).join("");
-      return `<tr class="vm-fach"><th scope="rowgroup" colspan="${bneZiele.length + 1}">${escapeHtml(f)}</th></tr>${rows}`;
+      return zeilen ? `<p class="label">${escapeHtml(f)}</p><div class="group">${zeilen}</div>` : "";
     }).join("");
-    return `<h2 class="vm-titel">Übersicht: Themenfelder und Ziele</h2>
-      <div class="vm-scroll" tabindex="0" role="region" aria-label="Übersicht Themenfelder und Nachhaltigkeitsziele, seitlich scrollbar">
-        <table class="vm"><caption class="sr-only">Anzahl der Materialien je Themenfeld und Nachhaltigkeitsziel</caption>
-        <thead><tr><th scope="col" class="vm-tf"><span class="sr-only">Themenfeld</span></th>${kopf}</tr></thead><tbody>${zeilen}</tbody></table>
-      </div>
-      <p class="vm-legende">Ein Punkt mit Zahl zeigt, wie viele Materialien das Ziel in diesem Themenfeld behandeln. Antippen öffnet das Ziel.</p>`;
+    return gruppen ? `<h2 class="bne-h">Nach Themenfeld</h2><p class="bne-sub">Diese Themenfelder haben schon Material mit Bezug zu den Zielen.</p>${gruppen}` : "";
   }
 
   /* ---------- BNE-Seite: Einstieg, Fragen und klickbare Grafik der Ziele; mit ?ziel=13 die Materialien beider Fächer ---------- */
@@ -608,7 +602,7 @@
     if (jahre && diff > 0) jahre.textContent = "Das Zieljahr ist 2030. Das ist in " + diff + (diff === 1 ? " Jahr." : " Jahren.");
 
     const matrix = $("#bne-matrix");
-    if (matrix) matrix.innerHTML = bneMatrix(visible);
+    if (matrix) matrix.innerHTML = bneNachThemenfeld(visible);
   }
 
   /* ---------- Start ---------- */
