@@ -107,20 +107,57 @@
   {
     "title": "Die Zelle – Stunde 2: Wie hat man die Zelle entdeckt?",
     "description": "Bildimpuls Kork, Fachbegriffe zuordnen, Zeitleiste zur Entdeckung, Merksatz.",
-    "type": "Interaktive Präsentation",
+    "type": "Materialseite",
     "path": "biologie/klasse-7/zelle/entdeckung-der-zelle/",
     "subject": "Biologie",
     "grade": "Klasse 7",
     "themenfeld": "3.1",
     "dauer": "45 Min.",
     "datum": "2026-11-08",
-    "reihe": "Zelle"
+    "reihe": "Zelle",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-7/zelle/entdeckung-der-zelle/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt Zellen",
+        "pfad": "biologie/klasse-7/zelle/entdeckung-der-zelle/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt"
+      }
+    ]
   },
   {
     "title": "Die Zelle – Stunde 3: Warum sind Zellen so unterschiedlich groß?",
-    "description": "Wer bin ich?, Zellen nach Größe ordnen, Größenstrahl, Form und Funktion, Nervenzelle.",
-    "type": "Interaktive Präsentation",
+    "description": "Wer bin ich?, acht Zelltypen aus M1 im Größenstrahl ordnen, Form und Funktion, Nervenzelle.",
+    "type": "Materialseite",
     "path": "biologie/klasse-7/zelle/zellgroesse-und-form/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-08",
+    "reihe": "Zelle",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-7/zelle/zellgroesse-und-form/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt Zellgröße und Funktion",
+        "pfad": "biologie/klasse-7/zelle/zellgroesse-und-form/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt"
+      }
+    ]
+  },
+  {
+    "title": "Die Zelle – Stunde 4: Mikroskopieren leicht gemacht",
+    "description": "Bauteile des Mikroskops beschriften, Bedienung ordnen, am Mikroskop-Trainer scharf stellen.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/mikroskopieren-leicht-gemacht/",
     "subject": "Biologie",
     "grade": "Klasse 7",
     "themenfeld": "3.1",
@@ -204,6 +241,11 @@
       {
         "titel": "Arbeitsblatt Zelle, Gewebe, Organ, Organismus",
         "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt"
+      },
+      {
+        "titel": "Arbeitsblatt Zelle, Gewebe, Organ, Organismus (Fassung 2)",
+        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/arbeitsblatt-2.pdf",
         "art": "Arbeitsblatt"
       }
     ]
