@@ -396,5 +396,25 @@
     "bne": [
       2
     ]
+  },
+  {
+    "title": "Gesundheit – Krankheit – Stunde 1: Was unterscheidet gesund von krank?",
+    "description": "Fallimpuls, Fragenentwicklung, WHO-Definition, zwei Fälle, Gesundheitsrad, Merksatz.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/gesundheit/gesund-oder-krank/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "45 Min.",
+    "datum": "2026-11-08",
+    "reihe": "Gesundheit – Krankheit",
+    "folge": 1,
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/gesundheit/gesund-oder-krank/praesentation/",
+        "art": "Präsentation"
+      }
+    ]
   }
 ]
