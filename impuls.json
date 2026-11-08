@@ -1,10 +1,96 @@
 {
   "aktiv": true,
   "label": "Impuls der Woche",
-  "klasse": "Klasse 8",
-  "frage": "Was fällt dir an diesem Blatt auf?",
-  "bild": "assets/img/impuls/blatt.webp",
-  "bildAlt": "Ein helles Blatt mit feinen Adern liegt auf dunklem Moos. Auf dem Blatt sitzen viele kleine Wassertropfen.",
-  "bildQuelle": "Foto: Quelle und Lizenz ergänzen",
-  "link": "biologie/"
+  "hinweis": "Wochenplan: Es gilt der letzte Eintrag, dessen Datum ab erreicht ist. Felder je Woche: ab, klasse, bne, frage, erklaerung, material (Pfade aus projects.json), optional bild, bildAlt, bildQuelle, link. Vorschau: ?impuls=JJJJ-MM-TT. Statt wochen geht auch ein einzelner Impuls mit frage, bild und link direkt auf oberster Ebene.",
+  "wochen": [
+    {
+      "ab": "2026-11-09",
+      "klasse": "Klasse 10",
+      "bne": [
+        12
+      ],
+      "frage": "Was steckt alles in deinem Handy?",
+      "erklaerung": "Ein Handy besteht aus vielen Rohstoffen, zum Beispiel Kupfer, Gold, Kobalt und Lithium. Sie kommen aus verschiedenen Ländern und werden in mehreren Schritten verarbeitet. Zusammengebaut wird es oft wieder woanders. So entsteht ein Netz über die ganze Welt.",
+      "material": [
+        "geografie/klasse-10/globalisierung/globalisierung-als-netz/"
+      ]
+    },
+    {
+      "ab": "2026-11-16",
+      "klasse": "Klasse 9",
+      "bne": [
+        3
+      ],
+      "frage": "Impfen: Deine Entscheidung oder die aller?",
+      "erklaerung": "Wer sich impfen lässt, schützt sich selbst. Bei manchen Krankheiten schützt er auch andere, zum Beispiel Babys, die noch nicht geimpft werden können. Darum ist Impfen nicht nur Privatsache. Wir sammeln Gründe dafür und dagegen.",
+      "material": [
+        "biologie/klasse-9/gesundheit/impfen/"
+      ]
+    },
+    {
+      "ab": "2026-11-23",
+      "klasse": "Klasse 9",
+      "bne": [
+        7
+      ],
+      "frage": "Windrad vor deiner Haustür: Ja oder nein?",
+      "erklaerung": "Windräder erzeugen Strom ohne Abgase. Manche Anwohner stört der Lärm oder der Blick auf die Landschaft. Beide Seiten haben Argumente. Wir prüfen sie und urteilen selbst.",
+      "material": [
+        "geografie/klasse-9/ressourcen/erneuerbare-energien/"
+      ]
+    },
+    {
+      "ab": "2026-11-30",
+      "klasse": "Klasse 7",
+      "bne": [
+        8
+      ],
+      "frage": "Urlaub auf dem Vulkan: Wer profitiert, wer riskiert?",
+      "erklaerung": "Zum Ätna kommen viele Touristen. Das bringt Arbeit und Geld. Gleichzeitig ist der Vulkan aktiv. Wer vor Ort wohnt, trägt das Risiko. Wir fragen: Für wen lohnt sich das?",
+      "material": [
+        "geografie/klasse-7/risikoraeume/aetna-tourismus/"
+      ]
+    },
+    {
+      "ab": "2026-12-07",
+      "klasse": "Klasse 7",
+      "bne": [
+        2
+      ],
+      "frage": "Warum wachsen Wein und Obst an einem aktiven Vulkan?",
+      "erklaerung": "Vulkanasche und Lava verwittern zu fruchtbarem Boden. Deshalb lohnt sich Landwirtschaft am Ätna, trotz des Risikos. Wir wägen Chancen und Risiken ab.",
+      "material": [
+        "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/"
+      ]
+    },
+    {
+      "ab": "2026-12-14",
+      "klasse": "Klasse 9",
+      "bne": [
+        13,
+        7
+      ],
+      "frage": "Heizen, Fahren, Strom: Wo kannst du etwas ändern und wo nicht?",
+      "erklaerung": "Energie brauchen wir für Strom, Wärme und Verkehr. Nicht jeder kann alles selbst ändern: Mieter entscheiden zum Beispiel nicht über die Heizung des Hauses. Es geht um Möglichkeiten und Grenzen.",
+      "material": [
+        "geografie/klasse-9/ressourcen/erneuerbare-energien/"
+      ]
+    },
+    {
+      "ab": "2027-01-11",
+      "bne": [
+        15
+      ],
+      "frage": "Wälder, Wiesen, Tiere: Was würde uns fehlen, wenn sie weg wären?",
+      "erklaerung": "Natur liefert uns viel, zum Beispiel Holz, Nahrung und saubere Luft. Wir sammeln, was davon wir im Alltag nutzen, ohne es zu merken."
+    },
+    {
+      "ab": "2027-01-18",
+      "bne": [
+        11
+      ],
+      "frage": "Wie wollen wir in Berlin in 20 Jahren wohnen und fahren?",
+      "erklaerung": "Städte wachsen, und alle wollen Platz: zum Wohnen, Arbeiten und Fahren. Wir sammeln Wünsche und prüfen, welche sich vertragen und welche nicht."
+    }
+  ]
 }

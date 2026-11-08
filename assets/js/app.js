@@ -263,25 +263,50 @@
     });
   }
 
+  /* Impuls der Woche: entweder ein einzelner Impuls (frage, bild, link) oder ein Wochenplan "wochen".
+     Im Plan gilt der letzte Eintrag, dessen Datum "ab" erreicht ist. Mit ?impuls=2026-11-23 lässt sich eine Woche ansehen. */
+  function impulsWoche(data) {
+    if (!Array.isArray(data.wochen) || !data.wochen.length) return data;
+    const preview = new URLSearchParams(location.search).get("impuls");
+    const today = /^\d{4}-\d{2}-\d{2}$/.test(preview || "") ? preview : new Date().toISOString().slice(0, 10);
+    const wochen = data.wochen.filter(w => w && w.frage).sort((x, y) => String(x.ab || "").localeCompare(String(y.ab || "")));
+    const aktuell = wochen.filter(w => !w.ab || String(w.ab) <= today).pop() || wochen[0];
+    return aktuell ? Object.assign({ label: data.label }, aktuell) : null;
+  }
+
   function initImpuls() {
     const section = $("#impuls");
     if (!section) return;
-    fetch(root + "impuls.json")
-      .then(response => (response.ok ? response.json() : null))
-      .then(data => {
-        if (!data || data.aktiv !== true || !data.frage) return;
+    Promise.all([
+      fetch(root + "impuls.json").then(response => (response.ok ? response.json() : null)),
+      fetch(root + "bne.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}))
+    ])
+      .then(([raw, bne]) => {
+        const data = raw && raw.aktiv === true ? impulsWoche(raw) : null;
+        if (!data || !data.frage) return;
+        const ziele = bne && Array.isArray(bne.ziele) ? bne.ziele : [];
+        const zielNrs = (Array.isArray(data.bne) ? data.bne : []).map(Number).filter(n => ziele.some(z => z.nr === n));
+        const erstes = ziele.find(z => z.nr === zielNrs[0]);
         const label = [data.label || "Impuls der Woche", data.klasse].filter(Boolean).map(escapeHtml).join(" · ");
         const media = data.bild
           ? `<img src="${escapeHtml(resolvePath(data.bild))}" alt="${escapeHtml(data.bildAlt || "")}" loading="lazy">`
-          : `<div class="impuls-placeholder">${icon("photo", 32)}<span>Platz für eigenes Foto</span></div>`;
+          : erstes
+            ? `<div class="impuls-ziel">${icon("z" + erstes.nr, 56)}<span class="impuls-ziel-nr">Ziel ${erstes.nr}</span><span>${escapeHtml(erstes.kurz)}</span></div>`
+            : `<div class="impuls-placeholder">${icon("photo", 32)}<span>Platz für eigenes Foto</span></div>`;
         const caption = data.bildQuelle ? `<p class="impuls-caption">${escapeHtml(data.bildQuelle)}</p>` : "";
-        const link = data.link
-          ? `<a class="impuls-link" href="${escapeHtml(resolvePath(data.link))}">Material öffnen ${icon("arrow", 18)}</a>` : "";
+        const chips = zielNrs.length ? `<p class="impuls-ziele">${zielNrs.map(n => { const z = ziele.find(x => x.nr === n); return `<a class="tz-chip" href="${root}bne/?ziel=${n}"><span class="z-badge" aria-hidden="true">${n}</span>${escapeHtml(z.kurz)}<span class="sr-only"> (Nachhaltigkeitsziel ${n})</span></a>`; }).join("")}</p>` : "";
+        const erklaerung = data.erklaerung ? `<div class="impuls-erkl"><p class="label">Kurz erklärt</p><p>${escapeHtml(data.erklaerung)}</p></div>` : "";
+        const mats = (Array.isArray(data.material) ? data.material : []).map(pfad => {
+          const proj = projects.find(p => p.path === pfad);
+          return proj ? `<a class="impuls-link" href="${escapeHtml(resolvePath(proj.path))}">${escapeHtml(proj.title)} ${icon("arrow", 18)}</a>` : "";
+        }).filter(Boolean);
+        if (!mats.length && data.link) mats.push(`<a class="impuls-link" href="${escapeHtml(resolvePath(data.link))}">Material öffnen ${icon("arrow", 18)}</a>`);
+        const material = mats.length ? `<div class="impuls-material"><p class="label">Material</p>${mats.join("")}</div>` : "";
         section.innerHTML = `
           <p class="label">${label}</p>
           <div class="impuls">
             <div><div class="impuls-media">${media}</div>${caption}</div>
-            <div class="impuls-body"><p class="impuls-q">${escapeHtml(data.frage)}</p>${link}</div>
+            <div class="impuls-body"><p class="impuls-q">${escapeHtml(data.frage)}</p>${chips}${erklaerung}${material}</div>
           </div>`;
         section.hidden = false;
       })

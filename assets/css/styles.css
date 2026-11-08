@@ -457,3 +457,13 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .tz-chip { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 2.75rem; padding: 0 0.8rem 0 0.5rem; border: 1px solid var(--line); border-radius: 2rem; background: var(--surface); font-size: 0.9375rem; }
 .tz-chip:hover { border-color: var(--text); }
 @media (max-width: 40rem) { .tz-tf { flex-basis: 100%; } .tz-chips { flex-basis: 100%; } .tz-chip { max-width: 100%; } }
+
+/* Impuls der Woche mit Nachhaltigkeitsziel, Kurzerklärung und Material */
+.impuls-ziel { display: grid; justify-items: center; gap: 0.35rem; padding: 1.5rem; text-align: center; font-weight: 700; color: var(--text); }
+.impuls-ziel-nr { font-size: 2rem; letter-spacing: -0.03em; line-height: 1; }
+.impuls-ziele { margin: 0 0 0.9rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.impuls-erkl p:last-child { margin-bottom: 0.9rem; max-width: 36rem; }
+.impuls-erkl .label, .impuls-material .label { margin-bottom: 0.2rem; }
+.impuls-material .impuls-link { display: flex; }
+.impuls > div:first-child { display: flex; flex-direction: column; }
+.impuls-media { flex: 1; }
