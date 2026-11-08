@@ -20,7 +20,7 @@
    [data-matrix]    Tabelle mit td.m (antippen) und .summe
    [data-checkliste] .cp antippen hakt ab, .cz zählt
    [data-selbst]    „Ich kann“: .sb mit drei Knöpfen
-   #vl              Vorlesen-Knopf (Taste V), nutzt die Sprachausgabe des Browsers */
+   */
 (function () {
   "use strict";
   var buehne = document.getElementById("buehne"), stage = document.getElementById("stage");
@@ -33,7 +33,7 @@
     K = s || 1;
     stage.style.transform = "translate(-50%,-50%) scale(" + s + ")";
   }
-  var show = function (n) {
+  function show(n) {
     cur = Math.max(0, Math.min(slides.length - 1, n));
     slides.forEach(function (s, i) { s.classList.toggle("on", i === cur); });
     if (balken) balken.style.width = ((cur + 1) / slides.length * 100) + "%";
@@ -41,7 +41,7 @@
     if (zur) zur.disabled = cur === 0;
     if (vor) vor.disabled = cur === slides.length - 1;
     try { history.replaceState(null, "", "#" + (cur + 1)); } catch (e) { /* ohne Adresszeile */ }
-  };
+  }
   function tippt(t) { return t && (t.isContentEditable || /INPUT|TEXTAREA|SELECT/.test(t.tagName)); }
   document.addEventListener("keydown", function (e) {
     if (tippt(e.target) || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -421,31 +421,6 @@
     else if (/sicherung|abschluss/.test(t)) k = "si"; else if (/reflexion|exit|ausblick|selbst/.test(t)) k = "re";
     p.setAttribute("data-ph", k);
   });
-
-  /* ---------- Vorlesen (Sprachausgabe des Browsers, keine Daten verlassen das Gerät) ---------- */
-  (function () {
-    var knopf = document.getElementById("vl");
-    if (!knopf || !("speechSynthesis" in window)) { if (knopf) knopf.style.display = "none"; return; }
-    var sprich = false;
-    function text() {
-      var s = slides[cur], teile = [], gesehen = {};
-      [].forEach.call(s.querySelectorAll("h1,p,li,.fragekarte,.opt span,.nl>div,th,td,.wort span,figcaption,.sb .t"), function (e) {
-        if (e.closest(".badge,.phase,.tip,.ctl,.fb,[data-fragenfeld]") || e.offsetParent === null) return;
-        var t = (e.innerText || "").replace(/\s+/g, " ").trim();
-        if (t && !gesehen[t]) { gesehen[t] = 1; teile.push(t); }
-      });
-      return teile.join(". ");
-    }
-    function stopp() { try { speechSynthesis.cancel(); } catch (x) { /* nichts */ } sprich = false; knopf.classList.remove("an"); }
-    knopf.addEventListener("click", function () {
-      if (sprich) { stopp(); return; }
-      var u = new SpeechSynthesisUtterance(text()); u.lang = "de-DE"; u.rate = 0.92;
-      u.onend = u.onerror = function () { sprich = false; knopf.classList.remove("an"); };
-      sprich = true; knopf.classList.add("an"); speechSynthesis.cancel(); speechSynthesis.speak(u);
-    });
-    document.addEventListener("keydown", function (e) { if ((e.key === "v" || e.key === "V") && !tippt(e.target) && !e.ctrlKey && !e.metaKey) knopf.click(); });
-    var alt = show; show = function (n) { stopp(); alt(n); };
-  })();
 
   var h = parseInt((location.hash || "").replace("#", ""), 10);
   show(isNaN(h) ? 0 : h - 1);
