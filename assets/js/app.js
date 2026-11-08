@@ -586,9 +586,15 @@
         <span class="vn-text"><span class="vn-name">${escapeHtml(z ? z.kurz : "Ziel " + n)}</span>
         <span class="vn-sub">Ziel ${n} · Nachhaltigkeit · ${countText(zaehler.get(n))} hier</span></span></a>`, "vn-bne");
     });
-    box.innerHTML = `<h2 class="vn-titel">Vernetzung</h2>
+    const zahlen = [
+      tfAeste.length ? (tfAeste.length === 1 ? "1 Themenfeld" : tfAeste.length + " Themenfelder") : "",
+      bneAeste.length ? (bneAeste.length === 1 ? "1 Nachhaltigkeitsziel" : bneAeste.length + " Nachhaltigkeitsziele") : ""
+    ].filter(Boolean).join(" · ");
+    box.innerHTML = `<details class="vn-details">
+      <summary class="vn-summary"><h2 class="vn-titel">Vernetzung</h2><span class="vn-count">${escapeHtml(zahlen)}</span></summary>
       <div class="vn">${mitte}<ul class="vn-aeste">${tfAeste.join("")}${bneAeste.join("")}</ul></div>
-      <p class="vn-legende">Oben verbundene Themenfelder, darunter Nachhaltigkeitsziele (BNE) der Materialien dieses Themenfelds.</p>`;
+      <p class="vn-legende">Oben verbundene Themenfelder, darunter Nachhaltigkeitsziele (BNE) der Materialien dieses Themenfelds.</p>
+    </details>`;
     box.hidden = false;
   }
 
