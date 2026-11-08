@@ -87,6 +87,128 @@
     ]
   },
   {
+    "title": "Die Zelle – Stunde 1: Kennzeichen des Lebendigen",
+    "description": "Bilder zuordnen (lebt, lebt nicht, strittig), Kriterien sammeln, fünf Kennzeichen des Lebendigen.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/kennzeichen-des-lebendigen/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "datum": "2026-11-08",
+    "reihe": "Zelle",
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Das Virus ist in Stunde 1 ein Grenzfall des Lebendigen. In Klasse 9 geht es darum, wie Impfen vor Virus-Krankheiten schützt."
+      }
+    ]
+  },
+  {
+    "title": "Die Zelle – Stunde 2: Wie hat man die Zelle entdeckt?",
+    "description": "Bildimpuls Kork, Fachbegriffe zuordnen, Zeitleiste zur Entdeckung, Merksatz.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/entdeckung-der-zelle/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "datum": "2026-11-08",
+    "reihe": "Zelle"
+  },
+  {
+    "title": "Die Zelle – Stunde 3: Warum sind Zellen so unterschiedlich groß?",
+    "description": "Wer bin ich?, Zellen nach Größe ordnen, Größenstrahl, Form und Funktion, Nervenzelle.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/zellgroesse-und-form/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–E",
+    "datum": "2026-11-08",
+    "reihe": "Zelle"
+  },
+  {
+    "title": "Die Zelle – Stunde 5: Zwiebelzellen unter dem Mikroskop",
+    "description": "Schätzfrage, Feuchtpräparat herstellen, mikroskopisch zeichnen, Vergleich mit dem Schema.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/zwiebelzellen-mikroskopieren/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-08",
+    "reihe": "Zelle"
+  },
+  {
+    "title": "Die Zelle – Stunde 6: Mikroskopische Zeichnung und Pflanzenzelle",
+    "description": "Zwei Zeichnungen vergleichen, Gesamtvergrößerung, Bilder ordnen, Pflanzenzelle beschriften, Funktionskarten.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/mikroskopische-zeichnung/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-08",
+    "reihe": "Zelle"
+  },
+  {
+    "title": "Die Zelle – Stunde 7: Zellen bei Tieren",
+    "description": "Impuls Papier und Haut, Tierzelle benennen, Tier oder Pflanze?, Vergleichstabelle, Weiterdenken: Papier aus Zellwänden und der Wald.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/zellen-bei-tieren/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "datum": "2026-11-08",
+    "reihe": "Zelle",
+    "bne": [
+      12,
+      15
+    ]
+  },
+  {
+    "title": "Die Zelle – Stunde 8: Zelldifferenzierung",
+    "description": "Gewebekette als Impuls, Rollenkarten, Stellenbörse, Ebenenleiter, Exit-Quiz, Weiterdenken: Leben in der Höhe.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-7/zelle/zelldifferenzierung/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "datum": "2026-11-08",
+    "reihe": "Zelle"
+  },
+  {
+    "title": "Die Zelle – Stunde 9: Von der Zelle zum Organismus",
+    "description": "Bildreihen zu Magen und Pflanze ordnen, Zelle, Gewebe, Organ und Organismus unterscheiden, Tafelbild, Tisch-Quiz. Mit Präsentation und Arbeitsblatt.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-7/zelle/zelle-zum-organismus/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-08",
+    "reihe": "Zelle",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt Zelle, Gewebe, Organ, Organismus",
+        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt"
+      }
+    ]
+  },
+  {
     "title": "Fotosynthese – Stunde 1: Woher nimmt die Pflanze ihre Masse?",
     "description": "Impuls Van-Helmont-Versuch, Hypothesen, Wortgleichung der Fotosynthese und Aufgabe der Chloroplasten.",
     "type": "Materialseite",
@@ -110,30 +232,11 @@
         "art": "Arbeitsblatt",
         "stufe": 2
       }
-    ]
-  },
-  {
-    "title": "Von der Zelle zum Organismus",
-    "description": "Bildreihen zu Magen und Pflanze ordnen, Zelle, Gewebe, Organ und Organismus unterscheiden, Tafelbild, Tisch-Quiz. Mit Präsentation und Arbeitsblatt.",
-    "type": "Materialseite",
-    "path": "biologie/klasse-7/zelle/zelle-zum-organismus/",
-    "subject": "Biologie",
-    "grade": "Klasse 7",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "niveau": "E–G",
-    "datum": "2026-11-08",
-    "reihe": "Zelle",
-    "dateien": [
+    ],
+    "verweise": [
       {
-        "titel": "Präsentation zur Stunde",
-        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/praesentation/",
-        "art": "Präsentation"
-      },
-      {
-        "titel": "Arbeitsblatt Zelle, Gewebe, Organ, Organismus",
-        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/arbeitsblatt-1.pdf",
-        "art": "Arbeitsblatt"
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/",
+        "grund": "Biomasse speichert Sonnenenergie, die Pflanzen durch Fotosynthese gebunden haben."
       }
     ]
   },
@@ -251,92 +354,5 @@
     "bne": [
       2
     ]
-  },
-  {
-    "title": "Die Zelle – Stunde 1: Kennzeichen des Lebendigen",
-    "description": "Bilder zuordnen (lebt, lebt nicht, strittig), Kriterien sammeln, fünf Kennzeichen des Lebendigen.",
-    "type": "Interaktive Präsentation",
-    "path": "biologie/klasse-7/zelle/kennzeichen-des-lebendigen/",
-    "subject": "Biologie",
-    "grade": "Klasse 7",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "datum": "2026-11-08",
-    "reihe": "Zelle"
-  },
-  {
-    "title": "Die Zelle – Stunde 2: Wie hat man die Zelle entdeckt?",
-    "description": "Bildimpuls Kork, Fachbegriffe zuordnen, Zeitleiste zur Entdeckung, Merksatz.",
-    "type": "Interaktive Präsentation",
-    "path": "biologie/klasse-7/zelle/entdeckung-der-zelle/",
-    "subject": "Biologie",
-    "grade": "Klasse 7",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "datum": "2026-11-08",
-    "reihe": "Zelle"
-  },
-  {
-    "title": "Die Zelle – Stunde 3: Warum sind Zellen so unterschiedlich groß?",
-    "description": "Wer bin ich?, Zellen nach Größe ordnen, Größenstrahl, Form und Funktion, Nervenzelle.",
-    "type": "Interaktive Präsentation",
-    "path": "biologie/klasse-7/zelle/zellgroesse-und-form/",
-    "subject": "Biologie",
-    "grade": "Klasse 7",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "niveau": "D–E",
-    "datum": "2026-11-08",
-    "reihe": "Zelle"
-  },
-  {
-    "title": "Die Zelle – Stunde 5: Zwiebelzellen unter dem Mikroskop",
-    "description": "Schätzfrage, Feuchtpräparat herstellen, mikroskopisch zeichnen, Vergleich mit dem Schema.",
-    "type": "Interaktive Präsentation",
-    "path": "biologie/klasse-7/zelle/zwiebelzellen-mikroskopieren/",
-    "subject": "Biologie",
-    "grade": "Klasse 7",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "niveau": "D–F",
-    "datum": "2026-11-08",
-    "reihe": "Zelle"
-  },
-  {
-    "title": "Die Zelle – Stunde 6: Mikroskopische Zeichnung und Pflanzenzelle",
-    "description": "Zwei Zeichnungen vergleichen, Gesamtvergrößerung, Bilder ordnen, Pflanzenzelle beschriften, Funktionskarten.",
-    "type": "Interaktive Präsentation",
-    "path": "biologie/klasse-7/zelle/mikroskopische-zeichnung/",
-    "subject": "Biologie",
-    "grade": "Klasse 7",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "niveau": "D–F",
-    "datum": "2026-11-08",
-    "reihe": "Zelle"
-  },
-  {
-    "title": "Die Zelle – Stunde 7: Zellen bei Tieren",
-    "description": "Impuls Papier und Haut, Tierzelle benennen, Tier oder Pflanze?, Vergleichstabelle.",
-    "type": "Interaktive Präsentation",
-    "path": "biologie/klasse-7/zelle/zellen-bei-tieren/",
-    "subject": "Biologie",
-    "grade": "Klasse 7",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "datum": "2026-11-08",
-    "reihe": "Zelle"
-  },
-  {
-    "title": "Die Zelle – Stunde 8: Zelldifferenzierung",
-    "description": "Gewebekette als Impuls, Rollenkarten, Stellenbörse, Ebenenleiter von der Zelle zum Organismus, Exit-Quiz.",
-    "type": "Interaktive Präsentation",
-    "path": "biologie/klasse-7/zelle/zelldifferenzierung/",
-    "subject": "Biologie",
-    "grade": "Klasse 7",
-    "themenfeld": "3.1",
-    "dauer": "45 Min.",
-    "datum": "2026-11-08",
-    "reihe": "Zelle"
   }
 ]

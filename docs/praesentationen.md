@@ -96,7 +96,6 @@ Für Stunden mit Aufgaben zum Ausfüllen, Zuordnen und Prüfen gibt es **eine** 
 | Matrix | `<table data-matrix>` mit `td.m` und `.summe` | Merkmale ankreuzen, Summe je Zeile |
 | Checkliste | `[data-checkliste]` mit `.cp`, `.cz` | Punkte abhaken, Zähler |
 | „Ich kann“ | `[data-selbst]` mit `.sb` (drei Knöpfe) | Selbsteinschätzung in drei Stufen, nichts wird gespeichert |
-| Vorlesen | Knopf `#vl` (Taste V) | Browser-Sprachausgabe liest die Folie vor (Gerät, keine Übertragung) |
 | Phasenmarke | `<p class="phase">` | Farbe nach Phase (Do Now, Impuls, Erarbeitung, Sicherung, Reflexion) |
 
 Hinweise: Klassennamen `.nr` und `.hilfe` nicht verwenden (kollidieren mit `material.css`). Inhalte der Lehrkraft (Zielkorridor, Erwartungshorizont) kommen nicht in die Folien, nur Lösungen, die Schülerinnen und Schüler selbst per Knopf prüfen.

@@ -145,14 +145,11 @@ td.jn.ok{background:#e4f6e8;color:#1e7e3c}td.jn.bad{background:#fdeaea;color:#c0
 .fig-s img{max-height:215px;width:auto;margin:0 auto}
 @media print{.slide{padding:40px 50px}#nummer{display:none}}
 
-/* ===== Phasenmarke, Vorlesen ===== */
+/* ===== Phasenmarke ===== */
 .phase{display:inline-block;margin:-8px 0 8px;padding:3px 14px;border-radius:999px;background:var(--grey);color:#fff;font-size:17px;letter-spacing:.03em}
 .phase[data-ph=dn]{background:#F4B400;color:var(--ink)}.phase[data-ph=im]{background:var(--b)}.phase[data-ph=er]{background:var(--g)}
 .phase[data-ph=si]{background:var(--dk)}.phase[data-ph=re]{background:var(--o);color:var(--ink)}
 .dark .phase{color:#fff}
-#vl{position:absolute;right:14px;top:24px;width:46px;height:46px;border-radius:50%;border:0;background:var(--mint);color:var(--dk);cursor:pointer;display:grid;place-items:center;z-index:8;touch-action:manipulation}
-#vl svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-#vl.an{background:var(--y);color:var(--ink)}#vl:focus-visible{outline:4px solid var(--y);outline-offset:2px}
 
 /* ===== Kartenablage ===== */
 .pool{display:flex;flex-wrap:wrap;gap:10px;min-height:96px;padding:10px;border-radius:16px;background:var(--mint);align-items:flex-start}
