@@ -582,9 +582,9 @@
     const bneAeste = nrs.map(n => {
       const z = bneZiel(n);
       return ast(`<a class="vn-knoten" href="${root}bne/?ziel=${n}">
-        <span class="numeral bne-nr">${n}</span>
+        <span class="tf-icon">${icon("z" + n, 22)}</span>
         <span class="vn-text"><span class="vn-name">${escapeHtml(z ? z.kurz : "Ziel " + n)}</span>
-        <span class="vn-sub">Nachhaltigkeit · ${countText(zaehler.get(n))} hier</span></span></a>`, "vn-bne");
+        <span class="vn-sub">Ziel ${n} · Nachhaltigkeit · ${countText(zaehler.get(n))} hier</span></span></a>`, "vn-bne");
     });
     box.innerHTML = `<h2 class="vn-titel">Vernetzung</h2>
       <div class="vn">${mitte}<ul class="vn-aeste">${tfAeste.join("")}${bneAeste.join("")}</ul></div>
