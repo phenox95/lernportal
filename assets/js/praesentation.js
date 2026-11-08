@@ -67,6 +67,7 @@
       let ref = "";
       try { const r = new URL(document.referrer); if (r.origin === location.origin && r.pathname !== location.pathname) ref = r.href; } catch (x) { /* kein Referrer */ }
       if (ref) { e.preventDefault(); location.href = ref; }
+      else if (history.length > 1) { e.preventDefault(); history.back(); }     // Referrer fehlt (Browser-Einstellung, lokal geöffnet): Verlauf nutzen
     });
     dock.appendChild(haus);
     const voll = knopf("lp-pr-btn", "", "Vollbild (Taste F)");
