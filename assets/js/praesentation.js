@@ -60,8 +60,14 @@
     const haus = neu("a", "lp-pr-btn");
     haus.href = wurzel;
     haus.innerHTML = ICON.haus;                           // feste, eigene Zeichenkette
-    haus.setAttribute("aria-label", "Zurück zum Portal");
-    haus.title = "Zurück zum Portal";
+    haus.setAttribute("aria-label", "Zurück zur vorherigen Seite");
+    haus.title = "Zurück zur vorherigen Seite";
+    /* Zur Seite, von der die Präsentation geöffnet wurde (gleiche Herkunft). Ohne Vorgängerseite, etwa bei direktem Aufruf: Portal-Startseite (href). */
+    haus.addEventListener("click", (e) => {
+      let ref = "";
+      try { const r = new URL(document.referrer); if (r.origin === location.origin && r.pathname !== location.pathname) ref = r.href; } catch (x) { /* kein Referrer */ }
+      if (ref) { e.preventDefault(); location.href = ref; }
+    });
     dock.appendChild(haus);
     const voll = knopf("lp-pr-btn", "", "Vollbild (Taste F)");
     voll.innerHTML = ICON.voll;
