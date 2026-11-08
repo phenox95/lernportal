@@ -71,3 +71,21 @@ Die Klasse sammelt **gemeinsam** Sterne, solange die Lärmampel läuft und grün
 - Die Werkzeuge liegen außerhalb der Folie und werden nicht gedruckt. Striche gibt es nur im Browser und sie sind beim Neuladen weg.
 - Eigene Stift-, Timer- oder Ampelknöpfe in einer Präsentation entfallen, sonst gibt es sie doppelt. Vorhandene Timer, die Teil einer Aufgabenfolie sind (Ätna, Einzel- und Gruppenphase), dürfen bleiben.
 
+## Stunden-Bausteine (`stunde.css` und `stunde.js`)
+
+Für Stunden mit Aufgaben zum Ausfüllen, Zuordnen und Prüfen gibt es **eine** gemeinsame Datei-Kombination: `assets/css/stunde.css` (nach `praesentation.css` laden) und `assets/js/stunde.js` (am Ende des `body`, vor `praesentation.js`). Sie bringt das Blättern (Pfeile, Tasten, Skalierung der Bühne) und die Bausteine mit. Vorbild: `biologie/klasse-7/zelle/` (sieben Stunden). Der Seitenrahmen steht dort in jeder `index.html`, die Folien sind `<section class="slide">` mit `<p class="phase">` (Phase), `<h1 class="k">` (Titel) und `<span class="badge">` (Sozialform und Zeit).
+
+| Baustein | Markup | Verhalten |
+|---|---|---|
+| Zuordnen | `<div data-zuordnen>` mit `.bank` (Vorrat aus `.dg`), Zielen `.dz[data-ans]` (Alternativen mit `\|`), Knöpfen `.chk` `.rst` `.lsg` und `.fb` | Wörter ziehen oder antippen, Prüfen färbt Felder grün/rot, „Lösung“ setzt alles richtig |
+| ABC-Quiz | `<div data-quiz>` mit `.opt` (richtige Antwort `data-ok`, Rückmeldung in `data-fb`) und `.qfb` | Antippen zeigt sofort Rückmeldung |
+| Lösung zeigen | Knopf mit `data-zeige`, Inhalt in `.lsg-box`; in Tabellen `td.fill[data-l]` | schaltet die Lösung an der Folie ein |
+| Reihenfolge | `<div data-ordnen>` mit `figure[data-pos]` (je `.rang` und `.buch`) | Bilder der Reihe nach antippen, Prüfen |
+| Ankreuz-Tabelle | `<table data-wahl>` mit `td.w` | eine Wahl je Zeile |
+| Ja/Nein-Tabelle | `<div data-jn>` mit `td.jn[data-a]`, `.chk` `.rst` `.lsg` | antippen wechselt leer, ja, nein |
+| Karten aufdecken | `.aufdecken` mit `.vorn` und `.hinten` | Antippen deckt auf |
+| Rechner | `[data-gv]` mit `.gv-o`, `.gv-k`, `.gv-e` | Objektiv mal Okular |
+| Strichliste | `[data-strich]` mit `.tc` (`.tn`, `.tm`) | Antippen zählt hoch |
+| Eingabefelder | `contenteditable="true"` an `td`, `.kasten`, `.lueck` | Texte tippen, nichts wird gespeichert |
+
+Hinweise: Klassennamen `.nr` und `.hilfe` nicht verwenden (kollidieren mit `material.css`). Inhalte der Lehrkraft (Zielkorridor, Erwartungshorizont) kommen nicht in die Folien, nur Lösungen, die Schülerinnen und Schüler selbst per Knopf prüfen.

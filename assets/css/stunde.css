@@ -1,0 +1,146 @@
+/* Lernportal – Bausteine für Stunden-Präsentationen (zusammen mit praesentation-design.css und praesentation.css laden).
+   Aufbau: Phasenzeile, Aufgaben, Tabellen zum Ausfüllen, Zuordnen (Ziehen/Antippen), ABC-Quiz, Lösung zeigen, Reihenfolge, Ankreuz-Tabelle.
+   Skript dazu: assets/js/stunde.js. Farben und Schrift kommen aus praesentation-design.css. */
+
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+#nummer{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;font-size:18px;color:var(--grey);z-index:5}
+.slide.dark #nummer{color:#cfe}
+
+.phase{margin:-8px 0 6px;font-size:20px;font-weight:700;color:var(--g);letter-spacing:.03em}
+.dark .phase{color:var(--y)}
+h1.k{font-size:40px;margin-bottom:16px}
+.lead.s{font-size:26px;margin:0 0 12px}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:start}
+.split.eq2{grid-template-columns:1fr 1fr}.split.w{grid-template-columns:1fr 1.3fr}.split.n{grid-template-columns:1.4fr 1fr}
+.col{display:grid;gap:14px;align-content:start}
+.mint{background:var(--mint);border-radius:16px}.pad{padding:18px 22px}
+.mint h3,.karte h3{margin:0 0 8px;font-size:24px;color:var(--dk)}
+.mint p,.karte p{margin:0 0 6px;font-size:23px;line-height:1.4}
+.mint ul,.karte ul{margin:4px 0 0;padding-left:26px;font-size:22px;line-height:1.4}
+.slide .badge{top:30px}
+.task{grid-template-columns:auto 1fr auto;column-gap:12px;font-size:26px;margin:0 0 14px}
+.task.nn{grid-template-columns:1fr auto}
+.snr{min-width:26px}
+.task.s{font-size:22px;margin:0 0 8px}
+.snr{font-weight:700;color:var(--g)}
+.shilfe{font-size:22px;padding:14px 18px}.shilfe b{color:var(--g)}
+.shilfe.gelb{background:#FFF4D6}
+.frame img,.frame svg{display:block;width:100%;height:auto}
+.frame figcaption,.quelle{font-size:16px;color:var(--grey);margin:6px 0 0}
+figure{margin:0}
+.row{display:flex;gap:22px;align-items:flex-start}
+.row>*{flex:1;min-width:0}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.bilder4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.bilder4 figure{position:relative;text-align:center;font-weight:700;font-size:22px}
+.bilder4 img{width:100%;height:190px;object-fit:cover;display:block;border-radius:14px;margin-bottom:4px}
+.num{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--g);color:#fff;font-weight:700;font-size:24px;flex:none}
+.num.y{background:var(--y);color:var(--ink)}
+.nl{display:grid;gap:12px}.nl>div{display:flex;gap:14px;align-items:center;font-size:24px;line-height:1.3}
+.karte{background:var(--mint);border:3px solid transparent;border-radius:16px;padding:14px 18px}
+.karte.w{background:#fff;border-color:var(--g)}
+.niv{display:inline-block;color:#fff;font-weight:700;font-size:17px;letter-spacing:.05em;padding:4px 14px;border-radius:999px;margin:0 0 10px}
+.niv.n1{background:var(--g)}.niv.n2{background:var(--b)}.niv.n3{background:var(--o);color:var(--ink)}
+.merk{margin-top:14px;padding:20px 26px;font-size:28px;line-height:1.45;background:var(--mint);border-radius:16px}.merk b{color:var(--g)}
+.merk.dk{background:var(--dk);color:#fff}.merk.dk b{color:#fff}.merk.dk b.y{color:var(--y)}
+.dark .merk{background:rgba(255,255,255,.1)}
+.lueck{display:inline-block;min-width:150px;border-bottom:3px solid var(--g);padding:0 6px;outline:none;color:var(--dk);font-weight:700}
+.lueck:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.edit{border-bottom:2px dashed var(--grey);outline:none;min-height:1.4em}
+.edit:focus-visible{outline:3px solid var(--y);outline-offset:2px;border-bottom-color:transparent}
+.kasten{min-height:150px;background:#fff;border:3px dashed var(--g);border-radius:16px;padding:12px 16px;font-size:24px;line-height:1.4;outline:none}
+.kasten:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.wort{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.wort span{border:2px solid var(--g);border-radius:999px;padding:6px 18px;font-size:22px;font-weight:700;color:var(--dk);background:#fff}
+
+/* Tabellen (zum Ausfüllen) */
+table.tab{width:100%;border-collapse:separate;border-spacing:0;font-size:22px;line-height:1.3;border:2px solid var(--g);border-radius:12px;overflow:hidden;background:#fff}
+.tab th{background:var(--g);color:#fff;text-align:left;padding:8px 12px;font-size:20px}
+.tab td{border-top:1px solid #c7d6cd;padding:7px 12px;vertical-align:middle;min-height:44px}
+.tab td+td,.tab th+th{border-left:1px solid #c7d6cd}
+.tab td[contenteditable],.tab td.fill{outline:none;background:#fcfffd}
+.tab td[contenteditable]:focus-visible{outline:3px solid var(--y);outline-offset:-3px}
+.tab.hoch td{height:54px}
+.tab td.nz{width:56px;text-align:center;font-weight:700;color:var(--g)}
+.tab td.z{text-align:center}
+.tab td.fill:empty::before{content:attr(data-l);color:#1e7e3c;font-weight:700;visibility:hidden}
+.zeigt .tab td.fill:empty::before{visibility:visible}
+.tab td.lsg span{visibility:hidden}.zeigt .tab td.lsg span{visibility:visible}
+.tab td .dz{min-height:36px;border-width:2px;padding:0 4px}
+.tab td .dz .dg{font-size:19px;padding:3px 10px}
+.tab td:has(.dz){padding:4px 10px}
+
+/* Ankreuz-Tabelle */
+td.w{cursor:pointer;text-align:center;user-select:none;touch-action:manipulation;font-size:28px;font-weight:700;width:130px}
+td.w:hover{background:var(--mint)}td.w.an{background:var(--g);color:#fff}
+td.w.an::before{content:"✓"}
+.tab.ak td:first-child{font-weight:700}
+
+/* Lösung zeigen */
+.lsg-box{display:none}.zeigt .lsg-box{display:block}
+.zeigt .lsg-weg{display:none}
+.b.lz{background:var(--y);color:var(--ink)}
+
+/* Zuordnen (Ziehen oder Antippen) */
+.dg{display:inline-block;background:var(--g);color:#fff;font-weight:700;font-size:23px;padding:8px 18px;border-radius:12px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;position:relative;z-index:2;line-height:1.25}
+.dg.sel{outline:5px solid var(--y)}.dg.drag{z-index:60;box-shadow:0 10px 24px rgba(0,0,0,.4);cursor:grabbing}
+.dz{min-height:54px;border:3px dashed var(--grey);border-radius:12px;display:flex;align-items:center;justify-content:center;background:#fff;position:relative}
+.dz.ok{border:3px solid #2e9e4f;background:#e4f6e8}.dz.bad{border:3px solid #d62828;background:#fdeaea}
+.bank{display:flex;flex-wrap:wrap;gap:10px;min-height:62px;padding:8px;border-radius:14px;background:var(--mint);margin-top:12px;align-items:center}
+.bank.col{flex-direction:column;align-items:stretch;margin-top:0}.bank.col .dg{text-align:center}
+.ctl{display:flex;gap:14px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.ov-wrap{position:relative;line-height:0}
+.ov-wrap .dz.ov{position:absolute;transform:translate(-50%,-50%);min-height:0;height:40px;min-width:120px;background:rgba(255,255,255,.95);border-width:2px;line-height:1.25}
+.ov-wrap .dz.ov .dg{font-size:17px;padding:3px 8px;border-radius:8px;white-space:nowrap}
+.zk{display:grid;gap:10px;align-content:start}
+.zk .karte{display:grid;grid-template-columns:44px 1fr 210px;gap:12px;align-items:center;padding:8px 12px}
+.zk .karte p{font-size:19px;margin:0;line-height:1.3}
+.zk .dz{min-height:46px;border-width:2px}
+
+/* ABC-Quiz */
+.fragekarte{background:var(--mint);border-radius:16px;padding:22px 28px;font-size:30px;line-height:1.35;margin-bottom:22px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.opt{font:inherit;text-align:left;background:#fff;border:3px solid var(--g);border-radius:16px;padding:16px 20px;display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;cursor:pointer;color:var(--ink);font-size:25px;line-height:1.3;min-height:150px;touch-action:manipulation}
+.opt b{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--g);color:#fff;font-size:24px}
+.opt:focus-visible{outline:4px solid var(--y);outline-offset:3px}
+.opt.ok{border-color:#2e9e4f;background:#e4f6e8}.opt.ok b{background:#2e9e4f}
+.opt.bad{border-color:#d62828;background:#fdeaea}.opt.bad b{background:#d62828}
+.qfb{font-size:24px;line-height:1.4;margin:16px 0 0;font-weight:700;min-height:2.8em}
+.qfb.good{color:#1e7e3c}.qfb.warn{color:#c0392b}
+
+/* Reihenfolge (nacheinander antippen) */
+.ord{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.ord figure{position:relative;text-align:center;cursor:pointer;touch-action:manipulation;border:4px solid transparent;border-radius:18px;padding:6px;font-weight:700;font-size:24px}
+.ord figure img{width:100%;display:block;border-radius:12px;background:#fff}
+.ord figure.ok{border-color:#2e9e4f}.ord figure.bad{border-color:#d62828}
+.ord figure .rang{position:absolute;right:10px;top:10px;min-width:48px;height:48px;border-radius:24px;background:var(--y);color:var(--ink);display:none;place-items:center;font-size:26px;font-weight:700;padding:0 8px}
+.ord figure.gew .rang{display:grid}
+.ord figure .buch{position:absolute;left:10px;top:10px;width:44px;height:44px;border-radius:50%;background:var(--dk);color:#fff;display:grid;place-items:center;font-size:24px}
+
+/* Aufdecken (Karten antippen) */
+.aufdecken{cursor:pointer;touch-action:manipulation}
+.aufdecken .hinten{display:none}.aufdecken.auf .hinten{display:block}.aufdecken.auf .vorn{display:none}
+
+.bilder4.mini{grid-template-columns:repeat(8,1fr);gap:8px;margin-bottom:22px}
+.bilder4.mini img{height:84px;border-radius:10px}.bilder4.mini figure{font-size:16px}
+.dz.il{display:inline-flex;min-width:190px;min-height:44px;vertical-align:middle;margin:0 4px}
+.dz.il .dg{font-size:22px}
+.zk4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
+.zk4 .karte{display:grid;gap:8px;padding:12px 14px;align-content:start}
+.zk4 .karte .kopf{display:flex;gap:10px;align-items:center}.zk4 .karte p{font-size:17px;line-height:1.3;margin:0}
+.zk4 .dz{min-height:44px;border-width:2px}
+td.jn{cursor:pointer;text-align:center;user-select:none;touch-action:manipulation;font-size:24px;font-weight:700;width:170px}
+td.jn.ok{background:#e4f6e8;color:#1e7e3c}td.jn.bad{background:#fdeaea;color:#c0392b}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tc{position:relative;background:var(--mint);border-radius:14px;padding:12px 8px 14px;text-align:center;font-size:24px;font-weight:700;cursor:pointer;user-select:none;touch-action:manipulation}
+.tc .tn{display:block;font-size:46px;color:var(--g)}
+.tm{position:absolute;right:6px;top:6px;border:0;background:#fff;border-radius:50%;width:36px;height:36px;font-size:22px;font-weight:700;cursor:pointer;color:var(--grey)}
+.gv{display:flex;gap:12px;align-items:center;font-size:30px;font-weight:700;flex-wrap:wrap}
+.gv input{font:700 28px Andika,Verdana,sans-serif;width:96px;padding:6px 10px;border:3px solid var(--g);border-radius:12px;text-align:center;color:var(--ink)}
+.gv .gv-e{background:var(--g);color:#fff;border-radius:12px;padding:6px 18px;min-width:150px;text-align:center}
+.cr{display:flex;align-items:center;gap:6px}
+.tab.eng td{height:44px}
+.fig-s img{max-height:215px;width:auto;margin:0 auto}
+@media print{.slide{padding:40px 50px}#nummer{display:none}}
