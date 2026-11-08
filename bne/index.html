@@ -28,17 +28,85 @@
   </header>
 
   <main>
-    <section class="fach-intro">
+    <section class="fach-intro bne-hero">
       <div class="wrap">
         <a class="back-link" id="bne-back" href="../"><span data-icon="back" data-size="20" aria-hidden="true"></span>Lernportal</a>
-        <p class="eyebrow">Fächerübergreifend</p>
-        <h1 class="title" id="bne-title">Nachhaltigkeit (BNE)</h1>
-        <p class="lead" id="bne-lead">Biologie und Geografie nach Zielen für nachhaltige Entwicklung. Wähle ein Ziel.</p>
+        <p class="eyebrow" id="bne-eyebrow">Nachhaltigkeit (BNE)</p>
+        <h1 class="title" id="bne-title">17 Ziele. Nur eins heißt Klimaschutz.</h1>
+        <p class="lead" id="bne-lead">Es geht um Handy, Hunger, Schule, Jobs und die Frage, wer was bekommt. Ohne Moralpredigt.</p>
+        <a class="bne-cta" id="bne-cta" href="#ziele">Ziele ansehen<span data-icon="down" data-size="20" aria-hidden="true"></span></a>
       </div>
     </section>
     <div class="wrap">
       <p class="result-count" id="result-count" aria-live="polite"></p>
-      <div id="project-list"><p class="loading-message">Materialien werden geladen …</p></div>
+
+      <div id="bne-overview">
+        <section class="bne-satt" aria-labelledby="h-satt">
+          <h2 id="h-satt">Schon genug von Klima, Umwelt und Nachhaltigkeit?</h2>
+          <p>Verstehen wir. Du hast das Thema vielleicht schon zu oft gehört. Deshalb gilt hier:</p>
+          <ul class="bne-regeln">
+            <li><strong>Keine Moralpredigt.</strong> Niemand sagt dir, was du denken musst.</li>
+            <li><strong>Keine Schuldgefühle.</strong> Es geht um Fälle, Zahlen und Interessen.</li>
+            <li><strong>Immer zwei Seiten.</strong> Du darfst widersprechen.</li>
+          </ul>
+        </section>
+
+        <section class="bne-block" aria-labelledby="h-fragen">
+          <h2 class="bne-h" id="h-fragen">Fünf Fragen, die dich etwas angehen</h2>
+          <p class="bne-sub">Jede Frage führt zu einem Ziel und zu Material dazu.</p>
+          <ul class="bne-fragen">
+            <li><a class="bne-frage" href="?ziel=12" data-ziel="12"><span class="bne-frage-t">Wer verdient an deinem T-Shirt?</span><span class="bne-frage-m">Ziel 12</span></a></li>
+            <li><a class="bne-frage" href="?ziel=8" data-ziel="8"><span class="bne-frage-t">Urlaub auf dem Vulkan: Wer profitiert, wer riskiert?</span><span class="bne-frage-m">Ziel 8</span></a></li>
+            <li><a class="bne-frage" href="?ziel=7" data-ziel="7"><span class="bne-frage-t">Windrad vor der Haustür: Ja oder nein?</span><span class="bne-frage-m">Ziel 7</span></a></li>
+            <li><a class="bne-frage" href="?ziel=3" data-ziel="3"><span class="bne-frage-t">Impfen: Wer entscheidet das?</span><span class="bne-frage-m">Ziel 3</span></a></li>
+            <li><a class="bne-frage" href="?ziel=2" data-ziel="2"><span class="bne-frage-t">Warum bleiben Bauern an einem Vulkan?</span><span class="bne-frage-m">Ziel 2</span></a></li>
+          </ul>
+        </section>
+
+        <section class="bne-block" id="ziele" aria-labelledby="h-ziele">
+          <div class="bne-kopf">
+            <h2 class="bne-h" id="h-ziele">Alle 17 Ziele: Tippe eins an</h2>
+            <button type="button" class="bne-zufall-btn" id="bne-zufall-btn">Überrasch mich</button>
+          </div>
+          <div class="bne-zufall" id="bne-zufall" aria-live="polite" hidden></div>
+          <div id="bne-grafik"><p class="loading-message">Ziele werden geladen …</p></div>
+          <p class="bne-legende" id="bne-legende"></p>
+        </section>
+
+        <section class="bne-block" aria-labelledby="h-erklaerung">
+          <h2 class="bne-h" id="h-erklaerung">Worum geht es überhaupt?</h2>
+          <div class="bne-erkl">
+            <article>
+              <h3>Die 17 Ziele</h3>
+              <p>2015 haben 193 Staaten der UN einen Plan beschlossen: 17 Ziele für eine bessere Welt bis 2030. Sie heißen Ziele für nachhaltige Entwicklung. Auf Englisch: SDGs.</p>
+              <p><strong>Nachhaltig</strong> heißt: Heute so leben und wirtschaften, dass es für alle reicht. Und für alle, die nach uns kommen, auch noch.</p>
+            </article>
+            <article>
+              <h3>Und BNE?</h3>
+              <p>BNE heißt <strong>Bildung für nachhaltige Entwicklung</strong>. Du lernst nicht, was du denken sollst. Du lernst, Fälle zu prüfen, Interessen zu vergleichen und dir ein eigenes Urteil zu bilden.</p>
+              <p>In Biologie und Geografie machen wir das an echten Beispielen.</p>
+            </article>
+          </div>
+          <h3 class="bne-warum-h">Warum soll mich das interessieren?</h3>
+          <ul class="bne-warum">
+            <li><strong>Es ist deine Zeit.</strong> <span id="bne-jahre">Das Zieljahr ist 2030.</span></li>
+            <li><strong>Es geht um mehr als Umwelt.</strong> Die meisten Ziele handeln von Menschen: Essen, Gesundheit, Schule, Arbeit, Frieden.</li>
+            <li><strong>Du entscheidest schon jetzt mit.</strong> Du kaufst ein, nutzt Strom, bewegst dich durch die Stadt. Bald wählst du und arbeitest.</li>
+            <li><strong>Es gibt Streit, und das ist gut so.</strong> Windrad oder Aussicht, billiges Handy oder faire Löhne: Wir üben, beide Seiten zu verstehen.</li>
+            <li><strong>Und ja, wir liegen zurück.</strong> UN-Berichte zeigen: Bei vielen Zielen sind wir hinter dem Plan. Deshalb braucht es Leute, die rechnen und urteilen können, nicht nur Parolen kennen.</li>
+          </ul>
+          <details class="bne-lehrkraft">
+            <summary>Für Lehrkräfte</summary>
+            <p>Bezug im RLP: übergreifendes Thema „Nachhaltige Entwicklung/Lernen in globalen Zusammenhängen“ (Teil B). Kontroverse Themen werden nach dem Beutelsbacher Konsens behandelt: Überwältigungsverbot, Kontroversität abbilden, Schülerinteressen. Ein Ziel steht nur bei einem Material, wenn Aufgabe oder Urteil der Stunde es selbst behandeln.</p>
+          </details>
+        </section>
+
+        <section class="bne-block">
+          <div id="bne-matrix"></div>
+        </section>
+      </div>
+
+      <div id="project-list"></div>
     </div>
   </main>
 
