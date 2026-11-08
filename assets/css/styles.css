@@ -237,7 +237,8 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 
 /* Themenfelder-Überblick der Fachseiten: kompakte Kacheln (Links zur Themenfeld-Seite) */
 .tf { margin-top: 1.5rem; }
-.tf-group { margin-top: 0.75rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 0.5rem; }
+.tf-group { margin-top: 0.75rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+@media (max-width: 40rem) { .tf-group { grid-template-columns: repeat(2, 1fr); } }
 .tf-head { grid-column: 1 / -1; margin: 0; font-size: 0.875rem; font-weight: 700; color: var(--text-2); }
 .tf-row {
   display: flex; flex-direction: column; align-items: flex-start; gap: 0.35rem; min-height: 7rem; padding: 0.75rem;
