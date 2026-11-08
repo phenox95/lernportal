@@ -97,7 +97,7 @@
     "dauer": "45 Min.",
     "niveau": "D–F",
     "datum": "2026-11-04",
-    "reihe": "Fotosynthese",
+    "reihe": "Zelle",
     "dateien": [
       {
         "titel": "Präsentation zur Stunde",
@@ -262,7 +262,7 @@
     "themenfeld": "3.1",
     "dauer": "45 Min.",
     "datum": "2026-11-08",
-    "reihe": "Die Zelle"
+    "reihe": "Zelle"
   },
   {
     "title": "Die Zelle – Stunde 2: Wie hat man die Zelle entdeckt?",
@@ -274,7 +274,7 @@
     "themenfeld": "3.1",
     "dauer": "45 Min.",
     "datum": "2026-11-08",
-    "reihe": "Die Zelle"
+    "reihe": "Zelle"
   },
   {
     "title": "Die Zelle – Stunde 3: Warum sind Zellen so unterschiedlich groß?",
@@ -287,7 +287,7 @@
     "dauer": "45 Min.",
     "niveau": "D–E",
     "datum": "2026-11-08",
-    "reihe": "Die Zelle"
+    "reihe": "Zelle"
   },
   {
     "title": "Die Zelle – Stunde 5: Zwiebelzellen unter dem Mikroskop",
@@ -300,7 +300,7 @@
     "dauer": "45 Min.",
     "niveau": "D–F",
     "datum": "2026-11-08",
-    "reihe": "Die Zelle"
+    "reihe": "Zelle"
   },
   {
     "title": "Die Zelle – Stunde 6: Mikroskopische Zeichnung und Pflanzenzelle",
@@ -313,7 +313,7 @@
     "dauer": "45 Min.",
     "niveau": "D–F",
     "datum": "2026-11-08",
-    "reihe": "Die Zelle"
+    "reihe": "Zelle"
   },
   {
     "title": "Die Zelle – Stunde 7: Zellen bei Tieren",
@@ -325,7 +325,7 @@
     "themenfeld": "3.1",
     "dauer": "45 Min.",
     "datum": "2026-11-08",
-    "reihe": "Die Zelle"
+    "reihe": "Zelle"
   },
   {
     "title": "Die Zelle – Stunde 8: Zelldifferenzierung",
@@ -337,6 +337,6 @@
     "themenfeld": "3.1",
     "dauer": "45 Min.",
     "datum": "2026-11-08",
-    "reihe": "Die Zelle"
+    "reihe": "Zelle"
   }
 ]
