@@ -453,3 +453,15 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .bne-lehrkraft p { max-width: 42rem; margin: 0.25rem 0 0; }
 #bne-matrix .vm-titel { margin-top: 0; }
 @media (prefers-reduced-motion: reduce) { .bne-frage, .z-kachel { transition: none; } .bne-frage:hover, .z-kachel:hover { transform: none; } }
+
+/* BNE-Seite, schlanke Fassung: Erklärung oben, Ziele mit farbiger Zahl darunter */
+.bne-erkl { grid-template-columns: 1fr; }
+@media (min-width: 46rem) { .bne-erkl-block .bne-erkl { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.bne-satt-zeile { margin: 1rem 0 0; color: var(--text-2); }
+.z-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 1.75rem; height: 1.75rem; padding: 0 0.4rem; border-radius: 1rem; background: var(--text-2); color: var(--surface); font-size: 0.9375rem; font-weight: 700; }
+.z-badge.bio { background: var(--bio); }
+.z-badge.geo { background: var(--geo); }
+.z-zaehler { gap: 0.35rem; }
+.z-leer { font-size: 0.875rem; font-weight: 400; }
+.bne-sub .z-z { margin-left: 0.6rem; }
+.bne-sub .z-badge { width: 1.5rem; min-width: 1.5rem; height: 1.5rem; font-size: 0.8125rem; }

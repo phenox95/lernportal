@@ -556,8 +556,8 @@
     const kacheln = bneZiele.map(z => {
       const m = zielMaterial(visible, z.nr);
       const zaehler = m.all.length
-        ? `<span class="z-zaehler">${m.bio ? `<span class="z-z"><span class="dot bio" aria-hidden="true"></span>${m.bio}</span>` : ""}${m.geo ? `<span class="z-z"><span class="dot geo" aria-hidden="true"></span>${m.geo}</span>` : ""}</span>`
-        : '<span class="z-zaehler z-leer">bald</span>';
+        ? `<span class="z-zaehler">${m.bio ? `<span class="z-badge bio" aria-hidden="true">${m.bio}</span>` : ""}${m.geo ? `<span class="z-badge geo" aria-hidden="true">${m.geo}</span>` : ""}</span>`
+        : '<span class="z-zaehler z-leer" aria-hidden="true">noch nichts</span>';
       const sr = m.all.length ? [m.bio ? "Biologie " + m.bio : "", m.geo ? "Geografie " + m.geo : ""].filter(Boolean).join(", ") : "noch kein Material";
       return `<li><a class="z-kachel${m.all.length ? " hat" : ""}" href="?ziel=${z.nr}" aria-label="${escapeHtml("Ziel " + z.nr + ": " + z.titel + ", " + sr)}">
         <span class="z-kopf"><span class="z-icon">${icon("z" + z.nr, 28)}</span><span class="z-nr" aria-hidden="true">${z.nr}</span></span>
@@ -579,7 +579,6 @@
     const ziel = bneZiel(nr);
     if (ziel) {
       if (overview) overview.hidden = true;
-      const cta = $("#bne-cta"); if (cta) cta.hidden = true;
       const eyebrow = $("#bne-eyebrow"); if (eyebrow) eyebrow.textContent = "Nachhaltigkeit (BNE) · Ziel " + ziel.nr;
       document.title = "Ziel " + ziel.nr + " " + ziel.kurz + " – Lernportal";
       head.textContent = ziel.kurz;
@@ -599,31 +598,10 @@
     counter.textContent = "";
     list.innerHTML = "";
 
-    /* Fragen: Zielname und Zähler aus bne.json und projects.json ergänzen */
-    document.querySelectorAll(".bne-frage[data-ziel]").forEach(a => {
-      const z = bneZiel(Number(a.dataset.ziel));
-      const meta = a.querySelector(".bne-frage-m");
-      if (!z || !meta) return;
-      const n = zielMaterial(visible, z.nr).all.length;
-      meta.textContent = "Ziel " + z.nr + " · " + z.kurz + (n ? " · " + countText(n) : "");
-    });
-
     const grafik = $("#bne-grafik");
     if (grafik) grafik.innerHTML = bneGrafik(visible);
     const legende = $("#bne-legende");
-    if (legende) legende.innerHTML = '<span class="z-z"><span class="dot bio" aria-hidden="true"></span>Biologie</span> <span class="z-z"><span class="dot geo" aria-hidden="true"></span>Geografie</span> Die Zahl zeigt, wie viele Materialien es gibt. „bald“ heißt: Material folgt.';
-
-    /* „Überrasch mich“: zufälliges Ziel mit seiner Frage */
-    const btn = $("#bne-zufall-btn"), box = $("#bne-zufall");
-    let letztes = 0;
-    if (btn && box) btn.addEventListener("click", () => {
-      let z;
-      do { z = bneZiele[Math.floor(Math.random() * bneZiele.length)]; } while (bneZiele.length > 1 && z.nr === letztes);
-      letztes = z.nr;
-      box.hidden = false;
-      box.innerHTML = `<p class="bne-zufall-f">${escapeHtml(z.frage || z.titel)}</p>
-        <a class="bne-zufall-l" href="?ziel=${z.nr}">Ziel ${z.nr}: ${escapeHtml(z.kurz)}${icon("arrow", 18)}</a>`;
-    });
+    if (legende) legende.innerHTML = 'Tippe ein Ziel an. Die Zahl zeigt, wie viel Material es gibt: <span class="z-z"><span class="z-badge bio" aria-hidden="true">1</span>Biologie</span> <span class="z-z"><span class="z-badge geo" aria-hidden="true">1</span>Geografie</span>';
 
     /* Zieljahr: aus dem aktuellen Jahr berechnet */
     const jahre = $("#bne-jahre"), diff = 2030 - new Date().getFullYear();
