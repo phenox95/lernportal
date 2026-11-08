@@ -87,5 +87,16 @@ Für Stunden mit Aufgaben zum Ausfüllen, Zuordnen und Prüfen gibt es **eine** 
 | Rechner | `[data-gv]` mit `.gv-o`, `.gv-k`, `.gv-e` | Objektiv mal Okular |
 | Strichliste | `[data-strich]` mit `.tc` (`.tn`, `.tm`) | Antippen zählt hoch |
 | Eingabefelder | `contenteditable="true"` an `td`, `.kasten`, `.lueck` | Texte tippen, nichts wird gespeichert |
+| Kartenablage | `<div data-sortieren>` mit `.pool` (Karten `.ks`, optional `data-ziel`) und Feldern `.zone[data-z]` mit `.inh`, optional `.chk` | Karten in Felder ziehen oder antippen, mehrere je Feld, Prüfen nur mit `data-ziel` |
+| Zoom-Regler | `<div data-zoom data-labels="A\|B">` mit `.zstapel > .zebene` (Ebenen), `input.zr`, `.zl` | Regler blendet Ebenen ineinander über (Lupe, Zoom) |
+| Mikroskop-Trainer | `<div data-mikro>` mit `.mk-sicht`, `.mk-obj button[data-o]`, `.mk-fokus`, `.mk-gv`, `.mk-fd`, `.mk-hint` | Objektiv wählen, scharf stellen, Sichtfeld und Gesamtvergrößerung ablesen |
+| Entdecker | `<div data-explorer>` mit **eingebundener** SVG (nicht als `img`) aus `.hot[data-n][data-t]` und `.ex-name`, `.ex-text`, `.ex-zahl` | Teile antippen, Name und Aufgabe erscheinen |
+| Schalter | `<div data-schalter>` mit `.sch button[data-m=tier\|pflanze]`, `[data-nur="pflanze"]`, `.sch-liste` | blendet Teile ein und aus (Tierzelle ⇄ Pflanzenzelle) |
+| Gewebekette | `[data-kette]` mit `circle.kp` und `button` | Signal: Kette zieht sich zusammen |
+| Matrix | `<table data-matrix>` mit `td.m` und `.summe` | Merkmale ankreuzen, Summe je Zeile |
+| Checkliste | `[data-checkliste]` mit `.cp`, `.cz` | Punkte abhaken, Zähler |
+| „Ich kann“ | `[data-selbst]` mit `.sb` (drei Knöpfe) | Selbsteinschätzung in drei Stufen, nichts wird gespeichert |
+| Vorlesen | Knopf `#vl` (Taste V) | Browser-Sprachausgabe liest die Folie vor (Gerät, keine Übertragung) |
+| Phasenmarke | `<p class="phase">` | Farbe nach Phase (Do Now, Impuls, Erarbeitung, Sicherung, Reflexion) |
 
 Hinweise: Klassennamen `.nr` und `.hilfe` nicht verwenden (kollidieren mit `material.css`). Inhalte der Lehrkraft (Zielkorridor, Erwartungshorizont) kommen nicht in die Folien, nur Lösungen, die Schülerinnen und Schüler selbst per Knopf prüfen.
