@@ -36,7 +36,8 @@ Anleitung für neue Materialien, die Felder in `projects.json`, Materialseiten, 
 | `type` | ja | Enthält das Wort *Präsentation*, *Arbeitsblatt*, *Modul* oder *interaktiv/Spiel/Simulation/Quiz*, greift der Filter „Art". Das Wort bestimmt auch das Symbol. `Materialseite` ist der Typ für ein Thema mit Dateiliste (siehe `dateien`). |
 | `path` | ja | Relativer Pfad im Repository, z. B. `biologie/klasse-8/zelle/` |
 | `description` | nein | Wird durchsucht |
-| `reihe` | nein | Name der Unterrichtsreihe, z. B. `Risikoräume`. Ordner der Reihe: `geografie/klasse-7/risikoraeume/<stunde>/`. Wird noch nicht ausgewertet, dient der Ordnung |
+| `reihe` | nein | Name der Unterrichtsreihe (Sequenz), z. B. `Vulkanismus`. Die Themenfeld-Seite gliedert ihre Materialien danach: je Reihe eine Überschrift mit Klasse und Anzahl, Reihen nach Klassenstufe sortiert, Materialien ohne Reihe unter „Weitere Materialien“. Gibt es nur eine Reihe und trägt sie den Namen des Themenfelds (oder fehlt `reihe`), bleibt die Liste flach. Die Reihe wird auch durchsucht. Ordner der Reihe: `geografie/klasse-7/risikoraeume/<stunde>/`. Gleiche Schreibweise für dieselbe Reihe verwenden |
+| `folge` | nein | Zahl (1, 2, 3 …): Reihenfolge innerhalb einer Reihe. Ohne `folge` gilt die Reihenfolge in `projects.json` |
 | `themenfeld` | nein | Nummer des RLP-Themenfelds, z. B. `3.1`. Das Portal ergänzt den offiziellen Titel aus `themenfelder.json`. Freier Text geht weiterhin, erscheint dann unter „Weitere“ im Filter (gleiche Schreibweise für gleiche Themenfelder) |
 | `dauer` | nein | z. B. `Do Now`, `45 Min.`, `Doppelstunde` |
 | `niveau` | nein | Niveaustufen D–H, nur eintragen, wenn gesichert |

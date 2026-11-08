@@ -257,6 +257,13 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .tf-kopf .tf-icon { width: 3.5rem; height: 3.5rem; flex: none; border-radius: 1rem; }
 .tf-kopf .title { margin: 0; }
 
+/* Gliederung nach Unterrichtsreihe auf der Themenfeld-Seite */
+.reihe { margin-top: 2.5rem; }
+.reihe:first-child { margin-top: 1.5rem; }
+.reihe-kopf { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem; padding-bottom: 0.6rem; }
+.reihe-titel { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; }
+.reihe-meta { margin: 0; font-size: 0.875rem; color: var(--text-2); }
+
 /* Themenfeldfarben (Master 5.3): je Themenfeld Tint (Fläche des Symbolfelds) und Ink (Symbol und Nummer), gebunden an Fach und Nummer.
    Ink auf Tint mindestens 5:1. Nur für Symbolfeld und Nummer, nie für Flächen mit Text. */
 [data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #d3eaf0; --tf-ink: #1f687a; }
