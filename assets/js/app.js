@@ -47,7 +47,25 @@
     thermo: '<path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/>',
     network: '<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="m12 7.5-6.2 9.2"/><path d="m12 7.5 6.2 9.2"/><path d="M7.5 19h9"/>',
     flag: '<path d="M5 22V3"/><path d="M5 4h13l-2 4 2 4H5"/>',
-    photo: '<rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.5-3.5a2 2 0 0 0-2.8 0L6 21"/>'
+    photo: '<rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.5-3.5a2 2 0 0 0-2.8 0L6 21"/>',
+    /* eigene Symbole der 17 Nachhaltigkeitsziele (keine UN-Logos) */
+    z1: '<circle cx="12" cy="12" r="9.5"/><path d="M14.6 9.2c-.6-1-1.6-1.5-2.7-1.5-1.5 0-2.6.8-2.6 2s1 1.7 2.8 2.1c1.7.4 2.7.9 2.7 2.1s-1.1 2-2.7 2c-1.2 0-2.3-.5-2.9-1.6"/><path d="M12 5.8v1.9M12 16.3v1.9"/>',
+    z2: '<path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M8 7c0-1 1-1.5 1-2.5M12 7c0-1 1-1.5 1-2.5M16 7c0-1 1-1.5 1-2.5"/>',
+    z3: '<path d="M2 12h5l2.5-6 4 12 2.5-6H22"/>',
+    z4: '<path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/>',
+    z5: '<circle cx="12" cy="12" r="9.5"/><path d="M7.5 9.5h9M7.5 14.5h9"/>',
+    z6: '<path d="M12 2.5S5 10 5 14.5a7 7 0 0 0 14 0C19 10 12 2.5 12 2.5z"/>',
+    z7: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+    z8: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M3 13h18"/>',
+    z9: '<path d="M3 21V10l6 4v-4l6 4V4h6v17z"/>',
+    z10: '<path d="M12 3v18"/><path d="M5 21h14"/><path d="M5 7h14"/><path d="m5 7-3 7a3.5 3.5 0 0 0 6 0z"/><path d="m19 7-3 7a3.5 3.5 0 0 0 6 0z"/>',
+    z11: '<rect x="3" y="10" width="7" height="11"/><rect x="10" y="3" width="11" height="18"/><path d="M14 8h3M14 12h3M14 16h3"/>',
+    z12: '<path d="M5 8h14l-1 13H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+    z13: '<path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/>',
+    z14: '<path d="M3 12c3-5 9-6 13-3l5-2v10l-5-2c-4 3-10 2-13-3z"/><circle cx="8" cy="11" r=".7"/>',
+    z15: '<path d="M12 22v-7"/><path d="M12 15c-4 0-7-3-7-6.5C5 5.5 8 3 12 2c4 1 7 3.5 7 6.5 0 3.5-3 6.5-7 6.5z"/>',
+    z16: '<circle cx="12" cy="12" r="9.5"/><path d="M12 2.5v19"/><path d="m12 12-6.7 6.7"/><path d="m12 12 6.7 6.7"/>',
+    z17: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
   };
   function icon(name, size) {
     const px = size || 22;
@@ -527,40 +545,70 @@
       <p class="vm-legende">Ein Punkt mit Zahl zeigt, wie viele Materialien das Ziel in diesem Themenfeld behandeln. Antippen öffnet das Ziel.</p>`;
   }
 
-  /* ---------- BNE-Seite: Überblick der Ziele, mit ?ziel=13 die Materialien beider Fächer ---------- */
+  /* ---------- BNE-Seite: Einstieg, Fragen und klickbare Grafik der Ziele; mit ?ziel=13 die Materialien beider Fächer ---------- */
+  function zielMaterial(visible, nr) {
+    const mine = visible.filter(p => bneOf(p).includes(nr));
+    return { all: mine, bio: mine.filter(p => p.subject === "Biologie").length, geo: mine.filter(p => p.subject === "Geografie").length };
+  }
+
+  /* Grafik: 17 Kacheln (Symbol, Nummer, Kurzname, Zähler je Fach) plus eine Kachel „Alle Materialien“ */
+  function bneGrafik(visible) {
+    const kacheln = bneZiele.map(z => {
+      const m = zielMaterial(visible, z.nr);
+      const zaehler = m.all.length
+        ? `<span class="z-zaehler">${m.bio ? `<span class="z-badge bio" aria-hidden="true">${m.bio}</span>` : ""}${m.geo ? `<span class="z-badge geo" aria-hidden="true">${m.geo}</span>` : ""}</span>`
+        : '<span class="z-zaehler z-leer" aria-hidden="true">noch nichts</span>';
+      const sr = m.all.length ? [m.bio ? "Biologie " + m.bio : "", m.geo ? "Geografie " + m.geo : ""].filter(Boolean).join(", ") : "noch kein Material";
+      return `<li><a class="z-kachel${m.all.length ? " hat" : ""}" href="?ziel=${z.nr}" aria-label="${escapeHtml("Ziel " + z.nr + ": " + z.titel + ", " + sr)}">
+        <span class="z-kopf"><span class="z-icon">${icon("z" + z.nr, 28)}</span><span class="z-nr" aria-hidden="true">${z.nr}</span></span>
+        <span class="z-name" aria-hidden="true">${escapeHtml(z.kurz)}</span>${zaehler}</a></li>`;
+    });
+    kacheln.push(`<li><a class="z-kachel z-alle" href="${root}alle/">
+      <span class="z-kopf"><span class="z-icon">${icon("layers", 28)}</span></span><span class="z-name">Alle Materialien</span><span class="z-zaehler">ansehen</span></a></li>`);
+    return `<ul class="z-grid">${kacheln.join("")}</ul>`;
+  }
+
   function initBne() {
     const params = new URLSearchParams(location.search);
     const raw = params.get("ziel");
     const nr = /^\d{1,2}$/.test(raw || "") ? Number(raw) : 0;
     const visible = projects.filter(isVisible);
     const head = $("#bne-title"), lead = $("#bne-lead"), back = $("#bne-back");
-    if (!bneZiele.length) { list.innerHTML = '<p class="empty-message">Die Nachhaltigkeitsziele konnten nicht geladen werden. Bitte bne.json prüfen.</p>'; return; }
+    const overview = $("#bne-overview");
+    if (!bneZiele.length) { list.innerHTML = '<p class="empty-message">Die Nachhaltigkeitsziele konnten nicht geladen werden. Bitte bne.json prüfen.</p>'; if (overview) overview.hidden = true; return; }
     const ziel = bneZiel(nr);
     if (ziel) {
+      if (overview) overview.hidden = true;
+      const eyebrow = $("#bne-eyebrow"); if (eyebrow) eyebrow.textContent = "Nachhaltigkeit (BNE) · Ziel " + ziel.nr;
       document.title = "Ziel " + ziel.nr + " " + ziel.kurz + " – Lernportal";
-      head.textContent = "Ziel " + ziel.nr + ": " + ziel.kurz;
-      lead.textContent = ziel.titel;
+      head.textContent = ziel.kurz;
+      lead.textContent = ziel.frage || ziel.titel;
       back.href = "./"; back.lastChild.textContent = "Alle Ziele";
       const found = visible.filter(p => bneOf(p).includes(nr));
       counter.textContent = found.length ? countText(found.length) : "";
       const groups = ["Biologie", "Geografie"].map(f => ({ f, items: found.filter(p => p.subject === f) })).filter(g => g.items.length);
       const rest = found.filter(p => p.subject !== "Biologie" && p.subject !== "Geografie");
       if (rest.length) groups.push({ f: "Weitere", items: rest });
-      list.innerHTML = groups.length
+      const titel = `<p class="label">Ziel ${ziel.nr} der UN: ${escapeHtml(ziel.titel)}</p>`;
+      list.innerHTML = titel + (groups.length
         ? groups.map(g => `<p class="label">${escapeHtml(g.f)}</p><div class="group">${g.items.map(p => row(p, false)).join("")}</div>`).join("")
-        : '<p class="empty-message">Für dieses Ziel gibt es noch kein Material.</p>';
+        : '<p class="empty-message">Für dieses Ziel gibt es noch kein Material.</p>');
       return;
     }
     counter.textContent = "";
-    const matrix = bneMatrix(visible);
-    list.innerHTML = matrix + `<h2 class="vm-titel">Alle Ziele</h2><div class="group">${bneZiele.map(z => {
-      const mine = visible.filter(p => bneOf(p).includes(z.nr));
-      const bio = mine.filter(p => p.subject === "Biologie").length, geo = mine.filter(p => p.subject === "Geografie").length;
-      const meta = mine.length ? [bio ? "Biologie " + bio : "", geo ? "Geografie " + geo : ""].filter(Boolean).join(" · ") : "Noch kein Material";
-      return `<a class="row" href="?ziel=${z.nr}"><span class="numeral bne-nr">${z.nr}</span>
-        <span class="row-main"><span class="row-title">${escapeHtml(z.kurz)}</span><span class="row-meta">${escapeHtml(meta)}</span></span>
-        <span class="row-chev">${icon("chevron", 20)}</span></a>`;
-    }).join("")}</div>`;
+    list.innerHTML = "";
+
+    const grafik = $("#bne-grafik");
+    if (grafik) grafik.innerHTML = bneGrafik(visible);
+    const legende = $("#bne-legende");
+    if (legende) legende.innerHTML = 'Tippe ein Ziel an. Die Zahl zeigt, wie viel Material es gibt: <span class="z-z"><span class="z-badge bio" aria-hidden="true">1</span>Biologie</span> <span class="z-z"><span class="z-badge geo" aria-hidden="true">1</span>Geografie</span>';
+
+    /* Zieljahr: aus dem aktuellen Jahr berechnet */
+    const jahre = $("#bne-jahre"), diff = 2030 - new Date().getFullYear();
+    if (jahre && diff > 0) jahre.textContent = "Das Zieljahr ist 2030. Das ist in " + diff + (diff === 1 ? " Jahr." : " Jahren.");
+
+    const matrix = $("#bne-matrix");
+    if (matrix) matrix.innerHTML = bneMatrix(visible);
   }
 
   /* ---------- Start ---------- */
