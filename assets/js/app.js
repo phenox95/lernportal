@@ -172,7 +172,7 @@
     return m ? Number(m[1]) : null;
   }
   /* Nummer nur, wenn sie zur Reihe gehört: Feld folge, oder "<Vorsatz> Stunde N:" im Titel, wenn der Vorsatz den Reihennamen enthält
-     (so bleibt "Fotosynthese – Stunde 1" in der Reihe "Zelle" ohne Nummer und mit vollem Titel) */
+     (so bleibt ein Titel mit anderem Vorsatz, z. B. "Fotosynthese – Stunde 1" in der Reihe "Zelle", ohne Nummer und mit vollem Titel) */
   function reihenNr(project, name) {
     if (Number.isFinite(project.folge)) return project.folge;
     const m = String(project.title || "").match(/^(.*?)\bStunde\s+(\d+)\s*:/i);
