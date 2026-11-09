@@ -537,3 +537,6 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .tipps { margin: 0.25rem 0 1rem; padding-left: 1.4rem; max-width: 40rem; }
 .tipps li { margin: 0.35rem 0; }
 .woche-mehr { margin-top: 1.5rem; }
+.news-ziele { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+.news-ziel { display: inline-flex; align-items: center; gap: 0.35rem; }
+.news-ziel svg { flex: none; color: var(--text); }

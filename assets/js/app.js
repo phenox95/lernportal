@@ -328,7 +328,7 @@
   const datumLang = d => /^\d{4}-\d{2}-\d{2}$/.test(d || "") ? new Date(d + "T12:00:00").toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : "";
   const zielNummern = list => (Array.isArray(list) ? list : []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 17);
   function newsRow(n) {
-    const ziele = zielNummern(n.bne).map(x => "Ziel " + x + " " + ((bneZiel(x) || {}).kurz || "")).map(t => t.trim()).join(" · ");
+    const ziele = zielNummern(n.bne).map(x => `<span class="news-ziel">${icon("z" + x, 16)}<span>${escapeHtml(("Ziel " + x + " " + ((bneZiel(x) || {}).kurz || "")).trim())}</span></span>`).join("");
     const ART = { Medienbericht: "Medienbericht", Regierung: "Sicht der Regierung", Position: "Position eines Verbands" };
     const meta = [n.quelle, datumLang(n.datum), ART[n.art] || "", "Externe Seite"].filter(Boolean).map(escapeHtml).join(" · ");
     return `
@@ -337,7 +337,7 @@
           <span class="row-title">${escapeHtml(n.titel)}<span class="sr-only"> (externe Seite, öffnet in neuem Tab)</span></span>
           <span class="row-meta">${meta}</span>${n.einordnung ? `
           <span class="row-meta news-ein">${escapeHtml(n.einordnung)}</span>` : ""}${ziele ? `
-          <span class="row-meta">${escapeHtml(ziele)}</span>` : ""}
+          <span class="row-meta news-ziele">${ziele}</span>` : ""}
         </span>
         <span class="row-chev">${icon("external", 20)}</span>
       </a>`;
