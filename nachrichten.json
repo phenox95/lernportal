@@ -1,5 +1,5 @@
 {
-  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden, Fachinstitute, Wissenschaftsmedien). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
+  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden und Ministerien, Fachinstitute, Wissenschaftsmedien, anerkannte Umweltverbände). Optional art: Medienbericht, Regierung oder Position (zeigt in der Liste, wessen Sicht die Meldung wiedergibt). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
   "erlaubteQuellen": [
     "tagesschau.de",
     "deutschlandfunk.de",
@@ -21,9 +21,39 @@
     "bundesregierung.de",
     "aerzteblatt.de",
     "spektrum.de",
-    "who.int"
+    "who.int",
+    "duh.de",
+    "germanwatch.org"
   ],
   "eintraege": [
+    {
+      "datum": "2026-11-08",
+      "titel": "Klimakonferenz in Türkei: Was verhandeln die Vereinten Nationen?",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/politik/ausland/klimakonferenz-tuerkei-cop31-politik-klimawandel-antalya-100.html",
+      "einordnung": "Der Beitrag erklärt, worüber die rund 200 Staaten in Antalya verhandeln, unter anderem über den Ausstieg aus Kohle, Öl und Gas und über Geld für die Anpassung an die Folgen des Klimawandels.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13
+      ]
+    },
+    {
+      "datum": "2026-11-08",
+      "titel": "COP31 startet: Kanzler fehlt bei Weltklimakonferenz - Geld auch",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/politik/deutschland/merz-weltklimakonferenz-absage-100.html",
+      "einordnung": "Der Bericht nennt Kritik am Fernbleiben des Kanzlers und die deutsche Klimafinanzierung: 4,7 statt der zugesagten 6 Milliarden Euro im Jahr. Prüfe, wie andere Quellen den Streit darstellen.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13
+      ]
+    },
     {
       "datum": "2026-11-08",
       "titel": "Deutschland auf der Weltklimakonferenz in Antalya: Pariser Klimaabkommen schneller umsetzen",
@@ -35,6 +65,36 @@
       ],
       "bne": [
         13
+      ],
+      "art": "Regierung"
+    },
+    {
+      "datum": "2026-11-06",
+      "titel": "At COP31 Implementation-Alliances can accelerate climate action and resilience – especially for the most vulnerable",
+      "quelle": "Germanwatch",
+      "link": "https://www.germanwatch.org/en/cop-31",
+      "einordnung": "Das ist die Position einer Organisation: Die COP31 zeigt, ob die Staaten vom Verhandeln zum schnellen Handeln kommen. Pressemitteilung vom 6. November auf der COP31-Seite von Germanwatch, auf Englisch.",
+      "art": "Position",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13
+      ]
+    },
+    {
+      "datum": "2026-11-05",
+      "titel": "COP31 in Antalya: Deutsche Umwelthilfe fordert verbindlichen Ausstieg aus fossilen Energien und wirksame Methanreduktionen",
+      "quelle": "Deutsche Umwelthilfe",
+      "link": "https://www.duh.de/presse/pressemitteilungen/pressemitteilung/cop31-in-antalya-deutsche-umwelthilfe-fordert-verbindlichen-ausstieg-aus-fossilen-energien-und-wirk/",
+      "einordnung": "Das ist die Position eines Umweltverbands: Er fordert verbindliche Schritte für den Ausstieg aus fossilen Energien und weniger Methan. Vergleiche sie mit der Sicht der Bundesregierung.",
+      "art": "Position",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13,
+        7
       ]
     },
     {
@@ -49,7 +109,8 @@
       "bne": [
         3
       ],
-      "woche": "2026-11-16"
+      "woche": "2026-11-16",
+      "art": "Medienbericht"
     }
   ]
 }
