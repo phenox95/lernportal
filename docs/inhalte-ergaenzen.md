@@ -254,3 +254,11 @@ Die Zeiten der Folien (`data-min`) ergeben je Stunde etwa 90 Minuten. Die Spieli
 - **Zuordnungsregel für `bne`:** Ein Ziel nur eintragen, wenn die Aufgabe oder das Urteil der Stunde es selbst behandelt, höchstens drei je Material. Materialien ohne Handlungs- oder Gesellschaftsbezug bekommen kein Ziel.
 - **Prüfen:** `python3 tools/check.py` prüft `bne` (Zahlen 1–17), `verweise` (Pfad muss in `projects.json` stehen) und `bezuege` (Fach und Nummer müssen existieren).
 - Präsentationen bleiben unverändert. Die Vernetzung erscheint nur in Portal, Listen und Materialseiten.
+
+
+## Thema der Woche und aktuelle Meldungen
+
+- **Seite `woche/`:** Auf der Startseite führt die Impuls-Karte („Thema der Woche mit aktuellen Meldungen“) auf diese Seite. Sie zeigt Foto, Erklärung, Nachhaltigkeitsziele, das Material zum Thema, aktuelle Meldungen und die früheren Themen. Die Daten kommen aus `impuls.json` (Wochenplan). Vorschau einer Woche: `woche/?impuls=2026-11-23`.
+- **Fotos:** je Woche `bild`, `bildAlt` und `bildQuelle` in `impuls.json`. Dateien als WebP (unter ca. 150 KB, 16:9) in `assets/img/impuls/`, Dateiname z. B. `2026-11-09-handy.webp`. Urheber und Lizenz gehören in `bildQuelle`. `python3 tools/check.py` prüft Datei, Größe, Beschreibung und Quelle.
+- **Meldungen (`nachrichten.json`):** Eine zentrale Liste ausgewählter aktueller Meldungen. Pro Eintrag `datum`, `titel` (wie veröffentlicht), `quelle`, `link` (https), `einordnung` (ein bis zwei eigene Sätze), `faecher`, `bne` (Zielnummern) und optional `woche` (das `ab`-Datum der Woche, an die die Meldung angepinnt wird). Die Meldungen erscheinen auf der Wochenseite (passend zu den Zielen der Woche, angepinnte zuerst, höchstens 5) und auf der BNE-Seite beim jeweiligen Ziel (`bne/?ziel=7`).
+- **Regeln für Meldungen:** Nur verlinken und mit eigenen Worten einordnen, keine Artikeltexte oder Bilder übernehmen. Titel und Datum prüfen, bevor etwas eingetragen wird. Zu einem kontroversen Thema Meldungen mit verschiedenen Blickwinkeln wählen (Beutelsbacher Konsens). Die Links führen auf fremde Seiten und öffnen in einem neuen Tab. Die Seite weist darauf hin.

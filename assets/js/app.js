@@ -46,6 +46,7 @@
     drop: '<path d="M12 2.5S5 10 5 14.5a7 7 0 0 0 14 0C19 10 12 2.5 12 2.5z"/>',
     thermo: '<path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/>',
     network: '<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="m12 7.5-6.2 9.2"/><path d="m12 7.5 6.2 9.2"/><path d="M7.5 19h9"/>',
+    external: '<path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/>',
     flag: '<path d="M5 22V3"/><path d="M5 4h13l-2 4 2 4H5"/>',
     photo: '<rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.5-3.5a2 2 0 0 0-2.8 0L6 21"/>',
     /* eigene Symbole der 17 Nachhaltigkeitsziele (keine UN-Logos) */
@@ -317,6 +318,91 @@
     return aktuell ? Object.assign({ label: data.label }, aktuell) : null;
   }
 
+  /* ---------- Nachrichten (nachrichten.json): ausgewählte aktuelle Meldungen, nur Verweis und eigene Einordnung ---------- */
+  function loadNachrichten() {
+    return fetch(root + "nachrichten.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}))
+      .then(d => (d && Array.isArray(d.eintraege) ? d.eintraege : []).filter(n => n && typeof n.titel === "string" && n.titel.trim()
+        && typeof n.link === "string" && /^https:\/\//.test(n.link) && n.sichtbar !== false)
+        .sort((a, b) => String(b.datum || "").localeCompare(String(a.datum || ""))));
+  }
+  const datumLang = d => /^\d{4}-\d{2}-\d{2}$/.test(d || "") ? new Date(d + "T12:00:00").toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : "";
+  const zielNummern = list => (Array.isArray(list) ? list : []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 17);
+  function newsRow(n) {
+    const ziele = zielNummern(n.bne).map(x => "Ziel " + x + " " + ((bneZiel(x) || {}).kurz || "")).map(t => t.trim()).join(" · ");
+    const meta = [n.quelle, datumLang(n.datum), "Externe Seite"].filter(Boolean).map(escapeHtml).join(" · ");
+    return `
+      <a class="row news-row" href="${escapeHtml(n.link)}" target="_blank" rel="noopener noreferrer">
+        <span class="row-main">
+          <span class="row-title">${escapeHtml(n.titel)}<span class="sr-only"> (externe Seite, öffnet in neuem Tab)</span></span>
+          <span class="row-meta">${meta}</span>${n.einordnung ? `
+          <span class="row-meta news-ein">${escapeHtml(n.einordnung)}</span>` : ""}${ziele ? `
+          <span class="row-meta">${escapeHtml(ziele)}</span>` : ""}
+        </span>
+        <span class="row-chev">${icon("external", 20)}</span>
+      </a>`;
+  }
+  const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche.</p>';
+
+  /* ---------- Seite "Thema der Woche" (woche/) ---------- */
+  function initWoche() {
+    const box = $("#woche-inhalt");
+    if (!box) return;
+    const params = new URLSearchParams(location.search);
+    const vorschau = /^\d{4}-\d{2}-\d{2}$/.test(params.get("impuls") || "") ? params.get("impuls") : "";
+    Promise.all([
+      fetch(root + "impuls.json").then(r => (r.ok ? r.json() : null)).catch(() => null),
+      loadNachrichten()
+    ]).then(([raw, news]) => {
+      const data = raw && raw.aktiv === true ? impulsWoche(raw) : null;
+      if (!data || !data.frage) { box.innerHTML = '<p class="empty-message">Zurzeit gibt es kein Thema der Woche.</p>'; return; }
+      const nrs = zielNummern(data.bne).filter(n => bneZiel(n));
+      const wochen = raw && Array.isArray(raw.wochen) ? raw.wochen.filter(w => w && w.frage && w.ab).sort((x, y) => String(y.ab).localeCompare(String(x.ab))) : [];
+      const heute = new Date().toISOString().slice(0, 10);
+      const echtAktuell = wochen.filter(w => String(w.ab) <= heute).shift();
+      const abLang = datumLang(data.ab);
+      $("#woche-eyebrow").textContent = ["Thema der Woche", data.klasse, abLang ? "ab " + abLang : ""].filter(Boolean).join(" · ");
+      $("#woche-title").textContent = data.frage;
+      document.title = data.frage + " – Lernportal";
+
+      const erstes = bneZiel(nrs[0]);
+      const media = data.bild
+        ? `<img src="${escapeHtml(resolvePath(data.bild))}" alt="${escapeHtml(data.bildAlt || "")}">`
+        : erstes
+          ? `<div class="impuls-ziel">${icon("z" + erstes.nr, 56)}<span class="impuls-ziel-nr">Ziel ${erstes.nr}</span><span>${escapeHtml(erstes.kurz)}</span></div>`
+          : `<div class="impuls-placeholder">${icon("photo", 32)}<span>Platz für eigenes Foto</span></div>`;
+      const caption = data.bildQuelle ? `<p class="impuls-caption">${escapeHtml(data.bildQuelle)}</p>` : "";
+      const chips = nrs.length ? `<p class="impuls-ziele">${nrs.map(n => `<a class="tz-chip" href="${root}bne/?ziel=${n}"><span class="z-badge" aria-hidden="true">${icon("z" + n, 16)}</span>${escapeHtml(bneZiel(n).kurz)}<span class="sr-only"> (Ziel ${n})</span></a>`).join("")}</p>` : "";
+      const erkl = data.erklaerung ? `<p class="label">Kurz erklärt</p><p class="woche-erkl">${escapeHtml(data.erklaerung)}</p>` : "";
+
+      const mats = (Array.isArray(data.material) ? data.material : []).map(pfad => projects.find(p => p.path === pfad)).filter(Boolean);
+      const material = mats.length
+        ? `<section class="section" aria-labelledby="w-material"><h2 id="w-material">Material zum Thema</h2><div class="group">${mats.map(p => row(p, true)).join("")}</div></section>` : "";
+
+      const gepinnt = news.filter(n => n.woche && n.woche === data.ab);
+      const passend = news.filter(n => !gepinnt.includes(n) && zielNummern(n.bne).some(x => nrs.includes(x)));
+      const meldungen = [...gepinnt, ...passend].slice(0, 5);
+      const aktuell = meldungen.length
+        ? `<section class="section" aria-labelledby="w-aktuell"><h2 id="w-aktuell">Aktuell dazu</h2>${newsHinweis}<div class="group">${meldungen.map(newsRow).join("")}</div></section>` : "";
+
+      const frueher = wochen.filter(w => String(w.ab) < String(data.ab));
+      const frueherHtml = frueher.length
+        ? `<section class="section" aria-labelledby="w-frueher"><h2 id="w-frueher">Frühere Themen</h2><div class="group">${frueher.map(w => `
+          <a class="row" href="?impuls=${escapeHtml(w.ab)}"><span class="row-main"><span class="row-title">${escapeHtml(w.frage)}</span>
+          <span class="row-meta">${escapeHtml([datumLang(w.ab), w.klasse].filter(Boolean).join(" · "))}</span></span><span class="row-chev">${icon("chevron", 20)}</span></a>`).join("")}</div></section>` : "";
+      const zumAktuellen = echtAktuell && echtAktuell.ab !== data.ab
+        ? `<p class="woche-hinweis"><a href="./">Zum aktuellen Thema der Woche</a></p>` : "";
+
+      box.innerHTML = `
+        ${zumAktuellen}
+        <div class="woche-kopf">
+          <figure class="woche-bild"><div class="impuls-media">${media}</div>${caption}</figure>
+          <div class="woche-text">${chips}${erkl}</div>
+        </div>
+        ${material}${aktuell}${frueherHtml}`;
+      hydrateIcons();
+    });
+  }
+
   function initImpuls() {
     const section = $("#impuls");
     if (!section) return;
@@ -345,11 +431,13 @@
         }).filter(Boolean);
         if (!mats.length && data.link) mats.push(`<a class="impuls-link" href="${escapeHtml(resolvePath(data.link))}">Material öffnen ${icon("arrow", 18)}</a>`);
         const material = mats.length ? `<div class="impuls-material"><p class="label">Material</p>${mats.join("")}</div>` : "";
+        const vorschau = new URLSearchParams(location.search).get("impuls");
+        const mehr = `<p class="impuls-mehr"><a class="impuls-link" href="${root}woche/${/^\d{4}-\d{2}-\d{2}$/.test(vorschau || "") ? "?impuls=" + vorschau : ""}">Thema der Woche mit aktuellen Meldungen ${icon("arrow", 18)}</a></p>`;
         section.innerHTML = `
           <p class="label">${label}</p>
           <div class="impuls">
             <div><div class="impuls-media">${media}</div>${caption}</div>
-            <div class="impuls-body"><p class="impuls-q">${escapeHtml(data.frage)}</p>${chips}${erklaerung}${material}</div>
+            <div class="impuls-body"><p class="impuls-q">${escapeHtml(data.frage)}</p>${chips}${erklaerung}${material}${mehr}</div>
           </div>`;
         section.hidden = false;
       })
@@ -665,6 +753,10 @@
       list.innerHTML = titel + (groups.length
         ? groups.map(g => `<p class="label">${escapeHtml(g.f)}</p><div class="group">${g.items.map(p => row(p, false)).join("")}</div>`).join("")
         : '<p class="empty-message">Für dieses Ziel gibt es noch kein Material.</p>');
+      loadNachrichten().then(news => {
+        const passend = news.filter(n => zielNummern(n.bne).includes(nr)).slice(0, 5);
+        if (passend.length) list.insertAdjacentHTML("beforeend", `<p class="label">Aktuell zu diesem Ziel</p>${newsHinweis}<div class="group">${passend.map(newsRow).join("")}</div>`);
+      });
       return;
     }
     counter.textContent = "";
@@ -706,7 +798,7 @@
       projects = Array.isArray(data) ? data : [];
       themenfelder = tf && typeof tf === "object" ? tf : {};
       bneZiele = bne && Array.isArray(bne.ziele) ? bne.ziele.filter(z => z && Number.isInteger(z.nr) && z.kurz) : [];
-      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else { initList(); }
+      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else if (page === "woche") { initWoche(); } else { initList(); }
     })
     .catch(() => {
       if (list) list.innerHTML = '<p class="empty-message">Die Projektübersicht konnte nicht geladen werden. Bitte projects.json prüfen.</p>';
