@@ -12,7 +12,14 @@ Eigene oder zugeschickte Datei:
 Bei HTTP 429 sofort abbrechen und nicht wiederholen: Wikimedia drosselt sonst länger.
 """
 import argparse, hashlib, json, os, re, subprocess, sys, tempfile, urllib.parse
-from PIL import Image
+try:
+    from PIL import Image
+except ImportError:  # Pillow fehlt oder ist defekt: einmal neu installieren (Paketquellen sind erlaubt)
+    subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "--force-reinstall", "pillow"], check=False)
+    try:
+        from PIL import Image
+    except ImportError:
+        sys.exit("Pillow lässt sich nicht laden. Bitte 'python3 -m pip install --force-reinstall pillow' ausführen.")
 
 UA = "User-Agent: lernportal-schulprojekt/1.0 (Unterrichtsmaterial; github.com/phenox95/lernportal)"
 ERLAUBT = re.compile(r"^(CC0.*|Public domain.*|PD.*|CC BY( |-)?\d\.\d.*|CC BY-SA \d\.\d.*)$", re.I)
