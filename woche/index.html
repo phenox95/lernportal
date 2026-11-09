@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Das Thema der Woche mit Foto, Erklärung, Material und aktuellen Meldungen.">
+  <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+  <title>Thema der Woche – Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/app.js" defer></script>
+</head>
+<body data-page="woche" data-root="../">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href=".././" aria-label="Lernportal Startseite"><span class="brand-dot" aria-hidden="true"></span>Lernportal</a>
+      <nav class="top-nav" aria-label="Hauptnavigation">
+        <a href="../biologie/">Biologie</a>
+        <a href="../geografie/">Geografie</a>
+        <a href="../alle/">Alle Materialien</a>
+        <a href="../bne/">Nachhaltigkeit</a>
+      </nav>
+      <div class="header-tools" id="prefs-slot"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <a class="back-link" href="../"><span data-icon="back" data-size="20" aria-hidden="true"></span>Lernportal</a>
+        <p class="eyebrow" id="woche-eyebrow">Thema der Woche</p>
+        <h1 class="title" id="woche-title">Thema der Woche</h1>
+      </div>
+    </section>
+    <div class="wrap" id="woche-inhalt" aria-live="polite">
+      <p class="loading-message">Thema wird geladen …</p>
+    </div>
+  </main>
+
+  <div class="wrap">
+    <footer class="site-footer">
+      <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
+      <span class="footer-links"><a href="../impressum/">Impressum</a><a href="../datenschutz/">Datenschutz</a></span>
+    </footer>
+  </div>
+</body>
+</html>

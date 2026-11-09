@@ -192,6 +192,39 @@ for w in wochen:
 if ohne_foto:
     print(f"HINWEIS  Impuls der Woche: {ohne_foto} von {len(wochen)} Einträgen ohne Foto")
 
+# Nachrichten (nachrichten.json): nur Verweise mit eigener Einordnung
+nach = laden("nachrichten.json") or {}
+woche_ab = {w.get("ab") for w in (impuls.get("wochen") or []) if isinstance(w, dict)}
+links = set()
+for i, n in enumerate(nach.get("eintraege", [])):
+    nn = f"nachrichten.json[{i}] „{str(n.get('titel', '?'))[:40]}“"
+    for f in ("datum", "titel", "quelle", "link"):
+        if not n.get(f):
+            err(f"{nn}: Pflichtfeld „{f}“ fehlt")
+    if n.get("datum") and not re.match(r"^\d{4}-\d{2}-\d{2}$", n["datum"]):
+        err(f"{nn}: datum nicht im Format JJJJ-MM-TT")
+    if n.get("link"):
+        if not n["link"].startswith("https://"):
+            err(f"{nn}: link muss mit https:// beginnen")
+        if n["link"] in links:
+            err(f"{nn}: link doppelt")
+        links.add(n["link"])
+    e = n.get("einordnung", "")
+    if not e:
+        wrn(f"{nn}: einordnung fehlt (ein bis zwei eigene Sätze)")
+    elif len(e) > 320:
+        wrn(f"{nn}: einordnung ist {len(e)} Zeichen lang (Ziel: höchstens 2 Sätze, Zitate vermeiden)")
+    for f in n.get("faecher", []):
+        if f not in ("Biologie", "Geografie"):
+            err(f"{nn}: faecher „{f}“ unbekannt")
+    b = n.get("bne", [])
+    if not isinstance(b, list) or not all(isinstance(x, int) and 1 <= x <= 17 for x in b):
+        err(f"{nn}: bne muss eine Liste von Zahlen 1–17 sein")
+    if n.get("woche") and n["woche"] not in woche_ab:
+        wrn(f"{nn}: woche „{n['woche']}“ steht nicht als ab-Datum in impuls.json")
+    if not n.get("bne") and not n.get("woche"):
+        wrn(f"{nn}: weder bne noch woche, wird nirgends angezeigt")
+
 for m in warn:
     print("WARNUNG ", m)
 for m in fehler:
