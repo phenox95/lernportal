@@ -531,8 +531,20 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .impuls-mehr { margin: 0.5rem 0 0; }
 
 /* Seite Nachrichten und Themenarchiv */
-.n-sprung { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 1rem 0 0; font-size: 0.9375rem; }
-.n-sprung a { font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; }
+.n-tabs { margin: 1.25rem 0 0; border: 1px solid var(--line); }
+.n-tab-n { margin-left: 0.4rem; font-size: 0.8125rem; font-weight: 400; color: var(--text-2); }
+.n-tabs + .section { margin-top: 1.5rem; }
+.filters .segmented button { min-height: 2.75rem; padding: 0 0.4rem; }
+.n-reset { padding: 0.25rem 0; border: 0; background: none; font-size: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; cursor: pointer; }
+.n-monat { margin: 0 0 0.75rem; }
+.n-monat-h { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; padding: 0.4rem 0; list-style: none; cursor: pointer; border-bottom: 2px solid var(--text); }
+.n-monat-h::-webkit-details-marker { display: none; }
+.n-monat-t { flex: 1; font-size: 1.125rem; font-weight: 700; letter-spacing: -0.01em; }
+.n-monat-n { font-size: 0.875rem; color: var(--text-2); }
+.n-monat-pfeil { display: inline-flex; color: var(--text-2); transition: transform 0.15s; }
+.n-monat[open] .n-monat-pfeil { transform: rotate(180deg); }
+.n-monat .group { border-top: 0; }
+.news-ziele .chip { padding-left: 0.65rem; }
 #meldungen .search { margin-top: 1rem; }
 .tipps { margin: 0.25rem 0 1rem; padding-left: 1.4rem; max-width: 40rem; }
 .tipps li { margin: 0.35rem 0; }
@@ -540,3 +552,7 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .news-ziele { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
 .news-ziel { display: inline-flex; align-items: center; gap: 0.35rem; }
 .news-ziel svg { flex: none; color: var(--text); }
+
+/* Nachrichten: Fachauswahl braucht Breite, auf schmalen Geräten untereinander */
+@media (max-width: 40rem) { #meldungen .filter-row, #archiv .filter-row { grid-template-columns: 1fr; } }
+.segmented button { white-space: nowrap; }
