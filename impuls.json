@@ -25,6 +25,9 @@
         3
       ],
       "frage": "Impfen: Deine Entscheidung oder die aller?",
+      "bild": "assets/img/impuls/2026-11-16-impfen.webp",
+      "bildAlt": "Eine Hand in einem blauen Einweghandschuh hält eine Spritze mit gelber Nadelschutzkappe vor schwarzem Hintergrund.",
+      "bildQuelle": "Foto: Tim Reckmann, CC BY 2.0, Wikimedia Commons (Spritze mit Impfstoff (50744954516).jpg), Ausschnitt",
       "erklaerung": "Wer sich impfen lässt, schützt sich selbst. Bei manchen Krankheiten schützt er auch andere, zum Beispiel Babys, die noch nicht geimpft werden können. Darum ist Impfen nicht nur Privatsache. Wir sammeln Gründe dafür und dagegen.",
       "material": [
         "biologie/klasse-9/gesundheit/impfen/"
@@ -49,6 +52,9 @@
         8
       ],
       "frage": "Urlaub auf dem Vulkan: Wer profitiert, wer riskiert?",
+      "bild": "assets/img/impuls/2026-11-30-aetna-tourismus.webp",
+      "bildAlt": "Eine Gruppe von Besuchern wandert auf dem Rand eines dunklen Vulkankraters unter blauem Himmel. Die Menschen sind sehr klein zu sehen.",
+      "bildQuelle": "Foto: Walter Isack, CC BY-SA 3.0 AT, Wikimedia Commons (Etna Crateri Silvestri 2012.JPG), Ausschnitt",
       "erklaerung": "Zum Ätna kommen viele Touristen. Das bringt Arbeit und Geld. Gleichzeitig ist der Vulkan aktiv. Wer vor Ort wohnt, trägt das Risiko. Wir fragen: Für wen lohnt sich das?",
       "material": [
         "geografie/klasse-7/risikoraeume/aetna-tourismus/"
@@ -74,6 +80,9 @@
         7
       ],
       "frage": "Heizen, Fahren, Strom: Wo kannst du etwas ändern und wo nicht?",
+      "bild": "assets/img/impuls/2026-12-14-heizen.webp",
+      "bildAlt": "Nahaufnahme eines Heizkörperthermostats mit den Stufen 1 bis 3 und einem Mondsymbol.",
+      "bildQuelle": "Foto: Uki_71, CC0, Wikimedia Commons (Heimeier-Thermostat-1283675.jpg), Ausschnitt",
       "erklaerung": "Energie brauchen wir für Strom, Wärme und Verkehr. Nicht jeder kann alles selbst ändern: Mieter entscheiden zum Beispiel nicht über die Heizung des Hauses. Es geht um Möglichkeiten und Grenzen.",
       "material": [
         "geografie/klasse-9/ressourcen/erneuerbare-energien/"
@@ -85,6 +94,9 @@
         15
       ],
       "frage": "Wälder, Wiesen, Tiere: Was würde uns fehlen, wenn sie weg wären?",
+      "bild": "assets/img/impuls/2027-01-11-natur.webp",
+      "bildAlt": "Blühende Wiese mit hohen Gräsern, lila Flockenblumen und gelben Blüten.",
+      "bildQuelle": "Foto: 4028mdk09, CC BY-SA 3.0, Wikimedia Commons (Blühende Blumenwiese.JPG), Ausschnitt",
       "erklaerung": "Natur liefert uns viel, zum Beispiel Holz, Nahrung und saubere Luft. Wir sammeln, was davon wir im Alltag nutzen, ohne es zu merken."
     },
     {
@@ -93,6 +105,9 @@
         11
       ],
       "frage": "Wie wollen wir in Berlin in 20 Jahren wohnen und fahren?",
+      "bild": "assets/img/impuls/2027-01-18-berlin.webp",
+      "bildAlt": "Straße mit Radweg-Schild und jungen Bäumen am Rand, dahinter ein Feld. Im Vordergrund ein Gehweg mit Pollern.",
+      "bildQuelle": "Foto: C.Suthorn, CC BY-SA 4.0, Wikimedia Commons (3661 Radweg Berlin.jpg), Ausschnitt",
       "erklaerung": "Städte wachsen, und alle wollen Platz: zum Wohnen, Arbeiten und Fahren. Wir sammeln Wünsche und prüfen, welche sich vertragen und welche nicht."
     }
   ]
