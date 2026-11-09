@@ -495,4 +495,20 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
   .select-wrap select { min-height: 2.25rem; font-size: 0.9375rem; }
   .filters { gap: 0.75rem; margin-top: 1.25rem; }
   .filter-label { margin-bottom: 0.25rem; font-size: 0.8125rem; }
+  /* Überschriften, Startseite, Listen und Impuls ebenfalls kompakter */
+  .hero { padding: 2rem 0 0.5rem; }
+  .title { font-size: clamp(2rem, 5vw, 2.75rem); }
+  .lead { font-size: 1rem; }
+  .section { padding-top: 1.75rem; }
+  .fach-name { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+  .fach-tile { padding: 0.85rem 1.1rem; }
+  .row { min-height: 3.5rem; padding: 0.85rem 0; }
+  .row-title { font-size: 1.0625rem; }
+  .numeral { font-size: 1.5rem; }
+  .impuls-q { font-size: 1.25rem; }
+}
+@media (pointer: fine) and (min-width: 46rem) {
+  .fach-tile { min-height: 6rem; }
+  .impuls-media { min-height: 13rem; }
+  .impuls-body { padding: 1.25rem 1.5rem; }
 }
