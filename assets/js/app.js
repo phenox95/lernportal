@@ -343,7 +343,7 @@
     const faecher = opt.fach && Array.isArray(n.faecher) ? n.faecher.filter(f => f === "Biologie" || f === "Geografie").map(f => `<span class="chip">${escapeHtml(f)}</span>`).join("") : "";
     return `
       <a class="row news-row" href="${escapeHtml(n.link)}" target="_blank" rel="noopener noreferrer">
-        <span class="news-quelle" aria-hidden="true">${escapeHtml(quelleKurz(n.quelle))}</span>
+        <span class="news-quelle" aria-hidden="true">${/^https:\/\//.test(n.bild || "") ? `<img class="news-bild" src="${escapeHtml(n.bild)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" title="Bild: ${escapeHtml(n.quelle)}">` : ""}<span class="news-kurz">${escapeHtml(quelleKurz(n.quelle))}</span></span>
         <span class="row-main">
           <span class="row-title">${escapeHtml(n.titel)}${opt.neu ? '<span class="badge">Neu</span>' : ""}<span class="sr-only"> (externe Seite, öffnet in neuem Tab)</span></span>
           <span class="row-meta">${meta}</span>${n.einordnung ? `
@@ -353,6 +353,8 @@
         <span class="row-chev">${icon("external", 20)}</span>
       </a>`;
   }
+  /* Lädt ein Vorschaubild nicht, bleibt das Kürzel der Quelle sichtbar */
+  document.addEventListener("error", e => { if (e.target && e.target.classList && e.target.classList.contains("news-bild")) e.target.remove(); }, true);
   const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche.</p>';
 
   /* Startseite: Meldungen der letzten 30 Tage (höchstens 3), damit Aktuelles nicht nur im Archiv steht */
