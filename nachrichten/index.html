@@ -39,11 +39,14 @@
     </section>
 
     <div class="wrap">
-      <p class="n-sprung"><a href="#meldungen">Meldungen</a><a href="#archiv">Themenarchiv</a></p>
+      <div class="segmented n-tabs" role="group" aria-label="Bereich wählen">
+        <button type="button" id="tab-meldungen" data-tab="meldungen" aria-pressed="true" aria-controls="meldungen">Meldungen<span class="n-tab-n" id="n-tab-m"></span></button>
+        <button type="button" id="tab-archiv" data-tab="archiv" aria-pressed="false" aria-controls="archiv">Themenarchiv<span class="n-tab-n" id="n-tab-a"></span></button>
+      </div>
 
       <section class="section" id="meldungen" aria-labelledby="h-meldungen">
         <h2 id="h-meldungen" class="aktuell-h">Meldungen</h2>
-        <p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln.</p>
+        <p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung, nach Monat sortiert. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln.</p>
 
         <details class="vn-details">
           <summary class="vn-summary"><h3 class="vn-titel">So prüfst du eine Meldung</h3></summary>
@@ -63,15 +66,8 @@
         <div class="filters">
           <div class="filter-row">
             <div>
-              <label class="filter-label" for="n-fach">Fach</label>
-              <div class="select-wrap">
-                <select id="n-fach">
-                  <option value="Alle">Alle Fächer</option>
-                  <option value="Biologie">Biologie</option>
-                  <option value="Geografie">Geografie</option>
-                </select>
-                <span data-icon="down" data-size="18" aria-hidden="true"></span>
-              </div>
+              <span class="filter-label" id="n-fach-l">Fach</span>
+              <div class="segmented" id="n-fach" role="group" aria-labelledby="n-fach-l"></div>
             </div>
             <div>
               <label class="filter-label" for="n-ziel">Nachhaltigkeit (BNE)</label>
@@ -86,9 +82,30 @@
         <div id="n-liste"><p class="loading-message">Meldungen werden geladen …</p></div>
       </section>
 
-      <section class="section" id="archiv" aria-labelledby="h-archiv">
+      <section class="section" id="archiv" aria-labelledby="h-archiv" hidden>
         <h2 id="h-archiv" class="aktuell-h">Themenarchiv</h2>
-        <p class="woche-hinweis">Alle Themen der Woche bis heute. Zu jedem Thema findest du Foto, Erklärung, Material und Meldungen.</p>
+        <p class="woche-hinweis">Alle Themen der Woche bis heute, nach Monat sortiert. Zu jedem Thema findest du Foto, Erklärung, Material und Meldungen.</p>
+        <div class="search">
+          <label class="sr-only" for="a-q">Im Themenarchiv suchen</label>
+          <span data-icon="search" data-size="20" aria-hidden="true"></span>
+          <input id="a-q" type="search" placeholder="Thema suchen" autocomplete="off" enterkeyhint="search">
+        </div>
+        <div class="filters">
+          <div class="filter-row">
+            <div>
+              <span class="filter-label" id="a-fach-l">Fach</span>
+              <div class="segmented" id="a-fach" role="group" aria-labelledby="a-fach-l"></div>
+            </div>
+            <div>
+              <label class="filter-label" for="a-klasse">Klassenstufe</label>
+              <div class="select-wrap">
+                <select id="a-klasse"><option value="Alle">Alle Klassen</option></select>
+                <span data-icon="down" data-size="18" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="result-count" id="a-count" aria-live="polite"></p>
         <div id="n-archiv"><p class="loading-message">Themen werden geladen …</p></div>
       </section>
     </div>

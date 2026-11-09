@@ -327,21 +327,34 @@
   }
   const datumLang = d => /^\d{4}-\d{2}-\d{2}$/.test(d || "") ? new Date(d + "T12:00:00").toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : "";
   const zielNummern = list => (Array.isArray(list) ? list : []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 17);
-  function newsRow(n) {
+  /* Kürzel der Quelle für das Kästchen neben der Schlagzeile (lokal, kein Fremdbild). Unbekannte Quellen: Anfangsbuchstaben der Wörter. */
+  const QUELLE_KURZ = { "zdfheute": "ZDF", "zdf": "ZDF", "tagesschau": "TS", "deutschlandfunk": "DLF", "rbb24": "rbb", "germanwatch": "GW", "deutsche umwelthilfe": "DUH", "umweltbundesamt": "UBA", "bundesumweltministerium (bmukn)": "BMUKN", "bundesumweltministerium": "BMUKN", "robert koch-institut": "RKI", "spektrum": "SPK", "destatis": "DST" };
+  function quelleKurz(q) {
+    const k = QUELLE_KURZ[String(q || "").trim().toLowerCase()];
+    if (k) return k;
+    const w = String(q || "").replace(/\(.*?\)/g, "").split(/[\s\-–.]+/).filter(Boolean);
+    return (w.length > 1 ? w.map(x => x[0]).join("") : (w[0] || "?").slice(0, 3)).toUpperCase().slice(0, 4);
+  }
+  function newsRow(n, opt) {
+    opt = opt || {};
     const ziele = zielNummern(n.bne).map(x => `<span class="news-ziel">${icon("z" + x, 16)}<span>${escapeHtml(("Ziel " + x + " " + ((bneZiel(x) || {}).kurz || "")).trim())}</span></span>`).join("");
     const ART = { Medienbericht: "Medienbericht", Regierung: "Sicht der Regierung", Position: "Position eines Verbands" };
     const meta = [n.quelle, datumLang(n.datum), ART[n.art] || "", "Externe Seite"].filter(Boolean).map(escapeHtml).join(" · ");
+    const faecher = opt.fach && Array.isArray(n.faecher) ? n.faecher.filter(f => f === "Biologie" || f === "Geografie").map(f => `<span class="chip">${escapeHtml(f)}</span>`).join("") : "";
     return `
       <a class="row news-row" href="${escapeHtml(n.link)}" target="_blank" rel="noopener noreferrer">
+        <span class="news-quelle" aria-hidden="true">${/^https:\/\//.test(n.bild || "") ? `<img class="news-bild" src="${escapeHtml(n.bild)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" title="Bild: ${escapeHtml(n.quelle)}">` : ""}<span class="news-kurz">${escapeHtml(quelleKurz(n.quelle))}</span></span>
         <span class="row-main">
-          <span class="row-title">${escapeHtml(n.titel)}<span class="sr-only"> (externe Seite, öffnet in neuem Tab)</span></span>
+          <span class="row-title">${escapeHtml(n.titel)}${opt.neu ? '<span class="badge">Neu</span>' : ""}<span class="sr-only"> (externe Seite, öffnet in neuem Tab)</span></span>
           <span class="row-meta">${meta}</span>${n.einordnung ? `
-          <span class="row-meta news-ein">${escapeHtml(n.einordnung)}</span>` : ""}${ziele ? `
-          <span class="row-meta news-ziele">${ziele}</span>` : ""}
+          <span class="row-meta news-ein">${escapeHtml(n.einordnung)}</span>` : ""}${ziele || faecher ? `
+          <span class="row-meta news-ziele">${faecher}${ziele}</span>` : ""}
         </span>
         <span class="row-chev">${icon("external", 20)}</span>
       </a>`;
   }
+  /* Lädt ein Vorschaubild nicht, bleibt das Kürzel der Quelle sichtbar */
+  document.addEventListener("error", e => { if (e.target && e.target.classList && e.target.classList.contains("news-bild")) e.target.remove(); }, true);
   const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche.</p>';
 
   /* Startseite: Meldungen der letzten 30 Tage (höchstens 3), damit Aktuelles nicht nur im Archiv steht */
@@ -359,6 +372,42 @@
   }
 
   /* ---------- Seite "Nachrichten und Themenarchiv" (nachrichten/) ---------- */
+  const monatLang = d => /^\d{4}-\d{2}/.test(d || "") ? new Date(d.slice(0, 7) + "-15T12:00:00").toLocaleDateString("de-DE", { month: "long", year: "numeric" }) : "Ohne Datum";
+  /* Gruppiert eine nach Datum absteigend sortierte Liste nach Monat. Die zwei neuesten Monate sind offen, ältere eingeklappt; bei Filter immer alle offen. */
+  function monatsGruppen(items, datumKey, rowFn, alleOffen) {
+    const gruppen = [];
+    items.forEach(it => {
+      const key = String(it[datumKey] || "").slice(0, 7);
+      let g = gruppen[gruppen.length - 1];
+      if (!g || g.key !== key) { g = { key, items: [] }; gruppen.push(g); }
+      g.items.push(it);
+    });
+    return gruppen.map((g, i) => `
+      <details class="n-monat"${alleOffen || i < 2 ? " open" : ""}>
+        <summary class="n-monat-h"><span class="n-monat-t">${escapeHtml(monatLang(g.key + "-15"))}</span><span class="n-monat-n">${g.items.length}</span><span class="n-monat-pfeil" aria-hidden="true">${icon("down", 18)}</span></summary>
+        <div class="group">${g.items.map(rowFn).join("")}</div>
+      </details>`).join("");
+  }
+  /* Segmentierte Fachauswahl mit Anzahl; Optionen ohne Treffer bleiben sichtbar, aber die Anzahl zeigt 0 */
+  function fachSegment(box, counts, onChange) {
+    const opts = [["Alle", "Alle"], ["Biologie", "Biologie"], ["Geografie", "Geografie"]];
+    const draw = (sel, c) => {
+      box.innerHTML = opts.map(([v, l]) => `<button type="button" data-v="${v}" aria-pressed="${v === sel}">${l}<span class="n-tab-n">${c[v]}</span></button>`).join("");
+    };
+    let aktuell = "Alle";
+    draw(aktuell, counts());
+    box.addEventListener("click", e => {
+      const b = e.target.closest("button[data-v]");
+      if (!b) return;
+      aktuell = b.dataset.v;
+      draw(aktuell, counts());
+      onChange(aktuell);
+      const neu = box.querySelector('[aria-pressed="true"]'); if (neu) neu.focus();
+    });
+    return { set: v => { aktuell = v; draw(aktuell, counts()); }, refresh: () => draw(aktuell, counts()) };
+  }
+  const zaehle = (n, einzahl, mehrzahl) => n === 1 ? "1 " + einzahl : n + " " + mehrzahl;
+
   function initNachrichten() {
     const liste = $("#n-liste"), archiv = $("#n-archiv");
     if (!liste || !archiv) return;
@@ -366,42 +415,98 @@
       fetch(root + "impuls.json").then(r => (r.ok ? r.json() : null)).catch(() => null),
       loadNachrichten()
     ]).then(([raw, news]) => {
+      /* ----- Tabs: Meldungen | Themenarchiv (Adresse #archiv öffnet das Archiv) ----- */
+      const tabs = { meldungen: $("#meldungen"), archiv: $("#archiv") };
+      const zeigeTab = name => {
+        Object.keys(tabs).forEach(k => {
+          tabs[k].hidden = k !== name;
+          $("#tab-" + k).setAttribute("aria-pressed", String(k === name));
+        });
+      };
+      document.querySelectorAll(".n-tabs button").forEach(b => b.addEventListener("click", () => {
+        zeigeTab(b.dataset.tab);
+        history.replaceState(null, "", b.dataset.tab === "archiv" ? "#archiv" : location.pathname + location.search);
+      }));
+      if (location.hash === "#archiv") zeigeTab("archiv");
+
+      /* ----- Meldungen ----- */
       const st = { q: "", fach: "Alle", ziel: "Alle" };
       const zielSelect = $("#n-ziel");
       zielSelect.innerHTML = '<option value="Alle">Alle Ziele</option>' + bneZiele.map(z =>
         `<option value="${z.nr}">${escapeHtml(z.nr + " " + z.kurz)} (${news.filter(n => zielNummern(n.bne).includes(z.nr)).length})</option>`).join("");
-      const render = () => {
+      const hatFach = (n, f) => f === "Alle" || (Array.isArray(n.faecher) && n.faecher.includes(f));
+      const passtSuche = (n, tokens) => tokens.length === 0 || (hay => tokens.every(t => hay.includes(t)))(
+        fold([n.titel, n.quelle, n.einordnung, zielNummern(n.bne).map(x => (bneZiel(x) || {}).kurz).join(" ")].join(" ")));
+      const grenzeNeu = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
+      const mRow = n => newsRow(n, { fach: true, neu: String(n.datum || "") >= grenzeNeu });
+      const fachM = fachSegment($("#n-fach"), () => {
         const tokens = fold(st.q).split(/\s+/).filter(Boolean);
-        const treffer = news.filter(n => {
-          if (st.fach !== "Alle" && !(Array.isArray(n.faecher) && n.faecher.includes(st.fach))) return false;
-          if (st.ziel !== "Alle" && !zielNummern(n.bne).includes(Number(st.ziel))) return false;
-          const hay = fold([n.titel, n.quelle, n.einordnung, zielNummern(n.bne).map(x => (bneZiel(x) || {}).kurz).join(" ")].join(" "));
-          return tokens.every(t => hay.includes(t));
-        });
-        $("#n-count").textContent = treffer.length === 1 ? "1 Meldung" : treffer.length + " Meldungen";
+        const basis = news.filter(n => (st.ziel === "Alle" || zielNummern(n.bne).includes(Number(st.ziel))) && passtSuche(n, tokens));
+        return { Alle: basis.length, Biologie: basis.filter(n => hatFach(n, "Biologie")).length, Geografie: basis.filter(n => hatFach(n, "Geografie")).length };
+      }, v => { st.fach = v; renderM(); });
+      const renderM = () => {
+        const tokens = fold(st.q).split(/\s+/).filter(Boolean);
+        const treffer = news.filter(n => hatFach(n, st.fach) && (st.ziel === "Alle" || zielNummern(n.bne).includes(Number(st.ziel))) && passtSuche(n, tokens));
+        const gefiltert = st.q || st.fach !== "Alle" || st.ziel !== "Alle";
+        $("#n-count").innerHTML = escapeHtml(zaehle(treffer.length, "Meldung", "Meldungen")) + (gefiltert ? ' · <button type="button" class="n-reset" id="n-reset">Filter zurücksetzen</button>' : "");
         liste.innerHTML = treffer.length
-          ? `<div class="group">${treffer.map(newsRow).join("")}</div>`
+          ? monatsGruppen(treffer, "datum", mRow, gefiltert)
           : '<p class="empty-message">' + (news.length ? "Dazu gibt es keine Meldung. Ändere die Suche oder den Filter." : "Es gibt noch keine Meldungen.") + "</p>";
+        const r = $("#n-reset");
+        if (r) r.addEventListener("click", () => { st.q = ""; st.fach = "Alle"; st.ziel = "Alle"; $("#n-q").value = ""; zielSelect.value = "Alle"; fachM.set("Alle"); renderM(); });
+        fachM.refresh();
+        hydrateIcons();
       };
-      $("#n-q").addEventListener("input", e => { st.q = e.target.value; render(); });
-      $("#n-fach").addEventListener("change", e => { st.fach = e.target.value; render(); });
-      zielSelect.addEventListener("change", e => { st.ziel = e.target.value; render(); });
+      $("#n-q").addEventListener("input", e => { st.q = e.target.value; renderM(); });
+      zielSelect.addEventListener("change", e => { st.ziel = e.target.value; renderM(); });
       const ziel = new URLSearchParams(location.search).get("ziel");
       if (/^\d{1,2}$/.test(ziel || "") && bneZiel(Number(ziel))) { st.ziel = String(Number(ziel)); zielSelect.value = st.ziel; }
-      render();
+      renderM();
+      $("#n-tab-m").textContent = news.length;
 
-      /* Themenarchiv: alle Wochen bis heute, neueste zuerst */
+      /* ----- Themenarchiv: alle Wochen bis heute, nach Monat gruppiert ----- */
       const heute = new Date().toISOString().slice(0, 10);
-      const wochen = raw && raw.aktiv === true && Array.isArray(raw.wochen)
-        ? raw.wochen.filter(w => w && w.frage && w.ab && String(w.ab) <= heute).sort((x, y) => String(y.ab).localeCompare(String(x.ab))) : [];
-      archiv.innerHTML = wochen.length
-        ? `<div class="group">${wochen.map((w, i) => {
-            const nrs = zielNummern(w.bne).filter(n => bneZiel(n));
-            const anzahl = news.filter(n => n.woche === w.ab || zielNummern(n.bne).some(x => nrs.includes(x))).length;
-            const meta = [datumLang(w.ab), w.klasse, nrs.map(n => "Ziel " + n + " " + bneZiel(n).kurz).join(" · "), anzahl ? (anzahl === 1 ? "1 Meldung" : anzahl + " Meldungen") : ""].filter(Boolean).map(escapeHtml).join(" · ");
-            return `<a class="row" href="${root}woche/?impuls=${escapeHtml(w.ab)}"><span class="row-main"><span class="row-title">${escapeHtml(w.frage)}${i === 0 ? '<span class="badge">Aktuell</span>' : ""}</span><span class="row-meta">${meta}</span></span><span class="row-chev">${icon("chevron", 20)}</span></a>`;
-          }).join("")}</div>`
-        : '<p class="empty-message">Es gibt noch keine früheren Themen.</p>';
+      const wochen = (raw && raw.aktiv === true && Array.isArray(raw.wochen)
+        ? raw.wochen.filter(w => w && w.frage && w.ab && String(w.ab) <= heute).sort((x, y) => String(y.ab).localeCompare(String(x.ab))) : [])
+        .map(w => {
+          const m = Array.isArray(w.material) && typeof w.material[0] === "string" ? w.material[0].split("/")[0] : "";
+          return Object.assign({}, w, { _fach: m === "biologie" ? "Biologie" : m === "geografie" ? "Geografie" : "" });
+        });
+      const neuesteAb = wochen.length ? wochen[0].ab : "";
+      $("#n-tab-a").textContent = wochen.length;
+      const klassen = [...new Set(wochen.map(w => w.klasse).filter(Boolean))].sort((a, b) => parseInt(a.replace(/\D/g, ""), 10) - parseInt(b.replace(/\D/g, ""), 10));
+      const klSelect = $("#a-klasse");
+      klSelect.innerHTML = '<option value="Alle">Alle Klassen</option>' + klassen.map(k => `<option value="${escapeHtml(k)}">${escapeHtml(k)} (${wochen.filter(w => w.klasse === k).length})</option>`).join("");
+      const sa = { q: "", fach: "Alle", klasse: "Alle" };
+      const aSuche = (w, tokens) => tokens.length === 0 || (hay => tokens.every(t => hay.includes(t)))(
+        fold([w.frage, w.erklaerung, w.klasse, zielNummern(w.bne).map(x => (bneZiel(x) || {}).kurz).join(" ")].join(" ")));
+      const aRow = w => {
+        const nrs = zielNummern(w.bne).filter(n => bneZiel(n));
+        const anzahl = news.filter(n => n.woche === w.ab || zielNummern(n.bne).some(x => nrs.includes(x))).length;
+        const meta = [datumLang(w.ab), w.klasse, w._fach, anzahl ? zaehle(anzahl, "Meldung", "Meldungen") : ""].filter(Boolean).map(escapeHtml).join(" · ");
+        const ziele = nrs.map(x => `<span class="news-ziel">${icon("z" + x, 16)}<span>${escapeHtml("Ziel " + x + " " + bneZiel(x).kurz)}</span></span>`).join("");
+        return `<a class="row" href="${root}woche/?impuls=${escapeHtml(w.ab)}"><span class="row-main"><span class="row-title">${escapeHtml(w.frage)}${w.ab === neuesteAb ? '<span class="badge">Aktuell</span>' : ""}</span><span class="row-meta">${meta}</span>${ziele ? `<span class="row-meta news-ziele">${ziele}</span>` : ""}</span><span class="row-chev">${icon("chevron", 20)}</span></a>`;
+      };
+      const aBasis = () => { const t = fold(sa.q).split(/\s+/).filter(Boolean); return wochen.filter(w => (sa.klasse === "Alle" || w.klasse === sa.klasse) && aSuche(w, t)); };
+      const fachA = fachSegment($("#a-fach"), () => {
+        const b = aBasis();
+        return { Alle: b.length, Biologie: b.filter(w => w._fach === "Biologie").length, Geografie: b.filter(w => w._fach === "Geografie").length };
+      }, v => { sa.fach = v; renderA(); });
+      const renderA = () => {
+        const treffer = aBasis().filter(w => sa.fach === "Alle" || w._fach === sa.fach);
+        const gefiltert = sa.q || sa.fach !== "Alle" || sa.klasse !== "Alle";
+        $("#a-count").innerHTML = escapeHtml(zaehle(treffer.length, "Thema", "Themen")) + (gefiltert ? ' · <button type="button" class="n-reset" id="a-reset">Filter zurücksetzen</button>' : "");
+        archiv.innerHTML = treffer.length
+          ? monatsGruppen(treffer, "ab", aRow, gefiltert)
+          : '<p class="empty-message">' + (wochen.length ? "Dazu gibt es kein Thema. Ändere die Suche oder den Filter." : "Es gibt noch keine früheren Themen.") + "</p>";
+        const r = $("#a-reset");
+        if (r) r.addEventListener("click", () => { sa.q = ""; sa.fach = "Alle"; sa.klasse = "Alle"; $("#a-q").value = ""; klSelect.value = "Alle"; fachA.set("Alle"); renderA(); });
+        fachA.refresh();
+        hydrateIcons();
+      };
+      $("#a-q").addEventListener("input", e => { sa.q = e.target.value; renderA(); });
+      klSelect.addEventListener("change", e => { sa.klasse = e.target.value; renderA(); });
+      renderA();
       hydrateIcons();
     });
   }

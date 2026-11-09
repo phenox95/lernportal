@@ -215,6 +215,8 @@ for i, n in enumerate(nach.get("eintraege", [])):
         if n["link"] in links:
             err(f"{nn}: link doppelt")
         links.add(n["link"])
+    if n.get("bild") and not str(n["bild"]).startswith("https://"):
+        err(f"{nn}: bild muss mit https:// beginnen")
     if n.get("art") and n["art"] not in ("Medienbericht", "Regierung", "Position"):
         err(f"{nn}: art „{n['art']}“ unbekannt (Medienbericht, Regierung oder Position)")
     e = n.get("einordnung", "")
