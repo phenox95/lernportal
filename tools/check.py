@@ -165,6 +165,33 @@ for liste in vorkommen.values():
     if len(liste) > 1:
         wrn("Identische Dateien: " + ", ".join(liste))
 
+# Impuls der Woche: Fotos (optional). Datei muss existieren, Beschreibung und Quelle sollen angegeben sein
+impuls = laden("impuls.json") or {}
+wochen = impuls.get("wochen") if isinstance(impuls.get("wochen"), list) else [impuls]
+ohne_foto = 0
+for w in wochen:
+    wn = f"impuls.json „{w.get('frage', '?')[:40]}“"
+    if not w.get("bild"):
+        ohne_foto += 1
+        continue
+    b = w["bild"]
+    if b.startswith("/") or ".." in b.split("/") or re.match(r"^[a-z]+:", b):
+        err(f"{wn}: bild „{b}“ ist kein zulässiger relativer Pfad")
+    elif not (ROOT / b).is_file():
+        err(f"{wn}: Bilddatei „{b}“ fehlt")
+    else:
+        kb = (ROOT / b).stat().st_size / 1024
+        if kb > 200:
+            wrn(f"{wn}: Bild „{b}“ ist {kb:.0f} KB groß (Ziel: unter ca. 150 KB, WebP)")
+        if not b.lower().endswith(".webp"):
+            wrn(f"{wn}: Bild „{b}“ ist kein WebP")
+    if not w.get("bildAlt"):
+        wrn(f"{wn}: bildAlt fehlt (Beschreibung für Screenreader)")
+    if not w.get("bildQuelle"):
+        wrn(f"{wn}: bildQuelle fehlt (Urheber und Lizenz angeben)")
+if ohne_foto:
+    print(f"HINWEIS  Impuls der Woche: {ohne_foto} von {len(wochen)} Einträgen ohne Foto")
+
 for m in warn:
     print("WARNUNG ", m)
 for m in fehler:
