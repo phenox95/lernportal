@@ -215,6 +215,8 @@ for i, n in enumerate(nach.get("eintraege", [])):
         if n["link"] in links:
             err(f"{nn}: link doppelt")
         links.add(n["link"])
+    if n.get("art") and n["art"] not in ("Medienbericht", "Regierung", "Position"):
+        err(f"{nn}: art „{n['art']}“ unbekannt (Medienbericht, Regierung oder Position)")
     e = n.get("einordnung", "")
     if not e:
         wrn(f"{nn}: einordnung fehlt (ein bis zwei eigene Sätze)")

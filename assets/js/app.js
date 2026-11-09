@@ -329,7 +329,8 @@
   const zielNummern = list => (Array.isArray(list) ? list : []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 17);
   function newsRow(n) {
     const ziele = zielNummern(n.bne).map(x => "Ziel " + x + " " + ((bneZiel(x) || {}).kurz || "")).map(t => t.trim()).join(" · ");
-    const meta = [n.quelle, datumLang(n.datum), "Externe Seite"].filter(Boolean).map(escapeHtml).join(" · ");
+    const ART = { Medienbericht: "Medienbericht", Regierung: "Sicht der Regierung", Position: "Position eines Verbands" };
+    const meta = [n.quelle, datumLang(n.datum), ART[n.art] || "", "Externe Seite"].filter(Boolean).map(escapeHtml).join(" · ");
     return `
       <a class="row news-row" href="${escapeHtml(n.link)}" target="_blank" rel="noopener noreferrer">
         <span class="row-main">
@@ -343,13 +344,13 @@
   }
   const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche.</p>';
 
-  /* Startseite: Meldungen der letzten 30 Tage (höchstens 2), damit Aktuelles nicht nur im Archiv steht */
+  /* Startseite: Meldungen der letzten 30 Tage (höchstens 3), damit Aktuelles nicht nur im Archiv steht */
   function initHomeAktuell() {
     const box = $("#home-aktuell");
     if (!box) return;
     loadNachrichten().then(news => {
       const grenze = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
-      const neu = news.filter(n => String(n.datum || "") >= grenze).slice(0, 2);
+      const neu = news.filter(n => String(n.datum || "") >= grenze).slice(0, 3);
       if (!neu.length) return;
       box.innerHTML = `<h2 id="h-home-aktuell" class="aktuell-h">Aktuell</h2>${newsHinweis}<div class="group">${neu.map(newsRow).join("")}</div>
         <p class="woche-hinweis woche-mehr"><a href="${root}nachrichten/">Alle Meldungen und das Themenarchiv</a></p>`;
