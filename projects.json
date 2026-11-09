@@ -416,5 +416,19 @@
         "art": "Präsentation"
       }
     ]
+  },
+  {
+    "title": "Der Wald als Zeitzeuge: Exkursion Königswald",
+    "description": "Interaktive Exkursionspräsentation: Waldwissen, Geländeauftrag, Luftbildvergleich 1989/heute und Planungsteam zur Frage, ob ein Wald ohne Menschen automatisch besser ist.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-8/lebensraeume/wald-als-zeitzeuge/",
+    "subject": "Biologie",
+    "grade": "Klasse 8",
+    "themenfeld": "3.2",
+    "dauer": "Doppelstunde",
+    "datum": "2026-11-09",
+    "bne": [
+      15
+    ]
   }
 ]
