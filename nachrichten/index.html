@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Ausgewählte Meldungen zu Biologie, Geografie und Nachhaltigkeit und das Archiv der Themen der Woche. Zum Nachlesen und Recherchieren.">
+  <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+  <title>Nachrichten und Themenarchiv – Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/app.js" defer></script>
+</head>
+<body data-page="nachrichten" data-root="../">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href=".././" aria-label="Lernportal Startseite"><span class="brand-dot" aria-hidden="true"></span>Lernportal</a>
+      <nav class="top-nav" aria-label="Hauptnavigation">
+        <a href="../biologie/">Biologie</a>
+        <a href="../geografie/">Geografie</a>
+        <a href="../alle/">Alle Materialien</a>
+        <a href="../bne/">Nachhaltigkeit</a>
+        <a href="../nachrichten/" aria-current="page">Nachrichten</a>
+      </nav>
+      <div class="header-tools" id="prefs-slot"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <a class="back-link" href="../"><span data-icon="back" data-size="20" aria-hidden="true"></span>Lernportal</a>
+        <p class="eyebrow">Zum Nachlesen und Recherchieren</p>
+        <h1 class="title">Nachrichten und Themenarchiv</h1>
+        <p class="lead">Ausgewählte Meldungen zu den Fächern und den Nachhaltigkeitszielen. Dazu alle früheren Themen der Woche.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <p class="n-sprung"><a href="#meldungen">Meldungen</a><a href="#archiv">Themenarchiv</a></p>
+
+      <section class="section" id="meldungen" aria-labelledby="h-meldungen">
+        <h2 id="h-meldungen" class="aktuell-h">Meldungen</h2>
+        <p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln.</p>
+
+        <details class="vn-details">
+          <summary class="vn-summary"><h3 class="vn-titel">So prüfst du eine Meldung</h3></summary>
+          <ol class="tipps">
+            <li><strong>Wer</strong> hat das veröffentlicht? Steht ein Medium, eine Behörde oder ein Institut dahinter?</li>
+            <li><strong>Wann</strong> ist es erschienen? Gibt es neuere Zahlen?</li>
+            <li><strong>Woher</strong> kommen die Zahlen? Wird eine Quelle genannt?</li>
+            <li><strong>Was sagen andere?</strong> Vergleiche mindestens zwei Quellen mit unterschiedlichem Blickwinkel.</li>
+          </ol>
+        </details>
+
+        <div class="search">
+          <label class="sr-only" for="n-q">In den Meldungen suchen</label>
+          <span data-icon="search" data-size="20" aria-hidden="true"></span>
+          <input id="n-q" type="search" placeholder="Meldung suchen" autocomplete="off" enterkeyhint="search">
+        </div>
+        <div class="filters">
+          <div class="filter-row">
+            <div>
+              <label class="filter-label" for="n-fach">Fach</label>
+              <div class="select-wrap">
+                <select id="n-fach">
+                  <option value="Alle">Alle Fächer</option>
+                  <option value="Biologie">Biologie</option>
+                  <option value="Geografie">Geografie</option>
+                </select>
+                <span data-icon="down" data-size="18" aria-hidden="true"></span>
+              </div>
+            </div>
+            <div>
+              <label class="filter-label" for="n-ziel">Nachhaltigkeit (BNE)</label>
+              <div class="select-wrap">
+                <select id="n-ziel"><option value="Alle">Alle Ziele</option></select>
+                <span data-icon="down" data-size="18" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="result-count" id="n-count" aria-live="polite"></p>
+        <div id="n-liste"><p class="loading-message">Meldungen werden geladen …</p></div>
+      </section>
+
+      <section class="section" id="archiv" aria-labelledby="h-archiv">
+        <h2 id="h-archiv" class="aktuell-h">Themenarchiv</h2>
+        <p class="woche-hinweis">Alle Themen der Woche bis heute. Zu jedem Thema findest du Foto, Erklärung, Material und Meldungen.</p>
+        <div id="n-archiv"><p class="loading-message">Themen werden geladen …</p></div>
+      </section>
+    </div>
+  </main>
+
+  <div class="wrap">
+    <footer class="site-footer">
+      <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
+      <span class="footer-links"><a href="../impressum/">Impressum</a><a href="../datenschutz/">Datenschutz</a></span>
+    </footer>
+  </div>
+</body>
+</html>

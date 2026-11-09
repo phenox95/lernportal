@@ -343,6 +343,54 @@
   }
   const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche.</p>';
 
+  /* ---------- Seite "Nachrichten und Themenarchiv" (nachrichten/) ---------- */
+  function initNachrichten() {
+    const liste = $("#n-liste"), archiv = $("#n-archiv");
+    if (!liste || !archiv) return;
+    Promise.all([
+      fetch(root + "impuls.json").then(r => (r.ok ? r.json() : null)).catch(() => null),
+      loadNachrichten()
+    ]).then(([raw, news]) => {
+      const st = { q: "", fach: "Alle", ziel: "Alle" };
+      const zielSelect = $("#n-ziel");
+      zielSelect.innerHTML = '<option value="Alle">Alle Ziele</option>' + bneZiele.map(z =>
+        `<option value="${z.nr}">${escapeHtml(z.nr + " " + z.kurz)} (${news.filter(n => zielNummern(n.bne).includes(z.nr)).length})</option>`).join("");
+      const render = () => {
+        const tokens = fold(st.q).split(/\s+/).filter(Boolean);
+        const treffer = news.filter(n => {
+          if (st.fach !== "Alle" && !(Array.isArray(n.faecher) && n.faecher.includes(st.fach))) return false;
+          if (st.ziel !== "Alle" && !zielNummern(n.bne).includes(Number(st.ziel))) return false;
+          const hay = fold([n.titel, n.quelle, n.einordnung, zielNummern(n.bne).map(x => (bneZiel(x) || {}).kurz).join(" ")].join(" "));
+          return tokens.every(t => hay.includes(t));
+        });
+        $("#n-count").textContent = treffer.length === 1 ? "1 Meldung" : treffer.length + " Meldungen";
+        liste.innerHTML = treffer.length
+          ? `<div class="group">${treffer.map(newsRow).join("")}</div>`
+          : '<p class="empty-message">' + (news.length ? "Dazu gibt es keine Meldung. Ändere die Suche oder den Filter." : "Es gibt noch keine Meldungen.") + "</p>";
+      };
+      $("#n-q").addEventListener("input", e => { st.q = e.target.value; render(); });
+      $("#n-fach").addEventListener("change", e => { st.fach = e.target.value; render(); });
+      zielSelect.addEventListener("change", e => { st.ziel = e.target.value; render(); });
+      const ziel = new URLSearchParams(location.search).get("ziel");
+      if (/^\d{1,2}$/.test(ziel || "") && bneZiel(Number(ziel))) { st.ziel = String(Number(ziel)); zielSelect.value = st.ziel; }
+      render();
+
+      /* Themenarchiv: alle Wochen bis heute, neueste zuerst */
+      const heute = new Date().toISOString().slice(0, 10);
+      const wochen = raw && raw.aktiv === true && Array.isArray(raw.wochen)
+        ? raw.wochen.filter(w => w && w.frage && w.ab && String(w.ab) <= heute).sort((x, y) => String(y.ab).localeCompare(String(x.ab))) : [];
+      archiv.innerHTML = wochen.length
+        ? `<div class="group">${wochen.map((w, i) => {
+            const nrs = zielNummern(w.bne).filter(n => bneZiel(n));
+            const anzahl = news.filter(n => n.woche === w.ab || zielNummern(n.bne).some(x => nrs.includes(x))).length;
+            const meta = [datumLang(w.ab), w.klasse, nrs.map(n => "Ziel " + n + " " + bneZiel(n).kurz).join(" · "), anzahl ? (anzahl === 1 ? "1 Meldung" : anzahl + " Meldungen") : ""].filter(Boolean).map(escapeHtml).join(" · ");
+            return `<a class="row" href="${root}woche/?impuls=${escapeHtml(w.ab)}"><span class="row-main"><span class="row-title">${escapeHtml(w.frage)}${i === 0 ? '<span class="badge">Aktuell</span>' : ""}</span><span class="row-meta">${meta}</span></span><span class="row-chev">${icon("chevron", 20)}</span></a>`;
+          }).join("")}</div>`
+        : '<p class="empty-message">Es gibt noch keine früheren Themen.</p>';
+      hydrateIcons();
+    });
+  }
+
   /* ---------- Seite "Thema der Woche" (woche/) ---------- */
   function initWoche() {
     const box = $("#woche-inhalt");
@@ -392,13 +440,14 @@
       const zumAktuellen = echtAktuell && echtAktuell.ab !== data.ab
         ? `<p class="woche-hinweis"><a href="./">Zum aktuellen Thema der Woche</a></p>` : "";
 
+      const archivLink = `<p class="woche-hinweis woche-mehr"><a href="${root}nachrichten/">Alle Meldungen und das Themenarchiv</a></p>`;
       box.innerHTML = `
         ${zumAktuellen}
         <div class="woche-kopf">
           <figure class="woche-bild"><div class="impuls-media">${media}</div>${caption}</figure>
           <div class="woche-text">${chips}${erkl}</div>
         </div>
-        ${material}${aktuell}${frueherHtml}`;
+        ${material}${aktuell}${frueherHtml}${archivLink}`;
       hydrateIcons();
     });
   }
@@ -810,7 +859,7 @@
       projects = Array.isArray(data) ? data : [];
       themenfelder = tf && typeof tf === "object" ? tf : {};
       bneZiele = bne && Array.isArray(bne.ziele) ? bne.ziele.filter(z => z && Number.isInteger(z.nr) && z.kurz) : [];
-      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else if (page === "woche") { initWoche(); } else { initList(); if (page === "fach") initFachAktuell(); }
+      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else if (page === "woche") { initWoche(); } else if (page === "nachrichten") { initNachrichten(); } else { initList(); if (page === "fach") initFachAktuell(); }
     })
     .catch(() => {
       if (list) list.innerHTML = '<p class="empty-message">Die Projektübersicht konnte nicht geladen werden. Bitte projects.json prüfen.</p>';

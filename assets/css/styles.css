@@ -529,3 +529,11 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 #woche-inhalt .section h2, .section h2.aktuell-h { margin: 0 0 0.75rem; font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
 .news-ein { color: var(--text); font-size: 0.9375rem; max-width: 46rem; }
 .impuls-mehr { margin: 0.5rem 0 0; }
+
+/* Seite Nachrichten und Themenarchiv */
+.n-sprung { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin: 1rem 0 0; font-size: 0.9375rem; }
+.n-sprung a { font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; }
+#meldungen .search { margin-top: 1rem; }
+.tipps { margin: 0.25rem 0 1rem; padding-left: 1.4rem; max-width: 40rem; }
+.tipps li { margin: 0.35rem 0; }
+.woche-mehr { margin-top: 1.5rem; }
