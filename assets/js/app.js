@@ -343,6 +343,20 @@
   }
   const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche.</p>';
 
+  /* Startseite: Meldungen der letzten 30 Tage (höchstens 2), damit Aktuelles nicht nur im Archiv steht */
+  function initHomeAktuell() {
+    const box = $("#home-aktuell");
+    if (!box) return;
+    loadNachrichten().then(news => {
+      const grenze = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
+      const neu = news.filter(n => String(n.datum || "") >= grenze).slice(0, 2);
+      if (!neu.length) return;
+      box.innerHTML = `<h2 id="h-home-aktuell" class="aktuell-h">Aktuell</h2>${newsHinweis}<div class="group">${neu.map(newsRow).join("")}</div>
+        <p class="woche-hinweis woche-mehr"><a href="${root}nachrichten/">Alle Meldungen und das Themenarchiv</a></p>`;
+      box.hidden = false;
+    });
+  }
+
   /* ---------- Seite "Nachrichten und Themenarchiv" (nachrichten/) ---------- */
   function initNachrichten() {
     const liste = $("#n-liste"), archiv = $("#n-archiv");
@@ -844,8 +858,7 @@
   const loadThemenfelder = page === "home" ? Promise.resolve({})
     : fetch(root + "themenfelder.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}));
 
-  const loadBne = page === "home" ? Promise.resolve({})
-    : fetch(root + "bne.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}));
+  const loadBne = fetch(root + "bne.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}));
 
   Promise.all([
     fetch(root + "projects.json").then(response => {
@@ -859,7 +872,7 @@
       projects = Array.isArray(data) ? data : [];
       themenfelder = tf && typeof tf === "object" ? tf : {};
       bneZiele = bne && Array.isArray(bne.ziele) ? bne.ziele.filter(z => z && Number.isInteger(z.nr) && z.kurz) : [];
-      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else if (page === "woche") { initWoche(); } else if (page === "nachrichten") { initNachrichten(); } else { initList(); if (page === "fach") initFachAktuell(); }
+      if (page === "home") { initHome(); initImpuls(); initHomeAktuell(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else if (page === "woche") { initWoche(); } else if (page === "nachrichten") { initNachrichten(); } else { initList(); if (page === "fach") initFachAktuell(); }
     })
     .catch(() => {
       if (list) list.innerHTML = '<p class="empty-message">Die Projektübersicht konnte nicht geladen werden. Bitte projects.json prüfen.</p>';

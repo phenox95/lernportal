@@ -14,6 +14,7 @@
     "bpb.de",
     "rki.de",
     "umweltbundesamt.de",
+    "bundesumweltministerium.de",
     "bundesnetzagentur.de",
     "destatis.de",
     "dwd.de",
@@ -23,6 +24,19 @@
     "who.int"
   ],
   "eintraege": [
+    {
+      "datum": "2026-11-08",
+      "titel": "Deutschland auf der Weltklimakonferenz in Antalya: Pariser Klimaabkommen schneller umsetzen",
+      "quelle": "Bundesumweltministerium (BMUKN)",
+      "link": "https://www.bundesumweltministerium.de/pressemitteilung/deutschland-auf-der-weltklimakonferenz-in-antalya-pariser-klimaabkommen-schneller-umsetzen",
+      "einordnung": "Am 9. November hat die Weltklimakonferenz COP31 in Antalya begonnen, sie dauert bis zum 20. November. Das ist die Sicht der Bundesregierung. Vergleiche sie mit anderen Quellen.",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13
+      ]
+    },
     {
       "datum": "2026-09-16",
       "titel": "Masern: Wie Eltern die Impfung ihrer Kinder trotz Gesetz umgehen",
