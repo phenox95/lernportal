@@ -10,6 +10,9 @@
         12
       ],
       "frage": "Was steckt alles in deinem Handy?",
+      "bild": "assets/img/impuls/2026-11-09-handy.webp",
+      "bildAlt": "Hauptplatine eines Smartphones von oben: blaue Platine mit vielen schwarzen Chips. Auf dem größten Chip ist ein Apfel-Logo zu sehen.",
+      "bildQuelle": "Foto: Raimond Spekking, CC BY-SA 4.0, Wikimedia Commons (IPhone 3G teardown - main board-3298.jpg), Ausschnitt",
       "erklaerung": "Ein Handy besteht aus vielen Rohstoffen, zum Beispiel Kupfer, Gold, Kobalt und Lithium. Sie kommen aus verschiedenen Ländern und werden in mehreren Schritten verarbeitet. Zusammengebaut wird es oft wieder woanders. So entsteht ein Netz über die ganze Welt.",
       "material": [
         "geografie/klasse-10/globalisierung/globalisierung-als-netz/"
