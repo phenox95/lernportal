@@ -526,6 +526,6 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .woche-erkl { max-width: 36rem; font-size: 1.0625rem; }
 .woche-hinweis { max-width: 40rem; margin: 0 0 0.75rem; font-size: 0.875rem; color: var(--text-2); }
 .woche-hinweis a { font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; }
-#woche-inhalt .section h2 { margin: 0 0 0.75rem; font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+#woche-inhalt .section h2, .section h2.aktuell-h { margin: 0 0 0.75rem; font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
 .news-ein { color: var(--text); font-size: 0.9375rem; max-width: 46rem; }
 .impuls-mehr { margin: 0.5rem 0 0; }

@@ -534,6 +534,18 @@
       button.setAttribute("aria-pressed", String(button.dataset.value === value)));
   }
 
+  /* Fachseiten: die neuesten Meldungen aus nachrichten.json zum Fach (Feld faecher), höchstens 3 */
+  function initFachAktuell() {
+    const box = $("#fach-aktuell");
+    if (!box || !pageSubject) return;
+    loadNachrichten().then(news => {
+      const passend = news.filter(n => Array.isArray(n.faecher) && n.faecher.includes(pageSubject)).slice(0, 3);
+      if (!passend.length) return;
+      box.innerHTML = `<h2 id="h-aktuell" class="aktuell-h">Aktuell in ${escapeHtml(pageSubject)}</h2>${newsHinweis}<div class="group">${passend.map(newsRow).join("")}</div>`;
+      box.hidden = false;
+    });
+  }
+
   function initList() {
     const params = new URLSearchParams(location.search);
     const grade = params.get("klasse");
@@ -798,7 +810,7 @@
       projects = Array.isArray(data) ? data : [];
       themenfelder = tf && typeof tf === "object" ? tf : {};
       bneZiele = bne && Array.isArray(bne.ziele) ? bne.ziele.filter(z => z && Number.isInteger(z.nr) && z.kurz) : [];
-      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else if (page === "woche") { initWoche(); } else { initList(); }
+      if (page === "home") { initHome(); initImpuls(); } else if (page === "themenfeld") { initThemenfeld(); } else if (page === "bne") { initBne(); } else if (page === "woche") { initWoche(); } else { initList(); if (page === "fach") initFachAktuell(); }
     })
     .catch(() => {
       if (list) list.innerHTML = '<p class="empty-message">Die Projektübersicht konnte nicht geladen werden. Bitte projects.json prüfen.</p>';
