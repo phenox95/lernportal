@@ -206,6 +206,12 @@ for i, n in enumerate(nach.get("eintraege", [])):
     if n.get("link"):
         if not n["link"].startswith("https://"):
             err(f"{nn}: link muss mit https:// beginnen")
+        else:
+            host = n["link"].split("/")[2].lower()
+            host = host[4:] if host.startswith("www.") else host
+            erlaubt = nach.get("erlaubteQuellen", [])
+            if not any(host == q or host.endswith("." + q) for q in erlaubt):
+                err(f"{nn}: Quelle „{host}“ steht nicht in erlaubteQuellen (nur seriöse Quellen)")
         if n["link"] in links:
             err(f"{nn}: link doppelt")
         links.add(n["link"])
