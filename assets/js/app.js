@@ -337,7 +337,7 @@
             ? `<div class="impuls-ziel">${icon("z" + erstes.nr, 56)}<span class="impuls-ziel-nr">Ziel ${erstes.nr}</span><span>${escapeHtml(erstes.kurz)}</span></div>`
             : `<div class="impuls-placeholder">${icon("photo", 32)}<span>Platz für eigenes Foto</span></div>`;
         const caption = data.bildQuelle ? `<p class="impuls-caption">${escapeHtml(data.bildQuelle)}</p>` : "";
-        const chips = zielNrs.length ? `<p class="impuls-ziele">${zielNrs.map(n => { const z = ziele.find(x => x.nr === n); return `<a class="tz-chip" href="${root}bne/?ziel=${n}"><span class="z-badge" aria-hidden="true">${n}</span>${escapeHtml(z.kurz)}<span class="sr-only"> (Nachhaltigkeitsziel ${n})</span></a>`; }).join("")}</p>` : "";
+        const chips = zielNrs.length ? `<p class="impuls-ziele">${zielNrs.map(n => { const z = ziele.find(x => x.nr === n); return `<a class="tz-chip" href="${root}bne/?ziel=${n}"><span class="z-badge" aria-hidden="true">${icon("z" + n, 16)}</span>${escapeHtml(z.kurz)}<span class="sr-only"> (Nachhaltigkeitsziel ${n})</span></a>`; }).join("")}</p>` : "";
         const erklaerung = data.erklaerung ? `<div class="impuls-erkl"><p class="label">Kurz erklärt</p><p>${escapeHtml(data.erklaerung)}</p></div>` : "";
         const mats = (Array.isArray(data.material) ? data.material : []).map(pfad => {
           const proj = projects.find(p => p.path === pfad);
@@ -525,7 +525,7 @@
     if (!namen.length) return `<div class="group">${items.map(p => row(p, false)).join("")}</div>`;
     const gruppe = (titel, mine, name) => {
       const nrs = [...new Set(mine.flatMap(bneOf))].sort((a, b) => a - b);
-      const ziele = nrs.length ? `<span class="reihe-ziele">${nrs.map(n => `<a class="reihe-ziel" href="${root}bne/?ziel=${n}" aria-label="Nachhaltigkeitsziel ${n} ${escapeHtml((bneZiel(n) || {}).kurz || "")}">${n}</a>`).join("")}</span>` : "";
+      const ziele = nrs.length ? `<span class="reihe-ziele">${nrs.map(n => `<a class="reihe-ziel" href="${root}bne/?ziel=${n}" aria-label="Nachhaltigkeitsziel ${n} ${escapeHtml((bneZiel(n) || {}).kurz || "")}">${icon("z" + n, 16)}<span>${escapeHtml((bneZiel(n) || {}).kurz || "Ziel " + n)}</span></a>`).join("")}</span>` : "";
       /* Klasse und Dauer einmal im Kopf, wenn sie bei allen Einträgen gleich sind */
       const gleich = f => mine.length > 1 && mine.every(p => p[f] && p[f] === mine[0][f]);
       const ohne = ["grade", "dauer"].filter(gleich);
@@ -608,7 +608,7 @@
         const href = root + "themenfeld/?fach=" + encodeURIComponent(f) + "&nr=" + encodeURIComponent(tf.nr);
         const chips = nrs.map(n => {
           const z = bneZiel(n);
-          return `<a class="tz-chip" href="?ziel=${n}"><span class="z-badge ${f === "Biologie" ? "bio" : "geo"}" aria-hidden="true">${n}</span>${escapeHtml(z ? z.kurz : "Ziel " + n)}<span class="sr-only"> (Ziel ${n}, ${escapeHtml(f)})</span></a>`;
+          return `<a class="tz-chip" href="?ziel=${n}"><span class="z-badge ${f === "Biologie" ? "bio" : "geo"}" aria-hidden="true">${icon("z" + n, 16)}</span>${escapeHtml(z ? z.kurz : "Ziel " + n)}<span class="sr-only"> (Ziel ${n}, ${escapeHtml(f)})</span></a>`;
         }).join("");
         return `<div class="tz-zeile"><a class="tz-tf" href="${escapeHtml(href)}"><span class="tf-icon" data-tf-fach="${escapeHtml(f)}" data-tf-nr="${escapeHtml(tf.nr)}">${icon(tf.icon, 18)}</span><span>${escapeHtml(tf.nr + " " + (tf.kurz || tf.titel))}</span></a><span class="tz-chips">${chips}</span></div>`;
       }).join("");
