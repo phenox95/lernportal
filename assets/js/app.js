@@ -327,6 +327,14 @@
   }
   const datumLang = d => /^\d{4}-\d{2}-\d{2}$/.test(d || "") ? new Date(d + "T12:00:00").toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : "";
   const zielNummern = list => (Array.isArray(list) ? list : []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 17);
+  /* Kürzel der Quelle für das Kästchen neben der Schlagzeile (lokal, kein Fremdbild). Unbekannte Quellen: Anfangsbuchstaben der Wörter. */
+  const QUELLE_KURZ = { "zdfheute": "ZDF", "zdf": "ZDF", "tagesschau": "TS", "deutschlandfunk": "DLF", "rbb24": "rbb", "germanwatch": "GW", "deutsche umwelthilfe": "DUH", "umweltbundesamt": "UBA", "bundesumweltministerium (bmukn)": "BMUKN", "bundesumweltministerium": "BMUKN", "robert koch-institut": "RKI", "spektrum": "SPK", "destatis": "DST" };
+  function quelleKurz(q) {
+    const k = QUELLE_KURZ[String(q || "").trim().toLowerCase()];
+    if (k) return k;
+    const w = String(q || "").replace(/\(.*?\)/g, "").split(/[\s\-–.]+/).filter(Boolean);
+    return (w.length > 1 ? w.map(x => x[0]).join("") : (w[0] || "?").slice(0, 3)).toUpperCase().slice(0, 4);
+  }
   function newsRow(n, opt) {
     opt = opt || {};
     const ziele = zielNummern(n.bne).map(x => `<span class="news-ziel">${icon("z" + x, 16)}<span>${escapeHtml(("Ziel " + x + " " + ((bneZiel(x) || {}).kurz || "")).trim())}</span></span>`).join("");
@@ -335,6 +343,7 @@
     const faecher = opt.fach && Array.isArray(n.faecher) ? n.faecher.filter(f => f === "Biologie" || f === "Geografie").map(f => `<span class="chip">${escapeHtml(f)}</span>`).join("") : "";
     return `
       <a class="row news-row" href="${escapeHtml(n.link)}" target="_blank" rel="noopener noreferrer">
+        <span class="news-quelle" aria-hidden="true">${escapeHtml(quelleKurz(n.quelle))}</span>
         <span class="row-main">
           <span class="row-title">${escapeHtml(n.titel)}${opt.neu ? '<span class="badge">Neu</span>' : ""}<span class="sr-only"> (externe Seite, öffnet in neuem Tab)</span></span>
           <span class="row-meta">${meta}</span>${n.einordnung ? `
