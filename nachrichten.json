@@ -1,5 +1,27 @@
 {
-  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze: Warum passt das zum Unterricht? Kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional woche (Datum 'ab' einer Woche aus impuls.json, um die Meldung dort anzupinnen) und sichtbar (false blendet aus). Zu jedem Thema Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
+  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden, Fachinstitute, Wissenschaftsmedien). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
+  "erlaubteQuellen": [
+    "tagesschau.de",
+    "deutschlandfunk.de",
+    "zdf.de",
+    "zdfheute.de",
+    "rbb24.de",
+    "ndr.de",
+    "br.de",
+    "wdr.de",
+    "mdr.de",
+    "swr.de",
+    "bpb.de",
+    "rki.de",
+    "umweltbundesamt.de",
+    "bundesnetzagentur.de",
+    "destatis.de",
+    "dwd.de",
+    "bundesregierung.de",
+    "aerzteblatt.de",
+    "spektrum.de",
+    "who.int"
+  ],
   "eintraege": [
     {
       "datum": "2026-09-16",
@@ -7,19 +29,13 @@
       "quelle": "ZDFheute",
       "link": "https://zdfheute.de/panorama/masern-impfung-masernschutzgesetz-impfgegner-impfbetrug-100.html",
       "einordnung": "Es gibt eine Masernimpfpflicht, und doch ist die Impfquote niedriger, als die WHO für den Schutz aller empfiehlt. Passt zur Frage, wann Impfen Privatsache ist und wann nicht.",
-      "faecher": ["Biologie"],
-      "bne": [3],
+      "faecher": [
+        "Biologie"
+      ],
+      "bne": [
+        3
+      ],
       "woche": "2026-11-16"
-    },
-    {
-      "datum": "2026-10-26",
-      "titel": "10 Gigawatt Windenergie-Leistung in NRW installiert",
-      "quelle": "Solarserver",
-      "link": "https://www.solarserver.de/2026/10/26/10-gigawatt-windenergie-leistung-in-nrw-installiert/",
-      "einordnung": "Der Ausbau der Windenergie geht voran, hier am Beispiel Nordrhein-Westfalen. Ein Anlass, Nutzen und Konflikte vor Ort gegeneinander abzuwägen.",
-      "faecher": ["Geografie"],
-      "bne": [7],
-      "woche": "2026-11-23"
     }
   ]
 }
