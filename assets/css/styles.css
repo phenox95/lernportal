@@ -556,3 +556,15 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 /* Nachrichten: Fachauswahl braucht Breite, auf schmalen Geräten untereinander */
 @media (max-width: 40rem) { #meldungen .filter-row, #archiv .filter-row { grid-template-columns: 1fr; } }
 .segmented button { white-space: nowrap; }
+
+/* Meldungen: Quellen-Kästchen vor der Schlagzeile */
+.news-row { align-items: flex-start; }
+.news-quelle { flex: none; display: flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; padding: 0 0.15rem; border: 1px solid var(--rahmen); border-radius: 0.6rem; background: var(--surface); font-size: 0.75rem; font-weight: 700; letter-spacing: 0; line-height: 1; overflow: hidden; }
+.news-row .row-chev { align-self: center; }
+@media (max-width: 40rem) { .news-row { gap: 0.75rem; } .news-quelle { width: 2.5rem; height: 2.5rem; font-size: 0.6875rem; } }
+
+/* Vorschaubild der Artikelseite, liegt über dem Kürzel (Rückfall, falls das Bild fehlt) */
+.news-quelle { position: relative; width: 4.5rem; height: 3.25rem; }
+.news-kurz { position: relative; }
+.news-bild { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 40rem) { .news-quelle { width: 3.75rem; height: 2.75rem; } }
