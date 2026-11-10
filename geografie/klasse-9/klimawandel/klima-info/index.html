@@ -11,7 +11,7 @@
   <meta name="description" content="Geografie Klasse 9/10: Was die Forschung zum Klimawandel sagt, fünf Mythen im Check, Tricks der Desinformation erkennen und ruhig darüber sprechen.">
   <!-- ENTWURF: bitte fachlich gegenlesen (Zahlen, Mythen-Antworten, Quellen). Keine Lösungen oder Lehrkrafthinweise auf dieser Seite. -->
   <link rel="stylesheet" href="../../../../assets/css/material.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=6">
   <script src="../../../../assets/js/prefs.js"></script>
   <script src="../../../../assets/js/material.js" defer></script>
 </head>
@@ -20,24 +20,23 @@
 
   <main class="lp-inhalt lp-info">
 
-    <section class="lp-material" aria-labelledby="kurz">
-      <div class="lp-material-kopf"><strong id="kurz">Kurz gesagt</strong></div>
-      <div class="lp-material-inhalt">
-        <ul>
-          <li>Die Erde wird wärmer. Das messen Forschende auf der ganzen Welt.</li>
-          <li>Die Hauptursache ist der Mensch. Vor allem Kohle, Öl und Gas setzen CO₂ frei.</li>
-          <li>Darüber sind sich die Forschenden einig. Offen ist: Wie schnell geht es weiter? Wie stark trifft es welche Region?</li>
-        </ul>
-      </div>
+    <section aria-labelledby="kurz">
+      <h2 class="lp-sr" id="kurz">Kurz gesagt</h2>
+      <ul class="lp-kacheln">
+        <li><svg class="lp-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M19 9a5 5 0 0 1 10 0v18a9 9 0 1 1-10 0z"/><path d="M24 14v20"/><circle cx="24" cy="36" r="3.5" class="lp-fuell"/></svg><strong>Die Erde wird wärmer.</strong><span>Das messen Forschende auf der ganzen Welt.</span></li>
+        <li><svg class="lp-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M5 41V24l12 6V24l12 6V14h8v27z"/><path d="M33 9c0-2 3-2 3-5"/><path d="M38 9c0-2 3-2 3-5"/></svg><strong>Der Mensch ist die Hauptursache.</strong><span>Vor allem Kohle, Öl und Gas setzen CO₂ frei.</span></li>
+        <li><svg class="lp-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M6 8h36v24H20l-9 8v-8H6z"/><path d="M15 20l6 6 12-12"/></svg><strong>Die Forschung ist sich einig.</strong><span>Offen ist: Wie schnell geht es weiter? Wie stark trifft es welche Region?</span></li>
+      </ul>
     </section>
 
-    <section class="lp-mit-bild" aria-labelledby="belege">
+    <section aria-labelledby="belege">
       <h2 id="belege">Woher wissen wir, dass der Mensch die Ursache ist?</h2>
-      <ol>
-        <li><strong class="lp-fett">Das CO₂ in der Luft steigt.</strong> Vor 1850 waren es etwa <a href="https://www.umweltbundesamt.de/node/42663" target="_blank" rel="noopener">280 ppm</a>. Heute sind es <a href="https://www.umweltbundesamt.de/daten/klima/atmosphaerische-treibhausgas-konzentrationen" target="_blank" rel="noopener">mehr als 420 ppm</a>. (ppm heißt: Teile pro Million.) Eisbohrkerne zeigen: In den letzten <a href="https://doi.org/10.1038/nature06949" target="_blank" rel="noopener">800 000 Jahren lag der Wert immer zwischen etwa 180 und 300 ppm</a>.</li>
-        <li><strong class="lp-fett">Das CO₂ hat einen Fingerabdruck.</strong> Kohle, Öl und Gas sind uralt. Sie enthalten kein C-14 mehr. C-14 ist eine besondere Art Kohlenstoff, die mit der Zeit zerfällt. Wenn man sie verbrennt, sinkt der Anteil von C-14 in der Luft. Genau das messen Forschende (<a href="https://utopia.de/news/3-klimawandel-belege-die-du-noch-nicht-kennst_549490" target="_blank" rel="noopener">Suess-Effekt</a>).</li>
-        <li><strong class="lp-fett">Die Sonne passt nicht.</strong> <a href="https://www.umweltbundesamt.de/themen/klima-energie/klimawandel/haeufige-fragen-klimawandel" target="_blank" rel="noopener">Seit Jahrzehnten wird die Sonne nicht stärker</a>. Die Temperatur auf der Erde steigt trotzdem.</li>
+      <ol class="lp-kacheln lp-nummeriert">
+        <li><svg class="lp-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M6 42h36"/><rect x="9" y="30" width="7" height="12" class="lp-fuell"/><rect x="21" y="22" width="7" height="20" class="lp-fuell"/><rect x="33" y="10" width="7" height="32" class="lp-fuell"/></svg><strong>Das CO₂ in der Luft steigt.</strong><span>Vor 1850 waren es etwa <a href="https://www.umweltbundesamt.de/node/42663" target="_blank" rel="noopener">280 ppm</a>. Heute sind es <a href="https://www.umweltbundesamt.de/daten/klima/atmosphaerische-treibhausgas-konzentrationen" target="_blank" rel="noopener">mehr als 420 ppm</a>. (ppm heißt: Teile pro Million.) Eisbohrkerne zeigen: In den letzten <a href="https://doi.org/10.1038/nature06949" target="_blank" rel="noopener">800 000 Jahren lag der Wert immer zwischen etwa 180 und 300 ppm</a>.</span></li>
+        <li><svg class="lp-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M10 30a14 14 0 0 1 28 0"/><path d="M16 36a8 8 0 0 1 16 0"/><path d="M24 42v-6"/><path d="M6 22a18 18 0 0 1 36 0"/></svg><strong>Das CO₂ hat einen Fingerabdruck.</strong><span>Kohle, Öl und Gas sind uralt. Sie enthalten kein C-14 mehr. C-14 ist eine besondere Art Kohlenstoff, die mit der Zeit zerfällt. Wenn man sie verbrennt, sinkt der Anteil von C-14 in der Luft. Genau das messen Forschende (<a href="https://utopia.de/news/3-klimawandel-belege-die-du-noch-nicht-kennst_549490" target="_blank" rel="noopener">Suess-Effekt</a>).</span></li>
+        <li><svg class="lp-icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="8" class="lp-fuell"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M38 10l-4 4M14 34l-4 4"/></svg><strong>Die Sonne passt nicht.</strong><span><a href="https://www.umweltbundesamt.de/themen/klima-energie/klimawandel/haeufige-fragen-klimawandel" target="_blank" rel="noopener">Seit Jahrzehnten wird die Sonne nicht stärker</a>. Die Temperatur auf der Erde steigt trotzdem.</span></li>
       </ol>
+      <div class="lp-zeile">
       <figure class="lp-material lp-abbildung lp-grafik lp-g-a" aria-labelledby="abb1">
         <div class="lp-material-kopf"><strong id="abb1">Abbildung 1</strong><span>CO₂ in der Luft in ppm</span></div>
         <div class="lp-grafik-flaeche">
@@ -59,10 +58,6 @@
         </div>
         <p class="lp-quelle">Quelle: <a href="https://gml.noaa.gov/ccgg/trends/" target="_blank" rel="noopener">NOAA</a>; <a href="https://doi.org/10.1038/nature06949" target="_blank" rel="noopener">Lüthi u. a. 2008</a>. Eigene Darstellung.</p>
       </figure>
-      <div class="lp-hilfe">
-        <span class="lp-label">Wie funktioniert der Treibhauseffekt?</span>
-        <p>Gase wie CO₂ halten Wärme in der Lufthülle fest. Ohne diesen natürlichen Effekt wäre es auf der Erde im Mittel etwa <a href="https://www.umweltbundesamt.de/themen/klima-energie/klimawandel/klima-treibhauseffekt" target="_blank" rel="noopener">−18 °C</a> kalt. Mit ihm sind es etwa <a href="https://www.umweltbundesamt.de/themen/klima-energie/klimawandel/klima-treibhauseffekt" target="_blank" rel="noopener">+15 °C</a>. Mehr CO₂ verstärkt den Effekt.</p>
-      </div>
       <figure class="lp-material lp-abbildung lp-grafik lp-g-b" aria-labelledby="abb2">
         <div class="lp-material-kopf"><strong id="abb2">Abbildung 2</strong><span>Treibhauseffekt</span></div>
         <div class="lp-grafik-flaeche">
@@ -81,24 +76,18 @@
             <g class="g-text"><text x="20" y="216">Ohne Treibhausgase: etwa −18 °C. Mit: etwa +15 °C.</text></g>
           </svg>
         </div>
+        <p class="lp-erklaer"><strong>So funktioniert es:</strong> Gase wie CO₂ halten Wärme in der Lufthülle fest. Ohne diesen natürlichen Effekt wäre es auf der Erde im Mittel etwa <a href="https://www.umweltbundesamt.de/themen/klima-energie/klimawandel/klima-treibhauseffekt" target="_blank" rel="noopener">−18 °C</a> kalt. Mit ihm sind es etwa <a href="https://www.umweltbundesamt.de/themen/klima-energie/klimawandel/klima-treibhauseffekt" target="_blank" rel="noopener">+15 °C</a>. Mehr CO₂ verstärkt den Effekt.</p>
         <p class="lp-quelle">Quelle: <a href="https://www.umweltbundesamt.de/themen/klima-energie/klimawandel/klima-treibhauseffekt" target="_blank" rel="noopener">Umweltbundesamt</a>. Eigene Darstellung, vereinfacht.</p>
       </figure>
+      </div>
     </section>
 
-    <section class="lp-mit-bild lp-forschung" aria-labelledby="forschung">
+    <section aria-labelledby="forschung">
       <h2 id="forschung">Was sagt die Forschung insgesamt?</h2>
-      <p><a href="https://doi.org/10.1088/1748-9326/ac2966" target="_blank" rel="noopener">Mehr als 99 %</a> der Fachaufsätze, die zur Ursache Stellung nehmen, stützen den menschengemachten Klimawandel (<a href="https://doi.org/10.1088/1748-9326/ac2966" target="_blank" rel="noopener">Lynas u. a. 2021</a>). Der <a href="https://www.ipcc.ch/report/ar5/wg1/" target="_blank" rel="noopener">Weltklimarat (IPCC)</a> hält den Einfluss des Menschen für „äußerst wahrscheinlich“ die Hauptursache.</p>
-            <figure class="lp-material lp-abbildung lp-grafik lp-g-c" aria-labelledby="abb3">
-        <div class="lp-material-kopf"><strong id="abb3">Abbildung 3</strong><span>100 Fachaufsätze</span></div>
-        <div class="lp-grafik-flaeche">
-          <svg viewBox="0 0 250 250" role="img" aria-label="100 Kästchen stehen für 100 Fachaufsätze, die zur Ursache der Erwärmung Stellung nehmen. 99 Kästchen sind gefüllt: Sie stützen den menschengemachten Klimawandel. Ein Kästchen ist leer: Es steht für weniger als 1 Aufsatz.">
-            <rect x="10" y="10" width="20" height="20" class="g-akzent"/><rect x="34" y="10" width="20" height="20" class="g-akzent"/><rect x="58" y="10" width="20" height="20" class="g-akzent"/><rect x="82" y="10" width="20" height="20" class="g-akzent"/><rect x="106" y="10" width="20" height="20" class="g-akzent"/><rect x="130" y="10" width="20" height="20" class="g-akzent"/><rect x="154" y="10" width="20" height="20" class="g-akzent"/><rect x="178" y="10" width="20" height="20" class="g-akzent"/><rect x="202" y="10" width="20" height="20" class="g-akzent"/><rect x="226" y="10" width="20" height="20" class="g-akzent"/><rect x="10" y="34" width="20" height="20" class="g-akzent"/><rect x="34" y="34" width="20" height="20" class="g-akzent"/><rect x="58" y="34" width="20" height="20" class="g-akzent"/><rect x="82" y="34" width="20" height="20" class="g-akzent"/><rect x="106" y="34" width="20" height="20" class="g-akzent"/><rect x="130" y="34" width="20" height="20" class="g-akzent"/><rect x="154" y="34" width="20" height="20" class="g-akzent"/><rect x="178" y="34" width="20" height="20" class="g-akzent"/><rect x="202" y="34" width="20" height="20" class="g-akzent"/><rect x="226" y="34" width="20" height="20" class="g-akzent"/><rect x="10" y="58" width="20" height="20" class="g-akzent"/><rect x="34" y="58" width="20" height="20" class="g-akzent"/><rect x="58" y="58" width="20" height="20" class="g-akzent"/><rect x="82" y="58" width="20" height="20" class="g-akzent"/><rect x="106" y="58" width="20" height="20" class="g-akzent"/><rect x="130" y="58" width="20" height="20" class="g-akzent"/><rect x="154" y="58" width="20" height="20" class="g-akzent"/><rect x="178" y="58" width="20" height="20" class="g-akzent"/><rect x="202" y="58" width="20" height="20" class="g-akzent"/><rect x="226" y="58" width="20" height="20" class="g-akzent"/><rect x="10" y="82" width="20" height="20" class="g-akzent"/><rect x="34" y="82" width="20" height="20" class="g-akzent"/><rect x="58" y="82" width="20" height="20" class="g-akzent"/><rect x="82" y="82" width="20" height="20" class="g-akzent"/><rect x="106" y="82" width="20" height="20" class="g-akzent"/><rect x="130" y="82" width="20" height="20" class="g-akzent"/><rect x="154" y="82" width="20" height="20" class="g-akzent"/><rect x="178" y="82" width="20" height="20" class="g-akzent"/><rect x="202" y="82" width="20" height="20" class="g-akzent"/><rect x="226" y="82" width="20" height="20" class="g-akzent"/><rect x="10" y="106" width="20" height="20" class="g-akzent"/><rect x="34" y="106" width="20" height="20" class="g-akzent"/><rect x="58" y="106" width="20" height="20" class="g-akzent"/><rect x="82" y="106" width="20" height="20" class="g-akzent"/><rect x="106" y="106" width="20" height="20" class="g-akzent"/><rect x="130" y="106" width="20" height="20" class="g-akzent"/><rect x="154" y="106" width="20" height="20" class="g-akzent"/><rect x="178" y="106" width="20" height="20" class="g-akzent"/><rect x="202" y="106" width="20" height="20" class="g-akzent"/><rect x="226" y="106" width="20" height="20" class="g-akzent"/><rect x="10" y="130" width="20" height="20" class="g-akzent"/><rect x="34" y="130" width="20" height="20" class="g-akzent"/><rect x="58" y="130" width="20" height="20" class="g-akzent"/><rect x="82" y="130" width="20" height="20" class="g-akzent"/><rect x="106" y="130" width="20" height="20" class="g-akzent"/><rect x="130" y="130" width="20" height="20" class="g-akzent"/><rect x="154" y="130" width="20" height="20" class="g-akzent"/><rect x="178" y="130" width="20" height="20" class="g-akzent"/><rect x="202" y="130" width="20" height="20" class="g-akzent"/><rect x="226" y="130" width="20" height="20" class="g-akzent"/><rect x="10" y="154" width="20" height="20" class="g-akzent"/><rect x="34" y="154" width="20" height="20" class="g-akzent"/><rect x="58" y="154" width="20" height="20" class="g-akzent"/><rect x="82" y="154" width="20" height="20" class="g-akzent"/><rect x="106" y="154" width="20" height="20" class="g-akzent"/><rect x="130" y="154" width="20" height="20" class="g-akzent"/><rect x="154" y="154" width="20" height="20" class="g-akzent"/><rect x="178" y="154" width="20" height="20" class="g-akzent"/><rect x="202" y="154" width="20" height="20" class="g-akzent"/><rect x="226" y="154" width="20" height="20" class="g-akzent"/><rect x="10" y="178" width="20" height="20" class="g-akzent"/><rect x="34" y="178" width="20" height="20" class="g-akzent"/><rect x="58" y="178" width="20" height="20" class="g-akzent"/><rect x="82" y="178" width="20" height="20" class="g-akzent"/><rect x="106" y="178" width="20" height="20" class="g-akzent"/><rect x="130" y="178" width="20" height="20" class="g-akzent"/><rect x="154" y="178" width="20" height="20" class="g-akzent"/><rect x="178" y="178" width="20" height="20" class="g-akzent"/><rect x="202" y="178" width="20" height="20" class="g-akzent"/><rect x="226" y="178" width="20" height="20" class="g-akzent"/><rect x="10" y="202" width="20" height="20" class="g-akzent"/><rect x="34" y="202" width="20" height="20" class="g-akzent"/><rect x="58" y="202" width="20" height="20" class="g-akzent"/><rect x="82" y="202" width="20" height="20" class="g-akzent"/><rect x="106" y="202" width="20" height="20" class="g-akzent"/><rect x="130" y="202" width="20" height="20" class="g-akzent"/><rect x="154" y="202" width="20" height="20" class="g-akzent"/><rect x="178" y="202" width="20" height="20" class="g-akzent"/><rect x="202" y="202" width="20" height="20" class="g-akzent"/><rect x="226" y="202" width="20" height="20" class="g-akzent"/><rect x="10" y="226" width="20" height="20" class="g-akzent"/><rect x="34" y="226" width="20" height="20" class="g-akzent"/><rect x="58" y="226" width="20" height="20" class="g-akzent"/><rect x="82" y="226" width="20" height="20" class="g-akzent"/><rect x="106" y="226" width="20" height="20" class="g-akzent"/><rect x="130" y="226" width="20" height="20" class="g-akzent"/><rect x="154" y="226" width="20" height="20" class="g-akzent"/><rect x="178" y="226" width="20" height="20" class="g-akzent"/><rect x="202" y="226" width="20" height="20" class="g-akzent"/><rect x="226" y="226" width="20" height="20" class="g-leer"/>
-          </svg>
-        </div>
-        <ul class="lp-legende"><li><span class="lp-kaestchen lp-voll" aria-hidden="true"></span>Mehr als 99 stützen den menschengemachten Klimawandel.</li><li><span class="lp-kaestchen" aria-hidden="true"></span>Weniger als 1 tut es nicht.</li></ul>
-        <p class="lp-quelle">Quelle: <a href="https://doi.org/10.1088/1748-9326/ac2966" target="_blank" rel="noopener">Lynas u. a. 2021</a>. Eigene Darstellung.</p>
-      </figure>
-      <div class="lp-scroll" tabindex="0" role="region" aria-label="Tabelle gesichert und offen, seitlich wischbar">
+      <div class="lp-zeile lp-zeile-text">
+        <div class="lp-karte">
+          <p><a href="https://doi.org/10.1088/1748-9326/ac2966" target="_blank" rel="noopener">Mehr als 99 %</a> der Fachaufsätze, die zur Ursache Stellung nehmen, stützen den menschengemachten Klimawandel (<a href="https://doi.org/10.1088/1748-9326/ac2966" target="_blank" rel="noopener">Lynas u. a. 2021</a>). Der <a href="https://www.ipcc.ch/report/ar5/wg1/" target="_blank" rel="noopener">Weltklimarat (IPCC)</a> hält den Einfluss des Menschen für „äußerst wahrscheinlich“ die Hauptursache.</p>
+          <div class="lp-scroll" tabindex="0" role="region" aria-label="Tabelle gesichert und offen, seitlich wischbar">
         <table class="lp-tabelle">
           <thead><tr><th scope="col">Gesichert</th><th scope="col">Noch offen</th></tr></thead>
           <tbody>
@@ -108,12 +97,24 @@
           </tbody>
         </table>
       </div>
+        </div>
+        <figure class="lp-material lp-abbildung lp-grafik lp-g-c" aria-labelledby="abb3">
+        <div class="lp-material-kopf"><strong id="abb3">Abbildung 3</strong><span>100 Fachaufsätze</span></div>
+        <div class="lp-grafik-flaeche">
+          <svg viewBox="0 0 250 250" role="img" aria-label="100 Kästchen stehen für 100 Fachaufsätze, die zur Ursache der Erwärmung Stellung nehmen. 99 Kästchen sind gefüllt: Sie stützen den menschengemachten Klimawandel. Ein Kästchen ist leer: Es steht für weniger als 1 Aufsatz.">
+            <rect x="10" y="10" width="20" height="20" class="g-akzent"/><rect x="34" y="10" width="20" height="20" class="g-akzent"/><rect x="58" y="10" width="20" height="20" class="g-akzent"/><rect x="82" y="10" width="20" height="20" class="g-akzent"/><rect x="106" y="10" width="20" height="20" class="g-akzent"/><rect x="130" y="10" width="20" height="20" class="g-akzent"/><rect x="154" y="10" width="20" height="20" class="g-akzent"/><rect x="178" y="10" width="20" height="20" class="g-akzent"/><rect x="202" y="10" width="20" height="20" class="g-akzent"/><rect x="226" y="10" width="20" height="20" class="g-akzent"/><rect x="10" y="34" width="20" height="20" class="g-akzent"/><rect x="34" y="34" width="20" height="20" class="g-akzent"/><rect x="58" y="34" width="20" height="20" class="g-akzent"/><rect x="82" y="34" width="20" height="20" class="g-akzent"/><rect x="106" y="34" width="20" height="20" class="g-akzent"/><rect x="130" y="34" width="20" height="20" class="g-akzent"/><rect x="154" y="34" width="20" height="20" class="g-akzent"/><rect x="178" y="34" width="20" height="20" class="g-akzent"/><rect x="202" y="34" width="20" height="20" class="g-akzent"/><rect x="226" y="34" width="20" height="20" class="g-akzent"/><rect x="10" y="58" width="20" height="20" class="g-akzent"/><rect x="34" y="58" width="20" height="20" class="g-akzent"/><rect x="58" y="58" width="20" height="20" class="g-akzent"/><rect x="82" y="58" width="20" height="20" class="g-akzent"/><rect x="106" y="58" width="20" height="20" class="g-akzent"/><rect x="130" y="58" width="20" height="20" class="g-akzent"/><rect x="154" y="58" width="20" height="20" class="g-akzent"/><rect x="178" y="58" width="20" height="20" class="g-akzent"/><rect x="202" y="58" width="20" height="20" class="g-akzent"/><rect x="226" y="58" width="20" height="20" class="g-akzent"/><rect x="10" y="82" width="20" height="20" class="g-akzent"/><rect x="34" y="82" width="20" height="20" class="g-akzent"/><rect x="58" y="82" width="20" height="20" class="g-akzent"/><rect x="82" y="82" width="20" height="20" class="g-akzent"/><rect x="106" y="82" width="20" height="20" class="g-akzent"/><rect x="130" y="82" width="20" height="20" class="g-akzent"/><rect x="154" y="82" width="20" height="20" class="g-akzent"/><rect x="178" y="82" width="20" height="20" class="g-akzent"/><rect x="202" y="82" width="20" height="20" class="g-akzent"/><rect x="226" y="82" width="20" height="20" class="g-akzent"/><rect x="10" y="106" width="20" height="20" class="g-akzent"/><rect x="34" y="106" width="20" height="20" class="g-akzent"/><rect x="58" y="106" width="20" height="20" class="g-akzent"/><rect x="82" y="106" width="20" height="20" class="g-akzent"/><rect x="106" y="106" width="20" height="20" class="g-akzent"/><rect x="130" y="106" width="20" height="20" class="g-akzent"/><rect x="154" y="106" width="20" height="20" class="g-akzent"/><rect x="178" y="106" width="20" height="20" class="g-akzent"/><rect x="202" y="106" width="20" height="20" class="g-akzent"/><rect x="226" y="106" width="20" height="20" class="g-akzent"/><rect x="10" y="130" width="20" height="20" class="g-akzent"/><rect x="34" y="130" width="20" height="20" class="g-akzent"/><rect x="58" y="130" width="20" height="20" class="g-akzent"/><rect x="82" y="130" width="20" height="20" class="g-akzent"/><rect x="106" y="130" width="20" height="20" class="g-akzent"/><rect x="130" y="130" width="20" height="20" class="g-akzent"/><rect x="154" y="130" width="20" height="20" class="g-akzent"/><rect x="178" y="130" width="20" height="20" class="g-akzent"/><rect x="202" y="130" width="20" height="20" class="g-akzent"/><rect x="226" y="130" width="20" height="20" class="g-akzent"/><rect x="10" y="154" width="20" height="20" class="g-akzent"/><rect x="34" y="154" width="20" height="20" class="g-akzent"/><rect x="58" y="154" width="20" height="20" class="g-akzent"/><rect x="82" y="154" width="20" height="20" class="g-akzent"/><rect x="106" y="154" width="20" height="20" class="g-akzent"/><rect x="130" y="154" width="20" height="20" class="g-akzent"/><rect x="154" y="154" width="20" height="20" class="g-akzent"/><rect x="178" y="154" width="20" height="20" class="g-akzent"/><rect x="202" y="154" width="20" height="20" class="g-akzent"/><rect x="226" y="154" width="20" height="20" class="g-akzent"/><rect x="10" y="178" width="20" height="20" class="g-akzent"/><rect x="34" y="178" width="20" height="20" class="g-akzent"/><rect x="58" y="178" width="20" height="20" class="g-akzent"/><rect x="82" y="178" width="20" height="20" class="g-akzent"/><rect x="106" y="178" width="20" height="20" class="g-akzent"/><rect x="130" y="178" width="20" height="20" class="g-akzent"/><rect x="154" y="178" width="20" height="20" class="g-akzent"/><rect x="178" y="178" width="20" height="20" class="g-akzent"/><rect x="202" y="178" width="20" height="20" class="g-akzent"/><rect x="226" y="178" width="20" height="20" class="g-akzent"/><rect x="10" y="202" width="20" height="20" class="g-akzent"/><rect x="34" y="202" width="20" height="20" class="g-akzent"/><rect x="58" y="202" width="20" height="20" class="g-akzent"/><rect x="82" y="202" width="20" height="20" class="g-akzent"/><rect x="106" y="202" width="20" height="20" class="g-akzent"/><rect x="130" y="202" width="20" height="20" class="g-akzent"/><rect x="154" y="202" width="20" height="20" class="g-akzent"/><rect x="178" y="202" width="20" height="20" class="g-akzent"/><rect x="202" y="202" width="20" height="20" class="g-akzent"/><rect x="226" y="202" width="20" height="20" class="g-akzent"/><rect x="10" y="226" width="20" height="20" class="g-akzent"/><rect x="34" y="226" width="20" height="20" class="g-akzent"/><rect x="58" y="226" width="20" height="20" class="g-akzent"/><rect x="82" y="226" width="20" height="20" class="g-akzent"/><rect x="106" y="226" width="20" height="20" class="g-akzent"/><rect x="130" y="226" width="20" height="20" class="g-akzent"/><rect x="154" y="226" width="20" height="20" class="g-akzent"/><rect x="178" y="226" width="20" height="20" class="g-akzent"/><rect x="202" y="226" width="20" height="20" class="g-akzent"/><rect x="226" y="226" width="20" height="20" class="g-leer"/>
+          </svg>
+        </div>
+        <ul class="lp-legende"><li><span class="lp-kaestchen lp-voll" aria-hidden="true"></span>Mehr als 99 stützen den menschengemachten Klimawandel.</li><li><span class="lp-kaestchen" aria-hidden="true"></span>Weniger als 1 tut es nicht.</li></ul>
+        <p class="lp-quelle">Quelle: <a href="https://doi.org/10.1088/1748-9326/ac2966" target="_blank" rel="noopener">Lynas u. a. 2021</a>. Eigene Darstellung.</p>
+      </figure>
+      </div>
     </section>
 
     <section aria-labelledby="mythen">
       <h2 id="mythen">Fünf Mythen im Check</h2>
       <p>Tippe auf einen Mythos. Dann siehst du, was daran stimmt und was nicht.</p>
-
+      <div class="lp-aufklappe">
       <details>
         <summary>„Das Klima hat sich schon immer gewandelt.“</summary>
         <div class="lp-aufklapp-inhalt">
@@ -158,6 +159,7 @@
           <p><strong class="lp-fett">Deine Gegenfrage:</strong> „Worüber sind sie uneinig: ob der Mensch die Ursache ist oder wie schnell es weitergeht?“</p>
         </div>
       </details>
+      </div>
     </section>
 
     <section aria-labelledby="tricks">
@@ -173,19 +175,19 @@
       <p class="lp-quelle">Quelle: nach dem FLICC-Modell von John Cook</p>
     </section>
 
-    <section class="lp-mit-bild lp-gespraech" aria-labelledby="gespraech">
+    <section aria-labelledby="gespraech">
       <h2 id="gespraech">So sprichst du ruhig darüber</h2>
-      <ol>
-        <li><strong class="lp-fett">Erst zuhören.</strong> Frage nach: „Wie meinst du das genau?“</li>
-        <li><strong class="lp-fett">Die Sorge suchen.</strong> Hinter „Das ist Panikmache“ steckt oft Angst vor Kosten oder Verboten. Frage: „Was macht dir dabei Sorgen?“ Wichtig: Ob der Mensch die Ursache ist, ist eine Frage der Fakten. Was wir tun sollen, ist eine politische Frage. Trenne beides.</li>
-        <li><strong class="lp-fett">Ein Punkt statt zehn.</strong> Wähle ein Argument und erkläre es gut.</li>
-        <li><strong class="lp-fett">Fakt – Mythos – Fakt.</strong> Nenne zuerst den gesicherten Fakt. Erkläre dann kurz, wie der Mythos in die Irre führt. Nenne am Ende den Fakt noch einmal.</li>
-        <li><strong class="lp-fett">Nach Quellen fragen.</strong> „Woher hast du das?“ Nenne auch deine Quelle.</li>
-        <li><strong class="lp-fett">Gemeinsames suchen.</strong> „Wir wollen beide gute Informationen.“</li>
-        <li><strong class="lp-fett">Du musst nicht gewinnen.</strong> Wer sich schon festgelegt hat, lässt sich selten umstimmen. Mehr bewirkst du bei Menschen, die noch unsicher sind oder nur mitlesen. Du darfst aufhören: „Wir sehen das verschieden. Ich schicke dir gern meine Quelle.“</li>
+      <ol class="lp-schritte lp-nummeriert">
+        <li><strong>Erst zuhören.</strong><span> Frage nach: „Wie meinst du das genau?“</span></li>
+        <li><strong>Die Sorge suchen.</strong><span> Hinter „Das ist Panikmache“ steckt oft Angst vor Kosten oder Verboten. Frage: „Was macht dir dabei Sorgen?“ Wichtig: Ob der Mensch die Ursache ist, ist eine Frage der Fakten. Was wir tun sollen, ist eine politische Frage. Trenne beides.</span></li>
+        <li><strong>Ein Punkt statt zehn.</strong><span> Wähle ein Argument und erkläre es gut.</span></li>
+        <li><strong>Fakt – Mythos – Fakt.</strong><span> Nenne zuerst den gesicherten Fakt. Erkläre dann kurz, wie der Mythos in die Irre führt. Nenne am Ende den Fakt noch einmal.</span></li>
+        <li><strong>Nach Quellen fragen.</strong><span> „Woher hast du das?“ Nenne auch deine Quelle.</span></li>
+        <li><strong>Gemeinsames suchen.</strong><span> „Wir wollen beide gute Informationen.“</span></li>
+        <li><strong>Du musst nicht gewinnen.</strong><span> Wer sich schon festgelegt hat, lässt sich selten umstimmen. Mehr bewirkst du bei Menschen, die noch unsicher sind oder nur mitlesen. Du darfst aufhören: „Wir sehen das verschieden. Ich schicke dir gern meine Quelle.“</span></li>
       </ol>
-
-      <div class="lp-hilfe">
+      <div class="lp-zeile">
+        <div class="lp-hilfe">
         <span class="lp-label">Beispielgespräch</span>
         <ul class="lp-dialog">
           <li>Person A: „Das Klima hat sich schon immer gewandelt.“</li>
@@ -194,9 +196,10 @@
           <li class="lp-du">Du: „Was war deiner Meinung nach früher die Ursache? Und woher hast du die Information?“</li>
         </ul>
       </div>
-      <div class="lp-hilfe">
+        <div class="lp-hilfe">
         <span class="lp-label">Im Netz</span>
         <p>Du schreibst für alle, die mitlesen. Bleib sachlich und nenne eine Quelle. Auf Beleidigungen antwortest du nicht. Du kannst sie melden.</p>
+      </div>
       </div>
     </section>
 
