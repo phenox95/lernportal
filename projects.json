@@ -30,7 +30,13 @@
     "grade": "Klasse 9",
     "themenfeld": "3.6",
     "dauer": "45 Min.",
-    "datum": "2026-11-03"
+    "datum": "2026-11-03",
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/auge-bau/",
+        "grund": "Der Bau des Auges ist die Grundlage, um den Strahlengang bei Kurzsichtigkeit zu erklären."
+      }
+    ]
   },
   {
     "title": "Urlaub auf dem Vulkan – Tourismus am Ätna",
@@ -45,6 +51,12 @@
     "reihe": "Vulkanismus",
     "bne": [
       8
+    ],
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/",
+        "grund": "Gleiche Reihe, gleicher Raum: Tourismus und Landwirtschaft nutzen den Ätna auf unterschiedliche Weise."
+      }
     ]
   },
   {
@@ -293,7 +305,17 @@
     "dauer": "45 Min.",
     "datum": "2026-11-05",
     "reihe": "Vulkanismus",
-    "status": "Entwurf"
+    "status": "Entwurf",
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-7/risikoraeume/aetna-tourismus/",
+        "grund": "Gleiche Reihe: Nach der Entstehung von Vulkanausbrüchen geht es um Leben und Tourismus am Ätna."
+      },
+      {
+        "pfad": "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/",
+        "grund": "Gleiche Reihe: Vulkanische Böden bringen am Ätna Chancen und Risiken für die Landwirtschaft."
+      }
+    ]
   },
   {
     "title": "Erneuerbare Energien – Strom, Wärme, Verkehr",
@@ -414,6 +436,15 @@
         "titel": "Präsentation zur Stunde",
         "pfad": "biologie/klasse-9/gesundheit/gesund-oder-krank/praesentation/",
         "art": "Präsentation"
+      }
+    ],
+    "bne": [
+      3
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Gleiche Reihe: Erst geht es um den Gesundheitsbegriff, dann um das Impfen als Schutz vor Krankheit."
       }
     ]
   },
