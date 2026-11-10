@@ -486,5 +486,23 @@
     "bne": [
       13
     ]
+  },
+  {
+    "title": "Klimawandel: Fakten, Mythen, Gespräche",
+    "description": "Was die Forschung sagt, fünf Mythen im Check, Tricks der Desinformation und Tipps für ruhige Gespräche. Stichwörter: Klimaleugnung, Fake News, Faktencheck.",
+    "type": "Lernmodul",
+    "path": "geografie/klasse-9/klimawandel/klima-info/",
+    "subject": "Geografie",
+    "grade": "Klasse 9/10",
+    "themenfeld": "3.6",
+    "reihe": "Klimawandel",
+    "datum": "2026-11-10",
+    "sichtbar": true,
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-9/klimawandel/quellen-pruefen/",
+        "grund": "Hier übst du das Prüfen von Quellen mit Aufgaben."
+      }
+    ]
   }
 ]
