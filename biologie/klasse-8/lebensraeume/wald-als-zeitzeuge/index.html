@@ -58,7 +58,7 @@
 .luft{display:grid;grid-template-columns:600px 1fr;gap:30px;align-items:start}
 .fragen-liste{height:200px}
 .bildbox{position:relative;border:3px solid var(--g);border-radius:14px;overflow:hidden;background:#222;aspect-ratio:16/10}
-.bildbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.bildbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
 .bildbox .vorn{clip-path:inset(0 calc(100% - var(--p,50%)) 0 0)}
 .bildbox .leer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff;font-size:23px;line-height:1.35}
 .bildbox .tag{position:absolute;top:8px;background:rgba(0,0,0,.75);color:#fff;font-weight:700;font-size:20px;padding:3px 12px;border-radius:8px}
@@ -388,10 +388,10 @@ svg.scene text{font-family:inherit}
   <div class="luft">
     <div>
       <div class="bildbox" id="bildbox">
-        <div class="leer" id="leer">Beide Luftbilder laden, dann mit dem Regler vergleichen.</div>
-        <img id="imgH" alt="Aktuelles Luftbild" hidden>
-        <img id="imgA" class="vorn" alt="Historisches Luftbild" hidden>
-        <span class="tag" style="left:8px">1989/1990</span><span class="tag" style="right:8px">heute</span>
+        <div class="leer" id="leer" style="display:none">Beide Bilder laden, dann mit dem Regler vergleichen.</div>
+        <img id="imgH" src="bilder/heute.webp" alt="Aktuelles Luftbild des Waldes mit der Grenze zwischen Berlin und Brandenburg">
+        <img id="imgA" class="vorn" src="bilder/frueher.webp" alt="Früheres Foto eines Grenzstreifens mit Zaun und Kolonnenweg durch den Wald">
+        <span class="tag" style="left:8px">früher</span><span class="tag" style="right:8px">heute</span>
       </div>
       <input class="regler" id="regler" type="range" min="0" max="100" value="50" aria-label="Vergleichsregler zwischen historischem und aktuellem Luftbild">
     </div>
@@ -401,10 +401,10 @@ svg.scene text{font-family:inherit}
       <p class="aufg s"><b>Beschreibe</b>, wie sich die Vegetation verändert hat.</p>
       <p class="aufg s"><b>Vermute</b>, wie die damalige Nutzung die Landschaft geprägt haben könnte.</p>
       <div class="laden">
-        <label>Historisches Bild laden<input type="file" id="fA" accept="image/*"></label>
-        <label>Aktuelles Bild laden<input type="file" id="fH" accept="image/*"></label>
+        <label>Anderes Bild (früher)<input type="file" id="fA" accept="image/*"></label>
+        <label>Anderes Bild (heute)<input type="file" id="fH" accept="image/*"></label>
       </div>
-      <p class="tip">Quelle für Berlin: Geoportal Berlin (FIS-Broker). Bilder vorher auf dem Gerät speichern.</p>
+      <p class="tip">Eigene Bilder (z. B. Geoportal Berlin, FIS-Broker) lassen sich über die Tasten laden.</p>
     </div>
   </div>
 </section>
