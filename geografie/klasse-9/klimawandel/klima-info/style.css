@@ -16,10 +16,40 @@
 .lp-info .lp-quelle { padding-left: 0; }
 .lp-info a { color: var(--lp-text); text-underline-offset: 0.15em; }
 
-/* Breite Bildschirme: zwei Spalten, damit die Fläche genutzt wird. Schmal bleibt es einspaltig. */
+/* Eine Spalte, breiter. Auf breiten Bildschirmen steht neben dem Text eine Grafik, schmal liegt sie darunter. */
+.lp-info > * { max-width: none; }
+.lp-info .lp-mit-bild { display: block; }
+.lp-grafik { margin: 0 0 1rem; }
+.lp-grafik-flaeche { padding: 0.9rem 1.1rem; background: var(--lp-flaeche); }
+.lp-grafik svg { display: block; width: 100%; height: auto; max-width: 28rem; margin: 0 auto; color: var(--lp-text); font-family: inherit; font-size: 13px; }
+.lp-grafik .lp-quelle { padding: 0 1.1rem 0.8rem; margin: 0; }
+.g-text text, text.g-text { fill: var(--lp-text); }
+.g-fett { font-weight: 700; }
+.g-achse line { stroke: var(--lp-text2); stroke-width: 1.5; }
+.g-grau { fill: var(--lp-text2); }
+.g-akzent { fill: var(--lp-akzent); }
+.g-leer { fill: none; stroke: var(--lp-text2); stroke-width: 2; }
+.g-auf-akzent { fill: var(--lp-flaeche) !important; }
+.g-band { fill: var(--lp-gruppe); stroke: var(--lp-text2); stroke-width: 2; stroke-dasharray: 5 3; }
+.g-pfeil line { stroke: currentColor; stroke-width: 3; }
+.g-warm { color: var(--lp-akzent); }
+.g-warm line { stroke-dasharray: 6 4; }
+.lp-legende { margin: 0; padding: 0 1.1rem 0.5rem; list-style: none; }
+.lp-legende li { display: flex; gap: 0.6rem; align-items: center; margin: 0 0 0.3rem; }
+.lp-kaestchen { flex: none; width: 1rem; height: 1rem; border: 2px solid var(--lp-text2); box-sizing: border-box; }
+.lp-kaestchen.lp-voll { background: var(--lp-akzent); border-color: var(--lp-akzent); }
+.lp-info .lp-karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 0.75rem; padding: 0; list-style: none; }
+.lp-info .lp-karten li { max-width: none; margin: 0; padding: 0.9rem 1.1rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); }
+.lp-info .lp-karten strong { display: block; margin-bottom: 0.25rem; }
+
 @media (min-width: 60rem) {
-  .lp-info { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2.5rem; align-items: start; }
-  .lp-info > * { max-width: none; }
-  .lp-info > section:first-child, .lp-info > .lp-fuss { grid-column: 1 / -1; }
-  .lp-info .lp-aufklapp-inhalt p, .lp-info li { max-width: none; }
+  .lp-info .lp-mit-bild { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 2.5rem; align-items: start; }
+  .lp-info .lp-mit-bild > h2 { grid-column: 1 / -1; }
+  .lp-info .lp-mit-bild > .lp-grafik { grid-column: 2; }
+  .lp-info .lp-mit-bild > :not(h2):not(.lp-grafik) { grid-column: 1; }
+  .lp-info .lp-forschung > .lp-g-c { grid-row: 2 / span 3; }
+  .lp-info .lp-gespraech > ol { grid-row: 2 / span 2; }
+  .lp-info .lp-gespraech > .lp-hilfe:nth-of-type(1) { grid-column: 2; grid-row: 2; }
+  .lp-info .lp-gespraech > .lp-hilfe:nth-of-type(2) { grid-column: 2; grid-row: 3; }
 }
+.lp-g-c svg { max-width: 15rem; }
