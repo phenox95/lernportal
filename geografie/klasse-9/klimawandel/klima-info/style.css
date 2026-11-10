@@ -15,3 +15,11 @@
 .lp-weiter:hover { background: var(--lp-gruppe); }
 .lp-info .lp-quelle { padding-left: 0; }
 .lp-info a { color: var(--lp-text); text-underline-offset: 0.15em; }
+
+/* Breite Bildschirme: zwei Spalten, damit die Fläche genutzt wird. Schmal bleibt es einspaltig. */
+@media (min-width: 60rem) {
+  .lp-info { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2.5rem; align-items: start; }
+  .lp-info > * { max-width: none; }
+  .lp-info > section:first-child, .lp-info > .lp-fuss { grid-column: 1 / -1; }
+  .lp-info .lp-aufklapp-inhalt p, .lp-info li { max-width: none; }
+}
