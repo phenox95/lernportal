@@ -94,3 +94,8 @@
 .lp-info .lp-weiter-details { margin-top: 1rem; }
 .lp-bildfigur { margin: 0; }
 .lp-bildfigur img { display: block; width: 100%; max-width: 44rem; height: auto; margin: 0 auto; border: 1px solid var(--lp-linie); border-radius: calc(var(--lp-radius) * 0.7); }
+.lp-info .lp-spalte { display: grid; gap: 1rem; align-content: start; }
+.lp-weiterlesen h3 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+.lp-weiterlesen ul { margin: 0; padding-left: 1.3rem; }
+.lp-info .lp-weiter-zeile { margin: 0; }
+.lp-info .lp-weiter-zeile .lp-weiter { margin-top: 0; }
