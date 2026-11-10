@@ -96,6 +96,13 @@ img { max-width: 100%; display: block; }
 .segmented button { flex: 1; min-height: 2.75rem; padding: 0 0.5rem; border: 0; border-radius: 0.55rem; background: transparent; color: var(--text-2); font-size: 0.9375rem; cursor: pointer; }
 .segmented button[aria-pressed="true"] { background: var(--surface); color: var(--text); font-weight: 700; }
 .segmented button:not([aria-pressed="true"]):hover { color: var(--text); }
+/* Ausgewählter Filter: farbige Umrandung in der Fachfarbe (Biologie grün, Geografie rot), ohne Platzbedarf */
+:root { --seg-akzent: var(--bio); }
+body[data-subject="Geografie"] { --seg-akzent: var(--geo); }
+#subject-control button[data-value="Geografie"][aria-pressed="true"] { --seg-akzent: var(--geo); }
+#subject-control button[data-value="Biologie"][aria-pressed="true"] { --seg-akzent: var(--bio); }
+.segmented button[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--seg-akzent); }
+.select-wrap.aktiv select { background: var(--surface); box-shadow: inset 0 0 0 2px var(--seg-akzent); font-weight: 700; }
 
 /* Einstieg */
 .hero { padding: 3rem 0 1rem; }
