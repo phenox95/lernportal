@@ -89,6 +89,18 @@
       ]
     },
     {
+      "ab": "2027-01-04",
+      "klasse": "Klasse 9",
+      "bne": [
+        13
+      ],
+      "frage": "Zwei Aussagen zum Klimawandel: Wem kannst du glauben?",
+      "erklaerung": "Im Netz stehen zum Klimawandel ganz verschiedene Aussagen. Nicht jede Quelle ist gleich verlässlich. Wir prüfen Quellen mit fünf Fragen und üben, ruhig darüber zu sprechen.",
+      "material": [
+        "geografie/klasse-9/klimawandel/quellen-pruefen/"
+      ]
+    },
+    {
       "ab": "2027-01-11",
       "bne": [
         15

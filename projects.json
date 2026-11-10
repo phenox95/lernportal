@@ -430,5 +430,30 @@
     "bne": [
       15
     ]
+  },
+  {
+    "title": "Klimawandel: Quellen prüfen",
+    "description": "Beurteile Quellen mit fünf Fragen, prüfe den Stand der Forschung und entwickle eine ruhige Antwort auf Klimamythen. Stichwörter: Quellenkritik, Fake News, Desinformation, Faktencheck, Klimaleugnung.",
+    "type": "Arbeitsblatt",
+    "path": "geografie/klasse-9/klimawandel/quellen-pruefen/",
+    "subject": "Geografie",
+    "grade": "Klasse 9/10",
+    "themenfeld": "3.6",
+    "reihe": "Klimawandel",
+    "datum": "2026-11-10",
+    "sichtbar": true,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Auch beim Impfen stehen widersprüchliche Aussagen im Netz. Der Quellencheck hilft dort genauso."
+      },
+      {
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/",
+        "grund": "Beim Klimaschutz und bei der Energiewende begegnen dir dieselben Mythen. Prüfe sie mit den fünf Fragen."
+      }
+    ],
+    "bne": [
+      13
+    ]
   }
 ]
