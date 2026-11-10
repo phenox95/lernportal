@@ -83,3 +83,14 @@
 .g-erde { fill: var(--lp-akzent); }
 .g-dunkel { fill: var(--lp-text); }
 .g-dunkel rect, .g-dunkel path, .g-dunkel circle { fill: var(--lp-text); stroke: none; }
+.lp-bildband { margin: 1.1rem 0 0; }
+.lp-bildband img { display: block; width: 100%; height: 9rem; object-fit: fill; border-radius: var(--lp-radius); }
+.lp-bildband figcaption, .lp-bildfigur figcaption { margin-top: 0.4rem; font-size: 0.875rem; color: var(--lp-text2); max-width: 80ch; }
+.lp-g-k img { display: block; width: 100%; height: auto; max-width: 32rem; margin: 0 auto; }
+.lp-info .lp-zeile-bild { grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
+.lp-lesehilfe h3 { margin: 0 0 0.6rem; font-size: 1.15rem; }
+.lp-lesehilfe ol { margin: 0 0 0.8rem; padding-left: 1.3rem; }
+.lp-lesehilfe .lp-frage { margin: 0; padding: 0.6rem 0.8rem; border: 2px solid var(--lp-akzent); border-radius: calc(var(--lp-radius) * 0.7); }
+.lp-info .lp-weiter-details { margin-top: 1rem; }
+.lp-bildfigur { margin: 0; }
+.lp-bildfigur img { display: block; width: 100%; max-width: 44rem; height: auto; margin: 0 auto; border: 1px solid var(--lp-linie); border-radius: calc(var(--lp-radius) * 0.7); }
