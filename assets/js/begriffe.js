@@ -62,14 +62,14 @@
     return m ? m[1] : "";
   }
 
-  /* ---------- Übersicht: Themenfelder, zu denen es Material gibt ---------- */
+  /* ---------- Übersicht: Themenfelder mit geprüften Begriffen (Feld begriffe: true), mit &entwurf=1 alle mit Material ---------- */
   function uebersicht(projekte, themenfelder) {
     document.title = "Begriffe – Lernportal";
     const gruppe = neu("div", "group");
     let n = 0;
     FAECHER.forEach((f) => {
       (Array.isArray(themenfelder[f]) ? themenfelder[f] : []).forEach((tf) => {
-        if (!projekte.some((p) => p.subject === f && tfNummer(p) === tf.nr)) return;
+        if (!projekte.some((p) => p.subject === f && tfNummer(p) === tf.nr && (entwurf || p.begriffe === true))) return;
         const a = neu("a", "row");
         a.href = root + "begriffe/?fach=" + encodeURIComponent(f) + "&nr=" + encodeURIComponent(tf.nr);
         const haupt = neu("span", "row-main");
