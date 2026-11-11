@@ -263,6 +263,8 @@
     const chips = chipsOf(project);
     const bne = bneText(project);
     const badge = project.status ? `<span class="badge">${escapeHtml(project.status)}</span>` : "";
+    const beschreibung = opts.beschreibung && project.description
+      ? `<span class="row-description">${escapeHtml(project.description)}</span>` : "";
     const nr = opts.nr;
     const kurz = nr != null && STUNDE_VORSATZ.test(project.title) ? String(project.title).replace(STUNDE_VORSATZ, "") : project.title;
     const vorsatz = nr != null ? `<span class="sr-only">Stunde ${nr}: </span>` : "";
@@ -271,7 +273,7 @@
       <a class="row" href="${escapeHtml(resolvePath(project.path))}">
         ${lead}
         <span class="row-main">
-          <span class="row-title">${vorsatz}${escapeHtml(kurz)}${badge}</span>${meta ? `
+          <span class="row-title">${vorsatz}${escapeHtml(kurz)}${badge}</span>${beschreibung}${meta ? `
           <span class="row-meta">${meta}</span>` : ""}${chips}${bne ? `
           <span class="row-meta">Nachhaltigkeit: ${escapeHtml(bne)}</span>` : ""}
         </span>
@@ -715,7 +717,7 @@
     });
     counter.textContent = countText(visible.length);
     list.innerHTML = visible.length
-      ? `<div class="group">${visible.map(p => row(p, page === "alle")).join("")}</div>`
+      ? `<div class="group">${visible.map(p => row(p, page === "alle", { beschreibung: page === "alle" })).join("")}</div>`
       : '<p class="empty-message">Für diese Auswahl gibt es noch kein Material.</p>';
   }
 
