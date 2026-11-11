@@ -1,5 +1,5 @@
 {
-  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden und Ministerien, Fachinstitute, Wissenschaftsmedien, anerkannte Umweltverbände). Optional art: Medienbericht, Regierung oder Position (zeigt in der Liste, wessen Sicht die Meldung wiedergibt). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional bild (https-Adresse des Vorschaubilds der Artikelseite, wird direkt von dort geladen, siehe Datenschutz), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
+  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden und Ministerien, Fachinstitute, Wissenschaftsmedien, anerkannte Umweltverbände). Optional art: Medienbericht, Regierung oder Position (zeigt in der Liste, wessen Sicht die Meldung wiedergibt). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional bild (HTTPS-Bildadresse); bildnachweis, bildquelle und bildlizenz dokumentieren die Bildrechte. Externe Vorschaubilder werden direkt vom jeweiligen Bildserver geladen (siehe Datenschutz), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
   "erlaubteQuellen": [
     "tagesschau.de",
     "deutschlandfunk.de",
@@ -39,7 +39,10 @@
       "bne": [
         13
       ],
-      "bild": "https://www.zdfheute.de/assets/klimakonferenz-cop31-haupteingang-politik-klimawandel-100~1280x720?cb=1793997253767"
+      "bild": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/10_11_2025_-_COP30_2025_%2854915669970%29.jpg/960px-10_11_2025_-_COP30_2025_%2854915669970%29.jpg",
+      "bildnachweis": "DPU – Defensoria Pública da União, COP30 (Symbolbild), CC0 1.0",
+      "bildquelle": "https://commons.wikimedia.org/wiki/File:10_11_2025_-_COP30_2025_(54915669970).jpg",
+      "bildlizenz": "https://creativecommons.org/publicdomain/zero/1.0/"
     },
     {
       "datum": "2026-11-08",
@@ -54,7 +57,10 @@
       "bne": [
         13
       ],
-      "bild": "https://www.zdfheute.de/assets/friedrich-merz-978~1280x720?cb=1794138721439"
+      "bild": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/10_11_2025_-_COP30_2025_%2854915669970%29.jpg/960px-10_11_2025_-_COP30_2025_%2854915669970%29.jpg",
+      "bildnachweis": "DPU – Defensoria Pública da União, COP30 (Symbolbild), CC0 1.0",
+      "bildquelle": "https://commons.wikimedia.org/wiki/File:10_11_2025_-_COP30_2025_(54915669970).jpg",
+      "bildlizenz": "https://creativecommons.org/publicdomain/zero/1.0/"
     },
     {
       "datum": "2026-11-08",
@@ -69,7 +75,10 @@
         13
       ],
       "art": "Regierung",
-      "bild": "https://www.bundesumweltministerium.de/typo3temp/assets/images/_c__UN_Climate_Change_-_Kiara_Worth__csm_cop31_anatalya_lp_ohne_fahnen_1200px_ba932e37e9_4d6262684f87f0d97b00fa818ab16300.jpg"
+      "bild": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/10_11_2025_-_COP30_2025_%2854915669970%29.jpg/960px-10_11_2025_-_COP30_2025_%2854915669970%29.jpg",
+      "bildnachweis": "DPU – Defensoria Pública da União, COP30 (Symbolbild), CC0 1.0",
+      "bildquelle": "https://commons.wikimedia.org/wiki/File:10_11_2025_-_COP30_2025_(54915669970).jpg",
+      "bildlizenz": "https://creativecommons.org/publicdomain/zero/1.0/"
     },
     {
       "datum": "2026-11-06",
@@ -84,7 +93,10 @@
       "bne": [
         13
       ],
-      "bild": "https://www.germanwatch.org/sites/default/files/styles/twitter/public/2026-09/2026_COP31.jpg?itok=cZKgV-iD"
+      "bild": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/10_11_2025_-_COP30_2025_%2854915669970%29.jpg/960px-10_11_2025_-_COP30_2025_%2854915669970%29.jpg",
+      "bildnachweis": "DPU – Defensoria Pública da União, COP30 (Symbolbild), CC0 1.0",
+      "bildquelle": "https://commons.wikimedia.org/wiki/File:10_11_2025_-_COP30_2025_(54915669970).jpg",
+      "bildlizenz": "https://creativecommons.org/publicdomain/zero/1.0/"
     },
     {
       "datum": "2026-11-05",
@@ -100,7 +112,10 @@
         13,
         7
       ],
-      "bild": "https://www.duh.de/fileadmin/_processed_/1/a/csm_AdobeStock_307425041_Klimaschutz_piyaset_089606e914.jpg"
+      "bild": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/10_11_2025_-_COP30_2025_%2854915669970%29.jpg/960px-10_11_2025_-_COP30_2025_%2854915669970%29.jpg",
+      "bildnachweis": "DPU – Defensoria Pública da União, COP30 (Symbolbild), CC0 1.0",
+      "bildquelle": "https://commons.wikimedia.org/wiki/File:10_11_2025_-_COP30_2025_(54915669970).jpg",
+      "bildlizenz": "https://creativecommons.org/publicdomain/zero/1.0/"
     },
     {
       "datum": "2026-09-16",
@@ -116,7 +131,10 @@
       ],
       "woche": "2026-11-16",
       "art": "Medienbericht",
-      "bild": "https://www.zdfheute.de/assets/impfen-impfschutz-schutzimpfung-masernschutzgesetz-100~1280x720?cb=1788864104176"
+      "bild": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Vaccination.jpg",
+      "bildnachweis": "CDC / U.S. Department of Health and Human Services, Public Domain",
+      "bildquelle": "https://commons.wikimedia.org/wiki/File:Vaccination.jpg",
+      "bildlizenz": "https://commons.wikimedia.org/wiki/File:Vaccination.jpg"
     }
   ]
 }
