@@ -7,7 +7,7 @@
     "description": "Ein Platzhalter für Quiz, Simulationen und Lernspiele.",
     "path": "interaktiv/",
     "datum": "2026-11-03",
-    "sichtbar": true,
+    "sichtbar": false,
     "status": "Beispiel"
   },
   {
@@ -97,7 +97,8 @@
         "pfad": "biologie/klasse-9/beispiel-materialseite/exitgame/",
         "art": "Spiel"
       }
-    ]
+    ],
+    "sichtbar": false
   },
   {
     "title": "Die Zelle – Stunde 1: Kennzeichen des Lebendigen",
@@ -316,7 +317,6 @@
     "dauer": "45 Min.",
     "datum": "2026-11-05",
     "reihe": "Vulkanismus",
-    "status": "Entwurf",
     "verweise": [
       {
         "pfad": "geografie/klasse-7/risikoraeume/aetna-tourismus/",
