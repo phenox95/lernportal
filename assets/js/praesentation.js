@@ -788,6 +788,164 @@
   addEventListener("hashchange", folieAktualisieren);
   folieAktualisieren();
 
+  /* =====================================================================
+     Leseansicht: alle Folien untereinander zum Nachlesen (Handy, zu Hause).
+     - Schmale Fenster (unter 820 px): eine Spalte. Mehrspaltige Bereiche der Folie laufen untereinander,
+       die Schrift richtet sich nach dem Lesemodus (Aa). Dafür werden die Folien einmal vermessen.
+     - Breite Fenster: jede Folie in Originalform, nur untereinander statt zum Blättern.
+     Start: Knopf im Werkzeugrand, Adresse ?ansicht=lesen, oder von selbst auf dem Handy im Hochformat.
+     ?ansicht=folien erzwingt die Präsentation. Es wird nichts gespeichert.
+     ===================================================================== */
+  const LESE_BREIT = 820, LESE_SPALTE = 520, LESE_FAKTOR = { gross: 1.15, "sehr-gross": 1.3 };
+  const wurzelEl = document.documentElement;
+  let lesenAn = false, leseVermessen = false;
+
+  ICON.buch = SVG('<path d="M12 6.5C10.2 5.2 7.6 4.7 4.5 5v13c3.1-.3 5.7.2 7.5 1.5 1.8-1.3 4.4-1.8 7.5-1.5V5c-3.1-.3-5.7.2-7.5 1.5z"/><path d="M12 6.5v13"/>');
+  ICON.folien = SVG('<rect x="3.5" y="5" width="17" height="11.5" rx="2"/><path d="M12 16.5V20"/><path d="M8.5 20h7"/>');
+
+  /* Einmal im Folienlayout (1280 px) messen, was auf dem Handy umgebaut werden muss:
+     data-lese-fluss   = an der Folie absolut gesetzt (z. B. Minutenangabe), läuft im Lesen im Textfluss mit
+     data-lese-spalten = Raster oder Zeile mit mindestens zwei breiten Spalten, läuft im Lesen untereinander
+     data-lese-fest    = Kasten mit darin absolut gesetzten Teilen (z. B. beschriftete Abbildung): behält seine Maße
+                         und wird als Ganzes verkleinert, wenn er breiter als die Spalte ist (leseEngpass)
+     data-lese-weit    = feste Mindestbreite ab 180 px (z. B. lange Lücke), entfällt im Lesen */
+  function leseMessen() {
+    if (leseVermessen) return;
+    leseVermessen = true;
+    wurzelEl.classList.add("lp-lese-mess");
+    slides().forEach((s) => {
+      [].forEach.call(s.querySelectorAll("*"), (el) => {
+        if (el.ownerSVGElement || !el.getClientRects().length) return;
+        const cs = getComputedStyle(el);
+        if (cs.position === "absolute") {
+          let halt = el.offsetParent;
+          if (halt === undefined) {                        // SVG-Wurzel: Bezugskasten von Hand suchen
+            halt = el.parentElement;
+            while (halt && halt !== s && getComputedStyle(halt).position === "static") halt = halt.parentElement;
+          }
+          if (halt === s) el.setAttribute("data-lese-fluss", "");
+          else if (halt && s.contains(halt)) halt.setAttribute("data-lese-fest", "");
+        }
+        const d = cs.display;
+        if (d === "grid" || d === "inline-grid") {
+          const breit = cs.gridTemplateColumns.split(/\s+/).filter((w) => parseFloat(w) >= 180).length;
+          if (breit >= 2) el.setAttribute("data-lese-spalten", "");
+        } else if ((d === "flex" || d === "inline-flex") && cs.flexDirection.indexOf("row") === 0) {
+          const breit = [].filter.call(el.children, (k) => k.offsetWidth >= 180).length;
+          if (breit >= 2) el.setAttribute("data-lese-spalten", "");
+        }
+        if (parseFloat(cs.minWidth) >= 180) el.setAttribute("data-lese-weit", "");
+      });
+    });
+    wurzelEl.classList.remove("lp-lese-mess");
+  }
+
+  function leseMass() {
+    if (!lesenAn) return;
+    /* Breite des Anzeigebereichs, nicht innerWidth: Auf dem Handy meldet innerWidth bei breitem Inhalt die herausgezoomte Breite (bis 1280 px) */
+    const breit = wurzelEl.clientWidth >= LESE_BREIT;
+    wurzelEl.classList.toggle("lp-lesen-breit", breit);
+    wurzelEl.classList.toggle("lp-lesen-schmal", !breit);
+    const platz = Math.max(240, wurzelEl.clientWidth - 16);
+    const f = LESE_FAKTOR[wurzelEl.dataset.size] || 1;
+    const w = breit ? 1280 : Math.round(LESE_SPALTE / f);
+    const z = breit ? Math.min(1, platz / w) : Math.min(f, platz / w);
+    stage.style.setProperty("--lese-breite", w + "px");
+    stage.style.setProperty("--lese-zoom", String(Math.round(z * 1000) / 1000));
+    leseEngpass();
+  }
+  /* Was in der schmalen Spalte nicht umbrechen kann, wird als Ganzes verkleinert (wie ein Bild):
+     Kästen mit festen Maßen und Bereiche, deren Inhalt über ihren Rand hinausragt. Breite Tabellen scrollen im eigenen Rahmen.
+     Bei jeder Größenänderung wird alles zurückgesetzt und neu berechnet. */
+  let leseKlein = [];
+  function leseEngpass() {
+    leseKlein.forEach((m) => { m.el.style.zoom = m.zoom; m.el.style.width = m.width; });
+    leseKlein = [];
+    const schmal = lesenAn && wurzelEl.classList.contains("lp-lesen-schmal");
+    function verkleinern(el, faktor, breite) {
+      leseKlein.push({ el, zoom: el.style.zoom, width: el.style.width });
+      if (breite) el.style.width = breite + "px";
+      el.style.zoom = String(Math.max(0.3, Math.floor(faktor * 1000) / 1000));
+    }
+    slides().forEach((s) => {
+      const tabellen = s.querySelectorAll("table");
+      [].forEach.call(tabellen, (el) => el.removeAttribute("data-lese-rollen"));
+      if (!schmal) return;
+      const cs = getComputedStyle(s);
+      const platz = s.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      if (!(platz > 100)) return;
+      [].forEach.call(tabellen, (el) => { if (el.offsetWidth > platz + 2) el.setAttribute("data-lese-rollen", ""); });
+      const alle = [].slice.call(s.querySelectorAll("*")).reverse();   // innen vor außen
+      alle.forEach((el) => {
+        if (el.ownerSVGElement || el.hasAttribute("data-lese-rollen") || el.closest("table[data-lese-rollen]")) return;
+        const w = el.clientWidth, sw = el.scrollWidth;
+        if (!w) return;
+        const st = getComputedStyle(el);
+        if (st.display === "inline" || st.overflowX !== "visible") return;
+        if (el.offsetWidth > platz + 2) verkleinern(el, platz / Math.max(el.offsetWidth, sw), 0);
+        else if (sw > w + 2) verkleinern(el, w / sw, w);
+      });
+    });
+  }
+  const leseBtn = knopf("lp-pr-btn", "", "Leseansicht: alle Folien untereinander");
+  leseBtn.innerHTML = ICON.buch;                          // feste, eigene Zeichenkette
+  leseBtn.title = "Leseansicht";
+  dock.appendChild(leseBtn);
+  const folienBtn = knopf("lp-pr-zurfolie", "", "Als Präsentation zeigen");
+  folienBtn.innerHTML = ICON.folien;                      // feste, eigene Zeichenkette
+  folienBtn.appendChild(neu("span", "", "Folien"));
+  folienBtn.hidden = true;
+  (function () {
+    const platz = document.querySelector(".lp-kopf .lp-werkzeuge");
+    if (platz) platz.parentNode.insertBefore(folienBtn, platz);
+    else { folienBtn.classList.add("lp-pr-frei"); document.body.appendChild(folienBtn); }
+  })();
+
+  function lesenSetzen(an) {
+    an = !!an;
+    if (an === lesenAn) return;
+    const nr = folie;
+    if (an) {
+      stiftSetzen(false);
+      Object.keys(panels).forEach((id) => { if (!panels[id].el.hidden) schalte(id, false); });
+      try { if (document.fullscreenElement) document.exitFullscreen(); } catch (e) { /* ok */ }
+      leseMessen();
+    }
+    lesenAn = an;
+    wurzelEl.classList.toggle("lp-lesen", an);
+    if (!an) { wurzelEl.classList.remove("lp-lesen-breit", "lp-lesen-schmal"); leseEngpass(); }
+    folienBtn.hidden = !an;
+    leseMass();
+    try {
+      const u = new URL(location.href);
+      u.searchParams.set("ansicht", an ? "lesen" : "folien");
+      history.replaceState(null, "", u.pathname + u.search + u.hash);
+    } catch (e) { /* Adresse bleibt, die Ansicht wechselt trotzdem */ }
+    if (an) { const s = slides()[nr]; if (s && nr > 0) s.scrollIntoView(); else scrollTo(0, 0); }
+    else { scrollTo(0, 0); dispatchEvent(new Event("resize")); }   // Bühne neu einpassen
+  }
+  leseBtn.addEventListener("click", () => lesenSetzen(true));
+  folienBtn.addEventListener("click", () => { lesenSetzen(false); leseBtn.focus(); });
+  addEventListener("resize", leseMass);
+  new MutationObserver(leseMass).observe(wurzelEl, { attributes: true, attributeFilter: ["data-size"] });
+
+  /* In der Leseansicht gehören Pfeiltasten und Leertaste dem Scrollen, die Kürzel der Präsentation ruhen.
+     Eingaben in Feldern und die Bedienung von Knöpfen bleiben unberührt. */
+  addEventListener("keydown", (e) => {
+    if (!lesenAn || tippt(e.target) || e.ctrlKey || e.metaKey || e.altKey) return;
+    const k = e.key;
+    const blaettern = k === " " || k === "Home" || k === "End" || /^(Arrow|Page)/.test(k);
+    const bedient = e.target.closest && e.target.closest("button,a[href],summary,[tabindex],[role=button]");
+    if (k.length === 1 && k !== " " || (blaettern && !bedient)) e.stopImmediatePropagation();
+  }, true);
+
+  (function leseStart() {
+    let wahl = "";
+    try { wahl = new URLSearchParams(location.search).get("ansicht") || ""; } catch (e) { /* ohne Parameter weiter */ }
+    const handy = !!window.matchMedia && matchMedia("(max-width: 700px) and (orientation: portrait)").matches;
+    if (wahl === "lesen" || (wahl !== "folien" && handy)) lesenSetzen(true);
+  })();
+
   /* ---------- Tasten: P Stift, T Timer, L Lärmampel, Esc schließt Stift ---------- */
   addEventListener("keydown", (e) => {
     if (tippt(e.target) || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -798,5 +956,5 @@
     else if (k === "escape" && penAn) { stiftSetzen(false); }
   });
 
-  Object.assign(window.Praesentation, { stift: stiftSetzen, schalte, folie: () => folie, spiel: spielStarten });
+  Object.assign(window.Praesentation, { stift: stiftSetzen, schalte, folie: () => folie, spiel: spielStarten, lesen: lesenSetzen });
 })();

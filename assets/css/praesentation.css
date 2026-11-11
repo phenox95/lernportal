@@ -143,3 +143,48 @@
 .lp-pr-minuten:focus-visible { outline: 4px solid #F4B400; outline-offset: 2px; }
 .lp-pr-minuten[data-lauf="an"], .lp-pr-minuten[data-lauf="pause"] { font-variant-numeric: tabular-nums; }
 @media print { .lp-pr-minuten::before { content: none; } }
+
+/* ---------- Leseansicht: alle Folien untereinander (praesentation.js, lesenSetzen) ----------
+   html.lp-lesen        = Leseansicht an
+   html.lp-lesen-breit  = breites Fenster: Folien in Originalform (1280 × 720), nur gestapelt
+   html.lp-lesen-schmal = Handy: eine Spalte, Breite und Zoom setzt das Skript (--lese-breite, --lese-zoom)
+   Die Folien behalten ihre Farben (unabhängig vom Dunkelmodus), der Seitengrund folgt dem Portal. */
+.lp-pr-zurfolie { display: inline-flex; align-items: center; gap: 0.4em; min-height: 2.75em; padding: 0 0.75em; border: 2px solid var(--lp-rahmen, #7d837e); border-radius: 0.75em; background: var(--lp-flaeche, #fff); color: var(--lp-text, #252a27); font: inherit; font-size: 0.9375em; font-weight: 700; cursor: pointer; touch-action: manipulation; }
+.lp-pr-zurfolie[hidden] { display: none; }
+.lp-pr-zurfolie svg { flex: none; width: 1.25em; height: 1.25em; }
+.lp-pr-zurfolie:focus-visible { outline: 3px solid var(--lp-fokus, #0a6fe0); outline-offset: 2px; }
+.lp-pr-zurfolie.lp-pr-frei { position: fixed; right: 8px; top: 8px; z-index: 3000; font: 700 16px Verdana, Arial, sans-serif; }
+html.lp-lese-mess .slide { display: block !important; visibility: hidden !important; }
+
+html.lp-lesen { height: auto; overflow: visible auto; background: var(--lp-bg, #f7f7f4); scroll-padding-top: 4.5rem; }
+html.lp-lesen body { display: block; height: auto; overflow: visible; background: var(--lp-bg, #f7f7f4); }
+html.lp-lesen body.lp-pres .lp-kopf { display: block; }
+html.lp-lesen #buehne { position: static; flex: none; overflow: visible; padding: 12px 8px 48px; }
+html.lp-lesen #stage { position: static; transform: none !important; left: auto; top: auto; height: auto; margin: 0 auto; width: var(--lese-breite, 1280px); zoom: var(--lese-zoom, 1); }
+html.lp-lesen .slide { display: block !important; position: relative; inset: auto; margin: 0 0 22px; border: 1px solid var(--lp-linie, #e1e2dc); border-radius: 22px; }
+html.lp-lesen #nav, html.lp-lesen #nummer, html.lp-lesen #foot, html.lp-lesen #bar, html.lp-lesen #tools, html.lp-lesen #notes, html.lp-lesen #notiz, html.lp-lesen #help,
+html.lp-lesen #fuss, html.lp-lesen #zur, html.lp-lesen #vor, html.lp-lesen .slide [data-timer],
+html.lp-lesen .pfeil, html.lp-lesen .lp-pr-dock, html.lp-lesen .lp-pr-panel, html.lp-lesen .lp-pr-canvas { display: none !important; }
+/* Fragenentwicklung gehört in den Unterricht: zum Nachlesen bleiben nur die Impulsfragen */
+html.lp-lesen .fragen-rechts, html.lp-lesen .fragen-leit { display: none; }
+html.lp-lesen .fragen { display: block; }
+
+html.lp-lesen-breit .slide { height: 720px; }
+
+html.lp-lesen-schmal .slide { height: auto; min-height: 0; padding: 30px 24px 32px; overflow: auto visible; }
+html.lp-lesen-schmal .slide h1 { font-size: 36px; overflow-wrap: break-word; hyphens: auto; }
+html.lp-lesen-schmal .slide *:not([data-lese-fest]) { max-width: 100%; }
+html.lp-lesen-schmal .slide [data-lese-fluss] { position: relative !important; inset: auto !important; transform: none !important; margin: 0 0 14px; }
+html.lp-lesen-schmal .slide [data-lese-fluss]:not([data-lese-fest]) { width: auto !important; height: auto !important; }
+html.lp-lesen-schmal .slide [data-lese-weit] { min-width: 0 !important; }
+html.lp-lesen-schmal .slide table[data-lese-rollen] { display: block; overflow-x: auto; }
+html.lp-lesen-schmal .slide .badge[data-lese-fluss] { display: inline-block; }
+html.lp-lesen-schmal .slide [data-lese-spalten] { grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: none !important; grid-template-areas: none !important; flex-direction: column !important; align-items: stretch !important; height: auto !important; max-height: none !important; }
+html.lp-lesen-schmal .slide [data-lese-spalten] > * { grid-column: auto !important; grid-row: auto !important; min-width: 0; max-width: 100%; }
+/* Minutenangaben starten in der Leseansicht keinen Timer */
+html.lp-lesen .lp-pr-minuten { pointer-events: none; cursor: default; }
+html.lp-lesen .lp-pr-minuten::before { content: none; }
+@media (max-width: 30em) { .lp-kopf .lp-pr-zurfolie span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } .lp-kopf .lp-pr-zurfolie { min-width: 2.75em; justify-content: center; padding: 0 0.5em; } }
+/* Auf dem Handy scrollt die Kopfleiste mit, damit der Platz dem Inhalt gehört */
+@media (max-width: 30em) { html.lp-lesen .lp-kopf { position: static; } }
+@media print { .lp-pr-zurfolie { display: none !important; } }
