@@ -617,3 +617,9 @@ body[data-subject="Geografie"] .bg-spiel { --g: #A9442B; --dk: #7C2F1C; --mint: 
 /* Verweis von der Themenfeld-Seite */
 .tf-begriffe { margin: 1.25rem 0 0; }
 .tf-begriffe[hidden] { display: none; }
+
+/* Header bei mittleren Breiten (Tablet hochkant): sechs Menüpunkte brauchen engere Abstände */
+@media (min-width: 46rem) and (max-width: 60rem) {
+  .top-nav { gap: 0; }
+  .top-nav a { padding: 0 0.45rem; font-size: 0.875rem; }
+}
