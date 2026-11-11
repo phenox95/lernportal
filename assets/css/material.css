@@ -234,11 +234,11 @@ select { min-height: 2.75rem; max-width: 100%; padding: 0.3rem 0.7rem; font: inh
   }
 }
 
-/* Lesemodus: Zeilenabstand überall, Schriftgröße nur auf Vorlagenseiten (html.lp-vorlage)
-   bzw. in der Kopfleiste. Bestehende Materialien behalten ihr eigenes Layout. */
+/* Lesemodus: Schriftgröße skaliert rem- und em-basierte Inhalte aller Materialseiten.
+   Zeilenabstand wird auf Vorlagen und Standardmaterialien angewendet. */
 :root[data-spacing="weit"] { --lp-lh: 1.8; }
-html.lp-vorlage[data-size="gross"] { font-size: 112.5%; }
-html.lp-vorlage[data-size="sehr-gross"] { font-size: 125%; }
+:root[data-size="gross"] { font-size: 112.5%; }
+:root[data-size="sehr-gross"] { font-size: 125%; }
 
 /* Fachfarben: dezent, nur als Punkt, Linie oder Rahmen. Das Fach steht immer auch als Text da. */
 body[data-subject="Biologie"] { --lp-akzent: var(--lp-bio); }
