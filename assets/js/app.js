@@ -447,7 +447,15 @@
     if (!liste || !archiv) return;
     Promise.all([
       fetch(root + "impuls.json").then(r => (r.ok ? r.json() : null)).catch(() => null),
-      loadNachrichten()
+      fetch(root + "nachrichten.json").then(response => {
+        if (!response.ok) throw new Error("nachrichten.json nicht erreichbar");
+        return response.json();
+      }).then(data => {
+        if (!data || !Array.isArray(data.eintraege)) throw new Error("nachrichten.json hat ein ungültiges Format");
+        return data.eintraege.filter(n => n && typeof n.titel === "string" && n.titel.trim()
+          && typeof n.link === "string" && /^https:\/\//.test(n.link) && n.sichtbar !== false)
+          .sort((a, b) => String(b.datum || "").localeCompare(String(a.datum || "")));
+      })
     ]).then(([raw, news]) => {
       /* ----- Tabs: Meldungen | Themenarchiv (Adresse #archiv öffnet das Archiv) ----- */
       const tabs = { meldungen: $("#meldungen"), archiv: $("#archiv") };
@@ -542,6 +550,9 @@
       klSelect.addEventListener("change", e => { sa.klasse = e.target.value; renderA(); });
       renderA();
       hydrateIcons();
+    }).catch(() => {
+      liste.innerHTML = '<p class="empty-message">Die Meldungen konnten nicht geladen werden. Bitte Verbindung und nachrichten.json prüfen.</p>';
+      archiv.innerHTML = '<p class="empty-message">Das Themenarchiv konnte nicht vollständig geladen werden.</p>';
     });
   }
 
