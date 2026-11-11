@@ -401,7 +401,6 @@
     "sichtbar": true,
     "bne": [
       8,
-      9,
       12
     ],
     "begriffe": true
@@ -521,6 +520,9 @@
         "pfad": "geografie/klasse-9/klimawandel/quellen-pruefen/",
         "grund": "Hier übst du das Prüfen von Quellen mit Aufgaben."
       }
+    ],
+    "bne": [
+      13
     ]
   }
 ]
