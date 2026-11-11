@@ -94,7 +94,7 @@ img { max-width: 100%; display: block; }
     border-bottom: 1px solid var(--line); background: var(--bg); box-shadow: var(--shadow);
   }
   .top-nav.is-open { align-items: stretch; gap: 0; }
-  .top-nav.is-open .nav-group { display: contents; }
+  .top-nav.is-open .nav-group { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
   .top-nav.is-open a { min-height: 3rem; padding: 0 0.25rem; border-bottom: 1px solid var(--line); }
   .top-nav.is-open a:last-child { border-bottom: 0; }
   .top-nav.is-open .nav-secondary { margin: 0.35rem 0 0; padding: 0.35rem 0 0; border-left: 0; border-top: 1px solid var(--line); }
