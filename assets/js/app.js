@@ -339,7 +339,7 @@
     opt = opt || {};
     const ziele = zielNummern(n.bne).map(x => `<span class="news-ziel">${icon("z" + x, 16)}<span>${escapeHtml(("Ziel " + x + " " + ((bneZiel(x) || {}).kurz || "")).trim())}</span></span>`).join("");
     const ART = { Medienbericht: "Medienbericht", Regierung: "Sicht der Regierung", Position: "Position eines Verbands" };
-    const meta = [n.quelle, datumLang(n.datum), ART[n.art] || "", "Externe Seite"].filter(Boolean).map(escapeHtml).join(" · ");
+    const meta = [n.quelle, datumLang(n.datum), ART[n.art] || "", n.bildnachweis ? "Bild: " + n.bildnachweis : "", "Externe Seite"].filter(Boolean).map(escapeHtml).join(" · ");
     const faecher = opt.fach && Array.isArray(n.faecher) ? n.faecher.filter(f => f === "Biologie" || f === "Geografie").map(f => `<span class="chip">${escapeHtml(f)}</span>`).join("") : "";
     return `
       <a class="row news-row" href="${escapeHtml(n.link)}" target="_blank" rel="noopener noreferrer">
