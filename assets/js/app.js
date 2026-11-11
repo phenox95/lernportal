@@ -4,6 +4,40 @@
   const page = body.dataset.page || "home";        // home | fach | alle | themenfeld | bne
   const pageSubject = body.dataset.subject || "";  // nur auf Fachseiten
   const $ = selector => document.querySelector(selector);
+
+  /* Mobile navigation: auf schmalen Bildschirmen als aufklappbares Menü */
+  const navigation = $("nav.top-nav");
+  if (navigation) {
+    const menuButton = document.createElement("button");
+    menuButton.type = "button";
+    menuButton.className = "nav-toggle";
+    menuButton.textContent = "Menü";
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-controls", "hauptnavigation");
+    navigation.id = "hauptnavigation";
+    navigation.setAttribute("aria-label", "Hauptnavigation");
+    navigation.before(menuButton);
+
+    function setMenuOpen(open) {
+      navigation.classList.toggle("is-open", open);
+      menuButton.setAttribute("aria-expanded", String(open));
+    }
+    menuButton.addEventListener("click", () => {
+      setMenuOpen(menuButton.getAttribute("aria-expanded") !== "true");
+    });
+    navigation.addEventListener("click", event => {
+      if (event.target.closest("a")) setMenuOpen(false);
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButton.focus();
+      }
+    });
+    window.addEventListener("resize", () => {
+      if (window.matchMedia("(min-width: 46rem)").matches) setMenuOpen(false);
+    });
+  }
   const GRADES = ["7", "8", "9", "10"];
   const INTERACTIVE = /interaktiv|spiel|simulation|quiz/i;
   const ART_TESTS = {
