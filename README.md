@@ -10,6 +10,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `themenfelder.json` | Die offiziellen RLP-Themenfelder je Fach (Nummer, Titel, Doppeljahrgangsstufe, Ordnername). Steuert Themenfeld-Filter und Themenfelder-Überblick |
 | `biologie/`, `geografie/` | Fachseiten mit Themenfelder-Überblick, Suche und Filtern (Klassenstufe, Art, Themenfeld) |
 | `alle/` | Alle Materialien mit zusätzlichem Fachfilter. Das Register der Startseite verlinkt hierher (`alle/?klasse=8`) |
+| `begriffe/` | Begriffe nachschlagen und üben, je Themenfeld (`begriffe/?fach=Biologie&nr=3.1`), verlinkt auf der Themenfeld-Seite. Liest die Spielinhalte der Präsentationen (`lp-spiel-daten`) und zeigt nur Blöcke mit `"geprueft": true`. Skript `assets/js/begriffe.js`, lädt bewusst kein `app.js`. Siehe [docs/praesentationen.md](docs/praesentationen.md) |
 | `impressum/`, `datenschutz/` | Rechtstexte, in der Fußzeile aller Seiten verlinkt. Laden bewusst kein `app.js`. **Platzhalter in eckigen Klammern vor der Veröffentlichung ausfüllen** |
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
@@ -44,7 +45,7 @@ Das Skript prüft `projects.json` und `themenfelder.json`: Pflichtfelder, Format
 | Thema | Datei |
 |---|---|
 | Neues Material anlegen, Felder in `projects.json`, Materialseiten, Impuls der Woche, Themenfelder | [docs/inhalte-ergaenzen.md](docs/inhalte-ergaenzen.md) |
-| Präsentationen: Grundaufbau, Stift, Timer, Lärmampel, Leseansicht (Nachlesen auf dem Handy), Fragenfeld, Belohnungsspiele | [docs/praesentationen.md](docs/praesentationen.md) |
+| Präsentationen: Grundaufbau, Stift, Timer, Lärmampel, Leseansicht (Nachlesen auf dem Handy), Fragenfeld, Belohnungsspiele, Begriffe-Seite | [docs/praesentationen.md](docs/praesentationen.md) |
 | Gestaltung, Favicon, Themenbilder, Lesemodus | [docs/gestaltung.md](docs/gestaltung.md) |
 | GitHub Pages, Rechtstexte, eigene Domain | [docs/betrieb.md](docs/betrieb.md) |
 

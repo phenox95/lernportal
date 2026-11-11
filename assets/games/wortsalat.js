@@ -10,14 +10,14 @@
       const runden = h.mischen(geeignet).slice(0, 4);
       let n = 0, hinweise = 0; const t0 = Date.now();
       const info = h.el("div", "lp-pr-sinfo"), zaehler = h.el("span", ""), zeit = h.el("span", "", "0:00");
-      info.appendChild(zaehler); info.appendChild(zeit);
+      info.appendChild(zaehler); if (!h.ohneZeit) info.appendChild(zeit);
       const frage = h.el("p", "lp-pr-frage"), antwort = h.el("div", "lp-pr-antwort"), pool = h.el("div", "lp-pr-buchstaben"), steuer = h.el("div", "lp-pr-buchstaben");
       feld.appendChild(info); feld.appendChild(frage); feld.appendChild(antwort); feld.appendChild(pool); feld.appendChild(steuer);
       const uhr = setInterval(() => { if (!document.body.contains(pool)) return clearInterval(uhr); zeit.textContent = h.zeit((Date.now() - t0) / 1000); }, 500);
       function runde() {
         if (n >= runden.length) {
           clearInterval(uhr); [frage, antwort, pool, steuer].forEach((x) => x.remove());
-          feld.appendChild(h.el("p", "lp-pr-geschafft", "Alle Wörter gefunden in " + h.zeit((Date.now() - t0) / 1000) + "!"));
+          feld.appendChild(h.el("p", "lp-pr-geschafft", "Alle Wörter gefunden" + (h.ohneZeit ? "" : " in " + h.zeit((Date.now() - t0) / 1000)) + "!"));
           return;
         }
         const r = runden[n], wort = r.b; zaehler.textContent = "Wort " + (n + 1) + " von " + runden.length;

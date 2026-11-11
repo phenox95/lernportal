@@ -575,3 +575,45 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .news-kurz { position: relative; }
 .news-bild { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 40rem) { .news-quelle { width: 3.75rem; height: 2.75rem; } }
+
+/* ============ Begriffe (begriffe/, assets/js/begriffe.js) ============
+   Liste der Begriffe je Stunde und Üben mit den Spielen aus assets/games/. */
+.bg-unsichtbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.bg-leiste { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin-top: 1.75rem; }
+.bg-leiste[hidden] { display: none; }
+.bg-leiste .bg-suche { flex: 1 1 16rem; margin-top: 0; }
+.bg-knopf { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: 0 1rem; border: 1px solid var(--rahmen); border-radius: var(--radius); background: var(--surface); color: var(--text); font-size: 0.9375rem; font-weight: 700; cursor: pointer; touch-action: manipulation; }
+.bg-knopf:hover { background: var(--field); }
+.bg-knopf[hidden] { display: none; }
+.bg-knopf.bg-haupt { min-height: 3.25rem; border-color: var(--text); background: var(--text); color: var(--bg); }
+.bg-knopf.bg-haupt:hover { background: var(--text); opacity: 0.88; }
+.bg-block { margin-top: 1.5rem; padding: 1.25rem clamp(1rem, 4vw, 1.5rem); border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); box-shadow: var(--shadow); }
+.bg-blockkopf { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 0.75rem 1rem; }
+.bg-blocktitel { flex: 1 1 14rem; min-width: 0; }
+.bg-blocktitel h2 { margin: 0; font-size: 1.375rem; font-weight: 700; letter-spacing: -0.015em; line-height: 1.25; }
+.bg-stunde { margin: 0.2rem 0 0; font-size: 0.875rem; color: var(--text-2); }
+.bg-entwurf { margin: 0.5rem 0 0; padding: 0.5rem 0.75rem; border: 1px dashed var(--rahmen); border-radius: 0.5rem; font-size: 0.875rem; color: var(--text); }
+.bg-aktionen { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.bg-dl { margin: 1rem 0 0; border-top: 1px solid var(--line); }
+.bg-zeile { display: grid; gap: 0.15rem 1.5rem; padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+.bg-zeile:last-child { border-bottom: 0; padding-bottom: 0.2rem; }
+.bg-zeile dt { font-size: 1.0625rem; font-weight: 700; overflow-wrap: anywhere; }
+.bg-zeile dd { margin: 0; max-width: 40rem; }
+.bg-silben { display: block; font-size: 0.875rem; font-weight: 400; color: var(--text-2); }
+@media (min-width: 44rem) { .bg-zeile { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); } }
+:root[data-spacing="weit"] .bg-zeile { line-height: 1.8; }
+/* Übungsfenster: helle Fläche wie in den Präsentationen, Portal-Schrift, Fachfarbe aus 5.3 der Master-Anweisung */
+html.bg-spiel-offen { overflow: hidden; }
+.bg-spiel { --g: #0F6E56; --dk: #0B4F3C; --mint: #E8F3EC; --grey: #5B6A63; --ink: #1A2B24; font-family: var(--font-body); color-scheme: light; }
+body[data-subject="Geografie"] .bg-spiel { --g: #A9442B; --dk: #7C2F1C; --mint: #F5EBE1; --grey: #7D726B; --ink: #2B211E; }
+.bg-spiel .lp-pr-spielkopf { padding: 0.6rem clamp(0.75rem, 4vw, 2rem); font-size: clamp(1.0625rem, 2.6vw, 1.5rem); padding-top: max(0.6rem, env(safe-area-inset-top)); }
+.bg-spiel .lp-pr-spielkopf { flex-wrap: wrap; gap: 0.4rem 1rem; }
+.bg-spiel .lp-pr-spielkopf strong { flex: 1 1 12rem; min-width: 0; line-height: 1.25; }
+.bg-spiel .lp-pr-spielfeld { padding: clamp(0.9rem, 3vw, 1.5rem) clamp(0.75rem, 4vw, 2rem); padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+.bg-spielknoepfe { flex: none; display: flex; gap: 0.5rem; }
+.bg-spiel .lp-pr-klein { font-size: 0.9375rem; }
+.bg-spiel .lp-pr-klein[hidden] { display: none; }
+.bg-spiel :focus-visible { outline: 4px solid #F4B400; outline-offset: 2px; }
+/* Verweis von der Themenfeld-Seite */
+.tf-begriffe { margin: 1.25rem 0 0; }
+.tf-begriffe[hidden] { display: none; }
