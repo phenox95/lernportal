@@ -68,8 +68,15 @@ img { max-width: 100%; display: block; }
 .brand-dot { display: none; }
 .top-nav { display: none; align-items: center; gap: 0.75rem; }
 .nav-group { display: flex; align-items: center; gap: 0.1rem; }
-.nav-secondary { margin-left: 0.15rem; padding-left: 0.75rem; border-left: 1px solid var(--line); }
-.nav-secondary a { font-size: 0.875rem; }
+.nav-more { position: relative; }
+.nav-more summary { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 0.75rem; color: var(--text-2); font-size: 0.9375rem; cursor: pointer; list-style: none; }
+.nav-more summary::-webkit-details-marker { display: none; }
+.nav-more summary::after { content: ""; width: 0.45rem; height: 0.45rem; margin: -0.2rem 0 0 0.55rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); }
+.nav-more summary:hover, .nav-more[open] summary, .nav-more.has-current summary { color: var(--text); }
+.nav-more-menu { position: absolute; top: calc(100% + 0.25rem); right: 0; z-index: 30; display: grid; min-width: 12rem; padding: 0.4rem; border: 1px solid var(--line); border-radius: 0.75rem; background: var(--bg); box-shadow: var(--shadow); }
+.nav-more:not([open]) .nav-more-menu { display: none; }
+.nav-more-menu a { min-height: 2.75rem; padding: 0 0.75rem; }
+.nav-more-menu a[aria-current="page"] { color: var(--text); font-weight: 700; }
 .top-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 0.75rem; font-size: 0.9375rem; color: var(--text-2); }
 .top-nav a:hover { color: var(--text); }
 .top-nav a[aria-current="page"] { color: var(--text); font-weight: 700; }
@@ -97,7 +104,10 @@ img { max-width: 100%; display: block; }
   .top-nav.is-open .nav-group { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
   .top-nav.is-open a { min-height: 3rem; padding: 0 0.25rem; border-bottom: 1px solid var(--line); }
   .top-nav.is-open a:last-child { border-bottom: 0; }
-  .top-nav.is-open .nav-secondary { margin: 0.35rem 0 0; padding: 0.35rem 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  .top-nav.is-open .nav-more { border-top: 1px solid var(--line); }
+  .top-nav.is-open .nav-more summary { min-height: 3rem; padding: 0 0.25rem; }
+  .top-nav.is-open .nav-more-menu { position: static; min-width: 0; padding: 0 0 0 0.75rem; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .top-nav.is-open .nav-more-menu a { min-height: 2.75rem; }
 }
 @media (min-width: 46rem) { .top-nav { display: flex; } }
 
