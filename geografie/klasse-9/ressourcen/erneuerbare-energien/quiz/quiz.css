@@ -1,7 +1,7 @@
 /* Quiz-Oberfläche (Materialseite, Fach Geografie).
    Farben, Dunkelmodus und Lesemodus kommen aus material.css (Akzent = Fachfarbe), Schrift ist die Systemschrift des Portals.
    Hier stehen nur Komponenten, die das Quiz braucht. Keine Verläufe, kein Glas. */
-.shell, #app { font-family: var(--lp-schrift, var(--font-system, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif)); color: var(--text); line-height: 1.5; }
+.shell, #app { font-family: var(--lp-schrift, var(--font-system, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif)); color: var(--text); line-height: var(--lp-lh, 1.5); }
 #app { --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); --t-press: 140ms; --t-enter: 220ms; --lift: 10px; --press: 0.97; --r-xl: 2rem; --r-lg: 1.5rem; --r-md: 1rem; }
 @media (prefers-reduced-motion: reduce) { #app { --lift: 0px; --press: 1; } }
 #app p, #app h1, #app h2, #app h3 { margin: 0; }
@@ -158,6 +158,13 @@
 .stage { animation: rise var(--t-enter) var(--ease-out) both; }
 .stagger > * { animation: rise var(--t-enter) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 50ms); }
 .foot { text-align: center; color: var(--text-2); margin-top: 36px; font-size: 0.85em; }
+
+/* Lesemodus: erweiterter Zeilenabstand für längere Texte, ohne die Kartenproportionen zu verändern. */
+:root[data-spacing="weit"] #app .lead,
+:root[data-spacing="weit"] #app .clues li,
+:root[data-spacing="weit"] #app .opt,
+:root[data-spacing="weit"] #app .fb,
+:root[data-spacing="weit"] #app .review li { line-height: 1.8; }
 
 /* material.css kennt ebenfalls .seg und .btn: im Quiz gelten diese Werte */
 #app .seg { display: grid; padding: 4px; border-radius: 999px; background: var(--field); gap: 0; }
