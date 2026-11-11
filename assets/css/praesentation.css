@@ -8,6 +8,9 @@
 .lp-pr-dock { position: fixed; right: 6px; top: 50%; transform: translateY(-50%); z-index: 3000; display: flex; flex-direction: column; gap: 8px; font-family: Verdana, Arial, sans-serif; }
 .lp-pr-btn { text-decoration: none; position: relative; width: 48px; min-height: 48px; border: 2px solid #fff; border-radius: 12px; background: rgba(26,26,26,.72); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; cursor: pointer; padding: 0; opacity: .55; transition: opacity .15s; touch-action: manipulation; }
 .lp-pr-btn:hover, .lp-pr-btn:focus-visible, .lp-pr-btn.on, .lp-pr-btn.lp-pr-lauf { opacity: 1; }
+.lp-pr-portal { width: 56px; min-height: 56px; gap: 0; font-family: Andika, Verdana, Arial, sans-serif; font-size: 11px; font-weight: 700; line-height: 1.1; }
+.lp-pr-portal svg { width: 21px; height: 21px; }
+.lp-pr-portal span { display: block; }
 .lp-pr-btn.on { background: #fff; color: #1a1a1a; border-color: #1a1a1a; }
 .lp-pr-btn:focus-visible { outline: 4px solid #F4B400; outline-offset: 2px; }
 .lp-pr-btn.lp-pr-lauf::after { content: ""; position: absolute; right: 4px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: #2e9e4f; border: 2px solid #fff; }
