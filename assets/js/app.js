@@ -5,7 +5,7 @@
   const pageSubject = body.dataset.subject || "";  // nur auf Fachseiten
   const $ = selector => document.querySelector(selector);
 
-  /* Navigation in Kern- und Ergänzungsbereiche gliedern */
+  /* Kernbereiche direkt anzeigen, ergänzende Seiten unter „Mehr“ bündeln */
   const navigation = $("nav.top-nav");
   if (navigation) {
     const links = [...navigation.querySelectorAll(":scope > a")];
@@ -13,17 +13,38 @@
     primary.className = "nav-group nav-primary";
     primary.setAttribute("role", "group");
     primary.setAttribute("aria-label", "Kernbereiche");
-    const secondary = document.createElement("div");
-    secondary.className = "nav-group nav-secondary";
-    secondary.setAttribute("role", "group");
-    secondary.setAttribute("aria-label", "Ergänzungsbereiche");
+    const secondaryLinks = [];
     links.forEach(link => {
       const path = link.getAttribute("href") || "";
-      const isPrimary = /(?:biologie|geografie|alle)\\/$/.test(path);
-      (isPrimary ? primary : secondary).append(link);
+      const isPrimary = /(?:biologie|geografie|alle)\/$/.test(path);
+      if (isPrimary) primary.append(link);
+      else secondaryLinks.push(link);
     });
     if (primary.children.length) navigation.append(primary);
-    if (secondary.children.length) navigation.append(secondary);
+    if (secondaryLinks.length) {
+      const more = document.createElement("details");
+      more.className = "nav-more";
+      const summary = document.createElement("summary");
+      summary.textContent = "Mehr";
+      summary.setAttribute("aria-label", "Weitere Bereiche anzeigen");
+      const menu = document.createElement("div");
+      menu.className = "nav-more-menu";
+      secondaryLinks.forEach(link => {
+        if (link.hasAttribute("aria-current")) more.classList.add("has-current");
+        menu.append(link);
+      });
+      more.append(summary, menu);
+      navigation.append(more);
+      document.addEventListener("click", event => {
+        if (!more.contains(event.target)) more.open = false;
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && more.open) {
+          more.open = false;
+          summary.focus();
+        }
+      });
+    }
   }
 
   /* Mobile navigation: auf schmalen Bildschirmen als aufklappbares Menü */
