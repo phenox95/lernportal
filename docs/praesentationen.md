@@ -28,6 +28,26 @@ Am rechten Bildrand stehen Haus (zurück zur Seite, von der die Präsentation ge
 | Timer | T | Countdown mit 1, 3, 5, 10, 15 Min., ±1 Min., +30 s, Start/Pause/Zurücksetzen und Signalton. Hat die Folie `data-min`, gibt es den Knopf „Dauer dieser Folie“. Die Restzeit steht auch am Knopf, wenn das Fenster zu ist. **Die Minutenangabe auf der Folie ist antippbar:** Ein Badge oder Meta-Chip, dessen Text mit „N Min.“ beginnt (zum Beispiel `<span class="badge">5 Min. · allein</span>`), startet beim Antippen den Timer mit N Minuten und zählt selbst herunter (`▮▮ 04:37 · allein`). Nochmal antippen: Pause und Weiter. Bei Ablauf wird das Badge rot und blinkt, dazu der Signalton. Das gilt automatisch in jeder Präsentation mit `praesentation.js`, auch für `data-minuten` an anderen Elementen. Eigene Timer-Knöpfe mit `data-timer` (Impfen) bleiben unberührt |
 | Lärmampel | L | Ampel (Ruhig, Etwas laut, Zu laut) mit Pegelbalken und Ruhe-Sternen (siehe unten). Erst nach Klick auf „Start“ fragt der Browser nach dem Mikrofon. „Kalibrieren“ misst 3 Sekunden und setzt die jetzige Lautstärke als ruhig. Der Regler stellt die Empfindlichkeit ein. Fenster schließen beendet die Messung und gibt das Mikrofon frei. **Töne** (Schalter „Ton: an/aus“): sanfter fallender Zweiklang, wenn die Ampel auf Rot springt (höchstens alle 8 Sekunden), kurzes Ding bei jedem Stern, Dreiklang beim Ziel. Während eines Tons wird die Ampel nicht neu bewertet, damit der Lautsprecher die Messung nicht auslöst |
 
+### Leseansicht (Nachlesen auf dem Handy und zu Hause)
+
+Jede Präsentation lässt sich ohne Zutun als **Leseansicht** öffnen: alle Folien stehen untereinander, die Werkzeuge (Stift, Timer, Lärmampel, Blätterpfeile) sind ausgeblendet, oben steht die Portal-Kopfleiste mit „Zurück“, dem Knopf „Folien“ und dem Lesemodus „Aa“. Gedacht ist sie für Schülerinnen und Schüler, die gefehlt haben oder wiederholen wollen. Sie kommt aus `praesentation.js` und `praesentation.css` und gilt für alle Präsentationen, eine einzelne Präsentation braucht dafür nichts.
+
+| Start | Wirkung |
+|---|---|
+| Handy im Hochformat (Fenster höchstens 700 px breit) | Leseansicht öffnet von selbst |
+| Buch-Knopf im Werkzeugrand | wechselt zur Leseansicht, an der Stelle der aktuellen Folie |
+| Knopf „Folien“ in der Kopfleiste | zurück zur Präsentation |
+| Adresse mit `?ansicht=lesen` | Leseansicht auf jedem Gerät, zum Beispiel als Link „Zum Nachlesen“ |
+| Adresse mit `?ansicht=folien` | Präsentation auch auf dem Handy |
+
+- **Schmale Fenster (unter 820 px):** eine Spalte. Mehrspaltige Bereiche laufen untereinander, die Minutenangabe rückt unter den Titel. Die Schriftgröße folgt dem Lesemodus (Normal, Groß, Sehr groß). Der Zeilenabstand des Lesemodus wirkt hier nicht. Was nicht umbrechen kann (beschriftete Abbildungen, feste Raster), wird als Ganzes verkleinert, breite Tabellen scrollen im eigenen Rahmen.
+- **Breite Fenster:** jede Folie in Originalform, nur untereinander statt zum Blättern.
+- Die Folien behalten ihre Farben, auch im Dunkelmodus des Geräts. Nur der Seitengrund und die Kopfleiste folgen dem Portal.
+- Aufgaben zum Antippen und Ausfüllen bleiben bedienbar. Pfeiltasten und Leertaste scrollen, die Tastenkürzel der Präsentation ruhen. Minutenangaben starten keinen Timer, das Fragenfeld zeigt nur die Impulsfragen.
+- Es wird nichts gespeichert. Beim Wechsel der Ansicht bleiben Eingaben erhalten, beim Neuladen nicht.
+- **Beim Bauen beachten:** Die Leseansicht vermisst jede Folie einmal und baut sie um. Am besten gelingt das mit den Klassen des Designs (`.split`, `.grid2` bis `.grid4`, `.row`, `.task`, `.shilfe`). Frei mit `position:absolute` und festen Pixelmaßen gesetzte Folien werden lesbar, aber weniger schön. Neue Präsentationen deshalb einmal im schmalen Fenster mit `?ansicht=lesen` ansehen.
+- Von Hand steuern: `window.Praesentation.lesen(true)` und `window.Praesentation.lesen(false)`.
+
 ### Fragenfeld (Fragenentwicklung)
 
 Standardbaustein für den Einstieg nach Impuls (Abschnitt „Impuls und Fragenentwicklung“ der Planungsvorgaben): Die Klasse nennt Fragen, die Lehrkraft tippt sie ein, die Klasse priorisiert mit 👍, „→ Leitfrage“ übernimmt die gewählte Frage ins Feld „Unsere Frage für heute“, dort lässt sie sich gemeinsam umformulieren. Eine Folie braucht nur:

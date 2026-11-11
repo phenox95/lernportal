@@ -623,6 +623,10 @@
     const hide = page === "fach" && !filtering;
     counter.hidden = hide;
     list.hidden = hide;
+    ["#filter-art", "#filter-theme", "#filter-bne"].forEach(id => {
+      const sel = $(id);
+      if (sel && sel.parentElement) sel.parentElement.classList.toggle("aktiv", sel.value !== "Alle");
+    });
     counter.textContent = countText(visible.length);
     list.innerHTML = visible.length
       ? `<div class="group">${visible.map(p => row(p, page === "alle")).join("")}</div>`
