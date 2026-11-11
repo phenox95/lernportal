@@ -5,8 +5,28 @@
   const pageSubject = body.dataset.subject || "";  // nur auf Fachseiten
   const $ = selector => document.querySelector(selector);
 
-  /* Mobile navigation: auf schmalen Bildschirmen als aufklappbares Menü */
+  /* Navigation in Kern- und Ergänzungsbereiche gliedern */
   const navigation = $("nav.top-nav");
+  if (navigation) {
+    const links = [...navigation.querySelectorAll(":scope > a")];
+    const primary = document.createElement("div");
+    primary.className = "nav-group nav-primary";
+    primary.setAttribute("role", "group");
+    primary.setAttribute("aria-label", "Kernbereiche");
+    const secondary = document.createElement("div");
+    secondary.className = "nav-group nav-secondary";
+    secondary.setAttribute("role", "group");
+    secondary.setAttribute("aria-label", "Ergänzungsbereiche");
+    links.forEach(link => {
+      const path = link.getAttribute("href") || "";
+      const isPrimary = /(?:biologie|geografie|alle)\\/$/.test(path);
+      (isPrimary ? primary : secondary).append(link);
+    });
+    if (primary.children.length) navigation.append(primary);
+    if (secondary.children.length) navigation.append(secondary);
+  }
+
+  /* Mobile navigation: auf schmalen Bildschirmen als aufklappbares Menü */
   if (navigation) {
     const menuButton = document.createElement("button");
     menuButton.type = "button";
