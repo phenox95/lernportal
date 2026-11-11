@@ -87,6 +87,20 @@ Die Klasse sammelt **gemeinsam** Sterne, solange die Lärmampel läuft und grün
 - `spiele` (optional) begrenzt die Auswahl. Fehlt es, kommen alle in Frage. Wortsalat braucht mindestens 3 einteilige Begriffe (3 bis 14 Buchstaben, ohne Leerzeichen und Bindestrich).
 - Die Spieldateien werden erst geladen, wenn das Spiel startet. Ein neues Spiel ist eine Datei in `assets/games/`, die sich mit `window.LPSpiele.reg.<name> = { titel, start({ feld, paare, hilfe, ende }) }` anmeldet, und ein Eintrag in der Liste `SPIELE` in `praesentation.js`.
 
+### Begriffe-Seite (`begriffe/`): Nachschlagen und Üben
+
+Aus den Spielinhalten entsteht ohne zweite Liste eine Seite für Schülerinnen und Schüler: `begriffe/?fach=Biologie&nr=3.1` zeigt alle Begriffe eines Themenfelds, geordnet nach Stunde, mit Suche, dem Verweis „Stunde nachlesen“ (öffnet die Leseansicht) und „Üben“. Die Themenfeld-Seite verlinkt darauf. `begriffe/` ohne Angaben zeigt die Themenfelder mit Material.
+
+- **Quelle:** Die Seite liest `projects.json`, lädt die Ordner der Einträge des Themenfelds (`path` und Ordner in `dateien`) und entnimmt ihnen den Block `lp-spiel-daten`. Ein Begriff wird also nur an einer Stelle gepflegt: in der Präsentation.
+- **Freigabe:** Gezeigt werden nur Blöcke mit `"geprueft": true`. Das Feld ist optional, ohne es bleibt der Block ein Entwurf: Er läuft weiter als Belohnungsspiel im Unterricht, erscheint aber nicht auf der Begriffe-Seite. Nach dem fachlichen Gegenlesen `"geprueft": true` in den Block schreiben und den Vermerk „ENTWURF“ im Kommentar darüber entfernen.
+- **Vorschau für die Lehrkraft:** `&entwurf=1` an der Adresse zeigt auch ungeprüfte Blöcke, deutlich als Entwurf markiert.
+- **Üben:** Dieselben Spiele wie in der Präsentation (`assets/games/`), zufällig gewählt, mit „Anderes Spiel“. `spiele` im Datenblock gilt auch hier. „Alle Begriffe üben“ nimmt jeden Begriff des Themenfelds einmal (die Erklärung aus der ersten Stunde, in der er vorkommt). **Ohne Zeitanzeige:** Die Seite setzt `hilfe.ohneZeit`, die Spiele zeigen dann keine Uhr und nennen am Ende keine Zeit. Ein neues Spiel muss `hilfe.ohneZeit` beachten.
+- Es wird nichts gespeichert. Die Begriffe sind echter Text und lassen sich vorlesen.
+
+```json
+{ "titel": "Fotosynthese", "geprueft": true, "paare": [["Chloroplast", "Ort der Fotosynthese in der Pflanzenzelle", "Chlo-ro-plast"]] }
+```
+
 **Hinweise:**
 
 - Die Lärmampel misst nur die Lautstärke im Browser. Es wird nichts aufgenommen, gespeichert oder gesendet. Sie braucht https (GitHub Pages) oder `localhost`. Die Pegelwerte hängen vom Gerät ab, deshalb vor der ersten Nutzung einmal kalibrieren.

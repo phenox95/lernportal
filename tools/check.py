@@ -122,6 +122,38 @@ for i, p in enumerate(projekte):
         if re.search(r"lrs", (d.get("titel", "") + d.get("pfad", "")), re.I):
             err(f"{dn}: Kennzeichnung „LRS“ in Titel/Dateiname nicht erlaubt")
 
+# Begriffe: Feld begriffe (true) muss zu "geprueft" in den Spielinhalten (lp-spiel-daten) der Präsentationen passen
+def hat_geprueft(eintrag):
+    ordner = [eintrag.get("path", "")] + [d.get("pfad", "") for d in eintrag.get("dateien", []) if isinstance(d, dict)]
+    for o in ordner:
+        if not o or not o.endswith("/") or ".." in o.split("/") or o.startswith(("/", "https:")):
+            continue
+        f = ROOT / o / "index.html"
+        if not f.is_file():
+            continue
+        m = re.search(r'<script[^>]*id="lp-spiel-daten"[^>]*>(.*?)</script>', f.read_text(encoding="utf-8", errors="ignore"), re.S)
+        if not m:
+            continue
+        try:
+            if json.loads(m.group(1)).get("geprueft") is True:
+                return True
+        except ValueError:
+            err(f"{o}index.html: lp-spiel-daten ist kein gültiges JSON")
+    return False
+
+
+for i, p in enumerate(projekte):
+    n = f"projects.json[{i}] „{p.get('title', '?')}“"
+    flag = p.get("begriffe")
+    if flag is not None and not isinstance(flag, bool):
+        err(f"{n}: begriffe muss true oder false sein")
+        continue
+    echt = hat_geprueft(p)
+    if flag is True and not echt:
+        err(f"{n}: begriffe ist true, aber keine Präsentation hat \"geprueft\": true in lp-spiel-daten")
+    elif echt and flag is not True:
+        err(f"{n}: Eine Präsentation hat \"geprueft\": true, im Eintrag fehlt \"begriffe\": true (sonst fehlen die Begriffe auf der Seite begriffe/)")
+
 eintraege = {p.get("path") for p in projekte}
 for idx in ROOT.glob("*/klasse-*/**/index.html"):
     ordner = idx.parent.relative_to(ROOT).as_posix() + "/"

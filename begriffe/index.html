@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Begriffe nachschlagen und üben – Lernportal.">
+  <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+  <title>Begriffe – Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/praesentation.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/begriffe.js" defer></script>
+</head>
+<body data-page="begriffe" data-root="../">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href=".././" aria-label="Lernportal Startseite"><span class="brand-dot" aria-hidden="true"></span>Lernportal</a>
+      <nav class="top-nav" aria-label="Hauptnavigation">
+        <a href="../biologie/">Biologie</a>
+        <a href="../geografie/">Geografie</a>
+        <a href="../alle/">Alle Materialien</a>
+        <a href="../bne/">Nachhaltigkeit</a>
+        <a href="../nachrichten/">Nachrichten</a>
+      </nav>
+      <div class="header-tools" id="prefs-slot"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="fach-intro">
+      <div class="wrap">
+        <a class="back-link" id="bg-back" href="../"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg><span id="bg-back-text">Portal</span></a>
+        <p class="eyebrow" id="bg-eyebrow">Begriffe</p>
+        <h1 class="title" id="bg-title">Begriffe</h1>
+        <p class="lead" id="bg-lead">Schlage Begriffe nach und übe sie.</p>
+      </div>
+    </section>
+    <div class="wrap">
+      <noscript><p class="empty-message">Diese Seite braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+      <div class="bg-leiste" id="bg-leiste" hidden>
+        <div class="search bg-suche">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg>
+          <label class="bg-unsichtbar" for="bg-q">Begriff suchen</label>
+          <input type="search" id="bg-q" placeholder="Begriff suchen" autocomplete="off">
+        </div>
+        <button type="button" class="bg-knopf bg-haupt" id="bg-alle">Alle Begriffe üben</button>
+      </div>
+      <p class="result-count" id="bg-zahl" aria-live="polite"></p>
+      <div id="bg-liste"><p class="loading-message">Begriffe werden geladen …</p></div>
+    </div>
+  </main>
+
+  <div class="wrap">
+    <footer class="site-footer">
+      <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
+      <span class="footer-links"><a href="../impressum/">Impressum</a><a href="../datenschutz/">Datenschutz</a></span>
+    </footer>
+  </div>
+</body>
+</html>

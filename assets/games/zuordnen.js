@@ -9,7 +9,7 @@
       const wahl = h.mischen(paare).slice(0, 5);
       const t0 = Date.now(); let fehler = 0, fertig = 0, gewaehlt = null;
       const info = h.el("div", "lp-pr-sinfo"), fl = h.el("span", "", "Fehlversuche: 0"), zeit = h.el("span", "", "0:00");
-      info.appendChild(fl); info.appendChild(zeit);
+      info.appendChild(fl); if (!h.ohneZeit) info.appendChild(zeit);
       feld.appendChild(h.el("p", "lp-pr-spieltext", "Tippe einen Begriff an und dann die Erklärung, die dazu passt."));
       feld.appendChild(info);
       const gitter = h.el("div", "lp-pr-zuordnen"), links = h.el("div", "lp-pr-karten"), rechts = h.el("div", "lp-pr-karten");
@@ -25,7 +25,7 @@
         if (!gewaehlt || b.classList.contains("ok")) return;
         if (gewaehlt.dataset.i === b.dataset.i) {
           [gewaehlt, b].forEach((x) => { x.classList.remove("sel"); x.classList.add("ok"); }); gewaehlt = null;
-          if (++fertig === wahl.length) { clearInterval(uhr); feld.appendChild(h.el("p", "lp-pr-geschafft", "Geschafft in " + h.zeit((Date.now() - t0) / 1000) + " mit " + fehler + " Fehlversuchen!")); }
+          if (++fertig === wahl.length) { clearInterval(uhr); feld.appendChild(h.el("p", "lp-pr-geschafft", (h.ohneZeit ? "Geschafft mit " : "Geschafft in " + h.zeit((Date.now() - t0) / 1000) + " mit ") + fehler + " Fehlversuchen!")); }
         } else {
           fehler++; fl.textContent = "Fehlversuche: " + fehler;
           b.classList.add("bad"); setTimeout(() => b.classList.remove("bad"), 700);

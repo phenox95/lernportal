@@ -787,6 +787,12 @@
     counter.textContent = items.length ? countText(items.length) : "";
     list.innerHTML = items.length ? reihenListe(items) : '<p class="empty-message">Für dieses Themenfeld gibt es noch kein Material.</p>';
     renderVerbindungen(tf, fach, items);
+    /* Verweis auf die Begriffe des Themenfelds (begriffe/), nur wenn ein Eintrag geprüfte Begriffe hat (Feld begriffe: true) */
+    const begriffe = $("#tf-begriffe"), begriffeLink = $("#tf-begriffe-link");
+    if (begriffe && begriffeLink && items.some(p => p.begriffe === true)) {
+      begriffeLink.href = root + "begriffe/?fach=" + encodeURIComponent(fach) + "&nr=" + encodeURIComponent(tf.nr);
+      begriffe.hidden = false;
+    }
   }
 
   /* Materialien eines Themenfelds nach Unterrichtsreihe (Sequenz) gruppiert, mit den Zielen der Reihe */

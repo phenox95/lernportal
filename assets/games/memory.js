@@ -10,7 +10,7 @@
       const karten = h.mischen(wahl.flatMap((p, i) => [{ i, t: p.s || p.b, art: "b" }, { i, t: p.e, art: "e" }]));
       const info = h.el("div", "lp-pr-sinfo");
       const zuege = h.el("span", "", "Züge: 0"), zeit = h.el("span", "", "0:00");
-      info.appendChild(zuege); info.appendChild(zeit);
+      info.appendChild(zuege); if (!h.ohneZeit) info.appendChild(zeit);
       feld.appendChild(h.el("p", "lp-pr-spieltext", "Finde zu jedem Begriff die passende Erklärung. Tippt abwechselnd zwei Karten an."));
       feld.appendChild(info);
       const gitter = h.el("div", "lp-pr-karten");
@@ -32,7 +32,7 @@
             [a[0], c[0]].forEach((x) => { x.classList.remove("auf"); x.classList.add("ok"); });
             if (++paareGefunden === wahl.length) {
               clearInterval(uhr);
-              feld.appendChild(h.el("p", "lp-pr-geschafft", "Geschafft in " + h.zeit((Date.now() - t0) / 1000) + " mit " + z + " Zügen!"));
+              feld.appendChild(h.el("p", "lp-pr-geschafft", (h.ohneZeit ? "Geschafft mit " : "Geschafft in " + h.zeit((Date.now() - t0) / 1000) + " mit ") + z + " Zügen!"));
             }
           } else {
             sperre = true;

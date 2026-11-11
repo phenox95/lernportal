@@ -9,7 +9,7 @@
       const runden = h.mischen(paare).slice(0, 6);
       let n = 0, richtig = 0; const t0 = Date.now();
       const info = h.el("div", "lp-pr-sinfo"), zaehler = h.el("span", "", ""), zeit = h.el("span", "", "0:00");
-      info.appendChild(zaehler); info.appendChild(zeit);
+      info.appendChild(zaehler); if (!h.ohneZeit) info.appendChild(zeit);
       const frage = h.el("p", "lp-pr-frage"), karten = h.el("div", "lp-pr-karten"), sagt = h.el("p", "lp-pr-spieltext", "");
       karten.style.gridTemplateColumns = "repeat(2, 1fr)";
       feld.appendChild(info); feld.appendChild(frage); feld.appendChild(karten); feld.appendChild(sagt);
@@ -17,7 +17,7 @@
       function runde() {
         if (n >= runden.length) {
           clearInterval(uhr); karten.remove(); frage.remove(); sagt.remove();
-          feld.appendChild(h.el("p", "lp-pr-geschafft", richtig + " von " + runden.length + " richtig in " + h.zeit((Date.now() - t0) / 1000) + "!"));
+          feld.appendChild(h.el("p", "lp-pr-geschafft", richtig + " von " + runden.length + " richtig" + (h.ohneZeit ? "" : " in " + h.zeit((Date.now() - t0) / 1000)) + "!"));
           return;
         }
         const r = runden[n]; zaehler.textContent = "Frage " + (n + 1) + " von " + runden.length;
