@@ -30,7 +30,13 @@
     "grade": "Klasse 9",
     "themenfeld": "3.6",
     "dauer": "45 Min.",
-    "datum": "2026-11-03"
+    "datum": "2026-11-03",
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/auge-bau/",
+        "grund": "Der Bau des Auges ist die Grundlage, um den Strahlengang bei Kurzsichtigkeit zu erklären."
+      }
+    ]
   },
   {
     "title": "Urlaub auf dem Vulkan – Tourismus am Ätna",
@@ -45,6 +51,12 @@
     "reihe": "Vulkanismus",
     "bne": [
       8
+    ],
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/",
+        "grund": "Gleiche Reihe, gleicher Raum: Tourismus und Landwirtschaft nutzen den Ätna auf unterschiedliche Weise."
+      }
     ]
   },
   {
@@ -293,7 +305,17 @@
     "dauer": "45 Min.",
     "datum": "2026-11-05",
     "reihe": "Vulkanismus",
-    "status": "Entwurf"
+    "status": "Entwurf",
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-7/risikoraeume/aetna-tourismus/",
+        "grund": "Gleiche Reihe: Nach der Entstehung von Vulkanausbrüchen geht es um Leben und Tourismus am Ätna."
+      },
+      {
+        "pfad": "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/",
+        "grund": "Gleiche Reihe: Vulkanische Böden bringen am Ätna Chancen und Risiken für die Landwirtschaft."
+      }
+    ]
   },
   {
     "title": "Erneuerbare Energien – Strom, Wärme, Verkehr",
@@ -415,6 +437,15 @@
         "pfad": "biologie/klasse-9/gesundheit/gesund-oder-krank/praesentation/",
         "art": "Präsentation"
       }
+    ],
+    "bne": [
+      3
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Gleiche Reihe: Erst geht es um den Gesundheitsbegriff, dann um das Impfen als Schutz vor Krankheit."
+      }
     ]
   },
   {
@@ -429,6 +460,49 @@
     "datum": "2026-11-09",
     "bne": [
       15
+    ]
+  },
+  {
+    "title": "Klimawandel: Quellen prüfen",
+    "description": "Beurteile Quellen mit fünf Fragen, prüfe den Stand der Forschung und entwickle eine ruhige Antwort auf Klimamythen. Stichwörter: Quellenkritik, Fake News, Desinformation, Faktencheck, Klimaleugnung.",
+    "type": "Arbeitsblatt",
+    "path": "geografie/klasse-9/klimawandel/quellen-pruefen/",
+    "subject": "Geografie",
+    "grade": "Klasse 9/10",
+    "themenfeld": "3.6",
+    "reihe": "Klimawandel",
+    "datum": "2026-11-10",
+    "sichtbar": true,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Auch beim Impfen stehen widersprüchliche Aussagen im Netz. Der Quellencheck hilft dort genauso."
+      },
+      {
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/",
+        "grund": "Beim Klimaschutz und bei der Energiewende begegnen dir dieselben Mythen. Prüfe sie mit den fünf Fragen."
+      }
+    ],
+    "bne": [
+      13
+    ]
+  },
+  {
+    "title": "Klimawandel: Fakten, Mythen, Gespräche",
+    "description": "Was die Forschung sagt, fünf Mythen im Check, Tricks der Desinformation und Tipps für ruhige Gespräche. Stichwörter: Klimaleugnung, Fake News, Faktencheck.",
+    "type": "Lernmodul",
+    "path": "geografie/klasse-9/klimawandel/klima-info/",
+    "subject": "Geografie",
+    "grade": "Klasse 9/10",
+    "themenfeld": "3.6",
+    "reihe": "Klimawandel",
+    "datum": "2026-11-10",
+    "sichtbar": true,
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-9/klimawandel/quellen-pruefen/",
+        "grund": "Hier übst du das Prüfen von Quellen mit Aufgaben."
+      }
     ]
   }
 ]

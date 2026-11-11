@@ -1,0 +1,101 @@
+/* Nur für diese Infoseite. Nutzt die Variablen des Portals, keine eigenen Farben. */
+.lp-info h2 { margin: 1.8rem 0 0.6rem; font-size: 1.375rem; line-height: 1.3; font-weight: 700; }
+.lp-info h2:first-child { margin-top: 0; }
+.lp-info ul, .lp-info ol { margin: 0 0 0.75em; padding-left: 1.3rem; }
+.lp-info li { margin-bottom: 0.5em; max-width: 70ch; }
+.lp-info details { margin: 0 0 0.6rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); }
+.lp-info summary { min-height: 44px; padding: 0.8rem 1.1rem; font-weight: 700; cursor: pointer; }
+.lp-info details[open] summary { border-bottom: 1px solid var(--lp-linie); }
+.lp-info .lp-aufklapp-inhalt { padding: 0.9rem 1.1rem 1rem; }
+.lp-info .lp-aufklapp-inhalt p { max-width: 70ch; }
+.lp-dialog { margin: 0; padding: 0; list-style: none; }
+.lp-dialog li { margin: 0 0 0.6rem; padding: 0.6rem 0.9rem; border-radius: calc(var(--lp-radius) * 0.7); background: var(--lp-gruppe); }
+.lp-dialog li.lp-du { border: 2px solid var(--lp-akzent); background: var(--lp-flaeche); }
+.lp-weiter { display: inline-flex; align-items: center; min-height: 44px; margin-top: 1.2rem; padding: 0.6rem 1.2rem; border: 2px solid var(--lp-akzent); border-radius: calc(var(--lp-radius) * 0.7); background: var(--lp-flaeche); color: var(--lp-text); font-weight: 700; text-decoration: none; }
+.lp-weiter:hover { background: var(--lp-gruppe); }
+.lp-info .lp-quelle { padding-left: 0; }
+.lp-info a { color: var(--lp-text); text-underline-offset: 0.15em; }
+
+/* Eine Spalte, breiter. Auf breiten Bildschirmen steht neben dem Text eine Grafik, schmal liegt sie darunter. */
+.lp-info > * { max-width: none; }
+.lp-info .lp-mit-bild { display: block; }
+.lp-grafik { margin: 0 0 1rem; }
+.lp-grafik-flaeche { padding: 0.9rem 1.1rem; background: var(--lp-flaeche); }
+.lp-grafik svg { display: block; width: 100%; height: auto; max-width: 28rem; margin: 0 auto; color: var(--lp-text); font-family: inherit; font-size: 13px; }
+.lp-grafik .lp-quelle { padding: 0 1.1rem 0.8rem; margin: 0; }
+.g-text text, text.g-text { fill: var(--lp-text); }
+.g-fett { font-weight: 700; }
+.g-achse line { stroke: var(--lp-text2); stroke-width: 1.5; }
+.g-grau { fill: var(--lp-text2); }
+.g-akzent { fill: var(--lp-akzent); }
+.g-leer { fill: none; stroke: var(--lp-text2); stroke-width: 2; }
+.g-auf-akzent { fill: var(--lp-flaeche) !important; }
+.g-band { fill: var(--lp-gruppe); stroke: var(--lp-text2); stroke-width: 2; stroke-dasharray: 5 3; }
+.g-pfeil line { stroke: currentColor; stroke-width: 3; }
+.g-warm { color: var(--lp-akzent); }
+.g-warm line { stroke-dasharray: 6 4; }
+.lp-legende { margin: 0; padding: 0 1.1rem 0.5rem; list-style: none; }
+.lp-legende li { display: flex; gap: 0.6rem; align-items: center; margin: 0 0 0.3rem; }
+.lp-kaestchen { flex: none; width: 1rem; height: 1rem; border: 2px solid var(--lp-text2); box-sizing: border-box; }
+.lp-kaestchen.lp-voll { background: var(--lp-akzent); border-color: var(--lp-akzent); }
+.lp-info .lp-karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 0.75rem; padding: 0; list-style: none; }
+.lp-info .lp-karten li { max-width: none; margin: 0; padding: 0.9rem 1.1rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); }
+.lp-info .lp-karten strong { display: block; margin-bottom: 0.25rem; }
+
+/* Aufbau: Kacheln, Karten und gleich hohe Reihen statt langer Textspalte */
+.lp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.lp-icon { width: 3rem; height: 3rem; fill: none; stroke: var(--lp-akzent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.lp-icon .lp-fuell { fill: var(--lp-akzent); }
+.lp-info .lp-kacheln, .lp-info .lp-schritte { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.9rem; margin: 0; padding: 0; list-style: none; }
+.lp-info .lp-kacheln li, .lp-info .lp-schritte li { max-width: none; margin: 0; display: grid; align-content: start; gap: 0.4rem; padding: 1.1rem 1.2rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); box-shadow: var(--lp-schatten); }
+.lp-info .lp-kacheln strong { font-size: 1.15rem; line-height: 1.3; }
+.lp-info .lp-schritte { grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+.lp-info .lp-schritte strong { font-size: 1.05rem; }
+.lp-info .lp-nummeriert { counter-reset: schritt; }
+.lp-info .lp-nummeriert > li { counter-increment: schritt; position: relative; padding-top: 1.4rem; }
+.lp-info .lp-nummeriert > li::before { content: counter(schritt); position: absolute; top: -0.75rem; left: 1rem; display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--lp-akzent); color: var(--lp-flaeche); font-weight: 700; }
+.lp-info .lp-zeile { display: grid; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); gap: 1rem; align-items: stretch; margin-top: 1.1rem; }
+.lp-info .lp-zeile > * { margin: 0; max-width: none; }
+.lp-info .lp-zeile-text { grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr)); }
+.lp-karte { padding: 1.1rem 1.2rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); box-shadow: var(--lp-schatten); }
+.lp-karte > p { margin-top: 0; }
+.lp-erklaer { margin: 0; padding: 0.2rem 1.1rem 0.6rem; }
+.lp-grafik { display: flex; flex-direction: column; margin: 0; }
+.lp-grafik .lp-grafik-flaeche { flex: 1; display: grid; align-content: center; }
+.lp-info .lp-aufklappe { display: grid; grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr)); gap: 0.7rem; align-items: start; }
+.lp-info .lp-aufklappe details { margin: 0; }
+.lp-info li, .lp-info p { max-width: 80ch; }
+.lp-g-c svg { max-width: 15rem; }
+.lp-info .lp-aufklappe details:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.lp-info .lp-schritte li:last-child:nth-child(3n+1) { grid-column: 1 / -1; }
+.lp-info .lp-gespraech-netz, .lp-info .lp-zeile > .lp-hilfe { align-self: start; }
+.g-glas { fill: var(--lp-flaeche); stroke: var(--lp-text2); stroke-width: 3; }
+.g-deckel { fill: var(--lp-text2); }
+.g-punkt-leer { fill: none; stroke: var(--lp-text2); stroke-width: 1.6; }
+.g-klein { font-size: 11px; fill: var(--lp-text2); }
+.g-sonne circle { fill: #f2b705; stroke: var(--lp-text); stroke-width: 2; }
+.g-sonne path { stroke: #f2b705; stroke-width: 3; stroke-linecap: round; fill: none; }
+.g-licht line, .g-licht-l { stroke: #e0a400; stroke-width: 5; }
+.g-warm line, .g-warm-l { stroke: var(--lp-akzent); stroke-width: 5; }
+.g-licht-f { fill: #e0a400; }
+.g-warm-f { fill: var(--lp-akzent); }
+.g-punkt-band circle { fill: var(--lp-text2); }
+.g-erde { fill: var(--lp-akzent); }
+.g-dunkel { fill: var(--lp-text); }
+.g-dunkel rect, .g-dunkel path, .g-dunkel circle { fill: var(--lp-text); stroke: none; }
+.lp-bildband { margin: 1.1rem 0 0; }
+.lp-bildband img { display: block; width: 100%; height: 9rem; object-fit: fill; border-radius: var(--lp-radius); }
+.lp-bildband figcaption, .lp-bildfigur figcaption { margin-top: 0.4rem; font-size: 0.875rem; color: var(--lp-text2); max-width: 80ch; }
+.lp-g-k img { display: block; width: 100%; height: auto; max-width: 32rem; margin: 0 auto; }
+.lp-info .lp-zeile-bild { grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
+.lp-lesehilfe h3 { margin: 0 0 0.6rem; font-size: 1.15rem; }
+.lp-lesehilfe ol { margin: 0 0 0.8rem; padding-left: 1.3rem; }
+.lp-lesehilfe .lp-frage { margin: 0; padding: 0.6rem 0.8rem; border: 2px solid var(--lp-akzent); border-radius: calc(var(--lp-radius) * 0.7); }
+.lp-info .lp-weiter-details { margin-top: 1rem; }
+.lp-bildfigur { margin: 0; }
+.lp-bildfigur img { display: block; width: 100%; max-width: 44rem; height: auto; margin: 0 auto; border: 1px solid var(--lp-linie); border-radius: calc(var(--lp-radius) * 0.7); }
+.lp-info .lp-spalte { display: grid; gap: 1rem; align-content: start; }
+.lp-weiterlesen h3 { margin: 0 0 0.5rem; font-size: 1.15rem; }
+.lp-weiterlesen ul { margin: 0; padding-left: 1.3rem; }
+.lp-info .lp-weiter-zeile { margin: 0; }
+.lp-info .lp-weiter-zeile .lp-weiter { margin-top: 0; }
