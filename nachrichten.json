@@ -103,6 +103,35 @@
       "bild": "https://www.duh.de/fileadmin/_processed_/1/a/csm_AdobeStock_307425041_Klimaschutz_piyaset_089606e914.jpg"
     },
     {
+      "datum": "2026-11-04",
+      "titel": "Abkehr vom Verbrenner-Aus? - EU-Abgeordnete stimmen für Lockerung",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/wirtschaft/eu-parlament-abstimmung-aufweichung-verbrenner-aus-100.html",
+      "einordnung": "Der Umweltausschuss des EU-Parlaments hat am 4. November für eine Lockerung gestimmt: 2035 sollen die CO2-Grenzwerte nur um höchstens 95 Prozent sinken, nicht auf null. Das Plenum entscheidet im Dezember. Passt zur Frage, ob E-Fuels ein Verbrenner-Aus überhaupt nötig machen.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13,
+        7
+      ]
+    },
+    {
+      "datum": "2026-10-16",
+      "titel": "Abkehr vom strikten Verbrenner-Aus: Berlin und Paris einig",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/politik/ausland/verbrenner-aus-lockerung-eu-frankreich-deutschland-100.html",
+      "einordnung": "Deutschland und Frankreich wollen die Grenzwerte für neue Autos 2035 um 90 Prozent senken, die restlichen 10 Prozent müssen nicht ausgeglichen werden. Das ist die gemeinsame Position der beiden Regierungen. Vergleiche sie mit der Sicht der Umweltverbände. E-Fuels kommen im Beitrag nicht vor.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13
+      ]
+    },
+    {
       "datum": "2026-09-16",
       "titel": "Masern: Wie Eltern die Impfung ihrer Kinder trotz Gesetz umgehen",
       "quelle": "ZDFheute",
@@ -117,6 +146,21 @@
       "woche": "2026-11-16",
       "art": "Medienbericht",
       "bild": "https://www.zdfheute.de/assets/impfen-impfschutz-schutzimpfung-masernschutzgesetz-100~1280x720?cb=1788864104176"
+    },
+    {
+      "datum": "2025-12-16",
+      "titel": "E-Fuels für Verbrenner: Chance für klimaneutrales Fahren?",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/wissen/e-fuels-verbrenner-synthetische-kraftstoffe-100.html",
+      "einordnung": "Der Beitrag erklärt, warum E-Fuels viel grünen Strom brauchen und im Pkw laut einem Fraunhofer-Experten etwa vier- bis fünfmal weniger effizient sind als ein Batterie-Auto. Er ist von Dezember 2025, die Grundlagen gelten weiter. Passt zu M2 des Arbeitsblatts.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        7,
+        13
+      ]
     }
   ]
 }
