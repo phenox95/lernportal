@@ -657,3 +657,6 @@ body[data-subject="Geografie"] .bg-spiel { --g: #A9442B; --dk: #7C2F1C; --mint: 
   .top-nav { gap: 0; }
   .top-nav a { padding: 0 0.45rem; font-size: 0.875rem; }
 }
+
+/* Themenfeld-Seite: Abstand zwischen Materialliste und Block "Aktuell" */
+#tf-aktuell { margin-top: 32px; }

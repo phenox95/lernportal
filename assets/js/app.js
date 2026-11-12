@@ -875,12 +875,27 @@
     counter.textContent = items.length ? countText(items.length) : "";
     list.innerHTML = items.length ? reihenListe(items) : '<p class="empty-message">Für dieses Themenfeld gibt es noch kein Material.</p>';
     renderVerbindungen(tf, fach, items);
+    initThemenfeldAktuell(tf, fach);
     /* Verweis auf die Begriffe des Themenfelds (begriffe/), nur wenn ein Eintrag geprüfte Begriffe hat (Feld begriffe: true) */
     const begriffe = $("#tf-begriffe"), begriffeLink = $("#tf-begriffe-link");
     if (begriffe && begriffeLink && items.some(p => p.begriffe === true)) {
       begriffeLink.href = root + "begriffe/?fach=" + encodeURIComponent(fach) + "&nr=" + encodeURIComponent(tf.nr);
       begriffe.hidden = false;
     }
+  }
+
+  /* Themenfeld-Seite: Meldungen aus nachrichten.json, die zu Fach (faecher) und Nummer (themenfeld) passen, höchstens 3 */
+  function initThemenfeldAktuell(tf, fach) {
+    const box = $("#tf-aktuell");
+    if (!box) return;
+    loadNachrichten().then(news => {
+      const passend = news.filter(n => Array.isArray(n.faecher) && n.faecher.includes(fach)
+        && Array.isArray(n.themenfeld) && n.themenfeld.map(String).includes(tf.nr)).slice(0, 3);
+      if (!passend.length) return;
+      box.innerHTML = `<h2 id="h-tf-aktuell" class="aktuell-h">Aktuell zu diesem Themenfeld</h2>${newsHinweis}<div class="group">${passend.map(newsRow).join("")}</div>
+        <p class="woche-hinweis woche-mehr"><a href="${root}nachrichten/">Alle Meldungen und das Themenarchiv</a></p>`;
+      box.hidden = false;
+    });
   }
 
   /* Materialien eines Themenfelds nach Unterrichtsreihe (Sequenz) gruppiert, mit den Zielen der Reihe */

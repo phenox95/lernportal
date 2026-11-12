@@ -262,6 +262,13 @@ for i, n in enumerate(nach.get("eintraege", [])):
     b = n.get("bne", [])
     if not isinstance(b, list) or not all(isinstance(x, int) and 1 <= x <= 17 for x in b):
         err(f"{nn}: bne muss eine Liste von Zahlen 1–17 sein")
+    tfn = n.get("themenfeld")
+    if tfn is not None:
+        gueltig = set().union(*[nummern.get(fa, set()) for fa in n.get("faecher", [])])
+        if not isinstance(tfn, list) or not all(isinstance(x, str) for x in tfn):
+            err(f"{nn}: themenfeld muss eine Liste von Texten wie \"3.5\" sein")
+        elif gueltig and not set(tfn) <= gueltig:
+            err(f"{nn}: themenfeld enthält Nummern, die es im Fach nicht gibt")
     if n.get("woche") and n["woche"] not in woche_ab:
         wrn(f"{nn}: woche „{n['woche']}“ steht nicht als ab-Datum in impuls.json")
     if not n.get("bne") and not n.get("woche"):
