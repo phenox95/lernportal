@@ -1,5 +1,5 @@
 {
-  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden und Ministerien, Fachinstitute, Wissenschaftsmedien, anerkannte Umweltverbände). Optional art: Medienbericht, Regierung oder Position (zeigt in der Liste, wessen Sicht die Meldung wiedergibt). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional bild (https-Adresse des Vorschaubilds der Artikelseite, wird direkt von dort geladen, siehe Datenschutz), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
+  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden und Ministerien, Fachinstitute, Wissenschaftsmedien, anerkannte Umweltverbände). Optional art: Medienbericht, Regierung oder Position (zeigt in der Liste, wessen Sicht die Meldung wiedergibt). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional bild (https-Adresse des Vorschaubilds der Artikelseite, wird direkt von dort geladen, siehe Datenschutz), optional themenfeld (Liste von RLP-Nummern wie \"3.5\", zeigt die Meldung auf der Themenfeld-Seite des Fachs), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
   "erlaubteQuellen": [
     "tagesschau.de",
     "deutschlandfunk.de",
@@ -39,7 +39,10 @@
       "bne": [
         13
       ],
-      "bild": "https://www.zdfheute.de/assets/klimakonferenz-cop31-haupteingang-politik-klimawandel-100~1280x720?cb=1793997253767"
+      "bild": "https://www.zdfheute.de/assets/klimakonferenz-cop31-haupteingang-politik-klimawandel-100~1280x720?cb=1793997253767",
+      "themenfeld": [
+        "3.6"
+      ]
     },
     {
       "datum": "2026-11-08",
@@ -54,7 +57,10 @@
       "bne": [
         13
       ],
-      "bild": "https://www.zdfheute.de/assets/friedrich-merz-978~1280x720?cb=1794138721439"
+      "bild": "https://www.zdfheute.de/assets/friedrich-merz-978~1280x720?cb=1794138721439",
+      "themenfeld": [
+        "3.6"
+      ]
     },
     {
       "datum": "2026-11-08",
@@ -69,7 +75,10 @@
         13
       ],
       "art": "Regierung",
-      "bild": "https://www.bundesumweltministerium.de/typo3temp/assets/images/_c__UN_Climate_Change_-_Kiara_Worth__csm_cop31_anatalya_lp_ohne_fahnen_1200px_ba932e37e9_4d6262684f87f0d97b00fa818ab16300.jpg"
+      "bild": "https://www.bundesumweltministerium.de/typo3temp/assets/images/_c__UN_Climate_Change_-_Kiara_Worth__csm_cop31_anatalya_lp_ohne_fahnen_1200px_ba932e37e9_4d6262684f87f0d97b00fa818ab16300.jpg",
+      "themenfeld": [
+        "3.6"
+      ]
     },
     {
       "datum": "2026-11-06",
@@ -84,7 +93,10 @@
       "bne": [
         13
       ],
-      "bild": "https://www.germanwatch.org/sites/default/files/styles/twitter/public/2026-09/2026_COP31.jpg?itok=cZKgV-iD"
+      "bild": "https://www.germanwatch.org/sites/default/files/styles/twitter/public/2026-09/2026_COP31.jpg?itok=cZKgV-iD",
+      "themenfeld": [
+        "3.6"
+      ]
     },
     {
       "datum": "2026-11-05",
@@ -100,7 +112,10 @@
         13,
         7
       ],
-      "bild": "https://www.duh.de/fileadmin/_processed_/1/a/csm_AdobeStock_307425041_Klimaschutz_piyaset_089606e914.jpg"
+      "bild": "https://www.duh.de/fileadmin/_processed_/1/a/csm_AdobeStock_307425041_Klimaschutz_piyaset_089606e914.jpg",
+      "themenfeld": [
+        "3.6"
+      ]
     },
     {
       "datum": "2026-11-04",
@@ -115,6 +130,10 @@
       "bne": [
         13,
         7
+      ],
+      "themenfeld": [
+        "3.5",
+        "3.6"
       ]
     },
     {
@@ -129,6 +148,10 @@
       ],
       "bne": [
         13
+      ],
+      "themenfeld": [
+        "3.5",
+        "3.6"
       ]
     },
     {
@@ -145,7 +168,10 @@
       ],
       "woche": "2026-11-16",
       "art": "Medienbericht",
-      "bild": "https://www.zdfheute.de/assets/impfen-impfschutz-schutzimpfung-masernschutzgesetz-100~1280x720?cb=1788864104176"
+      "bild": "https://www.zdfheute.de/assets/impfen-impfschutz-schutzimpfung-masernschutzgesetz-100~1280x720?cb=1788864104176",
+      "themenfeld": [
+        "3.5"
+      ]
     },
     {
       "datum": "2025-12-16",
@@ -160,6 +186,9 @@
       "bne": [
         7,
         13
+      ],
+      "themenfeld": [
+        "3.5"
       ]
     }
   ]
