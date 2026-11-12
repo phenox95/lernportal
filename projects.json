@@ -371,6 +371,28 @@
     "begriffe": true
   },
   {
+    "title": "E-Fuels und Verbrenner-Aus",
+    "description": "Retten E-Fuels den Verbrenner? 14 Begriffe mit Selbsttest, 6 Übungen (Zuordnen, Lückentext, Reihenfolge, Richtig/Falsch, Rechnen, Pro/Contra) und 4 aktuelle Meldungen mit Auftrag.",
+    "type": "Interaktive Übung",
+    "path": "geografie/klasse-9/ressourcen/e-fuels/",
+    "subject": "Geografie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "45 Min.",
+    "datum": "2026-11-12",
+    "reihe": "Umgang mit Ressourcen",
+    "bne": [
+      7,
+      13
+    ],
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/",
+        "grund": "Verkehr und Energiewende: E-Fuels sind eine Alternative zum Batterieauto, die viel Strom braucht."
+      }
+    ]
+  },
+  {
     "title": "Impfen – ja oder nein?",
     "description": "Impuls mit zwei Aussagen, Ausbruchsspiel, Herdenimmunität-Labor und Debatte in vier Rollen. Mit Do Now und Exit-Ticket.",
     "type": "Interaktive Präsentation",

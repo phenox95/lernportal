@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Begriffe, Übungen und aktuelle Meldungen zu E-Fuels und Verbrenner-Aus für Geografie, Jahrgang 9. Läuft im Browser, ohne Anmeldung und ohne Internetverbindung.">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>E-Fuels und Verbrenner-Aus · Geografie 9</title>
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+<style>
+@font-face{font-family:'Andika';font-weight:400;src:url(data:font/woff2;base64,__F400__) format('woff2');}
+@font-face{font-family:'Andika';font-weight:700;src:url(data:font/woff2;base64,__F700__) format('woff2');}
+:root{--bg:#fff;--fg:#111;--mut:#444;--line:#111;--soft:#efefef;--acc:#0b4f8a;--ok:#0a6b2d;--bad:#a11;}
+@media (prefers-color-scheme:dark){:root{--bg:#161616;--fg:#f2f2f2;--mut:#bbb;--line:#f2f2f2;--soft:#262626;--acc:#7fb8ee;--ok:#6fd08c;--bad:#ff8a8a;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Andika',Verdana,Arial,sans-serif;font-size:18px;line-height:1.5;text-align:left}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;margin:.2em 0}
+h2{font-size:1.3rem;margin:1.2em 0 .4em}
+h3{font-size:1.1rem;margin:0 0 .3em}
+.sub{color:var(--mut);margin:0 0 .6em}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;border:2px solid var(--line);padding:8px 12px;margin:10px 0}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+button,select,input{font:inherit;color:inherit}
+button{background:var(--bg);border:2px solid var(--line);padding:6px 12px;cursor:pointer;border-radius:6px;min-height:40px}
+button:hover{background:var(--soft)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button.tab[aria-selected="true"]{background:var(--fg);color:var(--bg);font-weight:700}
+select{max-width:100%;padding:4px 6px;border:2px solid var(--line);border-radius:6px;background:var(--bg)}
+.row select:not(.gap){flex:1 1 260px;min-width:0;width:100%;text-overflow:ellipsis}
+button.sm{padding:2px 10px;min-height:32px;font-size:.85rem}
+.card,.ue{border:2px solid var(--line);padding:12px 14px;margin:12px 0;border-radius:6px}
+.niv{display:inline-block;border:1px solid var(--line);padding:0 8px;font-size:.8rem;margin-left:8px}
+.syl{color:var(--mut);font-size:.85rem;margin:0 0 .3em}
+.def{margin:.3em 0}
+.hide .def{display:none}
+.hide .card.open .def{display:block}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.fb{font-weight:700;margin-left:6px}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+.gap{margin:0 4px;min-width:130px}
+.ro{display:flex;gap:6px;align-items:center;border:1px solid var(--line);padding:6px 8px;margin:6px 0;border-radius:6px;background:var(--soft)}
+.ro span.t{flex:1}
+input[type=text]{border:2px solid var(--line);background:var(--bg);padding:4px 8px;border-radius:6px;width:130px}
+textarea{width:100%;min-height:120px;border:2px solid var(--line);background:var(--bg);padding:8px;font:inherit;color:inherit;border-radius:6px}
+.hilfe{border:2px solid var(--line);background:var(--soft);padding:8px 12px;margin:8px 0;font-size:.9rem}
+.news .meta{color:var(--mut);font-size:.85rem}
+label.opt{display:block;margin:4px 0;cursor:pointer}
+.note{font-size:.85rem;color:var(--mut)}
+a{color:var(--acc)}
+sub{line-height:0}
+[hidden]{display:none!important}
+</style>
+</head>
+<body data-root="../../../../../" data-title="E-Fuels und Verbrenner-Aus" data-subject="Geografie" data-grade="Klasse 9">
+<noscript><p class="lp-noscript"><a href="../../../../../">Zurück zum Portal</a> · Diese Seite benötigt JavaScript für die vollständige Darstellung.</p></noscript>
+<div class="wrap">
+<h1>E-Fuels und Verbrenner-Aus</h1>
+<p class="sub">Geografie Jg. 9 · Umgang mit Ressourcen · Energie</p>
+<div class="bar"><span id="score" aria-live="polite">Richtig: 0 von 0</span><span class="note">Stand der Meldungen: <span id="stand"></span></span></div>
+<nav role="tablist">
+ <button class="tab" role="tab" data-tab="begriffe" aria-selected="true">Begriffe</button>
+ <button class="tab" role="tab" data-tab="uebungen" aria-selected="false">Übungen</button>
+ <button class="tab" role="tab" data-tab="meldungen" aria-selected="false">Aktuelle Meldungen</button>
+</nav>
+<section id="begriffe"></section>
+<section id="uebungen" hidden></section>
+<section id="meldungen" hidden></section>
+<p class="note">Alle Zahlen sind gerundet. Quellen stehen bei den Meldungen. Politische Entscheidungen können sich ändern.</p>
+</div>
+
+<script id="daten" type="application/json">__DATEN__</script>
+<script>
+const D=JSON.parse(document.getElementById('daten').textContent);
+const $=(s,r=document)=>r.querySelector(s);
+const el=(t,a={},...c)=>{const e=document.createElement(t);for(const[k,v]of Object.entries(a)){if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v)}c.flat().forEach(x=>e.append(x));return e};
+const fmt=s=>s.replace(/CO2/g,'CO<sub>2</sub>');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const results={};const keys=new Set();
+const reg=k=>{keys.add(k);updateScore()};
+const setRes=(k,ok)=>{results[k]=!!ok;updateScore()};
+function updateScore(){const r=[...keys].filter(k=>results[k]).length;$('#score').textContent='Richtig: '+r+' von '+keys.size}
+function speak(t){try{if(!('speechSynthesis' in window))return;const u=new SpeechSynthesisUtterance(t.replace(/CO2/g,'C O zwei'));u.lang='de-DE';speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+const vor=(t)=>el('button',{class:'sm',type:'button',onclick:()=>speak(t)},'Vorlesen');
+const mark=(node,ok,msg)=>{node.className='fb '+(ok?'ok':'bad');node.textContent=(ok?'✓ richtig. ':'✗ noch nicht. ')+(msg||'')};
+$('#stand').textContent=D.stand;
+
+/* Tabs */
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));
+ ['begriffe','uebungen','meldungen'].forEach(id=>$('#'+id).hidden=(id!==b.dataset.tab));
+}));
+
+/* Begriffe */
+(function(){
+ const root=$('#begriffe');
+ const list=el('div',{id:'liste'});
+ const search=el('input',{type:'text',placeholder:'Begriff suchen …','aria-label':'Begriff suchen',style:'width:100%;max-width:340px'});
+ const self=el('input',{type:'checkbox',id:'selbst'});
+ const cards=D.begriffe.map(t=>{
+  const c=el('div',{class:'card'});
+  c.append(el('h3',{},t.b),el('p',{class:'syl'},t.s));
+  const d=el('div',{class:'def'});d.append(el('p',{html:fmt(t.d)}),el('p',{class:'note',html:fmt(t.x)}));
+  c.append(d);
+  const row=el('div',{class:'row'});
+  row.append(el('button',{class:'sm',type:'button',onclick:()=>c.classList.toggle('open')},'Erklärung zeigen / verbergen'),vor(t.b+'. '+t.d));
+  c.append(row);c._t=t.b.toLowerCase()+' '+t.d.toLowerCase();return c});
+ cards.forEach(c=>list.append(c));
+ search.addEventListener('input',()=>{const q=search.value.toLowerCase().trim();cards.forEach(c=>c.hidden=q&&!c._t.includes(q))});
+ self.addEventListener('change',()=>{list.classList.toggle('hide',self.checked);cards.forEach(c=>c.classList.remove('open'))});
+ root.append(el('h2',{},'Begriffe zu E-Fuels'),
+  el('div',{class:'row'},search,el('label',{},self,' Selbsttest: Erklärungen verdecken')),list);
+})();
+
+/* Übungen */
+(function(){
+ const root=$('#uebungen');
+ const mk=(nr,op,niv,aufg)=>{const s=el('section',{class:'ue'});s.append(el('h3',{},'Übung '+nr+' · '+op,el('span',{class:'niv'},'Niveau '+niv)),el('p',{html:fmt(aufg)}),vor(aufg));return s};
+
+ /* 1 Zuordnen */
+ let u=mk(1,'Ordne zu','D–E','Ordne jedem Begriff die passende Erklärung zu.');
+ const defs=shuffle(D.zuordnen.map(x=>x.d));const sels=[];
+ D.zuordnen.forEach((x,i)=>{reg('z'+i);const sel=el('select',{'aria-label':x.b},el('option',{value:''},'– wählen –'),defs.map(d=>el('option',{value:d},d)));sels.push(sel);
+  u.append(el('div',{class:'row'},el('b',{},x.b+':'),sel))});
+ let fb=el('span',{class:'fb'});
+ u.append(el('div',{class:'row'},el('button',{type:'button',onclick:()=>{let n=0;D.zuordnen.forEach((x,i)=>{const ok=sels[i].value===x.d;setRes('z'+i,ok);if(ok)n++;sels[i].style.outline=ok?'':'3px solid var(--bad)'});mark(fb,n===D.zuordnen.length,n+' von '+D.zuordnen.length+' richtig.')}},'Prüfen'),fb));
+ root.append(u);
+
+ /* 2 Lückentext */
+ u=mk(2,'Ergänze','E','Ergänze den Lückentext mit den Wörtern aus der Liste. Zwei Wörter passen nicht.');
+ const words=shuffle(D.lueckentext.woerter);const p=el('p');let gi=0;const gsels=[];
+ D.lueckentext.teile.forEach(t=>{if(typeof t==='string'){p.append(t)}else{const k='l'+gi++;reg(k);const sel=el('select',{class:'gap','aria-label':'Lücke '+gi},el('option',{value:''},'–'),words.map(w=>el('option',{value:w},w)));sel._a=t.g;sel._k=k;gsels.push(sel);p.append(sel)}});
+ fb=el('span',{class:'fb'});
+ u.append(el('div',{class:'hilfe',html:'<b>Wortspeicher:</b> '+words.map(fmt).join(' · ')}),p,
+  el('div',{class:'row'},el('button',{type:'button',onclick:()=>{let n=0;gsels.forEach(s=>{const ok=s.value===s._a;setRes(s._k,ok);if(ok)n++;s.style.outline=ok?'':'3px solid var(--bad)'});mark(fb,n===gsels.length,n+' von '+gsels.length+' Lücken richtig.')}},'Prüfen'),fb));
+ root.append(u);
+
+ /* 3 Reihenfolge */
+ u=mk(3,'Bringe in die richtige Reihenfolge','E–F','Bringe die Schritte in die richtige Reihenfolge. Nutze die Pfeil-Knöpfe.');
+ let order=shuffle(D.reihenfolge.map((t,i)=>i));if(order.every((v,i)=>v===i))order.reverse();
+ const box=el('div');fb=el('span',{class:'fb'});reg('r');
+ const draw=()=>{box.replaceChildren();order.forEach((v,pos)=>{const r=el('div',{class:'ro'});r.append(el('span',{},(pos+1)+'.'),el('span',{class:'t',html:fmt(D.reihenfolge[v])}),
+  el('button',{class:'sm',type:'button','aria-label':'nach oben',onclick:()=>{if(pos>0){[order[pos-1],order[pos]]=[order[pos],order[pos-1]];draw()}}},'↑'),
+  el('button',{class:'sm',type:'button','aria-label':'nach unten',onclick:()=>{if(pos<order.length-1){[order[pos+1],order[pos]]=[order[pos],order[pos+1]];draw()}}},'↓'));box.append(r)})};draw();
+ u.append(box,el('div',{class:'row'},el('button',{type:'button',onclick:()=>{const ok=order.every((v,i)=>v===i);setRes('r',ok);mark(fb,ok,ok?'':'Tipp: Zuerst entsteht der Strom, am Ende fährt das Auto.')}},'Prüfen'),fb));
+ root.append(u);
+
+ /* 4 Richtig/Falsch */
+ u=mk(4,'Entscheide','E–F','Entscheide bei jeder Aussage: richtig oder falsch? Lies danach die Erklärung.');
+ D.richtigfalsch.forEach((x,i)=>{reg('t'+i);const f=el('div',{class:'fb'});const e=el('div',{class:'note'});
+  const ans=v=>{const ok=v===x.a;setRes('t'+i,ok);mark(f,ok,'');e.textContent=x.e};
+  u.append(el('div',{class:'row'},el('span',{html:fmt(x.t),style:'flex:1 1 320px'}),el('button',{class:'sm',type:'button',onclick:()=>ans(true)},'richtig'),el('button',{class:'sm',type:'button',onclick:()=>ans(false)},'falsch'),f),e)});
+ root.append(u);
+
+ /* 5 Rechnen */
+ u=mk(5,'Berechne','F','Berechne. Trage nur die Zahl ein. Du darfst einen Taschenrechner nutzen.');
+ D.rechnen.forEach((x,i)=>{reg('c'+i);const inp=el('input',{type:'text',inputmode:'decimal','aria-label':'Ergebnis'});const f=el('span',{class:'fb'});const e=el('div',{class:'note'});
+  u.append(el('div',{class:'card'},el('p',{html:fmt(x.f)}),el('div',{class:'row'},inp,el('span',{},x.u),
+   el('button',{class:'sm',type:'button',onclick:()=>{const v=parseFloat(inp.value.replace(/\s/g,'').replace(',','.'));const ok=!isNaN(v)&&Math.abs(v-x.a)<=x.tol;setRes('c'+i,ok);mark(f,ok,'');e.textContent=ok?'':'Tipp: '+x.h}},'Prüfen'),
+   el('button',{class:'sm',type:'button',onclick:()=>{e.textContent='Rechenweg: '+x.h}},'Rechenweg zeigen'),f),e))});
+ root.append(u);
+
+ /* 6 Argumente */
+ u=mk(6,'Beurteile','F–G','Beurteile die Aussage: „'+D.argumente.aussage+'“. Entscheide bei jedem Argument: Spricht es dafür (Pro) oder dagegen (Contra)? Schreibe danach dein Urteil.');
+ D.argumente.items.forEach((x,i)=>{reg('a'+i);const f=el('span',{class:'fb'});const ans=v=>{const ok=v===x.s;setRes('a'+i,ok);mark(f,ok,'')};
+  u.append(el('div',{class:'row'},el('span',{html:fmt(x.t),style:'flex:1 1 320px'}),el('button',{class:'sm',type:'button',onclick:()=>ans('pro')},'Pro'),el('button',{class:'sm',type:'button',onclick:()=>ans('contra')},'Contra'),f))});
+ u.append(el('div',{class:'hilfe',html:'<b>Satzbausteine:</b> „Ein Argument dafür ist …“ · „Ein Argument dagegen ist …“ · „Ich meine, der Staat sollte E-Fuels vor allem für … fördern, weil …“'}),
+  el('textarea',{'aria-label':'Dein Urteil',placeholder:'Schreibe 3 bis 4 Sätze …'}),
+  el('p',{class:'note'},'Dieses Textfeld wird nicht bewertet und nicht gespeichert.'));
+ root.append(u);
+})();
+
+/* Meldungen */
+(function(){
+ const root=$('#meldungen');
+ root.append(el('h2',{},'Aktuelle Meldungen'),el('p',{class:'note'},'Lies die Meldung. Bearbeite den Auftrag in deinem Heft. Beantworte danach die Frage.'));
+ D.meldungen.forEach((m,i)=>{reg('m'+i);
+  const c=el('article',{class:'card news'});
+  c.append(el('h3',{},m.titel),el('div',{class:'meta'},m.datum+' · '+m.quelle+' · '),
+   el('p',{html:fmt(m.text)}));
+  c.querySelector('.meta').append(el('a',{href:m.url,target:'_blank',rel:'noopener'},'zur Quelle'));
+  c.append(el('div',{class:'hilfe',html:'<b>Auftrag:</b> '+fmt(m.auftrag)}),vor(m.titel+'. '+m.text));
+  c.append(el('p',{},el('b',{},m.q)));
+  const f=el('span',{class:'fb'});const name='mq'+i;
+  m.o.forEach((o,j)=>{const inp=el('input',{type:'radio',name:name,value:j});c.append(el('label',{class:'opt'},inp,' '+o))});
+  c.append(el('div',{class:'row'},el('button',{class:'sm',type:'button',onclick:()=>{const s=c.querySelector('input[name='+name+']:checked');if(!s){f.className='fb bad';f.textContent='Bitte wähle eine Antwort.';return}const ok=+s.value===m.a;setRes('m'+i,ok);mark(f,ok,'')}},'Prüfen'),f));
+  root.append(c)});
+})();
+updateScore();
+</script>
+</body>
+</html>

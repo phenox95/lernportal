@@ -1,0 +1,88 @@
+{
+ "stand": "12.11.2026",
+ "begriffe": [
+  {"b":"E-Fuel","s":"E-Fuel","d":"Ein Kraftstoff, der mit Strom, Wasser und CO2 hergestellt wird. Es gibt E-Benzin, E-Diesel und E-Kerosin.","x":"Man tankt ihn wie Benzin."},
+  {"b":"Power-to-Liquid (PtL)","s":"Po-wer-to-Li-quid","d":"Englisch für „Strom zu Flüssigkeit“. So heißt das Verfahren, mit dem E-Fuels entstehen.","x":"Strom wird in einen flüssigen Kraftstoff umgewandelt."},
+  {"b":"Elektrolyse","s":"E-lek-tro-ly-se","d":"Strom spaltet Wasser (H2O) in Wasserstoff (H2) und Sauerstoff (O2).","x":"Erster Schritt bei der Herstellung von E-Fuels."},
+  {"b":"Wasserstoff","s":"Was-ser-stoff","d":"Ein sehr leichtes Gas. Es ist ein Energieträger. Man muss es erst mit Strom herstellen.","x":"Chemisches Zeichen: H2."},
+  {"b":"Synthese","s":"Syn-the-se","d":"Eine chemische Herstellung. Hier entsteht aus Wasserstoff und CO2 ein flüssiger Kraftstoff.","x":"Zweiter Schritt bei der Herstellung von E-Fuels."},
+  {"b":"CO2 aus der Luft (Direct Air Capture)","s":"Di-rect Air Cap-ture","d":"Spezielle Anlagen filtern CO2 aus der Luft. Man kann das CO2 für E-Fuels nutzen. CO2 aus Abgasen der Industrie ist auch möglich.","x":"Das CO2 ist der Kohlenstoff-Baustein im E-Fuel."},
+  {"b":"klimaneutral","s":"kli-ma-neu-tral","d":"Am Ende kommt nicht mehr CO2 in die Luft, als vorher entnommen wurde.","x":"E-Fuels sind nur klimaneutral, wenn der Strom aus Wind oder Sonne kommt."},
+  {"b":"Wirkungsgrad","s":"Wir-kungs-grad","d":"Er zeigt, wie viel der eingesetzten Energie nutzbar ankommt.","x":"75 von 100 kWh kommen an: Der Wirkungsgrad ist 75 %."},
+  {"b":"Kilowattstunde (kWh)","s":"Ki-lo-watt-stun-de","d":"Eine Einheit für Energie. Ein Batterie-Auto braucht etwa 18 kWh für 100 km.","x":"Ein Windrad liefert viele kWh pro Jahr."},
+  {"b":"Energieträger","s":"E-ner-gie-trä-ger","d":"Ein Stoff, in dem Energie gespeichert ist, zum Beispiel Benzin, Wasserstoff oder E-Fuel. Er muss erst hergestellt werden.","x":"Gegenstück: Energiequelle (Wind, Sonne). Sie kommt direkt aus der Natur."},
+  {"b":"Brennstoffzelle","s":"Brenn-stoff-zel-le","d":"Sie macht aus Wasserstoff Strom für einen Elektromotor. Dabei geht viel Energie verloren.","x":"Wird im Wasserstoff-Auto genutzt."},
+  {"b":"Wärmepumpe","s":"Wär-me-pum-pe","d":"Sie holt Wärme aus Luft oder Boden und braucht dafür Strom. Aus 1 kWh Strom macht sie etwa 3 kWh Wärme.","x":"Beim Heizen oft effizienter als Wasserstoff."},
+  {"b":"Flottengrenzwert","s":"Flot-ten-grenz-wert","d":"Das CO2-Limit für alle neuen Autos eines Herstellers im Durchschnitt.","x":"Ein Hersteller muss im Durchschnitt unter dem Wert bleiben."},
+  {"b":"Verbrenner-Aus","s":"Ver-bren-ner-Aus","d":"Umgangssprache für die EU-Regel für neue Pkw ab 2035 (CO2-Ziel). Die Regel wird gerade diskutiert und könnte gelockert werden. Bestehende Autos dürfen weiterfahren.","x":"Der Name sagt „Aus“, rechtlich ist es ein CO2-Ziel für neue Autos."}
+ ],
+ "zuordnen": [
+  {"b":"Elektrolyse","d":"Strom spaltet Wasser in Wasserstoff und Sauerstoff."},
+  {"b":"Synthese","d":"Aus Wasserstoff und CO2 entsteht ein flüssiger Kraftstoff."},
+  {"b":"Wirkungsgrad","d":"Anteil der Energie, der nutzbar ankommt."},
+  {"b":"Kilowattstunde","d":"Einheit für Energie."},
+  {"b":"E-Fuel","d":"Kraftstoff, der mit Strom, Wasser und CO2 hergestellt wird."},
+  {"b":"klimaneutral","d":"Nicht mehr CO2 in der Luft als vorher entnommen."}
+ ],
+ "lueckentext": {
+  "teile": [
+   "Ein Windrad erzeugt ", {"g":"Strom"}, ". Bei der ", {"g":"Elektrolyse"}, " spaltet der Strom ", {"g":"Wasser"}, " in Wasserstoff und Sauerstoff. Das ", {"g":"CO2"}, " kommt aus der Luft. Bei der ", {"g":"Synthese"}, " entsteht aus Wasserstoff und CO2 ein flüssiger ", {"g":"Kraftstoff"}, ". E-Fuels sind nur dann klimaneutral, wenn der Strom aus Wind oder Sonne kommt."
+  ],
+  "woerter": ["Strom","Elektrolyse","Wasser","CO2","Synthese","Kraftstoff","Erdöl","Verbrenner"]
+ },
+ "reihenfolge": [
+  "Ein Windrad erzeugt Strom.",
+  "Die Elektrolyse spaltet Wasser in Wasserstoff und Sauerstoff.",
+  "Wasserstoff und CO2 werden zu flüssigem Kraftstoff verbunden (Synthese).",
+  "Der E-Fuel kommt an die Tankstelle.",
+  "Der Verbrennungsmotor verbrennt den E-Fuel."
+ ],
+ "richtigfalsch": [
+  {"t":"E-Fuels werden aus Pflanzen gemacht.","a":false,"e":"Falsch. E-Fuels werden aus Strom, Wasser und CO2 gemacht. Pflanzen brauchen nur Biokraftstoffe."},
+  {"t":"Beim Batterie-Auto kommen von 100 kWh Windstrom etwa 75 kWh am Rad an.","a":true,"e":"Richtig. Der Wirkungsgrad liegt bei etwa 75 % (Umweltbundesamt, gerundet)."},
+  {"t":"Ein E-Fuel-Auto braucht bis zu fünfmal so viel Strom wie ein Batterie-Auto.","a":true,"e":"Richtig. Das nennt das Öko-Institut. Der Grund sind die vielen Umwandlungsschritte."},
+  {"t":"E-Fuels sind immer klimaneutral.","a":false,"e":"Falsch. Nur mit Strom aus Wind oder Sonne und CO2 aus der Luft."},
+  {"t":"Für Flugzeuge und Schiffe gelten E-Fuels als wichtige Möglichkeit.","a":true,"e":"Richtig. Batterien oder Wasserstofftanks brauchen dort zu viel Platz (laut ADAC)."},
+  {"t":"Der Elektromotor im Batterie-Auto verliert gar keine Energie.","a":false,"e":"Falsch. Auch der Motor und das Laden verlieren Energie. Es sind aber weniger Schritte als bei E-Fuels."}
+ ],
+ "rechnen": [
+  {"f":"Ein Batterie-Auto braucht 18 kWh für 100 km. Berechne den Strom für 15 000 km (= 150 × 100 km).","u":"kWh","a":2700,"tol":1,"h":"150 × 18 = 2 700 kWh"},
+  {"f":"Ein E-Fuel-Auto braucht bis zu 90 kWh für 100 km. Berechne den Strom für 15 000 km.","u":"kWh","a":13500,"tol":1,"h":"150 × 90 = 13 500 kWh"},
+  {"f":"Beim Batterie-Auto kommen von 100 kWh nur 75 kWh am Rad an. Berechne, wie viel Prozent verloren gehen.","u":"%","a":25,"tol":0.1,"h":"100 − 75 = 25 kWh, also 25 %"},
+  {"f":"Aus 100 kWh Strom macht eine Wärmepumpe etwa 300 kWh Wärme. Berechne, wie viel Wärme aus 1 kWh Strom entsteht.","u":"kWh","a":3,"tol":0.01,"h":"300 : 100 = 3 kWh"},
+  {"f":"Die E-Fuel-Anlage in Frankfurt-Höchst stellt 2 500 Tonnen im Jahr her. Der Flughafen Frankfurt braucht laut ADAC (Fraport) etwa 15 000 Tonnen Kerosin pro Tag. Berechne, für wie viele Stunden die Jahresproduktion reicht.","u":"Stunden","a":4,"tol":0.2,"h":"2 500 : 15 000 = 0,17 Tage; 0,17 × 24 ≈ 4 Stunden"}
+ ],
+ "argumente": {
+  "aussage": "Der Staat sollte E-Fuels fördern.",
+  "items": [
+   {"t":"E-Fuels passen in vorhandene Autos und an vorhandene Tankstellen.","s":"pro"},
+   {"t":"Für Flugzeuge und Schiffe gibt es kaum andere klimafreundliche Möglichkeiten.","s":"pro"},
+   {"t":"Ein E-Fuel-Auto braucht bis zu fünfmal so viel Strom wie ein Batterie-Auto.","s":"contra"},
+   {"t":"E-Fuels kosten in der Herstellung bisher etwa 5 Euro pro Liter (AutoColumn, Juni 2026).","s":"contra"},
+   {"t":"Die Anlagen in Europa sind noch sehr klein. Die Menge reicht bei Weitem nicht aus.","s":"contra"},
+   {"t":"Bestehende Benziner und Diesel könnten nach und nach klimaneutraler fahren.","s":"pro"}
+  ]
+ },
+ "meldungen": [
+  {"datum":"11.11.2026","quelle":"AUTO BILD","url":"https://www.autobild.de/artikel/eu-parlament-lockert-verbrenner-aus-2035---co2-ziele-gesenkt-44e5e1d-28889465.html",
+   "titel":"EU-Umweltausschuss will das Verbrenner-Aus lockern",
+   "text":"Der Umweltausschuss des EU-Parlaments hat mit 48 zu 30 Stimmen (2 Enthaltungen) dafür gestimmt, das Ziel für neue Pkw ab 2035 zu senken: nur noch 87,5 % weniger CO2 gegenüber 2021 statt 100 %. Mit CO2-armem Stahl aus der EU können weitere 7,5 Punkte angerechnet werden. Autos, die nur mit bestimmten erneuerbaren Kraftstoffen (zum Beispiel E-Fuels) fahren, sollen als emissionsfrei gelten. Das Plenum soll im Dezember abstimmen. Danach folgen Verhandlungen mit den Mitgliedstaaten.",
+   "auftrag":"Erkläre, warum diese Meldung für die Frage „Retten E-Fuels den Verbrenner?“ wichtig ist.",
+   "q":"Was ist der Stand der Abstimmung?","o":["Das Gesetz ist schon in Kraft.","Der Umweltausschuss hat zugestimmt. Das Plenum entscheidet im Dezember.","Das Verbrenner-Aus ist endgültig abgeschafft."],"a":1},
+  {"datum":"18.06.2026 (Stand der Seite)","quelle":"AutoColumn","url":"https://www.autocolumn.com/e-auto-nachrichten/verbrennerverbot-2035-was-gilt-eu-verbrenner-aus/",
+   "titel":"Verbrenner-Aus: Was gilt aktuell?",
+   "text":"Rechtlich gilt weiter die Regel von 2023: ab 2035 sollen neue Pkw 100 % weniger CO2 ausstoßen (gegenüber 2021). Die EU-Kommission hat im Dezember 2025 vorgeschlagen, das Ziel auf 90 % zu senken. Der Rest soll zum Beispiel über grünen Stahl oder E-Fuels ausgeglichen werden. Bestehende Verbrenner dürfen weitergefahren werden. Die Herstellung von E-Fuels kostet laut Artikel etwa 5 Euro pro Liter. Der Artikel ist älter als die Meldung vom 11.11.2026.",
+   "auftrag":"Vergleiche den Vorschlag der EU-Kommission (90 %) mit dem Vorschlag des Umweltausschusses (87,5 %).",
+   "q":"Welche Zahl hat die EU-Kommission im Dezember 2025 vorgeschlagen?","o":["100 %","90 %","50 %"],"a":1},
+  {"datum":"11.11.2025","quelle":"ADAC","url":"https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/alternative-antriebe/synthetische-kraftstoffe/",
+   "titel":"E-Fuels: Wo gibt es schon Anlagen?",
+   "text":"Die größte Anlage für E-Fuels in Europa steht laut ADAC in Frankfurt-Höchst (Ineratec, Start im Juni 2025, 2 500 Tonnen pro Jahr). Die Menge reicht bei Weitem nicht aus: Der Frankfurter Flughafen braucht nach Fraport-Angaben rund 15 000 Tonnen Kerosin pro Tag. Die Pläne für die Anlage Haru Oni in Chile sind verzögert. Als sinnvoll gelten E-Fuels laut ADAC vor allem für Flugzeuge und Schiffe.",
+   "auftrag":"Beschreibe, warum E-Fuels heute noch nicht in großen Mengen verfügbar sind.",
+   "q":"Wie viel E-Fuel stellt die Anlage in Frankfurt-Höchst pro Jahr her?","o":["25 Tonnen","2 500 Tonnen","250 000 Tonnen"],"a":1},
+  {"datum":"15.01.2026","quelle":"electrive","url":"https://www.electrive.net/2026/01/15/nur-noch-rund-50-oeffentliche-wasserstoff-tankstellen-in-deutschland/",
+   "titel":"Nur noch rund 50 öffentliche Wasserstoff-Tankstellen in Deutschland",
+   "text":"In Deutschland gibt es nur noch rund 50 öffentliche Wasserstoff-Tankstellen. Eine frühere Meldung von electrive (03.03.2025) berichtet, dass H2 Mobility 22 Wasserstoff-Tankstellen schließt.",
+   "auftrag":"Erkläre, warum Wasserstoff-Autos es schwer haben.",
+   "q":"Was bedeutet die geringe Zahl an Tankstellen für Wasserstoff-Pkw?","o":["Sie können fast nirgends tanken. Das macht sie unpraktisch.","Sie können bald überall tanken.","Sie brauchen keine Tankstellen."],"a":0}
+ ]
+}
