@@ -274,6 +274,30 @@ for i, n in enumerate(nach.get("eintraege", [])):
     if not n.get("bne") and not n.get("woche"):
         wrn(f"{nn}: weder bne noch woche, wird nirgends angezeigt")
 
+# App und Offline-Speicher: manifest.json, Symbole, Start-Dateien in sw.js, nav.js auf Portalseiten
+man = laden("manifest.json") or {}
+for ic in man.get("icons", []):
+    if not (ROOT / str(ic.get("src", ""))).is_file():
+        err(f"manifest.json: Symbol „{ic.get('src')}“ fehlt")
+for k in ("name", "short_name", "start_url", "display"):
+    if not man.get(k):
+        err(f"manifest.json: Feld {k} fehlt")
+sw = ROOT / "sw.js"
+if not sw.is_file():
+    err("sw.js fehlt (Offline-Speicher)")
+else:
+    m = re.search(r"const START = \[(.*?)\];", sw.read_text(encoding="utf-8"), re.S)
+    for d in re.findall(r'"([^"]+)"', m.group(1)) if m else []:
+        if d != "./" and not (ROOT / d).is_file():
+            err(f"sw.js: Start-Datei „{d}“ fehlt")
+for d in ("offline.html", "404.html"):
+    if not (ROOT / d).is_file():
+        err(f"{d} fehlt")
+for seite in sorted(ROOT.glob("*/index.html")) + [ROOT / "index.html"]:
+    t = seite.read_text(encoding="utf-8", errors="ignore")
+    if 'class="top-nav"' in t and "assets/js/nav.js" not in t:
+        err(f"{seite.relative_to(ROOT)}: Portalseite ohne assets/js/nav.js (keine Navigation auf dem Handy)")
+
 for m in warn:
     print("WARNUNG ", m)
 for m in fehler:

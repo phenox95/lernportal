@@ -8,9 +8,11 @@
   <link rel="icon" href="assets/favicon/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon/favicon.ico" sizes="48x48">
   <link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
   <title>Lernportal – Biologie und Geografie</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <script src="assets/js/prefs.js"></script>
+  <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/app.js" defer></script>
 </head>
 <body data-page="home" data-root="">
@@ -24,6 +26,7 @@
         <a href="begriffe/">Begriffe</a>
         <a href="bne/">Nachhaltigkeit</a>
         <a href="nachrichten/">Nachrichten</a>
+        <a href="hilfe/">Hilfe</a>
       </nav>
       <div class="header-tools" id="prefs-slot"></div>
     </div>
@@ -44,6 +47,8 @@
     </section>
 
     <div class="wrap">
+      <section class="section" id="zuletzt" hidden></section>
+
       <section class="section" aria-labelledby="h-fach">
         <h2 class="sr-only" id="h-fach">Fachbereiche</h2>
         <div class="fach-grid">
@@ -60,9 +65,6 @@
         </div>
       </section>
 
-      <section class="section" id="impuls" hidden aria-live="polite"></section>
-      <section class="section" id="home-aktuell" hidden></section>
-
       <section class="section" aria-labelledby="h-klasse">
         <h2 id="h-klasse">Nach Klassenstufe</h2>
         <div class="group">
@@ -72,6 +74,10 @@
           <a class="row" href="alle/?klasse=10" data-grade="10"><span class="numeral">10</span><span class="row-main"><span class="row-meta" data-count>Klasse 10</span></span><span class="row-chev" data-icon="chevron" data-size="20"></span></a>
         </div>
       </section>
+
+      <section class="section" id="impuls" hidden aria-live="polite"></section>
+      <section class="section" id="home-aktuell" hidden></section>
+
       <section class="section" aria-labelledby="h-quer">
         <h2 id="h-quer">Fächerübergreifend</h2>
         <div class="group">
@@ -84,7 +90,7 @@
   <div class="wrap">
     <footer class="site-footer">
       <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
-      <span class="footer-links"><a href="impressum/">Impressum</a><a href="datenschutz/">Datenschutz</a></span>
+      <span class="footer-links"><a href="hilfe/">Hilfe</a><a href="impressum/">Impressum</a><a href="datenschutz/">Datenschutz</a></span>
     </footer>
   </div>
 </body>

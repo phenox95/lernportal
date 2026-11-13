@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex">
+  <title>Kein Internet – Lernportal</title>
+  <style>
+    /* Diese Seite steht für beliebige Adressen ein. Deshalb ist alles eingebettet, es wird keine weitere Datei geladen. Werte wie in assets/css/styles.css. */
+    :root { color-scheme: light dark; --bg: #f7f7f4; --surface: #ffffff; --text: #252a27; --text-2: #5f6862; --line: #e1e2dc; --rahmen: #7d837e; --focus: #0a6fe0; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #121513; --surface: #1a1e1b; --text: #f0f2ee; --text-2: #a6ada7; --line: #2c312d; --rahmen: #7f867f; --focus: #4da3ff; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif; font-size: 1rem; line-height: 1.5; }
+    main { width: 100%; max-width: 30rem; }
+    .marke { margin: 0 0 1.5rem; font-weight: 700; letter-spacing: -0.02em; }
+    h1 { margin: 0 0 0.75rem; font-size: 2rem; line-height: 1.15; letter-spacing: -0.03em; }
+    p { margin: 0 0 1rem; color: var(--text-2); font-size: 1.0625rem; }
+    .knoepfe { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+    .knopf { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: 0 1.1rem; border: 1px solid var(--rahmen); border-radius: 0.75rem;
+      background: var(--surface); color: var(--text); font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; }
+    .knopf.voll { border-color: var(--text); background: var(--text); color: var(--bg); }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="marke">Lernportal</p>
+    <h1>Kein Internet</h1>
+    <p>Diese Seite ist auf diesem Gerät noch nicht gespeichert.</p>
+    <p>Seiten, die du schon einmal geöffnet hast, gehen auch ohne Internet.</p>
+    <div class="knoepfe">
+      <button class="knopf voll" type="button" id="neu">Neu laden</button>
+      <a class="knopf" id="start" href="./">Zur Startseite</a>
+    </div>
+  </main>
+  <script>
+    /* Stamm des Portals aus der Adresse von sw.js ableiten, weil diese Seite für jede Adresse einstehen kann */
+    (function () {
+      document.getElementById("neu").addEventListener("click", function () { location.reload(); });
+      try {
+        var sw = navigator.serviceWorker && navigator.serviceWorker.controller;
+        if (sw) document.getElementById("start").href = sw.scriptURL.replace(/sw\.js(\?.*)?$/, "");
+      } catch (e) { /* Link bleibt relativ */ }
+      window.addEventListener("online", function () { location.reload(); });
+    })();
+  </script>
+</body>
+</html>
