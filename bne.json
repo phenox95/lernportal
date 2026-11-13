@@ -1,107 +1,124 @@
 {
-  "quelle": "Ziele für nachhaltige Entwicklung (SDG) der Vereinten Nationen, Agenda 2030. Bezug im RLP: übergreifendes Thema „Nachhaltige Entwicklung/Lernen in globalen Zusammenhängen“ (Teil B). Die Zuordnung der Ziele zu Materialien trägt die Lehrkraft in projects.json ein (Feld bne). Die Kurztitel und Leitfragen sind redaktionelle, schülergerechte Kurzfassungen.",
+  "quelle": "Ziele für nachhaltige Entwicklung (SDG) der Vereinten Nationen, Agenda 2030. Bezug im RLP: übergreifendes Thema „Nachhaltige Entwicklung/Lernen in globalen Zusammenhängen“ (Teil B). Die Zuordnung der Ziele zu Materialien trägt die Lehrkraft in projects.json ein (Feld bne). Die Kurztitel, Leitfragen und Bedeutungen („bedeutung“, steht auf der Zielseite) sind redaktionelle, schülergerechte Kurzfassungen.",
   "ziele": [
     {
       "nr": 1,
       "titel": "Keine Armut",
       "kurz": "Armut",
-      "frage": "Warum leben Menschen in Armut?"
+      "frage": "Warum leben Menschen in Armut?",
+      "bedeutung": "Alle Menschen sollen genug zum Leben haben: Essen, ein Dach über dem Kopf, Kleidung und Schutz. Armut soll überall enden."
     },
     {
       "nr": 2,
       "titel": "Kein Hunger",
       "kurz": "Hunger",
-      "frage": "Warum hungern Menschen trotz ausreichender Nahrung?"
+      "frage": "Warum hungern Menschen trotz ausreichender Nahrung?",
+      "bedeutung": "Niemand soll hungern. Alle sollen sich gesund ernähren können. Dazu gehört eine Landwirtschaft, die den Boden nicht kaputt macht."
     },
     {
       "nr": 3,
       "titel": "Gesundheit und Wohlergehen",
       "kurz": "Gesundheit",
-      "frage": "Was brauchen Menschen für ein gesundes Leben?"
+      "frage": "Was brauchen Menschen für ein gesundes Leben?",
+      "bedeutung": "Alle Menschen sollen gesund leben und medizinische Hilfe bekommen, auch Impfungen. Das gilt für Kinder und Erwachsene."
     },
     {
       "nr": 4,
       "titel": "Hochwertige Bildung",
       "kurz": "Bildung",
-      "frage": "Warum haben nicht alle Zugang zu Bildung?"
+      "frage": "Warum haben nicht alle Zugang zu Bildung?",
+      "bedeutung": "Alle Kinder und Jugendlichen sollen gut lernen können. Schule und Ausbildung sollen für alle offen sein und etwas bringen."
     },
     {
       "nr": 5,
       "titel": "Geschlechtergleichheit",
       "kurz": "Geschlechtergleichheit",
-      "frage": "Haben alle Geschlechter die gleichen Chancen?"
+      "frage": "Haben alle Geschlechter die gleichen Chancen?",
+      "bedeutung": "Alle Geschlechter sollen die gleichen Rechte und Chancen haben. Niemand soll wegen des Geschlechts benachteiligt werden oder Gewalt erleben."
     },
     {
       "nr": 6,
       "titel": "Sauberes Wasser und Sanitäreinrichtungen",
       "kurz": "Wasser",
-      "frage": "Warum fehlt Menschen sauberes Wasser?"
+      "frage": "Warum fehlt Menschen sauberes Wasser?",
+      "bedeutung": "Alle Menschen sollen sauberes Trinkwasser und Toiletten haben. Wasser soll gerecht genutzt und nicht verschmutzt werden."
     },
     {
       "nr": 7,
       "titel": "Bezahlbare und saubere Energie",
       "kurz": "Energie",
-      "frage": "Wie können alle Menschen Zugang zu Energie erhalten?"
+      "frage": "Wie können alle Menschen Zugang zu Energie erhalten?",
+      "bedeutung": "Strom und Wärme sollen für alle bezahlbar sein. Sie sollen immer mehr aus erneuerbaren Quellen wie Sonne, Wind und Wasser kommen."
     },
     {
       "nr": 8,
       "titel": "Menschenwürdige Arbeit und Wirtschaftswachstum",
       "kurz": "Arbeit und Wirtschaft",
-      "frage": "Wie sieht faire und menschenwürdige Arbeit aus?"
+      "frage": "Wie sieht faire und menschenwürdige Arbeit aus?",
+      "bedeutung": "Alle sollen von ihrer Arbeit leben können, mit fairen und sicheren Bedingungen. Die Wirtschaft soll wachsen, ohne Menschen und Umwelt zu schaden."
     },
     {
       "nr": 9,
       "titel": "Industrie, Innovation und Infrastruktur",
       "kurz": "Industrie und Infrastruktur",
-      "frage": "Was braucht eine nachhaltige Wirtschaft?"
+      "frage": "Was braucht eine nachhaltige Wirtschaft?",
+      "bedeutung": "Straßen, Netze und Fabriken sollen lange nützen und die Umwelt schonen. Neue Ideen sollen dabei helfen."
     },
     {
       "nr": 10,
       "titel": "Weniger Ungleichheiten",
       "kurz": "Ungleichheiten",
-      "frage": "Warum sind Chancen ungleich verteilt?"
+      "frage": "Warum sind Chancen ungleich verteilt?",
+      "bedeutung": "Der Abstand zwischen Arm und Reich soll kleiner werden, in einem Land und zwischen Ländern. Alle sollen mitentscheiden können."
     },
     {
       "nr": 11,
       "titel": "Nachhaltige Städte und Gemeinden",
       "kurz": "Städte und Gemeinden",
-      "frage": "Wie sieht eine nachhaltige Stadt aus?"
+      "frage": "Wie sieht eine nachhaltige Stadt aus?",
+      "bedeutung": "Städte sollen sicher sein und bezahlbare Wohnungen, gute Verkehrsmittel und Grünflächen haben. Sie sollen weniger Müll und Abgase erzeugen."
     },
     {
       "nr": 12,
       "titel": "Nachhaltiger Konsum und Produktion",
       "kurz": "Konsum und Produktion",
-      "frage": "Wie können wir nachhaltig produzieren und konsumieren?"
+      "frage": "Wie können wir nachhaltig produzieren und konsumieren?",
+      "bedeutung": "Wir sollen Dinge so herstellen und verbrauchen, dass Rohstoffe reichen und wenig Müll entsteht. Das betrifft Firmen und jeden Einkauf."
     },
     {
       "nr": 13,
       "titel": "Maßnahmen zum Klimaschutz",
       "kurz": "Klimaschutz",
-      "frage": "Wie können wir den Klimawandel begrenzen?"
+      "frage": "Wie können wir den Klimawandel begrenzen?",
+      "bedeutung": "Der Klimawandel soll begrenzt werden, vor allem durch weniger Treibhausgase. Länder sollen sich auch auf Folgen wie Hitze und Hochwasser vorbereiten."
     },
     {
       "nr": 14,
       "titel": "Leben unter Wasser",
       "kurz": "Leben unter Wasser",
-      "frage": "Wie können wir Meere schützen?"
+      "frage": "Wie können wir Meere schützen?",
+      "bedeutung": "Meere und ihre Lebewesen sollen geschützt werden. Dazu gehören weniger Müll und Verschmutzung und eine Fischerei, die die Bestände nicht leert."
     },
     {
       "nr": 15,
       "titel": "Leben an Land",
       "kurz": "Leben an Land",
-      "frage": "Wie können wir die Natur an Land schützen?"
+      "frage": "Wie können wir die Natur an Land schützen?",
+      "bedeutung": "Wälder, Böden und Tierarten an Land sollen geschützt werden. Der Verlust von Arten und Lebensräumen soll gestoppt werden."
     },
     {
       "nr": 16,
       "titel": "Frieden, Gerechtigkeit und starke Institutionen",
       "kurz": "Frieden und Gerechtigkeit",
-      "frage": "Was brauchen Menschen für ein friedliches Zusammenleben?"
+      "frage": "Was brauchen Menschen für ein friedliches Zusammenleben?",
+      "bedeutung": "Menschen sollen ohne Gewalt zusammenleben. Alle sollen zu ihrem Recht kommen, und Behörden sollen ehrlich und fair arbeiten."
     },
     {
       "nr": 17,
       "titel": "Partnerschaften zur Erreichung der Ziele",
       "kurz": "Partnerschaften",
-      "frage": "Wie können Länder globale Probleme gemeinsam lösen?"
+      "frage": "Wie können Länder globale Probleme gemeinsam lösen?",
+      "bedeutung": "Staaten, Firmen und Organisationen sollen zusammenarbeiten, damit die Ziele erreicht werden. Reiche Länder sollen ärmere dabei unterstützen."
     }
   ]
 }
