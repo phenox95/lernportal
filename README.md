@@ -12,6 +12,10 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `alle/` | Alle Materialien mit zusätzlichem Fachfilter. Das Register der Startseite verlinkt hierher (`alle/?klasse=8`) |
 | `begriffe/` | Begriffe nachschlagen und üben, je Themenfeld (`begriffe/?fach=Biologie&nr=3.1`), verlinkt auf der Themenfeld-Seite. Liest die Spielinhalte der Präsentationen (`lp-spiel-daten`) und zeigt nur Blöcke mit `"geprueft": true`. Skript `assets/js/begriffe.js`, lädt bewusst kein `app.js`. Siehe [docs/praesentationen.md](docs/praesentationen.md) |
 | `impressum/`, `datenschutz/` | Rechtstexte, in der Fußzeile aller Seiten verlinkt. Laden bewusst kein `app.js`. **Platzhalter in eckigen Klammern vor der Veröffentlichung ausfüllen** |
+| `hilfe/` | Hilfeseite für Schülerinnen, Schüler und Lehrkräfte (Material finden, Lesemodus, als App nutzen, ohne Internet, Präsentation bedienen). Statischer Text, lädt kein `app.js` |
+| `assets/js/nav.js` | Navigation aller Portalseiten aus **einer** Liste (`SEITEN`): Kopfleiste im breiten Fenster, Leiste am unteren Rand auf dem Handy. Jede Portalseite bindet die Datei mit `defer` ein |
+| `manifest.json`, `sw.js`, `offline.html` | Portal als App (Symbol auf dem Startbildschirm) und Offline-Speicher: einmal geöffnete Seiten gehen ohne Internet. Angemeldet wird beides in `assets/js/prefs.js`. Siehe [docs/betrieb.md](docs/betrieb.md) |
+| `404.html` | Seite für unbekannte Adressen (GitHub Pages zeigt sie von selbst), mit Weg zur Startseite |
 | `projects.json` | Metadaten aller Materialien |
 | `impuls.json` | Impuls der Woche (optional) |
 | `woche/`, `nachrichten.json` | Seite „Thema der Woche“ (Foto, Erklärung, Material, aktuelle Meldungen, frühere Themen) und die Liste ausgewählter aktueller Meldungen nach Fach und Nachhaltigkeitsziel |
@@ -47,6 +51,6 @@ Das Skript prüft `projects.json` und `themenfelder.json`: Pflichtfelder, Format
 | Neues Material anlegen, Felder in `projects.json`, Materialseiten, Impuls der Woche, Themenfelder | [docs/inhalte-ergaenzen.md](docs/inhalte-ergaenzen.md) |
 | Präsentationen: Grundaufbau, Stift, Timer, Lärmampel, Leseansicht (Nachlesen auf dem Handy), Fragenfeld, Belohnungsspiele, Begriffe-Seite | [docs/praesentationen.md](docs/praesentationen.md) |
 | Gestaltung, Favicon, Themenbilder, Lesemodus | [docs/gestaltung.md](docs/gestaltung.md) |
-| GitHub Pages, Rechtstexte, eigene Domain | [docs/betrieb.md](docs/betrieb.md) |
+| GitHub Pages, Rechtstexte, eigene Domain, App und Offline-Speicher | [docs/betrieb.md](docs/betrieb.md) |
 
 **Wichtig:** Alles im Repository ist öffentlich. Nie hochladen: Erwartungshorizonte, Lehrkrafthinweise, Klassenarbeiten, Lösungen. Mehr dazu in [docs/inhalte-ergaenzen.md](docs/inhalte-ergaenzen.md).

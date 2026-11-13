@@ -30,6 +30,16 @@ Statt nur Typografie kann rechts neben dem Titel ein Themenbild stehen. Das Bild
 
 Die Fachseiten zeigen Fotos (`assets/img/fach/biologie.webp`, `geografie.webp`), der Impuls der Woche ein Foto (`assets/img/impuls/blatt.webp`). Zum Ersetzen: Datei gleichen Namens überschreiben, Alternativtext und Bildunterschrift im HTML bzw. `bildAlt` und `bildQuelle` in `impuls.json` anpassen. **Vor der Veröffentlichung** müssen in den Bildunterschriften Urheber und Lizenz stehen (derzeit steht dort „Quelle und Lizenz ergänzen").
 
+## Navigation
+
+Die Navigation aller Portalseiten kommt aus `assets/js/nav.js` (Liste `SEITEN`). Ein neuer Bereich wird nur dort eingetragen. Die Links im HTML (`<nav class="top-nav">`) sind der Rückfall ohne JavaScript.
+
+- **Breites Fenster (ab 46rem):** Kopfleiste mit Biologie, Geografie, Alle Materialien und „Mehr“ (Begriffe, Nachhaltigkeit, Nachrichten, Hilfe).
+- **Handy:** feste Leiste am unteren Rand mit Start, Biologie, Geografie, Alle und „Mehr“. „Mehr“ öffnet ein Blatt mit den übrigen Bereichen (Escape oder Tipp daneben schließt). Der aktive Bereich ist fett und hat eine getönte Marke hinter dem Symbol, also nicht nur Farbe. Flache Fläche mit Linie, kein Glas. Die Leiste beachtet den sicheren Bereich des Geräts (`env(safe-area-inset-bottom)`).
+- Materialseiten und Präsentationen haben diese Leiste bewusst nicht. Dort führt „Zurück zum Portal“ aus dem Material heraus.
+
+**Startseite:** Suche, „Zuletzt geöffnet“ (nur wenn vorhanden), Fächer, Klassenstufen, Impuls der Woche, Aktuell, Fächerübergreifend. Die Wege zum Material stehen vor Impuls und Meldungen.
+
 ## Lesemodus
 
 Das Symbol „Aa" in der Kopfleiste (Portal und Materialseiten) öffnet die Einstellungen: Schriftgröße (3 Stufen), Zeilenabstand und Darstellung (Auto, Hell, Dunkel). Gespeichert wird nur im Browser (`localStorage`), ohne Konto und ohne Übertragung. Die Einstellung gilt portalweit. Auf Vorlagenseiten wirken Schriftgröße und Zeilenabstand auf den ganzen Inhalt, bei eingehängten Anwendungen auf die Kopfleiste.

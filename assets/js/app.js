@@ -5,80 +5,8 @@
   const pageSubject = body.dataset.subject || "";  // nur auf Fachseiten
   const $ = selector => document.querySelector(selector);
 
-  /* Kernbereiche direkt anzeigen, ergänzende Seiten unter „Mehr“ bündeln */
-  const navigation = $("nav.top-nav");
-  if (navigation) {
-    const links = [...navigation.querySelectorAll(":scope > a")];
-    const primary = document.createElement("div");
-    primary.className = "nav-group nav-primary";
-    primary.setAttribute("role", "group");
-    primary.setAttribute("aria-label", "Kernbereiche");
-    const secondaryLinks = [];
-    links.forEach(link => {
-      const path = link.getAttribute("href") || "";
-      const isPrimary = /(?:biologie|geografie|alle)\/$/.test(path);
-      if (isPrimary) primary.append(link);
-      else secondaryLinks.push(link);
-    });
-    if (primary.children.length) navigation.append(primary);
-    if (secondaryLinks.length) {
-      const more = document.createElement("details");
-      more.className = "nav-more";
-      const summary = document.createElement("summary");
-      summary.textContent = "Mehr";
-      summary.setAttribute("aria-label", "Weitere Bereiche anzeigen");
-      const menu = document.createElement("div");
-      menu.className = "nav-more-menu";
-      secondaryLinks.forEach(link => {
-        if (link.hasAttribute("aria-current")) more.classList.add("has-current");
-        menu.append(link);
-      });
-      more.append(summary, menu);
-      navigation.append(more);
-      document.addEventListener("click", event => {
-        if (!more.contains(event.target)) more.open = false;
-      });
-      document.addEventListener("keydown", event => {
-        if (event.key === "Escape" && more.open) {
-          more.open = false;
-          summary.focus();
-        }
-      });
-    }
-  }
+  /* Die Navigation (Kopfleiste und Leiste am unteren Rand) baut assets/js/nav.js. */
 
-  /* Mobile navigation: auf schmalen Bildschirmen als aufklappbares Menü */
-  if (navigation) {
-    const menuButton = document.createElement("button");
-    menuButton.type = "button";
-    menuButton.className = "nav-toggle";
-    menuButton.textContent = "Menü";
-    menuButton.setAttribute("aria-expanded", "false");
-    menuButton.setAttribute("aria-controls", "hauptnavigation");
-    navigation.id = "hauptnavigation";
-    navigation.setAttribute("aria-label", "Hauptnavigation");
-    navigation.before(menuButton);
-
-    function setMenuOpen(open) {
-      navigation.classList.toggle("is-open", open);
-      menuButton.setAttribute("aria-expanded", String(open));
-    }
-    menuButton.addEventListener("click", () => {
-      setMenuOpen(menuButton.getAttribute("aria-expanded") !== "true");
-    });
-    navigation.addEventListener("click", event => {
-      if (event.target.closest("a")) setMenuOpen(false);
-    });
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
-        menuButton.focus();
-      }
-    });
-    window.addEventListener("resize", () => {
-      if (window.matchMedia("(min-width: 46rem)").matches) setMenuOpen(false);
-    });
-  }
   const GRADES = ["7", "8", "9", "10"];
   const INTERACTIVE = /interaktiv|spiel|simulation|quiz/i;
   const ART_TESTS = {
@@ -381,6 +309,36 @@
       results.innerHTML = found.length
         ? `<div class="group">${found.slice(0, 8).map(p => row(p, true)).join("")}</div>`
         : '<p class="empty-message">Dazu gibt es noch kein Material. Versuche ein anderes Wort.</p>';
+    });
+    initZuletzt(visible);
+  }
+
+  /* Zuletzt geöffnet (Startseite): Pfade merkt prefs.js im Browser. Gezeigt werden nur sichtbare Einträge aus projects.json,
+     je Pfad der längste passende Eintrag (eine Präsentation zählt zu ihrer Stunde), höchstens 3. */
+  function initZuletzt(visible) {
+    const box = $("#zuletzt");
+    if (!box) return;
+    const KEY = "lernportal.zuletzt";
+    let liste = [];
+    try { liste = JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (error) { liste = []; }
+    const treffer = [];
+    (Array.isArray(liste) ? liste : []).forEach(e => {
+      const pfad = e && typeof e.p === "string" ? e.p : "";
+      const passend = visible
+        .filter(p => { const n = normPath(p.path); return n && !/^https:/.test(n) && pfad.indexOf(n) === 0; })
+        .sort((a, b) => normPath(b.path).length - normPath(a.path).length)[0];
+      if (passend && !treffer.includes(passend)) treffer.push(passend);
+    });
+    if (!treffer.length) { box.hidden = true; return; }
+    box.innerHTML = `
+      <div class="section-head"><h2 id="h-zuletzt">Zuletzt geöffnet</h2><button type="button" class="section-btn" id="zuletzt-leeren">Liste leeren</button></div>
+      <div class="group">${treffer.slice(0, 3).map(p => row(p, true)).join("")}</div>`;
+    box.setAttribute("aria-labelledby", "h-zuletzt");
+    box.hidden = false;
+    $("#zuletzt-leeren").addEventListener("click", () => {
+      try { localStorage.removeItem(KEY); } catch (error) { /* ignorieren */ }
+      box.hidden = true; box.innerHTML = "";
+      const q = $("#q"); if (q) q.focus();
     });
   }
 
