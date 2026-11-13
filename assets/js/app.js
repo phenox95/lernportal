@@ -1033,10 +1033,14 @@
     const ziel = bneZiel(nr);
     if (ziel) {
       if (overview) overview.hidden = true;
-      const eyebrow = $("#bne-eyebrow"); if (eyebrow) eyebrow.textContent = "Nachhaltigkeit (BNE) · Ziel " + ziel.nr;
+      const eyebrow = $("#bne-eyebrow");
+      if (eyebrow) eyebrow.innerHTML = `<span class="bne-ziel-icon" aria-hidden="true">${icon("z" + ziel.nr, 32)}</span><span>Nachhaltigkeit (BNE) · Ziel ${ziel.nr}</span>`;
       document.title = "Ziel " + ziel.nr + " " + ziel.kurz + " – Lernportal";
       head.textContent = ziel.kurz;
       lead.textContent = ziel.frage || ziel.titel;
+      let hinweis = $("#bne-hinweis");
+      if (!hinweis) { hinweis = document.createElement("p"); hinweis.id = "bne-hinweis"; hinweis.className = "bne-hinweis"; lead.after(hinweis); }
+      hinweis.innerHTML = "<strong>Hinweis:</strong> Ein Ziel steht nur bei einem Material, wenn Aufgabe oder Urteil der Stunde es selbst behandeln. Die Ziele stammen von den Vereinten Nationen (Agenda 2030).";
       back.href = "./"; back.lastChild.textContent = "Alle Ziele";
       const found = visible.filter(p => bneOf(p).includes(nr));
       counter.textContent = found.length ? countText(found.length) : "";
