@@ -277,7 +277,7 @@ body[data-subject="Geografie"] { --lp-akzent: var(--lp-geo); }
 
 /* schmale Leiste auf Vorlagenseiten: nur Zurück und Lesemodus */
 .lp-schlank .lp-kopf-innen { min-height: 3em; }
-.lp-schlank .lp-werkzeuge { margin-left: auto; }
+.lp-schlank .lp-teilen-btn { margin-left: auto; }
 
 /* Titelblock auf Vorlagenseiten: flache Fachtönung mit dezentem Fachmuster (rein dekorativ), Text in Textfarbe.
    Optional ein Themenbild neben dem Titel, nie darunter oder dahinter. Keine Verläufe, keine Schatten. */
@@ -302,6 +302,12 @@ body[data-subject="Geografie"] { --lp-akzent: var(--lp-geo); }
 @media (min-width: 52rem) { .lp-titelblock.lp-mit-bild .lp-titelblock-innen { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); gap: 2.5rem; } }
 
 /* Lesemodus-Panel (von prefs.js erzeugt), hier eigenständig gestaltet */
+.lp-kopf .lp-teilen-btn {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  min-width: 2.75em; min-height: 2.75em; padding: 0; margin: 0; font: inherit;
+  border: 0; border-radius: 0.75em; background: transparent; color: var(--lp-text); cursor: pointer;
+}
+.lp-kopf .lp-teilen-btn:hover { background: var(--lp-feld); }
 .lp-kopf .icon-btn {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 2.75em; min-height: 2.75em; padding: 0 0.6em; margin: 0;

@@ -9,6 +9,8 @@
   const FACHKLASSE = { Biologie: "lp-bio", Geografie: "lp-geo", Interaktiv: "lp-neutral" };
   const PFEIL = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>';
 
+  const TEILEN = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 14h2.5v2.5H14zM19 14v.01M14 19.5v.01M17 19h3.5v1.5"/></svg>';
+
   /* nur relative Wurzelpfade wie "../../../" zulassen, alles andere wird zu "./" */
   function wurzel(wert) {
     const w = String(wert || "");
@@ -83,6 +85,21 @@
       if (meta) block.appendChild(meta);
       innen.appendChild(block);
     }
+    /* Teilen: Link und QR-Code. teilen.js wird erst beim Antippen nachgeladen. */
+    const teilen = neu("button", "lp-teilen-btn");
+    teilen.type = "button";
+    teilen.setAttribute("aria-label", "Link und QR-Code zeigen");
+    teilen.title = "Link und QR-Code";
+    teilen.innerHTML = TEILEN;                              // feste, eigene Zeichenkette
+    teilen.addEventListener("click", () => {
+      const oeffnen = () => window.LPTeilen && window.LPTeilen.open({ opener: teilen });
+      if (window.LPTeilen) { oeffnen(); return; }
+      const s = document.createElement("script");
+      s.src = wurzel(d.root) + "assets/js/teilen.js";
+      s.onload = oeffnen;
+      document.head.appendChild(s);
+    });
+    innen.appendChild(teilen);
     innen.appendChild(werkzeuge);
     kopf.appendChild(innen);
     body.insertBefore(kopf, body.firstChild);
