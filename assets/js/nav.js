@@ -134,4 +134,28 @@
   const breit = window.matchMedia("(min-width: 46rem)");
   const beiWechsel = () => { if (breit.matches) blattOffen(false); };
   if (breit.addEventListener) breit.addEventListener("change", beiWechsel);
+  /* ---------- Teilen (nur Startseite): Link und QR-Code ----------
+     teilen.js wird erst beim Antippen nachgeladen. Auf Seiten mit Filtern in der Adresse
+     (alle/, begriffe/ …) fehlt der Knopf bewusst, weil teilen.js den Suchteil der Adresse weglässt. */
+  if (hier === "start") {
+    const werkzeuge = document.querySelector(".header-tools");
+    if (werkzeuge && werkzeuge.parentNode) {
+      const t = document.createElement("button");
+      t.type = "button";
+      t.className = "icon-btn";
+      t.id = "teilen-btn";
+      t.setAttribute("aria-label", "Link und QR-Code zeigen");
+      t.title = "Link und QR-Code";
+      t.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 14h2.5v2.5H14zM19 14v.01M14 19.5v.01M17 19h3.5v1.5"/></svg>';
+      t.addEventListener("click", () => {
+        const los = () => window.LPTeilen && window.LPTeilen.open({ opener: t });
+        if (window.LPTeilen) { los(); return; }
+        const sk = document.createElement("script");
+        sk.src = root + "assets/js/teilen.js";
+        sk.onload = los;
+        document.head.appendChild(sk);
+      });
+      werkzeuge.parentNode.insertBefore(t, werkzeuge);
+    }
+  }
 })();
