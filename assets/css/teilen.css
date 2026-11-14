@@ -1,0 +1,69 @@
+/* Lernportal – Fenster „Link und QR-Code“ (teilen.js lädt diese Datei beim ersten Öffnen).
+   Flache Fläche, keine Verläufe, kein Glas. Der QR-Code steht immer schwarz auf weiß (nur so ist er sicher lesbar),
+   auch im Dunkelmodus. Maße in rem, damit der Lesemodus wirkt. Tippflächen mindestens 44 px. */
+
+.lp-tl {
+  --tl-bg: #ffffff; --tl-text: #252a27; --tl-text2: #5f6862; --tl-line: #e1e2dc; --tl-field: #eeeeea; --tl-rahmen: #7d837e; --tl-fokus: #0a6fe0;
+  position: fixed; inset: 0; z-index: 3500; display: grid; place-items: center;
+  padding: max(0.75rem, env(safe-area-inset-top, 0px)) max(0.75rem, env(safe-area-inset-right, 0px)) max(0.75rem, env(safe-area-inset-bottom, 0px)) max(0.75rem, env(safe-area-inset-left, 0px));
+  background: rgba(20, 24, 20, 0.55); color: var(--tl-text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 1rem; line-height: 1.45; text-align: left;
+}
+:root[data-theme="dark"] .lp-tl { --tl-bg: #1a1e1b; --tl-text: #f0f2ee; --tl-text2: #a6ada7; --tl-line: #2c312d; --tl-field: #222723; --tl-rahmen: #7f867f; --tl-fokus: #4da3ff; }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] .lp-tl, :root:not([data-theme]) .lp-tl { --tl-bg: #1a1e1b; --tl-text: #f0f2ee; --tl-text2: #a6ada7; --tl-line: #2c312d; --tl-field: #222723; --tl-rahmen: #7f867f; --tl-fokus: #4da3ff; }
+}
+html.lp-tl-offen { overflow: hidden; }
+.lp-tl, .lp-tl *, .lp-tl *::before, .lp-tl *::after { box-sizing: border-box; }
+
+.lp-tl-box {
+  width: min(30rem, 100%); max-height: calc(100vh - 1.5rem); overflow: auto; padding: 0.75rem 1.25rem 1.25rem;
+  border-radius: 1.25rem; background: var(--tl-bg); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35); outline: none;
+}
+.lp-tl.gross .lp-tl-box { width: min(44rem, 100%); }
+
+.lp-tl-kopf { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.5rem; }
+.lp-tl h2 { margin: 0; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; color: var(--tl-text); }
+.lp-tl-x {
+  display: inline-flex; align-items: center; justify-content: center; flex: none; width: 2.75rem; height: 2.75rem; margin: 0 -0.5rem 0 0; padding: 0;
+  border: 0; border-radius: 0.75rem; background: transparent; color: var(--tl-text); cursor: pointer;
+}
+.lp-tl-x:hover { background: var(--tl-field); }
+
+/* Auswahl, wenn es mehr als eine Adresse gibt (Präsentation: Nachlesen oder Stundenseite) */
+.lp-tl-wahl { display: flex; gap: 0.25rem; margin: 0.25rem 0 0.75rem; padding: 0.25rem; border-radius: 0.875rem; background: var(--tl-field); }
+.lp-tl-wahl[hidden] { display: none; }
+.lp-tl-wahl button {
+  flex: 1; min-height: 2.75rem; padding: 0 0.5rem; border: 0; border-radius: 0.65rem; background: transparent; color: var(--tl-text);
+  font: inherit; font-size: 0.9375rem; font-weight: 600; cursor: pointer;
+}
+.lp-tl-wahl button[aria-pressed="true"] { background: var(--tl-bg); font-weight: 700; box-shadow: 0 1px 3px rgba(20, 24, 20, 0.25); }
+
+/* Der Code: immer weiße Fläche, Rand gehört zum SVG (4 Module) */
+.lp-tl-qr { width: min(100%, 17rem); margin: 0.25rem auto 0; overflow: hidden; border: 1px solid var(--tl-line); border-radius: 0.75rem; background: #fff; line-height: 0; }
+.lp-tl.gross .lp-tl-qr { width: min(100%, max(15rem, calc(100vh - 19rem))); }
+.lp-tl-qr[hidden] { display: none; }
+.lp-tl-qr svg { display: block; width: 100%; height: auto; shape-rendering: crispEdges; }
+
+.lp-tl-hinweis { margin: 0.75rem 0 0.25rem; text-align: center; color: var(--tl-text2); font-size: 0.9375rem; }
+.lp-tl-url { margin: 0.25rem 0 0.875rem; text-align: center; font-size: 1rem; font-weight: 700; overflow-wrap: anywhere; -webkit-user-select: all; user-select: all; }
+.lp-tl-note { margin: 0.5rem 0; padding: 0.75rem 1rem; border: 1.5px dashed var(--tl-rahmen); border-radius: 0.875rem; color: var(--tl-text); font-size: 0.9375rem; }
+
+.lp-tl-aktionen { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+.lp-tl-b {
+  min-height: 2.75rem; padding: 0 1.1rem; border: 1px solid var(--tl-rahmen); border-radius: 0.75rem; background: var(--tl-bg); color: var(--tl-text);
+  font: inherit; font-size: 0.9375rem; font-weight: 700; cursor: pointer;
+}
+.lp-tl-b[hidden] { display: none; }
+.lp-tl-b:hover { background: var(--tl-field); }
+.lp-tl-b.voll { border-color: var(--tl-text); background: var(--tl-text); color: var(--tl-bg); }
+.lp-tl-b.voll:hover { opacity: 0.9; }
+.lp-tl-b[aria-pressed="true"] { background: var(--tl-field); box-shadow: inset 0 0 0 2px var(--tl-text); }
+
+.lp-tl-status { min-height: 1.5rem; margin: 0.5rem 0 0; text-align: center; color: var(--tl-text2); font-size: 0.9375rem; }
+.lp-tl :focus-visible { outline: 3px solid var(--tl-fokus); outline-offset: 2px; }
+
+@media (max-width: 30rem) { .lp-tl-box { padding: 0.5rem 1rem 1rem; } }
+@media (max-height: 36rem) { .lp-tl.gross .lp-tl-qr { width: min(100%, 15rem); } }
+.lp-tl .lp-tl-box:focus-visible { outline: none; }

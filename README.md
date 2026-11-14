@@ -49,7 +49,7 @@ Das Skript prüft `projects.json` und `themenfelder.json`: Pflichtfelder, Format
 | Thema | Datei |
 |---|---|
 | Neues Material anlegen, Felder in `projects.json`, Materialseiten, Impuls der Woche, Themenfelder | [docs/inhalte-ergaenzen.md](docs/inhalte-ergaenzen.md) |
-| Präsentationen: Grundaufbau, Stift, Timer, Lärmampel, Leseansicht (Nachlesen auf dem Handy), Fragenfeld, Belohnungsspiele, Begriffe-Seite | [docs/praesentationen.md](docs/praesentationen.md) |
+| Präsentationen: Grundaufbau, Stift, Timer, Lärmampel, Teilen mit QR-Code, Leseansicht (Nachlesen auf dem Handy), Fragenfeld, Belohnungsspiele, Begriffe-Seite | [docs/praesentationen.md](docs/praesentationen.md) |
 | Gestaltung, Favicon, Themenbilder, Lesemodus | [docs/gestaltung.md](docs/gestaltung.md) |
 | GitHub Pages, Rechtstexte, eigene Domain, App und Offline-Speicher | [docs/betrieb.md](docs/betrieb.md) |
 

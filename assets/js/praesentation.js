@@ -22,6 +22,7 @@
     timer: SVG('<circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5"/><path d="M9.5 3h5"/>'),
     zurueck: SVG('<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>'),
     voll: SVG('<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>'),
+    teilen: SVG('<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 14h2.5v2.5H14zM19 14v.01M14 19.5v.01M17 19h3.5v1.5"/>'),
     ampel: SVG('<rect x="7" y="2.5" width="10" height="19" rx="3"/><circle cx="12" cy="7.5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="16.5" r="1.4"/>')
   };
 
@@ -80,6 +81,21 @@
       try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch (e) { /* ok */ }
     });
     dock.appendChild(voll);
+    const teilen = knopf("lp-pr-btn", "", "Link und QR-Code (Taste Q)");
+    teilen.innerHTML = ICON.teilen;
+    teilen.title = "Link und QR-Code (Q)";
+    teilen.addEventListener("click", () => teilenOeffnen(teilen));
+    dock.appendChild(teilen);
+    /* teilen.js wird erst beim ersten Öffnen nachgeladen */
+    window.teilenOeffnenInt = teilenOeffnen;
+    function teilenOeffnen(opener) {
+      const los = () => window.LPTeilen && window.LPTeilen.open({ opener: opener || teilen });
+      if (window.LPTeilen) { los(); return; }
+      const sk = document.createElement("script");
+      sk.src = wurzel + "assets/js/teilen.js";
+      sk.onload = los;
+      document.head.appendChild(sk);
+    }
   })();
 
   let zTop = 3100;
@@ -947,8 +963,9 @@
     if (k === "p") { e.preventDefault(); stiftSetzen(!penAn); }
     else if (k === "t") { schalte("timer"); }
     else if (k === "l") { schalte("laerm"); }
+    else if (k === "q") { e.preventDefault(); if (window.teilenOeffnenInt) window.teilenOeffnenInt(); }
     else if (k === "escape" && penAn) { stiftSetzen(false); }
   });
 
-  Object.assign(window.Praesentation, { stift: stiftSetzen, schalte, folie: () => folie, spiel: spielStarten, lesen: lesenSetzen });
+  Object.assign(window.Praesentation, { stift: stiftSetzen, schalte, folie: () => folie, spiel: spielStarten, lesen: lesenSetzen, teilen: () => window.teilenOeffnenInt && window.teilenOeffnenInt() });
 })();
