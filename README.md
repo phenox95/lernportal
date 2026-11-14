@@ -13,7 +13,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `begriffe/` | Begriffe nachschlagen und üben, je Themenfeld (`begriffe/?fach=Biologie&nr=3.1`), verlinkt auf der Themenfeld-Seite. Liest die Spielinhalte der Präsentationen (`lp-spiel-daten`) und zeigt nur Blöcke mit `"geprueft": true`. Skript `assets/js/begriffe.js`, lädt bewusst kein `app.js`. Siehe [docs/praesentationen.md](docs/praesentationen.md) |
 | `impressum/`, `datenschutz/` | Rechtstexte, in der Fußzeile aller Seiten verlinkt. Laden bewusst kein `app.js`. **Platzhalter in eckigen Klammern vor der Veröffentlichung ausfüllen** |
 | `hilfe/` | Hilfeseite für Schülerinnen, Schüler und Lehrkräfte (Material finden, Lesemodus, als App nutzen, ohne Internet, Präsentation bedienen). Statischer Text, lädt kein `app.js` |
-| `assets/js/nav.js` | Navigation aller Portalseiten aus **einer** Liste (`SEITEN`): Kopfleiste im breiten Fenster, Leiste am unteren Rand auf dem Handy. Jede Portalseite bindet die Datei mit `defer` ein |
+| `assets/js/nav.js` | Navigation aller Portalseiten aus **einer** Liste (`SEITEN`): Kopfleiste im breiten Fenster, Leiste am unteren Rand auf dem Handy. Jede Portalseite bindet die Datei mit `defer` ein. Auf der Startseite ergänzt sie den Knopf „Link und QR-Code“ (lädt `teilen.js` beim Antippen) |
 | `manifest.json`, `sw.js`, `offline.html` | Portal als App (Symbol auf dem Startbildschirm) und Offline-Speicher: einmal geöffnete Seiten gehen ohne Internet. Angemeldet wird beides in `assets/js/prefs.js`. Siehe [docs/betrieb.md](docs/betrieb.md) |
 | `404.html` | Seite für unbekannte Adressen (GitHub Pages zeigt sie von selbst), mit Weg zur Startseite |
 | `projects.json` | Metadaten aller Materialien |
