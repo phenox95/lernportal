@@ -191,3 +191,97 @@ html.lp-lesen .lp-pr-minuten::before { content: none; }
 /* Auf dem Handy scrollt die Kopfleiste mit, damit der Platz dem Inhalt gehört */
 @media (max-width: 30em) { html.lp-lesen .lp-kopf { position: static; } }
 @media print { .lp-pr-zurfolie { display: none !important; } }
+
+/* ---------- Lärmampel: Aquarium-Ansicht (Inline-SVG aus praesentation.js, jeder Ruhe-Stern ist ein Fisch) ---------- */
+.lp-pr-ansicht > button { flex: 1 1 0; }
+.lp-pr-panel[data-ansicht="aqua"] .lp-pr-lampen,
+.lp-pr-panel[data-ansicht="aqua"] .lp-pr-sterne { display: none; }
+.lp-pr-panel:not([data-ansicht="aqua"]) .lp-pr-aquarahmen,
+.lp-pr-panel:not([data-ansicht="aqua"]) .lp-pr-fischzahl { display: none; }
+.lp-pr-aqua { position: absolute; left: 0; top: 0; display: block; width: 100%; height: 100%; }
+.lp-pr-panel:not([data-ansicht="aqua"]) .lp-pr-riff { display: none; }
+.lp-pr-riff > button { flex: 1 1 0; }
+.lp-pr-aquarahmen { position: relative; width: 100%; aspect-ratio: 9 / 5; border: 2px solid var(--lp-pr-ink); border-radius: 12px; clip-path: inset(0 round 12px); }
+/* Zeichnung des Riffs: Wasser und Sand mit sanftem Verlauf (nur hier, rein dekorativ), alles andere flach */
+.lp-pr-aqua .strahl { fill: #fff; opacity: .16; }
+.lp-pr-aqua .berg1 { fill: #2a86b0; opacity: .55; }
+.lp-pr-aqua .berg2 { fill: #1b6f9c; opacity: .7; }
+.lp-pr-aqua .rippel { fill: none; stroke: #fff; stroke-width: 1.4; opacity: .5; stroke-linecap: round; }
+.lp-pr-aqua .kiesel { fill: #8b7a55; }
+.lp-pr-aqua .fels { fill: #6a7d8e; }
+.lp-pr-aqua .fels2 { fill: #556677; }
+.lp-pr-aqua .hoehle { fill: #2b3a48; }
+.lp-pr-aqua .alge, .lp-pr-aqua .koralle { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.lp-pr-aqua .alge { stroke: #2f9e5a; stroke-width: 4; }
+.lp-pr-aqua .alge.hinten { stroke: #247a4a; stroke-width: 5; opacity: .75; }
+.lp-pr-aqua .koralle { stroke-width: 3.4; }
+.lp-pr-aqua .koralle.rot { stroke: #e0553f; }
+.lp-pr-aqua .koralle.rosa { stroke: #f0a0c0; stroke-width: 2.6; }
+.lp-pr-aqua .rohr rect { fill: #9fd1e6; stroke: #5b9fc0; stroke-width: 1; }
+.lp-pr-aqua .truhe .holz { fill: #8a5a2b; stroke: #5a3a1a; stroke-width: 1.2; }
+.lp-pr-aqua .truhe .band { stroke: #e6b422; stroke-width: 3; fill: none; }
+.lp-pr-aqua .truhe .gold { fill: #f4c430; }
+.lp-pr-aqua .stern { fill: #e8683a; }
+.lp-pr-aqua .muschel { fill: #f2e6c9; stroke: #cdb98f; stroke-width: 1; }
+.lp-pr-aqua .blase { fill: none; stroke: #fff; stroke-width: 1.5; opacity: .8; }
+.lp-pr-aqua .blase circle { animation: lp-pr-blase 7s ease-in infinite; }
+.lp-pr-aqua .blase circle:nth-child(2) { animation-delay: -3s; }
+.lp-pr-aqua .blase circle:nth-child(3) { animation-delay: -5s; }
+@keyframes lp-pr-blase { from { transform: translateY(20px); opacity: 0; } 20% { opacity: .8; } to { transform: translateY(-90px); opacity: 0; } }
+/* Fische: flache Farben aus dem Folien-Satz (Orange, Blau, Gelb, Rosa, Grau), Leib und Flosse je Farbe */
+.lp-pr-aqua .fisch { opacity: 0; transition: opacity .8s ease; }
+.lp-pr-aqua .fisch.da { opacity: 1; }
+.lp-pr-aqua .fisch .k { stroke: #1a1a1a; stroke-width: 1.1; stroke-linejoin: round; }
+.lp-pr-aqua .fisch .lb, .lp-pr-aqua .fisch .fl { fill: var(--fc, #e67e22); }
+.lp-pr-aqua .fisch.a0 { --fc: #e67e22; }
+.lp-pr-aqua .fisch.a1 { --fc: #1f6ba5; }
+.lp-pr-aqua .fisch.a2 { --fc: #f4b400; }
+.lp-pr-aqua .fisch.a3 { --fc: #a9b86a; }
+.lp-pr-aqua .fisch.a4 { --fc: #2a5aa8; }
+.lp-pr-aqua .fisch.a5 { --fc: #d8588a; }
+.lp-pr-aqua .fisch .streifen { fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; }
+.lp-pr-aqua .fisch .band { fill: none; stroke: #1a1a1a; stroke-width: 2.6; stroke-linecap: round; }
+.lp-pr-aqua .fisch .gelb { fill: none; stroke: #f4c430; stroke-width: 2.4; stroke-linecap: round; }
+.lp-pr-aqua .fisch .punkte { fill: none; stroke: #4a5a2a; stroke-width: 1.8; stroke-linecap: round; }
+.lp-pr-aqua .fisch .auge { fill: #fff; }
+.lp-pr-aqua .fisch .pupille { fill: #1a1a1a; }
+.lp-pr-aqua .schwimm { transform: translateX(var(--x0, 0px)); animation-timing-function: linear; animation-iteration-count: infinite; }
+.lp-pr-aqua .schwimm.r { animation-name: lp-pr-nach-rechts; }
+.lp-pr-aqua .schwimm.l { animation-name: lp-pr-nach-links; }
+@keyframes lp-pr-nach-rechts { from { transform: translateX(-40px); } to { transform: translateX(400px); } }
+@keyframes lp-pr-nach-links { from { transform: translateX(400px); } to { transform: translateX(-40px); } }
+/* Gelb: die Fische ruhen. Rot: sie verstecken sich. Die Zahl bleibt, sie wird als Text genannt. */
+.lp-pr-panel[data-stufe="1"] .lp-pr-aqua .fisch.da { opacity: .55; }
+.lp-pr-panel[data-stufe="1"] .lp-pr-aqua .schwimm,
+.lp-pr-panel[data-stufe="1"] .lp-pr-aqua .blase circle { animation-play-state: paused; }
+.lp-pr-panel[data-stufe="2"] .lp-pr-aqua .fisch.da { opacity: 0; }
+.lp-pr-fischzahl { margin: 0; text-align: center; font-weight: 700; font-size: 16px; font-size: clamp(14px, 5cqw, 32px); }
+@media (prefers-reduced-motion: reduce) { .lp-pr-aqua .schwimm, .lp-pr-aqua .blase circle { animation: none; } .lp-pr-aqua .fisch { transition: none; } }
+
+/* Vollbild: das Fenster füllt die ganze Bühne, das Aquarium nimmt den freien Platz */
+.lp-pr-panel.vollfenster { left: 8px !important; top: 8px !important; right: 8px !important; bottom: 8px !important; width: auto !important; height: auto !important; max-width: none; max-height: none !important; z-index: 3200; }
+.lp-pr-panel.vollfenster .lp-pr-inhalt { display: grid; grid-template-columns: minmax(0, 1fr) 300px; column-gap: 20px; row-gap: 10px; align-content: start; padding: 16px 24px; }
+.lp-pr-panel.vollfenster .lp-pr-inhalt > * { grid-column: 2; }
+.lp-pr-panel.vollfenster .lp-pr-inhalt > .lp-pr-aquarahmen { grid-column: 1; grid-row: 1 / span 14; align-self: center; width: 100%; }
+.lp-pr-panel.vollfenster .lp-pr-inhalt > .lp-pr-lampen { grid-column: 1; grid-row: 1 / span 14; align-self: center; }
+.lp-pr-panel.vollfenster .lp-pr-details, .lp-pr-panel.vollfenster .lp-pr-groesse { display: none; }
+@media (max-width: 900px) { .lp-pr-panel.vollfenster .lp-pr-inhalt { grid-template-columns: minmax(0, 1fr); } .lp-pr-panel.vollfenster .lp-pr-inhalt > *, .lp-pr-panel.vollfenster .lp-pr-inhalt > .lp-pr-aquarahmen, .lp-pr-panel.vollfenster .lp-pr-inhalt > .lp-pr-lampen { grid-column: 1; grid-row: auto; } }
+
+/* Gemaltes Riff: Fische ohne schwarzen Umriss, weicher Rand */
+.lp-pr-aquarahmen[data-riff="gemalt"] .fisch .k { stroke: rgba(50, 25, 10, .5); stroke-width: .7; }
+.lp-pr-aquarahmen[data-riff="gemalt"] .fisch .streifen { stroke: #fffaf0; stroke-width: 2.6; opacity: .92; }
+
+/* Märchenriff: handgemalt, warm. Fische mit weichem Rand und kleinem Glanzlicht */
+.lp-pr-aqua .fisch .glanz { display: none; fill: #fff; opacity: .28; }
+.lp-pr-aquarahmen[data-riff="maerchen"] .fisch .glanz { display: block; }
+.lp-pr-aquarahmen[data-riff="maerchen"] .fisch .k { stroke: rgba(20, 50, 60, .55); stroke-width: .8; }
+.lp-pr-aquarahmen[data-riff="maerchen"] .fisch .streifen { stroke: #fffdf4; stroke-width: 2.8; opacity: .95; }
+.lp-pr-aquarahmen[data-riff="maerchen"] .fisch .band { stroke: #26334a; }
+.lp-pr-aquarahmen[data-riff="maerchen"] .fisch .auge { stroke: rgba(20, 50, 60, .5); stroke-width: .5; }
+
+/* Märchenriff mit Bildern: sanftes Auf und Ab der Tiere */
+.lp-pr-aqua .bob { animation: lp-pr-bob 3s ease-in-out infinite alternate; }
+@keyframes lp-pr-bob { from { transform: translateY(-2px); } to { transform: translateY(2px); } }
+.lp-pr-panel[data-stufe="1"] .lp-pr-aqua .bob { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .lp-pr-aqua .bob { animation: none; } }
+.lp-pr-aquarahmen[data-riff="maerchen"] .blase { display: none; }

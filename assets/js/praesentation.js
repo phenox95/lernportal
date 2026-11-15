@@ -498,6 +498,167 @@
   const empLabel = neu("label", "", "Empfindlichkeit (links: empfindlicher)");
   empLabel.htmlFor = "lp-pr-emp";
 
+  /* ---------- Aquarium-Ansicht: jeder Ruhe-Stern ist ein Fisch.
+     Grün: die Fische schwimmen. Gelb: sie ruhen. Rot: sie verstecken sich. Verloren geht nichts.
+     Alles ist lokales Inline-SVG, keine Bilddatei, kein Fremdinhalt. ---------- */
+  const NS = "http://www.w3.org/2000/svg";
+  function svg(tag, attr, eltern) {
+    const k = document.createElementNS(NS, tag);
+    for (const a in attr) k.setAttribute(a, attr[a]);
+    if (eltern) eltern.appendChild(k);
+    return k;
+  }
+  /* Zwei Riffe: „Gezeichnet“ (flach, mit sanftem Verlauf) und „Gemalt“ (Aquarell durch SVG-Filter: Papierkorn, unruhige Farbränder).
+     Der Hintergrund ist eine eigene, ruhende SVG-Ebene unter den Fischen, damit die Filter nicht bei jeder Bewegung neu rechnen. */
+  const RIFFE = {
+    gezeichnet:
+      '<defs><linearGradient id="lp-aq-wasser" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a6e3ef"/><stop offset=".45" stop-color="#4fb0d2"/><stop offset="1" stop-color="#14699a"/></linearGradient>' +
+      '<linearGradient id="lp-aq-sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecd9a8"/><stop offset="1" stop-color="#d4b97e"/></linearGradient></defs>' +
+      '<rect width="360" height="200" fill="url(#lp-aq-wasser)"/>' +
+      '<g class="strahl"><path d="M60 0h30l-50 200h-40z"/><path d="M150 0h46l-30 200h-52z"/><path d="M250 0h30l-14 200h-48z"/></g>' +
+      '<path class="berg1" d="M0 120Q40 96 80 112T160 100T250 84T360 112V200H0z"/>' +
+      '<path class="berg2" d="M0 142Q70 118 140 134T270 126T360 138V200H0z"/>' +
+      '<g class="alge hinten"><path d="M108 176Q100 140 112 110Q120 90 110 62"/><path d="M200 176Q192 146 204 118Q212 98 202 74"/><path d="M262 176Q256 140 266 112Q272 92 264 66"/><path d="M296 176Q290 150 300 124"/></g>' +
+      '<path class="sand" d="M0 168Q60 160 120 168T250 166T360 164V200H0z" fill="url(#lp-aq-sand)"/>' +
+      '<g class="rippel"><path d="M70 182q14-3 28 0M150 188q16-3 32 0M240 180q14-3 28 0M300 190q12-3 24 0M20 192q10-2 20 0"/></g>' +
+      '<g class="kiesel"><ellipse cx="96" cy="176" rx="2.4" ry="1.6"/><ellipse cx="104" cy="179" rx="1.8" ry="1.2"/><ellipse cx="262" cy="176" rx="2.4" ry="1.6"/><ellipse cx="270" cy="182" rx="1.8" ry="1.2"/><ellipse cx="170" cy="190" rx="2" ry="1.3"/></g>' +
+      '<path class="fels" d="M0 200V132Q14 112 40 122Q60 132 76 168L86 200z"/><path class="fels2" d="M0 200V150Q16 138 34 146Q52 156 60 182L64 200z"/>' +
+      '<ellipse class="hoehle" cx="30" cy="172" rx="14" ry="12"/><ellipse class="hoehle" cx="52" cy="190" rx="6" ry="5"/>' +
+      '<g class="bunt"><circle cx="18" cy="126" r="4" fill="#e8a33d"/><circle cx="26" cy="122" r="3.4" fill="#d9577f"/><circle cx="34" cy="125" r="3" fill="#7ad0b4"/></g>' +
+      '<path class="fels" d="M360 200V136Q346 116 322 126Q302 136 288 170L278 200z"/><path class="fels2" d="M360 200V154Q344 142 328 150Q310 160 304 184L300 200z"/>' +
+      '<ellipse class="hoehle" cx="334" cy="174" rx="14" ry="12"/><ellipse class="hoehle" cx="312" cy="192" rx="6" ry="5"/>' +
+      '<g class="bunt"><circle cx="340" cy="130" r="4" fill="#e8a33d"/><circle cx="332" cy="126" r="3.4" fill="#d9577f"/><circle cx="324" cy="129" r="3" fill="#7ad0b4"/></g>' +
+      '<g class="alge vorn"><path d="M44 176Q36 150 46 128"/><path d="M322 176Q330 150 320 130"/><path d="M92 178Q86 158 94 142"/></g>' +
+      '<g class="koralle rot"><path d="M138 170V148M138 158l-10-12M138 154l9-10M128 146v-8M147 144v-8"/><path d="M156 170V152M156 162l-8-9M156 158l8-8"/></g>' +
+      '<g class="koralle rosa"><path d="M170 170q-14-4-14-22M170 170q-6-8-5-26M170 170q2-10 8-26M170 170q8-6 18-18M170 170q12-2 22-10"/></g>' +
+      '<g class="rohr"><rect x="186" y="150" width="6" height="22" rx="3"/><rect x="194" y="156" width="6" height="16" rx="3"/><rect x="202" y="146" width="6" height="26" rx="3"/></g>' +
+      '<g class="truhe"><path d="M222 172v-12q0-6 6-6h22q6 0 6 6v12z" class="holz"/><path d="M222 160h34" class="band"/><rect x="236" y="158" width="6" height="8" rx="1" class="gold"/></g>' +
+      '<path class="stern" d="M270 176l3-7-6-4 7-1 2-7 3 7 7 1-6 4 3 7-6-4z"/>' +
+      '<path class="muschel" d="M112 178q8-12 16 0z"/>',
+    maerchenSvg: `<defs>
+<linearGradient id="mW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8f4e6"/><stop offset=".25" stop-color="#7fdbd8"/><stop offset=".55" stop-color="#2fa8c0"/><stop offset=".82" stop-color="#157aa0"/><stop offset="1" stop-color="#0f5886"/></linearGradient>
+<linearGradient id="mSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbeec6"/><stop offset=".6" stop-color="#f2dcae"/><stop offset="1" stop-color="#e3c48f"/></linearGradient>
+<filter id="mNass" x="-30%" y="-30%" width="160%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".015" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="26"/><feGaussianBlur stdDeviation="7"/></filter>
+<filter id="mStrahl" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter>
+<filter id="mF" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="3" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" result="d"/><feGaussianBlur in="d" stdDeviation=".55" result="b"/><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="3" result="k"/><feColorMatrix in="k" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -.3 1.1" result="ka"/><feComposite in="b" in2="ka" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/></filter>
+<filter id="mWeich" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="1.1"/></filter>
+<filter id="mPinsel" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".012 .03" numOctaves="3" seed="6"/><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 .95 0 0 0 0 .8 0 0 0 1.4 -.45"/></filter>
+<filter id="mPapier" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="3" seed="12"/><feColorMatrix type="matrix" values="0 0 0 0 .3 0 0 0 0 .28 0 0 0 0 .2 0 0 0 -1.5 .9"/></filter>
+</defs><g transform="translate(-5 -5) scale(1.03)"><rect width="360" height="200" fill="url(#mW)"/><g filter="url(#mNass)"><ellipse cx="270" cy="-4" rx="140" ry="56" fill="#fffbd2" opacity=".7"/><ellipse cx="30" cy="196" rx="100" ry="50" fill="#0a416c" opacity=".6"/><ellipse cx="180" cy="110" rx="110" ry="28" fill="#3cc0c8" opacity=".35"/><ellipse cx="340" cy="150" rx="50" ry="40" fill="#0f5f8c" opacity=".4"/></g><g filter="url(#mStrahl)" fill="#fffbe0" opacity=".34"><path d="M250 0h34l-80 170h-60z"/><path d="M200 0h22l-70 170h-40z"/><path d="M300 0h30l-30 150h-70z"/><path d="M160 0h14l-80 150h-30z"/><path d="M330 0h24l6 120h-40z"/></g><g filter="url(#mF)" fill="#fff" opacity=".4"><path d="M0 0h360v7q-30 8-60 2t-70 3-70-3-70 4-60-3z"/></g><g filter="url(#mF)"><path d="M0 118Q50 92 100 108T200 96T290 104T360 94V200H0z" fill="#45b4bd" opacity=".55"/><path d="M80 160Q80 100 128 96Q176 100 180 160z" fill="#2c92ae" opacity=".55"/><path d="M110 160Q112 124 130 122Q148 124 150 160z" fill="#3fb0be" opacity=".8"/><path d="M0 138Q70 116 140 130T270 124T360 132V200H0z" fill="#1f86a8" opacity=".7"/></g><path d="M0 170Q60 160 120 168T240 166T360 162V210H0z" fill="url(#mSand)" filter="url(#mF)"/><g fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".6"><path d="M96 184q16-3 32 0M170 191q18-3 36 0M238 182q14-3 28 0M30 194q12-2 24 0M292 192q14-3 28 0"/></g><path d="M170 180h0M180 184h0M210 188h0M146 190h0M224 178h0M244 190h0M108 176h0" stroke="#d7b98a" stroke-width="3" stroke-linecap="round"/><g filter="url(#mF)" fill="none" stroke-linecap="round"><path d="M112 182 C122 149 102 119 116 90" stroke="#3d9a5c" stroke-width="6"/><path d="M112 182 C122 149 102 119 116 90" stroke="#8fdc7a" stroke-width="2.1" transform="translate(-1 0)" opacity=".7"/><path d="M178 182 C166 142 190 105 173 70" stroke="#2f8a55" stroke-width="6.5"/><path d="M178 182 C166 142 190 105 173 70" stroke="#79d070" stroke-width="2.3" transform="translate(-1 0)" opacity=".7"/><path d="M236 182 C248 147 224 114 240 82" stroke="#3d9a5c" stroke-width="6"/><path d="M236 182 C248 147 224 114 240 82" stroke="#8fdc7a" stroke-width="2.1" transform="translate(-1 0)" opacity=".7"/><path d="M268 182 C259 155 277 130 264 106" stroke="#4aa862" stroke-width="5"/><path d="M268 182 C259 155 277 130 264 106" stroke="#9be487" stroke-width="1.8" transform="translate(-1 0)" opacity=".7"/><path d="M140 182 C148 157 132 134 143 112" stroke="#4aa862" stroke-width="5"/><path d="M140 182 C148 157 132 134 143 112" stroke="#9be487" stroke-width="1.8" transform="translate(-1 0)" opacity=".7"/></g><g filter="url(#mF)" opacity=".95"><ellipse cx="119.9" cy="161.0" rx="7.0" ry="2.6" transform="rotate(-35 119.9 161.0)" fill="#3d9a5c"/><ellipse cx="109.3" cy="149.8" rx="6.6" ry="2.6" transform="rotate(35 109.3 149.8)" fill="#3d9a5c"/><ellipse cx="118.0" cy="138.6" rx="6.2" ry="2.6" transform="rotate(-35 118.0 138.6)" fill="#3d9a5c"/><ellipse cx="106.6" cy="127.6" rx="5.8" ry="2.6" transform="rotate(35 106.6 127.6)" fill="#3d9a5c"/><ellipse cx="115.9" cy="116.8" rx="5.4" ry="2.6" transform="rotate(-35 115.9 116.8)" fill="#3d9a5c"/><ellipse cx="106.4" cy="106.0" rx="5.0" ry="2.6" transform="rotate(35 106.4 106.0)" fill="#3d9a5c"/><ellipse cx="179.5" cy="156.4" rx="7.0" ry="2.6" transform="rotate(-35 179.5 156.4)" fill="#2f8a55"/><ellipse cx="170.2" cy="142.7" rx="6.6" ry="2.6" transform="rotate(35 170.2 142.7)" fill="#2f8a55"/><ellipse cx="181.8" cy="129.2" rx="6.2" ry="2.6" transform="rotate(-35 181.8 129.2)" fill="#2f8a55"/><ellipse cx="173.5" cy="115.8" rx="5.8" ry="2.6" transform="rotate(35 173.5 115.8)" fill="#2f8a55"/><ellipse cx="184.4" cy="102.6" rx="5.4" ry="2.6" transform="rotate(-35 184.4 102.6)" fill="#2f8a55"/><ellipse cx="173.8" cy="89.5" rx="5.0" ry="2.6" transform="rotate(35 173.8 89.5)" fill="#2f8a55"/><ellipse cx="244.5" cy="159.2" rx="7.0" ry="2.6" transform="rotate(-35 244.5 159.2)" fill="#3d9a5c"/><ellipse cx="233.8" cy="147.0" rx="6.6" ry="2.6" transform="rotate(35 233.8 147.0)" fill="#3d9a5c"/><ellipse cx="242.2" cy="134.9" rx="6.2" ry="2.6" transform="rotate(-35 242.2 134.9)" fill="#3d9a5c"/><ellipse cx="230.5" cy="122.9" rx="5.8" ry="2.6" transform="rotate(35 230.5 122.9)" fill="#3d9a5c"/><ellipse cx="239.6" cy="111.1" rx="5.4" ry="2.6" transform="rotate(-35 239.6 111.1)" fill="#3d9a5c"/><ellipse cx="230.2" cy="99.4" rx="5.0" ry="2.6" transform="rotate(35 230.2 99.4)" fill="#3d9a5c"/><ellipse cx="270.4" cy="164.7" rx="7.0" ry="2.6" transform="rotate(-35 270.4 164.7)" fill="#4aa862"/><ellipse cx="260.9" cy="155.4" rx="6.6" ry="2.6" transform="rotate(35 260.9 155.4)" fill="#4aa862"/><ellipse cx="272.1" cy="146.2" rx="6.2" ry="2.6" transform="rotate(-35 272.1 146.2)" fill="#4aa862"/><ellipse cx="263.3" cy="137.1" rx="5.8" ry="2.6" transform="rotate(35 263.3 137.1)" fill="#4aa862"/><ellipse cx="274.0" cy="128.1" rx="5.4" ry="2.6" transform="rotate(-35 274.0 128.1)" fill="#4aa862"/><ellipse cx="263.6" cy="119.2" rx="5.0" ry="2.6" transform="rotate(35 263.6 119.2)" fill="#4aa862"/><ellipse cx="147.3" cy="166.0" rx="7.0" ry="2.6" transform="rotate(-35 147.3 166.0)" fill="#4aa862"/><ellipse cx="136.8" cy="157.5" rx="6.6" ry="2.6" transform="rotate(35 136.8 157.5)" fill="#4aa862"/><ellipse cx="145.8" cy="149.0" rx="6.2" ry="2.6" transform="rotate(-35 145.8 149.0)" fill="#4aa862"/><ellipse cx="134.7" cy="140.6" rx="5.8" ry="2.6" transform="rotate(35 134.7 140.6)" fill="#4aa862"/><ellipse cx="144.1" cy="132.4" rx="5.4" ry="2.6" transform="rotate(-35 144.1 132.4)" fill="#4aa862"/><ellipse cx="134.5" cy="124.2" rx="5.0" ry="2.6" transform="rotate(35 134.5 124.2)" fill="#4aa862"/></g><g filter="url(#mF)"><path d="M-6 210V122Q-2 94 34 94Q70 96 88 128Q102 152 104 210z" fill="#8aa3a6"/><path d="M-6 210V146Q4 128 28 130Q52 134 66 158Q76 176 78 210z" fill="#6d868f"/><path d="M-4 124Q4 98 32 97Q54 98 66 112Q46 108 28 116Q12 124-4 130z" fill="#6fc255"/><path d="M6 112Q18 100 38 101Q26 104 16 112z" fill="#a9e56e"/><path d="M12 210V162Q12 140 34 140Q58 142 58 164V210z" fill="#0f3552"/></g><g fill="#ffd1dc"><circle cx="18" cy="104" r="2"/><circle cx="30" cy="99" r="1.8"/><circle cx="44" cy="102" r="2"/></g><g fill="#fff3a8"><circle cx="24" cy="108" r="1.5"/><circle cx="38" cy="104" r="1.5"/><circle cx="52" cy="108" r="1.4"/></g><g filter="url(#mF)"><path d="M366 210V128Q362 102 330 104Q300 108 290 138Q282 160 282 210z" fill="#92a8a8"/><path d="M366 210V152Q356 140 336 142Q316 146 308 168Q302 184 302 210z" fill="#6f8892"/><path d="M366 132Q358 108 330 108Q312 110 302 122Q320 116 336 124Q352 130 366 136z" fill="#6fc255"/><path d="M356 114Q344 106 326 110Q338 112 346 118z" fill="#a9e56e"/><path d="M318 210V176Q318 158 336 158Q354 160 354 178V210z" fill="#0f3552"/></g><g fill="#ffd1dc"><circle cx="340" cy="112" r="2"/><circle cx="328" cy="110" r="1.8"/></g><g fill="#fff3a8"><circle cx="346" cy="116" r="1.5"/><circle cx="334" cy="115" r="1.4"/></g><g filter="url(#mF)"><path d="M184 176q12-10 24 0z" fill="#b84f86"/><path d="M189.7 171.3 L175.1 169.5M189.9 170.9 L174.8 167.8M190.1 170.4 L175.3 166.2M190.4 170.0 L175.4 164.3M190.8 169.7 L178.1 163.4M191.2 169.3 L178.6 161.6M191.8 169.0 L184.9 163.7M192.3 168.7 L184.5 161.1M192.9 168.5 L184.6 158.2M193.6 168.3 L187.9 158.8M194.2 168.2 L189.6 157.1M194.9 168.1 L193.1 160.6M195.6 168.0 L194.9 158.7M196.4 168.0 L197.0 159.8M197.1 168.1 L199.4 158.5M197.8 168.2 L201.7 158.7M198.4 168.3 L202.3 161.8M199.1 168.5 L204.7 161.4M199.7 168.7 L206.7 161.9M200.2 169.0 L211.5 160.3M200.8 169.3 L212.5 162.1M201.2 169.7 L210.4 165.1M201.6 170.0 L215.6 164.7M201.9 170.4 L212.2 167.5M202.1 170.9 L216.3 168.0M202.3 171.3 L213.2 170.0" stroke="#ff9cc4" stroke-width="2.4" stroke-linecap="round" fill="none"/><path d="M189.7 171.3 L175.1 169.5M189.9 170.9 L174.8 167.8M190.1 170.4 L175.3 166.2M190.4 170.0 L175.4 164.3M190.8 169.7 L178.1 163.4M191.2 169.3 L178.6 161.6M191.8 169.0 L184.9 163.7M192.3 168.7 L184.5 161.1M192.9 168.5 L184.6 158.2M193.6 168.3 L187.9 158.8M194.2 168.2 L189.6 157.1M194.9 168.1 L193.1 160.6M195.6 168.0 L194.9 158.7M196.4 168.0 L197.0 159.8M197.1 168.1 L199.4 158.5M197.8 168.2 L201.7 158.7M198.4 168.3 L202.3 161.8M199.1 168.5 L204.7 161.4M199.7 168.7 L206.7 161.9M200.2 169.0 L211.5 160.3M200.8 169.3 L212.5 162.1M201.2 169.7 L210.4 165.1M201.6 170.0 L215.6 164.7M201.9 170.4 L212.2 167.5M202.1 170.9 L216.3 168.0M202.3 171.3 L213.2 170.0" stroke="#ffd6e6" stroke-width=".8" stroke-linecap="round" fill="none" transform="translate(0 -.8)"/></g><g filter="url(#mF)"><circle cx="124" cy="172" r="11" fill="#f5977f"/><circle cx="135" cy="176" r="8" fill="#f7ad8e"/><circle cx="122" cy="168" r="4" fill="#ffc9b0"/><g fill="#9576c8"><rect x="146" y="150" width="9" height="26" rx="4.5"/><rect x="157" y="158" width="9" height="18" rx="4.5"/></g><g fill="#c4aae6"><ellipse cx="150.5" cy="150" rx="3.2" ry="1.5"/><ellipse cx="161.5" cy="158" rx="3.2" ry="1.5"/></g></g><g filter="url(#mF)"><ellipse cx="256" cy="172" rx="22" ry="7" fill="#58bfae"/><ellipse cx="256" cy="168" rx="22" ry="6" fill="#74d3c0"/><path d="M236 168q20-5 40 0" fill="none" stroke="#c3f6e0" stroke-width="2.4" stroke-linecap="round"/><rect x="252" y="150" width="8" height="18" rx="3" fill="#4fae9f"/><ellipse cx="256" cy="150" rx="26" ry="7.5" fill="#6ccdb9"/><ellipse cx="256" cy="147" rx="26" ry="6.5" fill="#8fe3cc"/><path d="M232 147q24-6 48 0" fill="none" stroke="#d5fbe9" stroke-width="2.6" stroke-linecap="round"/></g><g filter="url(#mF)"><path d="M300 176L280.9 163.0M300 176L284.4 157.6M300 176L289.0 153.5M300 176L294.3 150.9M300 176L300.0 150.0M300 176L305.7 150.9M300 176L311.0 153.5M300 176L315.6 157.6M300 176L319.1 163.0" stroke="#f08ab8" stroke-width="2.4" stroke-linecap="round" fill="none"/><path d="M300 176q-18-10-20-30q14-4 20 14q6-18 22-14q-2 20-22 30z" fill="#f6a8c8" opacity=".55"/></g><g filter="url(#mF)"><path d="M70 186q8-12 17 0z" fill="#fff1de"/><path d="M268 186l3-8 3 8 8 1-6 5 2 8-7-4-7 4 2-8-6-5z" fill="#ff8a5c"/><circle cx="271" cy="190" r="1.4" fill="#ffd0b0"/><path d="M196 192l2-5 2 5 5 1-4 3 1 5-4-2-4 2 1-5-4-3z" fill="#ff9e72"/></g><g fill="none" stroke-linecap="round"><path d="M2 128Q6 106 34 100M66 114Q84 128 92 150" stroke="#cfe0dc" stroke-width="2" opacity=".6"/><path d="M40 150q8 6 6 16M70 160q6 8 4 22" stroke="#52707c" stroke-width="1.6" opacity=".6"/><path d="M360 134Q354 112 330 108M300 126Q290 138 286 160" stroke="#d6e6e2" stroke-width="2" opacity=".6"/><path d="M320 160q-6 6-4 16M300 170q-6 8-4 20" stroke="#52707c" stroke-width="1.6" opacity=".6"/></g><g filter="url(#mF)" fill="none" stroke-linecap="round" stroke-width="2.2"><path d="M92.5 184 q-1.0 -5.0 -1.7 -10.0M95.5 184 q-4.4 -6.3 -7.0 -12.6M98.5 184 q-2.7 -6.7 -4.3 -13.5M101.5 184 q-0.9 -9.1 -1.5 -18.1M104.5 184 q-4.8 -10.8 -7.7 -21.6M159.0 184 q0.1 -10.4 0.2 -20.7M162.0 184 q-1.3 -7.5 -2.1 -15.0M165.0 184 q-3.0 -7.0 -4.8 -14.0M168.0 184 q-1.5 -9.2 -2.5 -18.5M171.0 184 q3.5 -9.9 5.6 -19.8M174.0 184 q3.5 -6.1 5.6 -12.2M206.5 184 q-4.7 -5.3 -7.6 -10.7M209.5 184 q0.1 -7.1 0.1 -14.3M212.5 184 q1.9 -9.7 3.0 -19.5M215.5 184 q0.2 -10.0 0.4 -20.1M218.5 184 q-0.6 -6.1 -1.0 -12.2M275.0 184 q1.7 -6.5 2.8 -13.0M278.0 184 q3.9 -7.1 6.2 -14.3M281.0 184 q4.3 -5.6 6.9 -11.3M284.0 184 q-1.0 -5.2 -1.7 -10.4M287.0 184 q4.6 -8.1 7.3 -16.2M290.0 184 q-1.6 -7.0 -2.5 -14.1" stroke="#5fbf6a"/><path d="M92.5 184 q-1.0 -5.0 -1.7 -10.0M95.5 184 q-4.4 -6.3 -7.0 -12.6M98.5 184 q-2.7 -6.7 -4.3 -13.5M101.5 184 q-0.9 -9.1 -1.5 -18.1M104.5 184 q-4.8 -10.8 -7.7 -21.6M159.0 184 q0.1 -10.4 0.2 -20.7M162.0 184 q-1.3 -7.5 -2.1 -15.0M165.0 184 q-3.0 -7.0 -4.8 -14.0M168.0 184 q-1.5 -9.2 -2.5 -18.5M171.0 184 q3.5 -9.9 5.6 -19.8M174.0 184 q3.5 -6.1 5.6 -12.2M206.5 184 q-4.7 -5.3 -7.6 -10.7M209.5 184 q0.1 -7.1 0.1 -14.3M212.5 184 q1.9 -9.7 3.0 -19.5M215.5 184 q0.2 -10.0 0.4 -20.1M218.5 184 q-0.6 -6.1 -1.0 -12.2M275.0 184 q1.7 -6.5 2.8 -13.0M278.0 184 q3.9 -7.1 6.2 -14.3M281.0 184 q4.3 -5.6 6.9 -11.3M284.0 184 q-1.0 -5.2 -1.7 -10.4M287.0 184 q4.6 -8.1 7.3 -16.2M290.0 184 q-1.6 -7.0 -2.5 -14.1" stroke="#c4f08a" stroke-width=".8" transform="translate(.6 0)"/></g><g fill="#fffbe0" opacity=".32" filter="url(#mWeich)"><ellipse cx="160" cy="184" rx="16" ry="3"/><ellipse cx="236" cy="190" rx="12" ry="2.4"/><ellipse cx="120" cy="192" rx="10" ry="2"/></g><g filter="url(#mWeich)" fill="#1c6a46" opacity=".9"><path d="M-6 210Q-2 168 22 150Q18 176 30 210z"/><path d="M14 210Q22 176 46 166Q36 186 42 210z" fill="#2c8a58"/><path d="M366 210Q362 172 340 156Q342 182 330 210z"/><path d="M346 210Q340 182 318 174Q326 192 320 210z" fill="#2c8a58"/></g><g fill="#fffbe0" opacity=".7"><circle cx="40" cy="60" r="1.1"/><circle cx="92" cy="40" r="1.4"/><circle cx="150" cy="70" r="1"/><circle cx="214" cy="54" r="1.3"/><circle cx="260" cy="30" r="1"/><circle cx="318" cy="64" r="1.4"/><circle cx="190" cy="96" r="1"/><circle cx="70" cy="110" r="1.2"/><circle cx="300" cy="96" r="1"/></g><rect width="360" height="200" filter="url(#mPinsel)" opacity=".16" style="mix-blend-mode:soft-light"/><rect width="360" height="200" filter="url(#mPapier)" opacity=".12" style="mix-blend-mode:multiply"/></g>`,
+    gemalt: `<defs>
+<linearGradient id="aqW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c7e9ef"/><stop offset=".3" stop-color="#8ec9db"/><stop offset=".62" stop-color="#4b93b4"/><stop offset="1" stop-color="#2a6a8c"/></linearGradient>
+<linearGradient id="aqSand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe3c8"/><stop offset="1" stop-color="#dcc79c"/></linearGradient>
+<filter id="aqNass" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="5" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="22"/><feGaussianBlur stdDeviation="6"/></filter>
+<filter id="aqStrahl" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="2.2"/></filter>
+<filter id="aqFarbe" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="8" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4.5" result="d"/><feGaussianBlur in="d" stdDeviation=".45" result="b"/><feMorphology in="b" operator="erode" radius=".9" result="er"/><feComposite in="b" in2="er" operator="out" result="rim"/><feColorMatrix in="rim" type="matrix" values=".5 0 0 0 0 0 .5 0 0 0 0 0 .55 0 0 0 0 0 .6 0" result="rimd"/><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="2" result="k"/><feColorMatrix in="k" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -.4 1.05" result="ka"/><feComposite in="b" in2="ka" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="rimd"/></feMerge></filter>
+<filter id="aqPapier" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="3" seed="11"/><feColorMatrix type="matrix" values="0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .25 0 0 0 -1.6 1"/></filter>
+<clipPath id="aqRL"><path d="M0 200V122Q8 104 28 100Q56 98 76 124Q92 148 96 176L102 200z"/></clipPath><clipPath id="aqRR"><path d="M360 200V130Q346 110 326 120Q310 130 312 160L314 200z"/></clipPath></defs><g transform="translate(-5 -5) scale(1.03)"><rect width="360" height="200" fill="#f3efe3"/><rect width="360" height="200" fill="url(#aqW)"/><g filter="url(#aqNass)" opacity=".42"><ellipse cx="180" cy="10" rx="120" ry="40" fill="#f4fbfc"/><ellipse cx="30" cy="150" rx="70" ry="50" fill="#1f5a80"/><ellipse cx="340" cy="60" rx="50" ry="60" fill="#3f86aa"/><ellipse cx="190" cy="125" rx="90" ry="26" fill="#2a74a0"/></g><g filter="url(#aqStrahl)" fill="#fff" opacity=".28"><path d="M150 0h30l-40 150h-40z"/><path d="M185 0h24l10 150h-36z"/><path d="M215 0h26l40 140h-40z"/><path d="M120 0h16l-60 120h-20z"/><path d="M250 0h18l66 110h-24z"/></g><g filter="url(#aqFarbe)"><path d="M0 112Q30 90 70 106T150 98T230 82T300 100T360 88V200H0z" fill="#4d93b6" opacity=".7"/><path d="M0 134Q60 112 120 128T230 120T330 130T360 124V200H0z" fill="#33789f" opacity=".85"/></g><path fill="url(#aqSand)" filter="url(#aqFarbe)" d="M0 170Q50 160 110 168T230 166T360 162V200H0z"/><g fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity=".55"><path d="M110 184q16-3 32 0M180 190q18-3 36 0M236 182q14-3 28 0M20 194q12-2 24 0M286 192q14-3 28 0"/></g><path d="M168 180h0M178 184h0M206 188h0M148 190h0M222 178h0M240 190h0M110 176h0" stroke="#bda878" stroke-width="3.4" stroke-linecap="round"/><g filter="url(#aqFarbe)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M196 176Q186 150 200 128Q212 110 200 88Q194 76 202 64" stroke="#7c9650" stroke-width="5.5"/><path d="M262 176Q252 148 266 124Q276 104 264 84" stroke="#6f8a47" stroke-width="5.5"/><path d="M236 176Q232 150 242 130Q248 116 240 100" stroke="#8aa25a" stroke-width="4.5"/><path d="M154 176Q150 154 160 140" stroke="#8aa25a" stroke-width="4"/></g><g filter="url(#aqFarbe)"><path d="M0 200V122Q8 104 28 100Q56 98 76 124Q92 148 96 176L102 200z" fill="#b8a88b"/><path d="M0 200V138Q10 126 26 128Q46 130 60 152Q70 170 72 200z" fill="#9a8b73"/><path d="M10 112q16-10 34-4q-8 8-20 8z" fill="#d2c4a6"/></g><g clip-path="url(#aqRL)"><path d="M45 123h0M54 187h0M10 113h0M72 116h0M50 178h0M11 168h0M31 108h0M15 159h0M57 112h0M34 115h0M74 158h0M11 176h0M19 132h0M84 184h0M78 111h0M77 178h0M54 110h0M32 109h0M75 121h0M41 157h0M22 173h0M19 177h0M43 175h0M91 127h0M17 178h0M77 185h0M28 151h0M16 174h0M12 176h0M11 183h0M30 167h0M91 172h0M58 144h0M63 178h0M62 150h0M42 135h0M27 193h0M35 114h0M77 142h0M71 167h0M47 197h0M61 140h0M81 113h0M19 169h0M57 125h0M47 123h0" stroke="#e3d6b8" stroke-width="1.8" stroke-linecap="round" opacity=".8"/><path d="M66 157h0M9 189h0M13 175h0M77 144h0M47 192h0M48 180h0M67 178h0M62 112h0M15 138h0M64 193h0M89 112h0M11 197h0M93 143h0M86 177h0M91 161h0M40 195h0M53 189h0M48 106h0M63 149h0M25 182h0M18 167h0M11 131h0M40 120h0M35 154h0M54 167h0M14 125h0M61 155h0M74 139h0M21 159h0M74 139h0M94 157h0M49 191h0M52 133h0M23 114h0M26 123h0M33 188h0M33 105h0M66 179h0M27 137h0M40 104h0" stroke="#7d6e58" stroke-width="1.6" stroke-linecap="round" opacity=".6"/></g><g filter="url(#aqFarbe)"><path d="M10 200V158Q10 136 32 136Q58 136 58 160V200z" fill="#142840"/><path d="M62 200q0-14 8-22 6 10 10 22z" fill="#1d3550"/></g><g filter="url(#aqFarbe)" fill="none" stroke-linecap="round" stroke-linejoin="round"><g stroke="#f0e1c4" stroke-width="3.4"><path d="M8 112V90M8 102l-7-10M8 98l8-10M24 114V94M24 104l-8-9M24 100l9-11M38 112V98M38 104l6-8"/></g><g stroke="#e8964f" stroke-width="2.8"><path d="M44 112q-8-4-8-20M44 112q-2-8 2-22M44 112q7-6 14-18"/></g><g stroke="#d9728f" stroke-width="2.6"><path d="M58 118q-4-9 0-20M58 118q7-6 13-11"/></g></g><g filter="url(#aqFarbe)"><g fill="#8a68b8"><rect x="114" y="150" width="10" height="26" rx="5"/><rect x="126" y="140" width="10" height="36" rx="5"/><rect x="138" y="154" width="10" height="22" rx="5"/><rect x="148" y="162" width="8" height="14" rx="4"/></g><g fill="#b69bdc"><ellipse cx="119" cy="150" rx="3.6" ry="1.7"/><ellipse cx="131" cy="140" rx="3.6" ry="1.7"/><ellipse cx="143" cy="154" rx="3.6" ry="1.7"/><ellipse cx="152" cy="162" rx="3" ry="1.4"/></g></g><g filter="url(#aqFarbe)" fill="none" stroke-linecap="round" stroke-linejoin="round"><g stroke="#d9a0b8" stroke-width="2"><path d="M96 176q-4-14-2-28M96 176q-10-8-14-22M96 176q4-12 12-24M96 176q10-6 20-12M90 158q-6-4-10-4M104 158q6-2 8-10"/></g><g stroke="#ecc0cf" stroke-width="1.3"><path d="M94 148l-4-9M108 152l4-9M82 154l-6-3M80 154l-4-6"/></g></g><g filter="url(#aqFarbe)"><path d="M212 178q-12-6-8-18q10-10 22-6q14 4 14 18q0 6-6 6z" fill="#34506e"/><path d="M214 172q-6-8-2-14q8-8 18-4q10 4 10 14" fill="#4f6f90"/><path d="M210 178q16-8 36 0z" fill="#26405a"/><path d="M222 162q8-6 18 0" fill="none" stroke="#7e9bb8" stroke-width="1.6" stroke-linecap="round"/></g><g transform="translate(-84 0)"><g filter="url(#aqFarbe)"><path d="M252 180q-7 0-9-9-2-11 4-15h9q6 4 4 15-2 9-8 9z" fill="#d98a3e"/></g><path d="M247 162h0M252 166h0M246 170h0M253 160h0M250 173h0" stroke="#f6cf8a" stroke-width="2.2" stroke-linecap="round"/></g><g transform="translate(-26 6)"><g filter="url(#aqFarbe)"><path d="M256 136q40-22 84-6-6 10-36 12-34 2-48-6z" fill="#d6bf92"/><path d="M258 135q40-18 80-4" fill="none" stroke="#f0e2bc" stroke-width="3.2" stroke-linecap="round"/><path d="M262 144q40 4 66-4" fill="none" stroke="#a68f62" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M266 158q34-16 66-2-4 9-30 10-26 1-36-8z" fill="#cdb585"/><path d="M268 157q32-12 62-2" fill="none" stroke="#e9d7ac" stroke-width="3" stroke-linecap="round"/><path d="M278 148v14M302 144v18M322 140v14" stroke="#a68f62" stroke-width="3.2" stroke-linecap="round"/></g><path d="M279 135h0M304 134h0M309 136h0M290 133h0M314 138h0M302 136h0M311 137h0M317 132h0M299 138h0M319 138h0M313 138h0M305 135h0" stroke="#a88f60" stroke-width="1.3" stroke-linecap="round" opacity=".7"/></g><g transform="translate(-18 0)"><g filter="url(#aqFarbe)"><path d="M296 180q-4-20 14-24t24 6q14 8 14 18z" fill="#d1b98a"/><path d="M296 180q-4-20 14-24" fill="none" stroke="#efe0bb" stroke-width="2.8" stroke-linecap="round"/><path d="M238 182q-2-12 8-14" fill="none" stroke="#ecddb8" stroke-width="0"/></g></g><path d="M310 166h0M318 170h0M326 174h0M316 177h0M306 175h0M330 166h0" stroke="#9b835a" stroke-width="2.2" stroke-linecap="round" opacity=".85" transform="translate(-18 0)"/><g filter="url(#aqFarbe)"><path d="M360 200V130Q346 110 326 120Q310 130 312 160L314 200z" fill="#aa9d85"/><path d="M360 200V150Q346 140 334 148Q324 158 326 200z" fill="#8e826c"/><path d="M332 200q0-20 12-24 12 4 16 24z" fill="#142840"/></g><g clip-path="url(#aqRR)"><path d="M337 165h0M337 127h0M342 195h0M337 121h0M324 122h0M325 170h0M322 128h0M333 190h0M315 127h0M312 186h0M321 182h0M318 160h0M351 117h0M316 140h0M351 162h0M321 195h0M328 158h0M350 160h0M342 129h0M319 176h0M341 175h0M342 153h0M317 132h0M318 157h0M328 175h0M356 134h0M345 116h0M325 181h0M335 132h0M356 183h0M313 181h0M331 196h0M317 147h0M345 160h0" stroke="#e3d6b8" stroke-width="1.8" stroke-linecap="round" opacity=".75"/><path d="M322 159h0M326 182h0M346 178h0M333 195h0M326 192h0M324 144h0M337 143h0M324 180h0M343 159h0M358 117h0M313 149h0M342 147h0M324 191h0M334 171h0M358 158h0M335 124h0M326 127h0M326 174h0M324 157h0M325 175h0M351 192h0M312 175h0M353 158h0M353 124h0M354 129h0M336 139h0M342 136h0M339 195h0M333 125h0M358 164h0" stroke="#7d6e58" stroke-width="1.6" stroke-linecap="round" opacity=".55"/></g><g filter="url(#aqFarbe)" fill="none" stroke-linecap="round" stroke-linejoin="round"><g stroke="#6fb0c0" stroke-width="3.2"><path d="M346 116V88M346 104l-8-12M346 98l9-12M336 118l-7-16M356 120l6-12M338 110v-14"/></g><g stroke="#e8866a" stroke-width="2.6"><path d="M298 140q-8-4-8-18M298 140q-2-9 2-20M298 140q8-6 14-15"/></g></g><g filter="url(#aqFarbe)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M104 182Q96 168 104 156" stroke="#9db46a" stroke-width="3.6"/><path d="M286 184Q292 166 284 150" stroke="#9db46a" stroke-width="3.6"/></g><g filter="url(#aqFarbe)"><path d="M186 184q6-11 15 0z" fill="#f4e8d4"/><path d="M132 192q5-8 11 0z" fill="#f0d9d2"/><path d="M264 190q4-7 9 0z" fill="#f4e8d4"/><path d="M168 188l3-7 7 2-3 6z" fill="#e8683a" opacity=".9"/></g><rect width="360" height="200" filter="url(#aqPapier)" opacity=".2" style="mix-blend-mode:multiply"/></g>`
+  };
+  const hg = svg("svg", { viewBox: "0 0 360 200", "class": "lp-pr-aqua lp-pr-hg", preserveAspectRatio: "xMidYMid slice", "aria-hidden": "true", focusable: "false" });
+  const tank = svg("svg", { viewBox: "0 0 360 200", "class": "lp-pr-aqua", role: "img", focusable: "false", preserveAspectRatio: "xMidYMid slice" });
+  tank.innerHTML = '<g class="blase"></g>';
+  tank.firstChild.innerHTML = '<circle cx="96" cy="150" r="3"/><circle cx="212" cy="140" r="2.5"/><circle cx="262" cy="130" r="2"/><circle cx="150" cy="120" r="2"/>';
+  const tankRahmen = neu("div", "lp-pr-aquarahmen");
+  tankRahmen.appendChild(hg); tankRahmen.appendChild(tank);
+  const fischSchicht = svg("g", {}, tank);
+  fischSchicht.setAttribute("class", "fische");
+  const fischText = neu("p", "lp-pr-fischzahl", "");
+  /* Fischarten (Kopf zeigt nach rechts, Ursprung in der Körpermitte). k = Umriss, lb = Körper, fl = Flossen in der Artfarbe */
+  const AUGE = (x, y, r) => '<circle class="auge" cx="' + x + '" cy="' + y + '" r="' + r + '"/><circle class="pupille" cx="' + (x + .5) + '" cy="' + y + '" r="' + (r * .46).toFixed(1) + '"/>';
+  const ARTEN = [
+    { k: "a0", name: "Clownfisch", svg: '<path class="k fl" d="M-12 0L-27-10Q-24 0-27 10z"/><path class="k fl" d="M-5-8Q2-17 10-7z"/><path class="k fl" d="M-2 8Q3 14 8 8z"/><ellipse class="k lb" rx="15" ry="9"/><path class="streifen" d="M5-8.3Q8.5 0 5 8.3"/><path class="streifen" d="M-6-8.5Q-3 0-6 8.5"/>' + AUGE(9, -2.5, 2.4) },
+    { k: "a1", name: "Paletten-Doktorfisch", svg: '<path class="k" fill="#f4b400" d="M-13 0L-28-9L-24 0L-28 9z"/><path class="k fl" d="M-9-9Q0-16 9-8z"/><ellipse class="k lb" rx="15" ry="10"/><path fill="#14284a" d="M-11 3Q-4-7 9-4Q3 2-3 7Q-9 7-11 3z"/><path class="k" fill="#f4b400" d="M3 6Q8 12 11 6z"/>' + AUGE(10, -3, 2.2) },
+    { k: "a2", name: "Falterfisch", svg: '<path class="k fl" d="M-10 0L-21-7L-21 7z"/><path class="k fl" d="M-7-10Q0-18 8-9z"/><path class="k fl" d="M-4 10Q1 16 7 10z"/><ellipse class="k lb" rx="13" ry="11"/><path class="k lb" d="M10-3L18 0L10 3z"/><path class="band" d="M7-10Q10 0 7 10"/>' + AUGE(9, -3, 2.3) },
+    { k: "a3", name: "Kugelfisch", svg: '<path class="k fl" d="M-10 0L-18-5L-18 5z"/><circle class="k lb" r="11"/><path fill="#f2ecd0" d="M-8 4Q0 12 9 4Q0 8-8 4z"/><path class="punkte" d="M-6-5h0M0-7h0M-3-1h0M3-3h0M-7 1h0"/><path class="k fl" d="M-1 5Q3 11 6 5z"/>' + AUGE(6, -3, 3) },
+    { k: "a4", name: "Kaiserfisch", svg: '<path class="k" fill="#f4b400" d="M-12 0L-26-8L-26 8z"/><path class="k fl" d="M-9-8Q0-17 12-7z"/><ellipse class="k lb" rx="15" ry="9.5"/><path class="gelb" d="M-4-9Q-1 0-4 9"/><path class="gelb" d="M3-9Q6 0 3 9"/><path class="gelb" d="M-11-6Q-9 0-11 6"/>' + AUGE(10, -2.5, 2.3) },
+    { k: "a5", name: "Fahnenbarsch", svg: '<path class="k fl" d="M-14 0L-30-11L-25 0L-30 11z"/><path class="k fl" d="M-6-6L1-15L9-6z"/><ellipse class="k lb" rx="16" ry="6.5"/><path class="gelb" d="M-8 0H8"/>' + AUGE(11, -1.5, 2) }
+  ];
+  const ARTFOLGE = [0, 1, 2, 3, 4, 5, 1, 0, 2, 5, 3, 4, 1, 2, 0, 4, 5, 3, 2, 1];
+  /* Märchenriff mit Bildern (assets/img/aquarium/): Hintergrund und 7 Tiere als WebP. Fehlen die Dateien, greift die Vektorzeichnung. */
+  const WURZEL = /^(\.\.\/|\.\/)+$/.test(document.body.dataset.root || "") ? document.body.dataset.root : "./";
+  const BILDPFAD = WURZEL + "assets/img/aquarium/";
+  const SPRITES = [   // Datei, Name, Breite und Höhe in Bildeinheiten (Seitenverhältnis der Datei)
+    ["clownfisch", "Clownfisch", 46.8, 24.4], ["riffbarsch", "Violetter Riffbarsch", 49.4, 25.1], ["falterfisch", "Falterfisch", 39.0, 27.0],
+    ["kugelfisch", "Kugelfisch", 42.9, 21.3], ["kaiserfisch", "Kaiserfisch", 41.6, 23.7], ["fahnenbarsch", "Fahnenbarsch", 49.4, 24.8], ["qualle", "Qualle", 52.0, 22.8]
+  ];
+  const SPRFOLGE = [0, 1, 2, 3, 4, 5, 6, 2, 0, 4, 1, 5, 3, 6, 0, 2, 5, 1, 4, 3];
+  let bildFehler = false, aquaN = -1;
+  const spriteModus = () => tankRahmen.dataset.riff === "maerchen" && !bildFehler;
+  function aquaBauen(n) {
+    fischSchicht.textContent = "";
+    for (let i = 0; i < n; i++) {
+      const links = i % 2 === 1, dauer = 16 + ((i * 5) % 9) * 1.4;
+      const f = svg("g", { "class": "fisch", transform: "translate(0 " + (24 + (i * 37) % 96) + ")" }, fischSchicht);
+      const sw = svg("g", { "class": "schwimm " + (links ? "l" : "r") }, f);
+      sw.style.cssText = "--x0:" + (40 + (i * 53) % 280) + "px;animation-duration:" + dauer + "s;animation-delay:-" + ((i * 3.7) % dauer).toFixed(1) + "s";
+      if (spriteModus()) {
+        const sp = SPRITES[SPRFOLGE[i % SPRFOLGE.length]];
+        if (sp[0] === "qualle") sw.style.animationDuration = (dauer * 1.7) + "s";
+        const bob = svg("g", { "class": "bob" }, sw);
+        bob.style.animationDelay = "-" + ((i * 1.3) % 3).toFixed(1) + "s";
+        const d = svg("g", links ? { transform: "scale(-1 1)" } : {}, bob);
+        svg("image", { href: BILDPFAD + "fische/" + sp[0] + ".webp", x: -sp[2] / 2, y: -sp[3] / 2, width: sp[2], height: sp[3], "aria-hidden": "true" }, d);
+        svg("title", {}, f).textContent = sp[1];
+        continue;
+      }
+      const d = svg("g", links ? { transform: "scale(-1 1)" } : {}, sw);
+      const art = ARTEN[ARTFOLGE[i % ARTFOLGE.length]];
+      f.classList.add(art.k);
+      d.innerHTML = art.svg;
+      svg("title", {}, f).textContent = art.name;
+      svg("ellipse", { "class": "glanz", cx: 1, cy: -4.5, rx: 7, ry: 2 }, d);
+    }
+  }
+  function aquaZeigen() {
+    if (aquaN !== pk.ziel) { aquaN = pk.ziel; aquaBauen(pk.ziel); }
+    const da = Math.min(sterne, pk.ziel);
+    [].forEach.call(fischSchicht.children, (f, i) => f.classList.toggle("da", i < da));
+    fischText.textContent = da + " von " + pk.ziel + " Tieren" + (lae.el.dataset.stufe === "2" ? ". Sie verstecken sich." : "");
+    tank.setAttribute("aria-label", "Aquarium mit " + da + " von " + pk.ziel + " Tieren");
+  }
+  const ansichtZeile = neu("div", "lp-pr-reihe lp-pr-ansicht");
+  const aBtn = knopf("lp-pr-klein", "Ampel", "Ansicht Ampel"), qBtn = knopf("lp-pr-klein", "Aquarium", "Ansicht Aquarium");
+  function ansichtSetzen(a, merken) {
+    const aq = a === "aqua";
+    lae.el.dataset.ansicht = aq ? "aqua" : "ampel";
+    aBtn.setAttribute("aria-pressed", String(!aq)); aBtn.classList.toggle("on", !aq);
+    qBtn.setAttribute("aria-pressed", String(aq)); qBtn.classList.toggle("on", aq);
+    if (merken) { cfg.ansicht = aq ? "aqua" : "ampel"; speichern(SCHL, cfg); }
+    aquaZeigen();
+  }
+  aBtn.addEventListener("click", () => ansichtSetzen("ampel", true));
+  qBtn.addEventListener("click", () => ansichtSetzen("aqua", true));
+  const riffZeile = neu("div", "lp-pr-reihe lp-pr-riff");
+  const RIFFNAMEN = [["maerchen", "Märchen", "Riff Märchen, handgemalt und warm"], ["gezeichnet", "Gezeichnet", "Riff gezeichnet"], ["gemalt", "Aquarell", "Riff Aquarell"]];
+  const riffKnoepfe = {};
+  RIFFNAMEN.forEach(([id, text, label]) => {
+    const k = knopf("lp-pr-klein", text, label);
+    k.addEventListener("click", () => riffSetzen(id, true));
+    riffKnoepfe[id] = k; riffZeile.appendChild(k);
+  });
+  function riffSetzen(r, merken) {
+    if (!riffKnoepfe[r]) r = "maerchen";
+    tankRahmen.dataset.riff = r;
+    if (r === "maerchen") {
+      bildFehler = false; hg.innerHTML = "";
+      const bild = svg("image", { href: BILDPFAD + "riff-maerchen.webp", x: 0, y: 0, width: 360, height: 200, preserveAspectRatio: "xMidYMid slice" }, hg);
+      bild.addEventListener("error", () => { bildFehler = true; hg.innerHTML = RIFFE.maerchenSvg; aquaN = -1; aquaZeigen(); });
+    } else { hg.innerHTML = RIFFE[r]; }
+    aquaN = -1; aquaZeigen();
+    for (const id in riffKnoepfe) { riffKnoepfe[id].setAttribute("aria-pressed", String(id === r)); riffKnoepfe[id].classList.toggle("on", id === r); }
+    if (merken) { cfg.riff = r; speichern(SCHL, cfg); }
+  }
+  const vBtn = knopf("lp-pr-klein", "Vollbild", "Fenster auf die ganze Bühne vergrößern");
+  vBtn.setAttribute("aria-pressed", "false");
+  function vollSetzen(an) {
+    lae.el.classList.toggle("vollfenster", an);
+    vBtn.textContent = an ? "Verkleinern" : "Vollbild"; vBtn.setAttribute("aria-pressed", String(an));
+    if (lae.el.einpassen) lae.el.einpassen();
+  }
+  vBtn.addEventListener("click", () => vollSetzen(!lae.el.classList.contains("vollfenster")));
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && lae.el.classList.contains("vollfenster") && !lae.el.hidden) vollSetzen(false); });
+  ansichtZeile.appendChild(aBtn); ansichtZeile.appendChild(qBtn); ansichtZeile.appendChild(vBtn);
+
   const db = (v) => Math.max(0, Math.min(100, (v + 70) / 60 * 100));
   function grenzen() { balken.querySelector(".m1").style.left = db(cfg.gelb) + "%"; balken.querySelector(".m2").style.left = db(cfg.rot) + "%"; }
   function ampelSetzen(s, ruhig) {
@@ -506,6 +667,7 @@
     lampen.classList.toggle("aus", !!ruhig);
     text.textContent = ruhig ? "Aus" : ["Ruhig", "Etwas laut", "Zu laut"][s];
     lae.el.dataset.stufe = ruhig ? "aus" : String(s);
+    aquaZeigen();
   }
   function messen() {
     analyser.getFloatTimeDomainData(daten);
@@ -553,6 +715,7 @@
     sternFuell.style.width = Math.min(100, ruhe / pk.takt * 100) + "%";
     spielBtn.hidden = sterne < pk.ziel;
     sternLabel.textContent = (strom || sterne) ? "★ " + sterne + "/" + pk.ziel : "";
+    aquaZeigen();
   }
   function ruheTick(jetzt, s) {
     const dt = ruheLetzt ? Math.min(0.5, (jetzt - ruheLetzt) / 1000) : 0;
@@ -605,7 +768,7 @@
   }
   (function laermPanel() {
     const z = lae.inhalt;
-    z.appendChild(lampen); z.appendChild(text); z.appendChild(balken);
+    z.appendChild(ansichtZeile); z.appendChild(riffZeile); z.appendChild(lampen); z.appendChild(tankRahmen); z.appendChild(text); z.appendChild(fischText); z.appendChild(balken);
     const r = neu("div", "lp-pr-reihe"); r.appendChild(lStart); z.appendChild(r);
     const tonBtn = knopf("lp-pr-klein", cfg.ton ? "Ton: an" : "Ton: aus", "Signaltöne ein- oder ausschalten");
     tonBtn.setAttribute("aria-pressed", String(!!cfg.ton));
@@ -646,6 +809,8 @@
     sterneZeigen();
     z.appendChild(meld);
     grenzen(); ampelSetzen(0, true);
+    riffSetzen(cfg.riff, false);
+    ansichtSetzen(cfg.ansicht === "aqua" ? "aqua" : "ampel", false);
     lStart.addEventListener("click", () => { if (strom) laermAus("Messung beendet."); else laermAn(); });
     lKal.addEventListener("click", () => { if (analyser) { kalib = { summe: 0, n: 0, bis: Date.now() + 3000 }; meld.textContent = "Messe 3 Sekunden …"; } });
     emp.addEventListener("input", () => { cfg.gelb = +emp.value; cfg.rot = cfg.gelb + 10; speichern(SCHL, cfg); grenzen(); });
