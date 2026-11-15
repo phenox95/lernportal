@@ -819,6 +819,7 @@
     back.lastChild.textContent = fach;
     $("#tf-eyebrow").textContent = fach + (tf ? " · Klasse " + tf.klassen : "");
     document.body.dataset.subject = fach;
+    if (tf) document.body.dataset.tf = tf.slug;
     if (!tf) {
       $("#tf-title").textContent = "Themenfeld nicht gefunden";
       list.innerHTML = '<p class="empty-message">Dieses Themenfeld gibt es nicht. Bitte die Fachseite öffnen.</p>';

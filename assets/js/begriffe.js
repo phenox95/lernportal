@@ -175,6 +175,7 @@
     const name = tf ? (tf.kurz || tf.titel) : "Themenfeld " + nr;
     document.title = "Begriffe: " + name + " – Lernportal";
     body.dataset.subject = fach;
+    if (tf && tf.slug) body.dataset.tf = tf.slug;
     $("#bg-back").href = root + "themenfeld/?fach=" + encodeURIComponent(fach) + "&nr=" + encodeURIComponent(nr);
     $("#bg-back-text").textContent = name;
     $("#bg-eyebrow").textContent = fach + " · Themenfeld " + nr;

@@ -141,3 +141,11 @@
     });
   });
 })();
+
+/* Themenfeld-Farbe: Ordnername nach klasse-N (zum Beispiel genetik) wird zu data-tf am body, siehe assets/css/themenfarben.css */
+(() => {
+  const m = location.pathname.match(/\/klasse-\d+\/([^\/]+)\//);
+  if (!m) return;
+  const setzen = () => { if (document.body && !document.body.dataset.tf) document.body.dataset.tf = m[1]; };
+  if (document.body) setzen(); else document.addEventListener("DOMContentLoaded", setzen);
+})();

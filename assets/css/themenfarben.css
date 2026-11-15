@@ -1,0 +1,135 @@
+/* Erzeugt von tools/themenfarben.py, nicht von Hand ändern. Eine Tonlage je Themenfeld, siehe docs/gestaltung.md. */
+[data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #E1EFEA; --tf-ink: #214A3B; }
+body[data-subject="Biologie"][data-tf="zelle"] { --tf: #33715A; --tf-g: #33715A; --tf-dk: #214A3B; --tf-mint: #ECF4F1; --tf-grey: #596963; --tf-ink0: #182520; --g: #33715A; --dk: #214A3B; --mint: #ECF4F1; --grey: #596963; --ink: #182520; --fach-rgb: 51,113,90; --accent: #33715A; --accent-2: #33715A; --accent-hover: #214A3B; --accent-ink: #33715A; --fach-tint: #ECF4F1; --lp-akzent: #33715A; }
+[data-tf-fach="Biologie"][data-tf-nr="3.2"] { --tf-tint: #E6EFE1; --tf-ink: #2F4A21; }
+body[data-subject="Biologie"][data-tf="lebensraeume"] { --tf: #477133; --tf-g: #477133; --tf-dk: #2F4A21; --tf-mint: #EEF4EC; --tf-grey: #5E6959; --tf-ink0: #1C2518; --g: #477133; --dk: #2F4A21; --mint: #EEF4EC; --grey: #5E6959; --ink: #1C2518; --fach-rgb: 71,113,51; --accent: #477133; --accent-2: #477133; --accent-hover: #2F4A21; --accent-ink: #477133; --fach-tint: #EEF4EC; --lp-akzent: #477133; }
+[data-tf-fach="Biologie"][data-tf-nr="3.3"] { --tf-tint: #E1EDEF; --tf-ink: #244B51; }
+body[data-subject="Biologie"][data-tf="stoffwechsel"] { --tf: #366F78; --tf-g: #366F78; --tf-dk: #244B51; --tf-mint: #ECF3F4; --tf-grey: #596769; --tf-ink0: #182425; --g: #366F78; --dk: #244B51; --mint: #ECF3F4; --grey: #596769; --ink: #182425; --fach-rgb: 54,111,120; --accent: #366F78; --accent-2: #366F78; --accent-hover: #244B51; --accent-ink: #366F78; --fach-tint: #ECF3F4; --lp-akzent: #366F78; }
+[data-tf-fach="Biologie"][data-tf-nr="3.4"] { --tf-tint: #EFE1E6; --tf-ink: #7B3750; }
+body[data-subject="Biologie"][data-tf="sexualitaet"] { --tf: #A24969; --tf-g: #A24969; --tf-dk: #7B3750; --tf-mint: #F4ECEF; --tf-grey: #69595F; --tf-ink0: #25181D; --g: #A24969; --dk: #7B3750; --mint: #F4ECEF; --grey: #69595F; --ink: #25181D; --fach-rgb: 162,73,105; --accent: #A24969; --accent-2: #A24969; --accent-hover: #7B3750; --accent-ink: #A24969; --fach-tint: #F4ECEF; --lp-akzent: #A24969; }
+[data-tf-fach="Biologie"][data-tf-nr="3.5"] { --tf-tint: #E1E9EF; --tf-ink: #2F4E6A; }
+body[data-subject="Biologie"][data-tf="gesundheit"] { --tf: #416B90; --tf-g: #416B90; --tf-dk: #2F4E6A; --tf-mint: #ECF0F4; --tf-grey: #596169; --tf-ink0: #181F25; --g: #416B90; --dk: #2F4E6A; --mint: #ECF0F4; --grey: #596169; --ink: #181F25; --fach-rgb: 65,107,144; --accent: #416B90; --accent-2: #416B90; --accent-hover: #2F4E6A; --accent-ink: #416B90; --fach-tint: #ECF0F4; --lp-akzent: #416B90; }
+[data-tf-fach="Biologie"][data-tf-nr="3.6"] { --tf-tint: #E2E1EF; --tf-ink: #494294; }
+body[data-subject="Biologie"][data-tf="nervensystem"] { --tf: #615AB5; --tf-g: #615AB5; --tf-dk: #494294; --tf-mint: #ECECF4; --tf-grey: #5A5969; --tf-ink0: #191825; --g: #615AB5; --dk: #494294; --mint: #ECECF4; --grey: #5A5969; --ink: #191825; --fach-rgb: 97,90,181; --accent: #615AB5; --accent-2: #615AB5; --accent-hover: #494294; --accent-ink: #615AB5; --fach-tint: #ECECF4; --lp-akzent: #615AB5; }
+[data-tf-fach="Biologie"][data-tf-nr="3.7"] { --tf-tint: #E9E1EF; --tf-ink: #673C86; }
+body[data-subject="Biologie"][data-tf="genetik"] { --tf: #854DAC; --tf-g: #854DAC; --tf-dk: #673C86; --tf-mint: #F0ECF4; --tf-grey: #625969; --tf-ink0: #201825; --g: #854DAC; --dk: #673C86; --mint: #F0ECF4; --grey: #625969; --ink: #201825; --fach-rgb: 133,77,172; --accent: #854DAC; --accent-2: #854DAC; --accent-hover: #673C86; --accent-ink: #854DAC; --fach-tint: #F0ECF4; --lp-akzent: #854DAC; }
+[data-tf-fach="Biologie"][data-tf-nr="3.8"] { --tf-tint: #EFE8E1; --tf-ink: #5B4229; }
+body[data-subject="Biologie"][data-tf="evolution"] { --tf: #825E3A; --tf-g: #825E3A; --tf-dk: #5B4229; --tf-mint: #F4F0EC; --tf-grey: #696159; --tf-ink0: #251F18; --g: #825E3A; --dk: #5B4229; --mint: #F4F0EC; --grey: #696159; --ink: #251F18; --fach-rgb: 130,94,58; --accent: #825E3A; --accent-2: #825E3A; --accent-hover: #5B4229; --accent-ink: #825E3A; --fach-tint: #F4F0EC; --lp-akzent: #825E3A; }
+[data-tf-fach="Geografie"][data-tf-nr="3.1"] { --tf-tint: #EFE4E1; --tf-ink: #6D4136; }
+body[data-subject="Geografie"][data-tf="risikoraeume"] { --tf: #935748; --tf-g: #935748; --tf-dk: #6D4136; --tf-mint: #F4EDEC; --tf-grey: #695C59; --tf-ink0: #251B18; --g: #935748; --dk: #6D4136; --mint: #F4EDEC; --grey: #695C59; --ink: #251B18; --fach-rgb: 147,87,72; --accent: #935748; --accent-2: #935748; --accent-hover: #6D4136; --accent-ink: #935748; --fach-tint: #F4EDEC; --lp-akzent: #935748; }
+[data-tf-fach="Geografie"][data-tf-nr="3.2"] { --tf-tint: #EFE9E1; --tf-ink: #59452C; }
+body[data-subject="Geografie"][data-tf="migration"] { --tf: #7E623E; --tf-g: #7E623E; --tf-dk: #59452C; --tf-mint: #F4F0EC; --tf-grey: #696259; --tf-ink0: #251F18; --g: #7E623E; --dk: #59452C; --mint: #F4F0EC; --grey: #696259; --ink: #251F18; --fach-rgb: 126,98,62; --accent: #7E623E; --accent-2: #7E623E; --accent-hover: #59452C; --accent-ink: #7E623E; --fach-tint: #F4F0EC; --lp-akzent: #7E623E; }
+[data-tf-fach="Geografie"][data-tf-nr="3.3"] { --tf-tint: #EBEFE1; --tf-ink: #3D4823; }
+body[data-subject="Geografie"][data-tf="vielfalt-der-erde"] { --tf: #5D6D36; --tf-g: #5D6D36; --tf-dk: #3D4823; --tf-mint: #F1F4EC; --tf-grey: #646959; --tf-ink0: #212518; --g: #5D6D36; --dk: #3D4823; --mint: #F1F4EC; --grey: #646959; --ink: #212518; --fach-rgb: 93,109,54; --accent: #5D6D36; --accent-2: #5D6D36; --accent-hover: #3D4823; --accent-ink: #5D6D36; --fach-tint: #F1F4EC; --lp-akzent: #5D6D36; }
+[data-tf-fach="Geografie"][data-tf-nr="3.4"] { --tf-tint: #EFE1EA; --tf-ink: #743961; }
+body[data-subject="Geografie"][data-tf="armut-reichtum"] { --tf: #9A4C80; --tf-g: #9A4C80; --tf-dk: #743961; --tf-mint: #F4ECF1; --tf-grey: #695963; --tf-ink0: #251821; --g: #9A4C80; --dk: #743961; --mint: #F4ECF1; --grey: #695963; --ink: #251821; --fach-rgb: 154,76,128; --accent: #9A4C80; --accent-2: #9A4C80; --accent-hover: #743961; --accent-ink: #9A4C80; --fach-tint: #F4ECF1; --lp-akzent: #9A4C80; }
+[data-tf-fach="Geografie"][data-tf-nr="3.5"] { --tf-tint: #E1EBEF; --tf-ink: #2C4D59; }
+body[data-subject="Geografie"][data-tf="ressourcen"] { --tf: #3E6D7E; --tf-g: #3E6D7E; --tf-dk: #2C4D59; --tf-mint: #ECF2F4; --tf-grey: #596569; --tf-ink0: #182225; --g: #3E6D7E; --dk: #2C4D59; --mint: #ECF2F4; --grey: #596569; --ink: #182225; --fach-rgb: 62,109,126; --accent: #3E6D7E; --accent-2: #3E6D7E; --accent-hover: #2C4D59; --accent-ink: #3E6D7E; --fach-tint: #ECF2F4; --lp-akzent: #3E6D7E; }
+[data-tf-fach="Geografie"][data-tf-nr="3.6"] { --tf-tint: #EFE1E2; --tf-ink: #783B40; }
+body[data-subject="Geografie"][data-tf="klimawandel"] { --tf: #9D4D54; --tf-g: #9D4D54; --tf-dk: #783B40; --tf-mint: #F4ECEC; --tf-grey: #69595A; --tf-ink0: #251819; --g: #9D4D54; --dk: #783B40; --mint: #F4ECEC; --grey: #69595A; --ink: #251819; --fach-rgb: 157,77,84; --accent: #9D4D54; --accent-2: #9D4D54; --accent-hover: #783B40; --accent-ink: #9D4D54; --fach-tint: #F4ECEC; --lp-akzent: #9D4D54; }
+[data-tf-fach="Geografie"][data-tf-nr="3.7"] { --tf-tint: #E6E1EF; --tf-ink: #5A4285; }
+body[data-subject="Geografie"][data-tf="globalisierung"] { --tf: #7454AB; --tf-g: #7454AB; --tf-dk: #5A4285; --tf-mint: #EFECF4; --tf-grey: #5F5969; --tf-ink0: #1D1825; --g: #7454AB; --dk: #5A4285; --mint: #EFECF4; --grey: #5F5969; --ink: #1D1825; --fach-rgb: 116,84,171; --accent: #7454AB; --accent-2: #7454AB; --accent-hover: #5A4285; --accent-ink: #7454AB; --fach-tint: #EFECF4; --lp-akzent: #7454AB; }
+[data-tf-fach="Geografie"][data-tf-nr="3.8"] { --tf-tint: #E1E6EF; --tf-ink: #384D71; }
+body[data-subject="Geografie"][data-tf="europa"] { --tf: #4A6696; --tf-g: #4A6696; --tf-dk: #384D71; --tf-mint: #ECEFF4; --tf-grey: #595F69; --tf-ink0: #181D25; --g: #4A6696; --dk: #384D71; --mint: #ECEFF4; --grey: #595F69; --ink: #181D25; --fach-rgb: 74,102,150; --accent: #4A6696; --accent-2: #4A6696; --accent-hover: #384D71; --accent-ink: #4A6696; --fach-tint: #ECEFF4; --lp-akzent: #4A6696; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #2C443B; --tf-ink: #ABD9C8; }
+:root[data-theme="dark"] body[data-subject="Biologie"][data-tf="zelle"] { --tf: #9AD6C0; --accent: #9AD6C0; --accent-2: #9AD6C0; --accent-hover: #B7E1D2; --accent-ink: #9AD6C0; --on-accent: #162721; --fach-tint: #2C443B; --lp-akzent: #9AD6C0; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.2"] { --tf-tint: #34442C; --tf-ink: #BAD9AB; }
+:root[data-theme="dark"] body[data-subject="Biologie"][data-tf="lebensraeume"] { --tf: #AED69A; --accent: #AED69A; --accent-2: #AED69A; --accent-hover: #C5E1B7; --accent-ink: #AED69A; --on-accent: #1C2716; --fach-tint: #34442C; --lp-akzent: #AED69A; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.3"] { --tf-tint: #2C4144; --tf-ink: #ABD3D9; }
+:root[data-theme="dark"] body[data-subject="Biologie"][data-tf="stoffwechsel"] { --tf: #9ACED6; --accent: #9ACED6; --accent-2: #9ACED6; --accent-hover: #B7DCE1; --accent-ink: #9ACED6; --on-accent: #162527; --fach-tint: #2C4144; --lp-akzent: #9ACED6; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.4"] { --tf-tint: #442C35; --tf-ink: #D9ABBC; }
+:root[data-theme="dark"] body[data-subject="Biologie"][data-tf="sexualitaet"] { --tf: #D69AB0; --accent: #D69AB0; --accent-2: #D69AB0; --accent-hover: #E1B7C6; --accent-ink: #D69AB0; --on-accent: #27161C; --fach-tint: #442C35; --lp-akzent: #D69AB0; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.5"] { --tf-tint: #2C3944; --tf-ink: #ABC3D9; }
+:root[data-theme="dark"] body[data-subject="Biologie"][data-tf="gesundheit"] { --tf: #9ABAD6; --accent: #9ABAD6; --accent-2: #9ABAD6; --accent-hover: #B7CDE1; --accent-ink: #9ABAD6; --on-accent: #161F27; --fach-tint: #2C3944; --lp-akzent: #9ABAD6; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.6"] { --tf-tint: #2E2C44; --tf-ink: #AEABD9; }
+:root[data-theme="dark"] body[data-subject="Biologie"][data-tf="nervensystem"] { --tf: #9F9AD6; --accent: #9F9AD6; --accent-2: #9F9AD6; --accent-hover: #BAB7E1; --accent-ink: #9F9AD6; --on-accent: #171627; --fach-tint: #2E2C44; --lp-akzent: #9F9AD6; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.7"] { --tf-tint: #3A2C44; --tf-ink: #C6ABD9; }
+:root[data-theme="dark"] body[data-subject="Biologie"][data-tf="genetik"] { --tf: #BD9AD6; --accent: #BD9AD6; --accent-2: #BD9AD6; --accent-hover: #D0B7E1; --accent-ink: #BD9AD6; --on-accent: #201627; --fach-tint: #3A2C44; --lp-akzent: #BD9AD6; }
+:root[data-theme="dark"] [data-tf-fach="Biologie"][data-tf-nr="3.8"] { --tf-tint: #44382C; --tf-ink: #D9C2AB; }
+:root[data-theme="dark"] body[data-subject="Biologie"][data-tf="evolution"] { --tf: #D6B89A; --accent: #D6B89A; --accent-2: #D6B89A; --accent-hover: #E1CCB7; --accent-ink: #D6B89A; --on-accent: #271F16; --fach-tint: #44382C; --lp-akzent: #D6B89A; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.1"] { --tf-tint: #44312C; --tf-ink: #D9B4AB; }
+:root[data-theme="dark"] body[data-subject="Geografie"][data-tf="risikoraeume"] { --tf: #D6A69A; --accent: #D6A69A; --accent-2: #D6A69A; --accent-hover: #E1BFB7; --accent-ink: #D6A69A; --on-accent: #271916; --fach-tint: #44312C; --lp-akzent: #D6A69A; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.2"] { --tf-tint: #44392C; --tf-ink: #D9C4AB; }
+:root[data-theme="dark"] body[data-subject="Geografie"][data-tf="migration"] { --tf: #D6BB9A; --accent: #D6BB9A; --accent-2: #D6BB9A; --accent-hover: #E1CEB7; --accent-ink: #D6BB9A; --on-accent: #271F16; --fach-tint: #44392C; --lp-akzent: #D6BB9A; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.3"] { --tf-tint: #3D442C; --tf-ink: #CBD9AB; }
+:root[data-theme="dark"] body[data-subject="Geografie"][data-tf="vielfalt-der-erde"] { --tf: #C4D69A; --accent: #C4D69A; --accent-2: #C4D69A; --accent-hover: #D5E1B7; --accent-ink: #C4D69A; --on-accent: #222716; --fach-tint: #3D442C; --lp-akzent: #C4D69A; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.4"] { --tf-tint: #442C3C; --tf-ink: #D9ABCA; }
+:root[data-theme="dark"] body[data-subject="Geografie"][data-tf="armut-reichtum"] { --tf: #D69AC2; --accent: #D69AC2; --accent-2: #D69AC2; --accent-hover: #E1B7D3; --accent-ink: #D69AC2; --on-accent: #271621; --fach-tint: #442C3C; --lp-akzent: #D69AC2; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.5"] { --tf-tint: #2C3E44; --tf-ink: #ABCDD9; }
+:root[data-theme="dark"] body[data-subject="Geografie"][data-tf="ressourcen"] { --tf: #9AC6D6; --accent: #9AC6D6; --accent-2: #9AC6D6; --accent-hover: #B7D6E1; --accent-ink: #9AC6D6; --on-accent: #162327; --fach-tint: #2C3E44; --lp-akzent: #9AC6D6; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.6"] { --tf-tint: #442C2E; --tf-ink: #D9ABAE; }
+:root[data-theme="dark"] body[data-subject="Geografie"][data-tf="klimawandel"] { --tf: #D69A9F; --accent: #D69A9F; --accent-2: #D69A9F; --accent-hover: #E1B7BA; --accent-ink: #D69A9F; --on-accent: #271617; --fach-tint: #442C2E; --lp-akzent: #D69A9F; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.7"] { --tf-tint: #352C44; --tf-ink: #BCABD9; }
+:root[data-theme="dark"] body[data-subject="Geografie"][data-tf="globalisierung"] { --tf: #B09AD6; --accent: #B09AD6; --accent-2: #B09AD6; --accent-hover: #C6B7E1; --accent-ink: #B09AD6; --on-accent: #1C1627; --fach-tint: #352C44; --lp-akzent: #B09AD6; }
+:root[data-theme="dark"] [data-tf-fach="Geografie"][data-tf-nr="3.8"] { --tf-tint: #2C3544; --tf-ink: #ABBCD9; }
+:root[data-theme="dark"] body[data-subject="Geografie"][data-tf="europa"] { --tf: #9AB0D6; --accent: #9AB0D6; --accent-2: #9AB0D6; --accent-hover: #B7C6E1; --accent-ink: #9AB0D6; --on-accent: #161C27; --fach-tint: #2C3544; --lp-akzent: #9AB0D6; }
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #2C443B; --tf-ink: #ABD9C8; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.1"] { --tf-tint: #2C443B; --tf-ink: #ABD9C8; }
+  :root[data-theme="auto"] body[data-subject="Biologie"][data-tf="zelle"] { --tf: #9AD6C0; --accent: #9AD6C0; --accent-2: #9AD6C0; --accent-hover: #B7E1D2; --accent-ink: #9AD6C0; --on-accent: #162721; --fach-tint: #2C443B; --lp-akzent: #9AD6C0; }
+  :root:not([data-theme]) body[data-subject="Biologie"][data-tf="zelle"] { --tf: #9AD6C0; --accent: #9AD6C0; --accent-2: #9AD6C0; --accent-hover: #B7E1D2; --accent-ink: #9AD6C0; --on-accent: #162721; --fach-tint: #2C443B; --lp-akzent: #9AD6C0; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.2"] { --tf-tint: #34442C; --tf-ink: #BAD9AB; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.2"] { --tf-tint: #34442C; --tf-ink: #BAD9AB; }
+  :root[data-theme="auto"] body[data-subject="Biologie"][data-tf="lebensraeume"] { --tf: #AED69A; --accent: #AED69A; --accent-2: #AED69A; --accent-hover: #C5E1B7; --accent-ink: #AED69A; --on-accent: #1C2716; --fach-tint: #34442C; --lp-akzent: #AED69A; }
+  :root:not([data-theme]) body[data-subject="Biologie"][data-tf="lebensraeume"] { --tf: #AED69A; --accent: #AED69A; --accent-2: #AED69A; --accent-hover: #C5E1B7; --accent-ink: #AED69A; --on-accent: #1C2716; --fach-tint: #34442C; --lp-akzent: #AED69A; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.3"] { --tf-tint: #2C4144; --tf-ink: #ABD3D9; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.3"] { --tf-tint: #2C4144; --tf-ink: #ABD3D9; }
+  :root[data-theme="auto"] body[data-subject="Biologie"][data-tf="stoffwechsel"] { --tf: #9ACED6; --accent: #9ACED6; --accent-2: #9ACED6; --accent-hover: #B7DCE1; --accent-ink: #9ACED6; --on-accent: #162527; --fach-tint: #2C4144; --lp-akzent: #9ACED6; }
+  :root:not([data-theme]) body[data-subject="Biologie"][data-tf="stoffwechsel"] { --tf: #9ACED6; --accent: #9ACED6; --accent-2: #9ACED6; --accent-hover: #B7DCE1; --accent-ink: #9ACED6; --on-accent: #162527; --fach-tint: #2C4144; --lp-akzent: #9ACED6; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.4"] { --tf-tint: #442C35; --tf-ink: #D9ABBC; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.4"] { --tf-tint: #442C35; --tf-ink: #D9ABBC; }
+  :root[data-theme="auto"] body[data-subject="Biologie"][data-tf="sexualitaet"] { --tf: #D69AB0; --accent: #D69AB0; --accent-2: #D69AB0; --accent-hover: #E1B7C6; --accent-ink: #D69AB0; --on-accent: #27161C; --fach-tint: #442C35; --lp-akzent: #D69AB0; }
+  :root:not([data-theme]) body[data-subject="Biologie"][data-tf="sexualitaet"] { --tf: #D69AB0; --accent: #D69AB0; --accent-2: #D69AB0; --accent-hover: #E1B7C6; --accent-ink: #D69AB0; --on-accent: #27161C; --fach-tint: #442C35; --lp-akzent: #D69AB0; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.5"] { --tf-tint: #2C3944; --tf-ink: #ABC3D9; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.5"] { --tf-tint: #2C3944; --tf-ink: #ABC3D9; }
+  :root[data-theme="auto"] body[data-subject="Biologie"][data-tf="gesundheit"] { --tf: #9ABAD6; --accent: #9ABAD6; --accent-2: #9ABAD6; --accent-hover: #B7CDE1; --accent-ink: #9ABAD6; --on-accent: #161F27; --fach-tint: #2C3944; --lp-akzent: #9ABAD6; }
+  :root:not([data-theme]) body[data-subject="Biologie"][data-tf="gesundheit"] { --tf: #9ABAD6; --accent: #9ABAD6; --accent-2: #9ABAD6; --accent-hover: #B7CDE1; --accent-ink: #9ABAD6; --on-accent: #161F27; --fach-tint: #2C3944; --lp-akzent: #9ABAD6; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.6"] { --tf-tint: #2E2C44; --tf-ink: #AEABD9; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.6"] { --tf-tint: #2E2C44; --tf-ink: #AEABD9; }
+  :root[data-theme="auto"] body[data-subject="Biologie"][data-tf="nervensystem"] { --tf: #9F9AD6; --accent: #9F9AD6; --accent-2: #9F9AD6; --accent-hover: #BAB7E1; --accent-ink: #9F9AD6; --on-accent: #171627; --fach-tint: #2E2C44; --lp-akzent: #9F9AD6; }
+  :root:not([data-theme]) body[data-subject="Biologie"][data-tf="nervensystem"] { --tf: #9F9AD6; --accent: #9F9AD6; --accent-2: #9F9AD6; --accent-hover: #BAB7E1; --accent-ink: #9F9AD6; --on-accent: #171627; --fach-tint: #2E2C44; --lp-akzent: #9F9AD6; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.7"] { --tf-tint: #3A2C44; --tf-ink: #C6ABD9; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.7"] { --tf-tint: #3A2C44; --tf-ink: #C6ABD9; }
+  :root[data-theme="auto"] body[data-subject="Biologie"][data-tf="genetik"] { --tf: #BD9AD6; --accent: #BD9AD6; --accent-2: #BD9AD6; --accent-hover: #D0B7E1; --accent-ink: #BD9AD6; --on-accent: #201627; --fach-tint: #3A2C44; --lp-akzent: #BD9AD6; }
+  :root:not([data-theme]) body[data-subject="Biologie"][data-tf="genetik"] { --tf: #BD9AD6; --accent: #BD9AD6; --accent-2: #BD9AD6; --accent-hover: #D0B7E1; --accent-ink: #BD9AD6; --on-accent: #201627; --fach-tint: #3A2C44; --lp-akzent: #BD9AD6; }
+  :root[data-theme="auto"] [data-tf-fach="Biologie"][data-tf-nr="3.8"] { --tf-tint: #44382C; --tf-ink: #D9C2AB; }
+  :root:not([data-theme]) [data-tf-fach="Biologie"][data-tf-nr="3.8"] { --tf-tint: #44382C; --tf-ink: #D9C2AB; }
+  :root[data-theme="auto"] body[data-subject="Biologie"][data-tf="evolution"] { --tf: #D6B89A; --accent: #D6B89A; --accent-2: #D6B89A; --accent-hover: #E1CCB7; --accent-ink: #D6B89A; --on-accent: #271F16; --fach-tint: #44382C; --lp-akzent: #D6B89A; }
+  :root:not([data-theme]) body[data-subject="Biologie"][data-tf="evolution"] { --tf: #D6B89A; --accent: #D6B89A; --accent-2: #D6B89A; --accent-hover: #E1CCB7; --accent-ink: #D6B89A; --on-accent: #271F16; --fach-tint: #44382C; --lp-akzent: #D6B89A; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.1"] { --tf-tint: #44312C; --tf-ink: #D9B4AB; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.1"] { --tf-tint: #44312C; --tf-ink: #D9B4AB; }
+  :root[data-theme="auto"] body[data-subject="Geografie"][data-tf="risikoraeume"] { --tf: #D6A69A; --accent: #D6A69A; --accent-2: #D6A69A; --accent-hover: #E1BFB7; --accent-ink: #D6A69A; --on-accent: #271916; --fach-tint: #44312C; --lp-akzent: #D6A69A; }
+  :root:not([data-theme]) body[data-subject="Geografie"][data-tf="risikoraeume"] { --tf: #D6A69A; --accent: #D6A69A; --accent-2: #D6A69A; --accent-hover: #E1BFB7; --accent-ink: #D6A69A; --on-accent: #271916; --fach-tint: #44312C; --lp-akzent: #D6A69A; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.2"] { --tf-tint: #44392C; --tf-ink: #D9C4AB; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.2"] { --tf-tint: #44392C; --tf-ink: #D9C4AB; }
+  :root[data-theme="auto"] body[data-subject="Geografie"][data-tf="migration"] { --tf: #D6BB9A; --accent: #D6BB9A; --accent-2: #D6BB9A; --accent-hover: #E1CEB7; --accent-ink: #D6BB9A; --on-accent: #271F16; --fach-tint: #44392C; --lp-akzent: #D6BB9A; }
+  :root:not([data-theme]) body[data-subject="Geografie"][data-tf="migration"] { --tf: #D6BB9A; --accent: #D6BB9A; --accent-2: #D6BB9A; --accent-hover: #E1CEB7; --accent-ink: #D6BB9A; --on-accent: #271F16; --fach-tint: #44392C; --lp-akzent: #D6BB9A; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.3"] { --tf-tint: #3D442C; --tf-ink: #CBD9AB; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.3"] { --tf-tint: #3D442C; --tf-ink: #CBD9AB; }
+  :root[data-theme="auto"] body[data-subject="Geografie"][data-tf="vielfalt-der-erde"] { --tf: #C4D69A; --accent: #C4D69A; --accent-2: #C4D69A; --accent-hover: #D5E1B7; --accent-ink: #C4D69A; --on-accent: #222716; --fach-tint: #3D442C; --lp-akzent: #C4D69A; }
+  :root:not([data-theme]) body[data-subject="Geografie"][data-tf="vielfalt-der-erde"] { --tf: #C4D69A; --accent: #C4D69A; --accent-2: #C4D69A; --accent-hover: #D5E1B7; --accent-ink: #C4D69A; --on-accent: #222716; --fach-tint: #3D442C; --lp-akzent: #C4D69A; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.4"] { --tf-tint: #442C3C; --tf-ink: #D9ABCA; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.4"] { --tf-tint: #442C3C; --tf-ink: #D9ABCA; }
+  :root[data-theme="auto"] body[data-subject="Geografie"][data-tf="armut-reichtum"] { --tf: #D69AC2; --accent: #D69AC2; --accent-2: #D69AC2; --accent-hover: #E1B7D3; --accent-ink: #D69AC2; --on-accent: #271621; --fach-tint: #442C3C; --lp-akzent: #D69AC2; }
+  :root:not([data-theme]) body[data-subject="Geografie"][data-tf="armut-reichtum"] { --tf: #D69AC2; --accent: #D69AC2; --accent-2: #D69AC2; --accent-hover: #E1B7D3; --accent-ink: #D69AC2; --on-accent: #271621; --fach-tint: #442C3C; --lp-akzent: #D69AC2; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.5"] { --tf-tint: #2C3E44; --tf-ink: #ABCDD9; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.5"] { --tf-tint: #2C3E44; --tf-ink: #ABCDD9; }
+  :root[data-theme="auto"] body[data-subject="Geografie"][data-tf="ressourcen"] { --tf: #9AC6D6; --accent: #9AC6D6; --accent-2: #9AC6D6; --accent-hover: #B7D6E1; --accent-ink: #9AC6D6; --on-accent: #162327; --fach-tint: #2C3E44; --lp-akzent: #9AC6D6; }
+  :root:not([data-theme]) body[data-subject="Geografie"][data-tf="ressourcen"] { --tf: #9AC6D6; --accent: #9AC6D6; --accent-2: #9AC6D6; --accent-hover: #B7D6E1; --accent-ink: #9AC6D6; --on-accent: #162327; --fach-tint: #2C3E44; --lp-akzent: #9AC6D6; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.6"] { --tf-tint: #442C2E; --tf-ink: #D9ABAE; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.6"] { --tf-tint: #442C2E; --tf-ink: #D9ABAE; }
+  :root[data-theme="auto"] body[data-subject="Geografie"][data-tf="klimawandel"] { --tf: #D69A9F; --accent: #D69A9F; --accent-2: #D69A9F; --accent-hover: #E1B7BA; --accent-ink: #D69A9F; --on-accent: #271617; --fach-tint: #442C2E; --lp-akzent: #D69A9F; }
+  :root:not([data-theme]) body[data-subject="Geografie"][data-tf="klimawandel"] { --tf: #D69A9F; --accent: #D69A9F; --accent-2: #D69A9F; --accent-hover: #E1B7BA; --accent-ink: #D69A9F; --on-accent: #271617; --fach-tint: #442C2E; --lp-akzent: #D69A9F; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.7"] { --tf-tint: #352C44; --tf-ink: #BCABD9; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.7"] { --tf-tint: #352C44; --tf-ink: #BCABD9; }
+  :root[data-theme="auto"] body[data-subject="Geografie"][data-tf="globalisierung"] { --tf: #B09AD6; --accent: #B09AD6; --accent-2: #B09AD6; --accent-hover: #C6B7E1; --accent-ink: #B09AD6; --on-accent: #1C1627; --fach-tint: #352C44; --lp-akzent: #B09AD6; }
+  :root:not([data-theme]) body[data-subject="Geografie"][data-tf="globalisierung"] { --tf: #B09AD6; --accent: #B09AD6; --accent-2: #B09AD6; --accent-hover: #C6B7E1; --accent-ink: #B09AD6; --on-accent: #1C1627; --fach-tint: #352C44; --lp-akzent: #B09AD6; }
+  :root[data-theme="auto"] [data-tf-fach="Geografie"][data-tf-nr="3.8"] { --tf-tint: #2C3544; --tf-ink: #ABBCD9; }
+  :root:not([data-theme]) [data-tf-fach="Geografie"][data-tf-nr="3.8"] { --tf-tint: #2C3544; --tf-ink: #ABBCD9; }
+  :root[data-theme="auto"] body[data-subject="Geografie"][data-tf="europa"] { --tf: #9AB0D6; --accent: #9AB0D6; --accent-2: #9AB0D6; --accent-hover: #B7C6E1; --accent-ink: #9AB0D6; --on-accent: #161C27; --fach-tint: #2C3544; --lp-akzent: #9AB0D6; }
+  :root:not([data-theme]) body[data-subject="Geografie"][data-tf="europa"] { --tf: #9AB0D6; --accent: #9AB0D6; --accent-2: #9AB0D6; --accent-hover: #B7C6E1; --accent-ink: #9AB0D6; --on-accent: #161C27; --fach-tint: #2C3544; --lp-akzent: #9AB0D6; }
+}
+/* Themenfeld-Seite und Begriffe-Seite: Kopfzeile in der Farbe des Themenfelds */
+body[data-subject][data-tf] .eyebrow::before { background: var(--tf); }
+body[data-subject][data-tf] .fach-intro { background: var(--fach-tint); }
+body[data-subject][data-tf] .fach-intro::after { background: var(--tf); }

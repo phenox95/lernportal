@@ -14,7 +14,7 @@
 const VERSION = "lp-1";
 const MAX = 400;                           // höchstens so viele Kopien, danach fallen die ältesten weg (knapper Speicher auf Schulgeräten)
 const WARTEN = 4000;                       // Millisekunden, danach bei Seitenaufrufen die gespeicherte Kopie
-const START = ["./", "offline.html", "assets/css/styles.css", "assets/js/prefs.js", "assets/js/nav.js", "assets/js/app.js",
+const START = ["./", "offline.html", "assets/css/styles.css", "assets/css/themenfarben.css", "assets/js/prefs.js", "assets/js/nav.js", "assets/js/app.js",
   "projects.json", "themenfelder.json", "bne.json", "impuls.json", "assets/favicon/favicon.svg"];
 
 self.addEventListener("install", event => {
