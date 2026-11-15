@@ -16,6 +16,7 @@
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
 <style>
+.slide.hz-r{padding-right:132px}.slide.hz-r .badge{right:132px}
 .hz-card{border:3px solid var(--g);border-radius:16px;padding:10px 16px;background:#fff}
 .hz-card h2{margin:0 0 6px;font-size:24px;color:var(--dk)}
 .hz-k{min-height:46px;background:#fff;border:3px dashed var(--g);border-radius:14px;padding:8px 12px;font-size:22px;line-height:1.35;outline:none}
@@ -156,7 +157,7 @@
 </section>
 
 <!-- 7 KLASSENERGEBNIS -->
-<section class="slide" data-min="4">
+<section class="slide hz-r" data-min="4">
 <p class="phase" data-ph="er">Auswertung</p>
 <h1 class="k">Klassenergebnis: Welpen mit langem Fell</h1>
 <span class="badge">4 Min. · Plenum</span>
@@ -170,18 +171,18 @@
 <div class="grid3" style="margin-top:10px;gap:12px"><div class="hz-st"><div class="hz-kz" id="hzS">0</div>Summe</div><div class="hz-st"><div class="hz-kz" id="hzCP">–</div>Anteil</div><div class="hz-st"><div class="hz-kz" id="hzMM">–</div>Streuung</div></div>
 </div>
 </div>
-<p class="task" style="font-size:21px;margin:8px 0 0;padding-left:84px"><span class="snr">1</span><span><b>Vergleiche</b> deine Vorhersage mit deinem Ergebnis und dein Ergebnis mit der Klassensumme (Modell: ≈ 25 %, ≈ 5 von 20).</span></p>
-<p class="fb" id="hzCmp" style="font-size:19px;margin:2px 0 0;padding-left:84px"></p>
+<p class="task" style="font-size:21px;margin:8px 0 0;padding-left:0"><span class="snr">1</span><span><b>Vergleiche</b> deine Vorhersage mit deinem Ergebnis und dein Ergebnis mit der Klassensumme (Modell: ≈ 25 %, ≈ 5 von 20).</span></p>
+<p class="fb" id="hzCmp" style="font-size:19px;margin:2px 0 0;padding-left:44px"></p>
 </section>
 
 <!-- 8 STICHPROBE -->
-<section class="slide" data-min="2">
+<section class="slide hz-r" data-min="2">
 <p class="phase" data-ph="er">Auswertung · Stichprobe</p>
 <h1 class="k">Wie viel sagt eine Stichprobe?</h1>
 <span class="badge">2 Min. · Plenum</span>
 <div class="hz-row" id="hzBigN" style="margin-bottom:12px"><button class="b" data-n="20">20 Welpen</button><button class="b" data-n="100">100</button><button class="b" data-n="1000">1000</button><button class="b" data-n="10000">10 000</button><span class="tip" style="margin:0">Wähle eine Anzahl und beobachte den Anteil.</span></div>
 <canvas class="hz-cv" id="hzLC" height="290"></canvas>
-<p class="shilfe" id="hzLT" style="margin:10px 0 0 84px;font-size:21px;padding:10px 16px">Gestrichelte Linie: 25 %, der Erwartungswert des Modells.</p>
+<p class="shilfe" id="hzLT" style="margin:10px 0 0 0;font-size:21px;padding:10px 16px">Gestrichelte Linie: 25 %, der Erwartungswert des Modells.</p>
 </section>
 
 <!-- 9 BEURTEILEN -->
@@ -290,7 +291,7 @@ $("#hzSend").onclick=function(){var k=cin.findIndex(function(e){return e.value==
 $("#hzSim").onclick=function(){cin.forEach(function(e){e.value=bin(20)});refresh()};
 $("#hzClr").onclick=function(){cin.forEach(function(e){e.value=""});refresh()};
 var gc="#0F6E56",oc="#E67E22";function farben(){gc=getComputedStyle(document.body).getPropertyValue("--g").trim()||gc}
-function cv(el){farben();var d=window.devicePixelRatio||1,w=el.clientWidth||600,h=parseInt(el.getAttribute("height"),10);el.width=w*d;el.height=h*d;var g=el.getContext("2d");g.setTransform(d,0,0,d,0,0);return{g:g,w:w,h:h}}
+function cv(el){farben();var d=window.devicePixelRatio||1,w=el.clientWidth||600;if(!el.dataset.h)el.dataset.h=el.getAttribute("height");var h=parseInt(el.dataset.h,10);el.style.height=h+"px";el.width=Math.round(w*d);el.height=Math.round(h*d);var g=el.getContext("2d");g.setTransform(d,0,0,d,0,0);return{g:g,w:w,h:h}}
 function cmp(){var pred=parseInt($("#hzPred").value,10),t="";if(!isNaN(pred)&&W.n===20)t+="Deine Vorhersage: "+pred+" · dein Ergebnis: "+W.l+". ";var v=vals();if(v.length)t+="Klassenanteil: "+$("#hzCP").textContent+", Modell erwartet ≈ 25 %.";$("#hzCmp").textContent=t}
 function draw(){var v=vals(),n=v.length,s=v.reduce(function(a,b){return a+b},0);
  $("#hzS").textContent=s;$("#hzCP").textContent=n?(Math.round(s/(n*20)*1000)/10).toString().replace(".",",")+" %":"–";$("#hzMM").textContent=n?Math.min.apply(null,v)+"–"+Math.max.apply(null,v):"–";
