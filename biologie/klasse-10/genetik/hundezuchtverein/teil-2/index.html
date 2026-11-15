@@ -1,574 +1,321 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Der Hundezuchtverein · Teil 2 · Hypothesen und Münzmodell</title>
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Der Hundezuchtverein – Teil 2: Hypothesen und Münzmodell</title>
+<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Hypothesen zum Zuchtbuch, Münzmodell für Erbanlagen, Münzwurf mit Klassentabelle, Beurteilen des Modells.">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
 <style>
-@font-face{font-family:"Andika";font-weight:400;src:url(../../../../../assets/fonts/andika-regular.woff2) format("woff2");font-display:swap}
-@font-face{font-family:"Andika";font-weight:700;src:url(../../../../../assets/fonts/andika-bold.woff2) format("woff2");font-display:swap}
-:root{--ink:#12181F;--blue:#0B5C7A;--orange:#D96F00;--grey:#586370;--light:#DCEAF2;--paper:#F5F7F9;--line:#C9D1D8;--fs:19px}
-*{box-sizing:border-box}
-html,body{margin:0;height:100%}
-body{font-family:"Andika",Verdana,Arial,sans-serif;color:var(--ink);background:var(--paper);font-size:var(--fs);line-height:1.45;display:flex;flex-direction:column;overflow:hidden}
-h1,h2,h3{font-family:"Andika",sans-serif;margin:0;line-height:1.15}
-h2{font-size:1.9em}h3{font-size:1.15em}
-button,input,textarea,select{font:inherit;color:inherit}
-b,strong{font-weight:700}
-/* Kopfzeile */
-header{display:flex;align-items:center;gap:12px;padding:8px 16px;background:var(--ink);color:#fff;flex:none;flex-wrap:wrap}
-header .brand{font-family:"Andika";font-size:.85em;letter-spacing:.04em}
-header .brand span{opacity:.7;font-family:"Andika";font-weight:400;letter-spacing:0}
-.sp{flex:1}
-.hbtn{background:transparent;border:2px solid #fff;color:#fff;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.8em}
-.hbtn:hover,.hbtn[aria-pressed=true]{background:#fff;color:var(--ink)}
-.clock{font-family:"Andika";font-size:1.15em;min-width:4.2em;text-align:center;border:2px solid #fff;border-radius:8px;padding:2px 10px;font-variant-numeric:tabular-nums}
-.clock.over{background:var(--orange);border-color:var(--orange)}
-/* Layout */
-.wrap{flex:1;display:flex;min-height:0}
-nav{width:230px;flex:none;background:#fff;border-right:2px solid var(--line);overflow:auto;padding:10px 8px}
-nav button{display:flex;width:100%;gap:8px;align-items:flex-start;text-align:left;background:none;border:2px solid transparent;border-radius:10px;padding:7px 8px;cursor:pointer;font-size:.8em;margin-bottom:3px}
-nav button .n{flex:none;width:1.8em;height:1.8em;border-radius:50%;border:2px solid var(--blue);display:grid;place-items:center;font-weight:700;color:var(--blue);font-size:.9em}
-nav button small{display:block;color:var(--grey);font-size:.85em}
-nav button:hover{background:var(--paper)}
-nav button[aria-current=step]{border-color:var(--ink);background:var(--light)}
-nav button[aria-current=step] .n{background:var(--blue);color:#fff}
-nav button.done .n::after{content:"";}
-nav button.done .n{background:var(--light)}
-main{flex:1;overflow:auto;padding:22px 32px 90px;position:relative}
-.ph{display:none;max-width:1100px;margin:0 auto}
-.ph.on{display:block;animation:in .25s ease}
-@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.tag{display:inline-block;font-family:"Andika";font-size:.7em;letter-spacing:.06em;background:var(--light);color:var(--blue);padding:3px 9px;border-radius:5px;margin-bottom:8px;text-transform:uppercase}
-.lead{margin:8px 0 18px;color:var(--grey)}
-.card{background:#fff;border:2px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}
-.card.tint{background:var(--light);border-color:var(--light)}
-.card.dark{background:var(--blue);color:#fff;border-color:var(--blue)}
-.task{font-size:1.15em}
-.task b.op{color:var(--blue);font-size:1.05em}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-@media(max-width:900px){nav{display:none}.grid2,.grid3,.grid4{grid-template-columns:1fr}main{padding:16px}}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.btn{background:var(--blue);color:#fff;border:2px solid var(--blue);border-radius:10px;padding:8px 16px;cursor:pointer;font-weight:700}
-.btn:hover{background:var(--ink);border-color:var(--ink)}
-.btn.ghost{background:#fff;color:var(--blue)}
-.btn.ghost:hover{background:var(--light)}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-.lvl{font-family:"Andika";letter-spacing:.1em;color:var(--grey);font-size:.8em}
-.badge{display:inline-flex;gap:6px;align-items:center;background:var(--light);border-radius:8px;padding:4px 10px;font-size:.78em;color:var(--blue);font-weight:700}
-.badge span{font-weight:400;color:var(--ink)}
-textarea,input[type=text],input[type=number]{width:100%;border:2px solid var(--ink);border-radius:10px;padding:9px 12px;background:#fff}
-textarea{min-height:5.2em;resize:vertical;line-height:1.5}
-textarea:focus,input:focus,button:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
-label.f{display:block;font-weight:700;font-size:.85em;margin:10px 0 4px}
-.hint{font-size:.82em;color:var(--grey)}
-/* Impuls */
-.photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.photos figure{margin:0;background:#fff;border:2px solid var(--ink);border-radius:12px;overflow:hidden}
-.photos img{display:block;width:100%;height:auto}
-.photos figcaption{padding:8px 12px;font-weight:700;min-height:2.6em}
-.photos figcaption.hid{visibility:hidden}
-.big{font-family:"Andika";font-size:2.4em}
-.stille{font-family:"Andika";font-size:3em;color:var(--blue);min-width:2.2em;text-align:center}
-/* Auswahl: Rahmen + Haken, keine Farbe als Signal */
-.choice{cursor:pointer;border:2px solid var(--line);border-radius:12px;background:#fff;padding:12px 14px;position:relative;text-align:left;width:100%}
-.choice:hover{border-color:var(--ink)}
-.choice[aria-pressed=true]{border:5px double var(--ink);padding:9px 11px;background:repeating-linear-gradient(135deg,#fff 0 9px,var(--light) 9px 11px)}
-.choice[aria-pressed=true]::after{content:"gewählt";position:absolute;top:8px;right:10px;font-size:.7em;font-weight:700;background:var(--ink);color:#fff;border-radius:5px;padding:1px 7px}
-/* Fragenkarten */
-.q{cursor:pointer}
-.q.lit{background:var(--blue);color:#fff;border-color:var(--ink)}
-/* Tipps */
-.tipp{border:2px dashed var(--grey);border-radius:12px;padding:10px 14px;margin:12px 0;background:#fff}
-.tipp>.th{font-weight:700;font-size:.85em;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.tipp .st{display:none;margin-top:8px;padding-left:10px;border-left:4px solid var(--blue);font-size:.92em}
-.tipp .st.on{display:block}
-.tipp .st b{color:var(--blue)}
-/* Hypothesen */
-.hcirc{flex:none;width:2.6em;height:2.6em;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:"Andika"}
-.hcirc.o{background:var(--orange)}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
-.chip{border:2px solid var(--blue);background:#fff;color:var(--blue);border-radius:999px;padding:3px 12px;cursor:pointer;font-size:.85em}
-.chip:hover{background:var(--blue);color:#fff}
-.rev{display:none}.rev.on{display:block}
-/* Modell / Münzen */
-.coin{width:84px;height:84px;border-radius:50%;border:4px solid var(--ink);background:#fff;display:grid;place-items:center;font-family:"Andika";font-size:2.4em;transition:transform .5s}
-.coin.fl{animation:flip .55s ease}
-@keyframes flip{0%{transform:rotateY(0)}50%{transform:rotateY(540deg) scale(1.15)}100%{transform:rotateY(1080deg)}}
-.coin.l{background:repeating-linear-gradient(135deg,#fff 0 7px,var(--light) 7px 9px)}
-.rule{display:flex;gap:12px;align-items:flex-start}
-.rule .hcirc{background:var(--blue);width:2em;height:2em;font-size:.95em}
-.outcome{border:2px solid var(--ink);border-radius:10px;padding:8px 12px;text-align:center;min-width:6.6em;background:#fff}
-.outcome.lang{border-width:5px;border-style:double;background:repeating-linear-gradient(135deg,#fff 0 7px,var(--light) 7px 9px)}
-.outcome.hit{box-shadow:0 0 0 4px var(--orange)}
-.tally{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
-.tc{border:2px solid var(--line);border-radius:8px;padding:5px 2px;text-align:center;font-size:.8em;min-height:3.4em;background:#fff;font-variant-numeric:tabular-nums}
-.tc.s{border-color:var(--ink)}
-.tc.lang{border:4px double var(--ink);background:repeating-linear-gradient(135deg,#fff 0 7px,var(--light) 7px 9px);font-weight:700}
-.tc i{display:block;font-style:normal;font-size:.7em;color:var(--grey)}
-.kz{font-family:"Andika";font-size:2.6em;color:var(--blue);line-height:1}
-canvas{width:100%;display:block;background:#fff;border:2px solid var(--line);border-radius:12px}
-table{border-collapse:collapse;width:100%}
-th,td{border-bottom:2px solid var(--line);padding:4px 8px;text-align:left}
-td input{padding:3px 8px;width:5.2em;border-radius:8px}
-.tbl2{display:grid;grid-template-columns:1fr 1fr;gap:6px 20px}
-.tbl2 .r{display:flex;align-items:center;gap:8px}
-.tbl2 .r span{width:5.5em;font-size:.85em}
-/* Fuß */
-footer{position:fixed;left:230px;right:0;bottom:0;background:#fff;border-top:2px solid var(--line);padding:8px 24px;display:flex;gap:10px;align-items:center;z-index:5}
-@media(max-width:900px){footer{left:0}}
-.bar{flex:1;height:10px;border-radius:6px;background:var(--light);overflow:hidden}
-.bar i{display:block;height:100%;background:var(--blue);width:0;transition:width .3s}
-/* Lehrkraft */
-.sr{position:absolute;left:-9999px}
-@media print{header,nav,footer,</style>
+.hz-card{border:3px solid var(--g);border-radius:16px;padding:10px 16px;background:#fff}
+.hz-card h2{margin:0 0 6px;font-size:24px;color:var(--dk)}
+.hz-k{min-height:46px;background:#fff;border:3px dashed var(--g);border-radius:14px;padding:8px 12px;font-size:22px;line-height:1.35;outline:none}
+.hz-k:focus-visible,.hz-in:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.hz-l{display:block;font-weight:700;font-size:19px;margin:8px 0 3px;color:var(--grey)}
+.hz-h{margin:10px 0 0;font-size:22px;line-height:1.35;background:var(--mint);border-radius:12px;padding:10px 16px;display:none}
+.hz-h.on{display:block}
+.slide.zeigt .hz-over,.hz-h.on.hz-over{display:block}
+.hz-over{position:absolute;left:110px;right:110px;top:592px;z-index:8;box-shadow:0 6px 24px rgba(0,0,0,.3);border:3px solid var(--g);background:#fff;font-size:20px;line-height:1.3;padding:8px 14px;margin:0}
+.hz-circ{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--dk);color:#fff;font-weight:700;font-size:20px;margin-right:8px;flex:none}
+.hz-circ.o{background:var(--o);color:var(--ink)}
+.hz-fig{margin:0;text-align:center}.hz-fig figcaption{font-size:24px;font-weight:700;margin-top:8px;min-height:36px}
+.hz-fig figcaption.hid{visibility:hidden}
+.hz-big{font-size:96px;font-weight:700;color:var(--g);min-width:2.2em;text-align:center;line-height:1}
+.hz-coin{width:92px;height:92px;border-radius:50%;border:5px solid var(--ink);background:#fff;display:grid;place-items:center;font-size:46px;font-weight:700;color:var(--ink)}
+.hz-coin.l{background:repeating-linear-gradient(135deg,#fff 0 7px,#cfe3d8 7px 9px)}
+.hz-coin.fl{animation:hzflip .55s ease}
+@keyframes hzflip{0%{transform:rotateY(0)}50%{transform:rotateY(540deg) scale(1.15)}100%{transform:rotateY(1080deg)}}
+.hz-o{border:3px solid var(--ink);border-radius:12px;padding:6px 14px;text-align:center;font-size:24px;font-weight:700;background:#fff;color:var(--ink)}
+.hz-o small{display:block;font-size:16px;color:var(--grey);font-weight:400}
+.hz-o.lang{border-style:double;border-width:6px;background:repeating-linear-gradient(135deg,#fff 0 7px,#cfe3d8 7px 9px)}
+.hz-o.hit{box-shadow:0 0 0 5px var(--y)}
+.hz-in{width:7em;font:700 28px Andika,Verdana,sans-serif;padding:6px 12px;border:3px solid var(--ink);border-radius:12px}
+.hz-tally{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}
+.hz-tc{border:2px solid #c9d3ce;border-radius:10px;padding:2px 2px;text-align:center;font-size:17px;min-height:56px;background:#fff;line-height:1.2}
+.hz-tc.s{border-color:var(--ink)}
+.hz-tc.lang{border:5px double var(--ink);background:repeating-linear-gradient(135deg,#fff 0 7px,#cfe3d8 7px 9px);font-weight:700}
+.hz-tc i{display:block;font-style:normal;font-size:15px;color:var(--grey)}
+.hz-kz{font-size:38px;font-weight:700;color:var(--g);line-height:1}
+.hz-st{background:var(--mint);border-radius:14px;padding:10px 14px;font-size:20px;line-height:1.25}
+.hz-tab{display:grid;grid-template-columns:1fr 1fr;gap:3px 22px}
+.hz-tab div{display:flex;align-items:center;gap:8px;font-size:18px}
+.hz-tab span{width:5em}
+.hz-tab input{width:4.5em;font:18px Andika,Verdana,sans-serif;padding:1px 8px;border:2px solid var(--ink);border-radius:8px}
+.hz-cv{width:100%;display:block;background:#fff;border:2px solid #c9d3ce;border-radius:12px}
+.hz-ch{display:block;width:100%;text-align:left;font:inherit;font-size:26px;border:3px solid #c9d3ce;border-radius:14px;background:#fff;padding:12px 16px;cursor:pointer;color:var(--ink);touch-action:manipulation}
+.hz-ch[aria-pressed=true]{border:6px double var(--ink);padding:9px 13px;background:repeating-linear-gradient(135deg,#fff 0 9px,#cfe3d8 9px 11px)}
+.hz-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.hz-moderation{font-size:34px;font-weight:700;color:var(--dk)}
+.hz-prog{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hz-prog div{border:3px solid var(--line,#c9d3ce);border-radius:14px;padding:10px 14px;font-size:22px;display:flex;align-items:center;gap:10px}
+.hz-prog div.heute{border-color:var(--g);background:var(--mint)}
+.hz-prog div.next{background:var(--dk);color:#fff;border-color:var(--dk)}
+</style>
 </head>
-<body>
-<header>
-  <div class="brand">DER HUNDEZUCHTVEREIN <span>· Gutachten Teil 2 · Hypothesen und Modell</span></div>
-  <div class="sp"></div>
-  <a class="hbtn" href="../../../../../" style="text-decoration:none">Portal</a>
-  <div class="clock" id="clock" title="Zeit der Phase (Leertaste: Start/Pause)">3:00</div>
-  <button class="hbtn" id="tgo">Start</button>
-  <button class="hbtn" id="treset">Reset</button>
-  <button class="hbtn" id="bread" title="Aktuelle Aufgabe vorlesen (R)">Vorlesen</button>
-  <button class="hbtn" id="bminus" aria-label="Schrift kleiner">A−</button>
-  <button class="hbtn" id="bplus" aria-label="Schrift größer">A+</button>
-  <button class="hbtn" id="bfull" title="Vollbild (F)">Vollbild</button>
-</header>
-<div class="wrap">
-<nav id="nav" aria-label="Phasen"></nav>
-<main id="main">
+<body class="lp-pres" data-root="../../../../../" data-title="Der Hundezuchtverein – Teil 2" data-subject="Biologie" data-grade="Klasse 10">
+<noscript><p class="lp-noscript"><a href="../../../../../">Zurück zum Portal</a> · Diese Seite benötigt JavaScript für die vollständige Darstellung.</p></noscript>
+<div id="buehne">
+<div id="stage">
 
-<!-- 0 DO NOW -->
-<section class="ph" id="p0" data-t="3" data-title="Do Now" data-sub="3 Min · Einzelarbeit">
-  <span class="tag">Do Now · 3 Min · Einzelarbeit</span>
-  <div class="grid2" style="grid-template-columns:2fr 1fr">
-    <div>
-      <div class="card tint task" data-read>
-        <b class="op">Erkläre</b>, warum das Zuchtbuch allein nicht zeigt, ob die Anlage für langes Fell verloren ist.
-      </div>
-      <div class="row"><span class="badge">Logbuch Seite 4 <span>Feld „Do Now“</span></span><span class="lvl" title="Niveau E–G">●●○</span></div>
-      <p class="hint">Ohne Hilfe und ohne Gespräch. Die Anweisung dürft ihr euch von einer Mitschülerin oder einem Mitschüler vorlesen lassen. Schreibt zuerst ins Logbuch. Dieses Feld ist nur Notizraum.</p>
-      <textarea data-save="donow" placeholder="Notizraum (die Antwort gehört ins Logbuch)"></textarea>
-      <div class="tipp" data-tipp>
-        <div class="th">Hilfe (3 Stufen, nacheinander öffnen) <button class="btn ghost" style="padding:2px 12px" data-next>Stufe 1 zeigen</button></div>
-        <div class="st"><b>1 · Wohin schauen:</b> Begriffskarte, Logbuch Seite 1.</div>
-        <div class="st"><b>2 · Wie vorgehen:</b> Trenne, was im Zuchtbuch steht (Fell der Tiere), von dem, was in den Tieren steckt.</div>
-        <div class="st"><b>3 · Teilergebnis:</b> Das Zuchtbuch zeigt nur das ______ der Tiere.</div>
-      </div>
-    </div>
-    <div class="card dark" style="text-align:center">
-      <div class="big" id="dnClock">3:00</div>
-      <div>Minuten</div>
-      <p style="margin:14px 0 0"><button class="btn ghost" id="dnGo">Start</button></p>
-    </div>
-  </div>
-  <div class="row" style="margin-top:8px"><button class="btn" id="dnAbgleich">Abgleich zeigen</button></div>
-  <div class="rev card" id="dnRev">
-    <div class="grid2">
-      <div><h3>Das sieht man</h3><ul><li>Das Fell der Tiere: kurz oder lang.</li><li>Die Zahlen der Würfe.</li></ul></div>
-      <div><h3>Das sieht man nicht</h3><ul><li>Was in den Tieren steckt.</li><li>Ob eine Anlage vorhanden ist, die das Fell nicht zeigt.</li></ul></div>
-    </div>
-  </div>
+<!-- 1 DO NOW -->
+<section class="slide" data-min="3">
+<p class="phase" data-ph="dn">Einstieg · Do Now · Wiederholung der Spielstunde</p>
+<h1 class="k">Das Zuchtbuch</h1>
+<span class="badge">3 Min. · allein</span>
+<p class="task big"><span class="snr">1</span><span><b>Erkläre</b>, warum das Zuchtbuch allein nicht zeigt, ob die Anlage für langes Fell verloren ist.</span><i class="lvl">E–G</i></p>
+<p class="shilfe">Logbuch Seite 4, Feld „Do Now“. Ohne Hilfe und ohne Gespräch. Die Anweisung darf dir jemand vorlesen.</p>
+<div class="hz-row" style="margin-top:18px"><button class="b" data-hilfe>Hilfe Stufe 1 zeigen</button><button class="b lz" data-zeige>Abgleich zeigen</button></div>
+<div class="hz-h" data-stufen style="font-size:24px"><span data-s>Wohin schauen: Begriffskarte, Logbuch Seite 1.</span><span data-s>Wie vorgehen: Trenne, was im Zuchtbuch steht (Fell der Tiere), von dem, was in den Tieren steckt.</span><span data-s>Teilergebnis: Das Zuchtbuch zeigt nur das ______ der Tiere.</span></div>
+<div class="lsg-box" style="margin-top:16px"><div class="grid2"><div class="hz-card"><h2>Das sieht man</h2>Das Fell der Tiere: kurz oder lang. Die Zahlen der Würfe.</div><div class="hz-card"><h2>Das sieht man nicht</h2>Was in den Tieren steckt. Ob eine Anlage da ist, die das Fell nicht zeigt.</div></div></div>
 </section>
 
-<!-- 1 IMPULS -->
-<section class="ph" id="p1" data-t="2" data-title="Impuls" data-sub="Das Foto · 2 Min">
-  <span class="tag">Impuls</span>
-  <h2>Das Foto</h2>
-  <p class="lead">Foto zeigen, nichts erklären. Erst 20 Sekunden still beobachten.</p>
-  <div class="photos">
-    <figure><img src="img/eltern.jpg" alt="Ein kurzhaariger Hund, steht für beide Elterntiere"><figcaption class="cap hid">Beide Elterntiere: kurzhaarig</figcaption></figure>
-    <figure><img src="img/wurf.jpg" alt="Ein neuer Wurf Welpen, ein Welpe hat langes Fell"><figcaption class="cap hid">Der neue Wurf</figcaption></figure>
-  </div>
-  <div class="row" style="margin-top:12px">
-    <button class="btn" id="stGo">20 Sekunden Stille</button>
-    <div class="stille" id="stClock">20</div>
-    <button class="btn ghost" id="capBtn">Bildunterschriften zeigen</button>
-    <div class="sp"></div>
-    <div class="card tint" style="margin:0;padding:8px 16px;font-size:1.3em"><b>Was fällt euch auf?</b></div>
-  </div>
-  <p class="hint">Beide Fotos sind KI-Bilder (kennzeichnen, falls gefragt).</p>
-</section>
-
-<!-- 2 FRAGENENTWICKLUNG -->
-<section class="ph" id="p2" data-t="3" data-title="Fragenentwicklung" data-sub="Unsere Frage · 3 Min">
-  <span class="tag">Fragenentwicklung · 3 Min</span>
-  <h2>Welche Frage stellt sich euch?</h2>
-  <div class="grid3" style="margin-top:12px">
-    <button class="card q choice" data-q aria-pressed="false"><h3>Was fällt euch auf?</h3></button>
-    <button class="card q choice" data-q aria-pressed="false"><h3>Was überrascht euch?</h3></button>
-    <button class="card q choice" data-q aria-pressed="false"><h3>Was wollt ihr herausfinden?</h3></button>
-  </div>
-  <div class="card tint">
-    <label class="f" for="qin">Unsere Frage für heute:</label>
-    <textarea id="qin" data-save="frage" placeholder="Die Klasse formuliert sie. Die Lehrkraft schreibt sie hierher."></textarea>
-    <div class="row" style="margin-top:8px"><button class="btn" id="qFix">Frage festhalten</button><span class="hint" id="qHint"></span></div>
-  </div>
-  <div class="card" id="qShow" style="display:none"><div class="hint">Unsere Frage für heute</div><div class="big" style="font-size:1.8em" id="qText"></div></div>
-  <details class="card"><summary><b>Gelenkte Beobachtungsfragen (Basis)</b></summary>
-    <ul><li>Welche Fellart haben die Elterntiere?</li><li>Welche Fellart hat der Welpe mit dem auffälligen Fell?</li></ul>
-    <p class="hint">Erweiterung: offene Aufforderung „Stellt selbst eine Frage.“</p></details>
-</section>
-
-<!-- 3 HYPOTHESEN -->
-<section class="ph" id="p3" data-t="6" data-title="Hypothesen" data-sub="6 Min · Paare">
-  <span class="tag">Erarbeitung 1 · 6 Min · Paare</span>
-  <h2>Hypothesen formulieren</h2>
-  <div class="grid2" style="margin-top:10px">
-    <div class="card tint"><h3>Hypothese</h3><p>Eine Vermutung, die man prüfen kann.</p><p class="big" style="font-size:1.5em">„Wenn …, dann …“</p><p class="hint">Zu jeder Hypothese gehört eine Vorhersage, die sich mit Zahlen überprüfen lässt.</p></div>
-    <div>
-      <div class="task" data-read><b class="op">Formuliere</b> in Paaren zwei Hypothesen (H1 und H2) zu eurer Frage. <b class="op">Gib</b> je eine Vorhersage an: Was passiert, wenn man zwei Welpen aus dem Zuchtbuch verpaart?</div>
-      <div class="row" style="margin-top:8px"><span class="badge">Logbuch Seite 4 <span>Abschnitt „Hypothesen“</span></span><span class="lvl">●●○</span></div>
-      <div class="chips" id="chips1"><span class="hint">Satzbausteine (anklicken, fügt in das gewählte Feld ein):</span>
-        <button class="chip">Die Anlage für langes Fell ist …</button><button class="chip">Wenn H1 stimmt und man zwei Welpen verpaart, dann …</button><button class="chip">Wenn H2 stimmt, dann …</button></div>
-    </div>
-  </div>
-  <div class="grid2">
-    <div class="card"><div class="row"><div class="hcirc">H1</div><b>Hypothese 1</b></div>
-      <label class="f">Hypothese</label><textarea data-hf data-save="h1"></textarea>
-      <label class="f">Vorhersage</label><textarea data-hf data-save="v1"></textarea></div>
-    <div class="card"><div class="row"><div class="hcirc o">H2</div><b>Hypothese 2</b></div>
-      <label class="f">Hypothese</label><textarea data-hf data-save="h2"></textarea>
-      <label class="f">Vorhersage</label><textarea data-hf data-save="v2"></textarea></div>
-  </div>
-  <div class="tipp" data-tipp>
-    <div class="th">Hilfe (Basis, 3 Stufen) <button class="btn ghost" style="padding:2px 12px" data-next>Stufe 1 zeigen</button></div>
-    <div class="st"><b>1 · Wohin schauen:</b> Auf das Foto: beide Elterntiere kurzhaarig, ein Welpe langhaarig.</div>
-    <div class="st"><b>2 · Wie vorgehen:</b> Überlege zwei verschiedene Erklärungen. Bei der ersten fehlt die Anlage, bei der zweiten ist sie da, aber man sieht sie nicht.</div>
-    <div class="st"><b>3 · Teilergebnis:</b> H1: Die Anlage für langes Fell ist ______. Dann haben alle Welpen ______ Fell.</div>
-  </div>
-  <details class="card"><summary><b>Erweiterung (●●●)</b>: dritte Hypothese</summary>
-    <p><b>Formuliere</b> eine dritte Hypothese, zum Beispiel „Das Fell der Eltern mischt sich.“ <b>Gib</b> an, welches Ergebnis sie ausschließt.</p>
-    <textarea data-save="h3"></textarea></details>
-  <div class="row"><button class="btn" id="hAbgleich">Abgleich zeigen</button></div>
-  <div class="rev card" id="hRev">
-    <div class="grid2">
-      <div class="row" style="align-items:flex-start"><div class="hcirc">H1</div><div><b>Die Anlage für langes Fell ist verloren.</b><br><span class="hint">Vorhersage</span><br>Wenn H1 stimmt, dann haben alle Welpen aus der Verpaarung kurzes Fell.</div></div>
-      <div class="row" style="align-items:flex-start"><div class="hcirc o">H2</div><div><b>Die Anlage ist da, aber man sieht sie nicht.</b><br><span class="hint">Vorhersage</span><br>Wenn H2 stimmt, dann können bei der Verpaarung langhaarige Welpen auftreten.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 4 MODELL -->
-<section class="ph" id="p4" data-t="2" data-title="Modell M4" data-sub="Münzen statt Hunde · 2 Min">
-  <span class="tag">Modell · M4</span>
-  <h2>Das Modell: Münzen statt Hunde</h2>
-  <p class="lead">Ein Modell ist eine vereinfachte Nachbildung, die man testen kann.</p>
-  <div class="grid2">
-    <div>
-      <div class="card rule"><div class="hcirc">1</div><div>Jeder Welpe bekommt von jedem Elterntier eine Anlage.</div></div>
-      <div class="card rule"><div class="hcirc">2</div><div>Jedes Elterntier hat zwei Anlagen und gibt davon eine weiter, zufällig.</div></div>
-      <div class="card rule"><div class="hcirc">3</div><div>Anlage <b>K</b> = kurzes Fell, Anlage <b>l</b> = langes Fell.</div></div>
-      <div class="card rule"><div class="hcirc">4</div><div>Langes Fell zeigt ein Welpe nur, wenn er <b>zweimal l</b> hat.</div></div>
-    </div>
-    <div class="card dark">
-      <h3>Zwei Münzen = ein Welpe</h3>
-      <p>Kopf = K · Zahl = l</p>
-      <div class="row" style="justify-content:center;margin:10px 0"><div class="coin" id="mc1" style="color:var(--ink)">?</div><div class="coin" id="mc2" style="color:var(--ink)">?</div></div>
-      <div class="row" style="justify-content:center"><button class="btn ghost" id="mThrow">Werfen</button>
-        <label class="hint" style="color:#fff"><input type="checkbox" id="mDice"> Würfel statt Münze (1–3 = K, 4–6 = l)</label></div>
-      <p style="text-align:center;margin:10px 0 0;min-height:1.6em" id="mRes">&nbsp;</p>
-    </div>
-  </div>
-  <div class="row" style="gap:12px;margin:8px 0 4px" id="outs">
-    <div class="outcome" data-o="KK">K K<br><small>kurzhaarig</small></div>
-    <div class="outcome" data-o="Kl">K l<br><small>kurzhaarig</small></div>
-    <div class="outcome" data-o="lK">l K<br><small>kurzhaarig</small></div>
-    <div class="outcome lang" data-o="ll">l l<br><small><b>langhaarig</b></small></div>
-    <span class="hint">Wirf mehrmals: Welche Kombination zeigt langes Fell?</span>
-  </div>
-  <div class="row"><span class="badge">Logbuch Seite 4 <span>Modellkarte M4</span></span></div>
-</section>
-
-<!-- 5 MÜNZWURF -->
-<section class="ph" id="p5" data-t="8" data-title="Münzwurf" data-sub="20 Würfe · 8 Min">
-  <span class="tag">Erarbeitung 2 · 14 Min · Paare</span>
-  <h2>Münzwurf: So geht ihr vor</h2>
-  <div class="grid3" style="margin-top:8px">
-    <div class="card"><div class="rule"><div class="hcirc">1</div><div><b class="op">Leite</b> aus M4 <b>ab</b>, wie viele von 20 Welpen langes Fell haben.<br><span class="hint">Schreibe die Zahl auf, bevor ihr werft.</span></div></div></div>
-    <div class="card"><div class="rule"><div class="hcirc">2</div><div><b>Wirf</b> beide Münzen gleichzeitig, 20-mal.<br><span class="hint">Langes Fell hat ein Welpe nur bei zweimal Zahl (l und l).</span></div></div></div>
-    <div class="card"><div class="rule"><div class="hcirc">3</div><div><b>Trage</b> euer Ergebnis an der Tafel ein.<br><span class="hint">Die Klasse addiert.</span></div></div></div>
-  </div>
-  <div class="row"><span class="badge">Logbuch Seite 5 <span>Münzwurf-Protokoll</span></span><span class="lvl">●●○</span></div>
-  <div class="card tint">
-    <label class="f" for="pred">1 · Meine Vorhersage: Von 20 Welpen haben so viele langes Fell:</label>
-    <div class="row"><input type="number" id="pred" min="0" max="20" style="width:7em" data-save="pred"><span class="hint">Erst eintragen, dann werfen.</span></div>
-  </div>
-  <div class="row">
-    <button class="btn" id="wOne" disabled>Ein Welpe werfen</button>
-    <button class="btn ghost" id="wAll" disabled>Alle 20 auf einmal</button>
-    <button class="btn ghost" id="wReset">Neu beginnen</button>
-    <span class="hint" id="wHint">Trage zuerst deine Vorhersage ein.</span>
-  </div>
-  <div class="tally" id="tally" style="margin:12px 0"></div>
-  <div class="grid4">
-    <div class="card"><div class="kz" id="wN">0</div>Welpen geworfen</div>
-    <div class="card"><div class="kz" id="wL">0</div>mit langem Fell</div>
-    <div class="card"><div class="kz" id="wP">–</div>Anteil</div>
-    <div class="card"><div class="kz" id="wD">–</div>Abstand zur Vorhersage</div>
-  </div>
-  <div class="row"><button class="btn" id="wSend" disabled>Ergebnis an die Klassentabelle senden</button></div>
-</section>
-
-<!-- 6 KLASSENERGEBNIS -->
-<section class="ph" id="p6" data-t="4" data-title="Klassenergebnis" data-sub="Tafel und Auswertung · 4 Min">
-  <span class="tag">Ergebnis · Tafel</span>
-  <h2>Klassenergebnis: Welpen mit langem Fell</h2>
-  <div class="grid2" style="grid-template-columns:1fr 1.2fr">
-    <div class="card">
-      <div class="tbl2" id="ctab"></div>
-      <div class="row" style="margin-top:10px"><button class="btn ghost" id="cSim">Beispielklasse simulieren</button><button class="btn ghost" id="cClear">Leeren</button></div>
-      <p class="hint">Jedes Paar: Zahl der Welpen mit langem Fell von 20. Leere Zeilen zählen nicht.</p>
-    </div>
-    <div>
-      <canvas id="cChart" height="260"></canvas>
-      <div class="grid3" style="margin-top:12px">
-        <div class="card"><div class="kz" id="cS">0</div>Summe</div>
-        <div class="card"><div class="kz" id="cP">–</div>Anteil</div>
-        <div class="card"><div class="kz" id="cMM">–</div>Streuung (min bis max)</div>
-      </div>
-    </div>
-  </div>
-  <div class="card tint task" data-read><b class="op">Vergleiche</b> deine Vorhersage mit deinem Ergebnis. <b class="op">Vergleiche</b> dein Ergebnis mit der Klassensumme.
-    <div id="cCmp" style="margin-top:6px"></div></div>
-  <h3 style="margin-top:20px">Was das Modell vorhersagt</h3>
-  <div class="grid2">
-    <div class="card"><div class="row"><div><div class="kz">≈ 25 %</div>langhaarige Welpen erwartet</div><div><div class="kz">≈ 5 von 20</div>je Paar, einzelne Paare streuen</div></div>
-      <p class="hint">Vier gleich wahrscheinliche Kombinationen: K K, K l, l K, l l. Eine davon zeigt langes Fell.</p></div>
-    <div class="card"><b>Wie viel sagt eine Stichprobe?</b>
-      <div class="row" style="margin:6px 0" id="bigN"><button class="chip" data-n="20">20</button><button class="chip" data-n="100">100</button><button class="chip" data-n="1000">1000</button><button class="chip" data-n="10000">10 000</button></div>
-      <canvas id="lChart" height="170"></canvas>
-      <div class="hint" id="lTxt">Wähle eine Anzahl an Welpen und beobachte den Anteil.</div></div>
-  </div>
-  
-</section>
-
-<!-- 7 BEURTEILEN -->
-<section class="ph" id="p7" data-t="10" data-title="Beurteilen" data-sub="Logbuch · 10 Min">
-  <span class="tag">Logbuch · 10 Min · Einzelarbeit</span>
-  <h2>Beurteilt das Modell</h2>
-  <div class="task" data-read><b class="op">Beurteile</b>, wo das Münzmodell von einem echten Wurf abweicht.</div>
-  <div class="row" style="margin:6px 0"><span class="badge">Logbuch Seite 5 <span>Abschnitt „Beurteilen“</span></span><span class="lvl">●●○ · Erweiterung ●●●</span></div>
-  <div class="grid3">
-    <div class="card"><h3>Zufall</h3><p>Warum weichen einzelne Paare von eurer Vorhersage ab?</p><textarea data-save="b1" placeholder="Notizraum"></textarea>
-      <div class="tipp" data-tipp><div class="th">Hilfe <button class="btn ghost" style="padding:2px 12px" data-next>Stufe 1 zeigen</button></div>
-        <div class="st"><b>1 · Wohin schauen:</b> Auf die Klassentabelle: Wie weit streuen die Paare?</div>
-        <div class="st"><b>2 · Wie vorgehen:</b> Vergleiche das kleinste und das größte Ergebnis mit 5.</div>
-        <div class="st"><b>3 · Teilergebnis:</b> Jeder Wurf ist ______, deshalb ______ die Ergebnisse.</div></div></div>
-    <div class="card"><h3>Zahlen</h3><p>Wie sicher ist ein Ergebnis aus nur 20 Würfen?</p><textarea data-save="b2" placeholder="Notizraum"></textarea>
-      <div class="tipp" data-tipp><div class="th">Hilfe <button class="btn ghost" style="padding:2px 12px" data-next>Stufe 1 zeigen</button></div>
-        <div class="st"><b>1 · Wohin schauen:</b> Auf die Kurve „Wie viel sagt eine Stichprobe?“ (Phase Klassenergebnis).</div>
-        <div class="st"><b>2 · Wie vorgehen:</b> Vergleiche 20 Welpen mit 1000 Welpen.</div>
-        <div class="st"><b>3 · Teilergebnis:</b> Bei wenigen Würfen ______ der Anteil stark.</div></div></div>
-    <div class="card"><h3>Modell</h3><p>Was lässt das Münzmodell weg, das bei echten Hunden eine Rolle spielt?</p><textarea data-save="b3" placeholder="Notizraum"></textarea>
-      <div class="tipp" data-tipp><div class="th">Hilfe <button class="btn ghost" style="padding:2px 12px" data-next>Stufe 1 zeigen</button></div>
-        <div class="st"><b>1 · Wohin schauen:</b> Auf die vier Regeln der Modellkarte M4.</div>
-        <div class="st"><b>2 · Wie vorgehen:</b> Überlege, was bei einem echten Wurf noch dazukommt.</div>
-        <div class="st"><b>3 · Teilergebnis:</b> Ein echter Wurf hat zum Beispiel eine bestimmte ______.</div></div></div>
-  </div>
-  <details class="card"><summary><b>Erweiterung</b></summary>
-    <p><b>Entwickle</b> eine Verbesserung des Modells und <b>beurteile</b>, ob sie sich lohnt.</p><textarea data-save="b4"></textarea></details>
-  
-</section>
-
-<!-- 8 TRANSFER -->
-<section class="ph" id="p8" data-t="4" data-title="Transfer" data-sub="Welche Hypothese? · 4 Min">
-  <span class="tag">Transfer · 4 Min</span>
-  <h2>Welche Hypothese stützt das Ergebnis?</h2>
-  <div class="grid2" style="margin-top:8px">
-    <button class="card choice" data-h="H1" aria-pressed="false"><div class="row"><div class="hcirc">H1</div><div>Die Anlage für langes Fell ist verloren.</div></div></button>
-    <button class="card choice" data-h="H2" aria-pressed="false"><div class="row"><div class="hcirc o">H2</div><div>Die Anlage ist da, aber man sieht sie nicht.</div></div></button>
-  </div>
-  <div class="card tint task" data-read><b class="op">Entscheide</b>, welche Hypothese das Ergebnis der Klasse stützt, und <b class="op">begründe</b> in einem Satz.</div>
-  <div class="row"><span class="badge">Logbuch Seite 5 <span>Abschnitt „Transfer“</span></span><span class="lvl">●●○</span></div>
-  <div class="chips" id="chips2"><span class="hint">Satzbaustein:</span><button class="chip">Das Ergebnis stützt H …, weil …</button></div>
-  <textarea data-save="transfer" data-hf2 placeholder="Notizraum"></textarea>
-  <div class="card" id="tCheck"><b>Prüfe an den Zahlen:</b>
-    <div id="tTxt">Trage zuerst ein Klassenergebnis ein (Phase „Klassenergebnis“).</div></div>
-  <details class="card"><summary><b>Erweiterung</b></summary><p><b>Begründe</b>, warum das Münzmodell allein H2 nicht beweist.</p><textarea data-save="t2"></textarea></details>
-  <p class="hint">Das Münzmodell setzt voraus, dass die Anlage vorhanden ist. Ob es zu den echten Hunden passt, entscheiden erst die Daten im Spiel.</p>
-</section>
-
-<!-- 9 REFLEXION -->
-<section class="ph" id="p9" data-t="3" data-title="Reflexion" data-sub="Blitzlicht und Ausblick · 3 Min">
-  <span class="tag">Ausblick · 42–45 Min</span>
-  <h2>Im Zuchtlabor erzeugt ihr selbst Daten.</h2>
-  <div class="card dark"><h3>Passen sie zu unserer Klassensumme?</h3><p style="margin:6px 0 0">Später prüft ihr sie an Mendels Zahlen und am Zuchtbuch (Teil 5).</p></div>
-  <div class="card tint"><b>Blitzlicht:</b> Was ist euch heute klarer geworden? Was ist noch offen?
-    <div class="grid2"><div><label class="f">Klarer geworden</label><input type="text" data-save="bl1"></div><div><label class="f">Noch offen</label><input type="text" data-save="bl2"></div></div></div>
-  <div class="grid3" id="prog"></div>
-  <p class="hint">Spielstand-Code im Logbuch (Raum 1, Spielteil, Seite 2 und 3) notiert? Abgabe in der Spielstunde. Hausaufgabe: keine.</p>
-</section>
-
-</main>
+<!-- 2 IMPULS -->
+<section class="slide dark">
+<p class="phase" data-ph="im">Einstieg · Impuls</p>
+<h1 class="k">Das Foto</h1>
+<span class="badge">2 Min. · Plenum</span>
+<div class="grid2" style="gap:24px">
+<figure class="hz-fig"><div class="frame white"><img src="img/eltern.jpg" alt="Ein kurzhaariger Hund, steht für beide Elterntiere"></div><figcaption class="cap hid">Beide Elterntiere: kurzhaarig</figcaption></figure>
+<figure class="hz-fig"><div class="frame white"><img src="img/wurf.jpg" alt="Ein neuer Wurf Welpen, ein Welpe hat langes Fell"></div><figcaption class="cap hid">Der neue Wurf</figcaption></figure>
 </div>
-<footer>
-  <button class="btn ghost" id="prev">Zurück</button>
-  <div class="bar"><i id="barfill"></i></div>
-  <span class="hint" id="pos">1 / 10</span>
-  <button class="btn" id="next">Weiter</button>
-</footer>
+<div class="hz-row" style="margin-top:16px"><button class="b" id="hzStGo">20 Sekunden Stille</button><span class="hz-big" id="hzSt" style="color:var(--y);font-size:72px">20</span><button class="b sec" id="hzCap">Bildunterschriften zeigen</button><span style="flex:1"></span><span class="hz-moderation" style="color:#fff">Was fällt euch auf?</span></div>
+<p class="tip" style="color:#cfe;padding-left:84px">Beide Fotos sind KI-Bilder.</p>
+</section>
 
+<!-- 3 FRAGENENTWICKLUNG -->
+<section class="slide" data-min="3">
+<p class="phase" data-ph="im">Einstieg · Fragenentwicklung</p>
+<h1 class="k">Welche Frage stellt sich euch?</h1>
+<span class="badge">3 Min. · Plenum</span>
+<div data-fragenfeld></div>
+</section>
+
+<!-- 4 HYPOTHESEN -->
+<section class="slide" data-min="6">
+<p class="phase" data-ph="er">Erarbeitung 1 · Hypothesen</p>
+<h1 class="k">Hypothesen formulieren</h1>
+<span class="badge">6 Min. · Paare</span>
+<p class="task"><span class="snr">1</span><span><b>Formuliere</b> in Paaren zwei Hypothesen (H1, H2) zu eurer Frage. <b>Gib</b> je eine Vorhersage an: Was passiert, wenn man zwei Welpen aus dem Zuchtbuch verpaart?</span><i class="lvl">F</i></p>
+<div class="grid2">
+<div class="hz-card"><h2><span class="hz-circ">H1</span>Hypothese 1</h2><span class="hz-l" style="margin-top:2px">Hypothese</span><div class="hz-k" contenteditable="true" aria-label="Hypothese 1"></div><span class="hz-l">Vorhersage</span><div class="hz-k" contenteditable="true" aria-label="Vorhersage 1"></div></div>
+<div class="hz-card"><h2><span class="hz-circ o">H2</span>Hypothese 2</h2><span class="hz-l">Hypothese</span><div class="hz-k" contenteditable="true" aria-label="Hypothese 2"></div><span class="hz-l">Vorhersage</span><div class="hz-k" contenteditable="true" aria-label="Vorhersage 2"></div></div>
+</div>
+<div class="hz-row" style="margin-top:8px"><button class="b" data-hilfe>Hilfe Stufe 1 zeigen</button><button class="b lz" data-zeige>Abgleich zeigen</button></div>
+<p class="tip" style="font-size:18px;margin:6px 0 0 80px">Hypothese = prüfbare Vermutung: „Wenn …, dann …“ · Erweiterung: dritte Hypothese, die ein Ergebnis ausschließt.</p>
+<div class="hz-h hz-over" data-stufen><span data-s>Wohin schauen: Auf das Foto. Beide Elterntiere kurzhaarig, ein Welpe langhaarig.</span><span data-s>Wie vorgehen: Überlege zwei Erklärungen. Bei der ersten fehlt die Anlage, bei der zweiten ist sie da, aber man sieht sie nicht.</span><span data-s>Teilergebnis: H1: Die Anlage für langes Fell ist ______. Dann haben alle Welpen ______ Fell.</span></div>
+<div class="lsg-box hz-st hz-over"><b>H1:</b> Die Anlage für langes Fell ist verloren. → Alle Welpen haben kurzes Fell. · <b>H2:</b> Die Anlage ist da, aber man sieht sie nicht. → Langhaarige Welpen können auftreten.</div>
+</section>
+
+<!-- 5 MODELL -->
+<section class="slide" data-min="2">
+<p class="phase" data-ph="er">Modell M4</p>
+<h1 class="k">Das Modell: Münzen statt Hunde</h1>
+<span class="badge">2 Min. · Plenum</span>
+<div class="split eq2">
+<div>
+<p class="task"><span class="snr">1</span><span>Jeder Welpe bekommt von jedem Elterntier eine Anlage.</span></p>
+<p class="task"><span class="snr">2</span><span>Jedes Elterntier hat zwei Anlagen und gibt davon eine weiter, zufällig.</span></p>
+<p class="task"><span class="snr">3</span><span>Anlage <b>K</b> = kurzes Fell, Anlage <b>l</b> = langes Fell.</span></p>
+<p class="task"><span class="snr">4</span><span>Langes Fell zeigt ein Welpe nur, wenn er <b>zweimal l</b> hat.</span></p>
+<p class="tip">Ein Modell ist eine vereinfachte Nachbildung, die man testen kann.</p>
+</div>
+<div class="hz-card" style="background:var(--dk);border-color:var(--dk);color:#fff;text-align:center">
+<h2 style="color:#fff">Zwei Münzen = ein Welpe</h2>
+<p style="margin:0">Kopf = K · Zahl = l</p>
+<div class="hz-row" style="justify-content:center;margin:12px 0"><div class="hz-coin" id="hzC1">?</div><div class="hz-coin" id="hzC2">?</div></div>
+<div class="hz-row" style="justify-content:center"><button class="b" style="background:var(--y);color:var(--ink)" id="hzThrow">Werfen</button><label style="font-size:18px"><input type="checkbox" id="hzDice"> Würfel (1–3 = K, 4–6 = l)</label></div>
+<p style="margin:10px 0 0;min-height:1.6em;font-size:24px" id="hzRes">&nbsp;</p>
+</div>
+</div>
+<div class="hz-row" style="margin-top:14px;justify-content:center" id="hzOuts">
+<div class="hz-o" data-o="KK">K K<small>kurzhaarig</small></div><div class="hz-o" data-o="Kl">K l<small>kurzhaarig</small></div><div class="hz-o" data-o="lK">l K<small>kurzhaarig</small></div><div class="hz-o lang" data-o="ll">l l<small><b>langhaarig</b></small></div>
+</div>
+</section>
+
+<!-- 6 MÜNZWURF -->
+<section class="slide" data-min="8">
+<p class="phase" data-ph="er">Erarbeitung 2 · Münzwurf</p>
+<h1 class="k">Münzwurf: 20 Welpen</h1>
+<span class="badge">8 Min. · Paare</span>
+<p class="task" style="font-size:22px;margin-bottom:8px"><span class="snr">1</span><span><b>Leite</b> aus M4 <b>ab</b>, wie viele von 20 Welpen langes Fell haben, und schreibe die Zahl auf, bevor ihr werft. <b>Wirf</b> dann beide Münzen 20-mal. <b>Trage</b> euer Ergebnis an der Tafel ein.</span><i class="lvl">F</i></p>
+<div class="hz-row" style="margin-bottom:10px"><label for="hzPred" style="font-weight:700;font-size:22px">Meine Vorhersage (0 bis 20):</label><input class="hz-in" id="hzPred" type="number" min="0" max="20"><button class="b" id="hzOne" disabled>Ein Welpe werfen</button><button class="b sec" id="hzAll" disabled>Alle 20</button><button class="b sec" id="hzReset">Neu beginnen</button><span id="hzHint" class="sr" hidden></span></div>
+<div class="hz-tally" id="hzTally"></div>
+<div class="grid4" style="margin-top:10px">
+<div class="hz-st"><div class="hz-kz" id="hzN">0</div>Welpen geworfen</div><div class="hz-st"><div class="hz-kz" id="hzL">0</div>mit langem Fell</div><div class="hz-st"><div class="hz-kz" id="hzP">–</div>Anteil</div><div class="hz-st"><div class="hz-kz" id="hzD">–</div>Abstand zur Vorhersage</div>
+</div>
+<div style="margin-top:8px"><button class="b" id="hzSend" disabled style="margin-left:90px">Ergebnis in die Klassentabelle</button> <span class="tip">Logbuch Seite 5</span></div>
+</section>
+
+<!-- 7 KLASSENERGEBNIS -->
+<section class="slide" data-min="4">
+<p class="phase" data-ph="er">Auswertung</p>
+<h1 class="k">Klassenergebnis: Welpen mit langem Fell</h1>
+<span class="badge">4 Min. · Plenum</span>
+<div class="split" style="grid-template-columns:1fr 1.25fr;gap:28px">
+<div>
+<div class="hz-tab" id="hzCtab"></div>
+<div class="hz-row" style="margin-top:8px"><button class="b sec" id="hzSim">Beispielklasse</button><button class="b sec" id="hzClr">Leeren</button></div>
+</div>
+<div>
+<canvas class="hz-cv" id="hzChart" height="200"></canvas>
+<div class="grid3" style="margin-top:10px;gap:12px"><div class="hz-st"><div class="hz-kz" id="hzS">0</div>Summe</div><div class="hz-st"><div class="hz-kz" id="hzCP">–</div>Anteil</div><div class="hz-st"><div class="hz-kz" id="hzMM">–</div>Streuung</div></div>
+</div>
+</div>
+<p class="task" style="font-size:21px;margin:8px 0 0;padding-left:84px"><span class="snr">1</span><span><b>Vergleiche</b> deine Vorhersage mit deinem Ergebnis und dein Ergebnis mit der Klassensumme (Modell: ≈ 25 %, ≈ 5 von 20).</span></p>
+<p class="fb" id="hzCmp" style="font-size:19px;margin:2px 0 0;padding-left:84px"></p>
+</section>
+
+<!-- 8 STICHPROBE -->
+<section class="slide" data-min="2">
+<p class="phase" data-ph="er">Auswertung · Stichprobe</p>
+<h1 class="k">Wie viel sagt eine Stichprobe?</h1>
+<span class="badge">2 Min. · Plenum</span>
+<div class="hz-row" id="hzBigN" style="margin-bottom:12px"><button class="b" data-n="20">20 Welpen</button><button class="b" data-n="100">100</button><button class="b" data-n="1000">1000</button><button class="b" data-n="10000">10 000</button><span class="tip" style="margin:0">Wähle eine Anzahl und beobachte den Anteil.</span></div>
+<canvas class="hz-cv" id="hzLC" height="290"></canvas>
+<p class="shilfe" id="hzLT" style="margin:10px 0 0 84px;font-size:21px;padding:10px 16px">Gestrichelte Linie: 25 %, der Erwartungswert des Modells.</p>
+</section>
+
+<!-- 9 BEURTEILEN -->
+<section class="slide" data-min="10">
+<p class="phase" data-ph="si">Sicherung · Logbuch</p>
+<h1 class="k">Beurteilt das Modell</h1>
+<span class="badge">10 Min. · allein</span>
+<p class="task"><span class="snr">1</span><span><b>Beurteile</b>, wo das Münzmodell von einem echten Wurf abweicht. <b>Nenne</b> mindestens zwei Gründe.</span><i class="lvl">F–G</i></p>
+<div class="grid3">
+<div class="hz-card"><h2>Zufall</h2>Warum weichen einzelne Paare von eurer Vorhersage ab?<div class="hz-k" contenteditable="true" style="margin-top:8px;min-height:66px" aria-label="Zufall"></div><p class="tip" style="margin-top:6px">Hilfe: Vergleiche kleinstes und größtes Ergebnis mit 5.</p></div>
+<div class="hz-card"><h2>Zahlen</h2>Wie sicher ist ein Ergebnis aus nur 20 Würfen?<div class="hz-k" contenteditable="true" style="margin-top:8px;min-height:66px" aria-label="Zahlen"></div><p class="tip" style="margin-top:6px">Hilfe: Vergleiche 20 Welpen mit 1000 Welpen.</p></div>
+<div class="hz-card"><h2>Modell</h2>Was lässt das Münzmodell weg, das bei echten Hunden eine Rolle spielt?<div class="hz-k" contenteditable="true" style="margin-top:8px;min-height:66px" aria-label="Modell"></div><p class="tip" style="margin-top:6px">Hilfe: Schau auf die vier Regeln von M4.</p></div>
+</div>
+<p class="task" style="margin-top:14px;font-size:24px"><span class="snr">E</span><span><b>Entwickle</b> eine Verbesserung des Modells und <b>beurteile</b>, ob sie sich lohnt.</span><i class="lvl">G–H</i></p>
+<div class="hz-k" contenteditable="true" aria-label="Erweiterung"></div>
+</section>
+
+<!-- 10 TRANSFER -->
+<section class="slide" data-min="4">
+<p class="phase" data-ph="si">Transfer</p>
+<h1 class="k">Welche Hypothese stützt das Ergebnis?</h1>
+<span class="badge">4 Min. · allein</span>
+<div class="grid2" style="margin-bottom:12px">
+<button class="hz-ch" data-h="H1" aria-pressed="false"><span class="hz-circ">H1</span>Die Anlage für langes Fell ist verloren.</button>
+<button class="hz-ch" data-h="H2" aria-pressed="false"><span class="hz-circ o">H2</span>Die Anlage ist da, aber man sieht sie nicht.</button>
+</div>
+<p class="task"><span class="snr">1</span><span><b>Entscheide</b>, welche Hypothese das Ergebnis der Klasse stützt, und <b>begründe</b> in einem Satz. Satzbaustein: Das Ergebnis stützt H …, weil …</span><i class="lvl">F</i></p>
+<div class="hz-k" contenteditable="true" aria-label="Begründung"></div>
+<div class="hz-st" style="margin-top:12px;font-size:22px"><b>Prüfe an den Zahlen:</b> <span id="hzT">Trage zuerst ein Klassenergebnis ein.</span></div>
+<p class="task" style="margin-top:12px;font-size:22px"><span class="snr">E</span><span><b>Begründe</b>, warum das Münzmodell allein H2 nicht beweist.</span><i class="lvl">G–H</i></p>
+</section>
+
+<!-- 11 REFLEXION -->
+<section class="slide dark" data-min="3">
+<p class="phase" data-ph="re">Reflexion · Ausblick</p>
+<h1 class="k">Im Zuchtlabor erzeugt ihr selbst Daten.</h1>
+<span class="badge">3 Min. · Plenum</span>
+<p class="lead">Passen sie zu unserer Klassensumme? Später prüft ihr sie an Mendels Zahlen und am Zuchtbuch.</p>
+<div class="hz-card" style="background:#fff;color:var(--ink)"><b>Blitzlicht:</b> Was ist euch heute klarer geworden? Was ist noch offen?
+<div class="grid2" style="margin-top:6px"><div><span class="hz-l">Klarer geworden</span><div class="hz-k" contenteditable="true" aria-label="Klarer geworden" style="min-height:54px"></div></div><div><span class="hz-l">Noch offen</span><div class="hz-k" contenteditable="true" aria-label="Noch offen" style="min-height:54px"></div></div></div></div>
+<div class="hz-prog" style="margin-top:16px">
+<div><span class="hz-circ">1</span>Brief und Zuchtbuch (Spiel)</div><div class="heute" style="color:var(--ink)"><span class="hz-circ">2</span>Hypothesen und Modell (heute)</div><div class="next"><span class="hz-circ o">3</span>Zuchtlabor (nächstes Spiel)</div>
+<div><span class="hz-circ">4</span>Regeln (Unterricht)</div><div><span class="hz-circ">5</span>Einspruch (Spiel)</div><div><span class="hz-circ">6</span>Empfehlung (Unterricht)</div>
+</div>
+<p class="tip" style="color:#cfe;padding-left:84px">Spielstand-Code im Logbuch notiert? Abgabe in der Spielstunde. Hausaufgabe: keine.</p>
+</section>
+
+<div id="nummer"></div>
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+
+<!-- Spielinhalte für die Belohnungsspiele. ENTWURF: bitte fachlich gegenlesen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Hypothesen und Münzmodell",
+ "geprueft": false,
+ "paare": [
+  ["Hypothese", "Prüfbare Vermutung: Wenn …, dann …", "Hy-po-the-se"],
+  ["Vorhersage", "Das Ergebnis, das eine Hypothese erwarten lässt", "Vor-her-sa-ge"],
+  ["Modell", "Vereinfachte Nachbildung, die man testen kann"],
+  ["Erbanlage", "Anlage, die ein Elterntier an den Welpen weitergibt", "Erb-an-la-ge"],
+  ["Zufall", "Jeder Wurf kann anders ausgehen"],
+  ["Stichprobe", "Kleine Auswahl, an der man etwas untersucht", "Stich-pro-be"],
+  ["Erwartungswert", "Wert, der bei sehr vielen Versuchen im Mittel herauskommt", "Er-war-tungs-wert"],
+  ["Streuung", "Wie weit einzelne Ergebnisse auseinanderliegen", "Streu-ung"]
+ ],
+ "spiele": ["memory", "quiz"]
+}
+</script>
 <script>
 (function(){
 "use strict";
-var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
-var NOTES=[];
-var phases=$$(".ph"), cur=0;
-function store(k,v){try{if(v===undefined)return localStorage.getItem("hz2_"+k);localStorage.setItem("hz2_"+k,v)}catch(e){return null}}
-/* ---- Navigation ---- */
-var nav=$("#nav");
-phases.forEach(function(p,i){var b=document.createElement("button");b.innerHTML='<span class="n">'+(i+1)+'</span><span>'+p.dataset.title+'<small>'+p.dataset.sub+'</small></span>';b.onclick=function(){go(i)};nav.appendChild(b)});
-function go(i){
-  cur=Math.max(0,Math.min(phases.length-1,i));
-  phases.forEach(function(p,k){p.classList.toggle("on",k===cur)});
-  $$("button",nav).forEach(function(b,k){if(k===cur)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current");b.classList.toggle("done",k<cur)});
-  $("#pos").textContent=(cur+1)+" / "+phases.length;
-  $("#barfill").style.width=((cur+1)/phases.length*100)+"%";
-  $("#prev").disabled=cur===0;$("#next").disabled=cur===phases.length-1;
-  $("#main").scrollTop=0;
-  resetClock(parseInt(phases[cur].dataset.t,10)*60);
-  store("phase",String(cur));
-  if(cur===6)drawClass();
-  if(cur===8)updateTransfer();
-  if(cur===9)buildProg();
-}
-$("#prev").onclick=function(){go(cur-1)};$("#next").onclick=function(){go(cur+1)};
-/* ---- Uhr ---- */
-var tLeft=180,tRun=null,clockEl=$("#clock");
-function fmt(s){var m=Math.floor(Math.abs(s)/60),r=Math.abs(s)%60;return(s<0?"+":"")+m+":"+(r<10?"0":"")+r}
-function resetClock(s){stopClock();tLeft=s;clockEl.textContent=fmt(s);clockEl.classList.remove("over");$("#tgo").textContent="Start"}
-function stopClock(){if(tRun){clearInterval(tRun);tRun=null}}
-function toggleClock(){if(tRun){stopClock();$("#tgo").textContent="Start";return}
-  $("#tgo").textContent="Pause";tRun=setInterval(function(){tLeft--;clockEl.textContent=fmt(tLeft);if(tLeft<0)clockEl.classList.add("over");if(cur===0)$("#dnClock").textContent=fmt(Math.max(tLeft,0))},1000)}
-$("#tgo").onclick=toggleClock;$("#treset").onclick=function(){resetClock(parseInt(phases[cur].dataset.t,10)*60);$("#dnClock").textContent="3:00"};
-$("#dnGo").onclick=function(){if(cur===0&&!tRun)toggleClock()};
-/* ---- Schrift, Vollbild, Vorlesen, Lehrkraft ---- */
-var fs=19;function setFs(v){fs=Math.max(15,Math.min(28,v));document.documentElement.style.setProperty("--fs",fs+"px");store("fs",String(fs))}
-$("#bplus").onclick=function(){setFs(fs+2)};$("#bminus").onclick=function(){setFs(fs-2)};
-$("#bfull").onclick=function(){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()};
-function readAloud(){if(!window.speechSynthesis){alert("Vorlesen wird von diesem Gerät nicht unterstützt. Bitte laut vorlesen lassen.");return}
-  speechSynthesis.cancel();var t=$$("[data-read]",phases[cur]).map(function(e){return e.innerText}).join(". ")||phases[cur].querySelector("h2").innerText;
-  var u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.9;speechSynthesis.speak(u)}
-$("#bread").onclick=readAloud;
-document.addEventListener("keydown",function(e){
-  var tag=(e.target.tagName||"").toLowerCase();if(tag==="textarea"||tag==="input"||e.ctrlKey||e.metaKey||e.altKey)return;
-  if(e.key==="ArrowRight"||e.key==="PageDown")go(cur+1);
-  else if(e.key==="ArrowLeft"||e.key==="PageUp")go(cur-1);
-  else if(e.key===" "){e.preventDefault();toggleClock()}
-  else if(e.key==="f"||e.key==="F")$("#bfull").click();
-  else if(e.key==="r"||e.key==="R")readAloud();
-});
-/* ---- Autosave ---- */
-$$("[data-save]").forEach(function(el){var k=el.dataset.save,v=store(k);if(v!==null&&v!==undefined)el.value=v;el.addEventListener("input",function(){store(k,el.value)})});
-/* ---- Tipps in 3 Stufen ---- */
-$$("[data-tipp]").forEach(function(t){var sts=$$(".st",t),btn=$("[data-next]",t),n=0;
-  btn.onclick=function(){if(n<sts.length){sts[n].classList.add("on");n++}
-    btn.textContent=n<sts.length?"Stufe "+(n+1)+" zeigen":"Alle Stufen offen";if(n>=sts.length)btn.disabled=true}});
-/* ---- Do Now Abgleich ---- */
-$("#dnAbgleich").onclick=function(){$("#dnRev").classList.toggle("on")};
-/* ---- Impuls ---- */
-var stT=null;$("#stGo").onclick=function(){if(stT)return;var s=20;$("#stClock").textContent=s;
-  stT=setInterval(function(){s--;$("#stClock").textContent=s>0?s:"Los";if(s<=0){clearInterval(stT);stT=null}},1000)};
-$("#capBtn").onclick=function(){var c=$$(".cap");var hid=c[0].classList.contains("hid");c.forEach(function(x){x.classList.toggle("hid",!hid)});this.textContent=hid?"Bildunterschriften verbergen":"Bildunterschriften zeigen"};
-/* ---- Fragenentwicklung ---- */
-$$("[data-q]").forEach(function(q){q.onclick=function(){var on=q.getAttribute("aria-pressed")==="true";$$("[data-q]").forEach(function(o){o.setAttribute("aria-pressed","false")});q.setAttribute("aria-pressed",String(!on))}});
-$("#qFix").onclick=function(){var v=$("#qin").value.trim();if(!v){$("#qHint").textContent="Noch keine Frage eingetragen.";return}
-  $("#qHint").textContent="";$("#qText").textContent=v;$("#qShow").style.display="block";store("frageFix",v)};
-if(store("frageFix")){$("#qText").textContent=store("frageFix");$("#qShow").style.display="block"}
-/* ---- Hypothesen: Satzbausteine ---- */
-var lastField=null;$$("[data-hf]").forEach(function(t){t.addEventListener("focus",function(){lastField=t})});
-$$("#chips1 .chip").forEach(function(c){c.onclick=function(){var t=lastField||$$("[data-hf]")[0];t.value=(t.value?t.value+" ":"")+c.textContent;t.focus();store(t.dataset.save,t.value)}});
-$$("#chips2 .chip").forEach(function(c){c.onclick=function(){var t=$("[data-hf2]");t.value=(t.value?t.value+" ":"")+c.textContent;t.focus();store("transfer",t.value)}});
-$("#hAbgleich").onclick=function(){$("#hRev").classList.toggle("on")};
-/* ---- Modell M4 ---- */
-var seen={};
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+/* Hilfe in Stufen */
+$$("[data-hilfe]").forEach(function(b){var sec=b.closest(".slide"),box=$("[data-stufen]",sec),st=$$("[data-s]",box),n=0;
+ st.forEach(function(s){s.style.display="none";s.style.marginBottom="4px"});
+ b.onclick=function(){if(n<st.length){box.classList.add("on");st.forEach(function(s){s.style.display="none"});st[n].style.display="block";n++}b.textContent=n<st.length?"Hilfe Stufe "+(n+1)+" zeigen":"Alle Stufen offen";if(n>=st.length)b.disabled=true}});
+/* Impuls */
+var stT=null;$("#hzStGo").onclick=function(){if(stT)return;var s=20;$("#hzSt").textContent=s;stT=setInterval(function(){s--;$("#hzSt").textContent=s>0?s:"Los";if(s<=0){clearInterval(stT);stT=null}},1000)};
+$("#hzCap").onclick=function(){var c=$$(".cap"),hid=c[0].classList.contains("hid");c.forEach(function(x){x.classList.toggle("hid",!hid)});this.textContent=hid?"Bildunterschriften verbergen":"Bildunterschriften zeigen"};
+/* Modell */
 function die(){return 1+Math.floor(Math.random()*6)}
-function throwPup(dice){var a,b,la,lb;
-  if(dice){var x=die(),y=die();a=x<=3?"K":"l";b=y<=3?"K":"l";la=a+" ("+x+")";lb=b+" ("+y+")"}
-  else{a=Math.random()<.5?"K":"l";b=Math.random()<.5?"K":"l";la=a;lb=b}
-  return{a:a,b:b,la:la,lb:lb,lang:a==="l"&&b==="l"}}
-$("#mThrow").onclick=function(){var r=throwPup($("#mDice").checked);
-  [["#mc1",r.a],["#mc2",r.b]].forEach(function(p){var c=$(p[0]);c.classList.remove("fl");void c.offsetWidth;c.classList.add("fl");c.classList.toggle("l",p[1]==="l");
-    setTimeout(function(){c.textContent=p[1]},275)});
-  var key=r.a+r.b;seen[key]=true;
-  $$("#outs .outcome").forEach(function(o){o.classList.toggle("hit",o.dataset.o===key)});
-  $("#mRes").innerHTML="<b>"+r.a+" "+r.b+"</b> → "+(r.lang?"<b>langhaarig</b>":"kurzhaarig")};
-/* ---- Münzwurf ---- */
-var W={n:0,l:0,arr:[]},tally=$("#tally");
-function buildTally(){tally.innerHTML="";for(var i=0;i<20;i++){var d=document.createElement("div");d.className="tc";d.innerHTML=(i+1)+"<i>–</i>";tally.appendChild(d)}}
-function wStats(){$("#wN").textContent=W.n;$("#wL").textContent=W.l;
-  $("#wP").textContent=W.n?Math.round(W.l/W.n*100)+" %":"–";
-  var p=parseInt($("#pred").value,10);
-  $("#wD").textContent=(W.n===20&&!isNaN(p))?Math.abs(W.l-p):"–";
-  $("#wSend").disabled=W.n<20}
-function wOne(){if(W.n>=20)return;var r=throwPup($("#mDice").checked),c=tally.children[W.n];
-  c.classList.add("s");c.innerHTML=(W.n+1)+"<i>"+r.a+" "+r.b+"</i>"+(r.lang?"langhaarig":"kurz");if(r.lang){c.classList.add("lang");W.l++}
-  W.n++;W.arr.push(r.a+r.b);wStats()}
-function wEnable(){var ok=$("#pred").value!==""&&+$("#pred").value>=0&&+$("#pred").value<=20;$("#wOne").disabled=!ok||W.n>=20;$("#wAll").disabled=!ok||W.n>=20;
-  $("#wHint").textContent=ok?(W.n>=20?"20 Welpen geworfen.":"Bereit."):"Trage zuerst deine Vorhersage ein (0 bis 20)."}
-$("#pred").addEventListener("input",function(){wEnable();wStats()});
-$("#wOne").onclick=function(){wOne();wEnable()};
-$("#wAll").onclick=function(){while(W.n<20)wOne();wEnable()};
-$("#wReset").onclick=function(){W={n:0,l:0,arr:[]};buildTally();wStats();wEnable()};
-buildTally();wEnable();
-/* ---- Klassentabelle ---- */
-var ct=$("#ctab"),cin=[];
-for(var i=0;i<14;i++){var r=document.createElement("div");r.className="r";r.innerHTML="<span>Paar "+(i+1)+"</span>";var inp=document.createElement("input");inp.type="number";inp.min=0;inp.max=20;inp.setAttribute("aria-label","Paar "+(i+1)+", Welpen mit langem Fell");
-  (function(k,el){el.addEventListener("input",function(){store("c"+k,el.value);drawClass();updateTransfer()});var v=store("c"+k);if(v)el.value=v})(i,inp);
-  r.appendChild(inp);ct.appendChild(r);cin.push(inp)}
+function pup(dice){var a,b;if(dice){a=die()<=3?"K":"l";b=die()<=3?"K":"l"}else{a=Math.random()<.5?"K":"l";b=Math.random()<.5?"K":"l"}return{a:a,b:b,lang:a==="l"&&b==="l"}}
+$("#hzThrow").onclick=function(){var r=pup($("#hzDice").checked);
+ [["#hzC1",r.a],["#hzC2",r.b]].forEach(function(p){var c=$(p[0]);c.classList.remove("fl");void c.offsetWidth;c.classList.add("fl");c.classList.toggle("l",p[1]==="l");setTimeout(function(){c.textContent=p[1]},275)});
+ var key=r.a+r.b;$$("#hzOuts .hz-o").forEach(function(o){o.classList.toggle("hit",o.dataset.o===key)});
+ $("#hzRes").innerHTML="<b>"+r.a+" "+r.b+"</b> → "+(r.lang?"<b>langhaarig</b>":"kurzhaarig")};
+/* Münzwurf */
+var W={n:0,l:0},tally=$("#hzTally");
+function build(){tally.innerHTML="";for(var i=0;i<20;i++){var d=document.createElement("div");d.className="hz-tc";d.innerHTML=(i+1)+"<i>–</i>";tally.appendChild(d)}}
+function stats(){$("#hzN").textContent=W.n;$("#hzL").textContent=W.l;$("#hzP").textContent=W.n?Math.round(W.l/W.n*100)+" %":"–";var p=parseInt($("#hzPred").value,10);$("#hzD").textContent=(W.n===20&&!isNaN(p))?Math.abs(W.l-p):"–";$("#hzSend").disabled=W.n<20}
+function enable(){var v=$("#hzPred").value,ok=v!==""&&+v>=0&&+v<=20;$("#hzOne").disabled=!ok||W.n>=20;$("#hzAll").disabled=!ok||W.n>=20;$("#hzHint").textContent=ok?(W.n>=20?"20 Welpen geworfen.":"Bereit."):"Erst Vorhersage eintragen (0 bis 20)."}
+function one(){if(W.n>=20)return;var r=pup($("#hzDice").checked),c=tally.children[W.n];c.classList.add("s");c.innerHTML=(W.n+1)+"<i>"+r.a+" "+r.b+"</i>"+(r.lang?"lang":"kurz");if(r.lang){c.classList.add("lang");W.l++}W.n++;stats()}
+$("#hzPred").addEventListener("input",function(){enable();stats();cmp()});
+$("#hzOne").onclick=function(){one();enable()};$("#hzAll").onclick=function(){while(W.n<20)one();enable()};
+$("#hzReset").onclick=function(){W={n:0,l:0};build();stats();enable()};build();enable();
+/* Klassentabelle */
+var ct=$("#hzCtab"),cin=[];
+for(var i=0;i<14;i++){var r=document.createElement("div");r.innerHTML="<span>Paar "+(i+1)+"</span>";var inp=document.createElement("input");inp.type="number";inp.min=0;inp.max=20;inp.setAttribute("aria-label","Paar "+(i+1)+", Welpen mit langem Fell");inp.addEventListener("input",refresh);r.appendChild(inp);ct.appendChild(r);cin.push(inp)}
 function vals(){return cin.map(function(e){return e.value===""?null:Math.max(0,Math.min(20,parseInt(e.value,10)))}).filter(function(v){return v!==null&&!isNaN(v)})}
-function binom(n){var c=0;for(var i=0;i<n;i++)if(Math.random()<.5&&Math.random()<.5)c++;return c}
-$("#wSend").onclick=function(){cin[0].value=W.l;store("c0",String(W.l));drawClass();updateTransfer();go(6)};
-$("#cSim").onclick=function(){cin.forEach(function(e,k){e.value=binom(20);store("c"+k,e.value)});drawClass();updateTransfer()};
-$("#cClear").onclick=function(){cin.forEach(function(e,k){e.value="";store("c"+k,"")});drawClass();updateTransfer()};
+function bin(n){var c=0;for(var i=0;i<n;i++)if(Math.random()<.5&&Math.random()<.5)c++;return c}
+$("#hzSend").onclick=function(){var k=cin.findIndex(function(e){return e.value===""});cin[k<0?0:k].value=W.l;refresh()};
+$("#hzSim").onclick=function(){cin.forEach(function(e){e.value=bin(20)});refresh()};
+$("#hzClr").onclick=function(){cin.forEach(function(e){e.value=""});refresh()};
 function cv(el){var d=window.devicePixelRatio||1,w=el.clientWidth||600,h=parseInt(el.getAttribute("height"),10);el.width=w*d;el.height=h*d;var g=el.getContext("2d");g.setTransform(d,0,0,d,0,0);return{g:g,w:w,h:h}}
-function drawClass(){
-  var v=vals(),n=v.length,s=v.reduce(function(a,b){return a+b},0);
-  $("#cS").textContent=s;$("#cP").textContent=n?(Math.round(s/(n*20)*1000)/10).toString().replace(".",",")+" %":"–";
-  $("#cMM").textContent=n?Math.min.apply(null,v)+"–"+Math.max.apply(null,v):"–";
-  var o=cv($("#cChart")),g=o.g,W2=o.w,H=o.h,pl=34,pb=26,pt=14,pw=W2-pl-10,ph=H-pb-pt,mx=12;
-  g.font="13px Andika, sans-serif";g.fillStyle="#12181F";g.strokeStyle="#C9D1D8";g.lineWidth=1;
-  for(var y=0;y<=mx;y+=2){var yy=pt+ph-ph*y/mx;g.beginPath();g.moveTo(pl,yy);g.lineTo(pl+pw,yy);g.stroke();g.fillText(y,8,yy+4)}
-  var bw=pw/14*.7;
-  for(var i=0;i<14;i++){var x=pl+pw/14*i+pw/14*.15;g.fillStyle="#586370";g.fillText(i+1,x+bw/2-4,H-8);
-    var val=cin[i].value===""?null:Math.min(20,+cin[i].value);if(val!==null){var bh=ph*val/mx;g.fillStyle="#0B5C7A";g.fillRect(x,pt+ph-bh,bw,bh);g.fillStyle="#12181F";g.fillText(val,x+bw/2-5,pt+ph-bh-4)}}
-  var y5=pt+ph-ph*5/mx;g.strokeStyle="#D96F00";g.lineWidth=3;g.setLineDash([8,5]);g.beginPath();g.moveTo(pl,y5);g.lineTo(pl+pw,y5);g.stroke();g.setLineDash([]);
-  g.fillStyle="#D96F00";g.font="bold 13px Andika, sans-serif";g.fillText("Erwartung 5",pl+pw-86,y5-6);
-  var pred=parseInt($("#pred").value,10),mine=cin[0].value,t="";
-  if(!isNaN(pred)&&mine!=="")t+="Deine Vorhersage: <b>"+pred+"</b> · dein Ergebnis (Paar 1): <b>"+mine+"</b>. ";
-  if(n)t+="Klassenanteil: <b>"+$("#cP").textContent+"</b>, Modell erwartet ≈ 25 %.";
-  $("#cCmp").innerHTML=t||"<span class=hint>Trage Ergebnisse ein oder simuliere eine Klasse.</span>";
-}
-var lSeries=null;
-$$("#bigN .chip").forEach(function(b){b.onclick=function(){var N=+b.dataset.n,c=0,pts=[];for(var i=1;i<=N;i++){if(Math.random()<.5&&Math.random()<.5)c++;pts.push(c/i)}
-  var o=cv($("#lChart")),g=o.g,pl=40,pr=10,pt=10,pb=22,pw=o.w-pl-pr,ph=o.h-pt-pb;g.font="12px Andika, sans-serif";g.strokeStyle="#C9D1D8";g.fillStyle="#586370";
-  [0,.25,.5].forEach(function(f){var yy=pt+ph-ph*f/.5;g.beginPath();g.moveTo(pl,yy);g.lineTo(pl+pw,yy);g.stroke();g.fillText(Math.round(f*100)+" %",4,yy+4)});
-  g.strokeStyle="#D96F00";g.lineWidth=3;g.setLineDash([8,5]);var y25=pt+ph-ph*.25/.5;g.beginPath();g.moveTo(pl,y25);g.lineTo(pl+pw,y25);g.stroke();g.setLineDash([]);
-  g.strokeStyle="#0B5C7A";g.lineWidth=2.5;g.beginPath();pts.forEach(function(p,i){var x=pl+pw*(N===1?0:i/(N-1)),y=pt+ph-ph*Math.min(p,.5)/.5;if(i)g.lineTo(x,y);else g.moveTo(x,y)});g.stroke();
-  g.fillStyle="#12181F";g.fillText("1",pl,o.h-5);g.fillText(N+" Welpen",pl+pw-62,o.h-5);
-  $("#lTxt").innerHTML="Nach <b>"+N+"</b> Welpen: <b>"+Math.round(pts[N-1]*1000)/10+" %</b> mit langem Fell ("+c+" Welpen). Je mehr Welpen, desto näher an 25 %, aber nie garantiert genau."}});
-/* ---- Transfer ---- */
-$$("[data-h]").forEach(function(b){b.onclick=function(){var on=b.getAttribute("aria-pressed")==="true";$$("[data-h]").forEach(function(o){o.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed",String(!on));store("hsel",on?"":b.dataset.h);updateTransfer()}});
-if(store("hsel")){var hb=$('[data-h="'+store("hsel")+'"]');if(hb)hb.setAttribute("aria-pressed","true")}
-function updateTransfer(){var v=vals(),s=v.reduce(function(a,b){return a+b},0),n=v.length,t="";
-  if(!n){$("#tTxt").textContent="Trage zuerst ein Klassenergebnis ein (Phase „Klassenergebnis“).";return}
-  t="Klasse: <b>"+s+"</b> langhaarige Welpen von <b>"+(n*20)+"</b>. ";
-  t+="<br><b>H1</b> sagt voraus: 0 langhaarige Welpen. "+(s>0?"Das Ergebnis passt <b>nicht</b> zur Vorhersage von H1.":"Das Ergebnis passt zur Vorhersage von H1.");
-  t+="<br><b>H2</b> sagt voraus: langhaarige Welpen können auftreten. "+(s>0?"Das Ergebnis passt zur Vorhersage von H2.":"Das Ergebnis passt nicht zur Vorhersage von H2.");
-  t+="<br><span class=hint>Vorsicht: Das Münzmodell setzt die Anlage voraus. Es zeigt, was H2 vorhersagt, und beweist es nicht.</span>";$("#tTxt").innerHTML=t}
-/* ---- Fortschritt ---- */
-function buildProg(){var L=["Brief und Zuchtbuch (Spiel)","Hypothesen und Modell (Unterricht)","Zuchtlabor (Spiel)","Regeln (Unterricht)","Einspruch (Spiel)","Empfehlung (Unterricht)"],p=$("#prog");p.innerHTML="";
-  L.forEach(function(l,i){var d=document.createElement("div");d.className="card"+(i===2?" dark":"");d.innerHTML='<div class="row"><div class="hcirc'+(i===2?' o':'')+'">'+(i+1)+'</div><div>'+l+(i===1?'<br><span class="hint">heute</span>':i===2?'<br><span class="hint" style="color:#fff">nächstes Spiel</span>':'')+'</div></div>';p.appendChild(d)})}
-go(parseInt(store("phase")||"0",10)||0);
-window.addEventListener("resize",function(){if(cur===6)drawClass()});
-var fsv=parseInt(store("fs")||"19",10);if(fsv)setFs(fsv);
+function cmp(){var pred=parseInt($("#hzPred").value,10),t="";if(!isNaN(pred)&&W.n===20)t+="Deine Vorhersage: "+pred+" · dein Ergebnis: "+W.l+". ";var v=vals();if(v.length)t+="Klassenanteil: "+$("#hzCP").textContent+", Modell erwartet ≈ 25 %.";$("#hzCmp").textContent=t}
+function draw(){var v=vals(),n=v.length,s=v.reduce(function(a,b){return a+b},0);
+ $("#hzS").textContent=s;$("#hzCP").textContent=n?(Math.round(s/(n*20)*1000)/10).toString().replace(".",",")+" %":"–";$("#hzMM").textContent=n?Math.min.apply(null,v)+"–"+Math.max.apply(null,v):"–";
+ var o=cv($("#hzChart")),g=o.g,pl=34,pb=26,pt=14,pw=o.w-pl-10,ph=o.h-pb-pt,mx=12;if(o.w<50)return;
+ g.font="15px Andika, sans-serif";g.strokeStyle="#C9D3CE";g.lineWidth=1;g.fillStyle="#1A2B24";
+ for(var y=0;y<=mx;y+=2){var yy=pt+ph-ph*y/mx;g.beginPath();g.moveTo(pl,yy);g.lineTo(pl+pw,yy);g.stroke();g.fillText(y,6,yy+5)}
+ var bw=pw/14*.7;for(var i=0;i<14;i++){var x=pl+pw/14*i+pw/14*.15;g.fillStyle="#5B6A63";g.fillText(i+1,x+bw/2-6,o.h-6);var val=cin[i].value===""?null:Math.min(20,+cin[i].value);if(val!==null){var bh=ph*Math.min(val,mx)/mx;g.fillStyle="#0F6E56";g.fillRect(x,pt+ph-bh,bw,bh);g.fillStyle="#1A2B24";g.fillText(val,x+bw/2-6,pt+ph-bh-4)}}
+ var y5=pt+ph-ph*5/mx;g.strokeStyle="#E67E22";g.lineWidth=3;g.setLineDash([8,5]);g.beginPath();g.moveTo(pl,y5);g.lineTo(pl+pw,y5);g.stroke();g.setLineDash([]);g.fillStyle="#E67E22";g.font="bold 15px Andika, sans-serif";g.fillText("gestrichelt: Erwartung 5",pl+pw-215,pt+2);cmp()}
+function refresh(){draw();upT()}
+/* Stichprobe */
+$$("#hzBigN [data-n]").forEach(function(b){b.onclick=function(){var N=+b.dataset.n,c=0,pts=[];for(var i=1;i<=N;i++){if(Math.random()<.5&&Math.random()<.5)c++;pts.push(c/i)}
+ var o=cv($("#hzLC")),g=o.g,pl=52,pr=12,pt=12,pb=28,pw=o.w-pl-pr,ph=o.h-pt-pb;if(o.w<50)return;g.font="16px Andika, sans-serif";g.strokeStyle="#C9D3CE";g.lineWidth=1;g.fillStyle="#5B6A63";
+ [0,.25,.5].forEach(function(f){var yy=pt+ph-ph*f/.5;g.beginPath();g.moveTo(pl,yy);g.lineTo(pl+pw,yy);g.stroke();g.fillText(Math.round(f*100)+" %",6,yy+5)});
+ g.strokeStyle="#E67E22";g.lineWidth=3;g.setLineDash([8,5]);var y25=pt+ph-ph*.25/.5;g.beginPath();g.moveTo(pl,y25);g.lineTo(pl+pw,y25);g.stroke();g.setLineDash([]);
+ g.strokeStyle="#0F6E56";g.lineWidth=3;g.beginPath();pts.forEach(function(p,i){var x=pl+pw*(N===1?0:i/(N-1)),y=pt+ph-ph*Math.min(p,.5)/.5;if(i)g.lineTo(x,y);else g.moveTo(x,y)});g.stroke();
+ g.fillStyle="#1A2B24";g.fillText("1",pl,o.h-6);g.fillText(N+" Welpen",pl+pw-90,o.h-6);
+ $("#hzLT").innerHTML="Nach <b>"+N+"</b> Welpen: <b>"+(Math.round(pts[N-1]*1000)/10).toString().replace(".",",")+" %</b> mit langem Fell ("+c+" Welpen). Je mehr Welpen, desto näher an 25 %, aber nie garantiert genau."}});
+/* Transfer */
+$$("[data-h]").forEach(function(b){b.onclick=function(){var on=b.getAttribute("aria-pressed")==="true";$$("[data-h]").forEach(function(o){o.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed",String(!on))}});
+function upT(){var v=vals(),s=v.reduce(function(a,b){return a+b},0),n=v.length,el=$("#hzT");if(!n){el.textContent="Trage zuerst ein Klassenergebnis ein.";return}
+ el.innerHTML="Klasse: <b>"+s+"</b> langhaarige Welpen von <b>"+(n*20)+"</b>. H1 sagt 0 voraus: "+(s>0?"passt <b>nicht</b>.":"passt.")+" H2 sagt voraus, dass langhaarige Welpen auftreten können: "+(s>0?"passt.":"passt nicht.")+" Das Münzmodell setzt die Anlage voraus. Es zeigt, was H2 vorhersagt, und beweist es nicht."}
+window.addEventListener("resize",draw);window.addEventListener("load",draw);
+$$(".slide").forEach(function(s){new MutationObserver(function(){if(s.classList.contains("on")&&(s.contains($("#hzChart"))||s.contains($("#hzLC"))))draw()}).observe(s,{attributes:true,attributeFilter:["class"]})});
 })();
 </script>
+<script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
 </body>
 </html>
