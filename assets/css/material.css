@@ -2,6 +2,8 @@
    Nutzt die Portal-Variablen (Farben, Dunkelmodus, Lesemodus) und gestaltet
    Aufgabe, Material und Hilfe im gleichen Look. Alle Größen in rem. */
 
+@import url("themenfarben.css");
+
 :root {
   --card: var(--surface);
   --muted: var(--text-2);
