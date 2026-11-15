@@ -16,6 +16,8 @@
    [data-mikro]     Mikroskop-Trainer: .mk-sicht .mk-fokus .mk-obj button[data-o] .mk-gv .mk-fd .mk-hint
    [data-explorer]  Zeichnung mit .hot[data-n][data-t] antippen, Anzeige .ex-name .ex-text .ex-zahl
    [data-schalter]  Schalter .sch button[data-m=tier|pflanze] blendet [data-nur=pflanze] aus
+   [data-schritte]  Sätze .sz nacheinander zeigen mit Knopf .sz-weiter
+   [data-lz]        Knopf zeigt die direkt folgende .lz-box (Lösung je Aufgabe)
    [data-kette]     Gewebekette: circle.kp und ein Knopf
    [data-matrix]    Tabelle mit td.m (antippen) und .summe
    [data-checkliste] .cp antippen hakt ab, .cz zählt
@@ -117,8 +119,10 @@
     if (lsg) lsg.onclick = function () {
       items.forEach(function (x) { bank.appendChild(x); });      // erst alles zurück, dann jede Karte nur einmal vergeben
       zones.forEach(function (z) {
-        var first = String(z.dataset.ans || "").split("|")[0];
-        var it = items.filter(function (x) { return x.textContent.trim() === first && !x.parentElement.classList.contains("dz"); })[0];
+        var alt = String(z.dataset.ans || "").split("|"), it = null;
+        alt.forEach(function (a) {
+          if (!it) it = items.filter(function (x) { return x.textContent.trim() === a && !x.parentElement.classList.contains("dz"); })[0] || null;
+        });
         if (it) place(it, z);
       });
       if (chk) chk.onclick();
@@ -411,6 +415,24 @@
   [].forEach.call(document.querySelectorAll("[data-selbst] .sb"), function (z) {
     [].forEach.call(z.querySelectorAll("button"), function (b) {
       b.addEventListener("click", function () { [].forEach.call(z.querySelectorAll("button"), function (x) { x.classList.remove("an"); x.setAttribute("aria-pressed", "false"); }); b.classList.add("an"); b.setAttribute("aria-pressed", "true"); });
+    });
+  });
+
+  /* ---------- Sätze nacheinander zeigen ---------- */
+  [].forEach.call(document.querySelectorAll("[data-schritte]"), function (root) {
+    var sz = [].slice.call(root.querySelectorAll(".sz")), n = 0, knopf = root.querySelector(".sz-weiter");
+    knopf.addEventListener("click", function () {
+      if (n < sz.length) { sz[n].classList.add("an"); n++; }
+      if (n >= sz.length) { knopf.disabled = true; knopf.textContent = "Alle Sätze gezeigt"; }
+    });
+  });
+
+  /* ---------- Lösung je Aufgabe: Knopf [data-lz] zeigt das folgende .lz-box ---------- */
+  [].forEach.call(document.querySelectorAll("[data-lz]"), function (b) {
+    var label = b.textContent;
+    b.addEventListener("click", function () {
+      var nx = b.nextElementSibling, box = (nx && nx.classList.contains("lz-box")) ? nx : b.closest(".aufg").querySelector(".lz-box"), an = box.classList.toggle("an");
+      b.textContent = an ? "Lösung verbergen" : label;
     });
   });
 
