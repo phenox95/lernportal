@@ -13,6 +13,9 @@
 (() => {
   "use strict";
 
+  /* Themenfeld-Farbe: Ordnername nach klasse-N (zum Beispiel genetik) wird zu data-tf am body, siehe praesentation-design.css */
+  try{var tfm=location.pathname.match(/\/klasse-\d+\/([^\/]+)\//);if(tfm&&document.body&&!document.body.dataset.tf)document.body.dataset.tf=tfm[1]}catch(e){}
+
   const stage = document.getElementById("stage");
   if (!stage || window.Praesentation) return;
 

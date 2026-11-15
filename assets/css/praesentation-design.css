@@ -32,6 +32,25 @@ small{font-size:20px;color:var(--grey)}.center{text-align:center}.muted{color:va
    Biologie = Grün (Standard in :root). Geografie = Rostrot. Weitere Themen: eigenen Block mit denselben Variablen ergänzen. */
 body[data-subject="Geografie"]{--g:#A9442B;--dk:#7C2F1C;--mint:#F5EBE1;--grey:#7D726B;--ink:#2B211E;--fach-rgb:169,68,43}
 body[data-subject="Biologie"]{--fach-rgb:15,110,86}
+/* Farbfamilie je Themenfeld: gleiche Sättigung und Helligkeit, andere Tonlage. Die Tonlage kommt aus dem Ordner
+   (…/<fach>/klasse-N/<themenfeld-slug>/…): praesentation.js setzt data-tf am body. Weiß auf --g erreicht Kontrast 5,6 und mehr.
+   Neues Themenfeld: einen Block mit denselben sechs Variablen ergänzen. */
+body[data-subject="Biologie"][data-tf="zelle"]{--g:#0F6E56;--dk:#0B4F3C;--mint:#E8F3EC;--grey:#5B6A63;--ink:#1A2B24;--fach-rgb:15,110,86}
+body[data-subject="Biologie"][data-tf="lebensraeume"]{--g:#3F7425;--dk:#284A17;--mint:#EEF5EB;--grey:#5E6A58;--ink:#1C2716;--fach-rgb:63,116,37}
+body[data-subject="Biologie"][data-tf="stoffwechsel"]{--g:#27717C;--dk:#1A4A51;--mint:#EBF3F5;--grey:#58676A;--ink:#162527;--fach-rgb:39,113,124}
+body[data-subject="Biologie"][data-tf="sexualitaet"]{--g:#B23865;--dk:#882B4D;--mint:#F5EBEE;--grey:#6A585F;--ink:#27161C;--fach-rgb:178,56,101}
+body[data-subject="Biologie"][data-tf="gesundheit"]{--g:#316A9B;--dk:#234D70;--mint:#EBF0F5;--grey:#58616A;--ink:#161F27;--fach-rgb:49,106,155}
+body[data-subject="Biologie"][data-tf="nervensystem"]{--g:#5B51C8;--dk:#4036AB;--mint:#ECEBF5;--grey:#5A586A;--ink:#171627;--fach-rgb:91,81,200}
+body[data-subject="Biologie"][data-tf="genetik"]{--g:#8D41C3;--dk:#6F319B;--mint:#F1EBF5;--grey:#62586A;--ink:#201627;--fach-rgb:141,65,195}
+body[data-subject="Biologie"][data-tf="evolution"]{--g:#8C5C2C;--dk:#61401F;--mint:#F5F0EB;--grey:#6A6158;--ink:#271F16;--fach-rgb:140,92,44}
+body[data-subject="Geografie"][data-tf="risikoraeume"]{--g:#A9442B;--dk:#7C2F1C;--mint:#F5EBE1;--grey:#7D726B;--ink:#2B211E;--fach-rgb:169,68,43}
+body[data-subject="Geografie"][data-tf="migration"]{--g:#866032;--dk:#5D4322;--mint:#F5F0EB;--grey:#6A6258;--ink:#271F16;--fach-rgb:134,96,50}
+body[data-subject="Geografie"][data-tf="vielfalt-der-erde"]{--g:#586C28;--dk:#364319;--mint:#F2F5EB;--grey:#646A58;--ink:#222716;--fach-rgb:88,108,40}
+body[data-subject="Geografie"][data-tf="armut-reichtum"]{--g:#A83E84;--dk:#7F2F64;--mint:#F5EBF1;--grey:#6A5864;--ink:#271621;--fach-rgb:168,62,132}
+body[data-subject="Geografie"][data-tf="ressourcen"]{--g:#306C82;--dk:#214A59;--mint:#EBF2F5;--grey:#58656A;--ink:#162327;--fach-rgb:48,108,130}
+body[data-subject="Geografie"][data-tf="klimawandel"]{--g:#AF414A;--dk:#863239;--mint:#F5EBEC;--grey:#6A585A;--ink:#271617;--fach-rgb:175,65,74}
+body[data-subject="Geografie"][data-tf="globalisierung"]{--g:#7850BE;--dk:#5E3A9C;--mint:#EEEBF5;--grey:#5F586A;--ink:#1C1627;--fach-rgb:120,80,190}
+body[data-subject="Geografie"][data-tf="europa"]{--g:#3F67AB;--dk:#304E82;--mint:#EBEEF5;--grey:#585F6A;--ink:#161C27;--fach-rgb:63,103,171}
 
 /* Fragenfeld (Fragenentwicklung): <div data-fragenfeld></div>, gebaut von praesentation.js */
 .fragen{display:grid;grid-template-columns:400px 1fr;gap:20px 40px;margin-top:6px}
