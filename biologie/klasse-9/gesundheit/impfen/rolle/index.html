@@ -36,7 +36,7 @@ nav a[aria-current="page"]{background:var(--y);color:var(--ink)}
 <script src="../assets/rollen.js"></script>
 <script>
 (function(){
-  var R=window.IMPF_ROLLEN||{}, k=((/[?&]r=([A-Da-d])\b/.exec(location.search)||[])[1]||'').toUpperCase();
+  var runde2=/[?&]s=2\b/.test(location.search), R=(runde2?window.IMPF_ROLLEN_2:window.IMPF_ROLLEN)||{}, k=((/[?&]r=([A-Da-d])\b/.exec(location.search)||[])[1]||'').toUpperCase();
   var main=document.getElementById('inhalt');
   function el(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!==undefined)n.textContent=x;return n;}
   main.textContent='';
@@ -45,10 +45,11 @@ nav a[aria-current="page"]{background:var(--y);color:var(--ink)}
     return;
   }
   var r=R[k];
-  document.title='Rolle '+k+': '+r.n+' – Impfen';
-  document.getElementById('titel').textContent='Rolle '+k+': '+r.n;
-  var pos=el('p','pos'); pos.appendChild(el('b','','Deine Position: ')); pos.appendChild(document.createTextNode(r.p)); main.appendChild(pos);
-  main.appendChild(el('h2','','Wer bist du?')); main.appendChild(el('p','',r.w));
+  document.title='Rolle '+k+(runde2?' (Runde 2)':'')+': '+r.n+' – Impfen';
+  document.getElementById('titel').textContent='Rolle '+k+(runde2?' · Runde 2: ':': ')+r.n;
+  if(runde2){main.appendChild(el('p','pos','Deine Rollenkarte aus Runde 1 bleibt gültig. Das hier sind neue Informationen.'));}
+  else{var pos=el('p','pos'); pos.appendChild(el('b','','Deine Position: ')); pos.appendChild(document.createTextNode(r.p)); main.appendChild(pos);
+  main.appendChild(el('h2','','Wer bist du?')); main.appendChild(el('p','',r.w));}
   if(r.t){main.appendChild(el('h2','','Das denkst du')); main.appendChild(el('p','',r.t));}
   main.appendChild(el('h2','',r.h));
   var ul=el('ul'); r.a.forEach(function(x){ul.appendChild(el('li','',x));}); main.appendChild(ul);

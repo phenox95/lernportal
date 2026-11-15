@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Impfen, Folgestunde: Masern in den USA. Schätzfrage, Impfquote und Ausbruch-Simulation, Quellencheck, Elimination, Debatte Runde 2 mit Zusatzkarten per QR-Code.">
+<link rel="icon" href="../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../assets/favicon/apple-touch-icon.png">
+<title>Impfen – Fortsetzung USA</title>
+<link rel="stylesheet" href="../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../assets/css/praesentation.css">
+<script src="../../../../assets/js/prefs.js"></script>
+<script src="../../../../assets/js/material.js" defer></script>
+<style>
+/* Aussehen: gemeinsames Präsentationsdesign (praesentation-design.css, Fach Biologie = Grün).
+   Hier nur, was diese Stunde zusätzlich braucht. Orange als Text ist abgedunkelt (--ot), damit es lesbar bleibt. */
+:root{--green:var(--g);--orange:var(--o);--ot:#B3560A;--blue:var(--b);--lg:var(--mint);--lo:#FDF0D8;--line:#9FB3AA;--lgrey:#B9C3BF;--onacc:#fff;--muted:var(--grey)}
+.slide{background:#fff}
+.slide.dark{background:var(--dk)}
+.slide.dark h1{color:#fff}
+.slide.dark .card{color:var(--ink)}
+.slide.dark .hint,.slide.dark .muted{color:#D5E8DF}
+.card{border-radius:20px;background:var(--lg);padding:30px 36px}
+.card.o{background:var(--lo)}
+.abs{position:absolute}
+.q{font-size:34px;line-height:1.35}
+.who{font-size:22px;font-weight:700;color:var(--green)}
+.who.o{color:var(--ot)}
+.hl{color:var(--green);font-weight:700}
+button{font-family:inherit}
+.tmr{position:absolute;right:64px;top:40px;width:104px;height:104px;border-radius:50%;background:var(--y);color:var(--ink);font-weight:700;font-size:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:0;cursor:pointer;line-height:1.2;touch-action:manipulation}
+.tmr small{display:block;font-size:13px;font-weight:400;color:var(--ink)}
+.btn{background:var(--green);color:#fff;border:0;border-radius:12px;padding:10px 20px;font-size:20px;font-weight:700;cursor:pointer;min-height:48px;touch-action:manipulation}
+.btn.sec{background:var(--lg);color:var(--ink);border:2px solid var(--line)}
+.btn.o{background:var(--y);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.step{display:flex;align-items:center;gap:18px;font-size:24px;margin:0 0 20px}
+.num{width:44px;height:44px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;font-size:22px}
+.num.o{background:var(--y);color:var(--ink)}
+.rule{font-size:23px;margin:0 0 18px;line-height:1.3}
+.rule b{color:var(--ot);margin-right:10px}
+.leg{display:flex;align-items:center;gap:14px;font-size:22px;margin-bottom:12px}
+.cell{width:44px;height:44px;border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;flex:none}
+.cG{background:var(--green);color:#fff} .cU{background:var(--o);color:var(--ink);border-color:var(--o)} .cN{border:4px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:22px}
+th{background:var(--green);color:#fff;padding:12px;font-size:22px}
+td{border:1.5px solid var(--line);padding:0 12px;height:66px;text-align:center}
+td:first-child{background:var(--lg);text-align:left;font-weight:700;font-size:19px}
+td[contenteditable]{outline:none;font-size:28px;color:var(--ot);font-weight:700}
+td[contenteditable]:focus{background:var(--lo)}
+.rnd{width:376px;height:200px;border-radius:20px;background:var(--lg);padding:22px 28px;position:absolute;top:150px}
+.rnd.o{background:var(--lo)}
+.rnd h3{color:var(--green);margin:0 0 4px;font-size:28px}
+.rnd .t{font-size:24px;font-weight:700;color:var(--ot);margin-bottom:6px}
+.rnd p{margin:0;font-size:22px;line-height:1.3}
+.rolebtn{display:flex;align-items:center;gap:12px;font-size:22px;position:absolute;top:390px;background:var(--lg);border:2px solid var(--line);border-radius:16px;padding:10px 18px 10px 10px;cursor:pointer;color:var(--ink);font-weight:700;min-height:68px;touch-action:manipulation}
+.rolebtn .num{width:48px;height:48px;font-size:24px}
+.hint{font-size:19px;color:var(--grey)}
+.rolle{position:absolute;top:392px;width:270px;height:216px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.rolle .rolebtn{position:static;width:100%;justify-content:flex-start}
+.qr{width:140px;height:140px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:9px}
+.qr svg{display:block;width:100%;height:100%}
+/* Fortschrittsbalken (wie in der Vorlage) */
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+/* Blätterpfeile für das Board: groß, in beiden unteren Ecken, ohne Wischen oder Tastatur bedienbar */
+.pfeil{position:fixed;bottom:max(12px,env(safe-area-inset-bottom));z-index:30;width:84px;height:84px;border-radius:50%;border:4px solid #fff;background:var(--dk);color:#fff;display:grid;place-items:center;padding:0;cursor:pointer;touch-action:manipulation;box-shadow:0 6px 18px -6px rgba(0,0,0,.5)}
+.pfeil.l{left:max(12px,env(safe-area-inset-left))}.pfeil.r{right:max(12px,env(safe-area-inset-right));background:var(--y);color:var(--ink);border-color:var(--ink)}
+.pfeil svg{width:44px;height:44px;fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.pfeil:active:not(:disabled){transform:scale(.95)}
+.pfeil:disabled{opacity:.2;cursor:default}
+.pfeil:focus-visible{outline:4px solid var(--b);outline-offset:3px}
+/* Fußzeile mittig zwischen den Pfeilen */
+#fuss{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));display:flex;gap:14px;align-items:center;z-index:30;font-size:17px;color:#fff;background:rgba(26,43,36,.78);border-radius:12px;padding:4px 6px 4px 14px}
+#fuss button{border:0;border-radius:10px;background:rgba(255,255,255,.18);color:#fff;font-size:16px;font-weight:700;padding:0 14px;min-height:44px;cursor:pointer}
+#notes{position:fixed;left:0;right:0;bottom:0;max-height:38vh;overflow:auto;background:#1A2B24;color:#fff;padding:16px 110px calc(16px + env(safe-area-inset-bottom,0px));font-size:17px;line-height:1.45;border-top:3px solid var(--y);display:none;z-index:2000}
+#notes.on{display:block}
+#notes b{color:var(--y)}
+/* Impuls */
+.w{cursor:pointer;border-radius:6px;padding:0 2px;transition:background .12s}
+.w.mark{background:var(--y);color:var(--ink)}
+/* Spielfeld */
+#grid{display:grid;grid-template-columns:repeat(5,100px);grid-auto-rows:100px;gap:6px}
+.gc{border:2px solid var(--green);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:34px;font-weight:700;cursor:pointer;user-select:none;position:relative;background:#fff;color:var(--ink)}
+.gc.G{background:var(--lg)}
+.gc.N{border:5px solid var(--ink)}
+.gc.inf{background:var(--o);color:var(--ink);border-color:var(--o)}
+.gc small{font-size:18px;font-weight:700;line-height:1;color:inherit}
+.gc .ci{position:absolute;top:2px;left:6px;font-size:13px;color:var(--grey);font-weight:400}
+.gc.inf .ci{color:var(--ink)}
+.stat{font-size:24px;margin:0 0 8px}
+.stat b{font-size:34px;color:var(--ot);margin-left:8px}
+.seg{display:flex;gap:8px;margin-bottom:14px}
+.seg button{flex:1}
+.seg button.on{background:var(--green);color:#fff;border-color:var(--green)}
+/* Labor */
+#dots{display:grid;grid-template-columns:repeat(10,22px);gap:4px}
+#dots i{width:22px;height:22px;border-radius:50%;background:var(--green)}
+#dots i.U{background:var(--lgrey)} #dots i.I{background:var(--o)}
+input[type=range]{width:100%;accent-color:var(--green);height:32px}
+.lab label{display:block;font-size:20px;font-weight:700;margin:8px 0 0}
+/* Blitzlicht */
+.bar-area{display:flex;gap:18px;align-items:flex-end;height:230px;margin-top:6px}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bcol .bar{width:100%;border-radius:10px 10px 0 0;min-height:6px;transition:height .25s}
+.bcol .n{font-size:34px;font-weight:700;margin-bottom:4px}
+.bl{display:flex;gap:8px;margin-top:8px}
+.bl button{flex:1;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;font-size:22px;font-weight:700;min-height:48px;cursor:pointer}
+.bl button.p{background:var(--green);color:#fff;border-color:var(--green)}
+.lbl{font-size:20px;font-weight:700;text-align:center;margin-top:8px;min-height:52px}
+/* Exit */
+.chk{display:flex;align-items:center;gap:18px;font-size:25px;margin-bottom:8px;cursor:pointer;user-select:none}
+.box{width:44px;height:44px;border:3px solid var(--green);border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff}
+.chk.on .box{background:var(--green)}
+/* Aufdecken */
+.rv.hide{filter:blur(9px);cursor:pointer;user-select:none}
+.rv{cursor:pointer;transition:filter .2s}
+/* Rollenkarten */
+.modal{position:absolute;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:20;padding:40px}
+.modal.on{display:flex}
+.mcard{background:#fff;border:3px solid var(--green);border-radius:22px;padding:26px 38px;width:900px;max-height:640px;overflow:auto;font-size:21px;line-height:1.35;position:relative}
+.mclose{position:absolute;right:18px;top:14px;border:0;background:var(--lg);color:var(--ink);border-radius:10px;font-size:20px;font-weight:700;padding:8px 14px;cursor:pointer;min-height:44px}
+.mcard h2{color:var(--green);margin:0 0 6px;font-size:34px}
+.mcard h4{margin:10px 0 3px;font-size:20px;color:var(--ot)}
+.mcard ul{margin:0;padding-left:26px}
+.mcard li{margin-bottom:4px}
+svg text{font-family:Andika,Verdana,sans-serif}
+
+/* Zusätzlich in der Folgestunde */
+.hid{display:none}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;font-size:21px;line-height:1.3;border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:10px 16px;margin-bottom:10px;cursor:pointer;min-height:56px;touch-action:manipulation}
+.opt .mk{width:38px;height:38px;border-radius:50%;border:3px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px}
+.opt.ok{border-color:var(--green);background:var(--lg)} .opt.ok .mk{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.no{border-color:var(--o);background:var(--lo)} .opt.no .mk{background:var(--o);color:var(--ink);border-color:var(--o)}
+.tfr{display:flex;align-items:center;gap:16px;margin-bottom:12px;padding:10px 16px;border-radius:14px;background:var(--lg)}
+.tfr .tx{flex:1;font-size:22px;line-height:1.3}
+.tfr .bt{display:flex;gap:8px;flex:none}
+.tfr .bt button{border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;font-size:18px;font-weight:700;padding:6px 14px;cursor:pointer;min-height:48px;touch-action:manipulation}
+.tfr .bt button.sel{background:var(--green);color:#fff;border-color:var(--green)}
+.tfr .fb{width:300px;font-size:17px;line-height:1.25;color:var(--grey);flex:none;min-height:46px}
+.tfr.r{background:var(--lg)} .tfr.w{background:var(--lo)}
+.dg{display:grid;grid-template-columns:repeat(10,17px);gap:3px;margin:6px 0}
+.dg i{width:17px;height:17px;border-radius:50%;background:var(--green)}
+.dg i.U{background:var(--lgrey)} .dg i.I{background:var(--o)}
+.sim b.big{font-size:26px;color:var(--ot)}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../" data-title="Impfen – Fortsetzung USA" data-subject="Biologie" data-grade="Klasse 9">
+<div id="buehne"><div id="stage">
+
+<!-- 1 Do Now + Argumentesammler -->
+<section class="slide" data-min="5" data-note="<b>Do Now (0–3 Min.):</b> Rückgriff auf Runde 1, schriftlich ins Heft. <b>Abgleich (3–5 Min.):</b> SuS nennen ihr Argument; die Lehrkraft (oder ein/e Schüler/in) tippt es rechts ein, die Klasse stimmt mit 👍 ab. Die Sammlung dient als Ausgangspunkt für Runde 2. Falls Runde 1 anders verlaufen ist: Aufgabe anpassen.">
+  <h1>Do Now</h1>
+  <button class="tmr" data-timer="180" title="Timer starten">3 Min.<small>Start</small></button>
+  <div class="card abs" style="left:64px;top:160px;width:520px;height:330px;display:flex;align-items:center">
+    <div class="q" style="font-size:30px"><span class="hl">Nenne</span> ein Argument einer anderen Rolle aus Runde 1, das dich überzeugt hat, und <span class="hl">begründe</span>, warum.</div>
+  </div>
+  <div class="abs muted" style="left:64px;top:520px;font-size:20px">Schreibe ins Heft. Du darfst dir die Aufgabe vorlesen lassen.</div>
+  <div class="abs" style="left:630px;top:150px;width:586px">
+    <div style="font-size:26px;font-weight:700;color:var(--green);margin-bottom:8px">Argumente aus Runde 1</div>
+    <div style="display:flex;gap:10px"><input id="qin" type="text" placeholder="Argument eintippen …" maxlength="140" aria-label="Argument eintippen" style="width:410px"><button class="btn" id="qadd">Hinzufügen</button></div>
+    <div id="qlist" style="margin-top:14px;height:340px"></div>
+  </div>
+</section>
+
+<!-- 2 Schätzfrage USA -->
+<section class="slide" data-min="4" data-note="<b>USA-Datenimpuls (5–15 Min., Folien 2 bis 5):</b> Folie 2 und 3 sind Pflicht (ca. 8 Min.), Folie 4 und 5 sind Vertiefung (bei Zeitnot überspringen). Folie 2: erst schätzen lassen (Regler), dann auflösen. Quelle: CDC, Stand 12.11.2026: 5.412 bestätigte Fälle in 2026, 2.289 im gesamten Jahr 2025, 43 neue Ausbrüche. Höchster Wert seit 1991. <b>Vor der Stunde auf https://www.cdc.gov/measles/data-research/index.html die Zahlen aktualisieren</b> (sie ändern sich wöchentlich) und hier im Dokument anpassen. Die 96 % (ungeimpft oder Impfstatus unbekannt) gelten laut USAFacts für den Stand 5.11.2026. Arbeitsblatt Aufgabe 1 (Beschreibe).">
+  <h1>Masern in den USA</h1>
+  <div class="card abs" style="left:64px;top:150px;width:520px;height:450px">
+    <div class="q" style="font-size:27px"><span class="hl">Schätze:</span> Wie viele bestätigte Masernfälle gab es 2026 bis Mitte November in den USA?</div>
+    <input type="range" id="gs" min="0" max="10000" step="100" value="2000" style="margin-top:22px" aria-label="Schätzung">
+    <div style="font-size:44px;font-weight:700;color:var(--b);margin:6px 0 14px"><span id="gv">2.000</span></div>
+    <button class="btn o" id="gres">Auflösen</button>
+    <div id="gmsg2" style="font-size:21px;line-height:1.35;margin-top:14px"></div>
+  </div>
+  <div class="abs" style="left:620px;top:150px;width:596px">
+    <svg viewBox="0 0 596 360" width="596" height="360" role="img" aria-label="Säulendiagramm: Schätzung, Masernfälle USA 2025 und 2026">
+      <line x1="30" y1="320" x2="590" y2="320" stroke="var(--line)" stroke-width="2"/>
+      <g id="bars"></g>
+    </svg>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:6px" id="chips" class="hid"></div>
+  </div>
+</section>
+
+<!-- 3 Labor -->
+<section class="slide" data-min="4" data-note="<b>Quote 92,4 % und Ziel 95 %:</b> Links die Quote der Kindergartenkinder in den USA 2025/26: 92,4 %, Ziel 95 % (CDC; KFF). Rechts eine Ein-Klick-Simulation: 100 Personen, eine ist krank, jede kennt 18 andere, nur Ungeimpfte stecken an. „Ausbruch starten“ zeigt beide Quoten nebeneinander (je ein Beispiel) und den Durchschnitt aus 100 Läufen. Es ist ein Modell mit nur 100 Personen: Es zeigt die Richtung (mehr Ungeimpfte, größere Ausbrüche), keinen genauen Kipppunkt. Vor Ort können einzelne Gemeinden viel niedrigere Quoten haben (CDC). Arbeitsblatt Aufgabe 2 (Erkläre).">
+  <h1>Quote 92,4 %, Ziel 95 %</h1>
+  <div class="card abs" style="left:64px;top:150px;width:520px;height:440px">
+    <div style="font-size:24px;font-weight:700;color:var(--green)">MMR-Impfquote Kindergartenkinder USA 2025/26</div>
+    <svg viewBox="0 0 480 130" width="460" height="125" role="img" aria-label="Impfquote 92,4 Prozent, Ziel 95 Prozent">
+      <rect x="10" y="50" width="460" height="30" rx="8" fill="var(--lgrey)"/>
+      <rect x="10" y="50" width="425" height="30" rx="8" fill="var(--green)"/>
+      <line x1="447" y1="38" x2="447" y2="92" stroke="var(--o)" stroke-width="4"/>
+      <text x="435" y="30" font-size="20" font-weight="700" text-anchor="end" fill="var(--green)">92,4 %</text>
+      <text x="470" y="116" font-size="19" font-weight="700" text-anchor="end" fill="var(--ot)">Ziel 95 %</text>
+    </svg>
+    <div style="font-size:22px;line-height:1.4;margin-top:6px">Der Wert klingt hoch. Vor Ort können einzelne Gemeinden aber viel niedriger liegen. <span class="hl">Starte die Simulation:</span> Was ändert sich zwischen 92 % und 95 %?</div>
+  </div>
+  <div class="card abs sim" style="left:620px;top:126px;width:596px;height:496px;padding:12px 26px">
+    <div style="font-size:26px;font-weight:700;color:var(--green)">Ausbruch-Simulation</div>
+    <div style="font-size:18px;line-height:1.35;margin:4px 0 8px"><b>1 Person ist krank.</b> Jede Person kennt 18 andere. Nur <b>Ungeimpfte</b> stecken sich an und geben die Krankheit weiter.</div>
+    <button class="btn o" id="simgo">Ausbruch starten</button>
+    <div style="display:flex;gap:22px;margin-top:6px">
+      <div><div style="font-size:19px;font-weight:700">92 % geimpft (USA)</div><div class="dg" id="d92"></div><div id="r92" style="font-size:18px;line-height:1.3"></div></div>
+      <div><div style="font-size:19px;font-weight:700">95 % geimpft (Ziel)</div><div class="dg" id="d95"></div><div id="r95" style="font-size:18px;line-height:1.3"></div></div>
+    </div>
+    <div style="font-size:16px;margin-top:2px"><span style="color:var(--green)">●</span> geimpft &nbsp;<span style="color:var(--lgrey)">●</span> ungeimpft, gesund &nbsp;<span style="color:var(--o)">●</span> erkrankt</div>
+  </div>
+</section>
+
+<!-- 4 Quellencheck -->
+<section class="slide" data-min="3" data-note="<b>Quellencheck (Vertiefung):</b> Zwei Zahlen zu Masern-Todesfällen 2026 in den USA: CDC (Stand Anfang November): 4 bestätigte Todesfälle. CNN (13.11.): 10 Todesfälle. Hintergrund: Die CDC prüft Todesfälle noch und arbeitet mit den Staatsepidemiologen an einer einheitlichen Falldefinition; ihre Zahl kann sich ändern. Die Bundesstaaten meldeten Anfang November zusammen schon mehr (Pennsylvania 6, New York 1, Wisconsin 1; Quelle: AAP Red Book Online). <b>Vor der Stunde die aktuellen Zahlen prüfen.</b> Lerngedanke: Zahlen sind nicht einfach falsch oder richtig, sie hängen von Zählweise und Zeitpunkt ab. Drei Fragen an jede Zahl: Wer zählt? Wann? Was zählt als Fall?">
+  <h1>Quellencheck</h1>
+  <div class="abs" style="left:64px;top:150px;width:520px;font-size:25px;line-height:1.4">
+    <div class="card" style="margin-bottom:18px"><b class="hl">Quelle A</b> (CDC, Anfang November): <b>4</b> Todesfälle durch Masern in den USA 2026.</div>
+    <div class="card o"><b style="color:var(--ot)">Quelle B</b> (CNN, 13. November): <b>10</b> Todesfälle durch Masern in den USA 2026.</div>
+  </div>
+  <div class="abs" style="left:630px;top:150px;width:586px">
+    <div style="font-size:25px;font-weight:700;margin-bottom:12px">Welche Gründe sind möglich? Tippe an.</div>
+    <div id="mc"></div>
+  </div>
+</section>
+
+<!-- 5 Elimination -->
+<section class="slide" data-min="3" data-note="<b>Elimination (Vertiefung):</b> Vier Aussagen, die die SuS mit „stimmt“ oder „stimmt nicht“ beantworten. Aussage 4 hängt vom Stand ab: Am 13. bis 15.11.2026 meldeten Medien (u. a. Washington Post, Axios, CNN, Japan Times) unter Berufung auf Beteiligte, dass die USA den Eliminationsstatus verloren haben. Die offizielle Bekanntgabe der PAHO stand laut Washington Post noch aus. <b>Vor der Stunde prüfen, ob sie inzwischen erfolgt ist</b>, und Aussage und Rückmeldung ggf. anpassen. Kriterium: Derselbe Virusstamm wird in einem Land mindestens 12 Monate lang weitergegeben (Ausbruch in Utah mit über 700 Fällen). Kanada und Großbritannien haben ihren Status im vergangenen Jahr verloren (Axios).">
+  <h1>Was heißt „Elimination“?</h1>
+  <div class="abs" id="tf" style="left:64px;top:150px;width:1152px"></div>
+</section>
+
+<!-- 6 Runde 2 -->
+<section class="slide" data-min="6" data-note="<b>Debatte Runde 2 (ca. 15–21 Min.):</b> Gruppen sitzen wie in Runde 1. Jede Rolle liest ihre Zusatzinformation (QR-Code scannen oder Rolle antippen, Seite nur über die Portal-Adresse erreichbar, ohne Handys Papierkarten) und nutzt sie in der Diskussion. Die Rollenkarte aus Runde 1 bleibt gültig. Faktenbasis: CDC (96 % ungeimpft oder Status unbekannt, bis 5.11.), zwei Dosen zu 97 % wirksam, Kindergartenquote 92,4 %, erster Masern-Todesfall eines Kindes im Bundesstaat New York seit rund 30 Jahren, Säugling in Wisconsin gestorben, Kanada und Großbritannien ohne Eliminationsstatus. Beutelsbacher Konsens: Rolle A ernst nehmen; ihre Zusatzinfo gibt ihr ein sachliches Argument (Zahlen sind unsicher, Impfung schützt nicht zu 100 %).">
+  <h1>Debatte: Runde 2</h1>
+  <button class="tmr" data-timer="360" title="Timer starten">6 Min.<small>Start</small></button>
+  <div class="abs" style="left:64px;top:150px;width:1000px;font-size:26px;line-height:1.4">Jede Rolle erhält neue Informationen aus den USA. <b class="hl">Scanne den Code deiner Rolle</b> oder tippe sie an, lies die Karte und nutze sie in der Diskussion.</div>
+  <div class="rolle" style="left:64px;top:262px"><button class="rolebtn" data-role="A"><span class="num">A</span>Mutter</button><div class="qr" data-qr="A" role="img" aria-label="QR-Code zur Zusatzkarte A"></div></div>
+  <div class="rolle" style="left:358px;top:262px"><button class="rolebtn" data-role="B"><span class="num">B</span>Kinderärztin</button><div class="qr" data-qr="B" role="img" aria-label="QR-Code zur Zusatzkarte B"></div></div>
+  <div class="rolle" style="left:652px;top:262px"><button class="rolebtn" data-role="C"><span class="num">C</span>Vater von Mia</button><div class="qr" data-qr="C" role="img" aria-label="QR-Code zur Zusatzkarte C"></div></div>
+  <div class="rolle" style="left:946px;top:262px"><button class="rolebtn" data-role="D"><span class="num">D</span>Jurist</button><div class="qr" data-qr="D" role="img" aria-label="QR-Code zur Zusatzkarte D"></div></div>
+  <div class="abs" style="left:64px;top:520px;font-size:24px;font-weight:700;color:var(--ot)">Argumente statt Meinungen. Ausreden lassen. Bezieht euch auf die Zahlen.</div>
+  <div class="modal" id="rmodal"><div class="mcard" id="rcard"></div></div>
+</section>
+
+<!-- 7 Runde 3 + Blitzlicht -->
+<section class="slide" data-min="7" data-note="<b>Runde 3 und Blitzlicht (ca. 21–28 Min.):</b> Erst Gruppenentscheidung (4 Min.), dann Blitzlicht per Handzeichen. Links die Zählung nach Runde 1 (aus der letzten Stunde nachtragen oder erfragen), rechts die Zählung jetzt. Auswertung: Hat sich etwas verändert? Waren es die Zahlen oder die Argumente? Es gibt keine richtige Position; bewertet wird die Begründung.">
+  <h1>Runde 3 und Blitzlicht</h1>
+  <button class="tmr" data-timer="240" title="Timer starten">4 Min.<small>Start</small></button>
+  <div class="abs" style="left:64px;top:130px;width:1000px;font-size:23px;line-height:1.3"><b class="hl">Einigt euch in der Gruppe:</b> Pflicht, keine Pflicht oder eine andere Lösung? Nennt einen Fakt als Grund.</div>
+  <div class="abs" id="bz1" style="left:64px;top:190px;width:560px"></div>
+  <div class="abs" id="bz2" style="left:660px;top:190px;width:556px"></div>
+</section>
+
+<!-- 8 Tafelbild -->
+<section class="slide" data-min="6" data-note="<b>Sicherung (ca. 28–34 Min.):</b> Die Inhalte sind unscharf. Die Klasse erarbeitet sie, dann wird zum Aufdecken getippt. Links Herdenimmunität mit USA-Beispiel, rechts Pro/Contra aus der Debatte und die Quellenfragen.">
+  <h1>Herdenimmunität</h1>
+  <svg class="abs" style="right:64px;top:18px" viewBox="0 0 150 130" width="190" height="165" role="img" aria-label="Eine nicht impfbare Person in der Mitte, umgeben von geimpften Personen"><g id="ppl"></g></svg>
+  <div class="card abs" style="left:64px;top:190px;width:560px;height:390px;font-size:25px;line-height:1.35">
+    <ul style="margin:0;padding-left:28px">
+      <li class="rv hide" style="margin-bottom:12px">Viele Menschen sind geimpft, der Erreger findet kaum Ansteckungswege.</li>
+      <li class="rv hide" style="margin-bottom:12px">Auch Menschen, die nicht geimpft werden können, sind geschützt.</li>
+      <li class="rv hide" style="margin-bottom:12px">Masern: etwa 95 % Geimpfte nötig (RKI).</li>
+      <li class="rv hide">USA: 92,4 % bei Kindergartenkindern, viele Ausbrüche.</li>
+    </ul>
+  </div>
+  <div class="card o abs" style="left:656px;top:190px;width:560px;height:390px;font-size:25px;line-height:1.35">
+    <p class="rv hide" style="margin:0 0 14px"><b class="hl">Pro:</b> Schutz für Schwache, hohe Quote nötig</p>
+    <p class="rv hide" style="margin:0 0 14px"><b style="color:var(--ot)">Contra:</b> Selbstbestimmung, Sorge vor Nebenwirkungen</p>
+    <p class="rv hide" style="margin:0 0 14px"><b>Rahmen:</b> keine Zwangsimpfung, aber Nachweispflicht</p>
+    <p class="rv hide" style="margin:0"><b>Zahlen prüfen:</b> Wer zählt? Wann? Was zählt als Fall?</p>
+  </div>
+  <div class="abs rv hide" style="left:110px;top:602px;font-size:30px;font-weight:700;color:var(--green)">Impfen schützt mich und andere.</div>
+  <div class="abs hint" style="left:700px;top:606px">Tippe auf unscharfe Stellen zum Aufdecken.</div>
+</section>
+
+<!-- 9 Exit -->
+<section class="slide" data-min="7" data-note="<b>Exit (ca. 34–41 Min.):</b> Exit-Ticket (A5) schreiben lassen und einsammeln. Die Checkliste hilft beim Selbstcheck. Bewertet wird die Begründung, nicht die Position.">
+  <h1>Exit-Ticket</h1>
+  <button class="tmr" data-timer="420" title="Timer starten">7 Min.<small>Start</small></button>
+  <div class="card abs" style="left:64px;top:150px;width:1152px;height:230px;display:flex;align-items:center">
+    <div class="q" style="font-size:32px"><span class="hl">Beurteile</span>, ob eine Impfpflicht gegen Masern in Schulen gerechtfertigt ist. Begründe mit dem Begriff <b>Herdenimmunität</b> und nutze ein Beispiel aus den USA als Beleg.</div>
+  </div>
+  <div class="abs" style="left:64px;top:402px;width:700px" id="chks"></div>
+  <div class="abs" id="done" style="left:800px;top:430px;font-size:40px;font-weight:700;color:var(--green);display:none">✔ Geschafft!</div>
+  <div class="abs muted" style="left:800px;top:500px;width:416px;font-size:19px;line-height:1.35">Satzbausteine: In den USA zeigt sich, dass … · Deshalb halte ich eine Impfpflicht für (nicht) gerechtfertigt, weil … · Ein Gegenargument ist …, aber …</div>
+</section>
+
+<div id="nav"><i></i></div>
+</div></div>
+
+<button class="pfeil l" id="bPrev" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="bNext" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+<div id="fuss"><span id="cnt"></span><button id="bNotes" type="button">Notizen (N)</button></div>
+<div id="notes"></div>
+
+<script src="../impfen/assets/rollen.js"></script>
+<script src="../../../../assets/js/qrcode.js"></script>
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var slides=$$('.slide'), cur=0, stage=$('#stage'), buehne=$('#buehne'), notes=$('#notes'), cnt=$('#cnt'), balken=$('#nav i');
+  function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')';}
+  window.addEventListener('resize',fit);fit();
+  function show(i,fromHash){
+    cur=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(s,k){s.classList.toggle('on',k===cur);});
+    notes.innerHTML='<b>Lehrkraft, Folie '+(cur+1)+':</b> '+(slides[cur].getAttribute('data-note')||'');
+    cnt.textContent=(cur+1)+' / '+slides.length;
+    balken.style.width=((cur+1)/slides.length*100)+'%';
+    $('#bPrev').disabled=cur===0;$('#bNext').disabled=cur===slides.length-1;
+    stopTimer();
+    if(!fromHash){try{history.replaceState(null,'','#folie'+(cur+1));}catch(e){}}
+  }
+  function fromHash(){var m=/^#folie(\d+)$/.exec(location.hash);show(m?parseInt(m[1],10)-1:0,true);}
+  function go(d){show(cur+d);}
+  $('#bNext').onclick=function(){go(1)}; $('#bPrev').onclick=function(){go(-1)};
+  $('#bNotes').onclick=function(){notes.classList.toggle('on')};
+  function typing(t){return t&&(t.isContentEditable||/^(INPUT|TEXTAREA)$/.test(t.tagName));}
+  document.addEventListener('keydown',function(e){
+    if(typing(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key;
+    if(k==='Escape'){$$('.modal').forEach(function(m){m.classList.remove('on')});return;}
+    if(k==='ArrowRight'||k===' '||k==='PageDown'){e.preventDefault();go(1);}
+    else if(k==='ArrowLeft'||k==='PageUp'){go(-1);}
+    else if(k==='n'||k==='N'){notes.classList.toggle('on');}
+    else if(k==='Home'){show(0);}else if(k==='End'){show(slides.length-1);}
+  });
+  var sx=null;
+  document.addEventListener('touchstart',function(e){sx=typing(e.target)||e.target.closest('input,button,.modal,#qlist,.opt,.tfr')?null:e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>80)go(dx<0?1:-1);sx=null;},{passive:true});
+
+  /* Timer */
+  var tmr=null, activeBtn=null, orig='';
+  function fmt(s){var m=Math.floor(s/60),r=s%60;return m+':'+(r<10?'0':'')+r;}
+  function stopTimer(){if(tmr){clearInterval(tmr);tmr=null;}if(activeBtn){activeBtn.innerHTML=orig;activeBtn=null;}}
+  $$('[data-timer]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(activeBtn===b){stopTimer();return;}
+      stopTimer();
+      var left=parseInt(b.getAttribute('data-timer'),10);
+      activeBtn=b;orig=b.innerHTML;
+      function paint(){b.innerHTML=fmt(left)+'<small>läuft</small>';}
+      paint();
+      tmr=setInterval(function(){left--;if(left<0){var o=orig;stopTimer();b.innerHTML='Ende<small>Zeit</small>';setTimeout(function(){b.innerHTML=o;},3000);return;}paint();},1000);
+    });
+  });
+
+  /* 1 Argumentesammler */
+  var qs=[];
+  function renderQ(){
+    var l=$('#qlist');l.innerHTML='';
+    qs.slice().sort(function(a,b){return b.v-a.v||a.id-b.id;}).forEach(function(q){
+      var d=document.createElement('div');d.className='qc';
+      var t=document.createElement('span');t.className='t';t.textContent=q.t;
+      var v=document.createElement('button');v.textContent='👍 '+q.v;v.setAttribute('aria-label','Zustimmung');v.onclick=function(){q.v++;renderQ();};
+      d.appendChild(t);d.appendChild(v);l.appendChild(d);
+    });
+  }
+  function addQ(){var i=$('#qin'),t=i.value.trim();if(!t)return;qs.push({id:qs.length,t:t,v:0});i.value='';renderQ();i.focus();}
+  $('#qadd').onclick=addQ;$('#qin').addEventListener('keydown',function(e){if(e.key==='Enter')addQ();});
+
+  /* 2 Schätzfrage */
+  var gs=$('#gs');
+  function fm(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+  gs.oninput=function(){$('#gv').textContent=fm(gs.value);};
+  $('#gres').onclick=function(){
+    var g=parseInt(gs.value,10),data=[['Deine Schätzung',g,'var(--b)'],['2025 (ganzes Jahr)',2289,'var(--lgrey)'],['2026 (bis 12.11.)',5412,'var(--o)']];
+    var mx=Math.max(g,5412,1),h='';
+    data.forEach(function(d,i){var bh=Math.max(4,d[1]/mx*250),x=60+i*180;
+      h+='<rect x="'+x+'" y="'+(320-bh)+'" width="120" height="'+bh+'" rx="8" fill="'+d[2]+'"/><text x="'+(x+60)+'" y="'+(312-bh)+'" font-size="26" font-weight="700" text-anchor="middle" fill="var(--ink)">'+fm(d[1])+'</text><text x="'+(x+60)+'" y="346" font-size="16" font-weight="700" text-anchor="middle" fill="var(--ink)">'+d[0]+'</text>';});
+    $('#bars').innerHTML=h;
+    var c=$('#chips');c.classList.remove('hid');
+    c.innerHTML='<div class="card" style="padding:8px 18px;font-size:20px"><b class="hl">43</b> neue Ausbrüche 2026 (CDC, Stand 12.11.)</div><div class="card o" style="padding:8px 18px;font-size:20px"><b style="color:var(--ot)">96 %</b> der Fälle: ungeimpft oder Impfstatus unbekannt</div>';
+    var diff=Math.abs(g-5412);
+    $('#gmsg2').innerHTML=diff<=500?'Sehr nah dran!':(g<5412?'Es sind mehr: <b>5.412</b> Fälle. Das ist der höchste Wert seit 1991.':'Es sind weniger: <b>5.412</b> Fälle. Das ist trotzdem der höchste Wert seit 1991.');
+  };
+
+  /* 3 Labor */
+  var N=100;
+  function outbreak(q,k){
+    var V=Math.round(q/100*N),vac=new Array(N).fill(false),idx=[],i;
+    for(i=0;i<N;i++)idx.push(i);
+    for(i=N-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=idx[i];idx[i]=idx[j];idx[j]=t;}
+    for(i=0;i<V;i++)vac[idx[i]]=true;
+    var adj=[];for(i=0;i<N;i++)adj.push([]);
+    for(i=0;i<N;i++)for(var c=0;c<k;c++){var o=Math.floor(Math.random()*(N-1));if(o>=i)o++;adj[i].push(o);adj[o].push(i);}
+    var un=[];for(i=0;i<N;i++)if(!vac[i])un.push(i);
+    var sick=new Array(N).fill(false),count=0;
+    if(un.length){var s=un[Math.floor(Math.random()*un.length)];sick[s]=true;count=1;var qu=[s];
+      while(qu.length){var x=qu.shift();adj[x].forEach(function(y){if(!vac[y]&&!sick[y]){sick[y]=true;count++;qu.push(y);}});}}
+    return {vac:vac,sick:sick,count:count,un:un.length};
+  }
+  function draw(q,dId,rId){
+    var r=outbreak(q,18),d=$(dId);d.innerHTML='';
+    for(var i=0;i<N;i++){var e=document.createElement('i');e.className=r.vac[i]?'':(r.sick[i]?'I':'U');d.appendChild(e);}
+    var sum=0;for(var m=0;m<100;m++)sum+=outbreak(q,18).count;
+    $(rId).innerHTML='Hier: <b>'+r.count+'</b> von 100 krank<br>Im Schnitt: <b class="big">'+(sum/100).toFixed(1)+'</b>';
+    return sum/100;
+  }
+  function sim(){var a=draw(92,'#d92','#r92'),b=draw(95,'#d95','#r95');window.__sim=[a,b];}
+  $('#simgo').onclick=sim;sim();
+
+  /* 4 Quellencheck */
+  var mcs=[
+    ['Die Zahlen stammen aus verschiedenen Zeitpunkten.',true,'Ja. Die Meldung vom 13. November ist neuer als die CDC-Zahl von Anfang November.'],
+    ['Die CDC prüft Todesfälle noch und zählt anders als die Bundesstaaten.',true,'Ja. Die CDC bestätigt Todesfälle erst nach Prüfung. Das dauert.'],
+    ['Eine der Quellen hat sich die Zahl ausgedacht.',false,'Nein. Beide Quellen sind seriös. Unterschiede kommen meist von Zeitpunkt und Zählweise.'],
+    ['Masern-Todesfälle gibt es in den USA nicht.',false,'Nein. Mehrere Todesfälle sind belegt, auch bei Kindern.']
+  ];
+  var mh=$('#mc');
+  mcs.forEach(function(m){
+    var b=document.createElement('button');b.className='opt';b.innerHTML='<span class="mk"></span><span>'+m[0]+'</span>';
+    var fb=document.createElement('div');fb.style.cssText='font-size:18px;color:var(--grey);margin:-4px 0 10px 52px;display:none';fb.textContent=m[2];
+    b.onclick=function(){b.classList.add(m[1]?'ok':'no');b.querySelector('.mk').textContent=m[1]?'✓':'✗';fb.style.display='block';};
+    mh.appendChild(b);mh.appendChild(fb);
+  });
+
+  /* 5 Elimination */
+  var tfs=[
+    ['„Elimination“ bedeutet: Es gibt keinen einzigen Masernfall mehr.',false,'Falsch. Einzelne, eingeschleppte Fälle sind möglich. Entscheidend ist, ob sich ein Virusstamm im Land dauerhaft verbreitet.'],
+    ['Ein Land verliert den Status, wenn ein Virusstamm 12 Monate lang im Land weitergegeben wird.',true,'Richtig. Das ist das Kriterium.'],
+    ['Kanada und Großbritannien haben den Status schon verloren.',true,'Richtig, laut Berichten im vergangenen Jahr.'],
+    ['Die USA haben den Status laut Medienberichten verloren. Offiziell steht die Bekanntgabe noch aus.',true,'Richtig, nach Medienberichten von Mitte November. Die offizielle Bekanntgabe kann sich inzwischen geändert haben.']
+  ];
+  var th=$('#tf');
+  tfs.forEach(function(t){
+    var d=document.createElement('div');d.className='tfr';
+    d.innerHTML='<div class="tx">'+t[0]+'</div><div class="bt"><button>stimmt</button><button>stimmt nicht</button></div><div class="fb"></div>';
+    var bs=d.querySelectorAll('button');
+    [true,false].forEach(function(val,i){bs[i].onclick=function(){bs[0].classList.remove('sel');bs[1].classList.remove('sel');bs[i].classList.add('sel');var ok=(val===t[1]);d.classList.remove('r','w');d.classList.add(ok?'r':'w');d.querySelector('.fb').textContent=(ok?'✓ ':'✗ ')+t[2];};});
+    th.appendChild(d);
+  });
+
+  /* 6 Rollen: Zusatzinfos (Texte in ../impfen/assets/rollen.js, Handyseite ../impfen/rolle/?r=A&s=2) */
+  var roles=window.IMPF_ROLLEN_2;
+  $$('.qr').forEach(function(h){
+    try{var url=new URL('../impfen/rolle/?r='+h.getAttribute('data-qr')+'&s=2',location.href).href;var q=qrcode(0,'M');q.addData(url);q.make();h.innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true});h.title=url;}catch(e){h.textContent='QR nicht verfügbar';}
+  });
+  function openRole(k){
+    var r=roles[k],h='<button class="mclose" id="rclose">✕ Schließen</button><h2>Rolle '+k+': '+r.n+'</h2><h4>'+r.h+'</h4><ul>'+r.a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><h4>Deine Frage an die anderen</h4><div>'+r.q+'</div>';
+    $('#rcard').innerHTML=h;$('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
+  }
+  $$('.rolebtn').forEach(function(b){b.onclick=function(){openRole(b.getAttribute('data-role'));};});
+  $('#rmodal').onclick=function(e){if(e.target===this)this.classList.remove('on');};
+
+  /* 7 Blitzlicht */
+  function bz(host,title){
+    var opts=[['Impfpflicht ja','var(--green)'],['keine Pflicht','var(--o)'],['andere Lösung','var(--b)']],cnts=[0,0,0];
+    host.innerHTML='<div style="font-size:26px;font-weight:700;color:var(--green)">'+title+'</div><div class="bar-area"></div><div class="bl-wrap"></div>';
+    var area=host.querySelector('.bar-area'),wrap=host.querySelector('.bl-wrap');
+    var cols=opts.map(function(o){var c=document.createElement('div');c.className='bcol';c.innerHTML='<div class="n">0</div><div class="bar" style="background:'+o[1]+';height:6px"></div>';area.appendChild(c);return c;});
+    var row=document.createElement('div');row.style.display='flex';row.style.gap='18px';wrap.appendChild(row);
+    opts.forEach(function(o,i){
+      var c=document.createElement('div');c.style.flex='1';
+      c.innerHTML='<div class="lbl">'+o[0]+'</div><div class="bl"><button class="p" aria-label="plus eins">+</button><button aria-label="minus eins">−</button></div>';
+      var b=c.querySelectorAll('button');b[0].onclick=function(){cnts[i]++;redraw();};b[1].onclick=function(){cnts[i]=Math.max(0,cnts[i]-1);redraw();};row.appendChild(c);
+    });
+    function redraw(){var mx=Math.max.apply(null,cnts.concat([1]));cols.forEach(function(c,i){c.querySelector('.n').textContent=cnts[i];c.querySelector('.bar').style.height=Math.max(6,cnts[i]/mx*150)+'px';});}
+  }
+  bz($('#bz1'),'Nach Runde 1 (letzte Stunde)');bz($('#bz2'),'Jetzt nach Runde 3');
+
+  /* 9 Checkliste */
+  var items=['Ich habe mich für eine Position entschieden.','Ich habe Herdenimmunität erklärt.','Ich habe ein Beispiel aus den USA als Beleg genannt.','Ich habe ein Gegenargument ernst genommen.'];
+  var host=$('#chks');
+  items.forEach(function(t){var d=document.createElement('div');d.className='chk';d.setAttribute('role','checkbox');d.setAttribute('aria-checked','false');d.tabIndex=0;d.innerHTML='<span class="box"></span><span>'+t+'</span>';
+    function tg(){d.classList.toggle('on');var on=d.classList.contains('on');d.setAttribute('aria-checked',on);d.querySelector('.box').textContent=on?'✓':'';$('#done').style.display=$$('.chk.on',host).length===items.length?'block':'none';}
+    d.onclick=tg;d.onkeydown=function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();tg();}};host.appendChild(d);});
+
+  /* 8 Aufdecken + Herdenbild */
+  $$('.rv').forEach(function(el){el.onclick=function(){el.classList.toggle('hide');};});
+  var pg=$('#ppl'),html='';
+  for(var r=0;r<3;r++)for(var c=0;c<3;c++){
+    var mid=(r===1&&c===1),x=34+c*40,y=8+r*40,fill=mid?'var(--o)':'var(--green)';
+    html+='<g><circle cx="'+x+'" cy="'+(y+6)+'" r="7" fill="'+fill+'"/><rect x="'+(x-9)+'" y="'+(y+15)+'" width="18" height="16" rx="7" fill="'+fill+'"/></g>';
+  }
+  html+='<rect x="57" y="45" width="34" height="40" rx="12" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="4 3"/>';
+  pg.innerHTML=html;
+
+  window.addEventListener('hashchange',fromHash);fromHash();
+})();
+</script>
+<!-- Spielinhalte für die Belohnungsspiele. ENTWURF: bitte fachlich gegenlesen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Impfen und Zahlen (USA)",
+ "paare": [
+ ["Herdenimmunität", "Viele Geimpfte schützen auch Menschen ohne Impfung", "Her-den-im-mu-ni-tät"],
+ ["Impfquote", "Anteil der Geimpften in einer Gruppe", "Impf-quo-te"],
+ ["Elimination", "Ein Land hat die Krankheit unter Kontrolle: Kein Virusstamm wird 12 Monate lang weitergegeben", "E-li-mi-na-ti-on"],
+ ["Ausbruch", "Mehrere zusammenhängende Erkrankungsfälle", "Aus-bruch"],
+ ["Bestätigter Fall", "Erkrankung, die eine Gesundheitsbehörde geprüft und bestätigt hat", "Be-stä-tig-ter Fall"],
+ ["Falldefinition", "Regel, was als Fall gezählt wird", "Fall-de-fi-ni-ti-on"],
+ ["Quelle", "Stelle, von der eine Information oder Zahl stammt", "Quel-le"],
+ ["Zählweise", "Art, wie Fälle oder Todesfälle gezählt werden", "Zähl-wei-se"]
+ ],
+ "spiele": ["memory", "quiz", "zuordnen"]
+}
+</script>
+<script src="../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>
