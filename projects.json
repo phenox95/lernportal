@@ -581,5 +581,19 @@
     "bne": [
       13
     ]
+  },
+  {
+    "title": "Der Hundezuchtverein – Teil 2: Hypothesen und Münzmodell",
+    "description": "Do Now, Foto-Impuls, Fragenentwicklung, Hypothesen mit Vorhersage, Münzmodell für Erbanlagen, Münzwurf mit Klassentabelle, Beurteilen des Modells, Transfer.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-10/genetik/hundezuchtverein/teil-2/",
+    "subject": "Biologie",
+    "grade": "Klasse 10",
+    "themenfeld": "3.7",
+    "reihe": "Der Hundezuchtverein",
+    "folge": 2,
+    "dauer": "45 Min.",
+    "datum": "2026-11-15",
+    "sichtbar": true
   }
 ]
