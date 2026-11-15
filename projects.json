@@ -422,6 +422,28 @@
     "begriffe": true
   },
   {
+    "title": "Impfen – Fortsetzung USA",
+    "description": "Masern in den USA: Schätzfrage, Impfquote und Ausbruch-Simulation, Quellencheck, Elimination. Debatte Runde 2 mit Zusatzkarten per QR-Code, Blitzlicht und Exit-Ticket.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-9/gesundheit/impfen-usa/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "45 Min.",
+    "datum": "2026-11-15",
+    "reihe": "Gesundheit – Krankheit",
+    "sichtbar": true,
+    "bne": [
+      3
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Folgestunde: Die Debatte aus Stunde 1 geht mit aktuellen Zahlen aus den USA in Runde 2 weiter."
+      }
+    ]
+  },
+  {
     "title": "Globalisierung als Netz",
     "description": "Impuls Containerhafen, Wirkungsgefüge aus 12 Begriffskarten legen, Transfer am Weg eines Smartphones. Mit Do Now und Reflexion.",
     "type": "Interaktive Präsentation",
