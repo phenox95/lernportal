@@ -258,3 +258,13 @@ table.mx td.obj img{width:46px;height:34px;object-fit:cover;border-radius:6px;ve
 .eqzeile{display:flex;align-items:center;gap:12px;margin:10px 0}.eqzeile .dz{flex:1;min-height:64px}.eqzeile b{font-size:40px;color:var(--g)}
 .eqzeile .pf{font-size:40px;color:var(--y);font-weight:700}
 .aufg .rc{display:flex;flex-direction:column;align-items:flex-end;gap:4px;align-self:center}.aufg .rc .lvl{margin:0}
+
+/* Zwei Spalten für parallele Aufgaben (Partner A und B) */
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.cols2 .kopf{margin:0 0 2px;font-size:28px;color:var(--g)}
+.cols2 .tip{font-size:16px;margin:0 0 6px}
+.cols2 .aufg{padding:8px 12px;margin:0 0 8px}
+.cols2 .aufg .task{font-size:18px;line-height:1.3;margin:0}
+.cols2 .aufg .lvl{font-size:14px;padding:2px 8px}
+.cols2 .lz{min-height:30px;font-size:14px;padding:0 10px}
+.cols2 .lz-box{font-size:16px}
