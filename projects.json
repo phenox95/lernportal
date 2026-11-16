@@ -196,7 +196,13 @@
     "niveau": "D–F",
     "datum": "2026-11-08",
     "reihe": "Zelle",
-    "begriffe": true
+    "begriffe": true,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/mikroskopieren-leicht-gemacht/",
+        "grund": "Die Bedienung des Mikroskops aus Stunde 4 wird in Stunde 5 am Zwiebelpräparat angewendet."
+      }
+    ]
   },
   {
     "title": "Die Zelle – Stunde 6: Mikroskopische Zeichnung und Pflanzenzelle",
@@ -210,7 +216,13 @@
     "niveau": "D–F",
     "datum": "2026-11-08",
     "reihe": "Zelle",
-    "begriffe": true
+    "begriffe": true,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/zwiebelzellen-mikroskopieren/",
+        "grund": "Stunde 6 vergleicht und verbessert die mikroskopische Zeichnung, die in Stunde 5 am Zwiebelpräparat entsteht."
+      }
+    ]
   },
   {
     "title": "Die Zelle – Stunde 7: Zellen bei Tieren",
@@ -271,7 +283,13 @@
         "art": "Arbeitsblatt"
       }
     ],
-    "begriffe": true
+    "begriffe": true,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/zelldifferenzierung/",
+        "grund": "Die Spezialisierung der Zellen und Gewebe aus Stunde 8 führt zur Ebenenfolge Zelle, Gewebe, Organ, Organismus in Stunde 9."
+      }
+    ]
   },
   {
     "title": "Die Zelle – Stunde 10: Woher nimmt die Pflanze ihre Masse?",
@@ -338,6 +356,12 @@
         "titel": "Arbeitsblatt Do Now, Impuls und Sicherung",
         "pfad": "biologie/klasse-7/zelle/fotosynthese-2/arbeitsblatt-do-now-sicherung.pdf",
         "art": "Arbeitsblatt"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-1/",
+        "grund": "Stunde 11 prüft anhand von Messwerten zu Licht und Kohlenstoffdioxid die Wortgleichung, die in Stunde 10 aufgestellt wird."
       }
     ]
   },
