@@ -623,3 +623,9 @@ body[data-subject="Geografie"] .bg-spiel { --g: var(--tf-g, #A9442B); --dk: var(
 .bne-hero .eyebrow:has(.bne-ziel-icon) { display: flex; align-items: center; gap: 0.6rem; }
 .bne-ziel-icon { display: inline-flex; flex: none; color: var(--text); }
 .bne-hinweis { max-width: 46rem; margin: 0.9rem 0 0; padding-left: 0.9rem; border-left: 3px solid var(--line); font-size: 0.9375rem; color: var(--text-2); }
+
+/* Fakten prüfen */
+.n-unter { margin: 2rem 0 0.5rem; font-size: 1.0625rem; font-weight: 700; }
+.n-fragen { padding-left: 1.4rem; max-width: 42rem; }
+.n-fragen li { margin: 0.6rem 0; }
+.n-tabs button { white-space: normal; }

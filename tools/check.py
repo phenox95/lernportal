@@ -144,6 +144,8 @@ def hat_geprueft(eintrag):
 
 for i, p in enumerate(projekte):
     n = f"projects.json[{i}] „{p.get('title', '?')}“"
+    if "fakten" in p and not isinstance(p["fakten"], bool):
+        err(f"{n}: fakten muss true oder false sein")
     flag = p.get("begriffe")
     if flag is not None and not isinstance(flag, bool):
         err(f"{n}: begriffe muss true oder false sein")
