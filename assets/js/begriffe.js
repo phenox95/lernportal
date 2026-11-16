@@ -65,17 +65,24 @@
   /* ---------- Übersicht: Themenfelder mit geprüften Begriffen (Feld begriffe: true), mit &entwurf=1 alle mit Material ---------- */
   function uebersicht(projekte, themenfelder) {
     document.title = "Begriffe – Lernportal";
-    const gruppe = neu("div", "group");
+    const gruppe = neu("div", "tf-group");                 // Kacheln wie auf den Fachseiten
     let n = 0;
+    const symbol = (name) => (typeof window.LPIcon === "function" ? window.LPIcon(name, 16) : "");
     FAECHER.forEach((f) => {
       (Array.isArray(themenfelder[f]) ? themenfelder[f] : []).forEach((tf) => {
         if (!projekte.some((p) => p.subject === f && tfNummer(p) === tf.nr && (entwurf || p.begriffe === true))) return;
-        const a = neu("a", "row");
+        const a = neu("a", "tf-row");
         a.href = root + "begriffe/?fach=" + encodeURIComponent(f) + "&nr=" + encodeURIComponent(tf.nr);
-        const haupt = neu("span", "row-main");
-        haupt.appendChild(neu("span", "row-title", tf.kurz || tf.titel));
-        haupt.appendChild(neu("span", "row-meta", f + " · Themenfeld " + tf.nr));
-        a.appendChild(haupt);
+        a.setAttribute("aria-label", f + ", Themenfeld " + tf.nr + " " + (tf.kurz || tf.titel));
+        const oben = neu("span", "tf-top");
+        oben.dataset.tfFach = f; oben.dataset.tfNr = tf.nr;
+        const ic = neu("span", "tf-icon");
+        ic.innerHTML = symbol(tf.icon);                     // feste, eigene Zeichenkette aus dem Symbolset
+        oben.appendChild(ic);
+        oben.appendChild(neu("span", "tf-nr", tf.nr));
+        a.appendChild(oben);
+        a.appendChild(neu("span", "tf-title", tf.kurz || tf.titel));
+        a.appendChild(neu("span", "tf-count", f));
         gruppe.appendChild(a);
         n++;
       });

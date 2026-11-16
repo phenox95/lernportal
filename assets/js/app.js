@@ -75,6 +75,7 @@
     const px = size || 22;
     return `<svg viewBox="0 0 24 24" width="${px}" height="${px}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[name] || ""}</svg>`;
   }
+  window.LPIcon = icon;                                   // auch für Seiten ohne eigenes Symbolset (Begriffe)
   function hydrateIcons() {
     document.querySelectorAll("[data-icon]").forEach(el => {
       if (!el.firstElementChild) el.innerHTML = icon(el.dataset.icon, Number(el.dataset.size) || 22);
