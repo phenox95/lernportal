@@ -736,5 +736,18 @@
         "art": "Präsentation"
       }
     ]
+  },
+  {
+    "title": "Der Hundezuchtverein – Münzwurf auf dem Handy",
+    "description": "Werkzeug für Schülerinnen und Schüler: Vorhersage einstellen, 20 Welpen mit zwei Münzen werfen, Strichliste, Vergleich mit dem Modell. Nichts wird gespeichert oder gesendet.",
+    "type": "Interaktive Übung",
+    "path": "biologie/klasse-10/genetik/hundezuchtverein/muenzwurf/",
+    "subject": "Biologie",
+    "grade": "Klasse 10",
+    "themenfeld": "3.7",
+    "reihe": "Der Hundezuchtverein",
+    "dauer": "10 Min.",
+    "datum": "2026-11-16",
+    "sichtbar": true
   }
 ]
