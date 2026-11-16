@@ -169,3 +169,31 @@ BYOD ist an Berliner Schulen unterschiedlich geregelt. Alle Sensor-Bausteine sin
 2. Aufgaben operatorgestützt formulieren, Niveau am Rand, Hilfen als Kasten (Vorgaben Abschnitt 7 und 11).
 3. Zielkorridor und Moderationsfragen für den Impuls in `data-notes` der Folie, Erwartungshorizont **nicht** ins Repository (öffentlich).
 4. Eintrag in `projects.json`, `python3 tools/check.py` ausführen.
+
+## 8. Weitere Ideen (zweite Runde)
+
+| Idee | Nutzen | Aufwand |
+|---|---|---|
+| **Weltzeit-Uhr aus dem Browser** 💡 (`Intl.DateTimeFormat` mit Zeitzone, offline) | Geo Orientieren: Gradnetz und Zeitzonen. Schieber über die Karte, Uhrzeiten vieler Orte gleichzeitig, Sommerzeit als Falle. Kein Fremddienst nötig | S |
+| **Wirkungsgefüge-Editor** 💡 | Geo „Systeme erschließen“: Knoten ziehen, Pfeile mit + oder − beschriften, Rückkopplungen erkennen, Export als Bild fürs Heft. Auch als Concept Map in Biologie | M |
+| **Mystery digital** 💡 | Informationskarten sortieren und zu einem Ursache-Wirkung-Netz legen, Lösungsvorschlag erst nach Abgabe der eigenen Fassung | M |
+| **Energiebilanz-Schieber** 💡 | Geo 3.6: Treibhausgas-Anteil verändern, Gleichgewichtstemperatur im vereinfachten Modell ablesen, Modellgrenzen benennen | M |
+| **Warming-Stripes-Generator** 💡 | Eigene Jahresreihe (aus `daten/`) als Farbstreifen, Farbskala wählen und kritisch vergleichen | S |
+| **Kreuzungsquadrat-Simulator** 💡 | Bio Vererbung: Genotypen wählen, Verhältnisse ablesen, Häufigkeit mit Zufallsstichprobe vergleichen | S |
+| **Schattenlänge und Sonnenstand** 💡 | Geo und Bio: Sonnenhöhe aus Ort und Datum berechnen, mit gemessener Schattenlänge am Schulhof vergleichen | M |
+| **Klassenmessung als Datensatz** 💡 | Messwerte der Klasse (Reaktionszeit, Temperatur, Schattenlänge) per Ergebnis-QR sammeln, Diagramm der Klasse | M |
+| **Citizen Science mit Rückfluss** 💡 | Zählung von Vögeln oder Insekten im Schulgelände, Tabelle exportieren, Meldung an das Projekt von Hand durch die Lehrkraft | M |
+| **Planspiel digital (Klimaverhandlung)** 💡 | Rollenkarten, Zeitgeber, geheime Zusatzkarte per QR, Abstimmung per Papierkarten | M |
+
+## 9. Soll das Portal selbst von Dritten nachladen?
+
+Kurz: **Nein als Standard, ja als bewusste Ausnahme.**
+
+| Dafür | Dagegen |
+|---|---|
+| Wirklich live (Strommix, Wetter, Erdbeben der letzten Minute) | Jeder Aufruf gibt die IP-Adresse der Klasse an einen Dritten, oft in den USA. Das widerspricht der jetzigen Datenschutzerklärung |
+| Kein Pflegeaufwand für Daten | Ausfall, Drosselung oder Schlüsselzwang mitten in der Stunde, Schul-WLAN und Filter blockieren oft |
+| Riesige Auswahl (Kartenkacheln, Videos) | Inhalte ändern sich ungeprüft (Fachfehler, Werbung, Empfehlungen), die Stunde ist nicht wiederholbar |
+| | Offline-Speicher funktioniert nicht, CORS und Nutzungsbedingungen je Dienst |
+
+**Empfehlung:** Die Pipeline (Abschnitt 2) deckt fast alles ab, weil „vom Montag“ für Unterricht reicht. Wo wirklich live nötig ist, ein **Fremdinhalt-Tor**: Der Inhalt lädt erst nach Klick der Lehrkraft („Jetzt live von … laden“), nennt vorher Anbieter und Datenweitergabe, merkt die Wahl nur für diese Sitzung und fällt ohne Netz auf den gespeicherten Stand zurück. Eine feste Liste erlaubter Anbieter steht an **einer** Stelle im Quelltext, die Datenschutzerklärung zählt sie auf. So bleibt die Regel „nichts ungefragt“ und es gibt trotzdem Live-Momente. Nicht gesagt, dass ein Dritter zugelassen sein darf: Das klärt die Schule (Datenschutzbeauftragte).
