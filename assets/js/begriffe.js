@@ -65,8 +65,9 @@
   /* ---------- Übersicht: Themenfelder mit geprüften Begriffen (Feld begriffe: true), mit &entwurf=1 alle mit Material ---------- */
   function uebersicht(projekte, themenfelder) {
     document.title = "Begriffe – Lernportal";
-    const gruppe = neu("div", "tf-group");                 // Kacheln wie auf den Fachseiten
+    const gruppe = neu("div", "tf-group tf-group-3");       // Kacheln wie auf den Fachseiten, hier 3 × 3
     let n = 0;
+    const zaehlen = [];
     const symbol = (name) => (typeof window.LPIcon === "function" ? window.LPIcon(name, 16) : "");
     FAECHER.forEach((f) => {
       (Array.isArray(themenfelder[f]) ? themenfelder[f] : []).forEach((tf) => {
@@ -82,7 +83,9 @@
         oben.appendChild(neu("span", "tf-nr", tf.nr));
         a.appendChild(oben);
         a.appendChild(neu("span", "tf-title", tf.kurz || tf.titel));
-        a.appendChild(neu("span", "tf-count", f));
+        const zaehler = neu("span", "tf-count", f);
+        a.appendChild(zaehler);
+        zaehlen.push({ f, nr: tf.nr, el: zaehler });
         gruppe.appendChild(a);
         n++;
       });
@@ -91,6 +94,18 @@
     liste.textContent = "";
     liste.appendChild(gruppe);
     zahl.textContent = "Wähle ein Themenfeld.";
+    /* Anzahl der Begriffe je Themenfeld nachtragen (gleiche Zählung wie in der Themenfeld-Ansicht: jeder Begriff einmal) */
+    zaehlen.forEach((z) => {
+      const quellen = [], schon = new Set();
+      projekte.filter((p) => p.subject === z.f && tfNummer(p) === z.nr).forEach((p) => ordnerVon(p).forEach((q) => {
+        if (!schon.has(q.pfad)) { schon.add(q.pfad); quellen.push(q); }
+      }));
+      Promise.all(quellen.map(ladeBlock)).then((erg) => {
+        const gesehen = new Set();
+        erg.filter(Boolean).forEach((b) => b.paare.forEach((x) => gesehen.add(norm(x.b))));
+        if (gesehen.size) z.el.textContent = z.f + " · " + gesehen.size + (gesehen.size === 1 ? " Begriff" : " Begriffe");
+      });
+    });
   }
 
   /* ---------- Begriffe eines Themenfelds laden ---------- */

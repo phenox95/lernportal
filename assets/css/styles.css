@@ -322,6 +322,9 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .tf-row:hover { border-color: var(--rahmen); }
 .tf-row:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
+.tf-group-3 { grid-template-columns: repeat(3, 1fr); }   /* Begriffe-Übersicht: 3 × 3, auf dem Handy 2 Spalten */
+@media (max-width: 40rem) { .tf-group-3 { grid-template-columns: repeat(2, 1fr); } }
+
 /* Themenfeld-Seite */
 .tf-kopf { display: flex; align-items: center; gap: 0.9rem; }
 .tf-kopf .tf-icon { width: 3.5rem; height: 3.5rem; flex: none; border-radius: 1rem; }
