@@ -27,6 +27,36 @@
   ],
   "eintraege": [
     {
+      "datum": "2026-10-30",
+      "titel": "Vulkan Mayon ausgebrochen: 3.000 Meter hohe Aschewolke über den Philippinen",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/video/panorama-vulkan-mayon-ausgebrochen-video-100.html",
+      "einordnung": "Kurzes Video zu einem Vulkanausbruch mit Evakuierungen im Umkreis des Vulkans. Passt zur Frage, wie Menschen mit der Gefahr leben, und lässt sich mit dem Tourismus am Vulkan vergleichen.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        11
+      ],
+      "woche": "2026-11-30"
+    },
+    {
+      "datum": "2026-10-11",
+      "titel": "Krise auf hoher See: Warum Deutschlands Offshore-Ausbau stockt",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/wirtschaft/offshore-ausbau-windkraft-stockt-gruener-strom-100.html",
+      "einordnung": "Der Bericht nennt Gründe, warum neue Windparks auf dem Meer ins Stocken geraten, etwa Kosten und Netzanschlüsse. Gut für den Vergleich mit dem Windausbau an Land und der Frage, was Energiewende vor Ort bedeutet.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        7
+      ],
+      "woche": "2026-11-23"
+    },
+    {
       "datum": "2026-11-08",
       "titel": "Klimakonferenz in Türkei: Was verhandeln die Vereinten Nationen?",
       "quelle": "ZDFheute",
