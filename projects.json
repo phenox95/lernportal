@@ -717,5 +717,24 @@
         "grund": "Stunde 5 setzt die in Stunde 4 vorbereiteten Rollen und die Klassenfrage voraus."
       }
     ]
+  },
+  {
+    "title": "Gesundheit – Krankheit – Übungsstunde: Erreger und Infektionen (nach der LEK)",
+    "description": "Do Now, LEK-Check, Impuls und Fragenentwicklung, Station Infektionsweg, Station Bakterien, Fehleranalyse, Tafelbild, Reflexion.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/gesundheit/lek-rueckgabe/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "45 Min.",
+    "datum": "2026-11-16",
+    "reihe": "Gesundheit – Krankheit",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/gesundheit/lek-rueckgabe/praesentation/",
+        "art": "Präsentation"
+      }
+    ]
   }
 ]
