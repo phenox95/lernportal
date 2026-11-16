@@ -505,6 +505,32 @@
     ]
   },
   {
+    "title": "Impfen – Doppelstunde (Stunde 1 und 2 zusammen)",
+    "description": "Beide Impfen-Stunden in einer Präsentation für 90 Minuten: Impuls, Ausbruchsspiel, Debatte Runde 1, Daten aus den USA, Debatte Runde 2 und 3, Blitzlicht mit übernommener Zählung, Tafelbild, Exit-Ticket.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-9/gesundheit/impfen-doppelstunde/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "Doppelstunde",
+    "datum": "2026-11-16",
+    "reihe": "Gesundheit – Krankheit",
+    "sichtbar": true,
+    "bne": [
+      3
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Einzelstunde 1, aus der diese Doppelstunde zusammengesetzt ist."
+      },
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen-usa/",
+        "grund": "Einzelstunde 2 (Fortsetzung USA)."
+      }
+    ]
+  },
+  {
     "title": "Globalisierung als Netz",
     "description": "Impuls Containerhafen, Wirkungsgefüge aus 12 Begriffskarten legen, Transfer am Weg eines Smartphones. Mit Do Now und Reflexion.",
     "type": "Interaktive Präsentation",
