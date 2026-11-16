@@ -7,6 +7,7 @@ nur noch eigene Dateien. So sind "Live"-Daten datenschutzfreundlich, schnell und
 
 Aufruf (aus dem Hauptordner):
   python3 tools/daten-holen.py karte       Küstenlinien (Natural Earth, gemeinfrei) und Plattengrenzen (Bird 2003, ODC-By) -> daten/weltkarte.json, daten/plattengrenzen.json
+  python3 tools/daten-holen.py laender     Länder mit Namen in 8 Sprachen (Natural Earth, gemeinfrei) -> daten/laender.json (Topografie-Quiz, mehrsprachig)
   python3 tools/daten-holen.py erdbeben    Erdbeben der letzten 30 Tage, Stärke 4,5 und mehr (USGS, gemeinfrei) -> daten/erdbeben.json
   python3 tools/daten-holen.py demo        Beispiel-Erdbeben aus den Plattengrenzen SIMULIERT -> daten/erdbeben.json ("demo": true, wird auf der Seite gekennzeichnet)
 """
@@ -15,6 +16,7 @@ import json, math, random, sys, urllib.request, datetime, pathlib
 WURZEL = pathlib.Path(__file__).resolve().parent.parent / "daten"
 NE = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson"
 PB = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
+LAENDER = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson"
 USGS = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson"
 
 
@@ -53,6 +55,20 @@ def karte():
     pb = holen(PB)
     linien = [linie(f["geometry"]["coordinates"]) for f in pb["features"] if f["geometry"]["type"] == "LineString"]
     schreiben("plattengrenzen.json", {"quelle": "Peter Bird (2003), An updated digital model of plate boundaries; Aufbereitung: fraxen/tectonicplates, Open Data Commons Attribution License 1.0", "linien": linien})
+
+
+def laender():
+    d = holen(LAENDER)
+    sprachen = ["DE", "EN", "AR", "TR", "UK", "RU", "PL", "FA"]
+    aus = []
+    for f in d["features"]:
+        p = f["properties"]
+        g = f["geometry"]
+        polys = g["coordinates"] if g["type"] == "MultiPolygon" else [g["coordinates"]]
+        ringe = [linie(poly[0]) for poly in polys if len(poly[0]) > 3]
+        name = {s.lower(): p.get("NAME_" + s) for s in sprachen if p.get("NAME_" + s)}
+        aus.append({"n": name, "k": p.get("CONTINENT"), "e": p.get("POP_EST"), "r": ringe})
+    schreiben("laender.json", {"quelle": "Natural Earth, ne_110m_admin_0_countries (gemeinfrei). Grenzen und Namen vereinfacht, kein amtliches Kartenwerk", "laender": aus})
 
 
 def erdbeben():
@@ -98,4 +114,4 @@ def demo():
 
 
 if __name__ == "__main__":
-    {"karte": karte, "erdbeben": erdbeben, "demo": demo}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()
+    {"karte": karte, "laender": laender, "erdbeben": erdbeben, "demo": demo}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()

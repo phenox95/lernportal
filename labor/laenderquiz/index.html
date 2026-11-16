@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Länder-Quiz</title><link rel="stylesheet" href="../labor.css">
+<style>
+#kf{border:2px solid var(--g);border-radius:14px;background:#cfe6f2;overflow:hidden}@media (prefers-color-scheme:dark){#kf{background:#10222e}}
+svg{display:block;width:100%;height:auto;max-height:62vh;touch-action:manipulation}
+path{fill:#e9e3d0;stroke:#6b6b5a;stroke-width:.12;vector-effect:non-scaling-stroke;cursor:pointer}@media (prefers-color-scheme:dark){path{fill:#3a4a43;stroke:#9ab}}
+path:hover{fill:#f4dd9a}path.ok{fill:#2a9d8f!important}path.bad{fill:#e76f51!important}path.ziel{fill:#F4B400!important;stroke:#000;stroke-width:2}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}select{font:inherit;min-height:44px;padding:6px 10px;border-radius:10px;border:2px solid var(--g);background:var(--bg);color:var(--ink)}
+#frage{font-size:26px;font-weight:700;margin:10px 0}#opt{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}#opt button{background:transparent;color:var(--ink);border:2px solid var(--g)}
+.erg{font-size:22px}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Länder-Quiz (Orientieren)</h1>
+<div class="kasten"><b>Sich orientieren, Stufe D bis E:</b> Länder finden und benennen. Die Karte liegt auf dem Gerät (keine Kartenkacheln aus dem Internet). Tipp für DaZ: Der gesuchte Name erscheint auch in der Familiensprache. Kleine Staaten fehlen in dieser Karte.</div>
+<div class="leiste">
+ <label for="reg"><b>Gebiet</b></label><select id="reg"><option value="eu">Europa</option><option value="af">Afrika</option><option value="as">Asien</option><option value="am">Amerika</option><option value="welt">Welt</option></select>
+ <label for="mod"><b>Aufgabe</b></label><select id="mod"><option value="klick">Land auf der Karte anklicken</option><option value="wahl">Markiertes Land benennen</option></select>
+ <label for="spr"><b>Zusätzlich in</b></label><select id="spr"><option value="">nur Deutsch</option><option value="ar">Arabisch</option><option value="tr">Türkisch</option><option value="uk">Ukrainisch</option><option value="ru">Russisch</option><option value="pl">Polnisch</option><option value="fa">Persisch</option><option value="en">Englisch</option></select>
+ <button type="button" id="go">Neues Spiel (10 Fragen)</button>
+</div>
+<p id="frage" aria-live="polite">Wähle Gebiet und Aufgabe, dann „Neues Spiel“.</p>
+<div id="opt"></div>
+<div id="kf"><svg id="sv" role="img" aria-label="Karte"></svg></div>
+<p id="erg" class="erg" aria-live="polite"></p>
+<p class="quelle" id="quelle"></p>
+<script>
+(function(){
+ var REG={eu:{k:['Europe'],b:[-25,34,45,72],c:.62},af:{k:['Africa'],b:[-20,-36,53,38],c:.95},as:{k:['Asia'],b:[25,-12,150,78],c:.7},am:{k:['North America','South America'],b:[-170,-57,-30,75],c:.8},welt:{k:null,b:[-180,-60,180,85],c:.8}};
+ var L=null,sv=document.getElementById('sv'),NS='http://www.w3.org/2000/svg',pfade=[],fragen,qi,punkte,ziel,reg;
+ function $(i){return document.getElementById(i)}
+ function bau(r){var R=REG[r],x0=R.b[0]*R.c,y0=-R.b[3],w=(R.b[2]-R.b[0])*R.c,h=R.b[3]-R.b[1];sv.setAttribute('viewBox',x0+' '+y0+' '+w+' '+h);sv.textContent='';pfade=[];
+  L.forEach(function(l,i){var inn=R.k?R.k.indexOf(l.k)>=0:true;var d='';l.r.forEach(function(ring){ring.forEach(function(p,j){d+=(j?'L':'M')+(p[0]*R.c).toFixed(2)+' '+(-p[1]).toFixed(2)});d+='Z'});
+   var p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.dataset.i=i;p.dataset.in=inn?1:0;if(!inn)p.style.opacity='.45';sv.appendChild(p);pfade[i]=p})}
+ function name(l,s){return l.n[s]||l.n.de}
+ function frageText(l){var s=$('spr').value,t=name(l,'de');if(s&&l.n[s])t+=' · '+(s==='ar'||s==='fa'?'\u2067'+l.n[s]+'\u2069':l.n[s]);return t}
+ function frag(){ziel=fragen[qi];[].forEach.call(sv.querySelectorAll('path'),function(p){p.classList.remove('ok','bad','ziel')});$('opt').textContent='';
+  if($('mod').value==='klick'){$('frage').textContent='Frage '+(qi+1)+' von 10: Finde '+frageText(L[ziel]);$('frage').lang='de'}
+  else{pfade[ziel].classList.add('ziel');$('frage').textContent='Frage '+(qi+1)+' von 10: Wie heißt das markierte Land?';
+   var pool=L.map(function(_,i){return i}).filter(function(i){return i!==ziel&&pfade[i].dataset.in==='1'}).sort(function(){return Math.random()-.5}).slice(0,3).concat(ziel).sort(function(){return Math.random()-.5});
+   pool.forEach(function(i){var b=document.createElement('button');b.type='button';b.textContent=name(L[i],'de');b.onclick=function(){antwort(i)};$('opt').appendChild(b)})}}
+ function antwort(i){if(i===undefined)return;if(i===ziel){punkte++;pfade[ziel].classList.add('ok')}else{if($('mod').value==='klick')pfade[i].classList.add('bad');pfade[ziel].classList.add('ok')}
+  [].forEach.call($('opt').children,function(b){b.disabled=true});$('frage').textContent=(i===ziel?'Richtig: ':'Gesucht war: ')+name(L[ziel],'de');
+  setTimeout(function(){qi++;if(qi<fragen.length)frag();else{$('frage').textContent='Fertig.';$('opt').textContent='';$('erg').textContent=punkte+' von '+fragen.length+' richtig.'}},1100)}
+ sv.addEventListener('click',function(e){if($('mod').value!=='klick'||!fragen||qi>=fragen.length||sv.querySelector('path.ok'))return;var p=e.target.closest('path');if(p&&p.dataset.in==='1')antwort(+p.dataset.i)});
+ $('go').onclick=function(){if(!L)return;reg=$('reg').value;bau(reg);var R=REG[reg];var pool=L.map(function(_,i){return i}).filter(function(i){return pfade[i].dataset.in==='1'&&(L[i].e||0)>1500000});
+  fragen=pool.sort(function(){return Math.random()-.5}).slice(0,10);qi=0;punkte=0;$('erg').textContent='';frag()};
+ $('reg').onchange=function(){if(L){bau($('reg').value);fragen=null;$('frage').textContent='Wähle die Aufgabe und starte ein neues Spiel.'}};
+ fetch('../../daten/laender.json').then(function(r){return r.json()}).then(function(d){L=d.laender;bau('eu');$('quelle').textContent='Quelle: '+d.quelle}).catch(function(){$('frage').textContent='Die Kartendaten konnten nicht geladen werden (über einen Server öffnen).'});
+})();
+</script></main></body></html>
