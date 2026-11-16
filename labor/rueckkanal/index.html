@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Rückkanal per QR-Code</title><link rel="stylesheet" href="../labor.css">
+<style>
+.tabs{display:flex;gap:8px;margin:14px 0}.tabs button[aria-selected=true]{background:var(--dk);color:#fff;outline:3px solid var(--y)}
+textarea,input[type=text]{width:100%;font:inherit;padding:10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+textarea{min-height:120px}#qr{background:#fff;padding:14px;border-radius:12px;display:inline-block}#qr svg{width:min(80vw,340px);height:auto;display:block}
+.zaehler{font-size:14px;color:var(--grey)}.rast{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:12px}
+.karte{border:2px solid var(--g);border-radius:12px;padding:10px 14px}.karte b{display:block;color:var(--dk)}.karte.neu{animation:neu 1.2s}@keyframes neu{from{background:var(--y)}to{background:transparent}}
+video{width:100%;max-width:480px;border-radius:12px;background:#000}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Rückkanal ohne Server: Ergebnis-QR</h1>
+<div class="kasten">So kommen Gruppenergebnisse zur Lehrkraft, <b>ohne Konto, ohne Server, ohne Datenübertragung ins Internet</b>: Die Gruppe schreibt ihr Ergebnis, die Seite macht daraus einen QR-Code, die Lehrkraft scannt ihn mit der Kamera des Lehrer-Geräts. Alle Ergebnisse erscheinen gesammelt an der Wand. Die Daten stecken nur im Code.</div>
+<div class="tabs" role="tablist"><button role="tab" id="t1" aria-selected="true" aria-controls="p1">Gruppe: Ergebnis senden</button><button role="tab" id="t2" aria-selected="false" aria-controls="p2" class="sek">Lehrkraft: Ergebnisse sammeln</button></div>
+
+<section id="p1" role="tabpanel" aria-labelledby="t1">
+ <p><label for="gn"><b>Gruppenname</b> (kein Klarname nötig, z. B. „Gruppe 3“)</label><input type="text" id="gn" maxlength="30" value="Gruppe 1"></p>
+ <p><label for="tx"><b>Unser Ergebnis</b> (ein bis zwei Sätze)</label><textarea id="tx" maxlength="280"></textarea><span class="zaehler" id="zl">0 von 280 Zeichen</span></p>
+ <button type="button" id="mk">QR-Code erzeugen</button>
+ <p><span id="qr" hidden></span></p><p id="qrh" class="kasten" hidden>Halte den Code vor die Kamera der Lehrkraft.</p>
+</section>
+
+<section id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+ <div class="leiste" style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="cam">Kamera starten</button><button type="button" class="sek" id="camx" disabled>Kamera stoppen</button><button type="button" class="sek" id="cp">Als Text kopieren</button></div>
+ <video id="v" playsinline muted hidden aria-label="Kamerabild zum Scannen"></video>
+ <p id="sst" class="kasten" aria-live="polite">Die Kamera startet erst nach Antippen. Es wird kein Bild gespeichert.</p>
+ <div class="rast" id="wand" aria-live="polite"></div>
+</section>
+
+<script src="../../assets/js/qrcode.js"></script>
+<script src="../../assets/js/vendor/jsQR.js" defer></script>
+<script>
+(function(){
+ var $=function(i){return document.getElementById(i)};
+ function tab(n){[1,2].forEach(function(i){$('p'+i).hidden=i!==n;$('t'+i).setAttribute('aria-selected',String(i===n));$('t'+i).className=i===n?'':'sek'})}
+ $('t1').onclick=function(){tab(1)};$('t2').onclick=function(){tab(2)};
+ $('tx').oninput=function(){$('zl').textContent=$('tx').value.length+' von 280 Zeichen'};
+ function nutzlast(){return JSON.stringify({v:1,g:$('gn').value.trim()||'Gruppe',a:$('tx').value.trim()})}
+ window.LPRueckkanal={svg:function(text){if(window.qrcode.stringToBytesFuncs)window.qrcode.stringToBytes=window.qrcode.stringToBytesFuncs['UTF-8'];var q=window.qrcode(0,'M');q.addData(text,'Byte');q.make();return q.createSvgTag({cellSize:6,margin:0,scalable:true})},nutzlast:nutzlast};
+ $('mk').onclick=function(){var n=nutzlast();if(!$('tx').value.trim()){$('qrh').hidden=false;$('qrh').textContent='Schreibe zuerst euer Ergebnis.';return}
+  try{$('qr').innerHTML=LPRueckkanal.svg(n);$('qr').hidden=false;$('qrh').hidden=false;$('qrh').textContent='Halte den Code vor die Kamera der Lehrkraft.'}catch(e){$('qr').hidden=true;$('qrh').hidden=false;$('qrh').textContent='Zu lang für einen Code. Kürzt euer Ergebnis.'}};
+ /* Sammeln */
+ var strom=null,schleife=null,gesehen={},liste=[],cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});
+ function neu(o,txt){var k=o.g+'|'+o.a;if(gesehen[k])return false;gesehen[k]=1;liste.push(o);
+  var d=document.createElement('div');d.className='karte neu';var b=document.createElement('b');b.textContent=o.g;var p=document.createElement('span');p.textContent=o.a;d.appendChild(b);d.appendChild(p);$('wand').appendChild(d);return true}
+ function lesen(daten,w,h){if(!window.jsQR)return null;var c=window.jsQR(daten,w,h,{inversionAttempts:'dontInvert'});if(!c)return null;
+  try{var o=JSON.parse(c.data);if(o&&o.v===1&&typeof o.a==='string'&&typeof o.g==='string')return{g:o.g.slice(0,30),a:o.a.slice(0,280)}}catch(e){}return null}
+ window.LPRueckkanal.lesen=lesen;window.LPRueckkanal.neu=neu;
+ function takt(){var v=$('v');if(!v.videoWidth)return;cv.width=v.videoWidth;cv.height=v.videoHeight;cx.drawImage(v,0,0);var id=cx.getImageData(0,0,cv.width,cv.height),o=lesen(id.data,id.width,id.height);if(o&&neu(o))$('sst').textContent=liste.length+' Ergebnis(se) gesammelt. Zuletzt: '+o.g}
+ $('cam').onclick=function(){if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$('sst').textContent='Kein Kamerazugriff in diesem Browser (https oder localhost nötig).';return}
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){strom=s;$('v').srcObject=s;$('v').hidden=false;$('v').play();$('camx').disabled=false;$('sst').textContent='Scanne die Codes der Gruppen.';schleife=setInterval(takt,200)}).catch(function(){$('sst').textContent='Kein Zugriff auf die Kamera.'})};
+ function stopp(){clearInterval(schleife);if(strom){strom.getTracks().forEach(function(t){t.stop()});strom=null}$('v').hidden=true;$('camx').disabled=true}
+ $('camx').onclick=stopp;addEventListener('pagehide',stopp);
+ $('cp').onclick=function(){var t=liste.map(function(o){return '- '+o.g+': '+o.a}).join('\n');if(navigator.clipboard)navigator.clipboard.writeText(t).then(function(){$('sst').textContent='Kopiert.'},function(){$('sst').textContent='Kopieren nicht erlaubt.'})}
+})();
+</script>
+</main></body></html>

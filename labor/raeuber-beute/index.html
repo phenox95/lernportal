@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Räuber und Beute</title><link rel="stylesheet" href="../labor.css">
+<style>canvas{width:100%;height:auto;display:block;background:#fff;border:2px solid var(--g);border-radius:14px}@media (prefers-color-scheme:dark){canvas{background:#0d1b2a}}
+.regler{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:12px 0}.regler label{display:block;font-weight:700}.regler input{width:100%}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.lege{display:flex;gap:18px;font-weight:700}.lege i{display:inline-block;width:18px;height:6px;margin-right:6px;vertical-align:middle}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Räuber und Beute: erst vermuten, dann simulieren</h1>
+<div class="kasten"><b>Schritt 1 (allein, 2 Min.):</b> <b>Sage vorher</b>, was mit der Räuberzahl passiert, wenn die Beute stark zunimmt. Schreibe deine Vermutung in dein Heft.<br><b>Schritt 2:</b> Starte die Simulation. <b>Vergleiche</b> sie mit deiner Vermutung. <b>Erkläre</b> die zeitliche Verschiebung der beiden Kurven. Verändere dann einen Regler und <b>beschreibe</b> die Wirkung.</div>
+<div class="lege"><span><i style="background:#2a9d8f"></i>Beute (z. B. Hasen)</span><span><i style="background:#e76f51"></i>Räuber (z. B. Füchse)</span></div>
+<canvas id="c" width="1000" height="380" role="img" aria-label="Verlauf der Beute- und Räuberzahl über der Zeit"></canvas>
+<div class="regler">
+<div><label for="a">Vermehrung der Beute: <output id="ao"></output></label><input id="a" type="range" min="0.3" max="1.2" step="0.05" value="0.7"></div>
+<div><label for="f">Fangerfolg der Räuber: <output id="fo"></output></label><input id="f" type="range" min="0.2" max="1.5" step="0.05" value="0.8"></div>
+<div><label for="s">Sterberate der Räuber: <output id="so"></output></label><input id="s" type="range" min="0.2" max="1.2" step="0.05" value="0.6"></div>
+</div>
+<div class="leiste"><button type="button" id="go">▶ Start</button><button type="button" class="sek" id="re">Zurücksetzen</button></div>
+<p class="kasten">Modell: vereinfachtes Räuber-Beute-Modell (Lotka-Volterra). Es zeigt das Prinzip, keine echte Tierpopulation: Es gibt keine Nahrungsgrenze, keine Zufälle, keine anderen Arten. <b>Beurteile</b>, wo das Modell die Wirklichkeit vereinfacht.</p>
+<script>
+(function(){
+ var cv=document.getElementById('c'),g=cv.getContext('2d'),W=cv.width,H=cv.height,run=false,t,B,R,hist,timer;
+ var dark=matchMedia('(prefers-color-scheme:dark)').matches,ink=dark?'#9fb3c4':'#5B6A63';
+ function par(){return{a:+document.getElementById('a').value,f:+document.getElementById('f').value,s:+document.getElementById('s').value}}
+ function ausgeben(){var p=par();['a','f','s'].forEach(function(k){document.getElementById(k+'o').textContent=String(p[k]).replace('.',',')})}
+ function reset(){t=0;B=1.2;R=0.5;hist=[[B,R]];stop();malen()}
+ function schritt(){var p=par(),dt=0.02;for(var i=0;i<3;i++){var dB=(p.a*B-p.f*B*R)*dt,dR=(p.f*0.8*B*R-p.s*R)*dt;B=Math.max(.001,B+dB);R=Math.max(.001,R+dR)}hist.push([B,R]);if(hist.length>1000)hist.shift()}
+ function malen(){g.clearRect(0,0,W,H);g.strokeStyle=ink;g.lineWidth=1;g.globalAlpha=.4;g.beginPath();g.moveTo(40,10);g.lineTo(40,H-30);g.lineTo(W-10,H-30);g.stroke();g.globalAlpha=1;
+  g.fillStyle=ink;g.font='16px sans-serif';g.fillText('Zeit →',W-70,H-8);g.save();g.translate(14,H/2);g.rotate(-Math.PI/2);g.fillText('Anzahl (relativ)',-40,0);g.restore();
+  var mx=3;[0,1].forEach(function(k,ki){g.strokeStyle=k?'#e76f51':'#2a9d8f';g.lineWidth=3.5;g.beginPath();hist.forEach(function(h,i){var x=40+i/Math.max(300,hist.length-1)*(W-50),y=H-30-Math.min(h[k],mx)/mx*(H-50);i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke()})}
+ function stop(){run=false;clearInterval(timer);document.getElementById('go').textContent='▶ Start'}
+ document.getElementById('go').onclick=function(){if(run){stop();return}run=true;document.getElementById('go').textContent='❚❚ Pause';timer=setInterval(function(){schritt();if(hist.length>=1000){hist.shift()}malen()},30)};
+ document.getElementById('re').onclick=reset;['a','f','s'].forEach(function(k){document.getElementById(k).oninput=ausgeben});
+ ausgeben();reset();
+})();
+</script></main></body></html>

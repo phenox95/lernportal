@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Handy-Seismograf</title><link rel="stylesheet" href="../labor.css">
+<style>canvas{width:100%;height:auto;display:block;background:#0d1b2a;border-radius:14px;border:2px solid var(--g)}.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}output{font-weight:700}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Handy als Seismograf</h1>
+<div class="kasten"><b>Aufgabe (Methoden anwenden, Stufe E):</b> Lege das Handy flach auf den Tisch. <b>Miss</b> die Ausschläge, wenn ein Partner leicht auf den Tisch klopft (1), fest klopft (2) oder in einer Armlänge Abstand stampft (3). <b>Vergleiche</b> die Kurven und <b>erkläre</b>, warum der Ausschlag mit dem Abstand kleiner wird.</div>
+<div class="leiste"><button type="button" id="start">Messung starten</button><button type="button" class="sek" id="sim">Ohne Sensor ausprobieren</button><button type="button" class="sek" id="halt" aria-pressed="false">Kurve anhalten</button>
+<span>Größter Ausschlag: <output id="max">0,00</output> m/s²</span></div>
+<canvas id="c" width="1000" height="360" role="img" aria-label="Kurve der Erschütterung über der Zeit"></canvas>
+<p id="st" class="kasten" aria-live="polite">Der Sensor wird erst nach Antippen von „Messung starten“ gelesen. Es wird nichts gespeichert oder gesendet.</p>
+<script>
+(function(){
+ var cv=document.getElementById('c'),g=cv.getContext('2d'),W=cv.width,H=cv.height,N=500,daten=new Array(N).fill(0),halt=false,mx=0,quelle=null,simT=null,letzte=null;
+ function malen(){g.fillStyle='#0d1b2a';g.fillRect(0,0,W,H);g.strokeStyle='#2d4358';g.lineWidth=1;g.beginPath();g.moveTo(0,H/2);g.lineTo(W,H/2);g.stroke();
+  g.strokeStyle='#ffd166';g.lineWidth=2.5;g.beginPath();var skala=Math.max(1,mx)*1.15;for(var i=0;i<N;i++){var x=i/(N-1)*W,y=H/2-daten[i]/skala*(H/2-10);i?g.lineTo(x,y):g.moveTo(x,y)}g.stroke();
+  g.fillStyle='#9fb3c4';g.font='16px sans-serif';g.fillText('+'+skala.toFixed(1).replace('.',',')+' m/s²',8,20);g.fillText('−'+skala.toFixed(1).replace('.',',')+' m/s²',8,H-8)}
+ function wert(a){ if(halt)return; daten.push(a);daten.shift(); var b=Math.abs(a); if(b>mx){mx=b;document.getElementById('max').textContent=mx.toFixed(2).replace('.',',')} malen()}
+ /* Erschütterung = Beschleunigung ohne Erdanziehung. Hochpass: Abweichung vom langsamen Mittelwert, damit Neigen nicht zählt. */
+ var mittel=null;
+ function ausSensor(e){var a=e.acceleration&&e.acceleration.z!=null?e.acceleration:null,z;
+  if(a){z=a.z}else{var ag=e.accelerationIncludingGravity;if(!ag||ag.z==null)return;mittel=mittel==null?ag.z:mittel*.97+ag.z*.03;z=ag.z-mittel}
+  wert(z)}
+ function stopp(){if(quelle){removeEventListener('devicemotion',ausSensor);quelle=null}if(simT){clearInterval(simT);simT=null}}
+ document.getElementById('start').onclick=function(){stopp();mx=0;daten.fill(0);mittel=null;
+  function los(){addEventListener('devicemotion',ausSensor);quelle='s';document.getElementById('st').textContent='Messung läuft. Klopfe leicht auf den Tisch.';
+   setTimeout(function(){if(quelle==='s'&&!document.getElementById('st').dataset.ok){document.getElementById('st').textContent='Keine Sensordaten. Dieses Gerät hat keinen Bewegungssensor oder der Browser sperrt ihn. Nimm ein Handy oder „Ohne Sensor ausprobieren“.'}},2500)}
+  if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){DeviceMotionEvent.requestPermission().then(function(r){if(r==='granted')los();else document.getElementById('st').textContent='Zugriff auf den Bewegungssensor wurde abgelehnt.'}).catch(function(){document.getElementById('st').textContent='Zugriff nicht möglich.'})}
+  else if('DeviceMotionEvent' in window){los()}else{document.getElementById('st').textContent='Dieser Browser hat keinen Bewegungssensor. Nimm ein Handy oder „Ohne Sensor ausprobieren“.'}};
+ addEventListener('devicemotion',function(){document.getElementById('st').dataset.ok='1'});
+ /* Ohne Sensor: simulierte Klopfstöße, damit die Seite am Laptop zeigbar ist */
+ document.getElementById('sim').onclick=function(){stopp();mx=0;daten.fill(0);document.getElementById('st').textContent='Simulation (kein Sensor): zufällige Klopfstöße. Nur zum Ausprobieren.';var t=0,s=0,amp=0;
+  simT=setInterval(function(){t++;if(t%90===1){amp=1+Math.random()*5}amp*=.93;s=amp*Math.sin(t*1.7)+(Math.random()-.5)*.1;wert(s)},20)};
+ document.getElementById('halt').onclick=function(e){halt=!halt;e.target.setAttribute('aria-pressed',String(halt));e.target.textContent=halt?'Weiter messen':'Kurve anhalten'};
+ malen();
+})();
+</script></main></body></html>
