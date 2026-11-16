@@ -19,7 +19,8 @@
     "grade": "Klasse 9",
     "themenfeld": "3.6",
     "dauer": "45 Min.",
-    "datum": "2026-11-03"
+    "datum": "2026-11-03",
+    "begriffe": true
   },
   {
     "title": "Kurzsichtigkeit und Brille",
@@ -36,7 +37,8 @@
         "pfad": "biologie/klasse-9/nervensystem/auge-bau/",
         "grund": "Der Bau des Auges ist die Grundlage, um den Strahlengang bei Kurzsichtigkeit zu erklären."
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Urlaub auf dem Vulkan – Tourismus am Ätna",
@@ -364,7 +366,8 @@
         "pfad": "biologie/klasse-7/zelle/fotosynthese-1/",
         "grund": "Stunde 11 prüft anhand von Messwerten zu Licht und Kohlenstoffdioxid die Wortgleichung, die in Stunde 10 aufgestellt wird."
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Feuerwerk aus der Tiefe – Vulkanausbrüche",
@@ -464,7 +467,8 @@
         "pfad": "geografie/klasse-9/ressourcen/e-fuels/uebung/",
         "art": "Übung"
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Gesundheit – Krankheit – Stunde 2: Impfen – ja oder nein?",
@@ -505,7 +509,8 @@
         "pfad": "biologie/klasse-9/gesundheit/impfen/",
         "grund": "Folgestunde: Die Debatte aus Stunde 1 geht mit aktuellen Zahlen aus den USA in Runde 2 weiter."
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Gesundheit – Krankheit – Stunde 2 und 3: Impfen als Doppelstunde",
@@ -531,7 +536,8 @@
         "pfad": "biologie/klasse-9/gesundheit/impfen-usa/",
         "grund": "Einzelstunde 2 (Fortsetzung USA)."
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Globalisierung als Netz",
@@ -650,7 +656,8 @@
     ],
     "bne": [
       13
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Klimawandel: Fakten, Mythen, Gespräche",
@@ -671,7 +678,8 @@
     ],
     "bne": [
       13
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Der Hundezuchtverein – Teil 2: Hypothesen und Münzmodell",
@@ -685,7 +693,8 @@
     "folge": 2,
     "dauer": "45 Min.",
     "datum": "2026-11-15",
-    "sichtbar": true
+    "sichtbar": true,
+    "begriffe": true
   },
   {
     "title": "Erdbeben – Stunde 4: Alarm für Tokio",
@@ -715,7 +724,8 @@
         "pfad": "geografie/klasse-7/risikoraeume/erdbeben-tokio-2/",
         "grund": "Die Rollen, die in Stunde 4 vorbereitet werden, spielen in Stunde 5 die Erdbebenkonferenz."
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Erdbeben – Stunde 5: Die Erdbebenkonferenz",
@@ -745,7 +755,8 @@
         "pfad": "geografie/klasse-7/risikoraeume/erdbeben-tokio-1/",
         "grund": "Stunde 5 setzt die in Stunde 4 vorbereiteten Rollen und die Klassenfrage voraus."
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Gesundheit – Krankheit – Stunde 4: Erreger und Infektionen (Übungsstunde nach der LEK)",
@@ -765,7 +776,8 @@
         "pfad": "biologie/klasse-9/gesundheit/lek-rueckgabe/praesentation/",
         "art": "Präsentation"
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Der Hundezuchtverein – Münzwurf auf dem Handy",
