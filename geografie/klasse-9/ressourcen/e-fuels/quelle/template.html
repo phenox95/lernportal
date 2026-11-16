@@ -73,6 +73,60 @@ sub{line-height:0}
 <p class="note">Alle Zahlen sind gerundet. Quellen stehen bei den Meldungen. Politische Entscheidungen können sich ändern.</p>
 </div>
 
+<!-- Spielinhalte für die Belohnungsspiele (Memory, Quiz, Zuordnen, Wortsalat). Nur Inhalte dieser Stunde, vor dem Einsatz gegenlesen. -->
+<!-- ENTWURF: Begriffe noch nicht fachlich gegengelesen. Nach dem Gegenlesen "geprueft": true setzen und im Eintrag in projects.json "begriffe": true ergänzen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "E-Fuels und Verbrenner-Aus",
+ "paare": [
+  [
+   "E-Fuel",
+   "Kraftstoff, der mit Strom, Wasser und CO₂ hergestellt wird",
+   "E-Fuel"
+  ],
+  [
+   "Power-to-Liquid (PtL)",
+   "Verfahren, mit dem E-Fuels entstehen: Strom wird zu einer Flüssigkeit",
+   "Po-wer-to-Li-quid"
+  ],
+  [
+   "Elektrolyse",
+   "Strom spaltet Wasser in Wasserstoff und Sauerstoff",
+   "E-lek-tro-ly-se"
+  ],
+  [
+   "Wasserstoff",
+   "Sehr leichtes Gas und Energieträger, der erst mit Strom hergestellt werden muss",
+   "Was-ser-stoff"
+  ],
+  [
+   "klimaneutral",
+   "Am Ende kommt nicht mehr CO₂ in die Luft, als vorher entnommen wurde",
+   "kli-ma-neu-tral"
+  ],
+  [
+   "Wirkungsgrad",
+   "Zeigt, wie viel der eingesetzten Energie nutzbar ankommt",
+   "Wir-kungs-grad"
+  ],
+  [
+   "Energieträger",
+   "Stoff, in dem Energie gespeichert ist, zum Beispiel Benzin, Wasserstoff oder E-Fuel",
+   "E-ner-gie-trä-ger"
+  ],
+  [
+   "Verbrenner-Aus",
+   "Umgangssprache für die EU-Regel für neue Pkw ab 2035 (CO₂-Ziel)",
+   "Ver-bren-ner-Aus"
+  ]
+ ],
+ "spiele": [
+  "memory",
+  "quiz",
+  "zuordnen"
+ ]
+}
+</script>
 <script id="daten" type="application/json">__DATEN__</script>
 <script>
 const D=JSON.parse(document.getElementById('daten').textContent);

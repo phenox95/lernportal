@@ -152,5 +152,59 @@
 </main>
 
 <script src="app.js"></script>
+<!-- Spielinhalte für die Belohnungsspiele (Memory, Quiz, Zuordnen, Wortsalat). Nur Inhalte dieser Stunde, vor dem Einsatz gegenlesen. -->
+<!-- ENTWURF: Begriffe noch nicht fachlich gegengelesen. Nach dem Gegenlesen "geprueft": true setzen und im Eintrag in projects.json "begriffe": true ergänzen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Das Auge",
+ "paare": [
+  [
+   "Hornhaut",
+   "Liegt ganz vorn, schützt das Auge und bricht das Licht",
+   "Horn-haut"
+  ],
+  [
+   "Iris",
+   "Ring aus Muskeln, der die Pupille größer oder kleiner macht",
+   "I-ris"
+  ],
+  [
+   "Pupille",
+   "Loch in der Iris, durch das das Licht ins Auge fällt",
+   "Pu-pil-le"
+  ],
+  [
+   "Linse",
+   "Bricht das Licht und bündelt es auf der Netzhaut",
+   "Lin-se"
+  ],
+  [
+   "Netzhaut",
+   "Kleidet den Augenhintergrund aus, enthält die Sinneszellen für Licht",
+   "Netz-haut"
+  ],
+  [
+   "Sehnerv",
+   "Leitet die Signale der Netzhaut zum Gehirn",
+   "Seh-nerv"
+  ],
+  [
+   "Gelber Fleck",
+   "Stelle der Netzhaut mit den meisten Sinneszellen, hier sehen wir am schärfsten",
+   "Gel-ber Fleck"
+  ],
+  [
+   "Blinder Fleck",
+   "Stelle, an der der Sehnerv das Auge verlässt, hier gibt es keine Sinneszellen",
+   "Blin-der Fleck"
+  ]
+ ],
+ "spiele": [
+  "memory",
+  "quiz",
+  "zuordnen"
+ ]
+}
+</script>
 </body>
 </html>
