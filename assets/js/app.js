@@ -307,9 +307,12 @@
       if (!query) { results.hidden = true; results.innerHTML = ""; return; }
       const found = visible.filter(p => textMatches(p, query));
       results.hidden = false;
-      results.innerHTML = found.length
+      /* Begriffe, die Kinder und Jugendliche für „Stimmt das?“ nutzen, führen zum Fakten-Check */
+      const faktenHinweis = /fake|mythos|mythen|stimmt|faktencheck|fakten|desinformation|falschmeldung|lüge|quelle|glaub|gerücht/i.test(query)
+        ? `<div class="group"><a class="row" href="${root}fakten/"><span class="row-main"><span class="row-title">Fakten-Check: Stimmt das wirklich?</span><span class="row-meta">Mythen prüfen, Quellen prüfen, Gespräche führen</span></span><span class="row-chev">${icon("chevron", 20)}</span></a></div>` : "";
+      results.innerHTML = faktenHinweis + (found.length
         ? `<div class="group">${found.slice(0, 8).map(p => row(p, true)).join("")}</div>`
-        : '<p class="empty-message">Dazu gibt es noch kein Material. Versuche ein anderes Wort.</p>';
+        : (faktenHinweis ? "" : '<p class="empty-message">Dazu gibt es noch kein Material. Versuche ein anderes Wort.</p>'));
     });
     initZuletzt(visible);
   }
@@ -391,7 +394,7 @@
   }
   /* Lädt ein Vorschaubild nicht, bleibt das Kürzel der Quelle sichtbar */
   document.addEventListener("error", e => { if (e.target && e.target.classList && e.target.classList.contains("news-bild")) e.target.remove(); }, true);
-  const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche. <a href="' + root + 'nachrichten/#fakten">So prüfst du Quellen</a></p>';
+  const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche. <a href="' + root + 'fakten/#quellencheck">So prüfst du Quellen</a></p>';
 
   /* Startseite: Meldungen der letzten 30 Tage (höchstens 3), damit Aktuelles nicht nur im Archiv steht */
   function initHomeAktuell() {
@@ -457,11 +460,10 @@
         return data.eintraege.filter(n => n && typeof n.titel === "string" && n.titel.trim()
           && typeof n.link === "string" && /^https:\/\//.test(n.link) && n.sichtbar !== false)
           .sort((a, b) => String(b.datum || "").localeCompare(String(a.datum || "")));
-      }),
-      fetch(root + "projects.json").then(r => (r.ok ? r.json() : [])).catch(() => [])
-    ]).then(([raw, news, projekte]) => {
-      /* ----- Tabs: Meldungen | Themenarchiv | Fakten prüfen (Adressen #archiv und #fakten öffnen den Reiter) ----- */
-      const tabs = { meldungen: $("#meldungen"), archiv: $("#archiv"), fakten: $("#fakten") };
+      })
+    ]).then(([raw, news]) => {
+      /* ----- Tabs: Meldungen | Themenarchiv (Adresse #archiv öffnet das Archiv) ----- */
+      const tabs = { meldungen: $("#meldungen"), archiv: $("#archiv") };
       const zeigeTab = name => {
         Object.keys(tabs).forEach(k => {
           tabs[k].hidden = k !== name;
@@ -474,16 +476,9 @@
         window.scrollTo({ top: 0 });
       };
       document.querySelectorAll(".n-tabs button").forEach(b => b.addEventListener("click", () => gehZu(b.dataset.tab)));
-      document.querySelectorAll("[data-tab-link]").forEach(l => l.addEventListener("click", e => { e.preventDefault(); gehZu(l.dataset.tabLink); }));
       const hashTab = location.hash.slice(1);
       if (tabs[hashTab]) zeigeTab(hashTab);
 
-      /* ----- Fakten prüfen: Materialien aus projects.json mit Feld fakten: true ----- */
-      const fl = $("#n-fakten-liste");
-      const fm = (Array.isArray(projekte) ? projekte : (projekte && projekte.projekte) || []).filter(p => p && p.fakten === true && p.sichtbar !== false);
-      fl.innerHTML = fm.length
-        ? `<div class="group">${fm.map(p => `<a class="row" href="${root}${escapeHtml(p.path)}"><span class="dot" aria-hidden="true"></span><span class="row-main"><span class="row-title">${escapeHtml(p.title)}</span><span class="row-meta">${[p.subject, p.grade, p.type].filter(Boolean).map(escapeHtml).join(" · ")}</span>${p.description ? `<span class="row-meta">${escapeHtml(String(p.description).split(" Stichwörter")[0])}</span>` : ""}</span><span class="row-chev">${icon("chevron", 20)}</span></a>`).join("")}</div>`
-        : '<p class="empty-message">Zurzeit gibt es hier noch kein Material.</p>';
 
       /* ----- Meldungen ----- */
       const st = { q: "", fach: "Alle", ziel: "Alle" };

@@ -1,0 +1,73 @@
+{
+  "hinweis": "Mythen-Check der Seite fakten/. Pro Thema: id, titel, fach, klasse, optional hinweis (z. B. Wertfrage bei umstrittenen Themen) und optional material (Pfad aus projects.json). Pro Aussage: thema (id), aussage (so, wie man sie im Netz liest), stimmt (true oder false), fakt (kurze Sätze, nur belegte Aussagen), quelle { name, link }. Nur Quellen aus erlaubteQuellen in nachrichten.json. Auch wahre Aussagen aufnehmen, damit nicht immer „Stimmt nicht“ richtig ist. Nur verlinken, nichts kopieren.",
+  "themen": [
+    { "id": "impfen", "titel": "Impfen", "fach": "Biologie", "klasse": "Klasse 9", "material": "biologie/klasse-9/gesundheit/impfen/" },
+    { "id": "windkraft", "titel": "Windkraft", "fach": "Geografie", "klasse": "Klasse 9", "hinweis": "Ob ein Windrad bei dir in der Nähe gebaut werden soll, ist eine Frage der Meinung und der Werte. Hier geht es nur um die Fakten." },
+    { "id": "klima", "titel": "Klima", "fach": "Geografie", "klasse": "Klasse 9/10", "material": "geografie/klasse-9/klimawandel/klima-info/" }
+  ],
+  "mythen": [
+    {
+      "thema": "impfen",
+      "aussage": "Eine Impfung kann dich mit der Krankheit anstecken, gegen die sie schützen soll.",
+      "stimmt": false,
+      "fakt": "Impfstoffe können die Krankheit nicht auslösen, gegen die sie schützen. Die meisten enthalten nur abgetötete Erreger oder Teile davon. Auch Impfstoffe mit abgeschwächten, noch lebenden Erregern lösen die Krankheit nicht aus. Nur bei Menschen mit stark geschwächtem Immunsystem können sie in seltenen Fällen ähnliche Symptome auslösen. Für diese Gruppe gelten besondere Regeln.",
+      "quelle": { "name": "Robert Koch-Institut (RKI)", "link": "https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Informationsmaterialien/Impfmythen/Sicherheit_Erkrankung.html" }
+    },
+    {
+      "thema": "impfen",
+      "aussage": "Fieber oder Rötung nach einer Impfung zeigen, dass das Immunsystem auf den Impfstoff reagiert.",
+      "stimmt": true,
+      "fakt": "Das stimmt. Solche Reaktionen sind erwünscht. Sie zeigen, dass dein Immunsystem arbeitet. Meist klingen sie nach ein bis zwei Tagen ab. Das ist nicht die Krankheit selbst.",
+      "quelle": { "name": "Robert Koch-Institut (RKI)", "link": "https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Informationsmaterialien/Impfmythen/Sicherheit_Erkrankung.html" }
+    },
+    {
+      "thema": "impfen",
+      "aussage": "Die Impfung gegen Masern, Mumps und Röteln löst Autismus aus.",
+      "stimmt": false,
+      "fakt": "Ein Zusammenhang ist ausgeschlossen. Autismus kommt bei geimpften und ungeimpften Kindern gleich oft vor. Als Hauptursache gelten die Gene. Der Mythos stammt aus einer Studie aus den 1990er-Jahren. Ihre Daten waren gefälscht. Die Studie wurde zurückgezogen.",
+      "quelle": { "name": "Robert Koch-Institut (RKI)", "link": "https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Informationsmaterialien/Impfmythen/Sicherheit_Autismus.html" }
+    },
+    {
+      "thema": "impfen",
+      "aussage": "Die Impfung ist gefährlicher als die Krankheit.",
+      "stimmt": false,
+      "fakt": "Impfungen werden nur empfohlen, wenn ihr Nutzen größer ist als ihr Risiko. Beispiel Masern: Bei etwa 1 bis 2 von 1.000 Erkrankten entzündet sich das Gehirn. Das kann bleibende Schäden oder den Tod bedeuten. Schwere Nebenwirkungen der Impfung sind selten.",
+      "quelle": { "name": "Robert Koch-Institut (RKI)", "link": "https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Informationsmaterialien/Impfmythen/Nutzen_Risiko.html" }
+    },
+    {
+      "thema": "impfen",
+      "aussage": "Keine Impfung schützt zu 100 Prozent. Darum bringen Impfungen nichts.",
+      "stimmt": false,
+      "fakt": "Es stimmt, dass keine Impfung alle Geimpften schützt. Das gilt auch für Medikamente. Eine Impfung senkt aber das Risiko, krank zu werden, deutlich. Und sie mildert schwere Verläufe ab.",
+      "quelle": { "name": "Robert Koch-Institut (RKI)", "link": "https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Informationsmaterialien/Impfmythen/Wirksamkeit_Impfschutz.html" }
+    },
+    {
+      "thema": "windkraft",
+      "aussage": "Man kann den Infraschall von Windrädern hören. (Infraschall ist Schall, der so tief ist, dass wir ihn normalerweise nicht hören.)",
+      "stimmt": false,
+      "fakt": "Der Infraschall von Windrädern ist so tief und so leise, dass Menschen ihn nicht hören. Hörbar ist ein anderes Geräusch: das „Wuschen“ der Rotorblätter. Das ist aber kein Infraschall.",
+      "quelle": { "name": "Umweltbundesamt: Infraschall einfach erklärt", "link": "https://www.umweltbundesamt.de/system/files/medien/479/publikationen/broschuere_infraschall.pdf" }
+    },
+    {
+      "thema": "windkraft",
+      "aussage": "Sehr lauter Infraschall kann der Gesundheit schaden.",
+      "stimmt": true,
+      "fakt": "Das stimmt. Wie jeder Schall kann auch Infraschall schaden, wenn er sehr laut ist. Der Infraschall von Windrädern liegt aber deutlich unter dem, was Menschen wahrnehmen. Schäden in Wohnräumen sind deshalb unwahrscheinlich.",
+      "quelle": { "name": "Umweltbundesamt: Infraschall einfach erklärt", "link": "https://www.umweltbundesamt.de/system/files/medien/479/publikationen/broschuere_infraschall.pdf" }
+    },
+    {
+      "thema": "windkraft",
+      "aussage": "Der Infraschall von Windrädern macht Menschen in der Nähe krank.",
+      "stimmt": false,
+      "fakt": "Nach dem heutigen Stand der Forschung ist das unwahrscheinlich. Manche Menschen klagen trotzdem über Schlafprobleme oder Schwindel. Das Umweltbundesamt nennt als wahrscheinlichste Erklärung den Nocebo-Effekt: Wer Schlimmes erwartet, spürt es oft auch. Hörbare Geräusche können trotzdem stören. Dafür gibt es Lärmschutz-Regeln.",
+      "quelle": { "name": "Umweltbundesamt: Infraschall einfach erklärt", "link": "https://www.umweltbundesamt.de/system/files/medien/479/publikationen/broschuere_infraschall.pdf" }
+    },
+    {
+      "thema": "windkraft",
+      "aussage": "Windräder sind für alle Vogelarten gefährlich.",
+      "stimmt": false,
+      "fakt": "Die meisten Tierarten werden von Windrädern nicht gestört. Ein Risiko gibt es vor allem für bestimmte Greifvögel und für Fledermäuse, die hoch fliegen. Darum werden bei der Planung Brutplätze und Flugrouten berücksichtigt.",
+      "quelle": { "name": "Umweltbundesamt: Windenergie an Land", "link": "https://www.umweltbundesamt.de/themen/klima-energie/erneuerbare-energien/windenergie-an-land" }
+    }
+  ]
+}
