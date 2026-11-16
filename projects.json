@@ -467,7 +467,7 @@
     ]
   },
   {
-    "title": "Impfen – ja oder nein?",
+    "title": "Gesundheit – Krankheit – Stunde 2: Impfen – ja oder nein?",
     "description": "Impuls mit zwei Aussagen, Ausbruchsspiel, Herdenimmunität-Labor und Debatte in vier Rollen. Mit Do Now und Exit-Ticket.",
     "type": "Interaktive Präsentation",
     "path": "biologie/klasse-9/gesundheit/impfen/",
@@ -476,6 +476,8 @@
     "themenfeld": "3.5",
     "dauer": "45 Min.",
     "datum": "2026-11-05",
+    "reihe": "Gesundheit – Krankheit",
+    "folge": 2,
     "sichtbar": true,
     "bne": [
       3
@@ -483,7 +485,7 @@
     "begriffe": true
   },
   {
-    "title": "Impfen – Fortsetzung USA",
+    "title": "Gesundheit – Krankheit – Stunde 3: Impfen – Fortsetzung USA",
     "description": "Masern in den USA: Schätzfrage, Impfquote und Ausbruch-Simulation, Quellencheck, Elimination. Debatte Runde 2 mit Zusatzkarten per QR-Code, Blitzlicht und Exit-Ticket.",
     "type": "Interaktive Präsentation",
     "path": "biologie/klasse-9/gesundheit/impfen-usa/",
@@ -492,6 +494,7 @@
     "themenfeld": "3.5",
     "dauer": "45 Min.",
     "datum": "2026-11-15",
+    "folge": 3,
     "reihe": "Gesundheit – Krankheit",
     "sichtbar": true,
     "bne": [
@@ -501,6 +504,32 @@
       {
         "pfad": "biologie/klasse-9/gesundheit/impfen/",
         "grund": "Folgestunde: Die Debatte aus Stunde 1 geht mit aktuellen Zahlen aus den USA in Runde 2 weiter."
+      }
+    ]
+  },
+  {
+    "title": "Gesundheit – Krankheit – Stunde 2 und 3: Impfen als Doppelstunde",
+    "description": "Beide Impfen-Stunden in einer Präsentation für 90 Minuten: Impuls, Ausbruchsspiel, Debatte Runde 1, Daten aus den USA, Debatte Runde 2 und 3, Blitzlicht mit übernommener Zählung, Tafelbild, Exit-Ticket.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-9/gesundheit/impfen-doppelstunde/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "Doppelstunde",
+    "datum": "2026-11-16",
+    "reihe": "Gesundheit – Krankheit",
+    "sichtbar": true,
+    "bne": [
+      3
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Einzelstunde 1, aus der diese Doppelstunde zusammengesetzt ist."
+      },
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen-usa/",
+        "grund": "Einzelstunde 2 (Fortsetzung USA)."
       }
     ]
   },
@@ -719,7 +748,7 @@
     ]
   },
   {
-    "title": "Gesundheit – Krankheit – Übungsstunde: Erreger und Infektionen (nach der LEK)",
+    "title": "Gesundheit – Krankheit – Stunde 4: Erreger und Infektionen (Übungsstunde nach der LEK)",
     "description": "Do Now, LEK-Check, Impuls und Fragenentwicklung, Station Infektionsweg, Station Bakterien, Fehleranalyse, Tafelbild, Reflexion.",
     "type": "Materialseite",
     "path": "biologie/klasse-9/gesundheit/lek-rueckgabe/",
@@ -728,6 +757,7 @@
     "themenfeld": "3.5",
     "dauer": "45 Min.",
     "datum": "2026-11-16",
+    "folge": 4,
     "reihe": "Gesundheit – Krankheit",
     "dateien": [
       {
