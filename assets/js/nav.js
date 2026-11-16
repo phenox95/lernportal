@@ -20,6 +20,7 @@
     { id: "biologie", titel: "Biologie", pfad: "biologie/", symbol: "blatt", ort: "leiste" },
     { id: "geografie", titel: "Geografie", pfad: "geografie/", symbol: "erde", ort: "leiste" },
     { id: "alle", titel: "Alle Materialien", kurz: "Alle", pfad: "alle/", symbol: "stapel", ort: "leiste" },
+    { id: "fakten", titel: "Fakten-Check", kurz: "Fakten", pfad: "fakten/", symbol: "fakten", ort: "leiste" },
     { id: "begriffe", titel: "Begriffe", pfad: "begriffe/", ort: "mehr" },
     { id: "bne", titel: "Nachhaltigkeit", pfad: "bne/", ort: "mehr" },
     { id: "nachrichten", titel: "Nachrichten", pfad: "nachrichten/", ort: "mehr" },
@@ -30,6 +31,7 @@
     blatt: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/>',
     erde: '<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.8 2.7 4 5.9 4 9.5s-1.2 6.8-4 9.5c-2.8-2.7-4-5.9-4-9.5s1.2-6.8 4-9.5z"/>',
     stapel: '<path d="m12 3 9 4.5-9 4.5-9-4.5z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/>',
+    fakten: '<circle cx="11" cy="11" r="7.5"/><path d="m21 21-4.3-4.3"/><path d="m7.8 11 2.3 2.3 4.2-4.6"/>',
     mehr: '<circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/>'
   };
   const symbol = name => `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${SYMBOLE[name] || ""}</svg>`;

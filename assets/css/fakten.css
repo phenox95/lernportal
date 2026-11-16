@@ -1,0 +1,75 @@
+/* Seite Fakten-Check (fakten/): große Tippflächen, kurze Zeilen, ruhige Farben.
+   Alle Maße in rem, damit der Lesemodus wirkt. Ergänzt styles.css. */
+.f-sprung { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.25rem 0 0; }
+.f-sprung a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 1rem; border: 1px solid var(--rahmen); border-radius: 2rem; background: var(--surface); font-size: 0.9375rem; font-weight: 700; }
+.f-sprung a:hover { border-color: var(--text); }
+
+.f-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; }
+.f-pills button { min-height: 2.75rem; padding: 0 1.1rem; border: 1px solid var(--rahmen); border-radius: 2rem; background: var(--surface); font-size: 0.9375rem; cursor: pointer; }
+.f-pills button[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--bg); font-weight: 700; }
+.f-thema-hinweis { max-width: 40rem; margin: 1rem 0 0; padding: 0.75rem 1rem; border-left: 4px solid var(--rahmen); background: var(--field); border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.9375rem; }
+
+.f-karten { display: grid; gap: 1rem; }
+.f-karte { padding: 1.25rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); }
+.f-thema-etikett { margin: 0 0 0.5rem; font-size: 0.8125rem; color: var(--text-2); }
+.f-aussage { margin: 0; font-size: 1.1875rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.01em; max-width: 38rem; }
+.f-frage { margin: 0.9rem 0 0.5rem; font-size: 0.9375rem; color: var(--text-2); }
+.f-tipp { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; max-width: 26rem; }
+.f-tipp button { min-height: 3rem; border: 2px solid var(--rahmen); border-radius: var(--radius); background: var(--surface); font-size: 1rem; font-weight: 700; cursor: pointer; }
+.f-tipp button:hover { border-color: var(--text); }
+.f-tipp button:disabled { cursor: default; opacity: 1; }
+.f-tipp button[aria-pressed="true"] { background: var(--field); border-color: var(--text); }
+.f-antwort { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); max-width: 38rem; }
+.f-urteil { margin: 0 0 0.5rem; font-size: 1.0625rem; font-weight: 700; }
+.f-urteil .f-marke { display: inline-block; margin-right: 0.5rem; padding: 0.1rem 0.65rem; border: 2px solid var(--text); border-radius: 1rem; font-size: 0.875rem; }
+.f-fakt { margin: 0 0 0.75rem; }
+.f-quelle { margin: 0; font-size: 0.875rem; color: var(--text-2); }
+.f-quelle a { font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; }
+
+.f-fragen, .f-sandwich { list-style: none; counter-reset: f; display: grid; gap: 0.6rem; margin: 1rem 0 0; padding: 0; max-width: 44rem; }
+.f-fragen li, .f-sandwich li { counter-increment: f; display: grid; gap: 0.15rem; padding: 0.9rem 1rem 0.9rem 3.4rem; position: relative; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.f-fragen li::before { content: counter(f); position: absolute; left: 1rem; top: 0.8rem; display: flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; border: 2px solid var(--text); border-radius: 50%; font-weight: 700; font-size: 0.9375rem; }
+.f-sandwich li { padding-left: 1rem; }
+.f-fragen li span, .f-sandwich li span { font-size: 0.9375rem; color: var(--text-2); }
+.f-fragen li span:last-child { color: var(--text); }
+
+.f-sprechkarten { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.75rem; margin: 1rem 0; padding: 0; }
+.f-sprechkarten li { display: grid; align-content: start; gap: 0.35rem; padding: 1rem; border: 2px dashed var(--rahmen); border-radius: 1rem; background: var(--surface); }
+.f-sprechkarten li span { font-size: 0.9375rem; color: var(--text-2); }
+.f-knopf { min-height: 2.75rem; padding: 0 1.25rem; border: 1px solid var(--rahmen); border-radius: var(--radius); background: var(--surface); font-size: 0.9375rem; cursor: pointer; }
+.f-knopf:hover { border-color: var(--text); }
+
+.f-bogen { margin-top: 1rem; max-width: 44rem; }
+.f-bogen-kopf { margin: 1rem 0 0.25rem; font-weight: 700; }
+.f-bogen-meta { margin: 0 0 0.75rem; font-size: 0.875rem; color: var(--text-2); }
+.f-frage-block { margin: 0.75rem 0; padding: 0.9rem 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.f-frage-block fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.f-frage-block legend { padding: 0; margin-bottom: 0.5rem; font-weight: 700; }
+.f-frage-block legend span { display: block; font-weight: 400; font-size: 0.9375rem; color: var(--text-2); }
+.f-antworten { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.f-antworten label { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0 1rem; border: 1px solid var(--rahmen); border-radius: 2rem; cursor: pointer; font-size: 0.9375rem; }
+.f-antworten input { width: 1.1rem; height: 1.1rem; accent-color: currentColor; }
+.f-ergebnis { margin-top: 1rem; padding: 1rem; border: 2px solid var(--text); border-radius: var(--radius); }
+.f-ergebnis p { margin: 0 0 0.35rem; }
+
+.f-andere { display: grid; gap: 0.75rem; margin-top: 0.5rem; }
+.f-sicht { display: block; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.f-sicht:hover { border-color: var(--text-2); }
+.f-sicht .chip { margin-bottom: 0.4rem; }
+.f-sicht strong { display: block; line-height: 1.35; }
+.f-sicht span.f-s-ein { display: block; margin-top: 0.3rem; font-size: 0.9375rem; color: var(--text-2); }
+.f-auftrag { margin: 0.75rem 0 0; padding: 0.75rem 1rem; border-left: 4px solid var(--text); background: var(--field); border-radius: 0 var(--radius) var(--radius) 0; }
+
+#f-material .group, #f-thema-material .group { margin-top: 0.5rem; }
+#f-thema-material, #f-material { margin-top: 1.5rem; }
+
+@media (max-width: 40rem) { .f-tipp { grid-template-columns: 1fr; } .f-aussage { font-size: 1.0625rem; } }
+
+/* Drucken: nur die Gesprächskarten */
+@media print {
+  body.f-druck .site-header, body.f-druck .hero, body.f-druck .tabbar, body.f-druck .site-footer, body.f-druck .f-knopf,
+  body.f-druck #mythen, body.f-druck #quellencheck, body.f-druck #meldung, body.f-druck .tab-blatt, body.f-druck .tab-schleier { display: none !important; }
+  body.f-druck { background: #fff; color: #000; }
+  body.f-druck .f-sprechkarten li { break-inside: avoid; border-color: #000; }
+  body.f-druck .f-sandwich li { break-inside: avoid; border-color: #000; }
+}

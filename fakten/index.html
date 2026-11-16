@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Stimmt das wirklich? Mythen im Check zu Impfen, Windkraft und Klima, Quellen prüfen, Meldungen vergleichen und ruhig über Fakten sprechen.">
+  <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+  <title>Fakten-Check – Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/fakten.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/nav.js" defer></script>
+  <script src="../assets/js/fakten.js" defer></script>
+</head>
+<body data-page="fakten" data-root="../">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href=".././" aria-label="Lernportal Startseite"><span class="brand-dot" aria-hidden="true"></span>Lernportal</a>
+      <nav class="top-nav" aria-label="Hauptnavigation">
+        <a href="../biologie/">Biologie</a>
+        <a href="../geografie/">Geografie</a>
+        <a href="../alle/">Alle Materialien</a>
+        <a href="../fakten/" aria-current="page">Fakten-Check</a>
+        <a href="../begriffe/">Begriffe</a>
+        <a href="../bne/">Nachhaltigkeit</a>
+        <a href="../nachrichten/">Nachrichten</a>
+        <a href="../hilfe/">Hilfe</a>
+      </nav>
+      <div class="header-tools" id="prefs-slot"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Fakten-Check</p>
+        <h1 class="title">Stimmt das wirklich?</h1>
+        <p class="lead">Im Netz steht vieles. Nicht alles ist richtig. Hier übst du, Aussagen und Quellen zu prüfen. Rate zuerst, schau dann nach.</p>
+        <nav class="f-sprung" aria-label="Auf dieser Seite">
+          <a href="#mythen">Mythen-Check</a>
+          <a href="#quellencheck">Quellen prüfen</a>
+          <a href="#meldung">Meldung prüfen</a>
+          <a href="#gespraech">Gespräche führen</a>
+        </nav>
+      </div>
+    </section>
+
+    <div class="wrap">
+
+      <section class="section" id="mythen" aria-labelledby="h-mythen">
+        <h2 id="h-mythen" class="aktuell-h">Mythen-Check: Stimmt das?</h2>
+        <p class="woche-hinweis">Lies die Aussage. Tippe, ob sie stimmt. Dann siehst du die Antwort und die Quelle.</p>
+        <div class="f-pills" id="f-themen" role="group" aria-label="Thema wählen"></div>
+        <p class="f-thema-hinweis" id="f-thema-hinweis" hidden></p>
+        <p class="result-count" id="f-punkte" aria-live="polite"></p>
+        <div id="f-karten"><p class="loading-message">Aussagen werden geladen …</p></div>
+        <div id="f-thema-material"></div>
+      </section>
+
+      <section class="section" id="quellencheck" aria-labelledby="h-quellen">
+        <h2 id="h-quellen" class="aktuell-h">Quellencheck in fünf Fragen</h2>
+        <p class="woche-hinweis">Diese fünf Fragen helfen bei jedem Text, Video oder Beitrag.</p>
+        <ol class="f-fragen">
+          <li><strong>Wer schreibt?</strong><span>Gut: Name, Fachgebiet, Organisation, Impressum.</span><span>Vorsicht: anonym, kein Impressum.</span></li>
+          <li><strong>Wo steht es?</strong><span>Gut: Fachzeitschrift, Hochschule, Behörde, seriöses Medium.</span><span>Vorsicht: Forum, Blog, Video ohne Quelle.</span></li>
+          <li><strong>Gibt es Belege?</strong><span>Gut: Zahlen und ein Link zur Studie.</span><span>Vorsicht: „Studien zeigen …“ ohne Namen.</span></li>
+          <li><strong>Passt es zum Gesamtbild?</strong><span>Gut: Viele unabhängige Quellen sagen dasselbe.</span><span>Vorsicht: eine Quelle gegen alle anderen.</span></li>
+          <li><strong>Wie ist der Ton?</strong><span>Gut: sachlich.</span><span>Vorsicht: Panik, Verschwörung, „die da oben“.</span></li>
+        </ol>
+        <div id="f-material"></div>
+      </section>
+
+      <section class="section" id="meldung" aria-labelledby="h-meldung">
+        <h2 id="h-meldung" class="aktuell-h">Prüfe selbst eine Meldung</h2>
+        <p class="woche-hinweis">Wähle eine Meldung. Beantworte die fünf Fragen. Du siehst, wie viele gute Zeichen es gibt. Die Meldungen sind ausgewählt. Auch dort gilt: Vergleiche mehrere Quellen.</p>
+        <label class="filter-label" for="f-wahl">Meldung</label>
+        <div class="select-wrap">
+          <select id="f-wahl"><option value="">Meldung wählen</option></select>
+          <span data-icon="down" data-size="18" aria-hidden="true"></span>
+        </div>
+        <div id="f-bogen" hidden></div>
+        <h3 class="n-unter" id="f-andere-h" hidden>Gleiches Thema, andere Sicht</h3>
+        <div id="f-andere"></div>
+      </section>
+
+      <section class="section" id="gespraech" aria-labelledby="h-gespraech">
+        <h2 id="h-gespraech" class="aktuell-h">Ruhig darüber sprechen</h2>
+        <p class="woche-hinweis">Du musst niemanden überzeugen. Es hilft, ruhig zu bleiben und nachzufragen.</p>
+
+        <h3 class="n-unter">Das Faktensandwich in vier Schritten</h3>
+        <p class="woche-hinweis">Diese Methode nutzt das Robert Koch-Institut, um Mythen zu erklären. Der Fakt steht am Anfang und am Ende. <a href="https://www.rki.de/DE/Themen/Infektionskrankheiten/Impfen/Informationsmaterialien/Impfmythen/falschinformationen-wirksam-aufklaeren-node.html" target="_blank" rel="noopener noreferrer">RKI: Falschinformationen wirksam aufklären (externe Seite)</a></p>
+        <ol class="f-sandwich">
+          <li><strong>1. Fakt</strong><span>„Impfstoffe können die Krankheit nicht auslösen.“</span></li>
+          <li><strong>2. Mythos</strong><span>„Manche sagen, man werde von der Impfung krank.“</span></li>
+          <li><strong>3. Erklärung</strong><span>„Fieber nach der Impfung zeigt, dass das Immunsystem arbeitet. Das ist nicht die Krankheit.“</span></li>
+          <li><strong>4. Fakt noch einmal</strong><span>„Impfstoffe können die Krankheit nicht auslösen.“</span></li>
+        </ol>
+
+        <h3 class="n-unter">Gesprächskarten</h3>
+        <p class="woche-hinweis">Wenn jemand etwas sagt, das du nicht glaubst: Probiere einen dieser Sätze.</p>
+        <ul class="f-sprechkarten">
+          <li><strong>Woher weißt du das?</strong><span>Du fragst nach der Quelle. Das ist kein Vorwurf.</span></li>
+          <li><strong>Was würde dich überzeugen?</strong><span>So merkst du, was der anderen Person wichtig ist.</span></li>
+          <li><strong>Da sind wir uns einig: …</strong><span>Suche zuerst etwas Gemeinsames.</span></li>
+          <li><strong>Ich habe gelesen, dass … Quelle: …</strong><span>Du nennst einen Fakt und die Quelle dazu.</span></li>
+          <li><strong>Ich weiß es nicht. Wir können nachschauen.</strong><span>Nicht alles wissen ist in Ordnung.</span></li>
+          <li><strong>Wir müssen uns nicht einig werden.</strong><span>Du darfst das Gespräch freundlich beenden.</span></li>
+        </ul>
+        <p><button type="button" class="f-knopf" id="f-druck">Gesprächskarten drucken</button></p>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="wrap">
+    <footer class="site-footer">
+      <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
+      <span class="footer-links"><a href="../hilfe/">Hilfe</a><a href="../impressum/">Impressum</a><a href="../datenschutz/">Datenschutz</a></span>
+    </footer>
+  </div>
+</body>
+</html>

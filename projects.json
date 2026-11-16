@@ -657,7 +657,8 @@
     "bne": [
       13
     ],
-    "begriffe": true
+    "begriffe": true,
+    "fakten": true
   },
   {
     "title": "Klimawandel: Fakten, Mythen, Gespräche",
@@ -679,7 +680,8 @@
     "bne": [
       13
     ],
-    "begriffe": true
+    "begriffe": true,
+    "fakten": true
   },
   {
     "title": "Der Hundezuchtverein – Teil 2: Hypothesen und Münzmodell",

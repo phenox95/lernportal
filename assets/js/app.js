@@ -307,9 +307,12 @@
       if (!query) { results.hidden = true; results.innerHTML = ""; return; }
       const found = visible.filter(p => textMatches(p, query));
       results.hidden = false;
-      results.innerHTML = found.length
+      /* Begriffe, die Kinder und Jugendliche für „Stimmt das?“ nutzen, führen zum Fakten-Check */
+      const faktenHinweis = /fake|mythos|mythen|stimmt|faktencheck|fakten|desinformation|falschmeldung|lüge|quelle|glaub|gerücht/i.test(query)
+        ? `<div class="group"><a class="row" href="${root}fakten/"><span class="row-main"><span class="row-title">Fakten-Check: Stimmt das wirklich?</span><span class="row-meta">Mythen prüfen, Quellen prüfen, Gespräche führen</span></span><span class="row-chev">${icon("chevron", 20)}</span></a></div>` : "";
+      results.innerHTML = faktenHinweis + (found.length
         ? `<div class="group">${found.slice(0, 8).map(p => row(p, true)).join("")}</div>`
-        : '<p class="empty-message">Dazu gibt es noch kein Material. Versuche ein anderes Wort.</p>';
+        : (faktenHinweis ? "" : '<p class="empty-message">Dazu gibt es noch kein Material. Versuche ein anderes Wort.</p>'));
     });
     initZuletzt(visible);
   }
@@ -391,7 +394,7 @@
   }
   /* Lädt ein Vorschaubild nicht, bleibt das Kürzel der Quelle sichtbar */
   document.addEventListener("error", e => { if (e.target && e.target.classList && e.target.classList.contains("news-bild")) e.target.remove(); }, true);
-  const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche.</p>';
+  const newsHinweis = '<p class="woche-hinweis">Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Dort gelten deren Regeln. Lies verschiedene Quellen und vergleiche. <a href="' + root + 'fakten/#quellencheck">So prüfst du Quellen</a></p>';
 
   /* Startseite: Meldungen der letzten 30 Tage (höchstens 3), damit Aktuelles nicht nur im Archiv steht */
   function initHomeAktuell() {
@@ -467,11 +470,15 @@
           $("#tab-" + k).setAttribute("aria-pressed", String(k === name));
         });
       };
-      document.querySelectorAll(".n-tabs button").forEach(b => b.addEventListener("click", () => {
-        zeigeTab(b.dataset.tab);
-        history.replaceState(null, "", b.dataset.tab === "archiv" ? "#archiv" : location.pathname + location.search);
-      }));
-      if (location.hash === "#archiv") zeigeTab("archiv");
+      const gehZu = name => {
+        zeigeTab(name);
+        history.replaceState(null, "", name === "meldungen" ? location.pathname + location.search : "#" + name);
+        window.scrollTo({ top: 0 });
+      };
+      document.querySelectorAll(".n-tabs button").forEach(b => b.addEventListener("click", () => gehZu(b.dataset.tab)));
+      const hashTab = location.hash.slice(1);
+      if (tabs[hashTab]) zeigeTab(hashTab);
+
 
       /* ----- Meldungen ----- */
       const st = { q: "", fach: "Alle", ziel: "Alle" };

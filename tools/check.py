@@ -144,6 +144,8 @@ def hat_geprueft(eintrag):
 
 for i, p in enumerate(projekte):
     n = f"projects.json[{i}] „{p.get('title', '?')}“"
+    if "fakten" in p and not isinstance(p["fakten"], bool):
+        err(f"{n}: fakten muss true oder false sein")
     flag = p.get("begriffe")
     if flag is not None and not isinstance(flag, bool):
         err(f"{n}: begriffe muss true oder false sein")
@@ -297,6 +299,33 @@ for seite in sorted(ROOT.glob("*/index.html")) + [ROOT / "index.html"]:
     t = seite.read_text(encoding="utf-8", errors="ignore")
     if 'class="top-nav"' in t and "assets/js/nav.js" not in t:
         err(f"{seite.relative_to(ROOT)}: Portalseite ohne assets/js/nav.js (keine Navigation auf dem Handy)")
+
+# Mythen-Check (mythen.json): Aussagen mit belegter Quelle
+my = laden("mythen.json") or {}
+themen_ids = {x.get("id") for x in my.get("themen", []) if isinstance(x, dict)}
+pfade = {p.get("path") for p in projekte if isinstance(p, dict)}
+for x in my.get("themen", []):
+    if x.get("material") and x["material"] not in pfade:
+        err(f"mythen.json Thema „{x.get('id')}“: material „{x['material']}“ steht nicht in projects.json")
+for i, m in enumerate(my.get("mythen", [])):
+    mm = f"mythen.json[{i}] „{str(m.get('aussage', '?'))[:40]}“"
+    for f in ("thema", "aussage", "fakt"):
+        if not m.get(f):
+            err(f"{mm}: Pflichtfeld „{f}“ fehlt")
+    if m.get("thema") not in themen_ids:
+        err(f"{mm}: thema „{m.get('thema')}“ steht nicht in themen")
+    if not isinstance(m.get("stimmt"), bool):
+        err(f"{mm}: stimmt muss true oder false sein")
+    q = m.get("quelle") or {}
+    if not q.get("name") or not str(q.get("link", "")).startswith("https://"):
+        err(f"{mm}: quelle braucht name und https-link")
+    else:
+        host = q["link"].split("/")[2].lower()
+        host = host[4:] if host.startswith("www.") else host
+        if not any(host == e or host.endswith("." + e) for e in nach.get("erlaubteQuellen", [])):
+            err(f"{mm}: Quelle „{host}“ steht nicht in erlaubteQuellen (nachrichten.json)")
+    if len(m.get("fakt", "")) > 520:
+        wrn(f"{mm}: fakt ist {len(m['fakt'])} Zeichen lang (Ziel: kurze Sätze, höchstens ca. 500 Zeichen)")
 
 for m in warn:
     print("WARNUNG ", m)
