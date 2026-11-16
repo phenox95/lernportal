@@ -21,6 +21,7 @@ Zentrales Portal für digitale Unterrichtsmaterialien in Biologie und Geografie 
 | `woche/`, `nachrichten.json` | Seite „Thema der Woche“ (Foto, Erklärung, Material, aktuelle Meldungen, frühere Themen) und die Liste ausgewählter aktueller Meldungen nach Fach und Nachhaltigkeitsziel |
 | `nachrichten/` | Seite „Nachrichten und Themenarchiv“: zwei Reiter (Meldungen, Themenarchiv; `#archiv` öffnet das Archiv), je mit Suche, Fachauswahl und Filter, nach Monat gruppiert (die zwei neuesten Monate offen), Kennzeichen „Neu“ (14 Tage) und Recherche-Tipps |
 | `bne.json`, `bne/` | 17 Nachhaltigkeitsziele und die Seite „Nachhaltigkeit (BNE)“: Materialien beider Fächer nach Ziel. Zuordnung über das Feld `bne` in `projects.json` |
+| `labor/`, `daten/` | Prototypen neuer Werkzeuge (Karte ohne Karte, Länder-Quiz, Räuber-Beute, Vorlesen, Do Now, Seismograf, Farbmesser, QR-Rückkanal) und die Dateien, die `tools/daten-holen.py` aus offenen Quellen erzeugt. Nicht in `projects.json`. Siehe [docs/ideen-native-nutzung.md](docs/ideen-native-nutzung.md) |
 | `vorlage/` | Vorlagen: `vorlage/` (Materialseite mit Aufgaben), `vorlage/materialseite/` (Seite pro Thema mit Dateiliste) und `vorlage/praesentation/` (Grundaufbau einer Präsentation mit Stift, Timer und Lärmampel). Alle mit einheitlicher Kopfleiste. Steht nicht in `projects.json`, ist also nicht im Portal sichtbar |
 | `assets/` | `css/` (`styles.css` Portal, `material.css` Materialseiten), `js/` (`qrcode.js` QR-Codes für Präsentationen, `app.js` Liste und Suche, `prefs.js` Lesemodus, `material.js` Kopfleiste und Titelblock der Materialseiten, `materialseite.js` Dateiliste der Themenseite), `css/materialseite.css` (Stile der Themenseite), `js/praesentation.js` und `css/praesentation.css` (Werkzeuge für Präsentationen), `img/muster/` (Fachmuster als SVG), `img/fach/` (optionale Themenbilder der Fachseiten), `fonts/` (Andika, **nur für Präsentationen**), `games/` (Belohnungsspiele ohne Fachinhalte). Portal und Materialseiten laden keine Schriftdatei und nutzen die Systemschrift des Geräts |
 
@@ -50,6 +51,7 @@ Das Skript prüft `projects.json` und `themenfelder.json`: Pflichtfelder, Format
 |---|---|
 | Neues Material anlegen, Felder in `projects.json`, Materialseiten, Impuls der Woche, Themenfelder | [docs/inhalte-ergaenzen.md](docs/inhalte-ergaenzen.md) |
 | Präsentationen: Grundaufbau, Stift, Timer, Lärmampel, Teilen mit QR-Code, Leseansicht (Nachlesen auf dem Handy), Fragenfeld, Belohnungsspiele, Begriffe-Seite | [docs/praesentationen.md](docs/praesentationen.md) |
+| Ideen und Prototypen: Browser-Funktionen, Sensoren, Datenpipeline, Rückkanal ohne Server | [docs/ideen-native-nutzung.md](docs/ideen-native-nutzung.md) |
 | Gestaltung, Favicon, Themenbilder, Lesemodus | [docs/gestaltung.md](docs/gestaltung.md) |
 | GitHub Pages, Rechtstexte, eigene Domain, App und Offline-Speicher | [docs/betrieb.md](docs/betrieb.md) |
 
