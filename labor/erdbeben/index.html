@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Karte ohne Karte</title><link rel="stylesheet" href="../labor.css">
+<style>
+#kf{position:relative;border:2px solid var(--g);border-radius:14px;background:#0d1b2a;overflow:hidden;touch-action:manipulation}
+#kf canvas{display:block;width:100%;height:auto}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.leiste button[aria-pressed=true]{background:var(--dk);color:#fff;outline:3px solid var(--y)}
+label{font-weight:700}
+#info{min-height:2.6em}
+.lege{display:flex;gap:14px;flex-wrap:wrap;font-size:15px;margin:6px 0}
+.lege i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:5px;vertical-align:-2px}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Karte ohne Karte</h1>
+<div class="kasten">
+<b>Impuls, Stufe 1:</b> Nur Punkte, sonst nichts. Jeder Punkt ist ein Erdbeben der letzten 30 Tage (Stärke 4,5 oder mehr).<br>
+Die Klasse <b>beschreibt</b> die Anordnung und stellt Fragen. Die Leitfrage entsteht aus der Klasse. Erst dann werden Küsten und Plattengrenzen eingeblendet.
+</div>
+<p id="demo" class="kasten warn" hidden><b>Beispieldaten:</b> Diese Punkte sind simuliert (entlang der Plattengrenzen verteilt), keine echten Erdbeben. Echte Daten holt <code>python3 tools/daten-holen.py erdbeben</code>.</p>
+<div class="leiste" role="group" aria-label="Was die Karte zeigt">
+ <button type="button" data-st="0" aria-pressed="true">1 Nur Punkte</button>
+ <button type="button" data-st="1" aria-pressed="false">2 + Küsten</button>
+ <button type="button" data-st="2" aria-pressed="false">3 + Plattengrenzen</button>
+</div>
+<div class="leiste">
+ <label for="mag">Mindeststärke: <output id="magw">4,5</output></label>
+ <input id="mag" type="range" min="4.5" max="7" step="0.1" value="4.5" aria-describedby="info">
+ <button type="button" class="sek" id="tiefe" aria-pressed="false">Tiefe zeigen</button>
+</div>
+<div id="kf"><canvas id="c" width="1440" height="720" role="img" aria-label="Weltkarte mit Erdbebenpunkten"></canvas></div>
+<div class="lege" id="lege" hidden><span><i style="background:#ffd166"></i>flach (unter 70 km)</span><span><i style="background:#ef476f"></i>mittel (70 bis 300 km)</span><span><i style="background:#8ecae6"></i>tief (über 300 km)</span></div>
+<p id="info" class="kasten" aria-live="polite">Tippe einen Punkt an.</p>
+<p class="quelle" id="quelle"></p>
+<script>
+(function(){
+ var cv=document.getElementById('c'),g=cv.getContext('2d'),W=cv.width,H=cv.height,st=0,magMin=4.5,tiefeAn=false,beben=[],karte=null,platten=null,gewaehlt=-1;
+ function X(lon){return (lon+180)/360*W} function Y(lat){return (90-lat)/180*H}
+ function zeichnen(){
+  g.clearRect(0,0,W,H);g.fillStyle='#0d1b2a';g.fillRect(0,0,W,H);
+  if(st>=1&&karte){g.fillStyle='#22364a';g.strokeStyle='#4b6580';g.lineWidth=1.5;karte.ringe.forEach(function(r){g.beginPath();r.forEach(function(p,i){i?g.lineTo(X(p[0]),Y(p[1])):g.moveTo(X(p[0]),Y(p[1]))});g.closePath();g.fill();g.stroke()})}
+  if(st>=2&&platten){g.strokeStyle='#ffffff';g.lineWidth=2.5;g.setLineDash([]);platten.linien.forEach(function(l){g.beginPath();for(var i=0;i<l.length;i++){var p=l[i];if(i&&Math.abs(p[0]-l[i-1][0])>180){g.moveTo(X(p[0]),Y(p[1]));continue}i?g.lineTo(X(p[0]),Y(p[1])):g.moveTo(X(p[0]),Y(p[1]))}g.stroke()})}
+  beben.forEach(function(b,i){if(b[2]<magMin)return;var r=2+(b[2]-4.5)*3.2;g.beginPath();g.arc(X(b[0]),Y(b[1]),r,0,6.2832);
+   g.fillStyle=tiefeAn?(b[3]<70?'rgba(255,209,102,.8)':b[3]<300?'rgba(239,71,111,.85)':'rgba(142,202,230,.9)'):'rgba(255,107,53,.75)';g.fill();
+   if(i===gewaehlt){g.lineWidth=3;g.strokeStyle='#fff';g.stroke()}});
+ }
+ function zeige(i){gewaehlt=i;var b=beben[i];document.getElementById('info').textContent='Stärke '+String(b[2]).replace('.',',')+', Tiefe '+b[3]+' km, Datum '+b[4].split('-').reverse().join('.')+'. Lage: '+Math.abs(b[1]).toFixed(1).replace('.',',')+(b[1]<0?' °S, ':' °N, ')+Math.abs(b[0]).toFixed(1).replace('.',',')+(b[0]<0?' °W':' °O');zeichnen()}
+ cv.addEventListener('click',function(e){var rc=cv.getBoundingClientRect(),x=(e.clientX-rc.left)/rc.width*W,y=(e.clientY-rc.top)/rc.height*H,best=-1,bd=30*30;
+  beben.forEach(function(b,i){if(b[2]<magMin)return;var dx=X(b[0])-x,dy=Y(b[1])-y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=i}});if(best>=0)zeige(best)});
+ [].forEach.call(document.querySelectorAll('[data-st]'),function(b){b.onclick=function(){st=+b.dataset.st;[].forEach.call(document.querySelectorAll('[data-st]'),function(x){x.setAttribute('aria-pressed',String(x===b))});zeichnen()}});
+ document.getElementById('mag').oninput=function(e){magMin=+e.target.value;document.getElementById('magw').textContent=String(magMin).replace('.',',');gewaehlt=-1;zeichnen()};
+ var tb=document.getElementById('tiefe');tb.onclick=function(){tiefeAn=!tiefeAn;tb.setAttribute('aria-pressed',String(tiefeAn));document.getElementById('lege').hidden=!tiefeAn;zeichnen()};
+ function laden(u){return fetch(u).then(function(r){return r.json()})}
+ Promise.all([laden('../../daten/erdbeben.json'),laden('../../daten/weltkarte.json'),laden('../../daten/plattengrenzen.json')]).then(function(a){
+  beben=a[0].beben;karte=a[1];platten=a[2];document.getElementById('demo').hidden=!a[0].demo;
+  document.getElementById('quelle').textContent='Quellen: '+a[0].quelle+' · Abruf '+a[0].abruf+' · Küsten: '+a[1].quelle+' · Plattengrenzen: '+a[2].quelle;zeichnen();
+ }).catch(function(){document.getElementById('info').textContent='Die Daten konnten nicht geladen werden (Seite über einen Server öffnen, nicht als Datei).'});
+})();
+</script>
+</main></body></html>
