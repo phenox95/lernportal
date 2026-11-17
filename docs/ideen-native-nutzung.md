@@ -625,3 +625,7 @@ Am 17.11.2026 habe ich die Seiten der Anbieter gelesen (Hosts in der Umgebung fr
 
 `labor/phet-selektion/`: Linkkarte (Beschreibung und Simulation bei PhET, Deutsch) mit der geprüften Lizenzzeile und einem Ablauf mit Operatoren (vorhersagen, untersuchen, vergleichen, erklären, beurteilen) und Hilfen auf Abruf. Fehlvorstellungen sind genannt. Der Ablauf ist ein Entwurf und gegenzulesen.
 
+### 12.10 Aktion „Daten aktualisieren“ (17.11.2026)
+
+`.github/workflows/daten.yml` holt jetzt **Erdbeben** (USGS) und **Strommix** (SMARD) und legt das Ergebnis als **Pull Request** ab, nie direkt auf `main`. Beim Start von Hand lässt sich jede der beiden Quellen an- und abwählen (GitHub: Actions, „Daten aktualisieren“, Run workflow). Jeden Montag automatisch: im Workflow die beiden Zeilen unter `schedule` einkommentieren. Der Strommix zeigt immer die letzten 14 Tage, nach einer Woche ohne Aktualisierung ist er also bis zu sieben Tage alt (steht in der Datei unter „abruf“). **Nicht in GitHub Actions getestet**, nur die Befehle lokal.
+

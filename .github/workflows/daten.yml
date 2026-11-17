@@ -1,9 +1,20 @@
 name: Daten aktualisieren
-# Holt offene Daten (siehe tools/daten-holen.py) und legt sie als Pull Request ab. Nichts wird ungeprüft veröffentlicht.
-# Standard: nur von Hand starten (Actions → Daten aktualisieren → Run workflow).
-# Wöchentlich automatisch: die beiden Zeilen unter "schedule" einkommentieren.
+# Holt aktuelle Daten (siehe tools/daten-holen.py) und legt sie als Pull Request ab. Nichts wird ungeprüft veröffentlicht.
+#   erdbeben: Erdbeben der letzten 30 Tage (USGS, US Public Domain) -> daten/erdbeben.json
+#   strom:    Stromerzeugung Deutschland, letzte 14 Tage stündlich (SMARD, Bundesnetzagentur, CC BY 4.0) -> daten/strom.json
+# Standard: nur von Hand starten (Actions -> Daten aktualisieren -> Run workflow).
+# Automatisch jeden Montag: die beiden Zeilen unter "schedule" einkommentieren.
 on:
   workflow_dispatch:
+    inputs:
+      erdbeben:
+        description: "Erdbeben aktualisieren"
+        type: boolean
+        default: true
+      strom:
+        description: "Strommix aktualisieren"
+        type: boolean
+        default: true
   # schedule:
   #   - cron: "17 4 * * 1"
 permissions:
@@ -14,11 +25,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 tools/daten-holen.py erdbeben
+      - name: Erdbeben holen
+        if: ${{ github.event_name == 'schedule' || inputs.erdbeben }}
+        run: python3 tools/daten-holen.py erdbeben
+      - name: Strommix holen
+        if: ${{ github.event_name == 'schedule' || inputs.strom }}
+        run: python3 tools/daten-holen.py strom
       - run: python3 tools/check.py
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: daten/aktualisierung
-          title: "Daten aktualisiert (Erdbeben)"
+          title: "Daten aktualisiert (Erdbeben, Strommix)"
           commit-message: "Daten aktualisiert"
-          body: "Automatisch von tools/daten-holen.py erzeugt. Quelle und Abrufdatum stehen in der Datei."
+          body: |
+            Automatisch von tools/daten-holen.py erzeugt. Quelle und Abrufdatum stehen in den Dateien.
+            Erdbeben: USGS (US Public Domain). Strommix: Bundesnetzagentur | SMARD.de (CC BY 4.0), bearbeitet.
