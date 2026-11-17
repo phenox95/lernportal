@@ -56,7 +56,35 @@ REGIONEN = [
     ("venedig", "Italien: Venedig und Po-Ebene", 11.0, 44.0, 14.5, 46.0, 0.005, 8, "10m", True),
     ("jangtse", "China: Jangtse-Delta und Shanghai", 119.5, 29.5, 123.5, 32.5, 0.005, 8, "10m", True),
     ("lagos", "Nigeria: Lagos und Golf von Guinea", 2.6, 6.0, 4.8, 6.9, 0.005, 8, "10m", True),
+    ("london", "Großbritannien: London und Themsemündung", -0.8, 51.2, 1.4, 51.9, 0.005, 8, "10m", True),
+    ("kopenhagen", "Dänemark und Schweden: Kopenhagen und Öresund", 12.0, 55.3, 13.4, 56.1, 0.005, 8, "10m", True),
+    ("houston", "USA: Houston und Galveston", -95.8, 28.8, -94.2, 30.2, 0.005, 8, "10m", True),
+    ("rio", "Brasilien: Rio de Janeiro", -43.8, -23.3, -42.8, -22.6, 0.005, 8, "10m", True),
+    ("buenosaires", "Argentinien: Buenos Aires und Río de la Plata", -59.0, -35.2, -57.4, -34.2, 0.005, 8, "10m", True),
+    ("mumbai", "Indien: Mumbai", 72.5, 18.5, 73.6, 20.0, 0.005, 8, "10m", True),
+    ("indus", "Pakistan: Indus-Delta und Karatschi", 66.5, 23.5, 68.5, 25.5, 0.005, 8, "10m", True),
+    ("manila", "Philippinen: Manila", 120.5, 14.0, 121.5, 15.0, 0.005, 8, "10m", True),
+    ("tokio", "Japan: Tokio und Kanto-Ebene", 139.3, 35.0, 140.6, 36.0, 0.005, 8, "10m", True),
+    ("osaka", "Japan: Osaka und Kobe", 134.8, 34.2, 136.0, 35.0, 0.005, 8, "10m", True),
+    ("dubai", "Vereinigte Arabische Emirate: Dubai und Abu Dhabi", 54.0, 24.2, 55.8, 25.6, 0.005, 8, "10m", True),
+    ("singapur", "Singapur und Johor", 103.4, 1.0, 104.4, 1.7, 0.005, 8, "10m", True),
+    ("malediven", "Malediven (Atolle): Beispiel für ein ungeeignetes Höhenmodell", 72.5, -0.7, 73.9, 4.6, 0.005, 8, "10m", True),
 ]
+
+HINWEISE = {
+    "bangladesch": "Das Terrarium-Modell zeigt das Land hier vermutlich zu hoch (Bäume, Dächer). Vergleiche mit Copernicus.",
+    "florida": "Das Terrarium-Modell zeigt das Land hier vermutlich zu hoch. Vergleiche mit Copernicus. Die Karte kennt weder Kanäle noch Pumpen.",
+    "jangtse": "Das Terrarium-Modell zeigt das Land hier vermutlich zu hoch. Vergleiche mit Copernicus. Deiche und Sperrwerke sind nicht erfasst.",
+    "bangkok": "Das Terrarium-Modell zeigt das Land hier vermutlich zu hoch. Dazu kommt Landabsenkung durch Grundwasserentnahme, die die Karte nicht kennt.",
+    "jakarta": "Jakarta sinkt stellenweise stark ab (Grundwasserentnahme). Das Höhenmodell kennt nur einen Zeitpunkt und keine Absenkung.",
+    "nordsee": "Weite Teile der Niederlande und der deutschen Küste liegen auf oder unter dem Meeresspiegel. Deiche, Siele und Schöpfwerke halten das Wasser fern. Sie sind in der Karte nicht erfasst.",
+    "hamburg": "Hochwasserschutz (Deiche, Sperrwerke, Warften) ist in der Karte nicht erfasst.",
+    "london": "Die Themse-Sperre (Thames Barrier) und die Deiche sind in der Karte nicht erfasst.",
+    "malediven": "UNGEEIGNET: Die Inseln der Atolle sind meist nur 1 bis 2 m hoch und sehr klein. Das Höhenmodell ist viel zu grob, Bäume und Gebäude erscheinen als Höhe. Die Karte zeigt die Gefahr hier nicht richtig. Beurteile, warum.",
+    "venedig": "Die Lagune hat bewegliche Sperren (MOSE) und Deiche, die in der Karte nicht erfasst sind.",
+    "tokio": "Hochwasserschutz und Landabsenkung sind nicht erfasst.",
+    "indus": "Das Delta ist sehr flach. Das Höhenmodell ist dort ungenau, Bäume (Mangroven) erscheinen als Höhe.",
+}
 
 
 def holen(url, ziel):
@@ -217,8 +245,43 @@ def rechne(rid, name, lon0, lat0, lon1, lat1, res, z, mass, cop):
     return {"id": rid, "name": name, "lon0": lon0, "lat0": lat0, "lon1": lon1, "lat1": lat1, "breite": groesse[0], "hoehe": groesse[1], "aufloesung_grad": res, "modelle": modelle}
 
 
+def staedte():
+    """Städte (Natural Earth, gemeinfrei) in den Ausschnitten und Städte ab 1 Mio. Einwohner weltweit -> daten/hoehe/staedte.json."""
+    quelle = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_populated_places.geojson"
+    pp = json.loads(holen(quelle, CACHE / "populated_places.geojson"))["features"]
+    laender = {}
+    lp = WURZEL.parent / "laender.json"
+    if lp.exists():
+        for l in json.loads(lp.read_text(encoding="utf-8"))["laender"]:
+            if l["n"].get("en") and l["n"].get("de"):
+                laender[l["n"]["en"]] = l["n"]["de"]
+    boxen = [(r[2], r[3], r[4], r[5]) for r in REGIONEN if r[0] != "welt"]
+    aus = []
+    for f in pp:
+        p = f["properties"]
+        pop = p.get("POP_MAX") or 0
+        lon, lat = p["LONGITUDE"], p["LATITUDE"]
+        in_region = any(b[0] <= lon <= b[2] and b[1] <= lat <= b[3] for b in boxen)
+        if (in_region and pop >= 100000) or pop >= 1000000:
+            land = p.get("ADM0NAME") or ""
+            aus.append([p.get("NAME_DE") or p["NAME"], laender.get(land, land), round(lon, 3), round(lat, 3), int(pop)])
+    aus.sort(key=lambda x: -x[4])
+    schreiben_json = WURZEL / "staedte.json"
+    schreiben_json.write_text(json.dumps({
+        "quelle": "Natural Earth, ne_10m_populated_places (gemeinfrei). Einwohnerzahl ist der größte Schätzwert (POP_MAX) für Stadt und Umland, Stand der Datei (um 2010 bis 2020). Näherung.",
+        "spalten": ["Name", "Land", "Länge", "Breite", "Einwohner"], "staedte": aus}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    print("Städte:", len(aus), schreiben_json.stat().st_size // 1024, "KB")
+
+
 def main():
-    wahl = sys.argv[1:] or [r[0] for r in REGIONEN]
+    args = sys.argv[1:]
+    if "staedte" in args:
+        WURZEL.mkdir(parents=True, exist_ok=True)
+        staedte()
+        args = [a for a in args if a != "staedte"]
+        if not args and len(sys.argv) > 1:
+            return
+    wahl = args or [r[0] for r in REGIONEN]
     idx_pfad = WURZEL / "index.json"
     alt = {}
     if idx_pfad.exists():
@@ -226,7 +289,7 @@ def main():
     for r in REGIONEN:
         if r[0] in wahl:
             alt[r[0]] = rechne(*r)
-    regionen = [alt[r[0]] for r in REGIONEN if r[0] in alt]
+    regionen = [dict(alt[r[0]], hinweis=HINWEISE.get(r[0], "")) for r in REGIONEN if r[0] in alt]
     idx_pfad.write_text(json.dumps({
         "quelle": "Höhenmodelle: Terrarium-Kacheln (Mapzen/Tilezen, Amazon Open Data, u. a. SRTM, ETOPO1, GMTED) und Copernicus DEM GLO-30 (Copernicus, Amazon Open Data, Median je Gitterzelle). Küstenlinie: Natural Earth (gemeinfrei). Berechnung: tools/hoehe-holen.py",
         "hinweis": "Senkrechte Genauigkeit des Höhenmodells im Bereich mehrerer Meter, Bäume und Gebäude enthalten, Deiche und Pumpen nicht erfasst. Größenordnung, keine Prognose.",
