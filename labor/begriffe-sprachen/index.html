@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Begriffe in Familiensprachen</title><link rel="stylesheet" href="../labor.css">
+<style>select,input[type=search]{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%}th,td{padding:10px;border-bottom:1px solid #8aa59a55;text-align:left;vertical-align:middle}td.f{font-size:22px;font-weight:700}.tag{display:inline-block;padding:1px 8px;border-radius:8px;background:#f6e3b8;color:#1A2B24;font-size:13px;font-weight:700}.lz{min-height:44px;min-width:44px;padding:4px 10px}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Begriffe in Familiensprachen</h1>
+<div class="kasten"><b>Kommunizieren (Fachsprache verstehen und verwenden, Stufe D bis E):</b> <b>Suche</b> einen Fachbegriff in deiner Sprache. <b>Erkläre</b> ihn danach auf Deutsch in einem Satz. Frage eine Mitschülerin oder einen Mitschüler: „Wie heißt das bei dir?“</div>
+<p class="kasten warn"><b>Ungeprüft:</b> <span id="qu"></span> Fehler bitte der Lehrkraft melden.</p>
+<div class="leiste"><label for="sp"><b>Sprache</b></label><select id="sp"></select><label for="su"><b>Suchen</b></label><input type="search" id="su" placeholder="Begriff"></div>
+<div class="tw"><table><thead><tr><th>Deutsch</th><th id="kopf"></th><th>Vorlesen</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="quelle" id="stm"></p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}var D=null,voices=[];
+ function laden(){if(window.speechSynthesis)voices=speechSynthesis.getVoices()||[]}if(window.speechSynthesis){laden();speechSynthesis.onvoiceschanged=laden}
+ function hat(lang){return voices.some(function(v){return v.lang.toLowerCase().indexOf(lang)===0&&v.localService})}
+ function sag(text,lang){if(!window.speechSynthesis)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(text);u.lang=lang;var v=voices.filter(function(x){return x.lang.toLowerCase().indexOf(lang)===0&&x.localService})[0];if(v)u.voice=v;speechSynthesis.speak(u)}
+ function zeichnen(){if(!D)return;var l=$('sp').value,q=$('su').value.trim().toLowerCase();$('kopf').textContent=D.sprachen[l];var rtl=(l==='ar'||l==='fa'),kann=hat(l),kd=hat('de');
+  $('tb').innerHTML='';D.begriffe.filter(function(b){return !q||b.de.toLowerCase().indexOf(q)>=0||(b[l]||'').toLowerCase().indexOf(q)>=0}).forEach(function(b){var tr=document.createElement('tr');
+   var a=document.createElement('td');a.className='f';a.textContent=b.de;var c=document.createElement('td');c.className='f';c.lang=l;if(rtl)c.dir='rtl';c.textContent=b[l]||'–';var t=document.createElement('span');t.className='tag';t.textContent='ungeprüft';t.style.marginLeft='8px';c.appendChild(t);
+   var v=document.createElement('td');
+   if(kd){var k1=document.createElement('button');k1.type='button';k1.className='lz sek';k1.textContent='DE';k1.setAttribute('aria-label',b.de+' auf Deutsch vorlesen');k1.onclick=function(){sag(b.de,'de-DE')};v.appendChild(k1)}
+   if(kann){var k2=document.createElement('button');k2.type='button';k2.className='lz sek';k2.textContent=l.toUpperCase();k2.style.marginLeft='6px';k2.setAttribute('aria-label',b[l]+' vorlesen');k2.onclick=function(){sag(b[l],l)};v.appendChild(k2)}
+   tr.appendChild(a);tr.appendChild(c);tr.appendChild(v);$('tb').appendChild(tr)});
+  $('stm').textContent=(kann?'':'Für diese Sprache hat dieses Gerät keine lokale Stimme, deshalb kein Vorlesen. ')+'Die Daten liegen im Portal (daten/begriffe-sprachen.json), nichts wird aus dem Netz geladen.'}
+ fetch('../../daten/begriffe-sprachen.json').then(function(r){return r.json()}).then(function(d){D=d;$('qu').textContent=d.quelle;Object.keys(d.sprachen).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=d.sprachen[k];$('sp').appendChild(o)});$('sp').onchange=zeichnen;$('su').oninput=zeichnen;zeichnen()}).catch(function(){$('stm').textContent='Daten nicht geladen (über einen Server öffnen).'});
+})();
+</script></main></body></html>

@@ -518,3 +518,27 @@ Alle unter `labor/`, im Browser getestet (Hörbereich ohne echte Lautsprecher, S
 | `labor/vergleich/` und `assets/js/vergleich.js` | Vorher/Nachher-Schieber | Geo allgemein | Demo mit **gezeichneten Platzhalterbildern**, für echte Bilder Quelle und Lizenz einsetzen |
 | `labor/wirkungsgefuege/` | Wirkungsgefüge mit + und −, findet Kreisläufe | Geo 3.6, 3.7 | Beispiel Eis-Albedo-Rückkopplung vorgeladen, Export als Bild |
 
+### 12.4 Dritte Runde: alle übrigen Prototypen ohne externe Daten (17.11.2026)
+
+Alle unter `labor/`, im Browser getestet (Kamera, Standort, Sensoren und Sprachausgabe simuliert oder ohne echte Geräte). **Beispieldaten sind überall als Beispiel gekennzeichnet.**
+
+| Prototyp | Themenfeld | Anmerkung |
+|---|---|---|
+| `mikroskop/` | Bio 3.1 | Foto laden, zwei Punkte kalibrieren, messen. Rechenweg getestet (200 Pixel gleich 100 µm gibt 150 µm bei 300 Pixeln) |
+| `energiebilanz/` | Geo 3.6 | Ein-Schicht-Modell, Ausgangslage etwa 15 °C. Werte (Albedo 0,30, Rückhalt 0,78) sind gerundete Näherungen |
+| `kompass/` | Geo allgemein | `deviceorientation`, iPhone mit Freigabe, Regler als Rückfall |
+| `massstab/` | Geo allgemein | Maßstabsrechnung und Strecke per Standort (nur lokal, nur nach Antippen) |
+| `schatten/` | Geo, Bio | Sonnenhöhe, Azimut, Schattenlänge, Näherung etwa 1 Grad. Mittagshöhe stimmt mit 90 minus Breite plus Deklination überein |
+| `mystery/` | Bio 3.1 | Beispiel zur Fotosynthese **selbst geschrieben, fachlich gegenzulesen**, eigene Karten ladbar |
+| `planspiel/` | Geo 3.6 | Phasenuhr, sechs Rollen **als Entwurf**, Abstimmungszähler |
+| `papierkarten/` | Ablauf | Kartendruck mit QR und Buchstaben, Lage der Karte gleich Antwort. Drehung A, B, C, D mit gedrehten Codes getestet, Kamera live nicht |
+| `zaehlbogen/` | Bio 3.2 | Zählen, QR, Summe der Gruppen. Rundlauf getestet |
+| `lesedarstellung/` | Querschnitt | Größe, Zeilen- und Textabstand, Hintergrund, Schrift, nur im Browser gemerkt |
+| `warming/` | Geo 3.6 | Beispielreihe **künstlich erzeugt**, eigene Daten einfügbar |
+| `klimadiagramm/` | Geo 3.3, 3.6 | Beispielwerte für Berlin **gerundet und nicht amtlich** |
+| `streuplot/` | Geo 3.4, 3.7 | Beispielländer **erfunden** |
+| `quellenblatt/` | Medienbildung | TULLU-Vermerk, sechs Lizenzfälle als Vereinfachung, keine Rechtsberatung |
+| `hilfen/` und `assets/js/hilfen.js` | Querschnitt | Drei Hilfestufen zum Aufdecken |
+| `karteikasten/` | Querschnitt | Liest freigegebene Begriffe der Stunden, Leitner-Fächer im Browser, Kalenderdatei |
+| `begriffe-sprachen/` und `daten/begriffe-sprachen.json` | Querschnitt | Neun Begriffe in fünf Sprachen, **von mir zusammengestellt, ungeprüft und nicht aus Wikidata**. Gegenlesen nötig |
+

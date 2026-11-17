@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Quellenblatt und Lizenzen</title><link rel="stylesheet" href="../labor.css">
+<style>label{display:block;font-weight:700;margin-top:10px}input,select,textarea{font:inherit;width:100%;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+#aus{font-size:18px;white-space:pre-wrap;border:2px solid var(--g);border-radius:12px;padding:12px 16px;margin:12px 0}.fall{border:2px solid var(--g);border-radius:12px;padding:12px 16px;margin:10px 0}.fall button{margin:4px 6px 4px 0}.fall .fb{margin-top:6px;font-weight:700}.leiste{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.leiste button{background:transparent;color:var(--g);border:2px solid var(--g)}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Quellenblatt und Lizenz-Check</h1>
+<div class="kasten"><b>Kommunizieren, Medienbildung:</b> <b>Erstelle</b> zu einem Bild oder Text einen Quellenvermerk nach der TULLU-Regel (<b>T</b>itel, <b>U</b>rheber, <b>L</b>izenz mit Link, <b>L</b>ink zum <b>U</b>rsprung, bei Bearbeitung ein Hinweis). Danach <b>entscheide</b> bei sechs Fällen, ob ein Bild verwendet werden darf, und <b>begründe</b> deine Antwort.</div>
+<h2>1. Vermerk erzeugen</h2>
+<label for="ti">Titel des Werks</label><input id="ti" value="Beispielbild Blatt" maxlength="80">
+<label for="ur">Urheberin oder Urheber</label><input id="ur" value="Vorname Nachname" maxlength="60">
+<label for="li">Lizenz</label><select id="li"></select>
+<label for="qu">Link zum Ursprung (Seite, auf der du es gefunden hast)</label><input id="qu" value="https://example.org/bild" maxlength="200">
+<label for="be">Bearbeitung (leer lassen, wenn unverändert)</label><input id="be" placeholder="z. B. zugeschnitten, beschriftet" maxlength="80">
+<pre id="aus" aria-live="polite"></pre><div class="leiste"><button type="button" id="kop">Vermerk kopieren</button></div>
+<h2>2. Darf ich das verwenden?</h2><div id="faelle"></div>
+<p class="kasten warn"><b>Vereinfachung, keine Rechtsberatung:</b> Die Fälle zeigen Grundregeln. In der Schule gelten zusätzlich eigene Regeln, im Zweifel fragt die Lehrkraft nach. Namen und Rechte der echten Urheber gehören nicht in erfundene Beispiele.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var L=[['CC0 1.0 (gemeinfrei erklärt)','https://creativecommons.org/publicdomain/zero/1.0/deed.de'],['CC BY 4.0','https://creativecommons.org/licenses/by/4.0/deed.de'],['CC BY-SA 4.0','https://creativecommons.org/licenses/by-sa/4.0/deed.de'],['CC BY-NC 4.0','https://creativecommons.org/licenses/by-nc/4.0/deed.de'],['CC BY-ND 4.0','https://creativecommons.org/licenses/by-nd/4.0/deed.de'],['Datenlizenz Deutschland, Namensnennung 2.0','https://www.govdata.de/dl-de/by-2-0']];
+ L.forEach(function(l,i){var o=document.createElement('option');o.value=i;o.textContent=l[0];$('li').appendChild(o)});$('li').value=1;
+ function erz(){var l=L[+$('li').value],be=$('be').value.trim();$('aus').textContent='„'+$('ti').value+'“ von '+$('ur').value+', Lizenz: '+l[0]+' ('+l[1]+'), Quelle: '+$('qu').value+(be?'. Verändert: '+be+'.':'.')}
+ ['ti','ur','li','qu','be'].forEach(function(i){$(i).oninput=$(i).onchange=erz});erz();
+ $('kop').onclick=function(){if(navigator.clipboard)navigator.clipboard.writeText($('aus').textContent).then(function(){$('kop').textContent='Kopiert'},function(){$('kop').textContent='Kopieren nicht erlaubt'})};
+ var F=[['Ein Bild steht unter CC BY 4.0. Ich nenne Urheber, Lizenz und Quelle auf dem Plakat.','ja','Ja. CC BY erlaubt die Nutzung, wenn Urheber, Lizenz und Quelle genannt werden (TULLU).'],
+ ['Ein Bild steht unter CC BY-SA 4.0. Ich schneide es zu und nenne alles.','ja','Ja, mit Bedingung: Die Bearbeitung muss unter derselben Lizenz (CC BY-SA) weitergegeben werden, mit Hinweis auf die Änderung.'],
+ ['Ein Bild steht unter CC BY-ND 4.0. Ich schneide es zu und male Pfeile hinein.','nein','Nein. ND heißt „keine Bearbeitung“. Zuschneiden und Beschriften sind Veränderungen. Nimm es unverändert oder ein anderes Bild.'],
+ ['Ein Bild ist unter CC0 veröffentlicht. Ich verwende es ohne Namensnennung.','ja','Ja. CC0 verlangt keine Namensnennung. Sie anzugeben ist trotzdem guter Stil und hilft anderen beim Finden.'],
+ ['Ich habe ein Bild über eine Bildersuche gefunden. Eine Lizenz steht nicht dabei.','nein','Nein. Ohne Lizenz oder Erlaubnis darfst du es nicht verwenden. Suche eine Lizenz an der Ursprungsseite oder nimm ein anderes Bild.'],
+ ['Ein Bild steht unter CC BY-NC 4.0. Ich möchte es auf der öffentlichen Schulwebseite zeigen.','kommt','Kommt darauf an. NC heißt „nicht kommerziell“, die Auslegung ist eng und unklar. Im Zweifel die Lehrkraft fragen oder ein anderes Bild nehmen.']];
+ $('faelle').innerHTML='';F.forEach(function(f,i){var d=document.createElement('div');d.className='fall';var p=document.createElement('p');p.textContent=(i+1)+'. '+f[0];d.appendChild(p);var fb=document.createElement('p');fb.className='fb';fb.setAttribute('aria-live','polite');[['ja','Ja'],['nein','Nein'],['kommt','Kommt darauf an']].forEach(function(o){var b=document.createElement('button');b.type='button';b.textContent=o[1];b.onclick=function(){fb.textContent=(o[0]===f[1]?'Richtig. ':'Nicht ganz. ')+f[2]};d.appendChild(b)});d.appendChild(fb);$('faelle').appendChild(d)});
+})();
+</script></main></body></html>
