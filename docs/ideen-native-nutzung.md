@@ -498,3 +498,10 @@ Ausgewählt nach Nutzen für den Unterricht, Lizenzklarheit und Passung zu dem, 
 | Status | ungeprüft (Suchbeleg), Quellseite nicht gelesen |
 
 Quellen der Suche: [PhET Lizenz HTML](https://phet.colorado.edu/en/licensing/html), [Historische Sammlung](https://phet.colorado.edu/be/licensing/html), [Natural Selection, Quellcode](https://awesome.ecosyste.ms/projects/github.com%2Fphetsims%2Fnatural-selection).
+
+### 12.2 Foto in die Folie (Idee der Lehrkraft, 17.11.2026)
+
+Statt Ergebnisse per QR zu scannen: Heft, Plakat oder Gruppenergebnis **abfotografieren und direkt auf der Folie zeigen**. Bausteinen: `assets/js/fotofolie.js` (in `vorlage/praesentation/` eingebunden). Taste B, Knopf „Foto“, Einfügen (Strg/Cmd+V) oder Datei auf die Folie ziehen. Das Bild bleibt im Browser, es wird nicht hochgeladen oder gespeichert. Drehen, Zoom 1x bis 3x, mehrere Fotos blättern, Esc schließt. Getestet im Browser mit Testdateien, **nicht** mit der echten Kamera, dem iPad oder dem Beamer.
+
+Weg vom iPad zur Präsentation: läuft die Präsentation auf dem iPad selbst (Spiegelung aufs Board), öffnet „Foto“ direkt die Kamera. Läuft sie auf dem Laptop, hilft AirDrop, USB oder das Einfügen aus der Zwischenablage (Universal Clipboard, **ungeprüft**).
+
