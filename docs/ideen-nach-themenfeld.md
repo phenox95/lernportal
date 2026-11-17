@@ -103,8 +103,8 @@ Bezug: Geo 3.4, Geo 3.7.
 
 | Baustein | Was | Status | Aufwand |
 |---|---|---|---|
-| **Reaktionstest** | Reaktionszeit messen, Klassendaten per Ergebnis-QR zusammenführen | 💡 | S |
-| **Hörbereich** | Tongenerator, Hörschwelle. Lautstärke vorher einstellen | 💡 | S |
+| **Reaktionstest** | Reaktionszeit messen, Klassendaten per Ergebnis-QR zusammenführen (`labor/reaktion/`, Klassendaten noch von Hand) | ✅ | – |
+| **Hörbereich** | Tongenerator, Hörschwelle. Lautstärke vorher einstellen (`labor/hoerbereich/`) | ✅ | – |
 | **Auge** | Stunden zu Bau des Auges und Kurzsichtigkeit liegen im Portal | vorhanden | – |
 | **Klassenmessung als Datensatz** | Mittelwerte, Streuung, Ausreißer | 💡 | M |
 
@@ -112,7 +112,7 @@ Bezug: Geo 3.4, Geo 3.7.
 
 | Baustein | Was | Status | Aufwand |
 |---|---|---|---|
-| **Kreuzungsquadrat-Simulator** | Genotypen wählen, Verhältnisse ablesen, Zufallsstichprobe gegen Erwartung | 💡 | S |
+| **Kreuzungsquadrat-Simulator** | Genotypen wählen, Verhältnisse ablesen, Zufallsstichprobe gegen Erwartung (`labor/kreuzung/`) | ✅ | – |
 | **Mehrsprachige Begriffe** | Fachwortschatz, Wikidata als CC0-Rohquelle, Gegenlesen nötig | 💡 | M |
 | **Modell beurteilen** | Wie bei Räuber und Beute: Wo vereinfacht das Modell? | 💡 | S |
 
@@ -214,7 +214,7 @@ Im Portal: Globalisierung als Netz (Klasse 10).
 
 | Baustein | Was | Status | Aufwand |
 |---|---|---|---|
-| **Wirkungsgefüge-Editor** | Knoten, Pfeile mit + und −, Rückkopplung | 💡 | M |
+| **Wirkungsgefüge-Editor** | Knoten, Pfeile mit + und −, Rückkopplung (`labor/wirkungsgefuege/`) | ✅ | – |
 | **Weltbank, OWID** | Handel, Wirtschaftsdaten, Streuplot | 💡 🟡 | M |
 | **Planspiel, Mystery** | Perspektiven der Akteure | 💡 | M |
 | **Lizenz-Sortierspiel** | Bilder und Texte für Plakate und Referate | 💡 | S |

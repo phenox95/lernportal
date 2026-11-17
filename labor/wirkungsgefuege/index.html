@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Wirkungsgefüge</title><link rel="stylesheet" href="../labor.css">
+<style>
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}input[type=text]{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink);min-width:0;flex:1 1 180px}
+#sv{width:100%;height:auto;background:#fff;border:2px solid var(--g);border-radius:14px;touch-action:none;display:block}
+@media (prefers-color-scheme:dark){#sv{background:#0d1b2a}}
+.kn rect{fill:#e8f3ec;stroke:#0F6E56;stroke-width:3}.kn text{font:700 17px Andika,Verdana,sans-serif;fill:#1A2B24;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.kn.wahl rect{stroke:#F4B400;stroke-width:6}@media (prefers-color-scheme:dark){.kn rect{fill:#1f3329;stroke:#5fcfae}.kn text{fill:#eef5f1}}
+.pf{stroke:#1A2B24;stroke-width:3;fill:none}.mk{fill:#1A2B24}@media (prefers-color-scheme:dark){.pf{stroke:#eef5f1}.mk{fill:#eef5f1}}
+.vz circle{fill:#fff;stroke:#1A2B24;stroke-width:2.5}.vz text{font:700 22px Andika,Verdana,sans-serif;text-anchor:middle;dominant-baseline:central;cursor:pointer;fill:#1A2B24;pointer-events:none}.vz circle{cursor:pointer}
+.vz.plus circle{fill:#cfe9dd}.vz.minus circle{fill:#f6c9c0}
+.kette li{margin:6px 0}.tag{display:inline-block;padding:1px 10px;border-radius:8px;font-weight:700;font-size:15px}.v{background:#f6c9c0;color:#1A2B24}.a{background:#cfe0f6;color:#1A2B24}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Wirkungsgefüge</h1>
+<div class="kasten"><b>Systeme erschließen (Verknüpfen, Stufe E bis G):</b> <b>Erstelle</b> ein Wirkungsgefüge: Faktoren als Kästen, Wirkungen als Pfeile. Auf dem Pfeil zeigt ein <b>+</b> „je mehr, desto mehr“ und ein <b>−</b> „je mehr, desto weniger“. <b>Erkläre</b>, welche Kreisläufe (Rückkopplungen) entstehen und ob sie verstärken oder ausgleichen. Das Beispiel ist vorgeladen und lässt sich ändern.</div>
+<div class="leiste"><input type="text" id="nm" placeholder="Neuer Faktor, z. B. Niederschlag" maxlength="28" aria-label="Name des neuen Faktors"><button type="button" id="add">＋ Faktor</button></div>
+<div class="leiste"><button type="button" class="sek" id="ver" aria-pressed="false">Verbinden</button><button type="button" class="sek" id="del">Auswahl löschen</button><button type="button" class="sek" id="bsp">Beispiel laden</button><button type="button" class="sek" id="png">Als Bild speichern</button></div>
+<p id="hin" class="kasten" aria-live="polite">Ziehe die Kästen. „Verbinden“: erst den Ausgangs-Faktor, dann den Ziel-Faktor antippen. Tippe auf den Kreis am Pfeil, um + und − zu wechseln.</p>
+<svg id="sv" viewBox="0 0 900 520" role="img" aria-label="Wirkungsgefüge, Beschreibung steht darunter in der Liste"></svg>
+<h2>Wirkungen als Liste</h2><ul id="liste"></ul>
+<h2>Gefundene Kreisläufe</h2><ul id="kreis" class="kette"></ul>
+<p class="kasten warn"><b>Modell:</b> Ein Wirkungsgefüge zeigt Richtungen, keine Stärken und keine Zeiten. <b>Beurteile</b>, was dein Gefüge nicht erfasst.</p>
+<script>
+(function(){
+ var NS='http://www.w3.org/2000/svg',sv=document.getElementById('sv');function $(i){return document.getElementById(i)}
+ var N=[],K=[],id=0,sel=null,modus=false,ziehe=null;
+ function bsp(){N=[];K=[];id=0;var a=neu('Treibhausgase',120,260),b=neu('Temperatur',360,120),c=neu('Eisfläche',620,120),d=neu('Rückstrahlung',620,400);
+  verb(a,b,1);verb(b,c,-1);verb(c,d,1);verb(d,b,-1);sel=null;zeichnen()}
+ function neu(t,x,y){var n={id:++id,t:t,x:x,y:y};N.push(n);return n}
+ function nid(i){return N.filter(function(n){return n.id===i})[0]}
+ function verb(a,b,s){if(a===b||K.some(function(k){return k.a===a.id&&k.b===b.id}))return;K.push({a:a.id,b:b.id,s:s})}
+ function mitte(n){return{x:n.x,y:n.y}}
+ function rand(n,tx,ty){var dx=tx-n.x,dy=ty-n.y,w=Math.max(70,n.t.length*5.6+16),h=28,s=Math.min(Math.abs(dx)>0?w/Math.abs(dx):1e9,Math.abs(dy)>0?h/Math.abs(dy):1e9);return{x:n.x+dx*s,y:n.y+dy*s}}
+ function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);(p||sv).appendChild(e);return e}
+ function zeichnen(){sv.textContent='';
+  var d=el('defs',{});var m=el('marker',{id:'sp',viewBox:'0 0 10 10',refX:'9',refY:'5',markerWidth:'8',markerHeight:'8',orient:'auto-start-reverse'},d);el('path',{d:'M0 0L10 5L0 10z',class:'mk'},m);
+  K.forEach(function(k){var A=nid(k.a),B=nid(k.b),p1=rand(A,B.x,B.y),p2=rand(B,A.x,A.y);var gegen=K.some(function(q){return q.a===k.b&&q.b===k.a});var off=gegen?26:0,dx=p2.x-p1.x,dy=p2.y-p1.y,L=Math.hypot(dx,dy)||1,nx=-dy/L*off,ny=dx/L*off;
+   var cx=(p1.x+p2.x)/2+nx*1.6,cy=(p1.y+p2.y)/2+ny*1.6;el('path',{d:'M'+p1.x+' '+p1.y+' Q'+cx+' '+cy+' '+p2.x+' '+p2.y,class:'pf','marker-end':'url(#sp)'});
+   var mx=.25*p1.x+.5*cx+.25*p2.x,my=.25*p1.y+.5*cy+.25*p2.y;var g=el('g',{class:'vz '+(k.s>0?'plus':'minus'),tabindex:'0',role:'button','aria-label':'Wirkung von '+A.t+' auf '+B.t+': '+(k.s>0?'plus':'minus')+'. Zum Wechseln antippen'});
+   el('circle',{cx:mx,cy:my,r:17},g);var t=el('text',{x:mx,y:my+1},g);t.textContent=k.s>0?'+':'−';
+   g.addEventListener('click',function(){k.s=-k.s;zeichnen()});g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();k.s=-k.s;zeichnen()}})});
+  N.forEach(function(n){var w=Math.max(70,n.t.length*5.6+16);var g=el('g',{class:'kn'+(sel===n.id?' wahl':''),transform:'translate('+n.x+' '+n.y+')',tabindex:'0',role:'button','aria-label':'Faktor '+n.t});
+   el('rect',{x:-w,y:-28,width:w*2,height:56,rx:12},g);var t=el('text',{x:0,y:0},g);t.textContent=n.t;
+   g.addEventListener('pointerdown',function(e){e.preventDefault();if(modus){if(sel===null){sel=n.id;$('hin').textContent='Ausgang: '+n.t+'. Jetzt den Ziel-Faktor antippen.'}else{var A=nid(sel);verb(A,n,1);sel=null;modus=false;$('ver').setAttribute('aria-pressed','false');$('hin').textContent='Pfeil gesetzt. Tippe auf den Kreis, um + oder − zu wählen.'}zeichnen();return}
+    sel=n.id;ziehe={n:n,ox:0,oy:0};var p=pt(e);ziehe.ox=n.x-p.x;ziehe.oy=n.y-p.y;g.setPointerCapture(e.pointerId);zeichnen()});
+   g.addEventListener('keydown',function(e){var S=20;if(e.key==='ArrowLeft')n.x-=S;else if(e.key==='ArrowRight')n.x+=S;else if(e.key==='ArrowUp')n.y-=S;else if(e.key==='ArrowDown')n.y+=S;else return;e.preventDefault();clamp(n);zeichnen();var r=sv.querySelectorAll('.kn')[N.indexOf(n)];if(r)r.focus()})});
+  auswerten()}
+ function clamp(n){n.x=Math.max(70,Math.min(830,n.x));n.y=Math.max(40,Math.min(480,n.y))}
+ function pt(e){var r=sv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*900,y:(e.clientY-r.top)/r.height*520}}
+ sv.addEventListener('pointermove',function(e){if(!ziehe)return;var p=pt(e);ziehe.n.x=p.x+ziehe.ox;ziehe.n.y=p.y+ziehe.oy;clamp(ziehe.n);zeichnen()});
+ sv.addEventListener('pointerup',function(){ziehe=null});sv.addEventListener('pointercancel',function(){ziehe=null});
+ /* Kreisläufe: alle einfachen Zyklen suchen (kleine Graphen) */
+ function zyklen(){var res=[],seen={};function dfs(start,cur,pfad,kanten){K.filter(function(k){return k.a===cur}).forEach(function(k){if(k.b===start){var ks=kanten.concat(k),key=ks.map(function(x){return x.a+'>'+x.b}).sort().join('|');if(!seen[key]){seen[key]=1;res.push({n:pfad.slice(),k:ks})}}else if(pfad.indexOf(k.b)<0&&k.b>start){dfs(start,k.b,pfad.concat(k.b),kanten.concat(k))}})}
+  N.forEach(function(n){dfs(n.id,n.id,[n.id],[])});return res}
+ function auswerten(){$('liste').innerHTML=K.map(function(k){return '<li>'+nid(k.a).t+' → '+nid(k.b).t+': '+(k.s>0?'je mehr, desto mehr (+)':'je mehr, desto weniger (−)')+'</li>'}).join('')||'<li>Noch keine Wirkungen.</li>';
+  var z=zyklen();$('kreis').innerHTML=z.map(function(c){var minus=c.k.filter(function(k){return k.s<0}).length,v=minus%2===0;return '<li><span class="tag '+(v?'v':'a')+'">'+(v?'verstärkend':'ausgleichend')+'</span> '+c.n.map(function(i){return nid(i).t}).join(' → ')+' → '+nid(c.n[0]).t+' <small>('+minus+' Minus-Zeichen)</small></li>'}).join('')||'<li>Kein Kreislauf gefunden. Schließe einen Pfeil zurück zu einem früheren Faktor.</li>'}
+ $('add').onclick=function(){var t=$('nm').value.trim();if(!t)return;var n=neu(t,450+Math.random()*60-30,260+Math.random()*60-30);$('nm').value='';sel=n.id;zeichnen()};
+ $('nm').addEventListener('keydown',function(e){if(e.key==='Enter')$('add').click()});
+ $('ver').onclick=function(){modus=!modus;sel=null;$('ver').setAttribute('aria-pressed',String(modus));$('hin').textContent=modus?'Verbinden: erst den Ausgangs-Faktor antippen.':'Verbinden aus.';zeichnen()};
+ $('del').onclick=function(){if(sel===null)return;K=K.filter(function(k){return k.a!==sel&&k.b!==sel});N=N.filter(function(n){return n.id!==sel});sel=null;zeichnen()};
+ $('bsp').onclick=bsp;
+ $('png').onclick=function(){var x=new XMLSerializer().serializeToString(sv);var img=new Image();img.onload=function(){var c=document.createElement('canvas');c.width=1800;c.height=1040;var g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);g.drawImage(img,0,0,c.width,c.height);c.toBlob(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wirkungsgefuege.png';document.body.appendChild(a);a.click();a.remove()})};
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(x.replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" '))};
+ bsp();
+})();
+</script></main></body></html>

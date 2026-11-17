@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Weltzeit-Uhr</title><link rel="stylesheet" href="../labor.css">
+<style>
+.leiste{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+input[type=date],input[type=time],select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:620px}th,td{padding:8px 10px;border-bottom:1px solid #8aa59a55;text-align:left}th{background:var(--mint);font-size:14px}
+.sym{font-size:22px}.abw{font-weight:700}.tag{display:inline-block;padding:1px 8px;border-radius:8px;background:var(--mint);font-size:14px}
+tr.heim{outline:3px solid var(--y);outline-offset:-3px}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Weltzeit-Uhr</h1>
+<div class="kasten"><b>Sich orientieren (Gradnetz, Zeitzonen):</b> <b>Vergleiche</b> die Uhrzeiten der Orte. <b>Erkläre</b>, warum der Zeitunterschied nach Länge und die tatsächliche Zeitzone nicht überall gleich sind. Stelle dann ein Datum im Sommer und im Winter ein und <b>beschreibe</b>, was sich verändert.</div>
+<div class="leiste">
+ <label for="dat"><b>Datum</b></label><input type="date" id="dat">
+ <label for="zeit"><b>Uhrzeit in Berlin</b></label><input type="time" id="zeit">
+ <button type="button" class="sek" id="jetzt">Jetzt</button>
+</div>
+<div class="tw"><table><thead><tr><th>Ort</th><th>Länge</th><th>Uhrzeit</th><th>Datum</th><th>Tag / Nacht</th><th>Abstand zu UTC</th><th>nach Länge erwartet</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="kasten warn"><b>Hinweis:</b> „nach Länge erwartet“ ist die Länge geteilt durch 15 Grad je Stunde (15 Grad entsprechen 1 Stunde). Die tatsächliche Zeitzone folgt Staatsgrenzen und politischen Entscheidungen, deshalb gibt es Abweichungen. Die Uhrzeiten und Sommerzeitregeln kommen aus dem Browser (Zeitzonendatenbank des Geräts, nichts aus dem Netz).</p>
+<script>
+(function(){
+ var O=[['Berlin','Europe/Berlin',13.4],['London','Europe/London',-0.1],['Kyjiw','Europe/Kyiv',30.5],['Istanbul','Europe/Istanbul',29.0],['Kairo','Africa/Cairo',31.2],['Teheran','Asia/Tehran',51.4],['Neu-Delhi','Asia/Kolkata',77.2],['Peking','Asia/Shanghai',116.4],['Tokio','Asia/Tokyo',139.7],['Sydney','Australia/Sydney',151.2],['Reykjavik','Atlantic/Reykjavik',-21.9],['São Paulo','America/Sao_Paulo',-46.6],['New York','America/New_York',-74.0],['Los Angeles','America/Los_Angeles',-118.2]];
+ var $=function(i){return document.getElementById(i)};
+ /* Berliner Wandzeit (Datum und Uhrzeit) in einen Zeitpunkt umrechnen: Abweichung der Zone zu UTC aus Intl bestimmen */
+ function offsetMin(zone,t){var f=new Intl.DateTimeFormat('en-US',{timeZone:zone,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(t)),o={};f.forEach(function(p){o[p.type]=p.value});
+  var asUTC=Date.UTC(+o.year,+o.month-1,+o.day,+o.hour,+o.minute,+o.second);return Math.round((asUTC-Math.floor(t/1000)*1000)/60000)}
+ function zeitpunkt(){var d=$('dat').value.split('-'),z=$('zeit').value.split(':');if(d.length<3||z.length<2)return Date.now();
+  var guess=Date.UTC(+d[0],+d[1]-1,+d[2],+z[0],+z[1]);var off=offsetMin('Europe/Berlin',guess);var t=guess-off*60000;var off2=offsetMin('Europe/Berlin',t);return guess-off2*60000}
+ function vz(m){var s=m<0?'−':'+',a=Math.abs(m),h=Math.floor(a/60),mm=a%60;return 'UTC'+s+h+(mm?':'+('0'+mm).slice(-2):'')}
+ function zahl(x){return String(x).replace('.',',')}
+ function zeichnen(){var t=zeitpunkt(),html='';
+  O.forEach(function(o){var f=new Intl.DateTimeFormat('de-DE',{timeZone:o[1],hour:'2-digit',minute:'2-digit'}),dd=new Intl.DateTimeFormat('de-DE',{timeZone:o[1],weekday:'short',day:'2-digit',month:'2-digit'});
+   var h=+new Intl.DateTimeFormat('en-US',{timeZone:o[1],hourCycle:'h23',hour:'2-digit'}).format(new Date(t));
+   var off=offsetMin(o[1],t),erw=Math.round(o[2]/15*2)/2;var diff=off/60-erw;
+   var tag=(h>=7&&h<19)?'☀ Tag':'☾ Nacht';
+   html+='<tr'+(o[0]==='Berlin'?' class="heim"':'')+'><td><b>'+o[0]+'</b></td><td>'+zahl(o[2].toFixed(1))+'°</td><td class="abw">'+f.format(new Date(t))+'</td><td>'+dd.format(new Date(t))+'</td><td><span class="tag">'+tag+'</span></td><td>'+vz(off)+'</td><td>UTC'+(erw<0?'−':'+')+zahl(Math.abs(erw).toFixed(1))+' <span class="tag">'+(Math.abs(diff)<0.26?'passt':'Abweichung '+zahl((diff>0?'+':'−')+Math.abs(diff).toFixed(1))+' h')+'</span></td></tr>'});
+  $('tb').innerHTML=html}
+ function jetzt(){var n=new Date(),p=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Berlin',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(n).split(' ');$('dat').value=p[0];$('zeit').value=p[1];zeichnen()}
+ $('dat').oninput=$('zeit').oninput=zeichnen;$('jetzt').onclick=jetzt;jetzt();
+})();
+</script></main></body></html>
