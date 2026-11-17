@@ -505,3 +505,16 @@ Statt Ergebnisse per QR zu scannen: Heft, Plakat oder Gruppenergebnis **abfotogr
 
 Weg vom iPad zur Präsentation: läuft die Präsentation auf dem iPad selbst (Spiegelung aufs Board), öffnet „Foto“ direkt die Kamera. Läuft sie auf dem Laptop, hilft AirDrop, USB oder das Einfügen aus der Zwischenablage (Universal Clipboard, **ungeprüft**).
 
+### 12.3 Weitere Prototypen (17.11.2026)
+
+Alle unter `labor/`, im Browser getestet (Hörbereich ohne echte Lautsprecher, Schieber und Reaktionstest ohne echte Geräte):
+
+| Prototyp | Idee | Themenfeld | Anmerkung |
+|---|---|---|---|
+| `labor/weltzeit/` | Weltzeit-Uhr mit „nach Länge erwartet“ gegen tatsächliche Zeitzone | Geo 3.3 | Zeitzonen und Sommerzeit aus der Datenbank des Browsers, nichts aus dem Netz |
+| `labor/kreuzung/` | Kreuzungsquadrat, Nachkommen würfeln gegen Erwartung | Bio 3.7 | Ein Merkmal, vollständige Dominanz, Modellgrenzen genannt |
+| `labor/reaktion/` | Reaktionstest, Mittelwert, Median | Bio 3.6 | Gerätelatenz (Bildschirm, Berührung) wird mitgemessen und als Lernanlass genannt |
+| `labor/hoerbereich/` | Tongenerator 20 bis 20 000 Hz | Bio 3.6 | Hinweis zum Gehörschutz im Text, Tonstärke begrenzt |
+| `labor/vergleich/` und `assets/js/vergleich.js` | Vorher/Nachher-Schieber | Geo allgemein | Demo mit **gezeichneten Platzhalterbildern**, für echte Bilder Quelle und Lizenz einsetzen |
+| `labor/wirkungsgefuege/` | Wirkungsgefüge mit + und −, findet Kreisläufe | Geo 3.6, 3.7 | Beispiel Eis-Albedo-Rückkopplung vorgeladen, Export als Bild |
+

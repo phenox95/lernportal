@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Kreuzungsquadrat</title><link rel="stylesheet" href="../labor.css">
+<style>
+.leiste{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+.qd{display:grid;grid-template-columns:auto 1fr 1fr;gap:6px;max-width:420px;margin:12px 0;font-size:22px;text-align:center}.qd div{padding:14px 6px;border-radius:10px}.qd .k{background:var(--mint);font-weight:700}.qd .z{border:3px solid var(--g);font-weight:700}
+.dom{background:#cfe9dd}.rez{background:#f6e3b8}@media (prefers-color-scheme:dark){.dom{background:#245a46}.rez{background:#6a5520}}
+.bal{display:flex;gap:6px;align-items:flex-end;height:140px;margin:10px 0}.bal div{flex:1;background:var(--g);border-radius:6px 6px 0 0;position:relative;min-width:30px}.bal div i{position:absolute;top:-24px;left:0;right:0;text-align:center;font-style:normal;font-size:14px}.bal span{display:block;text-align:center;font-size:14px}
+.col{flex:1;text-align:center}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Kreuzungsquadrat</h1>
+<div class="kasten"><b>Mit Fachwissen umgehen, Basiskonzept Entwicklung (Reproduktion, Variabilität):</b> Beispiel: Blütenfarbe der Erbse, <b>A</b> = violett (dominant), <b>a</b> = weiß (rezessiv). <b>Sage vorher</b>, in welchem Verhältnis die Nachkommen violett und weiß sind. <b>Prüfe</b> dann mit dem Quadrat. Würfle danach zufällig Nachkommen und <b>vergleiche</b> das Ergebnis mit der Erwartung. <b>Erkläre</b>, warum bei wenigen Nachkommen das Verhältnis abweicht.</div>
+<div class="leiste"><label for="p1"><b>Elternteil 1</b></label><select id="p1"><option>AA</option><option selected>Aa</option><option>aa</option></select>
+<label for="p2"><b>Elternteil 2</b></label><select id="p2"><option>AA</option><option selected>Aa</option><option>aa</option></select></div>
+<div class="qd" id="qd" role="table" aria-label="Kreuzungsquadrat"></div>
+<p id="erw" class="kasten" aria-live="polite"></p>
+<div class="leiste"><label for="n"><b>Anzahl Nachkommen</b></label><select id="n"><option>4</option><option selected>20</option><option>100</option><option>1000</option></select><button type="button" id="wurf">Nachkommen würfeln</button></div>
+<div id="erg" aria-live="polite"></div>
+<p class="kasten warn"><b>Modell:</b> Ein Merkmal, vollständige Dominanz, zufällige Paarung der Keimzellen. Viele Merkmale in der Natur folgen dieser Regel nicht (Kopplung, unvollständige Dominanz, mehrere Gene). <b>Beurteile</b>, wo das Modell die Wirklichkeit vereinfacht.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ function gam(g){return g.split('')}
+ function pheno(g){return g.indexOf('A')>=0?'violett':'weiß'}
+ function quadrat(){var a=gam($('p1').value),b=gam($('p2').value),z=[];
+  var h='<div></div><div class="k">'+b[0]+'</div><div class="k">'+b[1]+'</div>';
+  for(var i=0;i<2;i++){h+='<div class="k">'+a[i]+'</div>';for(var j=0;j<2;j++){var g=[a[i],b[j]].sort().join('');z.push(g);h+='<div class="z '+(pheno(g)==='violett'?'dom':'rez')+'">'+g+'<br><small>'+pheno(g)+'</small></div>'}}
+  $('qd').innerHTML=h;var gz={},ph={violett:0,'weiß':0};z.forEach(function(g){gz[g]=(gz[g]||0)+1;ph[pheno(g)]++});
+  $('erw').innerHTML='<b>Erwartung:</b> Genotypen '+Object.keys(gz).sort().map(function(k){return gz[k]+'/4 '+k}).join(', ')+'. Aussehen: '+ph.violett+'/4 violett, '+ph['weiß']+'/4 weiß.';
+  $('erg').innerHTML='';return z}
+ var Z=quadrat();
+ $('p1').onchange=$('p2').onchange=function(){Z=quadrat()};
+ $('wurf').onclick=function(){var n=+$('n').value,c={violett:0,'weiß':0};for(var i=0;i<n;i++){c[pheno(Z[Math.floor(Math.random()*4)])]++}
+  var exp={violett:Z.filter(function(g){return pheno(g)==='violett'}).length/4,'weiß':0};exp['weiß']=1-exp.violett;
+  var h='<div class="bal" aria-hidden="true">';['violett','weiß'].forEach(function(k){h+='<div style="height:'+Math.max(2,c[k]/n*100)+'%;background:'+(k==='violett'?'#7b3fa0':'#b8b0a0')+'"><i>'+Math.round(c[k]/n*100)+' %</i></div>'});h+='</div><div class="leiste"><div class="col">violett<br>'+c.violett+'</div><div class="col">weiß<br>'+c['weiß']+'</div></div>';
+  h+='<p class="kasten">Gewürfelt: '+c.violett+' violett, '+c['weiß']+' weiß von '+n+'. Erwartet: '+Math.round(exp.violett*100)+' % violett, '+Math.round(exp['weiß']*100)+' % weiß. Abweichung violett: '+(Math.round((c.violett/n-exp.violett)*1000)/10).toString().replace('.',',')+' Prozentpunkte.</p>';$('erg').innerHTML=h}
+})();
+</script></main></body></html>

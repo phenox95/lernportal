@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Hörbereich</title><link rel="stylesheet" href="../labor.css">
+<style>input[type=range]{width:100%}.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}output{font-size:34px;font-weight:700;color:var(--dk)}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Hörbereich testen</h1>
+<div class="kasten warn"><b>Vor dem Start (Gehör schützen):</b> Stelle die Lautstärke des Geräts <b>leise</b> ein, bevor du einen Ton startest. Beginne mit Kopfhörern nie mit voller Lautstärke. Bei Unwohlsein sofort stoppen. Kleine Lautsprecher geben hohe und tiefe Töne oft nicht wieder.</div>
+<div class="kasten"><b>Erkenntnisse gewinnen (Untersuchung, Stufe E bis F):</b> <b>Sage vorher</b>, bis zu welcher Frequenz du hörst. <b>Miss</b>: Erhöhe die Frequenz langsam und notiere den letzten Ton, den du noch hörst. <b>Vergleiche</b> die Werte in der Klasse und <b>erkläre</b>, warum die Werte streuen (Alter, Gerät, Umgebung, Lautstärke).</div>
+<p>Frequenz: <output id="hz" aria-live="polite">1000 Hz</output></p>
+<label for="f"><b>Frequenz (logarithmisch, 20 Hz bis 20 000 Hz)</b></label><input type="range" id="f" min="0" max="1000" value="500" step="1">
+<label for="v"><b>Tonstärke</b> (zusätzlich zur Gerätelautstärke)</label><input type="range" id="v" min="0" max="100" value="20">
+<div class="leiste"><button type="button" id="an">▶ Ton an</button><button type="button" class="sek" id="aus" disabled>■ Ton aus</button><button type="button" class="sek" id="merk">Diesen Wert notieren</button></div>
+<p id="st" class="kasten" aria-live="polite">Der Ton startet erst nach Antippen. Es wird nichts aufgenommen oder gesendet.</p>
+<ol id="liste"></ol>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var ctx=null,osz=null,gain=null,MIN=20,MAX=20000;
+ function hz(){return Math.round(MIN*Math.pow(MAX/MIN,$('f').value/1000))}
+ function anz(){var h=hz();$('hz').textContent=String(h).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' Hz';if(osz)osz.frequency.setTargetAtTime(h,ctx.currentTime,0.03)}
+ function vol(){var v=Math.pow($('v').value/100,2)*0.25;if(gain)gain.gain.setTargetAtTime(v,ctx.currentTime,0.03)}
+ $('f').oninput=anz;$('v').oninput=vol;
+ $('an').onclick=function(){var AC=window.AudioContext||window.webkitAudioContext;if(!AC){$('st').textContent='Dieser Browser kann keinen Ton erzeugen.';return}
+  if(!ctx)ctx=new AC();if(ctx.resume)ctx.resume();if(osz)return;osz=ctx.createOscillator();gain=ctx.createGain();osz.type='sine';osz.frequency.value=hz();gain.gain.value=0;osz.connect(gain);gain.connect(ctx.destination);osz.start();vol();
+  $('an').disabled=true;$('aus').disabled=false;$('st').textContent='Ton läuft. Erhöhe die Frequenz langsam.'};
+ function stopp(){if(osz){try{gain.gain.setTargetAtTime(0,ctx.currentTime,0.02);var o=osz;setTimeout(function(){try{o.stop()}catch(e){}},120)}catch(e){}osz=null;gain=null}$('an').disabled=false;$('aus').disabled=true;$('st').textContent='Ton aus.'}
+ $('aus').onclick=stopp;addEventListener('pagehide',stopp);
+ $('merk').onclick=function(){var li=document.createElement('li');li.textContent=$('hz').textContent;$('liste').appendChild(li)};
+ anz();
+})();
+</script></main></body></html>

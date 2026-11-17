@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Reaktionstest</title><link rel="stylesheet" href="../labor.css">
+<style>
+#feld{display:flex;align-items:center;justify-content:center;text-align:center;min-height:240px;border-radius:16px;font-size:28px;font-weight:700;background:#4a5a52;color:#fff;cursor:pointer;user-select:none;touch-action:manipulation;padding:16px;border:0;width:100%}
+#feld.warte{background:#a33}#feld.los{background:#1a8f4a}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:560px}th,td{padding:6px 10px;border-bottom:1px solid #8aa59a55;text-align:left}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Reaktionstest</h1>
+<div class="kasten"><b>Erkenntnisse gewinnen (Untersuchung durchführen, Stufe E bis F):</b> <b>Sage vorher</b>, wie schnell du reagierst. <b>Miss</b> dann zehn Versuche. <b>Vergleiche</b> deinen Mittelwert mit deinem ersten Versuch und <b>erkläre</b> Unterschiede. <b>Beurteile</b>, was das Gerät mitmisst (Bildschirm, Berührung) und wie sich das auf deine Werte auswirkt.</div>
+<button id="feld" type="button">Tippe hier, um zu starten</button>
+<p id="st" aria-live="polite" class="kasten">Warte, bis das Feld grün wird. Dann tippe so schnell du kannst. Zu früh getippt: neuer Versuch.</p>
+<div class="tw"><table><thead><tr><th>Versuch</th><th>Zeit (ms)</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p><b>Mittelwert:</b> <span id="mw">–</span> · <b>Median:</b> <span id="md">–</span> · <b>schnellster:</b> <span id="mn">–</span></p>
+<div class="leiste" style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="sek" id="re">Neu beginnen</button><button type="button" class="sek" id="cp">Werte kopieren</button></div>
+<p class="quelle">Die Werte bleiben im Browser. Zum Sammeln der Klassendaten: Werte kopieren und mit dem Ergebnis-QR (<a href="../rueckkanal/">Rückkanal</a>) weitergeben.</p>
+<script>
+(function(){
+ var f=document.getElementById('feld'),st=document.getElementById('st'),t=0,zustand='ruhe',timer=null,werte=[];
+ function $(i){return document.getElementById(i)}
+ function fmt(x){return Math.round(x)}
+ function stat(){var n=werte.length;if(!n)return;var s=werte.slice().sort(function(a,b){return a-b}),m=n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2,sum=werte.reduce(function(a,b){return a+b},0);
+  $('mw').textContent=fmt(sum/n)+' ms';$('md').textContent=fmt(m)+' ms';$('mn').textContent=fmt(s[0])+' ms';
+  $('tb').innerHTML=werte.map(function(w,i){return '<tr><td>'+(i+1)+'</td><td>'+fmt(w)+'</td></tr>'}).join('')}
+ function start(){zustand='warte';f.className='warte';f.textContent='Warte …';st.textContent='Noch nicht tippen.';timer=setTimeout(function(){zustand='los';f.className='los';f.textContent='JETZT';t=performance.now()},1500+Math.random()*3500)}
+ f.addEventListener('pointerdown',function(e){e.preventDefault();var j=performance.now();
+  if(zustand==='ruhe'||zustand==='fertig'){if(werte.length>=10)return;start()}
+  else if(zustand==='warte'){clearTimeout(timer);zustand='ruhe';f.className='';f.textContent='Zu früh. Tippe zum neuen Versuch.';st.textContent='Zu früh getippt. Der Versuch zählt nicht.'}
+  else if(zustand==='los'){var d=j-t;werte.push(d);stat();zustand=werte.length>=10?'fertig':'ruhe';f.className='';f.textContent=fmt(d)+' ms'+(werte.length>=10?'. Fertig, 10 Versuche.':'. Tippe für den nächsten Versuch.');st.textContent=werte.length+' von 10 Versuchen.'}});
+ f.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();f.dispatchEvent(new Event('pointerdown'))}});
+ $('re').onclick=function(){clearTimeout(timer);werte=[];zustand='ruhe';f.className='';f.textContent='Tippe hier, um zu starten';$('tb').innerHTML='';['mw','md','mn'].forEach(function(i){$(i).textContent='–'});st.textContent='Neu begonnen.'};
+ $('cp').onclick=function(){var tx=werte.map(fmt).join(', ');if(navigator.clipboard)navigator.clipboard.writeText(tx).then(function(){st.textContent='Kopiert: '+tx},function(){st.textContent='Kopieren nicht erlaubt.'})};
+})();
+</script></main></body></html>
