@@ -31,7 +31,7 @@ Am rechten Bildrand stehen Haus (zurück zur Seite, von der die Präsentation ge
 | Blende | B | Unscharfe, transparent graue Abdeckung über der Folie (Milchglas: Formen sind zu ahnen, Text ist nicht lesbar). Sie startet vollflächig und wird an jeder Kante und Ecke kleiner gezogen (Griffe in Gelb); Ziehen in der Fläche verschiebt sie. „× Blende weg“ entfernt sie, beim Folienwechsel verschwindet sie von selbst. Sie liegt in der Bühne und skaliert mit der Folie. |
 | Mini-Timer | – | Läuft der Timer und ist sein Fenster zu, schwebt eine Zeitanzeige über der Folie (frei verschiebbar, Position bleibt im Browser gemerkt). Tippen pausiert und setzt fort, × setzt zurück, bei Ablauf blinkt sie rot mit „Zeit!“. |
 | Wer ist dran? | Z | Losnummer ohne Namen: Nummern 1 bis N (N einstellbar), optional „Jede Nummer nur einmal“ mit Liste der schon Gezogenen und „Neu beginnen“. |
-| Gruppen losen | G | Die Seite `interaktiv/gruppen/` (Sitzplan mit Nummern) als Fenster. Beim Einbetten (`?eingebettet=1`) ist die Kopfzeile ausgeblendet. |
+| Gruppen losen | G | Die Seite `interaktiv/gruppen/` (Sitzplan mit Nummern) als Fenster. Beim Einbetten (`?eingebettet=1`) ist die Kopfzeile ausgeblendet, die drei Schritte (Sitzplan, Einteilen, Ergebnis) liegen auf Reitern und passen sich der Fenstergröße an, sodass nicht gescrollt werden muss. |
 | Stoppuhr | S | Zählt vorwärts (Zehntelsekunden), Start/Stopp/Weiter, Runde (die letzten 5 stehen im Fenster), Zurücksetzen. |
 | Notizzettel | – | Freies Textfeld je Präsentation, gespeichert nur im Browser (`localStorage`), „Leeren“. Keine Namen eintragen. |
 
