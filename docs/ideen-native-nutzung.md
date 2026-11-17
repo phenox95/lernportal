@@ -550,3 +550,38 @@ Alle unter `labor/`, im Browser getestet (Kamera, Standort, Sensoren und Spracha
 
 **Nachtrag 12.5 (Satellitendaten):** Neuer Reiter „5. Gemessen (Satelliten)“ mit **echten Messdaten**: globaler Meeresspiegel seit 1880 (Gezeitenpegel und Satelliten, CSIRO, bis 2013) und Satellitenaltimetrie ab 1993 (NOAA, bis 2023). Quelle: EPA mit CSIRO und NOAA, aufbereitet von `datasets/sea-level-rise` (Open Data Commons Public Domain Dedication and License 1.0). Datei `daten/meeresspiegel.json` (Zoll in Millimeter umgerechnet), erzeugt mit `python3 tools/daten-holen.py meeresspiegel`. Kontrolle im Test: Satelliten 1993 bis 2023 etwa 3,1 mm pro Jahr, Pegel 1900 bis 1990 etwa 1,5 mm pro Jahr. **Nicht verwendet, weil in dieser Umgebung nicht erreichbar:** NASA Sea Level Change, Copernicus Marine und weitere Satellitenreihen (neuere Jahre, Höhenmodelle für Karten). Die Lizenzbedingungen von CSIRO und NOAA selbst habe ich nicht gelesen, nur die des Datensatz-Aufbereiters.
 
+### 12.6 Meeresspiegel auf der Karte (Weltkarte und Ausschnitte, 17.11.2026)
+
+`labor/meeresspiegel-karte/`: Weltkarte (Satellitenbild oder gezeichnet) und acht Ausschnitte (Nordsee, Bangladesch, Nildelta, Mekong, Südflorida, Venedig und Po, Jangtse, Mississippi). Regler 0 bis 10 m, Ort antippen zeigt, ab welchem Anstieg er überflutet wird, Land unter dem heutigen Meeresspiegel ist violett.
+
+**Technik:** `tools/hoehe-holen.py` berechnet aus dem Höhenmodell (Terrarium-Kacheln, Mapzen/Tilezen auf Amazon Open Data, enthält unter anderem SRTM) und der Natural-Earth-Küstenlinie für jeden Punkt die **Überflutungshöhe** (nur Land, das über niedrigeres Land mit dem offenen Meer verbunden ist). Ergebnis: `daten/hoehe/*.png` (rund 3,3 MB) und `index.json`. Die Seite wendet nur noch einen Schwellenwert an. Benötigte Hosts: `elevation-tiles-prod.s3.amazonaws.com`, `raw.githubusercontent.com`. Benötigt `numpy`, `scipy`, `pillow`. Satellitenbild: NASA „Blue Marble“ 2048 Pixel (Reto Stöckli, NASA Earth Observatory) über Wikimedia Commons, `daten/hoehe/blue-marble-2048.jpg`.
+
+**Grenzen (stehen auch auf der Seite):**
+- Die senkrechte Genauigkeit des Höhenmodells liegt bei mehreren Metern. Radarmodelle messen Baumkronen und Dächer mit, dadurch wird die Überflutung in tropischen Deltas **unterschätzt** (bekanntes Problem, aus allgemeinem Wissen, nicht geprüft). Beispiel Bangladesch: Bei 3 m zeigt die Karte nur schmale Küstensäume, das Ergebnis ist mit einer zweiten Quelle zu prüfen. In offenem Gelände wie der Nordsee wirkt es plausibel: Weite Teile der Niederlande liegen auf oder unter dem Meeresspiegel und sind ohne Deiche sofort überflutet.
+- Deiche, Pumpen, Dünen, Gezeiten, Sturmfluten und Landabsenkung sind nicht erfasst.
+- Weltkarte: eine Gitterzelle ist etwa 11 km breit, überflutete Punkte sind dort vergrößert gezeichnet.
+- Die Lizenzbedingungen der Höhenkacheln (Quellenangaben der einzelnen Datensätze) und der NASA-Bilder habe ich nicht an der Quelle gelesen. Vor einer öffentlichen Verwendung lesen.
+
+**Nachtrag 12.6 (zweites Höhenmodell, mehr Ausschnitte, 17.11.2026):** Zu jedem Ausschnitt gibt es jetzt auch eine Berechnung mit **Copernicus DEM GLO-30** (30 m, Median je Gitterzelle, Auswahl „Höhenmodell“ auf der Seite). Neue Ausschnitte: Hamburg und Elbmündung, Deutsche Ostseeküste, Bangkok, Jakarta, New York und New Jersey, Lagos. Insgesamt Weltkarte plus 14 Ausschnitte (rund 6,4 MB). Das Copernicus-Modell ist wie SRTM ein Oberflächenmodell (Baumkronen und Dächer), aber genauer. Benötigter Host zusätzlich: `copernicus-dem-30m.s3.amazonaws.com` (öffentlich, kein Konto nötig).
+
+Überflutete Landfläche bei 3 m Anstieg in km², gemessen mit dem Skript (Terrarium gegen Copernicus). Beide Modelle liegen an manchen Orten weit auseinander, das ist ein Prüfanlass:
+
+| Ausschnitt | Terrarium | Copernicus |
+|---|---|---|
+| Nordsee | 31.387 | 28.833 |
+| Hamburg | 2.530 | 2.251 |
+| Ostsee | 2.222 | 1.745 |
+| **Bangladesch** | 3.544 | **20.155** |
+| Nildelta | 10.521 | 11.334 |
+| Mekong | 31.854 | 30.514 |
+| **Bangkok** | 1.422 | **4.169** |
+| Jakarta | 1.499 | 1.341 |
+| **Südflorida** | 1.190 | **9.904** |
+| New York | 588 | 696 |
+| Mississippi | 13.433 | 18.552 |
+| Venedig | 6.999 | 6.081 |
+| **Jangtse** | 3.253 | **13.116** |
+| Lagos | 149 | 508 |
+
+Wo die Modelle abweichen (Bangladesch, Florida, Bangkok, Jangtse), ist das Terrarium-Modell vermutlich zu hoch (Bäume, Dächer), das Copernicus-Modell wirkt plausibler. **Auch Copernicus zeigt Baumkronen und Dächer**, kann also in dicht bewachsenen Deltas weiter unterschätzen. Beides ist aus allgemeinem Wissen abgeleitet, nicht an einer Quelle geprüft. Ein Modell, das Vegetation und Gebäude herausrechnet (zum Beispiel FABDEM) oder Küstenhöhen mit Korrektur (zum Beispiel CoastalDEM), habe ich nicht eingebaut (Zugang und Lizenz nicht geprüft).
+
