@@ -5,7 +5,7 @@
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tabs button[aria-selected=true]{background:var(--dk);color:#fff;outline:3px solid var(--y)}
 .regler{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:12px 0}.regler label{display:block;font-weight:700}input[type=range]{width:100%}
 select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
-#sv,#gl{width:100%;height:auto;display:block;border:2px solid var(--g);border-radius:14px;background:#fff}@media (prefers-color-scheme:dark){#sv,#gl{background:#0d1b2a}}
+#sv,#gl{width:100%;height:auto;display:block;border:2px solid var(--g);border-radius:14px;background:#fff}@media (prefers-color-scheme:dark){#sv,#gl,#mz{background:#0d1b2a!important}}
 .leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.leiste button.on{background:var(--dk);color:#fff}
 .tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}th,td{padding:8px 10px;border-bottom:1px solid #8aa59a55;text-align:left}th{background:var(--mint);font-size:14px}td input{width:100%}
 .erg{font-size:clamp(28px,6vw,44px);font-weight:700;color:var(--dk)}.tag{display:inline-block;padding:1px 8px;border-radius:8px;background:#f6e3b8;color:#1A2B24;font-size:13px;font-weight:700}
@@ -15,8 +15,8 @@ select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);b
 <a class="zurueck" href="../">← Labor</a>
 <h1>Meeresspiegelanstieg modellieren</h1>
 <div class="kasten"><b>Systeme erschließen, Urteilen (Geo 3.6 Klimawandel, 3.1 Risikoräume, Stufe E bis G):</b> <b>Sage vorher</b>, wie viele Häuser bei einem Anstieg von 1 m überflutet werden. <b>Untersuche</b> vier Küstenformen. <b>Berechne</b>, wie viel Meeresspiegel aus Eis an Land entsteht und was schwimmendes Eis ausmacht. <b>Erkläre</b> die Unterschiede und <b>beurteile</b> Maßnahmen wie Deiche.</div>
-<p class="kasten warn"><b>Modell, keine Vorhersage:</b> Alle Küstenformen sind <b>gezeichnete Schnittbilder</b> (schematisch, nicht maßstäblich, keine echten Orte). Die Zahlen zu Eismassen, Wärmeausdehnung und Szenarien sind <b>gerundete Näherungen aus allgemeinem Wissen und nicht an der Quelle geprüft</b>. Vor dem Unterricht an einer Quelle prüfen (zum Beispiel IPCC-Bericht AR6, NASA, Alfred-Wegener-Institut). Ein echtes Höhenmodell für Karten ist noch nicht eingebaut.</p>
-<div class="tabs" role="tablist"><button role="tab" id="t1" aria-selected="true">1. Küste</button><button role="tab" id="t2" aria-selected="false" class="sek">2. Woher das Wasser kommt</button><button role="tab" id="t3" aria-selected="false" class="sek">3. Eis im Glas</button><button role="tab" id="t4" aria-selected="false" class="sek">4. Im Internet nachsehen</button></div>
+<p class="kasten warn"><b>Modell, keine Vorhersage:</b> Alle Küstenformen sind <b>gezeichnete Schnittbilder</b> (schematisch, nicht maßstäblich, keine echten Orte). Die Zahlen zu Eismassen, Wärmeausdehnung und Szenarien sind <b>gerundete Näherungen aus allgemeinem Wissen und nicht an der Quelle geprüft</b>. Vor dem Unterricht an einer Quelle prüfen (zum Beispiel IPCC-Bericht AR6, NASA, Alfred-Wegener-Institut). Ein echtes Höhenmodell für Karten ist noch nicht eingebaut. <b>Reiter 5 nutzt echte Messdaten</b> (Gezeitenpegel und Satelliten).</p>
+<div class="tabs" role="tablist"><button role="tab" id="t1" aria-selected="true">1. Küste</button><button role="tab" id="t2" aria-selected="false" class="sek">2. Woher das Wasser kommt</button><button role="tab" id="t3" aria-selected="false" class="sek">3. Eis im Glas</button><button role="tab" id="t4" aria-selected="false" class="sek">4. Im Internet nachsehen</button><button role="tab" id="t5" aria-selected="false" class="sek">5. Gemessen (Satelliten)</button></div>
 
 <section id="p1">
 <div class="leiste"><label for="pro"><b>Küstenform</b></label><select id="pro"><option value="delta">Flache Küste, Flussdelta</option><option value="steil">Steilküste</option><option value="polder">Küste mit Deich, Land hinter dem Deich unter dem Meeresspiegel</option><option value="atoll">Flache Insel (Atoll)</option></select></div>
@@ -55,13 +55,28 @@ select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);b
 <p><b>Aufgabe:</b> <b>Wähle</b> eine Küstenstadt, <b>stelle</b> 1 m, 3 m und 10 m ein, <b>beschreibe</b> die Veränderung und <b>vergleiche</b> sie mit dem Küstenschnitt oben. <b>Beurteile</b>, was das schematische Modell nicht zeigt (Strömung, Gezeiten, Schutzbauten, Landabsenkung).</p>
 <p class="quelle">Für eine Karte im Portal selbst bräuchte es ein Höhenmodell der Region (zum Beispiel Copernicus DEM, Lizenz vorab lesen), das ein Skript wie <code>tools/daten-holen.py</code> zuschneidet. Das ist noch nicht gebaut.</p>
 </section>
+<section id="p5" hidden>
+<div class="kasten"><b>Daten auswerten (Analysieren, Stufe F bis G):</b> Die Linie zeigt den globalen Meeresspiegel seit 1880: bis 1992 aus Gezeitenpegeln, ab 1993 zusätzlich aus <b>Satelliten</b> (Radarhöhenmessung). <b>Beschreibe</b> den Verlauf. <b>Bestimme</b> die Anstiegsgeschwindigkeit für zwei Zeiträume und <b>vergleiche</b> sie. <b>Zeichne</b> den Verlauf bis 2100 weiter und <b>beurteile</b>, wie sicher so eine Fortsetzung ist.</div>
+<p class="kasten" id="dq">Lade Daten …</p>
+<svg id="mz" viewBox="0 0 900 460" role="img" aria-label="Globaler Meeresspiegel seit 1880, Zahlen in der Tabelle unten" style="width:100%;height:auto;display:block;border:2px solid var(--g);border-radius:14px;background:#fff"></svg>
+<div class="regler"><div><label for="ra">Zeitraum von <output id="rao"></output></label><input type="range" id="ra" min="1880" max="2022" step="1" value="1993"></div>
+<div><label for="rb">bis <output id="rbo"></output></label><input type="range" id="rb" min="1881" max="2023" step="1" value="2023"></div>
+<div><label for="ar">Reihe</label><select id="ar"><option value="n">Satelliten (NOAA, ab 1993)</option><option value="c">Gezeitenpegel und Satelliten (CSIRO, bis 2013)</option></select></div></div>
+<p class="erg" id="rate" aria-live="polite"></p>
+<h3>Weiterzeichnen bis 2100</h3>
+<div class="regler"><div><label for="pr">Anstieg ab 2023: <output id="pro2"></output> mm pro Jahr</label><input type="range" id="pr" min="0" max="15" step="0.1" value="4"></div>
+<div><label for="pb">Beschleunigung: <output id="pbo"></output> mm pro Jahr, in jedem Jahrzehnt zusätzlich</label><input type="range" id="pb" min="0" max="2" step="0.05" value="0"></div></div>
+<p id="pw" class="kasten" aria-live="polite"></p><div class="leiste"><button type="button" id="pu">Anstieg bis 2100 in den Küstenschnitt übernehmen</button><button type="button" class="sek" id="pm">Satelliten-Rate einsetzen</button></div>
+<p class="quelle"><b>Daten:</b> <span id="dqq"></span> Die Reihe endet für Gezeitenpegel 2013 und für Satelliten 2023. Neuere Satellitenreihen (zum Beispiel NASA, Copernicus Marine) waren in dieser Umgebung nicht abrufbar. Die Zukunft ist <b>keine Vorhersage</b>: Eine Gerade oder Parabel ist nur eine Annahme.</p>
+<details><summary>Zahlen als Tabelle</summary><div class="tw" style="max-height:320px"><table><thead><tr><th>Jahr</th><th>Pegel und Satelliten (CSIRO), mm</th><th>Satelliten (NOAA), mm</th></tr></thead><tbody id="mtb"></tbody></table></div></details>
+</section>
 
 <script>
 (function(){
  function $(i){return document.getElementById(i)}var NS='http://www.w3.org/2000/svg';
  function z(x,n){return String(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).replace('.',',')}
- function tab(n){for(var i=1;i<=4;i++){$('p'+i).hidden=i!==n;$('t'+i).setAttribute('aria-selected',String(i===n));$('t'+i).className=i===n?'':'sek'}}
- [1,2,3,4].forEach(function(i){$('t'+i).onclick=function(){tab(i)}});
+ function tab(n){for(var i=1;i<=5;i++){$('p'+i).hidden=i!==n;$('t'+i).setAttribute('aria-selected',String(i===n));$('t'+i).className=i===n?'':'sek'}}
+ [1,2,3,4,5].forEach(function(i){$('t'+i).onclick=function(){tab(i)}});
  /* ===== 1. Küstenschnitt ===== */
  var W=900,N=181; /* Spalten im Abstand von 5 px */
  var PR={
@@ -117,5 +132,32 @@ select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);b
  [].forEach.call(document.querySelectorAll('[data-vh]'),function(b){b.onclick=function(){vh=b.dataset.vh;[].forEach.call(document.querySelectorAll('[data-vh]'),function(x){x.classList.toggle('on',x===b)});glas()}});
  $('sm').oninput=glas;
  zeichnen();glas();
+
+ /* ===== 5. Gemessene Reihe ===== */
+ var MD=null;
+ function ols(pts){var n=pts.length;if(n<3)return null;var sx=0,sy=0,sxx=0,sxy=0;pts.forEach(function(p){sx+=p[0];sy+=p[1];sxx+=p[0]*p[0];sxy+=p[0]*p[1]});var d=n*sxx-sx*sx;if(!d)return null;var b=(n*sxy-sx*sy)/d;return{b:b,a:(sy-b*sx)/n}}
+ function elm(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!==undefined)e.textContent=txt;$('mz').appendChild(e);return e}
+ function mzeichnen(){if(!MD)return;var sv=$('mz');sv.textContent='';var ink=getComputedStyle(document.body).color,R=MD.reihe;
+  var a=+$('ra').value,b=+$('rb').value;if(b<=a+1){b=a+2;$('rb').value=b}$('rao').textContent=a;$('rbo').textContent=b;var ser=$('ar').value==='n'?4:1;
+  var pts=R.filter(function(r){return r[ser]!==null&&r[0]>=a&&r[0]<=b}).map(function(r){return [r[0],r[ser]]});var f=ols(pts);
+  $('rate').textContent=f?z(f.b,1)+' mm pro Jahr ('+pts.length+' Jahre mit Daten, etwa '+z(f.b*10,0)+' mm in 10 Jahren)':'Zu wenig Jahre mit Daten in diesem Zeitraum und dieser Reihe.';
+  var last=R.filter(function(r){return r[4]!==null}).slice(-1)[0],h0=last[4],r0=+$('pr').value,ac=+$('pb').value/10;$('pro2').textContent=z(r0,1);$('pbo').textContent=z(+$('pb').value,2);
+  var h2100=h0+r0*77+0.5*ac*77*77,zu=h2100-h0;window.__pz=zu/1000;
+  $('pw').innerHTML='Mit diesen Annahmen steigt der Meeresspiegel von 2023 bis 2100 um <b>'+z(zu/1000,2)+' m</b> ('+z(zu,0)+' mm). Zum Vergleich: Von 1993 bis 2023 stieg er laut NOAA-Satellitenreihe um '+z(h0-R.filter(function(r){return r[4]!==null})[0][4],0)+' mm.';
+  var L=70,Rr=860,T=20,B=400,X=function(y){return L+(y-1880)/(2100-1880)*(Rr-L)},ymin=-40,ymax=Math.max(500,Math.ceil((h2100+20)/100)*100),Y=function(v){return B-(v-ymin)/(ymax-ymin)*(B-T)};
+  for(var v=0;v<=ymax;v+=100){elm('line',{x1:L,x2:Rr,y1:Y(v),y2:Y(v),stroke:ink,'stroke-opacity':.15});elm('text',{x:L-8,y:Y(v)+5,'text-anchor':'end','font-size':13,fill:ink},v)}
+  for(var y=1880;y<=2100;y+=20){elm('text',{x:X(y),y:B+22,'text-anchor':'middle','font-size':13,fill:ink},y)}
+  elm('text',{x:20,y:210,'font-size':14,fill:ink,'text-anchor':'middle',transform:'rotate(-90 20 210)'},'Meeresspiegel in mm (Nullpunkt 1880)');
+  var band=R.filter(function(r){return r[1]!==null});if(band.length){var d='M'+band.map(function(r){return X(r[0])+' '+Y(r[3])}).join('L')+'L'+band.slice().reverse().map(function(r){return X(r[0])+' '+Y(r[2])}).join('L')+'Z';elm('path',{d:d,fill:'#2f7fc1','fill-opacity':.2})}
+  elm('polyline',{points:band.map(function(r){return X(r[0])+','+Y(r[1])}).join(' '),fill:'none',stroke:'#1f5f94','stroke-width':3});
+  var sat=R.filter(function(r){return r[4]!==null});elm('polyline',{points:sat.map(function(r){return X(r[0])+','+Y(r[4])}).join(' '),fill:'none',stroke:'#e67e22','stroke-width':4});
+  var fp=[];for(var yy=2023;yy<=2100;yy+=1){var t=yy-2023;fp.push(X(yy)+','+Y(h0+r0*t+0.5*ac*t*t))}elm('polyline',{points:fp.join(' '),fill:'none',stroke:'#c0392b','stroke-width':3.5,'stroke-dasharray':'8 6'});
+  if(f){var x1=Math.max(a,pts[0][0]),x2=Math.min(b,pts[pts.length-1][0]);elm('line',{x1:X(x1),x2:X(x2),y1:Y(f.a+f.b*x1),y2:Y(f.a+f.b*x2),stroke:ink,'stroke-width':2.5,'stroke-opacity':.8})}
+  elm('rect',{x:L+10,y:T+6,width:14,height:5,fill:'#1f5f94'});elm('text',{x:L+30,y:T+13,'font-size':13,fill:ink},'Pegel und Satelliten (CSIRO)');elm('rect',{x:L+10,y:T+24,width:14,height:5,fill:'#e67e22'});elm('text',{x:L+30,y:T+31,'font-size':13,fill:ink},'Satelliten (NOAA)');elm('rect',{x:L+10,y:T+42,width:14,height:5,fill:'#c0392b'});elm('text',{x:L+30,y:T+49,'font-size':13,fill:ink},'Weiterzeichnen (Annahme)');}
+ ['ra','rb','ar','pr','pb'].forEach(function(i){$(i).oninput=$(i).onchange=mzeichnen});
+ $('pu').onclick=function(){$('msp').value=Math.min(10,Math.max(0,window.__pz||0));zeichnen();tab(1)};
+ $('pm').onclick=function(){var R=MD.reihe.filter(function(r){return r[4]!==null}).map(function(r){return [r[0],r[4]]}),f=ols(R);if(f){$('pr').value=Math.max(0,Math.min(15,Math.round(f.b*10)/10));mzeichnen()}};
+ fetch('../../daten/meeresspiegel.json').then(function(r){return r.json()}).then(function(d){MD=d;$('dq').textContent='Echte Messdaten, im Portal gespeichert (Abruf '+d.abruf+').';$('dqq').textContent=d.quelle+'.';
+  $('mtb').innerHTML=d.reihe.filter(function(r,i){return r[0]%5===0||r[0]>=2010}).map(function(r){return '<tr><td>'+r[0]+'</td><td>'+(r[1]===null?'–':z(r[1],0))+'</td><td>'+(r[4]===null?'–':z(r[4],0))+'</td></tr>'}).join('');mzeichnen()}).catch(function(){$('dq').textContent='Die Messdaten konnten nicht geladen werden (Seite über einen Server öffnen).'});
 })();
 </script></main></body></html>
