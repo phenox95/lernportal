@@ -11,7 +11,8 @@
    "lat1": 84.0,
    "breite": 3600,
    "hoehe": 1440,
-   "aufloesung_grad": 0.1
+   "aufloesung_grad": 0.1,
+   "hinweis": ""
   },
   {
    "id": "nordsee",
@@ -26,7 +27,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": "Weite Teile der Niederlande und der deutschen Küste liegen auf oder unter dem Meeresspiegel. Deiche, Siele und Schöpfwerke halten das Wasser fern. Sie sind in der Karte nicht erfasst."
   },
   {
    "id": "hamburg",
@@ -41,7 +43,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": "Hochwasserschutz (Deiche, Sperrwerke, Warften) ist in der Karte nicht erfasst."
   },
   {
    "id": "ostsee",
@@ -56,7 +59,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": ""
   },
   {
    "id": "bangladesch",
@@ -71,7 +75,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": "Das Terrarium-Modell zeigt das Land hier vermutlich zu hoch (Bäume, Dächer). Vergleiche mit Copernicus."
   },
   {
    "id": "nildelta",
@@ -86,7 +91,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": ""
   },
   {
    "id": "mekong",
@@ -101,7 +107,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": ""
   },
   {
    "id": "bangkok",
@@ -116,7 +123,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": "Das Terrarium-Modell zeigt das Land hier vermutlich zu hoch. Dazu kommt Landabsenkung durch Grundwasserentnahme, die die Karte nicht kennt."
   },
   {
    "id": "jakarta",
@@ -131,7 +139,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": "Jakarta sinkt stellenweise stark ab (Grundwasserentnahme). Das Höhenmodell kennt nur einen Zeitpunkt und keine Absenkung."
   },
   {
    "id": "florida",
@@ -146,7 +155,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": "Das Terrarium-Modell zeigt das Land hier vermutlich zu hoch. Vergleiche mit Copernicus. Die Karte kennt weder Kanäle noch Pumpen."
   },
   {
    "id": "newyork",
@@ -161,7 +171,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": ""
   },
   {
    "id": "mississippi",
@@ -176,7 +187,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": ""
   },
   {
    "id": "venedig",
@@ -191,7 +203,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": "Die Lagune hat bewegliche Sperren (MOSE) und Deiche, die in der Karte nicht erfasst sind."
   },
   {
    "id": "jangtse",
@@ -206,7 +219,8 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": "Das Terrarium-Modell zeigt das Land hier vermutlich zu hoch. Vergleiche mit Copernicus. Deiche und Sperrwerke sind nicht erfasst."
   },
   {
    "id": "lagos",
@@ -221,7 +235,216 @@
    "modelle": [
     "terrarium",
     "cop"
-   ]
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "london",
+   "name": "Großbritannien: London und Themsemündung",
+   "lon0": -0.8,
+   "lat0": 51.2,
+   "lon1": 1.4,
+   "lat1": 51.9,
+   "breite": 440,
+   "hoehe": 140,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": "Die Themse-Sperre (Thames Barrier) und die Deiche sind in der Karte nicht erfasst."
+  },
+  {
+   "id": "kopenhagen",
+   "name": "Dänemark und Schweden: Kopenhagen und Öresund",
+   "lon0": 12.0,
+   "lat0": 55.3,
+   "lon1": 13.4,
+   "lat1": 56.1,
+   "breite": 280,
+   "hoehe": 160,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "houston",
+   "name": "USA: Houston und Galveston",
+   "lon0": -95.8,
+   "lat0": 28.8,
+   "lon1": -94.2,
+   "lat1": 30.2,
+   "breite": 320,
+   "hoehe": 280,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "rio",
+   "name": "Brasilien: Rio de Janeiro",
+   "lon0": -43.8,
+   "lat0": -23.3,
+   "lon1": -42.8,
+   "lat1": -22.6,
+   "breite": 200,
+   "hoehe": 140,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "buenosaires",
+   "name": "Argentinien: Buenos Aires und Río de la Plata",
+   "lon0": -59.0,
+   "lat0": -35.2,
+   "lon1": -57.4,
+   "lat1": -34.2,
+   "breite": 320,
+   "hoehe": 200,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "mumbai",
+   "name": "Indien: Mumbai",
+   "lon0": 72.5,
+   "lat0": 18.5,
+   "lon1": 73.6,
+   "lat1": 20.0,
+   "breite": 220,
+   "hoehe": 300,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "indus",
+   "name": "Pakistan: Indus-Delta und Karatschi",
+   "lon0": 66.5,
+   "lat0": 23.5,
+   "lon1": 68.5,
+   "lat1": 25.5,
+   "breite": 400,
+   "hoehe": 400,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": "Das Delta ist sehr flach. Das Höhenmodell ist dort ungenau, Bäume (Mangroven) erscheinen als Höhe."
+  },
+  {
+   "id": "manila",
+   "name": "Philippinen: Manila",
+   "lon0": 120.5,
+   "lat0": 14.0,
+   "lon1": 121.5,
+   "lat1": 15.0,
+   "breite": 200,
+   "hoehe": 200,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "tokio",
+   "name": "Japan: Tokio und Kanto-Ebene",
+   "lon0": 139.3,
+   "lat0": 35.0,
+   "lon1": 140.6,
+   "lat1": 36.0,
+   "breite": 260,
+   "hoehe": 200,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": "Hochwasserschutz und Landabsenkung sind nicht erfasst."
+  },
+  {
+   "id": "osaka",
+   "name": "Japan: Osaka und Kobe",
+   "lon0": 134.8,
+   "lat0": 34.2,
+   "lon1": 136.0,
+   "lat1": 35.0,
+   "breite": 240,
+   "hoehe": 160,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "dubai",
+   "name": "Vereinigte Arabische Emirate: Dubai und Abu Dhabi",
+   "lon0": 54.0,
+   "lat0": 24.2,
+   "lon1": 55.8,
+   "lat1": 25.6,
+   "breite": 360,
+   "hoehe": 280,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "singapur",
+   "name": "Singapur und Johor",
+   "lon0": 103.4,
+   "lat0": 1.0,
+   "lon1": 104.4,
+   "lat1": 1.7,
+   "breite": 200,
+   "hoehe": 140,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": ""
+  },
+  {
+   "id": "malediven",
+   "name": "Malediven (Atolle): Beispiel für ein ungeeignetes Höhenmodell",
+   "lon0": 72.5,
+   "lat0": -0.7,
+   "lon1": 73.9,
+   "lat1": 4.6,
+   "breite": 280,
+   "hoehe": 1060,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ],
+   "hinweis": "UNGEEIGNET: Die Inseln der Atolle sind meist nur 1 bis 2 m hoch und sehr klein. Das Höhenmodell ist viel zu grob, Bäume und Gebäude erscheinen als Höhe. Die Karte zeigt die Gefahr hier nicht richtig. Beurteile, warum."
   }
  ]
 }
