@@ -25,6 +25,8 @@ Quellen (Lizenzen vor der Veröffentlichung lesen):
 - Küstenlinie: Natural Earth, gemeinfrei
 
 Benötigt: numpy, scipy, pillow, tifffile, imagecodecs (pip install numpy scipy pillow tifffile imagecodecs). Aufruf: python3 tools/hoehe-holen.py [welt|<regions-id> ...]
+Zusatzbefehle: staedte (Natural Earth), menschen (WorldPop, braucht data.worldpop.org).
+Zusatzbefehle: staedte (Natural Earth), menschen (WorldPop, Host data.worldpop.org).
 Erlaubte Hosts: elevation-tiles-prod.s3.amazonaws.com, copernicus-dem-30m.s3.amazonaws.com, raw.githubusercontent.com
 """
 import io, json, math, os, pathlib, sys, urllib.request
@@ -69,6 +71,15 @@ REGIONEN = [
     ("dubai", "Vereinigte Arabische Emirate: Dubai und Abu Dhabi", 54.0, 24.2, 55.8, 25.6, 0.005, 8, "10m", True),
     ("singapur", "Singapur und Johor", 103.4, 1.0, 104.4, 1.7, 0.005, 8, "10m", True),
     ("malediven", "Malediven (Atolle): Beispiel für ein ungeeignetes Höhenmodell", 72.5, -0.7, 73.9, 4.6, 0.005, 8, "10m", True),
+    ("wattenmeer", "Nordseeküste: Ostfriesland, Wattenmeer und Elbe-Weser-Dreieck", 6.4, 53.1, 9.2, 54.0, 0.0025, 9, "10m", True),
+    ("perl", "China: Perlflussdelta mit Hongkong und Guangzhou", 112.8, 21.8, 114.8, 23.6, 0.005, 8, "10m", True),
+    ("tianjin", "China: Tianjin und Bohai-Bucht", 117.0, 38.3, 119.2, 39.8, 0.005, 8, "10m", True),
+    ("seoul", "Südkorea: Seoul und Incheon", 126.2, 36.9, 127.5, 37.9, 0.005, 8, "10m", True),
+    ("chennai", "Indien: Chennai", 79.8, 12.6, 80.7, 13.5, 0.005, 8, "10m", True),
+    ("norfolk", "USA: Norfolk und Chesapeake Bay", -77.2, 36.4, -75.6, 37.6, 0.005, 8, "10m", True),
+    ("charleston", "USA: Charleston und Savannah", -81.5, 31.8, -79.5, 33.2, 0.005, 8, "10m", True),
+    ("sanfrancisco", "USA: Bucht von San Francisco", -122.8, 37.2, -121.6, 38.3, 0.005, 8, "10m", True),
+    ("lissabon", "Portugal: Lissabon und Tejo-Mündung", -9.6, 38.3, -8.4, 39.2, 0.005, 8, "10m", True),
 ]
 
 HINWEISE = {
@@ -83,6 +94,10 @@ HINWEISE = {
     "malediven": "UNGEEIGNET: Die Inseln der Atolle sind meist nur 1 bis 2 m hoch und sehr klein. Das Höhenmodell ist viel zu grob, Bäume und Gebäude erscheinen als Höhe. Die Karte zeigt die Gefahr hier nicht richtig. Beurteile, warum.",
     "venedig": "Die Lagune hat bewegliche Sperren (MOSE) und Deiche, die in der Karte nicht erfasst sind.",
     "tokio": "Hochwasserschutz und Landabsenkung sind nicht erfasst.",
+    "wattenmeer": "Das Wattenmeer fällt bei Ebbe zum Teil trocken, die Karte kennt keine Gezeiten. Deiche, Siele und Sperrwerke sind nicht erfasst. Die Inseln und Halligen liegen nur wenig über dem Meer.",
+    "perl": "Das Delta ist dicht bebaut und bewachsen, das Höhenmodell liegt dort vermutlich zu hoch. Schutzbauten sind nicht erfasst.",
+    "norfolk": "Die Küste hier sinkt zusätzlich langsam ab (Landabsenkung), das kennt die Karte nicht. Schutzbauten sind nicht erfasst.",
+    "sanfrancisco": "Aufgeschüttetes Land und Schutzbauten rund um die Bucht sind im Höhenmodell nur grob erfasst.",
     "indus": "Das Delta ist sehr flach. Das Höhenmodell ist dort ungenau, Bäume (Mangroven) erscheinen als Höhe.",
 }
 
@@ -273,8 +288,84 @@ def staedte():
     print("Städte:", len(aus), schreiben_json.stat().st_size // 1024, "KB")
 
 
+# Länder (ISO-3166-1 alpha-3) je Ausschnitt für die Bevölkerungsraster von WorldPop
+LAENDER = {
+    "nordsee": ["NLD", "DEU", "BEL", "DNK"], "hamburg": ["DEU"], "ostsee": ["DEU", "DNK", "POL"], "wattenmeer": ["DEU", "NLD"],
+    "bangladesch": ["BGD", "IND"], "nildelta": ["EGY"], "mekong": ["VNM", "KHM"], "bangkok": ["THA"], "jakarta": ["IDN"],
+    "florida": ["USA"], "newyork": ["USA"], "mississippi": ["USA"], "houston": ["USA"], "norfolk": ["USA"], "charleston": ["USA"], "sanfrancisco": ["USA"],
+    "venedig": ["ITA", "SVN", "HRV"], "jangtse": ["CHN"], "lagos": ["NGA", "BEN"], "london": ["GBR"], "kopenhagen": ["DNK", "SWE"],
+    "rio": ["BRA"], "buenosaires": ["ARG", "URY"], "mumbai": ["IND"], "indus": ["PAK", "IND"], "manila": ["PHL"], "tokio": ["JPN"], "osaka": ["JPN"],
+    "dubai": ["ARE"], "singapur": ["SGP", "MYS"], "malediven": ["MDV"], "perl": ["CHN", "HKG", "MAC"], "tianjin": ["CHN"], "seoul": ["KOR"],
+    "chennai": ["IND"], "lissabon": ["PRT"],
+}
+POP = "https://data.worldpop.org/GIS/Population/Global_2000_2020_1km_UNadj/2020/{iso}/{iso_l}_ppp_2020_1km_Aggregated_UNadj.tif"
+
+
+def worldpop(iso):
+    import tifffile
+    url = POP.format(iso=iso, iso_l=iso.lower())
+    pfad = CACHE / "worldpop" / (iso + ".tif")
+    holen(url, pfad)
+    with tifffile.TiffFile(str(pfad)) as t:
+        seite = t.pages[0]
+        a = seite.asarray().astype(np.float32)
+        sx, sy = seite.tags["ModelPixelScaleTag"].value[:2]
+        x0, y0 = seite.tags["ModelTiepointTag"].value[3:5]
+    a[a < 0] = 0
+    return a, x0, y0, sx, sy
+
+
+def menschen():
+    """Einwohner je Gitterpunkt (WorldPop 2020, 1 km, an die Landpunkte jeder Quellzelle gleichmäßig verteilt) und
+    die Zahl der Menschen, die ab jeder Überflutungshöhe (0 bis 10 m) betroffen sind, je Höhenmodell -> index.json."""
+    idx_pfad = WURZEL / "index.json"
+    idx = json.loads(idx_pfad.read_text(encoding="utf-8"))
+    for reg in idx["regionen"]:
+        rid = reg["id"]
+        if rid not in LAENDER:
+            continue
+        print("→ Menschen", rid, flush=True)
+        res = reg["aufloesung_grad"]
+        w, h = reg["breite"], reg["hoehe"]
+        lons = reg["lon0"] + (np.arange(w) + 0.5) * res
+        lats = reg["lat1"] - (np.arange(h) + 0.5) * res
+        LON, LAT = np.meshgrid(lons, lats)
+        bild = np.asarray(Image.open(WURZEL / (rid + ".png")))
+        land = bild[:, :, 2] > 0
+        wert = np.zeros((h, w), np.float32)
+        zelle = np.zeros((h, w), np.int64)
+        for iso in LAENDER[rid]:
+            a, x0, y0, sx, sy = worldpop(iso)
+            c = np.floor((LON - x0) / sx).astype(int)
+            r = np.floor((y0 - LAT) / sy).astype(int)
+            ok = (c >= 0) & (c < a.shape[1]) & (r >= 0) & (r < a.shape[0])
+            v = np.zeros((h, w), np.float32)
+            v[ok] = a[r[ok], c[ok]]
+            neu = v > wert
+            wert[neu] = v[neu]
+            zelle[neu] = (r[neu].astype(np.int64) * 100000 + c[neu]) + hash(iso) % 7 * 10**11
+        m = land & (wert > 0)
+        _, inv, cnt = np.unique(zelle[m], return_inverse=True, return_counts=True)
+        pix = np.zeros((h, w), np.float32)
+        pix[m] = wert[m] / cnt[inv]
+        reg["bevoelkerung"] = {"gesamt": int(round(float(pix.sum())))}
+        for mod, suffix in (("terrarium", ""), ("cop", "-cop")):
+            if mod not in reg.get("modelle", []):
+                continue
+            rot = np.asarray(Image.open(WURZEL / (rid + suffix + ".png")))[:, :, 0]
+            g = (rot >= 1) & (rot <= 101) & land
+            hist = np.bincount(rot[g].astype(int), weights=pix[g], minlength=256)
+            reg["bevoelkerung"][mod] = [int(round(float(x))) for x in np.cumsum(hist[1:102])]
+    idx["bevoelkerung_quelle"] = "WorldPop (www.worldpop.org), Global High Resolution Population Denominators, 2020, 1 km, an Länder angepasst (UN adjusted), Lizenz CC BY 4.0. Zitiervorschlag und Lizenz auf der WorldPop-Seite prüfen. Die Menschen einer 1-km-Zelle sind gleichmäßig auf deren Landpunkte verteilt (Näherung)."
+    idx_pfad.write_text(json.dumps(idx, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("fertig")
+
+
 def main():
     args = sys.argv[1:]
+    if "menschen" in args:
+        menschen()
+        return
     if "staedte" in args:
         WURZEL.mkdir(parents=True, exist_ok=True)
         staedte()
