@@ -147,7 +147,7 @@ html.eingebettet .feld[data-tab~="plan"] .row+.row{margin-top:6px!important}
       <button type="button" id="e-anz" aria-pressed="true">Anzahl der Gruppen</button>
       <button type="button" id="e-gr" aria-pressed="false">Größe der Gruppen</button>
     </div>
-    <div class="stepper"><button type="button" id="g-minus" aria-label="weniger">−</button><input id="g-n" type="number" inputmode="numeric" min="2" max="30" value="4" aria-label="Wert"><button type="button" id="g-plus" aria-label="mehr">+</button></div>
+    <div class="stepper"><button type="button" id="g-minus" aria-label="weniger">−</button><input id="g-n" type="number" inputmode="numeric" min="2" max="26" value="4" aria-label="Wert"><button type="button" id="g-plus" aria-label="mehr">+</button></div>
     <p class="hint" id="g-info"></p>
     <div class="modus" role="group" aria-label="Verteilung" style="margin-top:10px">
       <button type="button" id="v-zufall" aria-pressed="true">Zufällig mischen</button>
@@ -161,7 +161,7 @@ html.eingebettet .feld[data-tab~="plan"] .row+.row{margin-top:6px!important}
 
   <section id="ergebnis" data-tab="erg" hidden aria-labelledby="h-erg">
     <h2 id="h-erg" style="font-size:22px;margin:12px 0 8px">Ergebnis am Sitzplan</h2>
-    <p class="hint" style="margin:0 0 8px">Große Zahl = Gruppe, kleine Zahl = Platznummer.</p>
+    <p class="hint" style="margin:0 0 8px">Großer Buchstabe = Gruppe, kleine Zahl = Platznummer.</p>
     <div class="tafel">TAFEL (vorne)</div>
     <div class="plan erg" id="planerg" role="group" aria-label="Sitzplan mit Gruppen"></div>
     <div class="legende" id="legende"></div>
@@ -198,6 +198,7 @@ html.eingebettet .feld[data-tab~="plan"] .row+.row{margin-top:6px!important}
     for (var i = a.length - 1; i > 0; i--) { var j = zufall(i + 1), t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
   }
+  function buchst(i) { return String.fromCharCode(65 + i); }      /* Gruppen heißen A, B, C … (eine Nummer weniger zu merken) */
   function begrenzen(el, min, max) { var v = parseInt(el.value, 10); if (isNaN(v)) v = min; v = Math.max(min, Math.min(max, v)); el.value = v; return v; }
   function setze(a, b, an) { a.setAttribute("aria-pressed", an ? "true" : "false"); b.setAttribute("aria-pressed", an ? "false" : "true"); }
 
@@ -238,10 +239,10 @@ html.eingebettet .feld[data-tab~="plan"] .row+.row{margin-top:6px!important}
         var g = gruppeVon[nr];
         b.className += " g" + (((g - 1) % 10) + 1);
         if (sprecherVon[g] === nr) b.className += " sp";
-        var gr = document.createElement("span"); gr.className = "gr"; gr.textContent = g;
+        var gr = document.createElement("span"); gr.className = "gr"; gr.textContent = buchst(g - 1);
         var n = document.createElement("span"); n.className = "nr"; n.textContent = nr;
         b.appendChild(gr); b.appendChild(n);
-        b.setAttribute("aria-label", "Platz " + nr + ", Gruppe " + g + (sprecherVon[g] === nr ? ", Sprecher" : ""));
+        b.setAttribute("aria-label", "Platz " + nr + ", Gruppe " + buchst(g - 1) + (sprecherVon[g] === nr ? ", Sprecher" : ""));
       } else {
         b.textContent = nr;
         if (i === wahl) b.className += " wahl";
@@ -302,7 +303,7 @@ html.eingebettet .feld[data-tab~="plan"] .row+.row{margin-top:6px!important}
     var leg = $("legende"); leg.textContent = "";
     gruppenListe.forEach(function (g, gi) {
       var s = document.createElement("span"); s.className = "g" + ((gi % 10) + 1);
-      s.textContent = "Gruppe " + (gi + 1) + ": " + g.map(function (n) { return sprecherVon[gi + 1] === n ? n + " ★" : n; }).join(", ");
+      s.textContent = "Gruppe " + buchst(gi) + ": " + g.map(function (n) { return sprecherVon[gi + 1] === n ? n + " ★" : n; }).join(", ");
       leg.appendChild(s);
     });
     $("ergebnis").hidden = false;
@@ -312,7 +313,7 @@ html.eingebettet .feld[data-tab~="plan"] .row+.row{margin-top:6px!important}
   function ergebnisWeg() { $("ergebnis").hidden = true; $("status").textContent = ""; $("reiter").querySelector("[data-t=erg]").disabled = true; if (document.documentElement.dataset.tab === "erg") reiter("plan"); }
   function alsText() {
     return gruppenListe.map(function (g, gi) {
-      return "Gruppe " + (gi + 1) + ": " + g.map(function (n) { return sprecherVon[gi + 1] === n ? n + " (Sprecher)" : n; }).join(", ");
+      return "Gruppe " + buchst(gi) + ": " + g.map(function (n) { return sprecherVon[gi + 1] === n ? n + " (Sprecher)" : n; }).join(", ");
     }).join("\n");
   }
 
@@ -343,9 +344,9 @@ html.eingebettet .feld[data-tab~="plan"] .row+.row{margin-top:6px!important}
   $("v-zufall").onclick = function () { verteilung = "zufall"; setze($("v-zufall"), $("v-nachbar"), true); };
   $("v-nachbar").onclick = function () { verteilung = "nachbar"; setze($("v-zufall"), $("v-nachbar"), false); };
   $("g-n").addEventListener("input", info);
-  $("g-n").addEventListener("change", function () { begrenzen($("g-n"), 2, 30); info(); });
-  $("g-minus").onclick = function () { $("g-n").value = (parseInt($("g-n").value, 10) || 2) - 1; begrenzen($("g-n"), 2, 30); info(); };
-  $("g-plus").onclick = function () { $("g-n").value = (parseInt($("g-n").value, 10) || 2) + 1; begrenzen($("g-n"), 2, 30); info(); };
+  $("g-n").addEventListener("change", function () { begrenzen($("g-n"), 2, 26); info(); });
+  $("g-minus").onclick = function () { $("g-n").value = (parseInt($("g-n").value, 10) || 2) - 1; begrenzen($("g-n"), 2, 26); info(); };
+  $("g-plus").onclick = function () { $("g-n").value = (parseInt($("g-n").value, 10) || 2) + 1; begrenzen($("g-n"), 2, 26); info(); };
   $("los").onclick = losen; $("neu").onclick = losen;
   $("druck").onclick = function () { window.print(); };
   $("kopie").onclick = function () {
