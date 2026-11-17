@@ -17,6 +17,9 @@ select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);b
 <div class="kasten"><b>Systeme erschließen, Urteilen (Geo 3.6 Klimawandel, 3.1 Risikoräume, Stufe E bis G):</b> <b>Sage vorher</b>, wie viele Häuser bei einem Anstieg von 1 m überflutet werden. <b>Untersuche</b> vier Küstenformen. <b>Berechne</b>, wie viel Meeresspiegel aus Eis an Land entsteht und was schwimmendes Eis ausmacht. <b>Erkläre</b> die Unterschiede und <b>beurteile</b> Maßnahmen wie Deiche.</div>
 <p class="kasten warn"><b>Modell, keine Vorhersage:</b> Alle Küstenformen sind <b>gezeichnete Schnittbilder</b> (schematisch, nicht maßstäblich, keine echten Orte). Die Zahlen zu Eismassen, Wärmeausdehnung und Szenarien sind <b>gerundete Näherungen aus allgemeinem Wissen und nicht an der Quelle geprüft</b>. Vor dem Unterricht an einer Quelle prüfen (zum Beispiel IPCC-Bericht AR6, NASA, Alfred-Wegener-Institut). Karten mit echten Höhendaten gibt es auf der Seite „Meeresspiegel auf der Karte“. <b>Reiter 5 nutzt echte Messdaten</b> (Gezeitenpegel und Satelliten).</p>
 <p class="kasten"><b>Neu:</b> <a href="../meeresspiegel-karte/">Weltkarte und Ausschnitte mit überfluteten Küsten</a> (Satellitenbild oder gezeichnet, mit echtem Höhenmodell).</p>
+<div class="kasten" id="zk"><b>Auf der Karte ansehen:</b> Der eingestellte Anstieg (<span id="zkw">0 m</span>) wird mit übernommen.
+<label for="zkr"> Ausschnitt</label> <select id="zkr"><option value="welt">Weltkarte</option></select>
+<a class="b" id="zkl" href="../meeresspiegel-karte/" style="display:inline-block;text-decoration:none;margin-top:6px">Auf der Karte zeigen →</a></div>
 <div class="tabs" role="tablist"><button role="tab" id="t1" aria-selected="true">1. Küste</button><button role="tab" id="t2" aria-selected="false" class="sek">2. Woher das Wasser kommt</button><button role="tab" id="t3" aria-selected="false" class="sek">3. Eis im Glas</button><button role="tab" id="t4" aria-selected="false" class="sek">4. Im Internet nachsehen</button><button role="tab" id="t5" aria-selected="false" class="sek">5. Gemessen (Satelliten)</button></div>
 
 <section id="p1">
@@ -133,6 +136,12 @@ select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);b
  [].forEach.call(document.querySelectorAll('[data-vh]'),function(b){b.onclick=function(){vh=b.dataset.vh;[].forEach.call(document.querySelectorAll('[data-vh]'),function(x){x.classList.toggle('on',x===b)});glas()}});
  $('sm').oninput=glas;
  zeichnen();glas();
+
+ /* Verknüpfung mit der Karte: Anstieg und Ausschnitt gehen als Adresse mit */
+ function kartenlink(){var v=+$('msp').value;$('zkw').textContent=z(v,1)+' m';$('zkl').href='../meeresspiegel-karte/#'+$('zkr').value+','+v}
+ $('zkr').onchange=kartenlink;$('msp').addEventListener('input',kartenlink);
+ fetch('../../daten/hoehe/index.json').then(function(r){return r.json()}).then(function(d){d.regionen.forEach(function(r){if(r.id==='welt')return;var o=document.createElement('option');o.value=r.id;o.textContent=r.name;$('zkr').appendChild(o)});kartenlink()}).catch(function(){});
+ var _zz=zeichnen;zeichnen=function(){_zz();kartenlink()};kartenlink();
 
  /* ===== 5. Gemessene Reihe ===== */
  var MD=null;

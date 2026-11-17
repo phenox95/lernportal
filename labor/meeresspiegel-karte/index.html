@@ -9,7 +9,7 @@ input[type=range]{width:100%}.regler{margin:12px 0}.regler label{display:block;f
 .erg{font-size:clamp(20px,4vw,28px);font-weight:700;color:var(--dk)}.quelle a{color:var(--g)}
 </style></head>
 <body><main>
-<a class="zurueck" href="../">← Labor</a>
+<a class="zurueck" href="../">← Labor</a> · <a class="zurueck" href="../meeresspiegel/">zum Modell „Meeresspiegelanstieg“</a>
 <h1>Meeresspiegel auf der Karte</h1>
 <div class="kasten"><b>Sich orientieren, Systeme erschließen, Urteilen (Geo 3.6 und 3.1, Stufe E bis G):</b> <b>Sage vorher</b>, welche Küsten bei 1 m, 3 m und 10 m Anstieg am stärksten betroffen sind. <b>Stelle</b> den Anstieg ein und <b>beschreibe</b> die überfluteten Flächen. <b>Vergleiche</b> zwei Regionen. <b>Erkläre</b>, warum flache Deltas stärker betroffen sind als Steilküsten. <b>Beurteile</b>, was die Karte nicht zeigt (Deiche, Pumpen, Menschen, Gezeiten, Sturmfluten).</div>
 <div class="leiste"><label for="reg"><b>Ausschnitt</b></label><select id="reg"></select>
@@ -72,7 +72,10 @@ input[type=range]{width:100%}.regler{margin:12px 0}.regler label{display:block;f
  function bgset(v){hg=v;$('bg1').classList.toggle('on',v==='1');$('bg2').classList.toggle('on',v==='2');$('bg1').setAttribute('aria-pressed',String(v==='1'));$('bg2').setAttribute('aria-pressed',String(v==='2'));if(v==='2'&&R.id!=='welt')$('punkt').textContent='Das Satellitenbild gibt es nur für die Weltkarte (für Ausschnitte ist es zu grob). Wähle „Weltkarte“.';zeichnen()}
  $('bg1').onclick=function(){bgset('1')};$('bg2').onclick=function(){if(!bm)laden('../../daten/hoehe/blue-marble-2048.jpg').then(function(i){bm=i;bgset('2')}).catch(function(){$('punkt').textContent='Satellitenbild nicht geladen.'});else bgset('2')};
  $('reg').onchange=function(){region($('reg').value)};$('stz').onchange=zeichnen;$('mod').onchange=function(){MOD=$('mod').value;region($('reg').value)};
+ /* Adresse: #<ausschnitt>,<anstieg in m>,<modell> zum Beispiel #nordsee,1.5,cop (vom Tool Meeresspiegelanstieg aus) */
+ function anwenden(){var u=(location.hash||'').replace('#','').split(',');if(!IDX)return;if(u[0]&&wahl(u[0]))$('reg').value=u[0];var v=parseFloat(u[1]);if(isFinite(v))$('ms').value=Math.max(0,Math.min(10,v));if(u[2]==='cop'||u[2]==='terrarium')MOD=u[2]}
+ addEventListener('hashchange',function(){anwenden();region($('reg').value)});
  fetch('../../daten/hoehe/staedte.json').then(function(r){return r.json()}).then(function(d){ST=d;if(D){stadtBerechnen();zeichnen()}}).catch(function(){});
- fetch('../../daten/hoehe/index.json').then(function(r){return r.json()}).then(function(d){IDX=d;d.regionen.forEach(function(r){var o=document.createElement('option');o.value=r.id;o.textContent=r.name;$('reg').appendChild(o)});$('quelle').textContent=d.hinweis+(d.bevoelkerung_quelle?' Menschen: '+d.bevoelkerung_quelle:'');var u=(location.hash||'').replace('#','');if(u&&wahl(u))$('reg').value=u;region($('reg').value)}).catch(function(){$('quelle').textContent='Daten nicht geladen (Seite über einen Server öffnen).'});
+ fetch('../../daten/hoehe/index.json').then(function(r){return r.json()}).then(function(d){IDX=d;d.regionen.forEach(function(r){var o=document.createElement('option');o.value=r.id;o.textContent=r.name;$('reg').appendChild(o)});$('quelle').textContent=d.hinweis+(d.bevoelkerung_quelle?' Menschen: '+d.bevoelkerung_quelle:'');anwenden();region($('reg').value)}).catch(function(){$('quelle').textContent='Daten nicht geladen (Seite über einen Server öffnen).'});
 })();
 </script></main></body></html>
