@@ -1117,7 +1117,7 @@
   })();
 
   /* ---------- Gruppen losen (die Seite interaktiv/gruppen/ im Fenster) ---------- */
-  const gp = panelBauen("gruppen", "Gruppen losen", 90, 560);
+  const gp = panelBauen("gruppen", "Gruppen losen", 90, 640);
   gp.el.classList.add("lp-pr-rahmen");
   gp.beimOeffnen = () => {
     if (gp.inhalt.firstChild) return;

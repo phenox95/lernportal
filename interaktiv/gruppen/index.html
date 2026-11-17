@@ -62,7 +62,46 @@ label.opt input{width:26px;height:26px;accent-color:var(--g)}
 .gruppe{border-radius:10px}
 [hidden]{display:none!important}
 html.eingebettet header{display:none}
-html.eingebettet main{padding-top:10px}
+.reiter{display:none}
+/* Eingebettet (Fenster in der Präsentation): ein Schritt je Reiter, alles passt ohne Scrollen und folgt der Fenstergröße */
+html.eingebettet,html.eingebettet body{height:100%;overflow:hidden}
+html.eingebettet body{display:flex;flex-direction:column;font-size:16px;line-height:1.3}
+html.eingebettet main{flex:1;min-height:0;display:flex;flex-direction:column;padding:6px 10px 8px;max-width:none;width:100%}
+html.eingebettet .reiter{display:flex;gap:6px;margin:0 0 6px}
+html.eingebettet .reiter button{flex:1;min-height:40px;border:3px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);font-weight:700;font-size:15px;padding:0 6px}
+html.eingebettet .reiter button[aria-pressed="true"]{background:var(--ink);color:#fff}
+html.eingebettet .reiter button:disabled{opacity:.4;cursor:not-allowed}
+html.eingebettet [data-tab]{display:none}
+html[data-tab="plan"].eingebettet [data-tab~="plan"],html[data-tab="wie"].eingebettet [data-tab~="wie"],html[data-tab="erg"].eingebettet [data-tab~="erg"]{display:block}
+html.eingebettet .feld,html.eingebettet #ergebnis{border-width:2px;border-radius:12px;padding:6px 8px;margin:0 0 6px}
+html.eingebettet .feld[data-tab~="plan"]:not([hidden]),html.eingebettet #ergebnis:not([hidden]){flex:1;min-height:0}
+html[data-tab="plan"].eingebettet .feld[data-tab~="plan"],html[data-tab="erg"].eingebettet #ergebnis:not([hidden]){display:flex;flex-direction:column}
+html.eingebettet .feld h2,html.eingebettet #h-erg,html.eingebettet #ergebnis>.hint{display:none}
+html.eingebettet .maße{gap:10px;margin:0 0 6px;align-items:flex-end}
+html.eingebettet .maße label{display:inline;margin:0 6px 0 0;font-size:14px}
+html.eingebettet .maße>div{display:flex;align-items:center}
+html.eingebettet .stepper button{width:38px;min-height:38px;font-size:22px;border-width:2px;border-radius:10px}
+html.eingebettet .stepper input,html.eingebettet input.txt,html.eingebettet select{min-height:38px;font-size:18px;border-width:2px;border-radius:10px}
+html.eingebettet .stepper input{width:3em}
+html.eingebettet .modus{margin:0 0 6px}
+html.eingebettet .modus button{min-height:38px;font-size:14px;border-width:2px;border-radius:10px}
+html.eingebettet .hint{font-size:13px;margin:3px 0 0}
+html.eingebettet #b-hilfe{margin:0 0 4px!important}
+html.eingebettet .tafel{font-size:12px;margin:0 auto 4px}
+html.eingebettet .feld[data-tab~="plan"] .plan,html.eingebettet #planerg{flex:1;min-height:60px;gap:4px;margin:0 auto 4px;max-width:none;width:100%}
+html.eingebettet .platz{aspect-ratio:auto;min-height:0;font-size:clamp(12px,3.4vmin,26px);border-width:2px;border-radius:8px}
+html.eingebettet .platz .gr{font-size:clamp(14px,4.6vmin,34px)}
+html.eingebettet .platz .nr{font-size:clamp(10px,2.2vmin,14px)}
+html.eingebettet .b{min-height:40px;font-size:16px;border-radius:10px;padding:0 12px}
+html.eingebettet .b.gross{min-height:52px;font-size:20px}
+html.eingebettet .row{gap:6px}
+html.eingebettet #renum{flex:none}
+html.eingebettet .legende{gap:4px;margin:0 0 4px;max-height:24%;overflow:auto}
+html.eingebettet .legende span{font-size:14px;padding:2px 8px;border-width:2px}
+html.eingebettet .status{min-height:1.2em;margin:2px 0 0;font-size:14px}
+html.eingebettet label.opt{min-height:36px;font-size:16px;margin:2px 0 0}
+html.eingebettet .feld[data-tab~="plan"] .row+.row{margin-top:6px!important}
+
 .g1{background:#F6D7D7}.g2{background:#D7E6F6}.g3{background:#DDF0D2}.g4{background:#F9EBB8}.g5{background:#E6D9F3}.g6{background:#CFEFEA}.g7{background:#FADDC4}.g8{background:#E1E1E1}.g9{background:#F3D3E6}.g10{background:#D5E8C0}
 @media (max-width:30rem){.platz{font-size:18px;border-width:2px;border-radius:8px}.plan{gap:4px}.stepper button{width:46px}}
 @media print{header,.feld,.aktionen,#los,.status,.hint,.tafel+.plan:not(.erg){display:none}.platz{border-width:2px}}
@@ -75,7 +114,8 @@ html.eingebettet main{padding-top:10px}
   <h1>Gruppen losen – mit Sitzplan</h1>
 </header>
 <main>
-  <section class="feld" aria-labelledby="h-plan">
+  <nav class="reiter" id="reiter" aria-label="Schritte"><button type="button" data-t="plan" aria-pressed="true">1 Sitzplan</button><button type="button" data-t="wie" aria-pressed="false">2 Einteilen</button><button type="button" data-t="erg" aria-pressed="false" disabled>3 Ergebnis</button></nav>
+  <section class="feld" data-tab="plan" aria-labelledby="h-plan">
     <h2 id="h-plan">1 · Sitzplan einstellen</h2>
     <div class="maße">
       <div><label for="r-n">Reihen</label><div class="stepper"><button type="button" id="r-minus" aria-label="eine Reihe weniger">−</button><input id="r-n" type="number" inputmode="numeric" min="1" max="8" value="4"><button type="button" id="r-plus" aria-label="eine Reihe mehr">+</button></div></div>
@@ -101,7 +141,7 @@ html.eingebettet main{padding-top:10px}
     <p class="hint">Gespeichert werden nur Raster und Nummern in diesem Browser, keine Namen.</p>
   </section>
 
-  <section class="feld" aria-labelledby="h-wie">
+  <section class="feld" data-tab="wie" aria-labelledby="h-wie">
     <h2 id="h-wie">2 · Wie wird eingeteilt?</h2>
     <div class="modus" role="group" aria-label="Einteilungsart">
       <button type="button" id="e-anz" aria-pressed="true">Anzahl der Gruppen</button>
@@ -116,10 +156,10 @@ html.eingebettet main{padding-top:10px}
     <label class="opt"><input type="checkbox" id="sprecher">In jeder Gruppe eine Sprecher-Nummer losen (★)</label>
   </section>
 
-  <button type="button" class="b gross" id="los">Gruppen losen</button>
-  <p class="status" id="status" role="status" aria-live="polite"></p>
+  <button type="button" class="b gross" id="los" data-tab="wie">Gruppen losen</button>
+  <p class="status" id="status" data-tab="plan wie erg" role="status" aria-live="polite"></p>
 
-  <section id="ergebnis" hidden aria-labelledby="h-erg">
+  <section id="ergebnis" data-tab="erg" hidden aria-labelledby="h-erg">
     <h2 id="h-erg" style="font-size:22px;margin:12px 0 8px">Ergebnis am Sitzplan</h2>
     <p class="hint" style="margin:0 0 8px">Große Zahl = Gruppe, kleine Zahl = Platznummer.</p>
     <div class="tafel">TAFEL (vorne)</div>
@@ -138,6 +178,13 @@ html.eingebettet main{padding-top:10px}
   var $ = function (id) { return document.getElementById(id); };
   var rows = 4, cols = 6, seats = [], wahl = -1, bearb = "platz", einteilung = "anz", verteilung = "zufall";
   var SPEICHER = "lp-gruppen-plaene";
+  var EINGEBETTET = document.documentElement.classList.contains("eingebettet");
+  function reiter(t) {
+    document.documentElement.dataset.tab = t;
+    [].forEach.call(document.querySelectorAll("#reiter button"), function (b) { b.setAttribute("aria-pressed", b.dataset.t === t ? "true" : "false"); });
+  }
+  [].forEach.call(document.querySelectorAll("#reiter button"), function (b) { b.onclick = function () { reiter(b.dataset.t); }; });
+  reiter("plan");
 
   function zufall(n) {
     var c = window.crypto || window.msCrypto;
@@ -178,6 +225,7 @@ html.eingebettet main{padding-top:10px}
   function zeichnePlan(box, ergebnis) {
     box.textContent = "";
     box.style.gridTemplateColumns = "repeat(" + cols + ",1fr)";
+    box.style.gridTemplateRows = EINGEBETTET ? "repeat(" + rows + ",minmax(0,1fr))" : "";
     seats.forEach(function (nr, i) {
       var b = document.createElement(ergebnis ? "div" : "button");
       b.className = "platz";
@@ -258,9 +306,10 @@ html.eingebettet main{padding-top:10px}
       leg.appendChild(s);
     });
     $("ergebnis").hidden = false;
-    $("ergebnis").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("reiter").querySelector("[data-t=erg]").disabled = false;
+    if (EINGEBETTET) reiter("erg"); else $("ergebnis").scrollIntoView({ behavior: "smooth", block: "start" });
   }
-  function ergebnisWeg() { $("ergebnis").hidden = true; $("status").textContent = ""; }
+  function ergebnisWeg() { $("ergebnis").hidden = true; $("status").textContent = ""; $("reiter").querySelector("[data-t=erg]").disabled = true; if (document.documentElement.dataset.tab === "erg") reiter("plan"); }
   function alsText() {
     return gruppenListe.map(function (g, gi) {
       return "Gruppe " + (gi + 1) + ": " + g.map(function (n) { return sprecherVon[gi + 1] === n ? n + " (Sprecher)" : n; }).join(", ");
