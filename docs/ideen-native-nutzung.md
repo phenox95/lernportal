@@ -481,3 +481,20 @@ Ausgewählt nach Nutzen für den Unterricht, Lizenzklarheit und Passung zu dem, 
 8. **Exkursionsorte:** Botanischer Garten, Naturschutzstationen, Umweltämter: Schulangebote bei den Anbietern erfragen, nichts hier übernehmen, bevor es bestätigt ist.
 9. **WCAG 1.4.12:** Prüfwerte an der W3C-Seite nachlesen.
 10. Alle Links in 11.2 stammen aus Suchtreffern. Beim ersten Öffnen prüfen, ob sie noch stimmen.
+
+## 12. Nachträge (Hinweise der Lehrkraft)
+
+### 12.1 PhET „Natural Selection“ (Hinweis vom 17.11.2026)
+
+| Feld | Eintrag |
+|---|---|
+| Link | [phet.colorado.edu/de/simulations/natural-selection](https://phet.colorado.edu/de/simulations/natural-selection) |
+| Fach, Passung | Biologie, Basiskonzept Entwicklung (Variabilität und Angepasstheit). Jahrgang und Themenfeld sind **zuzuordnen** (nicht belegt). Passt zum Muster „erst vermuten, dann simulieren, dann Modell beurteilen“ wie `labor/raeuber-beute/`: Die Klasse sagt vorher, wie sich ein Merkmal in der Population verändert, lässt die Simulation laufen und beurteilt die Modellgrenzen |
+| Inhalt (nicht abgerufen) | Aus dem Titel und allgemeiner Kenntnis: Population mit erblichen Merkmalen und Umweltfaktoren. **Ungeprüft**, Seite war im Netz der Entwicklungsumgebung gesperrt (Host `phet.colorado.edu` nicht freigegeben) |
+| Sprache | Deutsche Adresse (`/de/`) vorhanden, Umfang der Übersetzung **ungeprüft** |
+| Lizenz (Suchbeleg, ungeprüft) | Laut Suchtreffern auf den PhET-Lizenzseiten: reguläre HTML-Simulationen unter **CC BY 4.0** mit Namensnennung „PhET Interactive Simulations, University of Colorado Boulder, https://phet.colorado.edu“, Quellcode GPL-3.0 bzw. MIT, Name und Logo sind Marken (kein Freibrief). Eine Sonderregel „historische Sammlung“ mit Stichtag 29.03.2026 wird erwähnt, deren Inhalt ist **offen**. Die Aussage aus Abschnitt 11.1 (Wechsel der Kernsammlung zu CC BY-NC) ließ sich in der Suche am 17.11.2026 **nicht bestätigen**. Beides vor einer Ablage im Repository auf den PhET-Lizenzseiten lesen |
+| Umgang im Portal | **Verlinken, nicht kopieren**: Linkkarte auf der Materialseite mit Namensnennung und Hinweis „öffnet PhET (Dritter)“. Kein Einbetten per iframe (Datenschutz, Abschnitt 9). Optional später Offline-Kopie nur nach gelesenem Lizenzwortlaut |
+| Aufwand | S (Linkkarte und Aufgabenblatt), M mit passender Folge und Arbeitsblatt |
+| Status | ungeprüft (Suchbeleg), Quellseite nicht gelesen |
+
+Quellen der Suche: [PhET Lizenz HTML](https://phet.colorado.edu/en/licensing/html), [Historische Sammlung](https://phet.colorado.edu/be/licensing/html), [Natural Selection, Quellcode](https://awesome.ecosyste.ms/projects/github.com%2Fphetsims%2Fnatural-selection).
