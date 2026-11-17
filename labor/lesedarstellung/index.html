@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Lesedarstellung einstellen</title><link rel="stylesheet" href="../labor.css">
+<style>
+.regler{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:12px 0}.regler label{display:block;font-weight:700}input[type=range]{width:100%}select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+#text{border:2px solid var(--g);border-radius:14px;padding:16px 20px;max-width:75ch;text-align:left;hyphens:manual}
+#text.hell{background:#fff;color:#111}#text.creme{background:#f6f0e0;color:#222}#text.dunkel{background:#14201b;color:#eef5f1}
+.leiste{display:flex;gap:8px;flex-wrap:wrap}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Lesedarstellung einstellen</h1>
+<div class="kasten">Prototyp für den Lesemodus des Portals. Jede Person stellt selbst ein, was ihr das Lesen leichter macht. Es gibt keine feste „LRS-Schrift“ und keine Behauptung, dass eine Einstellung allen hilft. Die Wahl bleibt nur auf diesem Gerät. <b>Probiere</b> mit dem Textstück aus, was für dich angenehmer ist.</div>
+<div class="regler">
+<div><label for="gr">Schriftgröße: <output id="gro"></output></label><input type="range" id="gr" min="16" max="32" step="1" value="18"></div>
+<div><label for="zl">Zeilenabstand: <output id="zlo"></output></label><input type="range" id="zl" min="1.2" max="2.2" step="0.05" value="1.5"></div>
+<div><label for="ta">Textabstand: <output id="tao"></output></label><input type="range" id="ta" min="0" max="0.12" step="0.01" value="0"></div>
+<div><label for="hg">Hintergrund</label><select id="hg"><option value="hell">hell</option><option value="creme">creme</option><option value="dunkel">dunkel</option></select></div>
+<div><label for="sf">Schrift</label><select id="sf"><option value="sans">Systemschrift (serifenlos)</option><option value="mono">Gleichabständig</option><option value="serif">Mit Serifen</option></select></div>
+</div>
+<div class="leiste"><button type="button" class="sek" id="rs">Zurücksetzen</button></div>
+<div id="text" class="hell">
+<h2 style="margin-top:0">Wie schützt eine Impfung?</h2>
+<p>Ein Impfstoff enthält Teile eines Erregers oder einen abgeschwächten Erreger. Er macht nicht krank. Das Immunsystem erkennt den Erreger trotzdem und bildet Antikörper. Außerdem bleiben Gedächtniszellen im Körper.</p>
+<p>Kommt der echte Erreger später, reagiert das Immunsystem schnell. Die Krankheit bricht dann nicht aus oder verläuft milder.</p>
+</div>
+<p class="quelle">Textabstand: Buchstabenabstand und Wortabstand wachsen gemeinsam (Wortabstand etwa dreimal so stark), damit Wörter erkennbar bleiben. Stand der Forschung: Spezialschriften zeigen im Mittel keinen sicheren Vorteil, Abstände helfen manchen Kindern, anderen nicht. Darum Wahlfreiheit.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}var KEY='lp-lesen-labor';var def={gr:18,zl:1.5,ta:0,hg:'hell',sf:'sans'};
+ var F={sans:'Andika,Verdana,Arial,sans-serif',mono:'"Courier New",ui-monospace,monospace',serif:'Georgia,"Times New Roman",serif'};
+ function lies(){try{return Object.assign({},def,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){return Object.assign({},def)}}
+ function speichern(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ var s=lies();
+ function an(){var t=$('text');t.style.fontSize=s.gr+'px';t.style.lineHeight=s.zl;t.style.letterSpacing=s.ta+'em';t.style.wordSpacing=(s.ta*3)+'em';t.style.fontFamily=F[s.sf];t.className=s.hg;
+  $('gro').textContent=s.gr+' px';$('zlo').textContent=String(s.zl).replace('.',',');$('tao').textContent=s.ta==0?'normal':String(s.ta).replace('.',',')+' em';speichern(s)}
+ function feld(){$('gr').value=s.gr;$('zl').value=s.zl;$('ta').value=s.ta;$('hg').value=s.hg;$('sf').value=s.sf}
+ ['gr','zl','ta'].forEach(function(i){$(i).oninput=function(){s[i]=parseFloat($(i).value);an()}});['hg','sf'].forEach(function(i){$(i).onchange=function(){s[i]=$(i).value;an()}});
+ $('rs').onclick=function(){s=Object.assign({},def);feld();an()};feld();an();
+})();
+</script></main></body></html>

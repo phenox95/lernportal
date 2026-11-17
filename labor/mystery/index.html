@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Mystery digital</title><link rel="stylesheet" href="../labor.css">
+<style>
+#brett{position:relative;height:620px;border:2px dashed var(--g);border-radius:14px;overflow:hidden;touch-action:none;background:var(--bg)}
+.kt{position:absolute;width:190px;min-height:70px;padding:8px 10px;border-radius:10px;border:2px solid var(--ink);background:#fff;color:#1A2B24;font-size:15px;line-height:1.35;cursor:grab;user-select:none;box-shadow:0 2px 6px #0003}
+.kt.u{background:#cfe0f6}.kt.w{background:#f6c9c0}.kt.n{background:#e4e4e4}.kt:focus-visible{outline:3px solid var(--y)}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}textarea{width:100%;min-height:90px;font:inherit;padding:10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+.lg{font-size:15px}.lg i{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid #000;margin:0 4px 0 12px;vertical-align:-2px}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Mystery digital</h1>
+<div class="kasten"><b>Systeme erschließen (Verknüpfen, Stufe E bis G):</b> <b>Lies</b> die Karten. <b>Ordne</b> sie auf dem Brett so, dass eine Erklärung für die Leitfrage entsteht (Karten nahe zusammen oder in einer Kette). <b>Kennzeichne</b> mit „Farbe wechseln“ Ursachen (blau), Wirkungen (rot) und unwichtige Karten (grau). <b>Erkläre</b> dann in 3 bis 5 Sätzen und <b>begründe</b> auch, welche Karten du nicht gebraucht hast.</div>
+<p class="kasten"><b>Leitfrage:</b> <span id="lf"></span></p>
+<div class="leiste"><button type="button" class="sek" id="farbe">Farbe wechseln (Karte wählen)</button><button type="button" class="sek" id="misch">Karten mischen</button><button type="button" class="sek" id="exp">Anordnung als Text</button></div>
+<p class="lg"><i style="background:#cfe0f6"></i>Ursache<i style="background:#f6c9c0"></i>Wirkung<i style="background:#e4e4e4"></i>nicht wichtig</p>
+<div id="brett" role="application" aria-label="Brett mit Karten. Karten mit Maus oder Finger ziehen, mit Pfeiltasten verschieben"></div>
+<h2>Eigene Karten (optional)</h2>
+<p class="quelle">Eine Karte je Zeile. Die erste Zeile ist die Leitfrage. Nichts wird gespeichert.</p>
+<textarea id="eig" aria-label="Eigene Karten, erste Zeile Leitfrage"></textarea><div class="leiste"><button type="button" class="sek" id="lad">Eigene Karten laden</button></div>
+<pre id="aus" class="kasten" style="white-space:pre-wrap" aria-live="polite"></pre>
+<p class="kasten warn"><b>Beispiel (Entwurf, fachlich gegenlesen):</b> Die Karten sind selbst geschrieben und vereinfacht. Echte Mystery-Karten aus Verlagswerken nicht übernehmen (Urheberrecht), Methode nach David Leat.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var BSP=['Warum bleiben die Tomatenpflanzen im Schulgarten klein?','Das Beet liegt an einer hohen Mauer im Norden. Im Sommer scheint dort nur etwa 3 Stunden täglich die Sonne.','Die Blätter sind hell, fast gelbgrün.','Die Pflanzen in einem sonnigen Beet vor dem Haus sind doppelt so hoch.','Der Boden im Beet ist sandig.','Es wird jeden Tag gegossen.','Pflanzen bilden in den grünen Blättern mit Lichtenergie Traubenzucker.','Aus Traubenzucker bauen Pflanzen neue Teile, zum Beispiel Blätter und Früchte.','Im sonnigen Beet wird auch jeden Tag gegossen.','Der Hausmeister mäht den Rasen am Montag.','Im Beet an der Mauer wachsen nur wenige Tomaten, sie reifen spät.','Die Tomatensorte ist in beiden Beeten gleich.'];
+ var K=[],drag=null,sel=null,FARBE=['','u','w','n'];
+ function bau(liste){$('lf').textContent=liste[0];K=liste.slice(1);var b=$('brett');b.textContent='';var m=K.slice().sort(function(){return Math.random()-.5});
+  m.forEach(function(t,i){var d=document.createElement('div');d.className='kt';d.tabIndex=0;d.textContent=t;d.dataset.f='0';var cols=Math.max(1,Math.floor((b.clientWidth||900)/205));d.style.left=(8+(i%cols)*205)+'px';d.style.top=(8+Math.floor(i/cols)*105)+'px';b.appendChild(d);
+   d.addEventListener('pointerdown',function(e){sel=d;[].forEach.call(b.children,function(c){c.style.zIndex=1});d.style.zIndex=5;drag={d:d,ox:e.clientX-d.offsetLeft,oy:e.clientY-d.offsetTop};d.setPointerCapture(e.pointerId);e.preventDefault()});
+   d.addEventListener('keydown',function(e){var s=e.shiftKey?40:12,k=e.key;if(k==='ArrowLeft')d.style.left=Math.max(0,d.offsetLeft-s)+'px';else if(k==='ArrowRight')d.style.left=Math.min(b.clientWidth-d.offsetWidth,d.offsetLeft+s)+'px';else if(k==='ArrowUp')d.style.top=Math.max(0,d.offsetTop-s)+'px';else if(k==='ArrowDown')d.style.top=Math.min(b.clientHeight-d.offsetHeight,d.offsetTop+s)+'px';else if(k==='Enter'||k===' '){sel=d;farbe()}else return;e.preventDefault()});
+   d.addEventListener('focus',function(){sel=d})});}
+ document.addEventListener('pointermove',function(e){if(!drag)return;var b=$('brett');drag.d.style.left=Math.max(0,Math.min(b.clientWidth-drag.d.offsetWidth,e.clientX-drag.ox))+'px';drag.d.style.top=Math.max(0,Math.min(b.clientHeight-drag.d.offsetHeight,e.clientY-drag.oy))+'px'});
+ document.addEventListener('pointerup',function(){drag=null});
+ function farbe(){if(!sel)return;var f=(+sel.dataset.f+1)%4;sel.dataset.f=f;sel.className='kt '+FARBE[f]}
+ $('farbe').onclick=farbe;$('misch').onclick=function(){bau([$('lf').textContent].concat(K))};
+ $('exp').onclick=function(){var ks=[].slice.call($('brett').children).sort(function(a,b){return a.offsetLeft-b.offsetLeft||a.offsetTop-b.offsetTop});
+  var n={0:'ohne Kennzeichen',1:'Ursache',2:'Wirkung',3:'nicht wichtig'};$('aus').textContent='Leitfrage: '+$('lf').textContent+'\n'+ks.map(function(k,i){return (i+1)+'. ['+n[k.dataset.f]+'] '+k.textContent}).join('\n')};
+ $('lad').onclick=function(){var z=$('eig').value.split('\n').map(function(s){return s.trim()}).filter(Boolean);if(z.length<3){$('aus').textContent='Mindestens eine Leitfrage und zwei Karten.';return}bau(z)};
+ bau(BSP);
+})();
+</script></main></body></html>

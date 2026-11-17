@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Papierkarten-Abstimmung</title><link rel="stylesheet" href="../labor.css">
+<style>
+.tabs{display:flex;gap:8px;margin:14px 0}.tabs button[aria-selected=true]{background:var(--dk);color:#fff;outline:3px solid var(--y)}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}input[type=number]{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink);width:6em}
+#karten{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.kk{position:relative;aspect-ratio:1;border:2px solid #000;background:#fff;color:#000;break-inside:avoid}.kk svg{position:absolute;inset:22%;width:56%;height:56%}.kk b{position:absolute;font-size:22px}.kk .a{top:3%;left:50%;transform:translateX(-50%)}.kk .b{right:5%;top:50%;transform:translateY(-50%)}.kk .c{bottom:3%;left:50%;transform:translateX(-50%) rotate(180deg)}.kk .d{left:5%;top:50%;transform:translateY(-50%)}.kk small{position:absolute;left:4px;top:3px;font-size:11px}
+video{width:100%;max-width:520px;border-radius:12px;background:#000}
+.bal{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:end;height:200px;margin:12px 0}.bal div{background:var(--g);border-radius:8px 8px 0 0;position:relative;min-height:4px}.bal div i{position:absolute;top:-26px;left:0;right:0;text-align:center;font-style:normal;font-weight:700}.bal div.ok{background:#1a8f4a}
+.bu{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;font-weight:700;font-size:26px}
+@media print{body{background:#fff}.nodruck{display:none!important}#karten{grid-template-columns:repeat(3,1fr)}main{max-width:none}}
+</style></head>
+<body><main>
+<a class="zurueck nodruck" href="../">← Labor</a>
+<h1 class="nodruck">Papierkarten-Abstimmung</h1>
+<div class="kasten nodruck"><b>So geht es:</b> Jede Person bekommt eine Karte mit eigenem QR-Code und den Buchstaben A, B, C, D an den Seiten. Zum Antworten <b>hält sie die Karte so, dass ihr Buchstabe oben steht</b>. Das Gerät mit Kamera (iPad, Handy, Laptop) liest alle Karten und zeigt die Verteilung. Keine Namen, nur Kartennummern. Die Auswertung bleibt im Browser.</div>
+<div class="tabs nodruck" role="tablist"><button role="tab" id="t1" aria-selected="true">1. Karten drucken</button><button role="tab" id="t2" aria-selected="false" class="sek">2. Abstimmen und scannen</button></div>
+<section id="p1"><div class="leiste nodruck"><label for="n"><b>Anzahl Karten</b></label><input type="number" id="n" min="1" max="36" value="12"><button type="button" id="mk">Karten zeigen</button><button type="button" class="sek" id="dr">Drucken</button></div><div id="karten"></div></section>
+<section id="p2" hidden>
+<div class="leiste"><label for="q"><b>Frage Nr.</b></label><input type="number" id="q" min="1" value="1"><label for="ri"><b>richtig ist</b> (optional)</label><select id="ri" style="font:inherit;min-height:44px"><option value="">–</option><option>A</option><option>B</option><option>C</option><option>D</option></select><label for="erw"><b>Klassengröße</b></label><input type="number" id="erw" min="1" max="36" value="12">
+<button type="button" id="cam">Kamera starten</button><button type="button" class="sek" id="camx" disabled>Stopp</button><button type="button" class="sek" id="neu">Neue Frage</button></div>
+<video id="v" playsinline muted hidden aria-label="Kamerabild"></video>
+<p id="st" class="kasten" aria-live="polite">Die Kamera startet erst nach Antippen. Kein Bild wird gespeichert. Hinten liegende Kamera benutzen (Frontkamera spiegelt, A und B vertauscht).</p>
+<div class="bal" id="bal" aria-hidden="true"></div><div class="bu"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+<p id="sum" aria-live="polite"></p>
+</section>
+<script src="../../assets/js/qrcode.js"></script><script src="../../assets/js/vendor/jsQR.js" defer></script>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ function tab(n){$('p1').hidden=n!==1;$('p2').hidden=n!==2;$('t1').setAttribute('aria-selected',String(n===1));$('t2').setAttribute('aria-selected',String(n===2));$('t1').className=n===1?'':'sek';$('t2').className=n===2?'':'sek'}
+ $('t1').onclick=function(){tab(1)};$('t2').onclick=function(){tab(2)};
+ function svg(t){var q=window.qrcode(0,'M');q.addData(t,'Byte');q.make();return q.createSvgTag({cellSize:4,margin:0,scalable:true})}
+ $('mk').onclick=function(){var n=+$('n').value,h='';for(var i=1;i<=n;i++){h+='<div class="kk"><small>Nr. '+i+'</small><b class="a">A</b><b class="b">B</b><b class="c">C</b><b class="d">D</b>'+svg('LPK:'+i)+'</div>'}$('karten').innerHTML=h;$('erw').value=n};
+ $('dr').onclick=function(){window.print()};$('mk').click();
+ /* Winkel der logischen Code-Oberkante im Bild: 0 = aufrecht = A, -90 = B, 180 = C, +90 = D */
+ function buchstabe(loc){var a=Math.atan2(loc.topRightCorner.y-loc.topLeftCorner.y,loc.topRightCorner.x-loc.topLeftCorner.x)*180/Math.PI;var s=Math.round(a/90)*90;if(s===-180)s=180;return{0:'A','-90':'B',180:'C',90:'D'}[String(s)]}
+ var antw={},nq=1;
+ function lesen(daten,w,h){if(!window.jsQR)return null;var c=window.jsQR(daten,w,h,{inversionAttempts:'dontInvert'});if(!c||!/^LPK:\d+$/.test(c.data))return null;var id=+c.data.slice(4);return{id:id,b:buchstabe(c.location)}}
+ window.LPKarten={lesen:lesen,buchstabe:buchstabe,melde:melde};
+ function melde(o){if(!o||!o.b)return;antw[o.id]=o.b;zeig()}
+ function zeig(){var z={A:0,B:0,C:0,D:0},n=0;Object.keys(antw).forEach(function(k){z[antw[k]]++;n++});var mx=Math.max(1,z.A,z.B,z.C,z.D),ri=$('ri').value;
+  $('bal').innerHTML=['A','B','C','D'].map(function(k){return '<div class="'+(ri===k?'ok':'')+'" style="height:'+Math.max(2,z[k]/mx*100)+'%"><i>'+z[k]+'</i></div>'}).join('');
+  var e=+$('erw').value||n;$('sum').textContent=n+' von '+e+' Karten gelesen.'+(ri?' Richtig: '+Math.round(z[ri]/Math.max(1,n)*100)+' %.':'')}
+ $('ri').onchange=zeig;$('erw').oninput=zeig;
+ $('neu').onclick=function(){antw={};$('q').value=++nq;$('ri').value='';zeig()};
+ var strom=null,loop=null,cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});
+ function takt(){var v=$('v');if(!v.videoWidth)return;cv.width=v.videoWidth;cv.height=v.videoHeight;cx.drawImage(v,0,0);var id=cx.getImageData(0,0,cv.width,cv.height);melde(lesen(id.data,id.width,id.height))}
+ $('cam').onclick=function(){if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$('st').textContent='Kein Kamerazugriff in diesem Browser (https oder localhost nötig).';return}
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){strom=s;$('v').srcObject=s;$('v').hidden=false;$('v').play();$('camx').disabled=false;$('st').textContent='Alle Karten in das Bild halten, Buchstabe oben.';loop=setInterval(takt,150)}).catch(function(){$('st').textContent='Kein Zugriff auf die Kamera.'})};
+ function stopp(){clearInterval(loop);if(strom){strom.getTracks().forEach(function(t){t.stop()});strom=null}$('v').hidden=true;$('camx').disabled=true}
+ $('camx').onclick=stopp;addEventListener('pagehide',stopp);zeig();
+})();
+</script></main></body></html>
