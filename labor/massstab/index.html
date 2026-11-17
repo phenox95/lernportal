@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Schulhof-Maßstab</title><link rel="stylesheet" href="../labor.css">
+<style>.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}input[type=number]{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink);width:8em}.erg{font-size:30px;font-weight:700;color:var(--dk)}.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:640px}th,td{padding:6px 10px;border-bottom:1px solid #8aa59a55;text-align:left}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Schulhof-Maßstab</h1>
+<div class="kasten"><b>Methoden anwenden (Maßstab, Stufe E bis F):</b> Teil A: <b>Berechne</b> den Maßstab einer Karte aus gemessener Kartenstrecke und wirklicher Strecke. Teil B: <b>Miss</b> mit dem Handy die Strecke zwischen zwei Orten (Standort) und <b>vergleiche</b> sie mit deinen Schritten. <b>Beurteile</b> die Genauigkeit.</div>
+<h2>A) Maßstab berechnen</h2>
+<div class="leiste"><label for="k">Strecke auf der Karte (cm)</label><input type="number" id="k" min="0" step="any" value="4"><label for="w">wirkliche Strecke (m)</label><input type="number" id="w" min="0" step="any" value="200"></div>
+<p class="erg" id="ms" aria-live="polite"></p>
+<div class="leiste"><label for="m2">Maßstab 1 :</label><input type="number" id="m2" min="1" step="1" value="5000"><label for="k2">Kartenstrecke (cm)</label><input type="number" id="k2" min="0" step="any" value="3"></label></div>
+<p id="w2" class="kasten" aria-live="polite"></p>
+<h2>B) Strecke mit dem Handy messen</h2>
+<div class="leiste"><button type="button" id="p1">Punkt A setzen</button><button type="button" id="p2" disabled>Punkt B setzen</button><button type="button" class="sek" id="rs">Zurücksetzen</button></div>
+<p id="st" class="kasten" aria-live="polite">Der Standort wird erst nach Antippen gelesen, bleibt im Browser und wird nicht gespeichert oder gesendet. Draußen und mit freiem Himmel ist die Messung genauer.</p>
+<div class="tw"><table><tbody><tr><th>Luftlinie A–B</th><td id="d"></td></tr><tr><th>Genauigkeit des Geräts (Messunsicherheit)</th><td id="gen"></td></tr></tbody></table></div>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}function z(x,n){return String(Math.round(x*Math.pow(10,n||0))/Math.pow(10,n||0)).replace('.',',')}
+ function a(){var k=+$('k').value,w=+$('w').value;$('ms').textContent=(k>0&&w>0)?'Maßstab 1 : '+Math.round(w*100/k).toLocaleString('de-DE'):'Gib beide Werte ein.'}
+ function b(){var m=+$('m2').value,k=+$('k2').value;$('w2').textContent=(m>0&&k>0)?k+' cm auf der Karte sind '+z(k*m/100,1)+' m in Wirklichkeit.':''}
+ ['k','w'].forEach(function(i){$(i).oninput=a});['m2','k2'].forEach(function(i){$(i).oninput=b});a();b();
+ var A=null,Bp=null;
+ function hav(p,q){var R=6371000,r=Math.PI/180,dLa=(q.lat-p.lat)*r,dLo=(q.lon-p.lon)*r,x=Math.sin(dLa/2)*Math.sin(dLa/2)+Math.cos(p.lat*r)*Math.cos(q.lat*r)*Math.sin(dLo/2)*Math.sin(dLo/2);return 2*R*Math.asin(Math.sqrt(x))}
+ window.LPMassstab={abstand:hav};
+ function pos(cb){if(!navigator.geolocation){$('st').textContent='Dieser Browser kann keinen Standort bestimmen.';return}$('st').textContent='Suche Standort …';navigator.geolocation.getCurrentPosition(function(p){cb({lat:p.coords.latitude,lon:p.coords.longitude,acc:p.coords.accuracy})},function(){$('st').textContent='Kein Zugriff auf den Standort (abgelehnt oder nicht verfügbar).'},{enableHighAccuracy:true,timeout:15000,maximumAge:0})}
+ $('p1').onclick=function(){pos(function(p){A=p;$('p2').disabled=false;$('st').textContent='Punkt A gesetzt (Genauigkeit etwa '+z(p.acc,0)+' m). Gehe zu Punkt B.'})};
+ $('p2').onclick=function(){pos(function(p){Bp=p;var d=hav(A,Bp);$('d').textContent=z(d,1)+' m';$('gen').textContent='etwa ± '+z(A.acc+Bp.acc,0)+' m';$('st').textContent='Gemessen. Vergleiche mit Schritten (etwa '+z(d/0.7,0)+' Schritte zu 70 cm).'})};
+ $('rs').onclick=function(){A=Bp=null;$('p2').disabled=true;$('d').textContent='';$('gen').textContent='';$('st').textContent='Zurückgesetzt.'};
+})();
+</script></main></body></html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Kompass</title><link rel="stylesheet" href="../labor.css">
+<style>#ro{width:min(80vw,340px);height:auto;display:block;margin:12px auto}.grad{font-size:44px;font-weight:700;text-align:center;color:var(--dk)}.leiste{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}input[type=range]{width:100%}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Kompass und Himmelsrichtung</h1>
+<div class="kasten"><b>Sich orientieren (Karten, Orientierungsraster, Stufe D bis E):</b> <b>Bestimme</b> mit dem Gerät die Himmelsrichtung, in die dein Handy zeigt. <b>Vergleiche</b> mit der Karte und <b>nenne</b> die Richtung zu drei Orten im Schulhaus oder auf dem Schulhof. <b>Beurteile</b>, wie genau der Kompass ist (Metall, Magnete, Gerät).</div>
+<svg id="ro" viewBox="-110 -110 220 220" role="img" aria-label="Kompassrose"><circle r="100" fill="none" stroke="currentColor" stroke-width="3"/><g id="rose"><text y="-78" text-anchor="middle" font-size="22" font-weight="700" fill="#c0392b">N</text><text x="80" y="8" text-anchor="middle" font-size="20" font-weight="700" fill="currentColor">O</text><text y="94" text-anchor="middle" font-size="20" font-weight="700" fill="currentColor">S</text><text x="-80" y="8" text-anchor="middle" font-size="20" font-weight="700" fill="currentColor">W</text></g><path d="M0 -60 L8 0 L-8 0 Z" fill="#c0392b" opacity=".0"/><path d="M0 -95 L10 -75 L-10 -75 Z" fill="#F4B400" stroke="#000" stroke-width="2"/></svg>
+<p class="grad" id="gr" aria-live="polite">– °</p><p class="grad" style="font-size:28px" id="ri"></p>
+<div class="leiste"><button type="button" id="an">Kompass starten</button></div>
+<label for="hand"><b>Ohne Sensor:</b> Richtung von Hand einstellen</label><input type="range" id="hand" min="0" max="359" value="0">
+<p id="st" class="kasten" aria-live="polite">Der Sensor wird erst nach Antippen gelesen. Nichts wird gespeichert oder gesendet. Der Kompass funktioniert nur auf Geräten mit Magnetsensor (meist Handy oder Tablet).</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var N=['Norden','Nordosten','Osten','Südosten','Süden','Südwesten','Westen','Nordwesten'];
+ function zeige(h){h=((h%360)+360)%360;$('gr').textContent=Math.round(h)+' °';$('ri').textContent=N[Math.round(h/45)%8];$('rose').setAttribute('transform','rotate('+(-h)+')')}
+ function ev(e){var h=null;if(typeof e.webkitCompassHeading==='number')h=e.webkitCompassHeading;else if(e.absolute&&typeof e.alpha==='number')h=360-e.alpha;else if(typeof e.alpha==='number')h=360-e.alpha;if(h!==null){$('st').dataset.ok='1';zeige(h)}}
+ $('an').onclick=function(){
+  function los(){addEventListener('deviceorientationabsolute',ev,true);addEventListener('deviceorientation',ev,true);$('st').textContent='Kompass läuft. Halte das Gerät flach.';setTimeout(function(){if(!$('st').dataset.ok)$('st').textContent='Keine Sensordaten. Nutze den Regler unten.'},2500)}
+  if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){DeviceOrientationEvent.requestPermission().then(function(r){if(r==='granted')los();else $('st').textContent='Zugriff abgelehnt.'}).catch(function(){$('st').textContent='Zugriff nicht möglich.'})}
+  else if('DeviceOrientationEvent' in window)los();else $('st').textContent='Kein Orientierungssensor in diesem Browser.'};
+ $('hand').oninput=function(){zeige(+$('hand').value)};zeige(0);
+})();
+</script></main></body></html>
