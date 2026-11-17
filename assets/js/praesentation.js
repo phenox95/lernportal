@@ -1,4 +1,4 @@
-/* Lernportal – Werkzeuge für Präsentationen: Stift, Timer, Lärmampel.
+/* Lernportal – Werkzeuge für Präsentationen: Stift, Timer, Lärmampel, Blende, Zufallsnummer, Gruppen, Stoppuhr, Notizzettel.
    Einbinden am Ende des body (nach dem Präsentationsskript oder davor, beides geht):
    <link rel="stylesheet" href="…/assets/css/praesentation.css">
    <script src="…/assets/js/praesentation.js" defer></script>
@@ -26,6 +26,7 @@
     zurueck: SVG('<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>'),
     voll: SVG('<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>'),
     teilen: SVG('<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 14h2.5v2.5H14zM19 14v.01M14 19.5v.01M17 19h3.5v1.5"/>'),
+    mehr: SVG('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>'),
     ampel: SVG('<rect x="7" y="2.5" width="10" height="19" rx="3"/><circle cx="12" cy="7.5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="16.5" r="1.4"/>')
   };
 
@@ -359,6 +360,7 @@
     tim.taste && tim.taste.classList.toggle("lp-pr-lauf", !!uhr);
     anzeige.classList.toggle("aus", rest === 0);
     chipsZeigen();
+    miniZeigen();
   }
   function chipsZeigen() {
     chips.forEach((c) => {
@@ -444,6 +446,55 @@
     el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); klick(); } });
   });
   chipsZeigen();
+  /* ---------- Mini-Timer: schwebende Zeitanzeige, solange der Timer läuft und das Fenster zu ist ---------- */
+  const mini = neu("div", "lp-pr-mini");
+  mini.hidden = true;
+  mini.setAttribute("role", "group");
+  mini.setAttribute("aria-label", "Timer");
+  const miniZeit = knopf("lp-pr-mini-zeit", "", "Timer anhalten oder fortsetzen");
+  const miniZu = knopf("lp-pr-mini-zu", "×", "Timer zurücksetzen");
+  mini.appendChild(miniZeit); mini.appendChild(miniZu);
+  document.body.appendChild(mini);
+  (function miniStart() {
+    const MK = "lp-pr-mini";
+    const alt = laden(MK, null);
+    if (alt && typeof alt.x === "number" && typeof alt.y === "number") { mini.style.left = Math.max(0, Math.min(innerWidth - 80, alt.x)) + "px"; mini.style.top = Math.max(0, Math.min(innerHeight - 50, alt.y)) + "px"; }
+    let d = null;
+    mini.addEventListener("pointerdown", (e) => {
+      if (e.target.closest(".lp-pr-mini-zu")) return;
+      const r = mini.getBoundingClientRect();
+      d = { id: e.pointerId, ox: e.clientX - r.left, oy: e.clientY - r.top, x: e.clientX, y: e.clientY, bewegt: false };
+      mini.setPointerCapture(e.pointerId); mini.style.zIndex = ++zTop;
+    });
+    mini.addEventListener("pointermove", (e) => {
+      if (!d || d.id !== e.pointerId) return;
+      if (!d.bewegt && Math.hypot(e.clientX - d.x, e.clientY - d.y) < 6) return;
+      d.bewegt = true;
+      mini.style.right = "auto"; mini.style.bottom = "auto";
+      mini.style.left = Math.max(0, Math.min(innerWidth - mini.offsetWidth, e.clientX - d.ox)) + "px";
+      mini.style.top = Math.max(0, Math.min(innerHeight - mini.offsetHeight, e.clientY - d.oy)) + "px";
+    });
+    const ende = (e) => {
+      if (!d || d.id !== e.pointerId) return;
+      const war = d.bewegt; d = null;
+      if (war) { const r = mini.getBoundingClientRect(); speichern(MK, { x: Math.round(r.left), y: Math.round(r.top) }); }
+      else if (e.type === "pointerup" && !e.target.closest(".lp-pr-mini-zu")) { if (rest <= 0) setze(gesamt); else timerStart(); }
+    };
+    mini.addEventListener("pointerup", ende);
+    mini.addEventListener("pointercancel", ende);
+    miniZeit.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); if (rest <= 0) setze(gesamt); else timerStart(); } });
+    miniZu.addEventListener("click", () => setze(gesamt));
+    new MutationObserver(() => miniZeigen()).observe(tim.el, { attributes: true, attributeFilter: ["hidden"] });
+  })();
+  function miniZeigen() {
+    const lauft = !!uhr, pause = !uhr && rest > 0 && rest < gesamt, aus = rest === 0 && gesamt > 0;
+    const zeigen = tim.el.hidden && (lauft || pause || aus);
+    mini.hidden = !zeigen;
+    if (!zeigen) return;
+    mini.dataset.zustand = aus ? "ende" : lauft ? "an" : "pause";
+    const t = (aus ? "Zeit! " : "") + fmt(Math.max(0, rest));
+    if (miniZeit.textContent !== t) miniZeit.textContent = t;
+  }
   const timerTaste = dockKnopf("timer", ICON.timer, "Timer", "T");
   timerTaste.appendChild(bild);
   function folienMinuten() {
@@ -954,12 +1005,204 @@
     }).catch(() => { if (aktiv) { feld.textContent = ""; feld.appendChild(neu("p", "lp-pr-spieltext", "Das Spiel konnte nicht geladen werden.")); } });
   }
   window.Praesentation = window.Praesentation || {};
+  /* =====================================================================
+     WEITERE WERKZEUGE: Blende, Zufallsnummer, Gruppen, Stoppuhr, Notizzettel
+     Ein Dock-Knopf („Weitere“, Taste W) öffnet die Auswahl. Alles läuft im Browser, nichts wird gesendet.
+     ===================================================================== */
+  const zuf = (n) => {
+    const c = window.crypto;
+    if (!c || !c.getRandomValues) return Math.floor(Math.random() * n);
+    const grenze = Math.floor(4294967296 / n) * n, x = new Uint32Array(1);
+    do { c.getRandomValues(x); } while (x[0] >= grenze);
+    return x[0] % n;
+  };
+  const wenigBewegung = () => !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  /* ---------- Blende: frei verschiebbare und in jeder Kante ziehbare Abdeckung der Folie ---------- */
+  const blende = neu("div", "lp-pr-blende");
+  blende.hidden = true;
+  blende.setAttribute("role", "group");
+  blende.setAttribute("aria-label", "Blende: verdeckt einen Teil der Folie");
+  const blendeText = neu("p", "lp-pr-blende-text", "Blende · Ziehen verschiebt, die Kanten ziehen verkleinert");
+  const blendeZu = knopf("lp-pr-blende-zu", "× Blende weg", "Blende entfernen");
+  blende.appendChild(blendeText); blende.appendChild(blendeZu);
+  ["n", "s", "w", "o", "nw", "no", "sw", "so"].forEach((k) => { const h = neu("i", "lp-pr-bh"); h.dataset.k = k; h.setAttribute("aria-hidden", "true"); blende.appendChild(h); });
+  stage.appendChild(blende);
+  let br = { x: 0, y: 0, w: 1280, h: 720 };
+  let blendeTaste = null;
+  function blendeSetzen() {
+    blende.style.left = br.x + "px"; blende.style.top = br.y + "px"; blende.style.width = br.w + "px"; blende.style.height = br.h + "px";
+    blendeText.hidden = br.w < 420 || br.h < 160;
+  }
+  function blendeSchalte(an) {
+    const zeigen = an === undefined ? blende.hidden : an;
+    if (zeigen) { br = { x: 0, y: 0, w: 1280, h: 720 }; blendeSetzen(); }
+    blende.hidden = !zeigen;
+    if (blendeTaste) { blendeTaste.classList.toggle("on", zeigen); blendeTaste.setAttribute("aria-pressed", String(zeigen)); }
+  }
+  function blendeWeg() { if (!blende.hidden) blendeSchalte(false); }   // beim Folienwechsel: neue Folie, neue Blende
+  (function blendeBedienung() {
+    let d = null;
+    blende.addEventListener("pointerdown", (e) => {
+      if (e.target.closest(".lp-pr-blende-zu")) return;
+      const r = stage.getBoundingClientRect();
+      d = { id: e.pointerId, k: (e.target.dataset && e.target.dataset.k) || "", f: r.width / 1280, x: e.clientX, y: e.clientY, b: Object.assign({}, br) };
+      blende.setPointerCapture(e.pointerId); e.preventDefault();
+    });
+    blende.addEventListener("pointermove", (e) => {
+      if (!d || d.id !== e.pointerId) return;
+      const dx = (e.clientX - d.x) / d.f, dy = (e.clientY - d.y) / d.f, b = d.b, MIN = 80;
+      let x = b.x, y = b.y, w = b.w, h = b.h;
+      if (!d.k) {
+        x = Math.max(0, Math.min(1280 - b.w, b.x + dx)); y = Math.max(0, Math.min(720 - b.h, b.y + dy));
+      } else {
+        if (d.k.indexOf("w") >= 0) { const nx = Math.max(0, Math.min(b.x + b.w - MIN, b.x + dx)); w = b.x + b.w - nx; x = nx; }
+        if (d.k.indexOf("o") >= 0) w = Math.max(MIN, Math.min(1280 - b.x, b.w + dx));
+        if (d.k.indexOf("n") >= 0) { const ny = Math.max(0, Math.min(b.y + b.h - MIN, b.y + dy)); h = b.y + b.h - ny; y = ny; }
+        if (d.k.indexOf("s") >= 0) h = Math.max(MIN, Math.min(720 - b.y, b.h + dy));
+      }
+      br = { x, y, w, h }; blendeSetzen();
+    });
+    const ende = (e) => { if (d && d.id === e.pointerId) d = null; };
+    blende.addEventListener("pointerup", ende);
+    blende.addEventListener("pointercancel", ende);
+    blendeZu.addEventListener("click", () => blendeSchalte(false));
+  })();
+
+  /* ---------- Zufallsnummer „Wer ist dran?“ ---------- */
+  const zf = panelBauen("zufall", "Wer ist dran?", 80, 300);
+  (function zufallPanel() {
+    const ZK = "lp-pr-zufall", z = zf.inhalt;
+    const st = laden(ZK, {}) || {};
+    let n = Math.max(2, Math.min(60, +st.n || 24)), einmal = st.einmal !== false, gezogen = [], lauf = null;
+    const zahl = neu("div", "lp-pr-zufallzahl", "?");
+    zahl.setAttribute("aria-live", "polite");
+    const zeile = neu("div", "lp-pr-reihe");
+    const minus = knopf("lp-pr-klein", "−", "Eine Nummer weniger"), plus = knopf("lp-pr-klein", "+", "Eine Nummer mehr");
+    const von = neu("span", "lp-pr-hinweis");
+    zeile.appendChild(neu("span", "lp-pr-hinweis", "Nummern 1 bis"));
+    zeile.appendChild(minus); zeile.appendChild(von); zeile.appendChild(plus);
+    von.style.cssText = "font:700 20px Verdana,Arial,sans-serif;min-width:2ch;text-align:center;color:#1a1a1a";
+    const los = knopf("lp-pr-gross", "Losen", "Nummer losen");
+    const opt = neu("label", "lp-pr-opt");
+    const cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = einmal;
+    opt.appendChild(cb); opt.appendChild(document.createTextNode(" Jede Nummer nur einmal"));
+    const schon = neu("p", "lp-pr-hinweis", "");
+    const neuBtn = knopf("lp-pr-klein", "Neu beginnen", "Gezogene Nummern zurücksetzen");
+    z.appendChild(zahl); z.appendChild(zeile); z.appendChild(los); z.appendChild(opt); z.appendChild(schon); z.appendChild(neuBtn);
+    function zeigen() {
+      von.textContent = n;
+      schon.textContent = einmal && gezogen.length ? "Schon dran: " + gezogen.join(", ") : "";
+      los.disabled = einmal && gezogen.length >= n;
+      if (los.disabled) { zahl.textContent = "Alle"; schon.textContent += " (alle waren dran)"; }
+      speichern(ZK, { n, einmal });
+    }
+    function ziehen() {
+      if (lauf) return;
+      const frei = []; for (let i = 1; i <= n; i++) if (!einmal || gezogen.indexOf(i) < 0) frei.push(i);
+      if (!frei.length) return;
+      const ziel = frei[zuf(frei.length)];
+      const fertig = () => { lauf = null; zahl.textContent = ziel; zahl.classList.remove("rollt"); if (einmal) gezogen.push(ziel); zeigen(); };
+      if (wenigBewegung()) { fertig(); return; }
+      zahl.classList.add("rollt");
+      let k = 0;
+      lauf = setInterval(() => { zahl.textContent = 1 + zuf(n); if (++k >= 12) { clearInterval(lauf); fertig(); } }, 60);
+    }
+    los.addEventListener("click", ziehen);
+    minus.addEventListener("click", () => { n = Math.max(2, n - 1); gezogen = gezogen.filter((x) => x <= n); zeigen(); });
+    plus.addEventListener("click", () => { n = Math.min(60, n + 1); zeigen(); });
+    cb.addEventListener("change", () => { einmal = cb.checked; gezogen = []; zeigen(); });
+    neuBtn.addEventListener("click", () => { gezogen = []; zahl.textContent = "?"; zeigen(); });
+    zeigen();
+  })();
+
+  /* ---------- Gruppen losen (die Seite interaktiv/gruppen/ im Fenster) ---------- */
+  const gp = panelBauen("gruppen", "Gruppen losen", 90, 560);
+  gp.el.classList.add("lp-pr-rahmen");
+  gp.beimOeffnen = () => {
+    if (gp.inhalt.firstChild) return;
+    const f = document.createElement("iframe");
+    f.className = "lp-pr-iframe"; f.title = "Gruppen losen mit Sitzplan";
+    f.src = WURZEL + "interaktiv/gruppen/?eingebettet=1";
+    gp.inhalt.appendChild(f);
+  };
+
+  /* ---------- Stoppuhr ---------- */
+  const sp = panelBauen("stoppuhr", "Stoppuhr", 100, 300);
+  (function stoppuhrPanel() {
+    const z = sp.inhalt;
+    let t0 = 0, vor = 0, an = null, runden = [];
+    const zeit = neu("div", "lp-pr-zeit", "00:00,0");
+    const liste = neu("ol", "lp-pr-runden");
+    const reihe = neu("div", "lp-pr-reihe");
+    const start = knopf("lp-pr-gross", "Start", "Stoppuhr starten");
+    const runde = knopf("lp-pr-klein", "Runde", "Zwischenzeit festhalten");
+    const reset = knopf("lp-pr-klein", "Zurücksetzen", "Stoppuhr zurücksetzen");
+    reihe.appendChild(start); reihe.appendChild(runde); reihe.appendChild(reset);
+    z.appendChild(zeit); z.appendChild(reihe); z.appendChild(liste);
+    const fm = (ms) => { const g = Math.floor(ms / 100), m = Math.floor(g / 600), s = Math.floor(g / 10) % 60; return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0") + "," + (g % 10); };
+    const jetzt = () => vor + (an ? performance.now() - t0 : 0);
+    function zeichnen() {
+      zeit.textContent = fm(jetzt());
+      runde.disabled = !an;
+      start.textContent = an ? "Stopp" : vor > 0 ? "Weiter" : "Start";
+      liste.textContent = "";
+      runden.slice(-5).forEach((r) => liste.appendChild(neu("li", "", r)));
+    }
+    start.addEventListener("click", () => {
+      if (an) { vor = jetzt(); clearInterval(an); an = null; }
+      else { t0 = performance.now(); an = setInterval(() => { zeit.textContent = fm(jetzt()); }, 100); }
+      zeichnen();
+    });
+    runde.addEventListener("click", () => { runden.push(fm(jetzt())); zeichnen(); });
+    reset.addEventListener("click", () => { clearInterval(an); an = null; vor = 0; runden = []; zeichnen(); });
+    zeichnen();
+  })();
+
+  /* ---------- Notizzettel (bleibt nur in diesem Browser, je Präsentation) ---------- */
+  const nz = panelBauen("notiz", "Notizzettel", 110, 300);
+  (function notizPanel() {
+    const NK = "lp-pr-notiz:" + location.pathname, z = nz.inhalt;
+    const feld = document.createElement("textarea");
+    feld.className = "lp-pr-notizfeld"; feld.rows = 8; feld.spellcheck = false;
+    feld.setAttribute("aria-label", "Notizzettel");
+    feld.value = laden(NK, "") || "";
+    feld.addEventListener("input", () => speichern(NK, feld.value));
+    const leer = knopf("lp-pr-klein", "Leeren", "Notizzettel leeren");
+    leer.addEventListener("click", () => { feld.value = ""; speichern(NK, ""); feld.focus(); });
+    z.appendChild(feld); z.appendChild(leer);
+    z.appendChild(neu("p", "lp-pr-hinweis", "Bleibt nur in diesem Browser. Keine Namen eintragen."));
+  })();
+
+  /* ---------- Auswahl „Weitere Werkzeuge“ ---------- */
+  const mw = panelBauen("weitere", "Weitere Werkzeuge", 70, 260);
+  dockKnopf("weitere", ICON.mehr, "Weitere Werkzeuge", "W");
+  (function weiterePanel() {
+    const z = mw.inhalt;
+    const raster = neu("div", "lp-pr-raster");
+    const eintrag = (text, taste, tat, label) => {
+      const b = knopf("lp-pr-klein lp-pr-wahl", "", label);
+      b.appendChild(neu("span", "", text));
+      if (taste) b.appendChild(neu("kbd", "", taste));
+      b.addEventListener("click", tat);
+      raster.appendChild(b);
+      return b;
+    };
+    blendeTaste = eintrag("Blende", "B", () => blendeSchalte(), "Blende: Teil der Folie verdecken");
+    blendeTaste.setAttribute("aria-pressed", "false");
+    eintrag("Wer ist dran?", "Z", () => schalte("zufall"), "Zufallsnummer");
+    eintrag("Gruppen losen", "G", () => schalte("gruppen"), "Gruppen losen");
+    eintrag("Stoppuhr", "S", () => schalte("stoppuhr"), "Stoppuhr");
+    eintrag("Notizzettel", "", () => schalte("notiz"), "Notizzettel");
+    z.appendChild(raster);
+  })();
+
   /* ---------- Folienwechsel erkennen (Striche gehören zur Folie) ---------- */
   function folieAktualisieren() {
     const n = aktuelleFolie();
     if (n === folie && cv.dataset.f) return;
     folie = n; cv.dataset.f = "1";
-    zeichne(); folienMinuten();
+    zeichne(); folienMinuten(); blendeWeg();
   }
   const beob = new MutationObserver(folieAktualisieren);
   slides().forEach((s) => beob.observe(s, { attributes: true, attributeFilter: ["class"] }));
@@ -1124,13 +1367,18 @@
     if (wahl === "lesen" || (wahl !== "folien" && handy)) lesenSetzen(true);
   })();
 
-  /* ---------- Tasten: P Stift, T Timer, L Lärmampel, Esc schließt Stift ---------- */
+  /* ---------- Tasten: P Stift, T Timer, L Lärmampel, W Weitere, B Blende, Z Zufall, G Gruppen, S Stoppuhr, Esc schließt Stift ---------- */
   addEventListener("keydown", (e) => {
     if (tippt(e.target) || e.ctrlKey || e.metaKey || e.altKey) return;
     const k = e.key.toLowerCase();
     if (k === "p") { e.preventDefault(); stiftSetzen(!penAn); }
     else if (k === "t") { schalte("timer"); }
     else if (k === "l") { schalte("laerm"); }
+    else if (k === "w") { schalte("weitere"); }
+    else if (k === "b") { blendeSchalte(); }
+    else if (k === "z") { schalte("zufall"); }
+    else if (k === "g") { schalte("gruppen"); }
+    else if (k === "s") { schalte("stoppuhr"); }
     else if (k === "q") { e.preventDefault(); if (window.teilenOeffnenInt) window.teilenOeffnenInt(); }
     else if (k === "escape" && penAn) { stiftSetzen(false); }
   });
