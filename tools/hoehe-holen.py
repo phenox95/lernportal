@@ -356,7 +356,7 @@ def menschen():
             g = (rot >= 1) & (rot <= 101) & land
             hist = np.bincount(rot[g].astype(int), weights=pix[g], minlength=256)
             reg["bevoelkerung"][mod] = [int(round(float(x))) for x in np.cumsum(hist[1:102])]
-    idx["bevoelkerung_quelle"] = "WorldPop (www.worldpop.org), Global High Resolution Population Denominators, 2020, 1 km, an Länder angepasst (UN adjusted), Lizenz CC BY 4.0. Zitiervorschlag und Lizenz auf der WorldPop-Seite prüfen. Die Menschen einer 1-km-Zelle sind gleichmäßig auf deren Landpunkte verteilt (Näherung)."
+    idx["bevoelkerung_quelle"] = "WorldPop (www.worldpop.org), Global High Resolution Population Denominators, 2020, 1 km, an Länder angepasst (UN adjusted), Lizenz CC BY 4.0, Quellenangabe: www.worldpop.org (laut worldpop.org/faq, geprüft am 17.11.2026). Die Menschen einer 1-km-Zelle sind gleichmäßig auf deren Landpunkte verteilt (Näherung)."
     idx_pfad.write_text(json.dumps(idx, ensure_ascii=False, indent=1), encoding="utf-8")
     print("fertig")
 

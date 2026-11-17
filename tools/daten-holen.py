@@ -162,7 +162,7 @@ def erdbeben():
             continue
         tag = datetime.datetime.fromtimestamp(p["time"] / 1000, datetime.timezone.utc).strftime("%Y-%m-%d")
         bebenliste.append([round(lon, 2), round(lat, 2), round(p["mag"], 1), round(tiefe), tag])
-    schreiben("erdbeben.json", {"quelle": "USGS Earthquake Hazards Program (gemeinfrei), Feed 4.5_month", "abruf": datetime.date.today().isoformat(), "demo": False, "beben": bebenliste})
+    schreiben("erdbeben.json", {"quelle": "U.S. Geological Survey, Earthquake Hazards Program, Feed 4.5_month (laut USGS US-Public-Domain; Credit: U.S. Geological Survey Department of the Interior/USGS)", "abruf": datetime.date.today().isoformat(), "demo": False, "beben": bebenliste})
 
 
 def demo():
