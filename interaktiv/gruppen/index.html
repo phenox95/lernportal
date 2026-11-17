@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../assets/favicon/apple-touch-icon.png">
+<title>Gruppen losen – Lernportal</title>
+<meta name="description" content="Zufallsgenerator für Gruppen: Namen oder Nummern eingeben, Gruppenzahl oder Gruppengröße wählen, losen. Nichts wird gespeichert oder gesendet.">
+<style>
+@font-face{font-family:Andika;src:url(../../assets/fonts/andika-regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Andika;src:url(../../assets/fonts/andika-bold.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{--g:#2F6F5E;--dk:#1F4F42;--mint:#EAF2EF;--grey:#5B6A63;--ink:#1A2B24;--y:#F4B400;--line:#cfd5d2}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font-family:Andika,Verdana,sans-serif;font-size:19px;line-height:1.45;text-align:left;padding-bottom:env(safe-area-inset-bottom)}
+header{background:var(--dk);color:#fff;padding:max(14px,env(safe-area-inset-top)) 16px 16px}
+header p{margin:0;font-size:15px;opacity:.9}
+header h1{margin:2px 0 0;font-size:26px;line-height:1.2}
+main{max-width:62rem;margin:0 auto;padding:14px 16px 40px}
+.feld{border:3px solid var(--g);border-radius:16px;padding:12px 14px;margin:0 0 14px;background:#fff}
+.feld h2{margin:0 0 6px;font-size:20px}
+.hint{font-size:15px;color:var(--grey);margin:6px 0 0}
+button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+textarea{width:100%;min-height:9.5em;font:inherit;font-size:18px;border:3px solid var(--ink);border-radius:14px;padding:10px 12px;color:var(--ink);background:#fff;resize:vertical}
+.b{min-height:56px;border:0;border-radius:14px;background:var(--g);color:#fff;font-weight:700;font-size:20px;padding:0 20px}
+.b.sec{background:var(--grey)}
+.b.gross{width:100%;min-height:68px;font-size:24px}
+.b:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row>.b{flex:1;min-width:8em}
+.modus{display:flex;gap:8px;margin:0 0 10px}
+.modus button{flex:1;min-height:52px;border:3px solid var(--ink);border-radius:14px;background:#fff;color:var(--ink);font-weight:700;font-size:18px}
+.modus button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.stepper{display:flex;align-items:stretch;gap:8px}
+.stepper button{width:56px;min-height:56px;border:3px solid var(--ink);border-radius:14px;background:#fff;font-size:30px;font-weight:700;color:var(--ink)}
+.stepper input{width:5em;text-align:center;font:700 30px Andika,Verdana,sans-serif;border:3px solid var(--ink);border-radius:14px;min-height:56px;color:var(--ink);background:#fff;-moz-appearance:textfield}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+label.opt{display:flex;align-items:center;gap:10px;min-height:44px;font-size:18px;margin:6px 0 0}
+label.opt input{width:26px;height:26px;accent-color:var(--g)}
+.status{min-height:1.6em;margin:8px 0 0;font-size:17px;color:var(--grey)}
+.status.fehler{color:#9B1C1C;font-weight:700}
+.gruppen{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:12px;margin:0 0 14px}
+.gruppe{border:3px solid var(--ink);border-radius:16px;padding:10px 14px 12px;background:#fff;break-inside:avoid}
+.gruppe h3{margin:0 0 6px;font-size:22px;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.gruppe h3 small{font-size:15px;font-weight:400;color:var(--grey)}
+.gruppe ul{list-style:none;margin:0;padding:0}
+.gruppe li{padding:5px 0;border-top:2px solid var(--line);font-size:21px}
+.gruppe li.sprecher{font-weight:700}
+.gruppe li.sprecher::after{content:" · Sprecher/in";font-weight:400;font-size:15px;color:var(--grey)}
+.gruppe.neu{animation:ein .35s ease both}
+@keyframes ein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.gruppe.neu{animation:none}}
+[hidden]{display:none!important}
+@media print{header,.feld,.aktionen{display:none}.gruppe{border-width:2px}}
+</style>
+</head>
+<body>
+<header>
+  <p>Werkzeug für den Unterricht</p>
+  <h1>Gruppen losen</h1>
+</header>
+<main>
+  <section class="feld" aria-labelledby="h-wer">
+    <h2 id="h-wer">1 · Wer wird eingeteilt?</h2>
+    <div class="modus" role="group" aria-label="Eingabeart">
+      <button type="button" id="m-namen" aria-pressed="true">Namen</button>
+      <button type="button" id="m-zahl" aria-pressed="false">Nummern</button>
+    </div>
+    <div id="w-namen">
+      <label for="namen" class="hint" style="margin:0 0 6px;display:block">Ein Name pro Zeile (oder mit Komma getrennt).</label>
+      <textarea id="namen" spellcheck="false" autocomplete="off" autocapitalize="words"></textarea>
+      <p class="hint" id="n-zahl">0 Personen</p>
+    </div>
+    <div id="w-zahl" hidden>
+      <p class="hint" style="margin:0 0 6px">Anzahl der Personen. Gelost werden die Nummern 1 bis N.</p>
+      <div class="stepper"><button type="button" id="p-minus" aria-label="eine Person weniger">−</button><input id="p-n" type="number" inputmode="numeric" min="2" max="60" value="24" aria-label="Anzahl der Personen"><button type="button" id="p-plus" aria-label="eine Person mehr">+</button></div>
+    </div>
+  </section>
+
+  <section class="feld" aria-labelledby="h-wie">
+    <h2 id="h-wie">2 · Wie wird eingeteilt?</h2>
+    <div class="modus" role="group" aria-label="Einteilungsart">
+      <button type="button" id="e-anz" aria-pressed="true">Anzahl der Gruppen</button>
+      <button type="button" id="e-gr" aria-pressed="false">Größe der Gruppen</button>
+    </div>
+    <div class="stepper"><button type="button" id="g-minus" aria-label="weniger">−</button><input id="g-n" type="number" inputmode="numeric" min="2" max="30" value="4" aria-label="Wert"><button type="button" id="g-plus" aria-label="mehr">+</button></div>
+    <p class="hint" id="g-info"></p>
+    <label class="opt"><input type="checkbox" id="sprecher">In jeder Gruppe eine Sprecherin oder einen Sprecher losen</label>
+  </section>
+
+  <button type="button" class="b gross" id="los">Gruppen losen</button>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+
+  <section id="ergebnis" hidden aria-labelledby="h-erg">
+    <h2 id="h-erg" style="font-size:22px;margin:12px 0 8px">Ergebnis</h2>
+    <div class="gruppen" id="gruppen"></div>
+    <div class="row aktionen">
+      <button type="button" class="b sec" id="neu">Neu mischen</button>
+      <button type="button" class="b sec" id="kopie">Als Text kopieren</button>
+      <button type="button" class="b sec" id="druck">Drucken</button>
+    </div>
+  </section>
+  <p class="hint">Nichts wird gespeichert oder gesendet. Die Namen bleiben nur auf diesem Gerät, bis du die Seite schließt.</p>
+</main>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var modusNamen = true, einteilung = "anz";
+
+  /* faire Zufallszahl 0..n-1 (ohne Modulo-Verzerrung) */
+  function zufall(n) {
+    var c = window.crypto || window.msCrypto;
+    if (!c || !c.getRandomValues) return Math.floor(Math.random() * n);
+    var grenze = Math.floor(4294967296 / n) * n, x = new Uint32Array(1);
+    do { c.getRandomValues(x); } while (x[0] >= grenze);
+    return x[0] % n;
+  }
+  function mischen(liste) {
+    var a = liste.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = zufall(i + 1), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function personen() {
+    if (!modusNamen) {
+      var n = Math.max(0, Math.min(60, parseInt($("p-n").value, 10) || 0)), out = [];
+      for (var i = 1; i <= n; i++) out.push(String(i));
+      return out;
+    }
+    return $("namen").value.split(/[\n,;]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  function anzahlGruppen(n) {
+    var w = Math.max(2, parseInt($("g-n").value, 10) || 2);
+    return einteilung === "anz" ? Math.min(w, Math.max(1, n)) : Math.max(1, Math.ceil(n / w));
+  }
+  function info() {
+    var n = personen().length;
+    $("n-zahl").textContent = n + (n === 1 ? " Person" : " Personen");
+    if (n < 2) { $("g-info").textContent = ""; return; }
+    var k = anzahlGruppen(n), klein = Math.floor(n / k), gross = Math.ceil(n / k);
+    $("g-info").textContent = k + (k === 1 ? " Gruppe" : " Gruppen") + " mit " + (klein === gross ? klein : klein + " bis " + gross) + " Personen";
+  }
+  function setze(btnA, btnB, a) { btnA.setAttribute("aria-pressed", a ? "true" : "false"); btnB.setAttribute("aria-pressed", a ? "false" : "true"); }
+  function begrenzen(el, min, max) { var v = parseInt(el.value, 10); if (isNaN(v)) v = min; el.value = Math.max(min, Math.min(max, v)); }
+
+  $("m-namen").onclick = function () { modusNamen = true; setze($("m-namen"), $("m-zahl"), true); $("w-namen").hidden = false; $("w-zahl").hidden = true; info(); };
+  $("m-zahl").onclick = function () { modusNamen = false; setze($("m-namen"), $("m-zahl"), false); $("w-namen").hidden = true; $("w-zahl").hidden = false; info(); };
+  $("e-anz").onclick = function () { einteilung = "anz"; setze($("e-anz"), $("e-gr"), true); info(); };
+  $("e-gr").onclick = function () { einteilung = "gr"; setze($("e-anz"), $("e-gr"), false); info(); };
+  $("namen").addEventListener("input", info);
+  $("p-n").addEventListener("input", info); $("g-n").addEventListener("input", info);
+  $("p-n").addEventListener("change", function () { begrenzen($("p-n"), 2, 60); info(); });
+  $("g-n").addEventListener("change", function () { begrenzen($("g-n"), 2, 30); info(); });
+  $("p-minus").onclick = function () { $("p-n").value = (parseInt($("p-n").value, 10) || 2) - 1; begrenzen($("p-n"), 2, 60); info(); };
+  $("p-plus").onclick = function () { $("p-n").value = (parseInt($("p-n").value, 10) || 2) + 1; begrenzen($("p-n"), 2, 60); info(); };
+  $("g-minus").onclick = function () { $("g-n").value = (parseInt($("g-n").value, 10) || 2) - 1; begrenzen($("g-n"), 2, 30); info(); };
+  $("g-plus").onclick = function () { $("g-n").value = (parseInt($("g-n").value, 10) || 2) + 1; begrenzen($("g-n"), 2, 30); info(); };
+
+  var letzte = [];
+  function losen() {
+    var st = $("status"), liste = personen();
+    st.className = "status";
+    if (liste.length < 2) { st.className = "status fehler"; st.textContent = "Es braucht mindestens 2 Personen."; return; }
+    var doppelt = liste.filter(function (x, i) { return liste.indexOf(x) !== i; });
+    var k = anzahlGruppen(liste.length), mix = mischen(liste), gr = [];
+    for (var i = 0; i < k; i++) gr.push([]);
+    mix.forEach(function (p, i) { gr[i % k].push(p); });          /* Reihum verteilen: Größen unterscheiden sich um höchstens 1 */
+    letzte = gr.map(function (g) { return { mitglieder: g, sprecher: $("sprecher").checked ? zufall(g.length) : -1 }; });
+    zeichne();
+    st.textContent = doppelt.length ? "Hinweis: Mehrere Einträge heißen gleich (" + doppelt.filter(function (x, i) { return doppelt.indexOf(x) === i; }).join(", ") + ")." : "";
+  }
+  function zeichne() {
+    var box = $("gruppen"); box.textContent = "";
+    letzte.forEach(function (g, i) {
+      var d = document.createElement("div"); d.className = "gruppe neu";
+      var h = document.createElement("h3"); h.appendChild(document.createTextNode("Gruppe " + (i + 1)));
+      var s = document.createElement("small"); s.textContent = g.mitglieder.length + " Pers."; h.appendChild(s);
+      var ul = document.createElement("ul");
+      g.mitglieder.forEach(function (m, j) { var li = document.createElement("li"); if (j === g.sprecher) li.className = "sprecher"; li.textContent = m; ul.appendChild(li); });
+      d.appendChild(h); d.appendChild(ul); box.appendChild(d);
+    });
+    $("ergebnis").hidden = false;
+    $("ergebnis").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function alsText() {
+    return letzte.map(function (g, i) {
+      return "Gruppe " + (i + 1) + ": " + g.mitglieder.map(function (m, j) { return j === g.sprecher ? m + " (Sprecher/in)" : m; }).join(", ");
+    }).join("\n");
+  }
+  $("los").onclick = losen; $("neu").onclick = losen;
+  $("druck").onclick = function () { window.print(); };
+  $("kopie").onclick = function () {
+    var st = $("status"), t = alsText();
+    function ok() { st.className = "status"; st.textContent = "Kopiert."; }
+    function fehl() { st.className = "status fehler"; st.textContent = "Kopieren ging nicht. Markiere den Text von Hand."; }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, fehl); else fehl();
+  };
+  info();
+})();
+</script>
+</body>
+</html>

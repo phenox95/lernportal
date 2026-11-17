@@ -793,5 +793,16 @@
     "dauer": "10 Min.",
     "datum": "2026-11-16",
     "sichtbar": true
+  },
+  {
+    "title": "Gruppen losen",
+    "description": "Zufallsgenerator für Gruppen: Namen oder Nummern eingeben, Gruppenzahl oder Gruppengröße wählen, optional Sprecher/in losen. Nichts wird gespeichert oder gesendet.",
+    "type": "Interaktive Übung",
+    "path": "interaktiv/gruppen/",
+    "subject": "Interaktiv",
+    "grade": "Verschiedene",
+    "dauer": "2 Min.",
+    "datum": "2026-11-17",
+    "sichtbar": true
   }
 ]
