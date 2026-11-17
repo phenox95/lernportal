@@ -1,0 +1,17 @@
+/* Lernportal – Labor: gemeinsames Aussehen der Prototyp-Seiten. Ruhig, hoher Kontrast, Systemschrift. */
+:root{--dk:#0B4F3C;--g:#0F6E56;--mint:#E8F3EC;--y:#F4B400;--b:#1F6BA5;--ink:#1A2B24;--grey:#5B6A63;--bg:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#14201b;--ink:#eef5f1;--mint:#1f3329;--grey:#a9bab1;--dk:#9fe0c6;--g:#3aa384}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.5 Andika,Verdana,system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:clamp(26px,5vw,38px);line-height:1.15;margin:.3em 0 .4em;color:var(--dk)}
+h2{font-size:24px;margin:1.4em 0 .4em;color:var(--dk)}
+.zurueck{display:inline-block;min-height:44px;padding:10px 0;color:var(--g);font-weight:700}
+.kasten{background:var(--mint);border-radius:14px;padding:14px 18px;margin:12px 0}
+.kasten.warn{border-left:6px solid var(--y)}
+button,.b{font:inherit;font-weight:700;min-height:44px;padding:8px 18px;border-radius:12px;border:0;background:var(--g);color:#fff;cursor:pointer}
+button.sek{background:transparent;color:var(--g);border:2px solid var(--g)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.material{border:2px solid var(--g);border-radius:14px;padding:14px 18px;margin:12px 0}
+.quelle{font-size:14px;color:var(--grey)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

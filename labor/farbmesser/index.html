@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Kamera-Farbmesser</title><link rel="stylesheet" href="../labor.css">
+<style>
+#bw{position:relative;max-width:640px}video,canvas#snap{width:100%;height:auto;display:block;border-radius:14px;background:#000}
+#ziel{position:absolute;left:50%;top:50%;width:80px;height:80px;margin:-40px 0 0 -40px;border:4px solid #fff;outline:3px solid #000;border-radius:10px;pointer-events:none}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+table{border-collapse:collapse;width:100%;max-width:640px}td,th{border:2px solid var(--g);padding:6px 10px;text-align:left}
+.sw{display:inline-block;width:34px;height:34px;border:2px solid var(--ink);border-radius:8px;vertical-align:middle;margin-right:8px}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Kamera als Farbmesser</h1>
+<div class="kasten"><b>Aufgabe (Erkenntnisse gewinnen, Stufe E bis F):</b> Rotkohlsaft ändert mit dem pH-Wert seine Farbe. <b>Miss</b> mit dem Kamerabild den Farbton von Proben (Zitrone, Wasser, Natron). <b>Ordne</b> die Messwerte nach Farbton und <b>erkläre</b>, warum Augenmaß nicht reicht. Gleiches Licht, gleicher Abstand, weißes Papier als Hintergrund.</div>
+<div class="leiste"><button type="button" id="an">Kamera starten</button><button type="button" id="mess" disabled>Messen und speichern</button><button type="button" class="sek" id="aus" disabled>Kamera stoppen</button></div>
+<div id="bw"><video id="v" playsinline muted aria-label="Kamerabild"></video><div id="ziel" aria-hidden="true"></div></div>
+<canvas id="snap" width="64" height="64" hidden></canvas>
+<p id="st" class="kasten" aria-live="polite">Die Kamera startet erst nach Antippen. Das Bild bleibt im Browser, es wird nichts aufgenommen oder gesendet. Ausgewertet wird nur ein kleines Quadrat in der Mitte.</p>
+<table id="tab" aria-label="Messwerte"><thead><tr><th>Probe</th><th>Farbe</th><th>Farbton (°)</th><th>Rot / Grün / Blau</th></tr></thead><tbody></tbody></table>
+<p class="quelle">Hinweis: Der Farbton hängt vom Licht ab. Weißabgleich der Kamera nicht automatisch ändern lassen (Papier zuerst messen und als Probe 0 eintragen).</p>
+<script>
+(function(){
+ var v=document.getElementById('v'),sn=document.getElementById('snap'),sx=sn.getContext('2d',{willReadFrequently:true}),strom=null,nr=0;
+ function hsv(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn,h=0;if(d){if(mx===r)h=((g-b)/d)%6;else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h*=60;if(h<0)h+=360}return Math.round(h)}
+ document.getElementById('an').onclick=function(){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){document.getElementById('st').textContent='Dieser Browser hat keinen Kamerazugriff (https oder localhost nötig).';return}
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){strom=s;v.srcObject=s;v.play();document.getElementById('mess').disabled=false;document.getElementById('aus').disabled=false;document.getElementById('st').textContent='Kamera läuft. Halte die Probe in den weißen Rahmen.'})
+  .catch(function(){document.getElementById('st').textContent='Kein Zugriff auf die Kamera (abgelehnt oder keine vorhanden).'})};
+ function aus(){if(strom){strom.getTracks().forEach(function(t){t.stop()});strom=null}v.srcObject=null;document.getElementById('mess').disabled=true;document.getElementById('aus').disabled=true}
+ document.getElementById('aus').onclick=aus;addEventListener('pagehide',aus);
+ document.getElementById('mess').onclick=function(){
+  var w=v.videoWidth,h=v.videoHeight;if(!w)return;var q=Math.round(Math.min(w,h)*.12);
+  sx.drawImage(v,(w-q)/2,(h-q)/2,q,q,0,0,64,64);var d=sx.getImageData(0,0,64,64).data,r=0,g=0,b=0,n=d.length/4;
+  for(var i=0;i<d.length;i+=4){r+=d[i];g+=d[i+1];b+=d[i+2]}r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
+  var tr=document.createElement('tr');tr.innerHTML='<td contenteditable="true" aria-label="Name der Probe">Probe '+(nr++)+'</td><td><span class="sw" style="background:rgb('+r+','+g+','+b+')"></span></td><td>'+hsv(r,g,b)+'</td><td>'+r+' / '+g+' / '+b+'</td>';
+  document.querySelector('#tab tbody').appendChild(tr)};
+})();
+</script></main></body></html>

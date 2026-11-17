@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Vorlesen</title><link rel="stylesheet" href="../labor.css"></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Vorlesen mit Mitlesen</h1>
+<p class="kasten">Prototyp. Der Browser liest vor und färbt das Wort ein. Wort antippen: ab hier weiterlesen. Es wird nichts gesendet, es zählen nur Stimmen auf dem Gerät. Gibt es keine, erscheint kein Knopf.</p>
+<div class="material" data-vorlesen id="m1">
+<p><b>M1: Wie schützt eine Impfung?</b></p>
+<p>Ein Impfstoff enthält Teile eines Erregers oder einen abgeschwächten Erreger. Er macht nicht krank. Das Immunsystem erkennt den Erreger trotzdem und bildet Antikörper. Außerdem bleiben Gedächtniszellen im Körper. Kommt der echte Erreger später, reagiert das Immunsystem schnell. Die Krankheit bricht dann nicht aus oder verläuft milder.</p>
+<p class="quelle">Beispieltext für diesen Prototyp.</p>
+</div>
+<p id="status" class="quelle"></p>
+<script>document.getElementById('status').textContent = ('speechSynthesis' in window) ? 'Sprachausgabe im Browser vorhanden.' : 'Dieser Browser hat keine Sprachausgabe.';</script>
+<script src="../../assets/js/vorlesen.js" defer></script>
+</main></body></html>
