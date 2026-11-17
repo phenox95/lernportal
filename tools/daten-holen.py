@@ -9,10 +9,11 @@ Aufruf (aus dem Hauptordner):
   python3 tools/daten-holen.py karte       Küstenlinien (Natural Earth, gemeinfrei) und Plattengrenzen (Bird 2003, ODC-By) -> daten/weltkarte.json, daten/plattengrenzen.json
   python3 tools/daten-holen.py laender     Länder mit Namen in 8 Sprachen (Natural Earth, gemeinfrei) -> daten/laender.json (Topografie-Quiz, mehrsprachig)
   python3 tools/daten-holen.py meeresspiegel  Globaler Meeresspiegel 1880 bis 2013 (EPA mit CSIRO und NOAA Satellitenaltimetrie, Datensatz datasets/sea-level-rise, ODC-PDDL) -> daten/meeresspiegel.json
+  python3 tools/daten-holen.py strom       Realisierte Stromerzeugung Deutschland, letzte 14 Tage, stündlich (SMARD, Bundesnetzagentur, CC BY 4.0) -> daten/strom.json
   python3 tools/daten-holen.py erdbeben    Erdbeben der letzten 30 Tage, Stärke 4,5 und mehr (USGS, gemeinfrei) -> daten/erdbeben.json
   python3 tools/daten-holen.py demo        Beispiel-Erdbeben aus den Plattengrenzen SIMULIERT -> daten/erdbeben.json ("demo": true, wird auf der Seite gekennzeichnet)
 """
-import json, math, random, sys, urllib.request, datetime, pathlib
+import io, json, math, random, sys, urllib.request, datetime, pathlib
 
 WURZEL = pathlib.Path(__file__).resolve().parent.parent / "daten"
 NE = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson"
@@ -91,6 +92,66 @@ def meeresspiegel():
         "reihe": zeilen})
 
 
+SMARD = "https://www.smard.de/nip-download-manager/nip/download/market-data"
+# Modulnummern und Namen am 17.11.2026 gegen die Spaltenköpfe des offiziellen Downloads geprüft
+STROM = [(1001223, "Braunkohle", "fossil"), (1004069, "Steinkohle", "fossil"), (1004071, "Erdgas", "fossil"), (1001227, "Sonstige Konventionelle", "fossil"),
+         (1004070, "Pumpspeicher", "speicher"), (1004066, "Biomasse", "erneuerbar"), (1001226, "Wasserkraft", "erneuerbar"),
+         (1001228, "Sonstige Erneuerbare", "erneuerbar"), (1001225, "Wind Offshore", "erneuerbar"), (1004067, "Wind Onshore", "erneuerbar"),
+         (1004068, "Photovoltaik", "erneuerbar")]
+NETZLAST = 5000410
+
+
+def strom():
+    """Letzte 14 volle Tage stündlich aus dem Download von SMARD (Marktdaten, CC BY 4.0, Vermerk Bundesnetzagentur | SMARD.de).
+    Großhandelspreise werden NICHT geholt (Lizenz laut SMARD in Prüfung)."""
+    import csv
+    heute = datetime.date.today()
+    def ms(d):
+        return int(datetime.datetime(d.year, d.month, d.day, tzinfo=datetime.timezone.utc).timestamp() * 1000)
+    von, bis = ms(heute - datetime.timedelta(days=14)), ms(heute)
+    ids = [m[0] for m in STROM] + [NETZLAST]
+    body = {"request_form": [{"format": "CSV", "moduleIds": ids, "region": "DE", "timestamp_from": von, "timestamp_to": bis, "type": "discrete", "language": "de", "resolution": "hour"}]}
+    req = urllib.request.Request(SMARD, data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "User-Agent": "lernportal-daten"})
+    with urllib.request.urlopen(req, timeout=120) as r:
+        roh = r.read()
+    texte = []
+    if roh[:2] == b"PK":
+        import zipfile
+        z = zipfile.ZipFile(io.BytesIO(roh))
+        texte = [z.read(n).decode("utf-8-sig") for n in z.namelist()]
+    else:
+        if roh[:2] == b"\x1f\x8b":
+            import gzip
+            roh = gzip.decompress(roh)
+        texte = [roh.decode("utf-8-sig")]
+
+    def zahl(x):
+        x = x.strip()
+        return None if x in ("", "-") else float(x.replace(".", "").replace(",", "."))
+    nach_zeit, namen_alle = {}, []
+    for text in texte:
+        zeilen = list(csv.reader(io.StringIO(text), delimiter=";"))
+        kopf = zeilen[0]
+        namen = [k.split(" [")[0] for k in kopf[2:]]
+        namen_alle += namen
+        for z in zeilen[1:]:
+            if len(z) < len(kopf):
+                continue
+            t = datetime.datetime.strptime(z[0], "%d.%m.%Y %H:%M").strftime("%Y-%m-%dT%H:%M")
+            d = nach_zeit.setdefault(t, {})
+            for n, v in zip(namen, z[2:]):
+                d[n] = zahl(v)
+    zeit = sorted(nach_zeit)
+    reihen = {n: [nach_zeit[t].get(n) for t in zeit] for n in namen_alle}
+    gruppen = {m[1]: m[2] for m in STROM}
+    schreiben("strom.json", {
+        "quelle": "Bundesnetzagentur | SMARD.de, Marktdaten, Realisierte Erzeugung und Netzlast, Deutschland, stündlich (Download-Bereich), Lizenz CC BY 4.0",
+        "vermerk": "Bundesnetzagentur | SMARD.de. Daten bearbeitet: Auswahl, Zusammenstellung, Umrechnung in Megawatt (Stundenmittel).",
+        "lizenz": "https://creativecommons.org/licenses/by/4.0/deed.de",
+        "abruf": heute.isoformat(), "einheit": "MWh je Stunde (gleich mittlere Leistung in MW)", "zeitzone": "Ortszeit Deutschland (MEZ, im Sommer MESZ)",
+        "gruppen": gruppen, "zeit": zeit, "reihen": reihen})
+
+
 def erdbeben():
     d = holen(USGS)
     bebenliste = []
@@ -134,4 +195,4 @@ def demo():
 
 
 if __name__ == "__main__":
-    {"karte": karte, "laender": laender, "meeresspiegel": meeresspiegel, "erdbeben": erdbeben, "demo": demo}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()
+    {"karte": karte, "laender": laender, "strom": strom, "meeresspiegel": meeresspiegel, "erdbeben": erdbeben, "demo": demo}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()

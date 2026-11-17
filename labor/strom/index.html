@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Strommix</title><link rel="stylesheet" href="../labor.css">
+<style>
+.leiste{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+#sv{width:100%;height:auto;display:block;border:2px solid var(--g);border-radius:14px;background:#fff;touch-action:pan-y}@media (prefers-color-scheme:dark){#sv{background:#0d1b2a}}
+.lg{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:15px;margin:8px 0}.lg span{display:inline-flex;gap:6px;align-items:center}.lg i{display:inline-block;width:16px;height:16px;border-radius:3px;border:1px solid #0006}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:520px}th,td{padding:5px 10px;border-bottom:1px solid #8aa59a55;text-align:right}th:first-child,td:first-child{text-align:left}th{background:var(--mint);font-size:14px}
+.erg{font-size:clamp(18px,3.4vw,24px);font-weight:700;color:var(--dk)}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Strommix in Deutschland</h1>
+<div class="kasten"><b>Systeme erschließen, Daten auswerten (Geo 3.5 Ressourcen, Stufe F bis G):</b> <b>Beschreibe</b> den Verlauf von Photovoltaik und Wind über den Tag. <b>Erkläre</b>, warum Photovoltaik nachts null ist und was dann den Strom liefert. <b>Vergleiche</b> einen windigen mit einem windarmen Tag und <b>nenne</b>, welche Quellen einspringen. <b>Beurteile</b>, welche Rolle Speicher und Gas spielen und was die Grafik nicht zeigt (Import, Export, Preise).</div>
+<p id="dq" class="kasten">Lade Daten …</p>
+<div class="leiste"><label for="tag"><b>Tag</b></label><select id="tag"></select><button type="button" class="sek" id="mx">Tag mit höchstem Anteil Erneuerbarer</button><button type="button" class="sek" id="mn">Tag mit niedrigstem Anteil</button></div>
+<svg id="sv" viewBox="0 0 900 440" role="img" aria-label="Stromerzeugung über den Tag nach Quellen, Zahlen in der Tabelle darunter"></svg>
+<div class="lg" id="lg" aria-hidden="true"></div>
+<p class="erg" id="ke" aria-live="polite"></p>
+<div class="leiste"><span><b>Zwei Tage vergleichen:</b></span><label for="t2">Vergleichstag</label><select id="t2"></select></div>
+<div class="tw"><table><thead><tr><th>Kennzahl</th><th id="h1">Tag 1</th><th id="h2">Tag 2</th></tr></thead><tbody id="vt"></tbody></table></div>
+<p class="kasten warn"><b>Was die Daten sind:</b> Realisierte Stromerzeugung in Deutschland, im Stundenmittel in Megawatt (MW). Die Netzlast (gestrichelt) ist der Verbrauch im Netz. Erzeugung und Verbrauch sind nicht gleich: Deutschland importiert und exportiert Strom. Kleine Anlagen und Eigenverbrauch (zum Beispiel viele Dächer) sind nur geschätzt. Pumpspeicher zeigt nur die Stromerzeugung beim Abfließen, nicht das Pumpen. Großhandelspreise sind absichtlich nicht dabei (die Lizenz prüft die Bundesnetzagentur laut SMARD noch). Kernenergie liefert in diesem Zeitraum keine Daten.</p>
+<p class="quelle" id="qu"></p>
+<details><summary>Zahlen als Tabelle (für den gewählten Tag)</summary><div class="tw" style="max-height:340px"><table><thead id="th"></thead><tbody id="tb"></tbody></table></div></details>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}var NS='http://www.w3.org/2000/svg';function z(x,n){return String(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).replace('.',',')}
+ var FARBE={'Braunkohle':'#6b4f3a','Steinkohle':'#3d3d3d','Erdgas':'#9a9a9a','Sonstige Konventionelle':'#c9c0b4','Pumpspeicher':'#8e5fb0','Biomasse':'#2f7d3b','Wasserkraft':'#1f6bb5','Sonstige Erneuerbare':'#9ccc65','Wind Offshore':'#0f9aa8','Wind Onshore':'#78c8e8','Photovoltaik':'#f4c20d'};
+ var ORD=['Braunkohle','Steinkohle','Erdgas','Sonstige Konventionelle','Pumpspeicher','Biomasse','Wasserkraft','Sonstige Erneuerbare','Wind Offshore','Wind Onshore','Photovoltaik'];
+ var D=null,tage=[],sel=null;
+ function el(t,a,txt,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!==undefined)e.textContent=txt;(p||$('sv')).appendChild(e);return e}
+ function tagdaten(t){var idx=[];D.zeit.forEach(function(s,i){if(s.slice(0,10)===t)idx.push(i)});return idx}
+ function kenn(t){var idx=tagdaten(t),summe=0,er=0,pv=0,wi=0,mxpv=0,mxwi=0,ern=[],gas=0,kohle=0;
+  idx.forEach(function(i){var h=0,e=0;ORD.forEach(function(n){var v=D.reihen[n][i]||0;h+=v;if(D.gruppen[n]==='erneuerbar')e+=v;});summe+=h;er+=e;ern.push(h?e/h:0);var p=D.reihen['Photovoltaik'][i]||0,w=(D.reihen['Wind Onshore'][i]||0)+(D.reihen['Wind Offshore'][i]||0);pv+=p;wi+=w;mxpv=Math.max(mxpv,p);mxwi=Math.max(mxwi,w);gas+=D.reihen['Erdgas'][i]||0;kohle+=(D.reihen['Braunkohle'][i]||0)+(D.reihen['Steinkohle'][i]||0)});
+  return{n:idx.length,summe:summe,er:er,anteil:summe?er/summe:0,min:Math.min.apply(null,ern),max:Math.max.apply(null,ern),pv:pv,wi:wi,mxpv:mxpv,mxwi:mxwi,gas:gas,kohle:kohle}}
+ function datum(t){var d=t.split('-');return d[2]+'.'+d[1]+'.'+d[0]}
+ function zeichnen(){var sv=$('sv');sv.textContent='';var t=$('tag').value,idx=tagdaten(t),ink=getComputedStyle(document.body).color;if(!idx.length)return;
+  var L=70,R=880,T=20,B=380,n=idx.length;var stapel=[],mx=0;idx.forEach(function(i){var a=0,row={};ORD.forEach(function(nm){var v=D.reihen[nm][i]||0;row[nm]=[a,a+v];a+=v});stapel.push(row);mx=Math.max(mx,a,D.reihen['Netzlast'][i]||0)});mx=Math.ceil(mx/10000)*10000;
+  var X=function(k){return L+k/(n-1)*(R-L)},Y=function(v){return B-v/mx*(B-T)};
+  for(var v=0;v<=mx;v+=10000){el('line',{x1:L,x2:R,y1:Y(v),y2:Y(v),stroke:ink,'stroke-opacity':.15});el('text',{x:L-8,y:Y(v)+5,'text-anchor':'end','font-size':13,fill:ink},(v/1000)+' GW')}
+  ORD.forEach(function(nm){var up='M'+X(0)+' '+Y(stapel[0][nm][1]),k;for(k=1;k<n;k++)up+='L'+X(k)+' '+Y(stapel[k][nm][1]);for(k=n-1;k>=0;k--)up+='L'+X(k)+' '+Y(stapel[k][nm][0]);el('path',{d:up+'Z',fill:FARBE[nm],stroke:'#00000030','stroke-width':.5})});
+  var np=idx.map(function(i,k){return X(k)+','+Y(D.reihen['Netzlast'][i]||0)}).join(' ');el('polyline',{points:np,fill:'none',stroke:ink,'stroke-width':3,'stroke-dasharray':'8 5'});
+  for(var h=0;h<n;h+=3)el('text',{x:X(h),y:B+22,'text-anchor':'middle','font-size':13,fill:ink},D.zeit[idx[h]].slice(11));
+  el('text',{x:(L+R)/2,y:B+44,'text-anchor':'middle','font-size':14,fill:ink,'font-weight':700},'Uhrzeit (Beginn der Stunde, Ortszeit) am '+datum(t));
+  el('text',{x:L+4,y:T+14,'font-size':13,fill:ink},'gestrichelt: Netzlast (Verbrauch)');
+  var cur=el('line',{x1:0,x2:0,y1:T,y2:B,stroke:ink,'stroke-width':2,visibility:'hidden'}),tip=el('text',{x:0,y:T+34,'font-size':13,fill:ink,visibility:'hidden'}),tip2=el('text',{x:0,y:T+50,'font-size':13,fill:ink,visibility:'hidden'});
+  function zeige(ev){var rc=sv.getBoundingClientRect(),x=(ev.clientX-rc.left)/rc.width*900,k=Math.max(0,Math.min(n-1,Math.round((x-L)/(R-L)*(n-1))));cur.setAttribute('x1',X(k));cur.setAttribute('x2',X(k));cur.setAttribute('visibility','visible');var i=idx[k],pv=D.reihen['Photovoltaik'][i]||0,wi=(D.reihen['Wind Onshore'][i]||0)+(D.reihen['Wind Offshore'][i]||0),ge=0,er=0;ORD.forEach(function(nm){var vv=D.reihen[nm][i]||0;ge+=vv;if(D.gruppen[nm]==='erneuerbar')er+=vv});
+   tip.textContent=D.zeit[i].slice(11)+' Uhr: Erneuerbare '+z(er/ge*100,0)+' %, Verbrauch '+z((D.reihen['Netzlast'][i]||0)/1000,1)+' GW';tip2.textContent='Photovoltaik '+z(pv/1000,1)+' GW, Wind '+z(wi/1000,1)+' GW';var tx=Math.max(L+4,Math.min(X(k)+8,R-300));[tip,tip2].forEach(function(e){e.setAttribute('x',tx);e.setAttribute('visibility','visible')})}
+  sv.onpointermove=zeige;sv.onpointerdown=zeige;
+  var k1=kenn(t);$('ke').textContent='Am '+datum(t)+' kamen '+z(k1.anteil*100,0)+' % der erzeugten Strommenge aus Erneuerbaren (Spanne über den Tag: '+z(k1.min*100,0)+' bis '+z(k1.max*100,0)+' % je Stunde).';
+  var th='<tr><th>Uhrzeit</th>'+ORD.map(function(nm){return '<th>'+nm+'</th>'}).join('')+'<th>Netzlast</th></tr>';$('th').innerHTML=th;
+  $('tb').innerHTML=idx.map(function(i){return '<tr><td>'+D.zeit[i].slice(11)+'</td>'+ORD.map(function(nm){var vv=D.reihen[nm][i];return '<td>'+(vv==null?'–':Math.round(vv).toLocaleString('de-DE'))+'</td>'}).join('')+'<td>'+Math.round(D.reihen['Netzlast'][i]||0).toLocaleString('de-DE')+'</td></tr>'}).join('');vergleich()}
+ function vergleich(){var a=$('tag').value,b=$('t2').value,ka=kenn(a),kb=kenn(b);$('h1').textContent=datum(a);$('h2').textContent=datum(b);
+  var Z=[['Anteil Erneuerbare an der Erzeugung (%)',function(k){return z(k.anteil*100,0)}],['Photovoltaik: höchste Stunde (GW)',function(k){return z(k.mxpv/1000,1)}],['Wind (an Land und auf See): höchste Stunde (GW)',function(k){return z(k.mxwi/1000,1)}],['Erzeugung aus Braun- und Steinkohle (GWh am Tag)',function(k){return z(k.kohle/1000,0)}],['Erzeugung aus Erdgas (GWh am Tag)',function(k){return z(k.gas/1000,0)}],['Erzeugung insgesamt (GWh am Tag)',function(k){return z(k.summe/1000,0)}]];
+  $('vt').innerHTML=Z.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1](ka)+'</td><td>'+r[1](kb)+'</td></tr>'}).join('')}
+ function lade(d){D=d;var vol={};D.zeit.forEach(function(s){vol[s.slice(0,10)]=(vol[s.slice(0,10)]||0)+1});tage=Object.keys(vol).filter(function(k){return vol[k]===24}).sort();
+  tage.forEach(function(t){['tag','t2'].forEach(function(id){var o=document.createElement('option');o.value=t;o.textContent=datum(t);$(id).appendChild(o)})});$('tag').value=tage[tage.length-1];$('t2').value=tage[tage.length-2]||tage[0];
+  var best=null,worst=null;tage.forEach(function(t){var a=kenn(t).anteil;if(!best||a>best[1])best=[t,a];if(!worst||a<worst[1])worst=[t,a]});$('mx').onclick=function(){$('tag').value=best[0];zeichnen()};$('mn').onclick=function(){$('tag').value=worst[0];zeichnen()};
+  $('lg').innerHTML=ORD.slice().reverse().map(function(nm){return '<span><i style="background:'+FARBE[nm]+'"></i>'+nm+'</span>'}).join('');
+  $('dq').innerHTML='Echte Messdaten, im Portal gespeichert. Abruf am '+d.abruf+', '+tage.length+' volle Tage ('+datum(tage[0])+' bis '+datum(tage[tage.length-1])+').';
+  $('qu').innerHTML='<b>Quelle:</b> '+d.vermerk+' Lizenz <a href="'+d.lizenz+'" rel="noopener noreferrer" target="_blank">CC BY 4.0</a>. '+d.quelle+'.';$('tag').onchange=zeichnen;$('t2').onchange=vergleich;zeichnen()}
+ fetch('../../daten/strom.json').then(function(r){return r.json()}).then(lade).catch(function(){$('dq').textContent='Daten nicht geladen (Seite über einen Server öffnen).'});
+})();
+</script></main></body></html>
