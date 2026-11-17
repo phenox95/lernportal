@@ -1,5 +1,5 @@
 {
- "quelle": "Höhenmodell: Terrarium-Kacheln (Mapzen/Tilezen, Amazon Open Data, u. a. SRTM, ETOPO1, GMTED), Küstenlinie: Natural Earth (gemeinfrei). Berechnung: tools/hoehe-holen.py",
+ "quelle": "Höhenmodelle: Terrarium-Kacheln (Mapzen/Tilezen, Amazon Open Data, u. a. SRTM, ETOPO1, GMTED) und Copernicus DEM GLO-30 (Copernicus, Amazon Open Data, Median je Gitterzelle). Küstenlinie: Natural Earth (gemeinfrei). Berechnung: tools/hoehe-holen.py",
  "hinweis": "Senkrechte Genauigkeit des Höhenmodells im Bereich mehrerer Meter, Bäume und Gebäude enthalten, Deiche und Pumpen nicht erfasst. Größenordnung, keine Prognose.",
  "regionen": [
   {
@@ -22,7 +22,41 @@
    "lat1": 55.2,
    "breite": 1500,
    "hoehe": 840,
-   "aufloesung_grad": 0.005
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
+  },
+  {
+   "id": "hamburg",
+   "name": "Hamburg und Elbmündung",
+   "lon0": 8.8,
+   "lat0": 53.0,
+   "lon1": 10.6,
+   "lat1": 54.0,
+   "breite": 720,
+   "hoehe": 400,
+   "aufloesung_grad": 0.0025,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
+  },
+  {
+   "id": "ostsee",
+   "name": "Deutsche Ostseeküste",
+   "lon0": 10.0,
+   "lat0": 53.8,
+   "lon1": 14.4,
+   "lat1": 54.9,
+   "breite": 880,
+   "hoehe": 220,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
   },
   {
    "id": "bangladesch",
@@ -33,7 +67,11 @@
    "lat1": 25.0,
    "breite": 1200,
    "hoehe": 800,
-   "aufloesung_grad": 0.005
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
   },
   {
    "id": "nildelta",
@@ -44,7 +82,11 @@
    "lat1": 32.0,
    "breite": 800,
    "hoehe": 400,
-   "aufloesung_grad": 0.005
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
   },
   {
    "id": "mekong",
@@ -55,7 +97,41 @@
    "lat1": 11.6,
    "breite": 700,
    "hoehe": 660,
-   "aufloesung_grad": 0.005
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
+  },
+  {
+   "id": "bangkok",
+   "name": "Thailand: Bangkok und Golf von Thailand",
+   "lon0": 99.8,
+   "lat0": 12.6,
+   "lon1": 101.4,
+   "lat1": 14.2,
+   "breite": 320,
+   "hoehe": 320,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
+  },
+  {
+   "id": "jakarta",
+   "name": "Indonesien: Jakarta und Nordküste Javas",
+   "lon0": 106.2,
+   "lat0": -6.9,
+   "lon1": 107.6,
+   "lat1": -5.8,
+   "breite": 280,
+   "hoehe": 220,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
   },
   {
    "id": "florida",
@@ -66,29 +142,26 @@
    "lat1": 28.2,
    "breite": 740,
    "hoehe": 680,
-   "aufloesung_grad": 0.005
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
   },
   {
-   "id": "venedig",
-   "name": "Italien: Venedig und Po-Ebene",
-   "lon0": 11.0,
-   "lat0": 44.0,
-   "lon1": 14.5,
-   "lat1": 46.0,
-   "breite": 700,
-   "hoehe": 400,
-   "aufloesung_grad": 0.005
-  },
-  {
-   "id": "jangtse",
-   "name": "China: Jangtse-Delta und Shanghai",
-   "lon0": 119.5,
-   "lat0": 29.5,
-   "lon1": 123.5,
-   "lat1": 32.5,
-   "breite": 800,
-   "hoehe": 600,
-   "aufloesung_grad": 0.005
+   "id": "newyork",
+   "name": "USA: New York und New Jersey",
+   "lon0": -74.6,
+   "lat0": 39.6,
+   "lon1": -73.2,
+   "lat1": 41.0,
+   "breite": 280,
+   "hoehe": 280,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
   },
   {
    "id": "mississippi",
@@ -99,7 +172,56 @@
    "lat1": 30.8,
    "breite": 900,
    "hoehe": 460,
-   "aufloesung_grad": 0.005
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
+  },
+  {
+   "id": "venedig",
+   "name": "Italien: Venedig und Po-Ebene",
+   "lon0": 11.0,
+   "lat0": 44.0,
+   "lon1": 14.5,
+   "lat1": 46.0,
+   "breite": 700,
+   "hoehe": 400,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
+  },
+  {
+   "id": "jangtse",
+   "name": "China: Jangtse-Delta und Shanghai",
+   "lon0": 119.5,
+   "lat0": 29.5,
+   "lon1": 123.5,
+   "lat1": 32.5,
+   "breite": 800,
+   "hoehe": 600,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
+  },
+  {
+   "id": "lagos",
+   "name": "Nigeria: Lagos und Golf von Guinea",
+   "lon0": 2.6,
+   "lat0": 6.0,
+   "lon1": 4.8,
+   "lat1": 6.9,
+   "breite": 440,
+   "hoehe": 180,
+   "aufloesung_grad": 0.005,
+   "modelle": [
+    "terrarium",
+    "cop"
+   ]
   }
  ]
 }

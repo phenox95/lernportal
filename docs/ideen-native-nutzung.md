@@ -562,3 +562,26 @@ Alle unter `labor/`, im Browser getestet (Kamera, Standort, Sensoren und Spracha
 - Weltkarte: eine Gitterzelle ist etwa 11 km breit, überflutete Punkte sind dort vergrößert gezeichnet.
 - Die Lizenzbedingungen der Höhenkacheln (Quellenangaben der einzelnen Datensätze) und der NASA-Bilder habe ich nicht an der Quelle gelesen. Vor einer öffentlichen Verwendung lesen.
 
+**Nachtrag 12.6 (zweites Höhenmodell, mehr Ausschnitte, 17.11.2026):** Zu jedem Ausschnitt gibt es jetzt auch eine Berechnung mit **Copernicus DEM GLO-30** (30 m, Median je Gitterzelle, Auswahl „Höhenmodell“ auf der Seite). Neue Ausschnitte: Hamburg und Elbmündung, Deutsche Ostseeküste, Bangkok, Jakarta, New York und New Jersey, Lagos. Insgesamt Weltkarte plus 14 Ausschnitte (rund 6,4 MB). Das Copernicus-Modell ist wie SRTM ein Oberflächenmodell (Baumkronen und Dächer), aber genauer. Benötigter Host zusätzlich: `copernicus-dem-30m.s3.amazonaws.com` (öffentlich, kein Konto nötig).
+
+Überflutete Landfläche bei 3 m Anstieg in km², gemessen mit dem Skript (Terrarium gegen Copernicus). Beide Modelle liegen an manchen Orten weit auseinander, das ist ein Prüfanlass:
+
+| Ausschnitt | Terrarium | Copernicus |
+|---|---|---|
+| Nordsee | 31.387 | 28.833 |
+| Hamburg | 2.530 | 2.251 |
+| Ostsee | 2.222 | 1.745 |
+| **Bangladesch** | 3.544 | **20.155** |
+| Nildelta | 10.521 | 11.334 |
+| Mekong | 31.854 | 30.514 |
+| **Bangkok** | 1.422 | **4.169** |
+| Jakarta | 1.499 | 1.341 |
+| **Südflorida** | 1.190 | **9.904** |
+| New York | 588 | 696 |
+| Mississippi | 13.433 | 18.552 |
+| Venedig | 6.999 | 6.081 |
+| **Jangtse** | 3.253 | **13.116** |
+| Lagos | 149 | 508 |
+
+Wo die Modelle abweichen (Bangladesch, Florida, Bangkok, Jangtse), ist das Terrarium-Modell vermutlich zu hoch (Bäume, Dächer), das Copernicus-Modell wirkt plausibler. **Auch Copernicus zeigt Baumkronen und Dächer**, kann also in dicht bewachsenen Deltas weiter unterschätzen. Beides ist aus allgemeinem Wissen abgeleitet, nicht an einer Quelle geprüft. Ein Modell, das Vegetation und Gebäude herausrechnet (zum Beispiel FABDEM) oder Küstenhöhen mit Korrektur (zum Beispiel CoastalDEM), habe ich nicht eingebaut (Zugang und Lizenz nicht geprüft).
+
