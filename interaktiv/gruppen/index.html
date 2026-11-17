@@ -61,12 +61,15 @@ label.opt input{width:26px;height:26px;accent-color:var(--g)}
 .legende span{border:2px solid var(--ink);border-radius:10px;padding:4px 10px;font-size:17px}
 .gruppe{border-radius:10px}
 [hidden]{display:none!important}
+html.eingebettet header{display:none}
+html.eingebettet main{padding-top:10px}
 .g1{background:#F6D7D7}.g2{background:#D7E6F6}.g3{background:#DDF0D2}.g4{background:#F9EBB8}.g5{background:#E6D9F3}.g6{background:#CFEFEA}.g7{background:#FADDC4}.g8{background:#E1E1E1}.g9{background:#F3D3E6}.g10{background:#D5E8C0}
 @media (max-width:30rem){.platz{font-size:18px;border-width:2px;border-radius:8px}.plan{gap:4px}.stepper button{width:46px}}
 @media print{header,.feld,.aktionen,#los,.status,.hint,.tafel+.plan:not(.erg){display:none}.platz{border-width:2px}}
 </style>
 </head>
 <body>
+<script>if(/[?&]eingebettet=1/.test(location.search))document.documentElement.className+=" eingebettet";</script>
 <header>
   <p>Werkzeug für den Unterricht</p>
   <h1>Gruppen losen – mit Sitzplan</h1>

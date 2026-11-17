@@ -285,3 +285,49 @@ html.lp-lesen .lp-pr-minuten::before { content: none; }
 .lp-pr-panel[data-stufe="1"] .lp-pr-aqua .bob { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .lp-pr-aqua .bob { animation: none; } }
 .lp-pr-aquarahmen[data-riff="maerchen"] .blase { display: none; }
+
+/* ---------- Mini-Timer (schwebt über der Folie, solange der Timer läuft und das Fenster zu ist) ---------- */
+.lp-pr-mini { position: fixed; left: 14px; bottom: 14px; z-index: 3050; display: flex; align-items: stretch; background: var(--lp-pr-ink); color: #fff; border: 3px solid #fff; border-radius: 999px; box-shadow: 0 4px 16px rgba(0,0,0,.4); touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; font-family: Verdana, Arial, sans-serif; }
+.lp-pr-mini[hidden] { display: none; }
+.lp-pr-mini-zeit { font: 700 26px/1 Verdana, Arial, sans-serif; font-variant-numeric: tabular-nums; min-height: 52px; padding: 0 8px 0 18px; border: 0; background: transparent; color: inherit; cursor: inherit; }
+.lp-pr-mini-zu { width: 44px; border: 0; border-radius: 0 999px 999px 0; background: transparent; color: inherit; font-size: 24px; cursor: pointer; }
+.lp-pr-mini-zu:hover { background: rgba(255,255,255,.2); }
+.lp-pr-mini-zeit:focus-visible, .lp-pr-mini-zu:focus-visible { outline: 4px solid #F4B400; outline-offset: 2px; }
+.lp-pr-mini[data-zustand="pause"] .lp-pr-mini-zeit { opacity: .75; }
+.lp-pr-mini[data-zustand="pause"] .lp-pr-mini-zeit::before { content: "❚❚ "; font-size: 16px; }
+.lp-pr-mini[data-zustand="ende"] { background: #d62828; animation: lp-pr-blink 1s steps(2) infinite; }
+
+/* ---------- Blende (in der Bühne, wird mit der Folie skaliert) ---------- */
+.lp-pr-blende { position: absolute; z-index: 45; background: #2b2f2d; color: #fff; border: 4px solid #F4B400; box-sizing: border-box; display: grid; place-items: center; touch-action: none; cursor: move; font-family: Verdana, Arial, sans-serif; }
+.lp-pr-blende[hidden] { display: none; }
+.lp-pr-blende-text { margin: 0; padding: 0 60px; text-align: center; font-size: 26px; opacity: .85; }
+.lp-pr-blende-zu { position: absolute; left: 44px; top: 44px; min-height: 48px; padding: 0 16px; border: 2px solid #fff; border-radius: 12px; background: #1a1a1a; color: #fff; font: 700 20px Verdana, Arial, sans-serif; cursor: pointer; }
+.lp-pr-blende-zu:focus-visible { outline: 4px solid #F4B400; outline-offset: 2px; }
+.lp-pr-bh { position: absolute; display: block; }
+.lp-pr-bh[data-k="n"], .lp-pr-bh[data-k="s"] { left: 30px; right: 30px; height: 32px; cursor: ns-resize; }
+.lp-pr-bh[data-k="w"], .lp-pr-bh[data-k="o"] { top: 30px; bottom: 30px; width: 32px; cursor: ew-resize; }
+.lp-pr-bh[data-k="n"] { top: 0; } .lp-pr-bh[data-k="s"] { bottom: 0; }
+.lp-pr-bh[data-k="w"] { left: 0; } .lp-pr-bh[data-k="o"] { right: 0; }
+.lp-pr-bh[data-k="nw"], .lp-pr-bh[data-k="no"], .lp-pr-bh[data-k="sw"], .lp-pr-bh[data-k="so"] { width: 44px; height: 44px; }
+.lp-pr-bh[data-k="nw"] { left: 0; top: 0; cursor: nwse-resize; } .lp-pr-bh[data-k="so"] { right: 0; bottom: 0; cursor: nwse-resize; }
+.lp-pr-bh[data-k="no"] { right: 0; top: 0; cursor: nesw-resize; } .lp-pr-bh[data-k="sw"] { left: 0; bottom: 0; cursor: nesw-resize; }
+.lp-pr-bh[data-k="n"]::after, .lp-pr-bh[data-k="s"]::after { content: ""; position: absolute; left: 50%; top: 10px; width: 90px; height: 8px; margin-left: -45px; border-radius: 4px; background: #F4B400; }
+.lp-pr-bh[data-k="w"]::after, .lp-pr-bh[data-k="o"]::after { content: ""; position: absolute; top: 50%; left: 10px; width: 8px; height: 90px; margin-top: -45px; border-radius: 4px; background: #F4B400; }
+.lp-pr-bh[data-k="nw"]::after, .lp-pr-bh[data-k="no"]::after, .lp-pr-bh[data-k="sw"]::after, .lp-pr-bh[data-k="so"]::after { content: ""; position: absolute; left: 10px; top: 10px; width: 22px; height: 22px; border-radius: 6px; background: #F4B400; }
+
+/* ---------- Weitere Werkzeuge ---------- */
+.lp-pr-raster { display: grid; gap: 8px; }
+.lp-pr-wahl { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 52px; font-size: 18px; text-align: left; }
+.lp-pr-wahl kbd { font: 700 14px Verdana, Arial, sans-serif; min-width: 28px; padding: 2px 8px; text-align: center; border: 2px solid var(--lp-pr-ink); border-radius: 8px; background: #fff; }
+.lp-pr-klein.on kbd { color: var(--lp-pr-ink); }
+.lp-pr-zufallzahl { font: 700 110px/1.1 Verdana, Arial, sans-serif; text-align: center; font-variant-numeric: tabular-nums; min-height: 1.1em; }
+.lp-pr-zufallzahl.rollt { opacity: .55; }
+.lp-pr-opt { display: flex; align-items: center; gap: 8px; font-size: 16px; min-height: 44px; }
+.lp-pr-opt input { width: 24px; height: 24px; accent-color: var(--lp-pr-ink); }
+.lp-pr-runden { margin: 0; padding-left: 1.6em; font: 700 16px Verdana, Arial, sans-serif; font-variant-numeric: tabular-nums; }
+.lp-pr-notizfeld { width: 100%; min-height: 9em; font: 17px/1.4 Verdana, Arial, sans-serif; border: 2px solid var(--lp-pr-ink); border-radius: 10px; padding: 8px 10px; resize: vertical; box-sizing: border-box; }
+.lp-pr-rahmen { display: flex; flex-direction: column; height: 640px; }
+.lp-pr-rahmen .lp-pr-inhalt { flex: 1; min-height: 0; padding: 0; display: flex; }
+.lp-pr-iframe { flex: 1; width: 100%; height: 100%; border: 0; background: #fff; border-radius: 0 0 11px 11px; }
+@media print { .lp-pr-mini, .lp-pr-blende { display: none !important; } }
+html.lp-lesen .lp-pr-mini, html.lp-lesen .lp-pr-blende { display: none !important; }
