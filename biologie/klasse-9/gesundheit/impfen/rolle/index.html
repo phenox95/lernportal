@@ -41,7 +41,8 @@ nav a[aria-current="page"]{background:var(--y);color:var(--ink)}
   if(!c){main.innerHTML='<p class="fehler">Diese Rollenkarte gibt es nicht. Scanne den QR-Code auf der Folie noch einmal.</p>';return;}
   document.title=c.titel+' – Impfen';
   document.getElementById('titel').textContent=c.titel;
-  main.innerHTML=c.html+'<p class="hinweis">Fiktive Rolle für den Unterricht. Du kannst dir den Text vorlesen lassen.</p>';
+  var pool=(!runde2&&window.impfPoolKarte)?window.impfPoolKarte():null;
+  main.innerHTML=c.html+(pool?'<h2>Materialpool: Belege M1 bis M8</h2>'+pool.html:'')+'<p class="hinweis">Fiktive Rolle für den Unterricht. Du kannst dir den Text vorlesen lassen.</p>';
 })();
 </script>
 </body>

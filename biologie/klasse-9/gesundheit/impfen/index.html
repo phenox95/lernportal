@@ -321,13 +321,14 @@ svg text{font-family:Andika,Verdana,sans-serif}
   <div class="abs" id="abtf" style="left:64px;top:352px;width:1152px"></div>
 </section>
 
-<section class="slide" data-min="14" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollen verteilen: SuS scannen den QR-Code ihrer Rolle mit dem Handy (Seite rolle/, nur über die Portal-Adresse, nicht aus einer lokalen Datei) oder tippen hier A–D an, dann öffnet sich die Karte im Fenster. Ohne Handys: Rollenkarten auf Papier. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
+<section class="slide" data-min="14" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollen verteilen: SuS scannen den QR-Code ihrer Rolle mit dem Handy (Seite rolle/, nur über die Portal-Adresse, nicht aus einer lokalen Datei) oder tippen hier A–D an, dann öffnet sich die Karte im Fenster. Ohne Handys: Rollenkarten auf Papier. Die Karten geben keine fertigen Argumente vor: SuS wählen im Materialpool (M1–M8, Knopf „Materialpool“ oder auf der Handyseite unter der Karte) zwei Belege aus und formulieren die Argumente selbst. Der „Tipp“ auf der Karte nennt passende Belege für SuS, die Hilfe brauchen. Erweiterung: den Beleg der Gegenseite entkräften. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
   <h1>Debatte in vier Rollen</h1>
   <button class="tmr" data-timer="180,270,90" title="Timer: Runde 1, 2, 3">Timer<small>Runde 1</small></button>
   <div class="rnd" style="left:64px;top:150px"><h3>Runde 1</h3><div class="t">3 Min.</div><p>Statements: jede Rolle 45 Sekunden, ein Argument mit Beleg</p></div>
   <div class="rnd" style="left:452px;top:150px"><h3>Runde 2</h3><div class="t">4,5 Min.</div><p>Diskussion: geht auf andere ein</p></div>
   <div class="rnd o" style="left:840px;top:150px"><h3>Runde 3</h3><div class="t">1,5 Min.</div><p>Entscheidung der Gruppe</p></div>
   <div class="abs hint" style="left:64px;top:358px">Scanne den Code deiner Rolle mit dem Handy oder tippe auf die Rolle.</div>
+  <button class="btn sec abs" id="poolbtn" type="button" style="left:900px;top:346px;min-height:44px;padding:4px 16px;font-size:18px">Materialpool M1–M8</button>
   <div class="rolle" style="left:64px"><button class="rolebtn" data-role="A"><span class="num">A</span>Mutter</button><div class="qr" data-qr="A" role="img" aria-label="QR-Code zur Rollenkarte A"></div></div>
   <div class="rolle" style="left:358px"><button class="rolebtn" data-role="B"><span class="num">B</span>Kinderärztin</button><div class="qr" data-qr="B" role="img" aria-label="QR-Code zur Rollenkarte B"></div></div>
   <div class="rolle" style="left:652px"><button class="rolebtn" data-role="C"><span class="num">C</span>Vater von Mia</button><div class="qr" data-qr="C" role="img" aria-label="QR-Code zur Rollenkarte C"></div></div>
@@ -552,6 +553,11 @@ svg text{font-family:Andika,Verdana,sans-serif}
     $('#rcard').innerHTML='<button class="mclose" id="rclose">✕ Schließen</button><h2>'+c.titel+'</h2>'+c.html;
     $('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
   }
+  $('#poolbtn').onclick=function(){
+    var c=window.impfPoolKarte();
+    $('#rcard').innerHTML='<button class="mclose" id="rclose">✕ Schließen</button><h2>'+c.titel+'</h2>'+c.html;
+    $('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
+  };
   /* QR-Codes: zeigen auf rolle/?r=A usw., relativ zur Adresse dieser Seite (läuft also unter GitHub Pages, nicht aus dem Dateisystem) */
   $$('.qr').forEach(function(h){
     try{var url=new URL('rolle/?r='+h.getAttribute('data-qr'),location.href).href;var q=qrcode(0,'M');q.addData(url);q.make();h.innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true});h.title=url;}catch(e){h.textContent='QR nicht verfügbar';}
