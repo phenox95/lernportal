@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Meeresspiegel auf der Karte</title><link rel="stylesheet" href="../labor.css">
+<style>
+.leiste{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+input[type=range]{width:100%}.regler{margin:12px 0}.regler label{display:block;font-weight:700}
+#kf{position:relative;border:2px solid var(--g);border-radius:14px;overflow:hidden;background:#b9d4e8;line-height:0}#cv{width:100%;height:auto;display:block;cursor:crosshair;touch-action:manipulation;image-rendering:auto}
+.leiste button.on{background:var(--dk);color:#fff}.legende{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;margin:8px 0}.legende i{display:inline-block;width:16px;height:16px;border-radius:3px;border:1px solid #0006;margin-right:6px;vertical-align:-3px}
+.erg{font-size:clamp(20px,4vw,28px);font-weight:700;color:var(--dk)}.quelle a{color:var(--g)}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Meeresspiegel auf der Karte</h1>
+<div class="kasten"><b>Sich orientieren, Systeme erschließen, Urteilen (Geo 3.6 und 3.1, Stufe E bis G):</b> <b>Sage vorher</b>, welche Küsten bei 1 m, 3 m und 10 m Anstieg am stärksten betroffen sind. <b>Stelle</b> den Anstieg ein und <b>beschreibe</b> die überfluteten Flächen. <b>Vergleiche</b> zwei Regionen. <b>Erkläre</b>, warum flache Deltas stärker betroffen sind als Steilküsten. <b>Beurteile</b>, was die Karte nicht zeigt (Deiche, Pumpen, Menschen, Gezeiten, Sturmfluten).</div>
+<div class="leiste"><label for="reg"><b>Ausschnitt</b></label><select id="reg"></select>
+<span role="group" aria-label="Hintergrund"><b>Hintergrund:</b> <button type="button" class="sek on" id="bg1" aria-pressed="true">Gezeichnet</button> <button type="button" class="sek" id="bg2" aria-pressed="false">Satellit (nur Weltkarte)</button></span></div>
+<div class="leiste"><span><b>Beispiele:</b></span><button type="button" class="sek" data-sz="0">Heute</button><button type="button" class="sek" data-sz="0.4">0,4 m</button><button type="button" class="sek" data-sz="1">1 m</button><button type="button" class="sek" data-sz="3">3 m</button><button type="button" class="sek" data-sz="6">6 m</button><button type="button" class="sek" data-sz="10">10 m</button></div>
+<div class="regler"><label for="ms">Meeresspiegel steigt um: <output id="mo"></output></label><input type="range" id="ms" min="0" max="10" step="0.1" value="1"></div>
+<div id="kf"><canvas id="cv" role="img" aria-label="Karte mit überfluteten Gebieten, Zahlen darunter"></canvas></div>
+<div class="legende" aria-hidden="true"><span><i style="background:#1f6fe0"></i>überflutet bei diesem Anstieg</span><span><i style="background:#8a3fc0"></i>liegt schon heute unter dem Meeresspiegel (durch Deiche und Pumpen geschützt)</span><span><i style="background:#7a5"></i>Land</span></div>
+<p class="erg" id="ausw" aria-live="polite"></p>
+<p id="punkt" class="kasten" aria-live="polite">Tippe in die Karte: Dann siehst du, ab welchem Anstieg dieser Ort überflutet wird.</p>
+<p class="kasten warn"><b>Wichtig bei Deltas in den Tropen:</b> Radar-Höhenmodelle messen Baumkronen und Dächer mit. Dadurch erscheint das Land dort <b>zu hoch</b>, und die Karte <b>unterschätzt</b> die Überflutung zum Beispiel in Bangladesch, im Mekong-, Nil- und Jangtse-Delta (bekanntes Problem, aus allgemeinem Wissen, nicht an einer Quelle geprüft). <b>Prüfe</b> das Ergebnis dort mit einer zweiten Quelle und <b>beurteile</b>, wie verlässlich die Karte ist. In offenem Gelände (Nordsee) ist das Höhenmodell besser.</p>
+<p class="kasten warn"><b>Modell, keine Prognose:</b> Grundlage ist ein globales Höhenmodell (unter anderem Radardaten von Satelliten, SRTM). Seine senkrechte Genauigkeit liegt im Bereich mehrerer Meter und es enthält Bäume und Gebäude. <b>Deiche, Pumpen, Dünen, Gezeiten, Sturmfluten und Landabsenkung sind nicht erfasst.</b> Überflutet wird nur Land, das über zusammenhängend niedrigeres Land mit dem offenen Meer verbunden ist. Flächen im Text sind Näherungen. Auf der Weltkarte sind die überfluteten Punkte <b>größer gezeichnet als sie sind</b>, damit man sie sieht (eine Gitterzelle ist etwa 11 km breit).</p>
+<p class="quelle" id="quelle">Lade Karten …</p>
+<p class="quelle"><b>Quellen:</b> Höhenmodell: Terrarium-Kacheln (Mapzen/Tilezen, Amazon Open Data; enthält SRTM, ETOPO1, GMTED u. a.). Küstenlinie: Natural Earth (gemeinfrei). Satellitenbild: NASA Earth Observatory, „Blue Marble“ (Reto Stöckli), über Wikimedia Commons, Namensnennung NASA; Nutzungsbedingungen von NASA und Commons vor einer öffentlichen Verwendung lesen. Berechnung: <code>tools/hoehe-holen.py</code>.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}function z(x,n){return String(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).replace('.',',')}
+ var IDX=null,R=null,D=null,cv=$('cv'),g=cv.getContext('2d'),bm=null,hg='1',pos=null;
+ function laden(url){return new Promise(function(ok,fehl){var i=new Image();i.onload=function(){ok(i)};i.onerror=fehl;i.src=url})}
+ function wahl(id){return IDX.regionen.filter(function(r){return r.id===id})[0]}
+ function region(id){R=wahl(id);D=null;pos=null;$('punkt').textContent='Lade '+R.name+' …';laden('../../daten/hoehe/'+id+'.png').then(function(img){
+   var c=document.createElement('canvas');c.width=R.breite;c.height=R.hoehe;var x=c.getContext('2d');x.drawImage(img,0,0);D=x.getImageData(0,0,R.breite,R.hoehe).data;
+   cv.width=R.breite;cv.height=R.hoehe;var f=Math.cos((R.lat0+R.lat1)/2*Math.PI/180);cv.style.aspectRatio=(R.breite*f)+' / '+R.hoehe;
+   $('punkt').textContent='Tippe in die Karte: Dann siehst du, ab welchem Anstieg dieser Ort überflutet wird.';zeichnen()}).catch(function(){$('punkt').textContent='Karte konnte nicht geladen werden (Seite über einen Server öffnen).'})}
+ function zeichnen(){if(!D)return;var w=R.breite,h=R.hoehe,lev=+$('ms').value,st=Math.round(lev*10)+1;$('mo').textContent=z(lev,1)+' m';
+  var out=g.createImageData(w,h),o=new Uint32Array(out.data.buffer),sat=(hg==='2'&&R.id==='welt'&&bm),i,j;
+  if(sat){var t=document.createElement('canvas');t.width=w;t.height=h;var tx=t.getContext('2d');var sy=(90-R.lat1)/180*bm.naturalHeight,sh=(R.lat1-R.lat0)/180*bm.naturalHeight;tx.drawImage(bm,0,sy,bm.naturalWidth,sh,0,0,w,h);var bd=tx.getImageData(0,0,w,h).data;var b32=new Uint32Array(bd.buffer);for(i=0;i<o.length;i++)o[i]=b32[i]}
+  var dark=matchMedia('(prefers-color-scheme:dark)').matches,BL=sat?(0xff000000|(0xff<<16)|(0xe0<<8)|0x00):(0xff000000|(0xe0<<16)|(0x6f<<8)|0x1f),PU=0xff000000|(0xc0<<16)|(0x3f<<8)|0x8a,OC=dark?0xff4a3a24:0xffe8d4b9;/*ABGR*/
+  var n=0,nl=0,areal=0,flaeche=0,la0=R.lat1,rs=R.aufloesung_grad,wel=R.id==='welt';
+  for(j=0;j<h;j++){var lat=la0-(j+.5)*rs,a=rs*111.32*rs*111.32*Math.cos(lat*Math.PI/180);for(i=0;i<w;i++){var p=(j*w+i)*4,r=D[p],gr=D[p+1],land=D[p+2]>0;
+    if(land){nl++;areal+=a}
+    if(!sat){if(land){var v=gr/255;var rr=Math.round(110+v*90),gg=Math.round(170-v*50),bb=Math.round(100+v*10);if(v>.55){rr=150+Math.round((v-.55)*200);gg=130+Math.round((v-.55)*150);bb=100+Math.round((v-.55)*150)}o[j*w+i]=0xff000000|(bb<<16)|(gg<<8)|rr}else o[j*w+i]=OC}
+    if(land&&r>0&&r<255){if(r===1){o[j*w+i]=PU;if(wel){if(i+1<w)o[j*w+i+1]=PU;if(j+1<h)o[(j+1)*w+i]=PU}if(lev>=0){n++;flaeche+=a}}else if(r<=st){o[j*w+i]=BL;if(wel){if(i+1<w)o[j*w+i+1]=BL;if(j+1<h)o[(j+1)*w+i]=BL}n++;flaeche+=a}}}}
+  g.putImageData(out,0,0);if(pos){g.strokeStyle='#fff';g.lineWidth=Math.max(2,w/300);g.beginPath();g.arc(pos[0],pos[1],Math.max(6,w/90),0,6.3);g.stroke();g.strokeStyle='#000';g.lineWidth=Math.max(1,w/600);g.stroke()}
+  $('ausw').textContent='Überflutete Landfläche in diesem Ausschnitt: etwa '+Math.round(flaeche).toLocaleString('de-DE')+' km² ('+z(areal?flaeche/areal*100:0,1)+' % der Landfläche des Ausschnitts, darin enthalten: Land unter dem heutigen Meeresspiegel).'}
+ cv.addEventListener('click',function(e){if(!D)return;var rc=cv.getBoundingClientRect(),x=Math.floor((e.clientX-rc.left)/rc.width*R.breite),y=Math.floor((e.clientY-rc.top)/rc.height*R.hoehe);x=Math.max(0,Math.min(R.breite-1,x));y=Math.max(0,Math.min(R.hoehe-1,y));var p=(y*R.breite+x)*4,r=D[p],land=D[p+2]>0;var lon=R.lon0+(x+.5)*R.aufloesung_grad,lat=R.lat1-(y+.5)*R.aufloesung_grad;pos=[x,y];
+  var t=!land?'Offenes Meer.':r===255?'Dieser Ort wird bis 10 m Anstieg nicht vom Meer erreicht (zu hoch oder nicht mit dem Meer verbunden).':r===1?'Dieser Ort liegt nach dem Höhenmodell schon heute auf oder unter dem Meeresspiegel. Er ist nur durch Deiche, Dünen oder Pumpen trocken.':'Dieser Ort wird ab etwa '+z((r-1)/10,1)+' m Anstieg überflutet.';
+  $('punkt').textContent='Ort bei '+z(Math.abs(lat),2)+(lat<0?' °S, ':' °N, ')+z(Math.abs(lon),2)+(lon<0?' °W: ':' °O: ')+t;zeichnen()});
+ [].forEach.call(document.querySelectorAll('[data-sz]'),function(b){b.onclick=function(){$('ms').value=b.dataset.sz;zeichnen()}});$('ms').oninput=zeichnen;
+ function bgset(v){hg=v;$('bg1').classList.toggle('on',v==='1');$('bg2').classList.toggle('on',v==='2');$('bg1').setAttribute('aria-pressed',String(v==='1'));$('bg2').setAttribute('aria-pressed',String(v==='2'));if(v==='2'&&R.id!=='welt')$('punkt').textContent='Das Satellitenbild gibt es nur für die Weltkarte (für Ausschnitte ist es zu grob). Wähle „Weltkarte“.';zeichnen()}
+ $('bg1').onclick=function(){bgset('1')};$('bg2').onclick=function(){if(!bm)laden('../../daten/hoehe/blue-marble-2048.jpg').then(function(i){bm=i;bgset('2')}).catch(function(){$('punkt').textContent='Satellitenbild nicht geladen.'});else bgset('2')};
+ $('reg').onchange=function(){region($('reg').value)};
+ fetch('../../daten/hoehe/index.json').then(function(r){return r.json()}).then(function(d){IDX=d;d.regionen.forEach(function(r){var o=document.createElement('option');o.value=r.id;o.textContent=r.name;$('reg').appendChild(o)});$('quelle').textContent=d.hinweis;var u=(location.hash||'').replace('#','');if(u&&wahl(u))$('reg').value=u;region($('reg').value)}).catch(function(){$('quelle').textContent='Daten nicht geladen (Seite über einen Server öffnen).'});
+})();
+</script></main></body></html>

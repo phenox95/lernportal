@@ -1,0 +1,105 @@
+{
+ "quelle": "Höhenmodell: Terrarium-Kacheln (Mapzen/Tilezen, Amazon Open Data, u. a. SRTM, ETOPO1, GMTED), Küstenlinie: Natural Earth (gemeinfrei). Berechnung: tools/hoehe-holen.py",
+ "hinweis": "Senkrechte Genauigkeit des Höhenmodells im Bereich mehrerer Meter, Bäume und Gebäude enthalten, Deiche und Pumpen nicht erfasst. Größenordnung, keine Prognose.",
+ "regionen": [
+  {
+   "id": "welt",
+   "name": "Weltkarte",
+   "lon0": -180.0,
+   "lat0": -60.0,
+   "lon1": 180.0,
+   "lat1": 84.0,
+   "breite": 3600,
+   "hoehe": 1440,
+   "aufloesung_grad": 0.1
+  },
+  {
+   "id": "nordsee",
+   "name": "Nordsee: Niederlande und Norddeutschland",
+   "lon0": 3.0,
+   "lat0": 51.0,
+   "lon1": 10.5,
+   "lat1": 55.2,
+   "breite": 1500,
+   "hoehe": 840,
+   "aufloesung_grad": 0.005
+  },
+  {
+   "id": "bangladesch",
+   "name": "Bangladesch: Ganges-Brahmaputra-Delta",
+   "lon0": 87.0,
+   "lat0": 21.0,
+   "lon1": 93.0,
+   "lat1": 25.0,
+   "breite": 1200,
+   "hoehe": 800,
+   "aufloesung_grad": 0.005
+  },
+  {
+   "id": "nildelta",
+   "name": "Ägypten: Nildelta",
+   "lon0": 29.0,
+   "lat0": 30.0,
+   "lon1": 33.0,
+   "lat1": 32.0,
+   "breite": 800,
+   "hoehe": 400,
+   "aufloesung_grad": 0.005
+  },
+  {
+   "id": "mekong",
+   "name": "Vietnam: Mekong-Delta",
+   "lon0": 104.5,
+   "lat0": 8.3,
+   "lon1": 108.0,
+   "lat1": 11.6,
+   "breite": 700,
+   "hoehe": 660,
+   "aufloesung_grad": 0.005
+  },
+  {
+   "id": "florida",
+   "name": "USA: Südflorida",
+   "lon0": -83.0,
+   "lat0": 24.8,
+   "lon1": -79.3,
+   "lat1": 28.2,
+   "breite": 740,
+   "hoehe": 680,
+   "aufloesung_grad": 0.005
+  },
+  {
+   "id": "venedig",
+   "name": "Italien: Venedig und Po-Ebene",
+   "lon0": 11.0,
+   "lat0": 44.0,
+   "lon1": 14.5,
+   "lat1": 46.0,
+   "breite": 700,
+   "hoehe": 400,
+   "aufloesung_grad": 0.005
+  },
+  {
+   "id": "jangtse",
+   "name": "China: Jangtse-Delta und Shanghai",
+   "lon0": 119.5,
+   "lat0": 29.5,
+   "lon1": 123.5,
+   "lat1": 32.5,
+   "breite": 800,
+   "hoehe": 600,
+   "aufloesung_grad": 0.005
+  },
+  {
+   "id": "mississippi",
+   "name": "USA: Mississippi-Delta",
+   "lon0": -92.5,
+   "lat0": 28.5,
+   "lon1": -88.0,
+   "lat1": 30.8,
+   "breite": 900,
+   "hoehe": 460,
+   "aufloesung_grad": 0.005
+  }
+ ]
+}

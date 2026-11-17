@@ -550,3 +550,15 @@ Alle unter `labor/`, im Browser getestet (Kamera, Standort, Sensoren und Spracha
 
 **Nachtrag 12.5 (Satellitendaten):** Neuer Reiter „5. Gemessen (Satelliten)“ mit **echten Messdaten**: globaler Meeresspiegel seit 1880 (Gezeitenpegel und Satelliten, CSIRO, bis 2013) und Satellitenaltimetrie ab 1993 (NOAA, bis 2023). Quelle: EPA mit CSIRO und NOAA, aufbereitet von `datasets/sea-level-rise` (Open Data Commons Public Domain Dedication and License 1.0). Datei `daten/meeresspiegel.json` (Zoll in Millimeter umgerechnet), erzeugt mit `python3 tools/daten-holen.py meeresspiegel`. Kontrolle im Test: Satelliten 1993 bis 2023 etwa 3,1 mm pro Jahr, Pegel 1900 bis 1990 etwa 1,5 mm pro Jahr. **Nicht verwendet, weil in dieser Umgebung nicht erreichbar:** NASA Sea Level Change, Copernicus Marine und weitere Satellitenreihen (neuere Jahre, Höhenmodelle für Karten). Die Lizenzbedingungen von CSIRO und NOAA selbst habe ich nicht gelesen, nur die des Datensatz-Aufbereiters.
 
+### 12.6 Meeresspiegel auf der Karte (Weltkarte und Ausschnitte, 17.11.2026)
+
+`labor/meeresspiegel-karte/`: Weltkarte (Satellitenbild oder gezeichnet) und acht Ausschnitte (Nordsee, Bangladesch, Nildelta, Mekong, Südflorida, Venedig und Po, Jangtse, Mississippi). Regler 0 bis 10 m, Ort antippen zeigt, ab welchem Anstieg er überflutet wird, Land unter dem heutigen Meeresspiegel ist violett.
+
+**Technik:** `tools/hoehe-holen.py` berechnet aus dem Höhenmodell (Terrarium-Kacheln, Mapzen/Tilezen auf Amazon Open Data, enthält unter anderem SRTM) und der Natural-Earth-Küstenlinie für jeden Punkt die **Überflutungshöhe** (nur Land, das über niedrigeres Land mit dem offenen Meer verbunden ist). Ergebnis: `daten/hoehe/*.png` (rund 3,3 MB) und `index.json`. Die Seite wendet nur noch einen Schwellenwert an. Benötigte Hosts: `elevation-tiles-prod.s3.amazonaws.com`, `raw.githubusercontent.com`. Benötigt `numpy`, `scipy`, `pillow`. Satellitenbild: NASA „Blue Marble“ 2048 Pixel (Reto Stöckli, NASA Earth Observatory) über Wikimedia Commons, `daten/hoehe/blue-marble-2048.jpg`.
+
+**Grenzen (stehen auch auf der Seite):**
+- Die senkrechte Genauigkeit des Höhenmodells liegt bei mehreren Metern. Radarmodelle messen Baumkronen und Dächer mit, dadurch wird die Überflutung in tropischen Deltas **unterschätzt** (bekanntes Problem, aus allgemeinem Wissen, nicht geprüft). Beispiel Bangladesch: Bei 3 m zeigt die Karte nur schmale Küstensäume, das Ergebnis ist mit einer zweiten Quelle zu prüfen. In offenem Gelände wie der Nordsee wirkt es plausibel: Weite Teile der Niederlande liegen auf oder unter dem Meeresspiegel und sind ohne Deiche sofort überflutet.
+- Deiche, Pumpen, Dünen, Gezeiten, Sturmfluten und Landabsenkung sind nicht erfasst.
+- Weltkarte: eine Gitterzelle ist etwa 11 km breit, überflutete Punkte sind dort vergrößert gezeichnet.
+- Die Lizenzbedingungen der Höhenkacheln (Quellenangaben der einzelnen Datensätze) und der NASA-Bilder habe ich nicht an der Quelle gelesen. Vor einer öffentlichen Verwendung lesen.
+
