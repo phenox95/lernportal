@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Klimadiagramm</title><link rel="stylesheet" href="../labor.css">
+<style>.tw{overflow-x:auto}table.e{border-collapse:collapse;min-width:640px;width:100%}table.e th,table.e td{padding:4px 6px;border-bottom:1px solid #8aa59a55;text-align:center}table.e input{width:4.6em;font:inherit;padding:4px;border:2px solid var(--g);border-radius:8px;background:var(--bg);color:var(--ink);text-align:center;min-height:40px}
+#sv{width:100%;height:auto;max-width:760px;display:block;background:#fff;border:2px solid var(--g);border-radius:12px}@media (prefers-color-scheme:dark){#sv{background:#0d1b2a}}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}input[type=text]{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Klimadiagramm zeichnen lassen</h1>
+<div class="kasten"><b>Methoden anwenden (Darstellen und Auswerten, Stufe E bis F):</b> <b>Trage</b> zwölf Monatswerte für Temperatur und Niederschlag ein. Das Diagramm entsteht nach der üblichen Regel (10 Grad Celsius entsprechen 20 mm Niederschlag). <b>Beschreibe</b> den Verlauf, <b>vergleiche</b> zwei Orte und <b>ordne</b> das Klima einer Klimazone zu. Die Satzanfänge unten helfen beim Formulieren.</div>
+<p class="kasten warn"><b>Beispielwerte:</b> Die vorgeladenen Werte sind <b>gerundete Näherungen</b> für Berlin und nicht amtlich geprüft. Echte Werte von einer Station (zum Beispiel DWD) einsetzen und Quelle und Lizenz auf der Seite nennen.</p>
+<div class="leiste"><label for="ort"><b>Ort</b></label><input type="text" id="ort" value="Berlin (Beispiel)" maxlength="30"><button type="button" class="sek" id="bsp">Berlin-Beispiel</button><button type="button" class="sek" id="leer">Leeres Raster</button></div>
+<div class="tw"><table class="e"><thead><tr><th></th><th>Jan</th><th>Feb</th><th>Mär</th><th>Apr</th><th>Mai</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Okt</th><th>Nov</th><th>Dez</th></tr></thead>
+<tbody><tr><th scope="row">°C</th><td colspan="12" id="rt"></td></tr><tr><th scope="row">mm</th><td colspan="12" id="rn"></td></tr></tbody></table></div>
+<svg id="sv" viewBox="0 0 760 420" role="img" aria-label="Klimadiagramm"></svg>
+<p id="ausw" class="kasten" aria-live="polite"></p>
+<details><summary><b>Satzanfänge zum Beschreiben</b></summary><ul><li>Die Temperatur steigt von … im … bis … im … an.</li><li>Der wärmste Monat ist …, der kälteste Monat ist …</li><li>Es fällt am meisten Niederschlag im …, am wenigsten im …</li><li>Die Jahresmitteltemperatur beträgt …, die Jahressumme des Niederschlags …</li><li>Im Vergleich zu … ist es in … wärmer, kälter, feuchter, trockener, weil …</li></ul></details>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var M=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+ var BT=[0.9,1.7,4.9,9.8,14.2,17.7,20.0,19.6,15.0,9.9,5.0,2.0],BN=[42,36,38,32,54,64,60,56,46,36,41,43];
+ function reihe(id,w,lab){var h='<div style="display:grid;grid-template-columns:repeat(12,1fr);gap:4px">';for(var i=0;i<12;i++)h+='<input type="number" step="0.1" data-k="'+id+'" data-i="'+i+'" value="'+(w[i]===null?'':w[i])+'" aria-label="'+lab+' '+M[i]+'">';$(id).innerHTML=h+'</div>'}
+ function lies(k){return [].map.call(document.querySelectorAll('[data-k='+k+']'),function(e){var v=parseFloat(e.value.replace(',','.'));return isFinite(v)?v:null})}
+ function z(x,n){return String(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).replace('.',',')}
+ function setze(t,n){reihe('rt',t,'Temperatur');reihe('rn',n,'Niederschlag');[].forEach.call(document.querySelectorAll('[data-k]'),function(e){e.oninput=zeichnen});zeichnen()}
+ function el(t,a,txt){var e=document.createElementNS('http://www.w3.org/2000/svg',t);for(var k in a)e.setAttribute(k,a[k]);if(txt)e.textContent=txt;$('sv').appendChild(e);return e}
+ function zeichnen(){var T=lies('rt'),N=lies('rn'),sv=$('sv');sv.textContent='';var ok=T.every(function(x){return x!==null})&&N.every(function(x){return x!==null});
+  var tmax=Math.max(30,Math.ceil(Math.max.apply(null,T.map(function(x){return x===null?0:x}))/10)*10),pmax=Math.max(2*tmax,Math.ceil(Math.max.apply(null,N.map(function(x){return x===null?0:x}))/20)*20);tmax=pmax/2;
+  var tmin=Math.min(0,Math.floor(Math.min.apply(null,T.map(function(x){return x===null?0:x}))/10)*10);var X0=70,X1=690,Y0=30,Y1=360;
+  function Y(t){return Y1-(t-tmin)/(tmax-tmin)*(Y1-Y0)}function Xm(i){return X0+(i+.5)*(X1-X0)/12}
+  var ink=getComputedStyle(document.body).color;
+  for(var t=tmin;t<=tmax;t+=10){el('line',{x1:X0,x2:X1,y1:Y(t),y2:Y(t),stroke:ink,'stroke-opacity':.15});el('text',{x:X0-8,y:Y(t)+5,'text-anchor':'end','font-size':14,fill:ink},t);el('text',{x:X1+8,y:Y(t)+5,'font-size':14,fill:ink},Math.round(tmin*2+(t-tmin)*2))}
+  el('text',{x:X0-8,y:18,'text-anchor':'end','font-size':14,fill:'#c0392b','font-weight':700},'°C');el('text',{x:X1+8,y:18,'font-size':14,fill:'#1f6ba5','font-weight':700},'mm');
+  N.forEach(function(n,i){if(n===null)return;var h=n/2/(tmax-tmin)*(Y1-Y0);el('rect',{x:Xm(i)-17,y:Y(0)-h,width:34,height:h,fill:'#1f6ba5','fill-opacity':.7})});
+  var pts=T.map(function(v,i){return v===null?null:[Xm(i),Y(v)]}).filter(Boolean);if(pts.length>1)el('polyline',{points:pts.map(function(p){return p.join(',')}).join(' '),fill:'none',stroke:'#c0392b','stroke-width':3.5});pts.forEach(function(p){el('circle',{cx:p[0],cy:p[1],r:4,fill:'#c0392b'})});
+  M.forEach(function(m,i){el('text',{x:Xm(i),y:Y1+22,'text-anchor':'middle','font-size':14,fill:ink},m)});el('line',{x1:X0,x2:X1,y1:Y(0),y2:Y(0),stroke:ink,'stroke-width':1.5});
+  el('text',{x:380,y:410,'text-anchor':'middle','font-size':16,'font-weight':700,fill:ink},$('ort').value);
+  if(!ok){$('ausw').textContent='Trage alle 24 Werte ein.';return}
+  var mt=T.reduce(function(a,b){return a+b},0)/12,sn=N.reduce(function(a,b){return a+b},0),wi=T.indexOf(Math.max.apply(null,T)),ki=T.indexOf(Math.min.apply(null,T)),ni=N.indexOf(Math.max.apply(null,N)),ti=N.indexOf(Math.min.apply(null,N));
+  $('ausw').innerHTML='<b>Jahresmitteltemperatur:</b> '+z(mt,1)+' °C · <b>Jahresniederschlag:</b> '+z(sn,0)+' mm · wärmster Monat: '+M[wi]+' ('+z(T[wi],1)+' °C) · kältester: '+M[ki]+' ('+z(T[ki],1)+' °C) · nassester: '+M[ni]+' ('+z(N[ni],0)+' mm) · trockenster: '+M[ti]+' ('+z(N[ti],0)+' mm)'}
+ $('ort').oninput=zeichnen;$('bsp').onclick=function(){$('ort').value='Berlin (Beispiel)';setze(BT,BN)};$('leer').onclick=function(){$('ort').value='';setze(new Array(12).fill(null),new Array(12).fill(null))};
+ setze(BT,BN);
+})();
+</script></main></body></html>

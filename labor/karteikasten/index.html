@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Karteikasten</title><link rel="stylesheet" href="../labor.css">
+<style>.karte{border:3px solid var(--g);border-radius:16px;padding:24px;min-height:170px;font-size:26px;font-weight:700;text-align:center;display:flex;align-items:center;justify-content:center;margin:12px 0}.karte.rueck{background:var(--mint);font-weight:400;font-size:22px}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.boxen{display:flex;gap:8px;flex-wrap:wrap}.boxen div{flex:1;min-width:70px;border:2px solid var(--g);border-radius:10px;padding:6px;text-align:center}.boxen b{font-size:24px;display:block}select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Karteikasten (Leitner)</h1>
+<div class="kasten"><b>Wiederholen mit Abstand:</b> Begriffe aus den Stunden kommen nach 1, 3, 7 und 14 Tagen wieder, wenn du sie gewusst hast. <b>Erkläre</b> den Begriff in deinen Worten, <b>decke</b> dann die Karte auf und <b>vergleiche</b>. Was du nicht wusstest, kommt morgen wieder. Der Stand bleibt nur auf diesem Gerät.</div>
+<div class="leiste"><label for="qs"><b>Stunde</b></label><select id="qs"><option value="../../biologie/klasse-7/zelle/fotosynthese-1/praesentation/">Fotosynthese (Klasse 7)</option><option value="../../biologie/klasse-7/zelle/entdeckung-der-zelle/praesentation/">Entdeckung der Zelle (Klasse 7)</option><option value="../../biologie/klasse-9/gesundheit/lek-rueckgabe/praesentation/">Erreger und Infektionen (Klasse 9)</option></select><button type="button" class="sek" id="rs">Diesen Kasten leeren</button></div>
+<div class="boxen" id="bx" aria-label="Fächer des Karteikastens"></div>
+<div class="karte" id="k" aria-live="polite">Lade Begriffe …</div>
+<div class="leiste"><button type="button" id="zg">Karte aufdecken</button><button type="button" id="ja" disabled>Gewusst</button><button type="button" id="nein" class="sek" disabled>Nicht gewusst</button></div>
+<p id="st" class="kasten" aria-live="polite"></p><div class="leiste"><button type="button" class="sek" id="ics">Erinnerung als Kalenderdatei (.ics)</button></div>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}var INT=[0,1,3,7,14],T=0,k=null,aktuell=null,stand={},KEY='';
+ function heute(){var d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/86400000)}
+ function lad(){try{stand=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){stand={}}}function sp(){try{localStorage.setItem(KEY,JSON.stringify(stand))}catch(e){}}
+ function holen(u){return fetch(u).then(function(r){if(!r.ok)throw new Error('nicht gefunden');return r.text()}).then(function(t){var d=new DOMParser().parseFromString(t,'text/html'),j=d.getElementById('lp-spiel-daten');if(!j)throw new Error('keine Begriffe');var o=JSON.parse(j.textContent);if(o.geprueft!==true)throw new Error('Begriffe noch nicht freigegeben');return o})}
+ function zst(){var n=[0,0,0,0,0,0],t=heute(),f=0;K.paare.forEach(function(p){var s=stand[p[0]]||{b:0,f:t};n[s.b]++;if(s.f<=t)f++});
+  $('bx').innerHTML=['neu','1','2','3','4','gelernt'].map(function(l,i){return '<div><b>'+n[i]+'</b>'+(i===0?'neu':i===5?'gelernt':'Fach '+l)+'</div>'}).join('');return f}
+ var K=null;
+ function naechste(){var t=heute(),f=zst();var faellig=K.paare.filter(function(p){var s=stand[p[0]]||{b:0,f:t};return s.b<5&&s.f<=t});
+  if(!faellig.length){aktuell=null;$('k').className='karte';$('k').textContent='Für heute ist alles geschafft.';$('zg').disabled=$('ja').disabled=$('nein').disabled=true;var nx=null;K.paare.forEach(function(p){var s=stand[p[0]];if(s&&s.b<5&&(nx===null||s.f<nx))nx=s.f});$('st').textContent=nx?'Nächste Karte in '+Math.max(1,nx-t)+' Tag(en).':'Alle Begriffe sind gelernt.';return}
+  aktuell=faellig[Math.floor(Math.random()*faellig.length)];$('k').className='karte';$('k').textContent=aktuell[0];$('zg').disabled=false;$('ja').disabled=$('nein').disabled=true;$('st').textContent=faellig.length+' Karte(n) heute fällig.'}
+ $('zg').onclick=function(){if(!aktuell)return;$('k').className='karte rueck';$('k').textContent=aktuell[1];$('zg').disabled=true;$('ja').disabled=$('nein').disabled=false};
+ function bewerte(ok){var s=stand[aktuell[0]]||{b:0,f:heute()};if(ok){s.b=Math.min(5,Math.max(1,s.b)+1);s.f=heute()+(INT[Math.min(4,s.b-1)]||14)}else{s.b=1;s.f=heute()+1}stand[aktuell[0]]=s;sp();naechste()}
+ $('ja').onclick=function(){bewerte(true)};$('nein').onclick=function(){bewerte(false)};
+ $('rs').onclick=function(){stand={};sp();naechste()};
+ $('ics').onclick=function(){var t=heute(),nx=null;K.paare.forEach(function(p){var s=stand[p[0]];if(s&&s.b<5&&(nx===null||s.f<nx))nx=s.f});if(nx===null)nx=t+1;var d=new Date(nx*86400000),ds=d.getUTCFullYear()+('0'+(d.getUTCMonth()+1)).slice(-2)+('0'+d.getUTCDate()).slice(-2);
+  var ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Lernportal//Karteikasten//DE\r\nBEGIN:VEVENT\r\nUID:lp-'+KEY+'-'+ds+'\r\nDTSTAMP:'+ds+'T000000Z\r\nDTSTART;VALUE=DATE:'+ds+'\r\nSUMMARY:Begriffe wiederholen ('+K.titel+')\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n';
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='karteikasten.ics';document.body.appendChild(a);a.click();a.remove()};
+ function start(){KEY='lp-leitner:'+$('qs').value;lad();$('k').textContent='Lade Begriffe …';holen($('qs').value).then(function(o){K=o;K.titel=o.titel||'Begriffe';naechste()}).catch(function(e){$('k').textContent='Nicht geladen: '+e.message})}
+ $('qs').onchange=start;start();
+})();
+</script></main></body></html>

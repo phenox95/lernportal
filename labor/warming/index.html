@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Warming Stripes</title><link rel="stylesheet" href="../labor.css">
+<style>textarea{width:100%;min-height:130px;font:14px/1.4 ui-monospace,monospace;padding:10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+#cv{width:100%;height:240px;display:block;border-radius:12px;border:2px solid var(--g)}.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.tw{overflow-x:auto;max-height:320px}table{border-collapse:collapse;width:100%;max-width:520px}th,td{padding:4px 10px;border-bottom:1px solid #8aa59a55;text-align:left}
+.lg{display:flex;align-items:center;gap:8px;max-width:520px}.lg i{flex:1;height:14px;border-radius:7px}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Warming-Stripes-Generator</h1>
+<div class="kasten"><b>Methoden anwenden (Darstellen, Stufe E bis G):</b> Jeder Streifen ist ein Jahr, die Farbe zeigt die Abweichung vom Mittel der Reihe. <b>Beschreibe</b> das Farbmuster. <b>Vergleiche</b> zwei Farbskalen und <b>beurteile</b>, was die Wahl der Skala mit dem Eindruck macht (Blau–Rot gegen Violett–Gelb). <b>Erkläre</b>, was die Streifen nicht zeigen (Zahlenwerte, Ursachen).</div>
+<p class="kasten warn"><b>Beispieldaten:</b> Die Reihe unten ist <b>künstlich erzeugt</b> (Trend plus Zufall), keine Messung. Für echte Daten (zum Beispiel Jahresmittel einer DWD-Station) in das Feld einfügen: eine Zeile je Jahr, „Jahr;Wert“ oder „Jahr,Wert“. Quelle und Lizenz der Daten gehören auf die Seite, auf der die Streifen gezeigt werden.</p>
+<label for="d"><b>Daten</b> (Jahr;Wert)</label><textarea id="d" spellcheck="false"></textarea>
+<div class="leiste"><label for="pal"><b>Farbskala</b></label><select id="pal"><option value="br">Blau–Rot</option><option value="vg">Violett–Gelb (auch bei Rot-Grün-Schwäche gut)</option><option value="gr">Graustufen</option></select><button type="button" id="demo" class="sek">Beispieldaten laden</button></div>
+<canvas id="cv" width="1200" height="240" role="img" aria-label="Farbstreifen, ein Streifen je Jahr"></canvas>
+<p class="quelle" id="info"></p><div class="lg" aria-hidden="true"><span>kälter als Mittel</span><i id="lgi"></i><span>wärmer</span></div>
+<details><summary>Zahlen als Tabelle</summary><div class="tw"><table><thead><tr><th>Jahr</th><th>Wert</th><th>Abweichung</th></tr></thead><tbody id="tb"></tbody></table></div></details>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var cv=$('cv'),g=cv.getContext('2d');
+ function demo(){var s=3,r=function(){s=(s*16807)%2147483647;return s/2147483647},z=[];for(var y=1900;y<=2024;y++){z.push(y+';'+(8.6+0.012*(y-1900)+Math.pow(Math.max(0,y-1975)/50,1.6)*1.2+(r()-.5)*1.4).toFixed(2))}$('d').value=z.join('\n')}
+ function lies(){return $('d').value.split('\n').map(function(l){var p=l.trim().split(/[;,\t]/);if(p.length<2)return null;var y=parseInt(p[0],10),v=parseFloat(p[1].replace(',','.'));return isFinite(y)&&isFinite(v)?{y:y,v:v}:null}).filter(Boolean).sort(function(a,b){return a.y-b.y})}
+ function lerp(a,b,t){return Math.round(a+(b-a)*t)}
+ function farbe(t,p){t=Math.max(0,Math.min(1,t));if(p==='gr'){var v=lerp(235,30,t);return 'rgb('+v+','+v+','+v+')'}
+  var st=p==='vg'?[[68,1,84],[49,104,142],[53,183,121],[253,231,37]]:[[8,48,107],[107,174,214],[255,255,255],[252,146,114],[165,15,21]];var x=t*(st.length-1),i=Math.min(st.length-2,Math.floor(x)),f=x-i;return 'rgb('+lerp(st[i][0],st[i+1][0],f)+','+lerp(st[i][1],st[i+1][1],f)+','+lerp(st[i][2],st[i+1][2],f)+')'}
+ function zeichnen(){var D=lies();g.clearRect(0,0,cv.width,cv.height);if(D.length<2){$('info').textContent='Mindestens zwei Jahre eingeben.';$('tb').innerHTML='';return}
+  var mean=D.reduce(function(a,b){return a+b.v},0)/D.length,mx=Math.max.apply(null,D.map(function(d){return Math.abs(d.v-mean)})),p=$('pal').value,w=cv.width/D.length;
+  D.forEach(function(d,i){g.fillStyle=farbe(0.5+(d.v-mean)/(2*mx),p);g.fillRect(Math.floor(i*w),0,Math.ceil(w)+1,cv.height)});
+  var st=p==='vg'?'linear-gradient(90deg,rgb(68,1,84),rgb(49,104,142),rgb(53,183,121),rgb(253,231,37))':p==='gr'?'linear-gradient(90deg,#ebebeb,#1e1e1e)':'linear-gradient(90deg,rgb(8,48,107),rgb(107,174,214),#fff,rgb(252,146,114),rgb(165,15,21))';$('lgi').style.background=st;$('lgi').style.border='1px solid #888';
+  $('info').textContent=D.length+' Jahre ('+D[0].y+' bis '+D[D.length-1].y+'), Mittel der Reihe '+String(mean.toFixed(2)).replace('.',',')+', größte Abweichung '+String(mx.toFixed(2)).replace('.',',')+'. Die Farbskala ist auf die größte Abweichung gestreckt.';
+  $('tb').innerHTML=D.map(function(d){return '<tr><td>'+d.y+'</td><td>'+String(d.v).replace('.',',')+'</td><td>'+String((d.v-mean).toFixed(2)).replace('.',',')+'</td></tr>'}).join('')}
+ $('d').oninput=zeichnen;$('pal').onchange=zeichnen;$('demo').onclick=function(){demo();zeichnen()};demo();zeichnen();
+})();
+</script></main></body></html>

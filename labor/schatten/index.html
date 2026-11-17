@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Schatten und Sonnenstand</title><link rel="stylesheet" href="../labor.css">
+<style>.leiste{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}input,select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}input[type=number]{width:8em}.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:700px}th,td{padding:6px 10px;border-bottom:1px solid #8aa59a55;text-align:left}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Schatten und Sonnenstand</h1>
+<div class="kasten"><b>Erkenntnisse gewinnen (Hypothese, Messung, Auswertung, Stufe E bis G):</b> <b>Sage vorher</b>, wie lang der Schatten eines Stabs um 12 Uhr im Sommer und im Winter ist. <b>Miss</b> am Schulhof Stablänge und Schattenlänge. <b>Berechne</b> die Sonnenhöhe und <b>vergleiche</b> mit der Rechnung der Seite. <b>Erkläre</b> Abweichungen (Zeitpunkt, Zeitgleichung, Messfehler).</div>
+<div class="leiste"><label for="la">Breite (°N)</label><input type="number" id="la" value="52.5" step="0.1"><label for="lo">Länge (°O)</label><input type="number" id="lo" value="13.4" step="0.1">
+<label for="dat">Datum</label><input type="date" id="dat"><label for="zt">Uhrzeit (Ortszeit)</label><input type="time" id="zt" value="12:00"><label for="sz">Zeitzone</label><select id="sz"><option value="auto">automatisch (Berlin)</option></select></div>
+<div class="tw"><table><tbody>
+<tr><th>Sonnenhöhe über dem Horizont</th><td id="el"></td></tr><tr><th>Sonnenrichtung (Azimut, von Norden über Osten)</th><td id="az"></td></tr>
+<tr><th>Mittagshöhe an diesem Tag</th><td id="mh"></td></tr><tr><th>Schattenlänge eines Stabs</th><td><input type="number" id="h" value="100" min="1" step="1" aria-label="Stablänge in cm"> cm hoher Stab → Schatten <b id="sl"></b></td></tr>
+<tr><th>Gemessene Schattenlänge (cm)</th><td><input type="number" id="gm" min="0" step="1" aria-label="Gemessene Schattenlänge"> <span id="df"></span></td></tr></tbody></table></div>
+<p class="kasten warn"><b>Näherung:</b> Rechnung nach üblichen Formeln für Deklination und Zeitgleichung (Genauigkeit etwa 1 Grad). Die Ortszeit wird über Länge und Berliner Zeit (Sommerzeit aus dem Browser) umgerechnet. Wolken, Brechung der Atmosphäre und Hindernisse sind nicht berücksichtigt.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}function z(x,n){return String(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).replace('.',',')}
+ var R=Math.PI/180;
+ function sonne(lat,lon,dat,zeit){var d=dat.split('-'),t=zeit.split(':');
+  /* Berliner Wandzeit in UTC umrechnen (Offset aus Intl, Sommerzeit inklusive) */
+  var guess=Date.UTC(+d[0],+d[1]-1,+d[2],+t[0],+t[1]);var f=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Berlin',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+  function off(ts){var o={};f.formatToParts(new Date(ts)).forEach(function(p){o[p.type]=p.value});return Math.round((Date.UTC(+o.year,+o.month-1,+o.day,+o.hour,+o.minute)-ts)/60000)}
+  var ut=guess-off(guess)*60000;ut=guess-off(ut)*60000;var D=new Date(ut);
+  var start=Date.UTC(D.getUTCFullYear(),0,0),N=Math.floor((ut-start)/86400000),Bw=360/365*(N-81)*R;
+  var E=9.87*Math.sin(2*Bw)-7.53*Math.cos(Bw)-1.5*Math.sin(Bw);/*Zeitgleichung in Minuten*/
+  var dekl=23.44*Math.sin(360/365*(284+N)*R)*R;
+  var wsz=D.getUTCHours()*60+D.getUTCMinutes()+4*lon+E;/*wahre Sonnenzeit in Minuten*/
+  var H=(wsz/4-180)*R,phi=lat*R;var sinh=Math.sin(phi)*Math.sin(dekl)+Math.cos(phi)*Math.cos(dekl)*Math.cos(H),h=Math.asin(sinh);
+  var az=Math.atan2(Math.sin(H),Math.cos(H)*Math.sin(phi)-Math.tan(dekl)*Math.cos(phi))/R+180;
+  return{h:h/R,az:((az%360)+360)%360,mh:90-lat+dekl/R}}
+ window.LPSonne=sonne;
+ function rech(){var la=+$('la').value,lo=+$('lo').value,dt=$('dat').value,zt=$('zt').value;if(!dt||!zt)return;var s=sonne(la,lo,dt,zt);
+  $('el').textContent=s.h>0?z(s.h,1)+' °':'Sonne unter dem Horizont ('+z(s.h,1)+' °)';$('az').textContent=z(s.az,0)+' °';$('mh').textContent=z(s.mh,1)+' °';
+  var h=+$('h').value,sl=s.h>0.5?h/Math.tan(s.h*R):null;$('sl').textContent=sl?z(sl,0)+' cm':'kein Schatten (Sonne zu tief oder unter dem Horizont)';
+  var gm=parseFloat($('gm').value);$('df').textContent=(sl&&gm>=0)?'Abweichung von der Rechnung: '+z((gm-sl)/sl*100,0)+' %':''}
+ ['la','lo','dat','zt','h','gm'].forEach(function(i){$(i).oninput=rech});
+ var n=new Date(),p=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Berlin'}).format(n);$('dat').value=p;rech();
+})();
+</script></main></body></html>

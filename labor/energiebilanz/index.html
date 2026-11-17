@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Energiebilanz</title><link rel="stylesheet" href="../labor.css">
+<style>.regler{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:12px 0}.regler label{display:block;font-weight:700}input[type=range]{width:100%}
+.erg{font-size:clamp(34px,8vw,56px);font-weight:700;color:var(--dk)}.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:640px}th,td{padding:6px 10px;border-bottom:1px solid #8aa59a55;text-align:left}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Energiebilanz der Erde</h1>
+<div class="kasten"><b>Systeme erschließen (Modelle nutzen, Stufe F bis G):</b> <b>Sage vorher</b>, wie die Temperatur sich ändert, wenn die Erde mehr Sonnenlicht zurückwirft (z. B. mehr Eis) oder wenn die Atmosphäre mehr Wärme zurückhält (mehr Treibhausgase). <b>Verändere</b> die Regler, <b>beschreibe</b> die Wirkung und <b>erkläre</b> sie mit Energie, die ankommt und abgeht. <b>Beurteile</b> die Grenzen des Modells.</div>
+<div class="regler">
+<div><label for="a">Rückstrahlung der Erde (Albedo): <output id="ao"></output></label><input type="range" id="a" min="0.15" max="0.55" step="0.01" value="0.30"></div>
+<div><label for="e">Wärme, die die Atmosphäre zurückhält: <output id="eo"></output></label><input type="range" id="e" min="0.5" max="0.95" step="0.01" value="0.78"></div>
+<div><label for="s">Sonneneinstrahlung (W/m² am Rand der Atmosphäre): <output id="so"></output></label><input type="range" id="s" min="1300" max="1420" step="1" value="1361"></div>
+</div>
+<p>Mittlere Erdtemperatur im Modell:</p><p class="erg" id="T" aria-live="polite"></p>
+<div class="tw"><table><tbody>
+<tr><th>Absorbierte Sonnenenergie je m² Erdoberfläche (Mittel)</th><td id="in"></td></tr>
+<tr><th>Abgestrahlt ins Weltall (im Gleichgewicht gleich viel)</th><td id="out"></td></tr>
+<tr><th>Temperatur ohne Atmosphäre (Vergleich)</th><td id="T0"></td></tr></tbody></table></div>
+<div class="leiste" style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0"><button type="button" class="sek" id="r1">Ausgangslage</button><button type="button" class="sek" id="r2">Mehr Treibhausgase</button><button type="button" class="sek" id="r3">Mehr Eis (Albedo hoch)</button></div>
+<p class="kasten warn"><b>Modell (Ein-Schicht-Atmosphäre):</b> Die Erde nimmt Sonnenenergie auf und strahlt Wärme ab. Eine Schicht Atmosphäre hält einen Teil der Wärme zurück. Das Modell kennt keine Wolken, keine Meere, keine Jahreszeiten und keine Rückkopplungen und zeigt das Prinzip, nicht eine Vorhersage. Die Ausgangswerte (Albedo 0,30, Rückhalt 0,78) sind gerundete Näherungen, die ein Mittel von etwa 15 Grad Celsius ergeben.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var SIG=5.670374e-8;function c(x){return String(Math.round(x*10)/10).replace('.',',')}
+ function rechne(){var a=+$('a').value,e=+$('e').value,S=+$('s').value;
+  var in_=S*(1-a)/4,T=Math.pow(in_/(SIG*(1-e/2)),0.25),T0=Math.pow(in_/SIG,0.25);
+  $('ao').textContent=String(a).replace('.',',');$('eo').textContent=String(e).replace('.',',');$('so').textContent=S;
+  $('T').textContent=c(T-273.15)+' °C';$('in').textContent=c(in_)+' W/m²';$('out').textContent=c(in_)+' W/m²';$('T0').textContent=c(T0-273.15)+' °C'}
+ ['a','e','s'].forEach(function(i){$(i).oninput=rechne});
+ function set(a,e,s){$('a').value=a;$('e').value=e;$('s').value=s;rechne()}
+ $('r1').onclick=function(){set(0.30,0.78,1361)};$('r2').onclick=function(){set(0.30,0.84,1361)};$('r3').onclick=function(){set(0.38,0.78,1361)};rechne();
+})();
+</script></main></body></html>

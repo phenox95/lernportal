@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Streudiagramm</title><link rel="stylesheet" href="../labor.css">
+<style>textarea{width:100%;min-height:150px;font:14px/1.4 ui-monospace,monospace;padding:10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+#sv{width:100%;height:auto;max-width:860px;display:block;background:#fff;border:2px solid var(--g);border-radius:12px;touch-action:manipulation}@media (prefers-color-scheme:dark){#sv{background:#0d1b2a}}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:640px}th,td{padding:4px 10px;border-bottom:1px solid #8aa59a55;text-align:left}</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Streudiagramm selbst deuten</h1>
+<div class="kasten"><b>Systeme erschließen, Urteilen (Analysieren, Stufe F bis H):</b> Jeder Punkt ist ein Land. <b>Beschreibe</b> den Zusammenhang der beiden Größen. <b>Vergleiche</b> Gruppen. <b>Erkläre</b> Ausreißer mit möglichen Ursachen und <b>beurteile</b>, was ein Zusammenhang nicht beweist (Korrelation ist keine Ursache). Wechsle die logarithmische Achse und <b>beschreibe</b> den Unterschied.</div>
+<p class="kasten warn"><b>Beispieldaten:</b> Die Länder „Land A bis Land L“ und alle Zahlen sind <b>erfunden</b>. Für echte Daten (zum Beispiel Weltbank, Our World in Data) in das Feld einfügen: „Name;x;y;Größe;Gruppe“, eine Zeile je Land. Quelle und Lizenz nennen.</p>
+<label for="d"><b>Daten</b> (Name;x;y;Größe;Gruppe)</label><textarea id="d" spellcheck="false"></textarea>
+<div class="leiste"><label for="lx"><b>x-Achse</b></label><select id="lx"><option value="lin">linear</option><option value="log" selected>logarithmisch</option></select><label for="xn">Beschriftung x</label><input id="xn" value="Einkommen je Person (Beispiel)" style="font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)"><label for="yn">y</label><input id="yn" value="Lebenserwartung in Jahren (Beispiel)" style="font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)"></div>
+<svg id="sv" viewBox="0 0 860 520" role="img" aria-label="Streudiagramm, Zahlen in der Tabelle darunter"></svg>
+<p id="info" class="kasten" aria-live="polite">Tippe einen Punkt an.</p>
+<details><summary>Zahlen als Tabelle</summary><div class="tw"><table><thead><tr><th>Name</th><th>x</th><th>y</th><th>Größe</th><th>Gruppe</th></tr></thead><tbody id="tb"></tbody></table></div></details>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}var NS='http://www.w3.org/2000/svg';
+ var DEMO='Land A;800;54;12;Gruppe 1\nLand B;1500;60;30;Gruppe 1\nLand C;2500;63;8;Gruppe 1\nLand D;4000;68;45;Gruppe 2\nLand E;6500;72;20;Gruppe 2\nLand F;9000;70;60;Gruppe 2\nLand G;15000;75;25;Gruppe 3\nLand H;25000;79;10;Gruppe 3\nLand I;40000;81;38;Gruppe 3\nLand J;60000;82;6;Gruppe 3\nLand K;30000;74;18;Gruppe 2\nLand L;1200;68;5;Gruppe 1';
+ var farben={};var PAL=['#1f6ba5','#e67e22','#2a9d8f','#b03f69','#7b3fa0','#555'];var P=[],sel=-1;
+ function lies(){return $('d').value.split('\n').map(function(l){var s=l.split(';');if(s.length<3)return null;var x=parseFloat(s[1].replace(',','.')),y=parseFloat(s[2].replace(',','.'));if(!isFinite(x)||!isFinite(y))return null;var gr=parseFloat((s[3]||'').replace(',','.'));return{n:s[0].trim(),x:x,y:y,s:isFinite(gr)?gr:10,g:(s[4]||'').trim()}}).filter(Boolean)}
+ function z(x){return String(Math.round(x*10)/10).replace('.',',')}
+ function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!==undefined)e.textContent=txt;$('sv').appendChild(e);return e}
+ function zeichnen(){P=lies();var sv=$('sv');sv.textContent='';if(!P.length)return;var ink=getComputedStyle(document.body).color,log=$('lx').value==='log';
+  var xs=P.map(function(p){return log?Math.log10(Math.max(p.x,1e-9)):p.x}),ys=P.map(function(p){return p.y});var x0=Math.min.apply(null,xs),x1=Math.max.apply(null,xs),y0=Math.floor(Math.min.apply(null,ys)/5)*5,y1=Math.ceil(Math.max.apply(null,ys)/5)*5;if(x0===x1){x0-=1;x1+=1}if(y0===y1)y1+=5;
+  var L=80,R=830,T=20,B=450;function X(v){return L+(v-x0)/(x1-x0)*(R-L)}function Y(v){return B-(v-y0)/(y1-y0)*(B-T)}
+  for(var y=y0;y<=y1;y+=5){el('line',{x1:L,x2:R,y1:Y(y),y2:Y(y),stroke:ink,'stroke-opacity':.15});el('text',{x:L-8,y:Y(y)+5,'text-anchor':'end','font-size':14,fill:ink},y)}
+  if(log){for(var e=Math.ceil(x0);e<=Math.floor(x1);e++){el('line',{x1:X(e),x2:X(e),y1:T,y2:B,stroke:ink,'stroke-opacity':.15});el('text',{x:X(e),y:B+20,'text-anchor':'middle','font-size':14,fill:ink},Math.pow(10,e).toLocaleString('de-DE'))}}
+  else{var st=(x1-x0)/6;for(var i=0;i<=6;i++){var v=x0+st*i;el('text',{x:X(v),y:B+20,'text-anchor':'middle','font-size':14,fill:ink},Math.round(v).toLocaleString('de-DE'))}}
+  el('line',{x1:L,x2:R,y1:B,y2:B,stroke:ink,'stroke-width':1.5});el('line',{x1:L,x2:L,y1:T,y2:B,stroke:ink,'stroke-width':1.5});
+  el('text',{x:(L+R)/2,y:490,'text-anchor':'middle','font-size':16,'font-weight':700,fill:ink},$('xn').value+(log?' (logarithmisch)':''));var yt=el('text',{x:18,y:(T+B)/2,'text-anchor':'middle','font-size':16,'font-weight':700,fill:ink,transform:'rotate(-90 18 '+(T+B)/2+')'},$('yn').value);
+  var gs=[];P.forEach(function(p){if(gs.indexOf(p.g)<0)gs.push(p.g)});var mxs=Math.max.apply(null,P.map(function(p){return p.s}));
+  P.forEach(function(p,i){var c=PAL[gs.indexOf(p.g)%PAL.length],r=6+Math.sqrt(p.s/mxs)*16;var cir=el('circle',{cx:X(log?Math.log10(Math.max(p.x,1e-9)):p.x),cy:Y(p.y),r:r,fill:c,'fill-opacity':.65,stroke:i===sel?ink:c,'stroke-width':i===sel?4:1.5,tabindex:0,role:'button','aria-label':p.n+': x '+p.x+', y '+p.y});
+   function pick(){sel=i;$('info').textContent=p.n+': x = '+z(p.x)+', y = '+z(p.y)+', Größe = '+z(p.s)+(p.g?', '+p.g:'');zeichnen()}cir.addEventListener('click',pick);cir.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}})});
+  gs.forEach(function(g,i){if(!g)return;el('rect',{x:L+i*150,y:500,width:12,height:12,fill:PAL[i%PAL.length]});el('text',{x:L+i*150+18,y:511,'font-size':13,fill:ink},g)});
+  $('tb').innerHTML=P.map(function(p){return '<tr><td>'+esc(p.n)+'</td><td>'+z(p.x)+'</td><td>'+z(p.y)+'</td><td>'+z(p.s)+'</td><td>'+esc(p.g)+'</td></tr>'}).join('')}
+ function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+ $('d').value=DEMO;['d','lx','xn','yn'].forEach(function(i){$(i).oninput=$(i).onchange=function(){sel=-1;zeichnen()}});zeichnen();
+})();
+</script></main></body></html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Mikroskop-Foto vermessen</title><link rel="stylesheet" href="../labor.css">
+<style>
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}input[type=number],input[type=text]{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink);width:9em}
+#cv{width:100%;height:auto;max-height:70vh;display:block;border:2px solid var(--g);border-radius:12px;background:#222;touch-action:none;cursor:crosshair}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:640px}th,td{padding:6px 10px;border-bottom:1px solid #8aa59a55;text-align:left}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Mikroskop-Foto vermessen</h1>
+<div class="kasten"><b>Untersuchungen durchführen (Auswerten, Stufe E bis F):</b> 1. Foto laden (Mikroskopbild mit Maßstab oder Objektmikrometer). 2. <b>Kalibriere</b>: Zwei Punkte auf eine bekannte Strecke setzen, die Länge eingeben. 3. <b>Miss</b> Zellen: je zwei Punkte, die Länge steht in der Tabelle. 4. <b>Vergleiche</b> mehrere Zellen und <b>beurteile</b>, wie genau die Messung ist.</div>
+<div class="leiste"><button type="button" id="foto">Foto wählen oder aufnehmen</button><input type="file" id="in" accept="image/*" hidden>
+<button type="button" class="sek" id="mkal" aria-pressed="false">1. Kalibrieren</button>
+<label for="len">bekannte Länge</label><input type="number" id="len" min="0" step="any" value="100"><label for="einh" class="quelle">Einheit</label><input type="text" id="einh" value="µm" maxlength="6" style="width:5em">
+<button type="button" class="sek" id="mmes" aria-pressed="false">2. Messen</button><button type="button" class="sek" id="rst">Punkte löschen</button></div>
+<p id="st" class="kasten" aria-live="polite">Wähle zuerst ein Foto. Es bleibt im Browser, nichts wird hochgeladen.</p>
+<canvas id="cv" width="960" height="600" role="img" aria-label="Foto zum Vermessen"></canvas>
+<div class="tw"><table><thead><tr><th>Messung</th><th>Länge</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="quelle">Messfehler: Klickgenauigkeit, Foto nicht senkrecht, Maßstab schlecht lesbar. Die Genauigkeit liegt meist im Bereich weniger Prozent, nicht darunter.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var cv=$('cv'),g=cv.getContext('2d'),img=null,modus=null,pk=[],kal=null,mess=[],tmp=[];
+ function zeichnen(){g.fillStyle='#222';g.fillRect(0,0,cv.width,cv.height);if(img){g.drawImage(img,0,0,cv.width,cv.height)}
+  function linie(a,b,c){g.strokeStyle=c;g.lineWidth=3;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();[a,b].forEach(function(p){g.fillStyle=c;g.beginPath();g.arc(p.x,p.y,5,0,6.3);g.fill()})}
+  if(kal)linie(kal.a,kal.b,'#F4B400');mess.forEach(function(m,i){linie(m.a,m.b,'#5fcfae');g.fillStyle='#fff';g.font='bold 18px sans-serif';g.fillText(String(i+1),(m.a.x+m.b.x)/2+6,(m.a.y+m.b.y)/2-6)});
+  tmp.forEach(function(p){g.fillStyle='#fff';g.beginPath();g.arc(p.x,p.y,6,0,6.3);g.fill()})}
+ function d(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+ function fmt(x){return (Math.round(x*10)/10).toString().replace('.',',')}
+ function tab(){$('tb').innerHTML=mess.map(function(m,i){return '<tr><td>'+(i+1)+'</td><td>'+(kal?fmt(d(m.a,m.b)*kal.f)+' '+$('einh').value:'erst kalibrieren')+'</td></tr>'}).join('')}
+ function setm(m){modus=m;$('mkal').setAttribute('aria-pressed',String(m==='kal'));$('mmes').setAttribute('aria-pressed',String(m==='mes'));tmp=[]}
+ $('foto').onclick=function(){$('in').click()};
+ $('in').onchange=function(){var f=$('in').files[0];if(!f)return;var u=URL.createObjectURL(f),i=new Image();i.onload=function(){img=i;cv.height=Math.round(cv.width*i.naturalHeight/i.naturalWidth);kal=null;mess=[];tmp=[];zeichnen();tab();$('st').textContent='Foto geladen. Drücke „1. Kalibrieren“ und setze zwei Punkte auf eine bekannte Strecke.'};i.src=u};
+ $('mkal').onclick=function(){setm('kal');$('st').textContent='Kalibrieren: erster Punkt der bekannten Strecke.'};$('mmes').onclick=function(){if(!kal){$('st').textContent='Erst kalibrieren.';return}setm('mes');$('st').textContent='Messen: erster Punkt.'};
+ $('rst').onclick=function(){kal=null;mess=[];tmp=[];zeichnen();tab()};
+ function pos(e){var r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*cv.width,y:(e.clientY-r.top)/r.height*cv.height}}
+ cv.addEventListener('pointerdown',function(e){if(!modus||!img)return;e.preventDefault();tmp.push(pos(e));
+  if(tmp.length===2){var a=tmp[0],b=tmp[1];tmp=[];if(modus==='kal'){var L=parseFloat($('len').value);if(!(L>0)){$('st').textContent='Gib eine Länge größer 0 ein.';zeichnen();return}kal={a:a,b:b,f:L/d(a,b)};$('st').textContent='Kalibriert: 100 Pixel entsprechen '+fmt(100*kal.f)+' '+$('einh').value+'. Jetzt „2. Messen“.';setm(null);tab()}else{mess.push({a:a,b:b});$('st').textContent='Messung '+mess.length+': '+fmt(d(a,b)*kal.f)+' '+$('einh').value;tab()}}
+  zeichnen()});
+ zeichnen();
+})();
+</script></main></body></html>

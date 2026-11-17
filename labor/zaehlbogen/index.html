@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Zählbogen</title><link rel="stylesheet" href="../labor.css">
+<style>
+.tabs{display:flex;gap:8px;margin:14px 0}.tabs button[aria-selected=true]{background:var(--dk);color:#fff;outline:3px solid var(--y)}
+input[type=text],input[type=number]{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.zl{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;margin:6px 0;max-width:560px}.zl b{font-size:28px;min-width:2.2em;text-align:center}.zl button{min-width:56px;font-size:24px}
+#qr{background:#fff;padding:14px;border-radius:12px;display:inline-block}#qr svg{width:min(80vw,320px);height:auto;display:block}
+video{width:100%;max-width:480px;border-radius:12px;background:#000}.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;max-width:700px}th,td{padding:6px 10px;border-bottom:1px solid #8aa59a55;text-align:left}
+.bar{height:20px;background:var(--g);border-radius:4px}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Zählbogen mit Klassendatensatz</h1>
+<div class="kasten"><b>Erkenntnisse gewinnen (Daten erheben und auswerten, Stufe E bis G):</b> Jede Gruppe zählt im festen Gebiet in der festen Zeit und trägt ein, was sie sieht. Das Ergebnis wird ein QR-Code, die Lehrkraft scannt ihn, und die Klasse sieht die <b>Summe aller Gruppen</b>. <b>Vergleiche</b> Gruppen und Gebiete, <b>nenne</b> Fehlerquellen und <b>beurteile</b>, was die Daten zeigen können und was nicht. Keine Namen, kein Standort.</div>
+<div class="tabs" role="tablist"><button role="tab" id="t1" aria-selected="true">Gruppe zählt</button><button role="tab" id="t2" aria-selected="false" class="sek">Lehrkraft sammelt</button></div>
+<section id="p1">
+<div class="leiste"><label for="gn"><b>Gruppe</b></label><input type="text" id="gn" value="Gruppe 1" maxlength="20"><label for="gb"><b>Gebiet</b></label><input type="text" id="gb" value="Wiese" maxlength="20"></div>
+<p class="quelle">Kategorien (Namen änderbar, damit das Verfahren zum Thema passt):</p><div id="zl"></div>
+<div class="leiste"><button type="button" id="mk">QR-Code erzeugen</button></div><p><span id="qr" hidden></span></p><p id="qh" class="kasten" hidden aria-live="polite"></p>
+</section>
+<section id="p2" hidden>
+<div class="leiste"><button type="button" id="cam">Kamera starten</button><button type="button" class="sek" id="camx" disabled>Stopp</button><button type="button" class="sek" id="rs">Alles löschen</button></div>
+<video id="v" playsinline muted hidden aria-label="Kamerabild zum Scannen"></video><p id="st" class="kasten" aria-live="polite">Die Kamera startet erst nach Antippen. Kein Bild wird gespeichert.</p>
+<div class="tw"><table><thead><tr><th>Kategorie</th><th>Summe</th><th>Verteilung</th></tr></thead><tbody id="tb"></tbody></table></div><p id="gr"></p>
+</section>
+<script src="../../assets/js/qrcode.js"></script><script src="../../assets/js/vendor/jsQR.js" defer></script>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ function tab(n){$('p1').hidden=n!==1;$('p2').hidden=n!==2;[1,2].forEach(function(i){$('t'+i).setAttribute('aria-selected',String(i===n));$('t'+i).className=i===n?'':'sek'})}
+ $('t1').onclick=function(){tab(1)};$('t2').onclick=function(){tab(2)};
+ var KAT=['Käfer','Fliegen und Mücken','Ameisen','Spinnen','Schnecken','Andere'],Z=KAT.map(function(){return 0});
+ function zl(){$('zl').innerHTML='';KAT.forEach(function(k,i){var d=document.createElement('div');d.className='zl';var n=document.createElement('input');n.type='text';n.value=k;n.maxLength=18;n.setAttribute('aria-label','Name der Kategorie '+(i+1));n.oninput=function(){KAT[i]=n.value};var m=document.createElement('button');m.type='button';m.className='sek';m.textContent='−';m.setAttribute('aria-label','eins weniger: '+k);var c=document.createElement('b');c.textContent=Z[i];c.setAttribute('aria-live','polite');var p=document.createElement('button');p.type='button';p.textContent='+';p.setAttribute('aria-label','eins mehr: '+k);
+  m.onclick=function(){Z[i]=Math.max(0,Z[i]-1);c.textContent=Z[i]};p.onclick=function(){Z[i]++;c.textContent=Z[i]};d.appendChild(n);d.appendChild(m);d.appendChild(c);d.appendChild(p);$('zl').appendChild(d)})}
+ zl();
+ function nutz(){return JSON.stringify({v:2,g:$('gn').value.trim()||'Gruppe',o:$('gb').value.trim(),c:KAT,k:Z})}
+ function svg(t){if(window.qrcode.stringToBytesFuncs)window.qrcode.stringToBytes=window.qrcode.stringToBytesFuncs['UTF-8'];var q=window.qrcode(0,'M');q.addData(t,'Byte');q.make();return q.createSvgTag({cellSize:6,margin:0,scalable:true})}
+ $('mk').onclick=function(){try{$('qr').innerHTML=svg(nutz());$('qr').hidden=false;$('qh').hidden=false;$('qh').textContent='Halte den Code vor die Kamera der Lehrkraft.'}catch(e){$('qr').hidden=true;$('qh').hidden=false;$('qh').textContent='Zu viele Zeichen für einen Code. Kürze die Kategorienamen.'}};
+ var daten={},reihen=[];
+ function lesen(d,w,h){if(!window.jsQR)return null;var c=window.jsQR(d,w,h,{inversionAttempts:'dontInvert'});if(!c)return null;try{var o=JSON.parse(c.data);if(o&&o.v===2&&Array.isArray(o.c)&&Array.isArray(o.k)&&o.c.length===o.k.length&&o.c.length<=12)return{g:String(o.g).slice(0,20),o:String(o.o||'').slice(0,20),c:o.c.map(function(x){return String(x).slice(0,18)}),k:o.k.map(function(x){return Math.max(0,Math.min(9999,Math.round(+x)||0))})}}catch(e){}return null}
+ function neu(o){if(!o)return false;var key=o.g+'|'+o.o;if(daten[key]&&JSON.stringify(daten[key])===JSON.stringify(o))return false;daten[key]=o;auswerten();return true}
+ window.LPZaehl={lesen:lesen,neu:neu,svg:svg};
+ function auswerten(){var gs=Object.keys(daten).map(function(k){return daten[k]});if(!gs.length){$('tb').innerHTML='';$('gr').textContent='';return}
+  var cats=[],sum={};gs.forEach(function(o){o.c.forEach(function(c,i){if(cats.indexOf(c)<0)cats.push(c);sum[c]=(sum[c]||0)+o.k[i]})});var mx=Math.max(1,Math.max.apply(null,cats.map(function(c){return sum[c]})));
+  $('tb').innerHTML=cats.map(function(c){return '<tr><td>'+esc(c)+'</td><td><b>'+sum[c]+'</b></td><td><div class="bar" style="width:'+(sum[c]/mx*100)+'%"></div></td></tr>'}).join('');
+  $('gr').textContent=gs.length+' Gruppe(n): '+gs.map(function(o){return o.g+(o.o?' ('+o.o+')':'')}).join(', ')}
+ function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+ var strom=null,loop=null,cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});
+ function takt(){var v=$('v');if(!v.videoWidth)return;cv.width=v.videoWidth;cv.height=v.videoHeight;cx.drawImage(v,0,0);var id=cx.getImageData(0,0,cv.width,cv.height),o=lesen(id.data,id.width,id.height);if(o&&neu(o))$('st').textContent='Gesammelt: '+Object.keys(daten).length+' Gruppe(n). Zuletzt: '+o.g}
+ $('cam').onclick=function(){if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$('st').textContent='Kein Kamerazugriff in diesem Browser (https oder localhost nötig).';return}
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){strom=s;$('v').srcObject=s;$('v').hidden=false;$('v').play();$('camx').disabled=false;$('st').textContent='Scanne die Codes der Gruppen.';loop=setInterval(takt,200)}).catch(function(){$('st').textContent='Kein Zugriff auf die Kamera.'})};
+ function stopp(){clearInterval(loop);if(strom){strom.getTracks().forEach(function(t){t.stop()});strom=null}$('v').hidden=true;$('camx').disabled=true}
+ $('camx').onclick=stopp;addEventListener('pagehide',stopp);$('rs').onclick=function(){daten={};auswerten();$('st').textContent='Gelöscht.'};
+})();
+</script></main></body></html>

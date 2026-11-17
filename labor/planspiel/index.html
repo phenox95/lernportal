@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Planspiel Klimaverhandlung</title><link rel="stylesheet" href="../labor.css">
+<style>
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.uhr{font-size:clamp(46px,12vw,90px);font-weight:700;font-variant-numeric:tabular-nums;color:var(--dk);text-align:center}
+.ph{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.ph span{padding:6px 12px;border-radius:10px;border:2px solid var(--g);font-weight:700;font-size:15px}.ph span.an{background:var(--g);color:#fff}
+.rolle{border:3px solid var(--g);border-radius:14px;padding:16px;min-height:150px;margin:10px 0;background:var(--mint)}
+.abst{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.abst div{border:2px solid var(--g);border-radius:12px;padding:10px;text-align:center}.abst b{font-size:36px;display:block}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Planspiel Klimaverhandlung</h1>
+<div class="kasten"><b>Urteilen, Kommunizieren (Perspektiven, Stufe F bis H):</b> Delegationen verhandeln ein gemeinsames Klimaziel. Ablauf: Rolle lesen, Position vorbereiten, Verhandeln, Abstimmen, Auswerten. <b>Beurteile</b> am Ende, welche Interessen sich durchgesetzt haben und warum. Beutelsbacher Konsens: Rollen sind Positionen, keine Meinungen der Lehrkraft oder der Klasse.</div>
+<p class="kasten warn"><b>Entwurf, fachlich und sprachlich gegenlesen:</b> Die Rollentexte sind vereinfachte, erfundene Beispiele, keine Zahlen. Sie müssen vor dem Einsatz zur Lerngruppe passen.</p>
+<h2>Phasen und Uhr</h2>
+<div class="ph" id="ph"></div><p class="uhr" id="uhr" aria-live="off">00:00</p>
+<div class="leiste"><button type="button" id="st">▶ Start</button><button type="button" class="sek" id="wt">Nächste Phase</button><button type="button" class="sek" id="rs">Zurück auf Anfang</button></div>
+<h2>Rolle ziehen (für eine Gruppe, verdeckt)</h2>
+<div class="leiste"><label for="gn"><b>Gruppe</b></label><select id="gn" style="font:inherit;min-height:44px"></select><button type="button" id="zieh">Rolle ziehen</button><button type="button" class="sek" id="weg" disabled>Verdecken</button></div>
+<div class="rolle" id="rolle" aria-live="polite">Karte ziehen und nur der Gruppe zeigen. „Verdecken“ blendet sie wieder aus.</div>
+<h2>Abstimmung (Handzeichen, Lehrkraft zählt)</h2>
+<p><label for="vo"><b>Antrag</b></label> <input type="text" id="vo" value="Die Staaten senken ihre Emissionen bis 2040 um die Hälfte." style="font:inherit;min-height:44px;width:100%;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)"></p>
+<div class="abst"><div>Ja<b id="vj">0</b><button type="button" data-v="j">+1</button></div><div>Nein<b id="vn">0</b><button type="button" data-v="n">+1</button></div><div>Enthaltung<b id="ve">0</b><button type="button" data-v="e">+1</button></div></div>
+<div class="leiste"><button type="button" class="sek" id="vr">Stimmen zurücksetzen</button></div>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}
+ var P=[['Vorbereiten',5],['Verhandeln',12],['Abstimmen',3],['Auswerten',8]];
+ var R=[['Inselstaat','Dein Land liegt kaum über dem Meeresspiegel. Ein steigender Meeresspiegel bedroht Häuser und Trinkwasser. Du willst schnelle, verbindliche Ziele und Geld für Anpassung.'],
+ ['Industrieland','Dein Land hat lange viel CO₂ ausgestoßen und hat eine starke Industrie. Du willst Ziele, die Arbeitsplätze nicht gefährden, und setzt auf neue Technik.'],
+ ['Schwellenland','Deine Wirtschaft wächst schnell und braucht viel Energie. Du willst, dass Länder mit früherem Ausstoß mehr leisten und dir bei sauberer Technik helfen.'],
+ ['Förderland für Erdöl','Dein Land lebt vom Verkauf von Erdöl. Du willst, dass Ziele schrittweise kommen und dein Land Zeit für neue Einnahmen bekommt.'],
+ ['Umweltverband','Du vertrittst Menschen, die für Klimaschutz eintreten. Du willst strenge Ziele, Kontrolle und klare Zahlen, und fragst nach Folgen für arme Länder.'],
+ ['Wirtschaftsverband','Du vertrittst Firmen. Du willst verlässliche Regeln und Planungssicherheit, und fragst nach Kosten und Wettbewerb.']];
+ var phase=0,rest=P[0][1]*60,lauf=null,gezogen={};
+ function fm(s){return ('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2)}
+ function zeigen(){$('ph').innerHTML=P.map(function(p,i){return '<span class="'+(i===phase?'an':'')+'">'+p[0]+' · '+p[1]+' Min.</span>'}).join('');$('uhr').textContent=fm(rest)}
+ function tick(){if(rest>0){rest--;zeigen()}else{stopp();try{var c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);g.gain.value=.1;o.frequency.value=660;o.start();setTimeout(function(){o.stop()},400)}catch(e){}}}
+ function stopp(){clearInterval(lauf);lauf=null;$('st').textContent='▶ Start'}
+ $('st').onclick=function(){if(lauf){stopp();return}lauf=setInterval(tick,1000);$('st').textContent='❚❚ Pause'};
+ $('wt').onclick=function(){stopp();phase=(phase+1)%P.length;rest=P[phase][1]*60;zeigen()};$('rs').onclick=function(){stopp();phase=0;rest=P[0][1]*60;zeigen()};
+ for(var i=1;i<=6;i++){var o=document.createElement('option');o.textContent='Gruppe '+i;$('gn').appendChild(o)}
+ $('zieh').onclick=function(){var g=$('gn').value;var frei=R.map(function(_,i){return i}).filter(function(i){return Object.keys(gezogen).every(function(k){return gezogen[k]!==i})});if(gezogen[g]===undefined){if(!frei.length){$('rolle').textContent='Alle Rollen sind vergeben.';return}gezogen[g]=frei[Math.floor(Math.random()*frei.length)]}
+  var r=R[gezogen[g]];$('rolle').innerHTML='<b>'+g+': '+r[0]+'</b><p>'+r[1]+'</p>';$('weg').disabled=false};
+ $('weg').onclick=function(){$('rolle').textContent='Verdeckt. Wähle die nächste Gruppe.';$('weg').disabled=true};
+ var v={j:0,n:0,e:0};[].forEach.call(document.querySelectorAll('[data-v]'),function(b){b.onclick=function(){v[b.dataset.v]++;$('v'+b.dataset.v).textContent=v[b.dataset.v]}});
+ $('vr').onclick=function(){v={j:0,n:0,e:0};['vj','vn','ve'].forEach(function(i){$(i).textContent=0})};
+ zeigen();
+})();
+</script></main></body></html>
