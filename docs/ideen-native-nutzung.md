@@ -542,3 +542,9 @@ Alle unter `labor/`, im Browser getestet (Kamera, Standort, Sensoren und Spracha
 | `karteikasten/` | Querschnitt | Liest freigegebene Begriffe der Stunden, Leitner-Fächer im Browser, Kalenderdatei |
 | `begriffe-sprachen/` und `daten/begriffe-sprachen.json` | Querschnitt | Neun Begriffe in fünf Sprachen, **von mir zusammengestellt, ungeprüft und nicht aus Wikidata**. Gegenlesen nötig |
 
+### 12.5 Meeresspiegelanstieg modellieren (Wunsch der Lehrkraft, 17.11.2026)
+
+`labor/meeresspiegel/`, vier Reiter: (1) **Küstenschnitt** mit vier gezeichneten Küstenformen (Flussdelta, Steilküste, Küste mit Deich und Land unter dem Meeresspiegel, flache Insel), Regler für Anstieg, Sturmflut und Deichhöhe, Zählung überfluteter Häuser. (2) **Woher das Wasser kommt**: Beiträge von Gebirgsgletschern, Grönland, Westantarktis, Ostantarktis, schwimmendem Eis (null) und Wärmeausdehnung, mit Übernahme in den Küstenschnitt. (3) **Eis im Glas**: schwimmendes Eis gegen Eis auf einem Stein, mit Vorhersage. (4) **Im Internet nachsehen**: Linkkarten zu Climate Central, NOAA und Flood Maps (nicht eingebettet, Adressen aus der Erinnerung, **ungeprüft**).
+
+**Grenzen:** Küstenformen sind schematisch, keine echten Orte. Die Zahlen (Eismassen, Wärmeausdehnung, Szenarien um 2100) sind gerundete Näherungen aus allgemeinem Wissen und **nicht an einer Quelle geprüft**. Eine Karte mit echten Höhendaten ist nicht eingebaut. Dafür bräuchte `tools/daten-holen.py` einen Zuschnitt eines Höhenmodells (zum Beispiel Copernicus DEM, Lizenz vorab lesen) für eine Beispielregion.
+
