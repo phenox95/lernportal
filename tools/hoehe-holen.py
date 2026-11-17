@@ -119,8 +119,16 @@ def hoehen_cop(lon0, lat0, lon1, lat1, res):
                 a = tifffile.imread(io.BytesIO(r.read()))
         except Exception:
             return t, None  # reine Meereskachtel gibt es nicht
-        a = a[:n * f, :n * f].astype(np.float32)
-        return t, np.median(a.reshape(n, f, n, f), axis=(1, 3))
+        a = a.astype(np.float32)
+        # Kacheln haben ab etwa 50 Grad Breite weniger Spalten (2400, 1800, ...), Zeilen immer 3600
+        fx = a.shape[1] * res
+        if abs(fx - round(fx)) > 1e-6:
+            xi = np.minimum((np.arange(n) + 0.5) * (a.shape[1] / n), a.shape[1] - 1).astype(int)
+            yi = np.minimum((np.arange(n) + 0.5) * f, a.shape[0] - 1).astype(int)
+            return t, a[np.ix_(yi, xi)]
+        fx = int(round(fx))
+        a = a[:n * f, :n * fx]
+        return t, np.median(a.reshape(n, f, n, fx), axis=(1, 3))
 
     with cf.ThreadPoolExecutor(4) as ex:
         for (la, lo), m in ex.map(hole, kacheln):
