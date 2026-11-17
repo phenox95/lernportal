@@ -15,12 +15,17 @@ Gitter: gleichwinklig (Längen- und Breitengrad), Breite und Höhe in index.json
 WICHTIG (Genauigkeit, auch auf der Seite genannt): Das Höhenmodell (SRTM und andere) hat eine senkrechte Genauigkeit im Bereich
 mehrerer Meter und enthält Bäume und Gebäude. Deiche und Pumpen sind nicht erfasst. Die Karten zeigen Größenordnungen, keine Prognose.
 
+Zwei Höhenmodelle:
+- Terrarium (Weltkarte und alle Ausschnitte, Datei <id>.png)
+- Copernicus GLO-30 (30 m, für die Ausschnitte, Datei <id>-cop.png, jeweils der Median je Gitterzelle). Es ist wie SRTM ein Oberflächenmodell, enthält also ebenfalls Baumkronen und Dächer, ist aber genauer.
+
 Quellen (Lizenzen vor der Veröffentlichung lesen):
+- Copernicus DEM GLO-30: https://registry.opendata.aws/copernicus-dem/ (Lizenz und Namensnennung des Anbieters lesen)
 - Höhenkacheln: https://registry.opendata.aws/terrain-tiles/ (Terrarium-Format, enthält u. a. SRTM, ETOPO1, GMTED; Hinweise des Anbieters beachten)
 - Küstenlinie: Natural Earth, gemeinfrei
 
-Benötigt: numpy, scipy, pillow (pip install numpy scipy pillow). Aufruf: python3 tools/hoehe-holen.py [welt|<regions-id> ...]
-Erlaubte Hosts: elevation-tiles-prod.s3.amazonaws.com, raw.githubusercontent.com
+Benötigt: numpy, scipy, pillow, tifffile, imagecodecs (pip install numpy scipy pillow tifffile imagecodecs). Aufruf: python3 tools/hoehe-holen.py [welt|<regions-id> ...]
+Erlaubte Hosts: elevation-tiles-prod.s3.amazonaws.com, copernicus-dem-30m.s3.amazonaws.com, raw.githubusercontent.com
 """
 import io, json, math, os, pathlib, sys, urllib.request
 import concurrent.futures as cf
@@ -34,17 +39,23 @@ KACHEL = "https://elevation-tiles-prod.s3.amazonaws.com/terrarium/{z}/{x}/{y}.pn
 LAND = {"50m": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_land.geojson",
         "10m": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson"}
 
-# id, Name, lon0, lat0 (Süd), lon1, lat1 (Nord), Auflösung in Grad, Zoom der Höhenkacheln, Küstenlinie
+# id, Name, lon0, lat0 (Süd), lon1, lat1 (Nord), Auflösung in Grad, Zoom der Terrarium-Kacheln, Küstenlinie, Copernicus-Variante
 REGIONEN = [
-    ("welt", "Weltkarte", -180.0, -60.0, 180.0, 84.0, 0.1, 4, "50m"),
-    ("nordsee", "Nordsee: Niederlande und Norddeutschland", 3.0, 51.0, 10.5, 55.2, 0.005, 8, "10m"),
-    ("bangladesch", "Bangladesch: Ganges-Brahmaputra-Delta", 87.0, 21.0, 93.0, 25.0, 0.005, 8, "10m"),
-    ("nildelta", "Ägypten: Nildelta", 29.0, 30.0, 33.0, 32.0, 0.005, 8, "10m"),
-    ("mekong", "Vietnam: Mekong-Delta", 104.5, 8.3, 108.0, 11.6, 0.005, 8, "10m"),
-    ("florida", "USA: Südflorida", -83.0, 24.8, -79.3, 28.2, 0.005, 8, "10m"),
-    ("venedig", "Italien: Venedig und Po-Ebene", 11.0, 44.0, 14.5, 46.0, 0.005, 8, "10m"),
-    ("jangtse", "China: Jangtse-Delta und Shanghai", 119.5, 29.5, 123.5, 32.5, 0.005, 8, "10m"),
-    ("mississippi", "USA: Mississippi-Delta", -92.5, 28.5, -88.0, 30.8, 0.005, 8, "10m"),
+    ("welt", "Weltkarte", -180.0, -60.0, 180.0, 84.0, 0.1, 4, "50m", False),
+    ("nordsee", "Nordsee: Niederlande und Norddeutschland", 3.0, 51.0, 10.5, 55.2, 0.005, 8, "10m", True),
+    ("hamburg", "Hamburg und Elbmündung", 8.8, 53.0, 10.6, 54.0, 0.0025, 9, "10m", True),
+    ("ostsee", "Deutsche Ostseeküste", 10.0, 53.8, 14.4, 54.9, 0.005, 8, "10m", True),
+    ("bangladesch", "Bangladesch: Ganges-Brahmaputra-Delta", 87.0, 21.0, 93.0, 25.0, 0.005, 8, "10m", True),
+    ("nildelta", "Ägypten: Nildelta", 29.0, 30.0, 33.0, 32.0, 0.005, 8, "10m", True),
+    ("mekong", "Vietnam: Mekong-Delta", 104.5, 8.3, 108.0, 11.6, 0.005, 8, "10m", True),
+    ("bangkok", "Thailand: Bangkok und Golf von Thailand", 99.8, 12.6, 101.4, 14.2, 0.005, 8, "10m", True),
+    ("jakarta", "Indonesien: Jakarta und Nordküste Javas", 106.2, -6.9, 107.6, -5.8, 0.005, 8, "10m", True),
+    ("florida", "USA: Südflorida", -83.0, 24.8, -79.3, 28.2, 0.005, 8, "10m", True),
+    ("newyork", "USA: New York und New Jersey", -74.6, 39.6, -73.2, 41.0, 0.005, 8, "10m", True),
+    ("mississippi", "USA: Mississippi-Delta", -92.5, 28.5, -88.0, 30.8, 0.005, 8, "10m", True),
+    ("venedig", "Italien: Venedig und Po-Ebene", 11.0, 44.0, 14.5, 46.0, 0.005, 8, "10m", True),
+    ("jangtse", "China: Jangtse-Delta und Shanghai", 119.5, 29.5, 123.5, 32.5, 0.005, 8, "10m", True),
+    ("lagos", "Nigeria: Lagos und Golf von Guinea", 2.6, 6.0, 4.8, 6.9, 0.005, 8, "10m", True),
 ]
 
 
@@ -85,6 +96,42 @@ def hoehen(lon0, lat0, lon1, lat1, res, z):
     py = np.clip((my * 256).astype(int) - ty0 * 256, 0, ny * 256 - 1)
     e = mos[np.ix_(py, px)]
     e[lats > 85.05, :] = 9999.0  # über dem Kachelrand: nie überflutet
+    return e
+
+
+COP = "https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM/Copernicus_DSM_COG_10_{ns}{lat:02d}_00_{ew}{lon:03d}_00_DEM.tif"
+
+
+def hoehen_cop(lon0, lat0, lon1, lat1, res):
+    """Copernicus GLO-30: Median je Gitterzelle (res muss ein Vielfaches von 1/3600 Grad sein, Ränder auf das Gitter gelegt)."""
+    import tifffile
+    w, h = int(round((lon1 - lon0) / res)), int(round((lat1 - lat0) / res))
+    f = int(round(res * 3600))
+    n = 3600 // f
+    e = np.full((h, w), -50.0, np.float32)
+    kacheln = [(la, lo) for la in range(int(math.floor(lat0)), int(math.ceil(lat1))) for lo in range(int(math.floor(lon0)), int(math.ceil(lon1)))]
+
+    def hole(t):
+        la, lo = t
+        url = COP.format(ns="N" if la >= 0 else "S", lat=abs(la), ew="E" if lo >= 0 else "W", lon=abs(lo))
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "lernportal-daten"}), timeout=120) as r:
+                a = tifffile.imread(io.BytesIO(r.read()))
+        except Exception:
+            return t, None  # reine Meereskachtel gibt es nicht
+        a = a[:n * f, :n * f].astype(np.float32)
+        return t, np.median(a.reshape(n, f, n, f), axis=(1, 3))
+
+    with cf.ThreadPoolExecutor(4) as ex:
+        for (la, lo), m in ex.map(hole, kacheln):
+            if m is None:
+                continue
+            c0 = int(round((lo - lon0) / res))
+            r0 = int(round((lat1 - (la + 1)) / res))
+            cs, rs = max(0, c0), max(0, r0)
+            ce, re_ = min(w, c0 + n), min(h, r0 + n)
+            if ce > cs and re_ > rs:
+                e[rs:re_, cs:ce] = m[rs - r0:re_ - r0, cs - c0:ce - c0]
     return e
 
 
@@ -139,19 +186,27 @@ def ueberflutungshoehe(e, land):
     return aus
 
 
-def rechne(rid, name, lon0, lat0, lon1, lat1, res, z, mass):
-    print("→", rid, name, flush=True)
-    e = hoehen(lon0, lat0, lon1, lat1, res, z)
-    land = landmaske(lon0, lat0, lon1, lat1, res, mass)
+def speichern(rid, e, land, suffix=""):
     rot = ueberflutungshoehe(e, land)
     gruen = np.where(land, np.rint(255 * np.sqrt(np.clip(e, 0, 4000) / 4000.0)), 0).astype(np.uint8)
     blau = np.where(land, 255, 0).astype(np.uint8)
     bild = Image.fromarray(np.dstack([rot, gruen, blau]), "RGB")
     WURZEL.mkdir(parents=True, exist_ok=True)
-    pfad = WURZEL / (rid + ".png")
+    pfad = WURZEL / (rid + suffix + ".png")
     bild.save(pfad, optimize=True)
-    print("   ", bild.size, pfad.stat().st_size // 1024, "KB; überflutet bis 10 m:", int(((rot > 0) & (rot < 255)).sum()), "Punkte", flush=True)
-    return {"id": rid, "name": name, "lon0": lon0, "lat0": lat0, "lon1": lon1, "lat1": lat1, "breite": bild.size[0], "hoehe": bild.size[1], "aufloesung_grad": res}
+    print("   ", pfad.name, bild.size, pfad.stat().st_size // 1024, "KB; überflutet bis 10 m:", int(((rot > 0) & (rot < 255)).sum()), "Punkte", flush=True)
+    return bild.size
+
+
+def rechne(rid, name, lon0, lat0, lon1, lat1, res, z, mass, cop):
+    print("→", rid, name, flush=True)
+    land = landmaske(lon0, lat0, lon1, lat1, res, mass)
+    groesse = speichern(rid, hoehen(lon0, lat0, lon1, lat1, res, z), land)
+    modelle = ["terrarium"]
+    if cop:
+        speichern(rid, hoehen_cop(lon0, lat0, lon1, lat1, res), land, "-cop")
+        modelle.append("cop")
+    return {"id": rid, "name": name, "lon0": lon0, "lat0": lat0, "lon1": lon1, "lat1": lat1, "breite": groesse[0], "hoehe": groesse[1], "aufloesung_grad": res, "modelle": modelle}
 
 
 def main():
@@ -165,7 +220,7 @@ def main():
             alt[r[0]] = rechne(*r)
     regionen = [alt[r[0]] for r in REGIONEN if r[0] in alt]
     idx_pfad.write_text(json.dumps({
-        "quelle": "Höhenmodell: Terrarium-Kacheln (Mapzen/Tilezen, Amazon Open Data, u. a. SRTM, ETOPO1, GMTED), Küstenlinie: Natural Earth (gemeinfrei). Berechnung: tools/hoehe-holen.py",
+        "quelle": "Höhenmodelle: Terrarium-Kacheln (Mapzen/Tilezen, Amazon Open Data, u. a. SRTM, ETOPO1, GMTED) und Copernicus DEM GLO-30 (Copernicus, Amazon Open Data, Median je Gitterzelle). Küstenlinie: Natural Earth (gemeinfrei). Berechnung: tools/hoehe-holen.py",
         "hinweis": "Senkrechte Genauigkeit des Höhenmodells im Bereich mehrerer Meter, Bäume und Gebäude enthalten, Deiche und Pumpen nicht erfasst. Größenordnung, keine Prognose.",
         "regionen": regionen}, ensure_ascii=False, indent=1), encoding="utf-8")
 
