@@ -233,7 +233,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
 <section class="slide" data-min="6" data-note="<b>Debatte Runde 2 (ca. 15–21 Min.):</b> Gruppen sitzen wie in Runde 1. Jede Rolle liest ihre Zusatzinformation (QR-Code scannen oder Rolle antippen, Seite nur über die Portal-Adresse erreichbar, ohne Handys Papierkarten) und nutzt sie in der Diskussion. Die Rollenkarte aus Runde 1 bleibt gültig. Faktenbasis: CDC (96 % ungeimpft oder Status unbekannt, bis 5.11.), zwei Dosen zu 97 % wirksam, Kindergartenquote 92,4 %, erster Masern-Todesfall eines Kindes im Bundesstaat New York seit rund 30 Jahren, Säugling in Wisconsin gestorben, Kanada und Großbritannien ohne Eliminationsstatus. Beutelsbacher Konsens: Rolle A ernst nehmen; ihre Zusatzinfo gibt ihr ein sachliches Argument (Zahlen sind unsicher, Impfung schützt nicht zu 100 %).">
   <h1>Debatte: Runde 2</h1>
   <button class="tmr" data-timer="360" title="Timer starten">6 Min.<small>Start</small></button>
-  <div class="abs" style="left:64px;top:150px;width:1000px;font-size:26px;line-height:1.4">Jede Rolle erhält neue Informationen aus den USA. <b class="hl">Scanne den Code deiner Rolle</b> oder tippe sie an, lies die Karte und nutze sie in der Diskussion.</div>
+  <div class="abs" style="left:64px;top:150px;width:1000px;font-size:26px;line-height:1.4">Jede Rolle erhält zwei neue Belege aus den USA. <b class="hl">Scanne den Code deiner Rolle</b> oder tippe sie an, lies die Karte und nutze sie in der Diskussion.</div>
   <div class="rolle" style="left:64px;top:262px"><button class="rolebtn" data-role="A"><span class="num">A</span>Mutter</button><div class="qr" data-qr="A" role="img" aria-label="QR-Code zur Zusatzkarte A"></div></div>
   <div class="rolle" style="left:358px;top:262px"><button class="rolebtn" data-role="B"><span class="num">B</span>Kinderärztin</button><div class="qr" data-qr="B" role="img" aria-label="QR-Code zur Zusatzkarte B"></div></div>
   <div class="rolle" style="left:652px;top:262px"><button class="rolebtn" data-role="C"><span class="num">C</span>Vater von Mia</button><div class="qr" data-qr="C" role="img" aria-label="QR-Code zur Zusatzkarte C"></div></div>
@@ -432,13 +432,14 @@ svg text{font-family:Andika,Verdana,sans-serif}
   });
 
   /* 6 Rollen: Zusatzinfos (Texte in ../impfen/assets/rollen.js, Handyseite ../impfen/rolle/?r=A&s=2) */
-  var roles=window.IMPF_ROLLEN_2;
+  
   $$('.qr').forEach(function(h){
     try{var url=new URL('../impfen/rolle/?r='+h.getAttribute('data-qr')+'&s=2',location.href).href;var q=qrcode(0,'M');q.addData(url);q.make();h.innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true});h.title=url;}catch(e){h.textContent='QR nicht verfügbar';}
   });
   function openRole(k){
-    var r=roles[k],h='<button class="mclose" id="rclose">✕ Schließen</button><h2>Rolle '+k+': '+r.n+'</h2><h4>'+r.h+'</h4><ul>'+r.a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><h4>Deine Frage an die anderen</h4><div>'+r.q+'</div>';
-    $('#rcard').innerHTML=h;$('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
+    var c=window.impfRolleKarte(k,true);if(!c)return;
+    $('#rcard').innerHTML='<button class="mclose" id="rclose">✕ Schließen</button><h2>'+c.titel+'</h2>'+c.html;
+    $('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
   }
   $$('.rolebtn').forEach(function(b){b.onclick=function(){openRole(b.getAttribute('data-role'));};});
   $('#rmodal').onclick=function(e){if(e.target===this)this.classList.remove('on');};

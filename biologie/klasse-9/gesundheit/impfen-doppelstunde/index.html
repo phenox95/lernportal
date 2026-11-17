@@ -62,6 +62,18 @@ td[contenteditable]:focus{background:var(--lo)}
 .rolle .rolebtn{position:static;width:100%;justify-content:flex-start}
 .qr,.qr2{width:140px;height:140px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:9px}
 .qr svg,.qr2 svg{display:block;width:100%;height:100%}
+
+/* Meinung, Argument, Beleg */
+.abk{position:absolute;top:150px;width:364px;height:156px;border-radius:16px;background:var(--lg);padding:12px 18px;font-size:19px;line-height:1.3}
+.abk b{font-size:24px;color:var(--green);display:block;margin-bottom:2px}
+.abk p{margin:0 0 4px}.abk .bsp{font-weight:700;font-size:18px}
+.abr{display:flex;align-items:center;gap:14px;margin-bottom:8px;padding:6px 14px;border-radius:12px;background:var(--lg)}
+.abr .tx{flex:1;font-size:20px;line-height:1.25}
+.abr .bt{display:flex;gap:6px;flex:none}
+.abr .bt button{border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;font-size:17px;font-weight:700;padding:4px 10px;cursor:pointer;min-height:48px;touch-action:manipulation}
+.abr .bt button.sel{background:var(--green);color:#fff;border-color:var(--green)}
+.abr .fb{width:250px;font-size:16px;line-height:1.2;color:var(--grey);flex:none;min-height:40px}
+.abr.r{background:var(--lg)}.abr.w{background:var(--lo)}
 /* Fortschrittsbalken (wie in der Vorlage) */
 #nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
 #nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
@@ -310,10 +322,19 @@ svg text{font-family:Andika,Verdana,sans-serif}
   </div>
   </section>
 
-<section class="slide" data-min="15" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollen verteilen: SuS scannen den QR-Code ihrer Rolle mit dem Handy (Seite rolle/, nur über die Portal-Adresse, nicht aus einer lokalen Datei) oder tippen hier A–D an, dann öffnet sich die Karte im Fenster. Ohne Handys: Rollenkarten auf Papier. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
+<section class="slide" data-min="4" data-note="<b>Meinung, Argument, Beleg (ca. 3 Min.):</b> Vor der Debatte klären. Erfahrungsgemäß fällt es SuS schwer, Argument (Begründung, oft mit „weil“) und Beleg (Fakt, Zahl oder Quelle) zu trennen. Die vier Beispiele gemeinsam entscheiden lassen, die Begründung nennen lassen. Danach: Jede Rollenkarte hat zwei Argumente, zu jedem Argument steht ein Beleg. Ein gutes Statement folgt dem Muster „Ich finde …, weil … (Argument). Das zeigt: … (Beleg).“ Operatoren auf den Rollenkarten: Nenne, Begründe, Belege.">
+  <h1>Meinung, Argument, Beleg</h1>
+  <div class="abk" style="left:64px"><b>Meinung</b><p>Ich finde etwas. Ohne Grund.</p><p class="bsp">„Ich bin für eine Impfpflicht.“</p></div>
+  <div class="abk" style="left:458px"><b>Argument</b><p>Meinung plus Grund. Der Grund beginnt oft mit „weil“.</p><p class="bsp">„Ich bin für eine Impfpflicht, weil Mia sich nicht selbst schützen kann.“</p></div>
+  <div class="abk" style="left:852px"><b>Beleg</b><p>Fakt, Zahl oder Quelle. Er stützt das Argument.</p><p class="bsp">„Mia darf wegen ihrer Behandlung nicht geimpft werden.“</p></div>
+  <div class="abs hint" style="left:64px;top:318px">Tippe an: Ist die Aussage eine Meinung, ein Argument oder ein Beleg?</div>
+  <div class="abs" id="abtf" style="left:64px;top:352px;width:1152px"></div>
+</section>
+
+<section class="slide" data-min="13" data-note="<b>Vorbereitung (27–33 Min.):</b> Rollen verteilen: SuS scannen den QR-Code ihrer Rolle mit dem Handy (Seite rolle/, nur über die Portal-Adresse, nicht aus einer lokalen Datei) oder tippen hier A–D an, dann öffnet sich die Karte im Fenster. Ohne Handys: Rollenkarten auf Papier. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (33–40 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
   <h1>Debatte in vier Rollen</h1>
   <button class="tmr" data-timer="180,270,90" title="Timer: Runde 1, 2, 3">Timer<small>Runde 1</small></button>
-  <div class="rnd" style="left:64px;top:150px"><h3>Runde 1</h3><div class="t">3 Min.</div><p>Statements: jede Rolle 45 Sekunden</p></div>
+  <div class="rnd" style="left:64px;top:150px"><h3>Runde 1</h3><div class="t">3 Min.</div><p>Statements: jede Rolle 45 Sekunden, ein Argument mit Beleg</p></div>
   <div class="rnd" style="left:452px;top:150px"><h3>Runde 2</h3><div class="t">4,5 Min.</div><p>Diskussion: geht auf andere ein</p></div>
   <div class="rnd o" style="left:840px;top:150px"><h3>Runde 3</h3><div class="t">1,5 Min.</div><p>Entscheidung der Gruppe</p></div>
   <div class="abs hint" style="left:64px;top:358px">Scanne den Code deiner Rolle mit dem Handy oder tippe auf die Rolle.</div>
@@ -321,17 +342,17 @@ svg text{font-family:Andika,Verdana,sans-serif}
   <div class="rolle" style="left:358px"><button class="rolebtn" data-role="B"><span class="num">B</span>Kinderärztin</button><div class="qr" data-qr="B" role="img" aria-label="QR-Code zur Rollenkarte B"></div></div>
   <div class="rolle" style="left:652px"><button class="rolebtn" data-role="C"><span class="num">C</span>Vater von Mia</button><div class="qr" data-qr="C" role="img" aria-label="QR-Code zur Rollenkarte C"></div></div>
   <div class="rolle" style="left:946px"><button class="rolebtn" data-role="D"><span class="num">D</span>Jurist</button><div class="qr" data-qr="D" role="img" aria-label="QR-Code zur Rollenkarte D"></div></div>
-  <div class="abs" style="left:110px;top:612px;font-size:22px;font-weight:700;color:var(--ot)">Argumente statt Meinungen. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
+  <div class="abs" style="left:110px;top:612px;font-size:22px;font-weight:700;color:var(--ot)">Argument und Beleg statt Meinung. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
   <div class="modal" id="rmodal"><div class="mcard" id="rcard"></div></div>
 </section>
 
-<section class="slide" data-min="1" data-note="<b>Blitzlicht (38–39 Min.):</b> Obere Zählung am besten schon nach dem Impuls (Bauchgefühl) mit Handzeichen erfassen, die zweite nach der Debatte (Gruppenentscheidungen oder Einzelmeinungen). Tippen auf „+“ zählt hoch, „−“ korrigiert. Auswertung: Hat sich etwas verändert? Warum? Es gibt keine richtige Position, bewertet wird die Begründung. Die Zählung nach der Debatte (rechts) erscheint in Folie 15 links wieder, Änderungen gelten für beide Folien.">
+<section class="slide" data-min="1" data-note="<b>Blitzlicht (40–41 Min.):</b> Obere Zählung am besten schon nach dem Impuls (Bauchgefühl) mit Handzeichen erfassen, die zweite nach der Debatte (Gruppenentscheidungen oder Einzelmeinungen). Tippen auf „+“ zählt hoch, „−“ korrigiert. Auswertung: Hat sich etwas verändert? Warum? Es gibt keine richtige Position, bewertet wird die Begründung. Die Zählung nach der Debatte (rechts) erscheint in Folie 16 links wieder, Änderungen gelten für beide Folien.">
   <h1>Blitzlicht: Wie entscheidet ihr?</h1>
   <div class="abs" id="bz1" style="left:64px;top:150px;width:560px"></div>
   <div class="abs" id="bz2" style="left:660px;top:150px;width:556px"></div>
 </section>
 
-<section class="slide" data-min="3" data-note="<b>Argumentesammler (ca. 39–42 Min.):</b> Direkt nach Runde 1 und Blitzlicht, statt eines Do Now. SuS schreiben ein Argument ins Heft (3 Min.). <b>Abgleich:</b> SuS nennen ihr Argument; die Lehrkraft (oder ein/e Schüler/in) tippt es rechts ein, die Klasse stimmt mit 👍 ab. Die Sammlung dient als Ausgangspunkt für Runde 2. Falls Runde 1 anders verlaufen ist: Aufgabe anpassen.">
+<section class="slide" data-min="3" data-note="<b>Argumentesammler (ca. 41–44 Min.):</b> Direkt nach Runde 1 und Blitzlicht, statt eines Do Now. SuS schreiben ein Argument mit Beleg ins Heft (3 Min.). <b>Abgleich:</b> SuS nennen ihr Argument; die Lehrkraft (oder ein/e Schüler/in) tippt es rechts ein, die Klasse stimmt mit 👍 ab. Die Sammlung dient als Ausgangspunkt für Runde 2. Falls Runde 1 anders verlaufen ist: Aufgabe anpassen.">
   <h1>Argumentesammler</h1>
   <button class="tmr" data-timer="180" title="Timer starten">3 Min.<small>Start</small></button>
   <div class="card abs" style="left:64px;top:160px;width:520px;height:330px;display:flex;align-items:center">
@@ -345,7 +366,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
   </div>
 </section>
 
-<section class="slide" data-min="4" data-note="<b>USA-Datenimpuls (ca. 42–56 Min., Folien 10 bis 13):</b> Folie 10 und 11 sind Pflicht (ca. 8 Min.), Folie 12 und 13 sind Vertiefung (bei Zeitnot überspringen). Folie 10: erst schätzen lassen (Regler), dann auflösen. Quelle: CDC, Stand 12.11.2026: 5.412 bestätigte Fälle in 2026, 2.289 im gesamten Jahr 2025, 43 neue Ausbrüche. Höchster Wert seit 1991. <b>Vor der Stunde auf https://www.cdc.gov/measles/data-research/index.html die Zahlen aktualisieren</b> (sie ändern sich wöchentlich) und hier im Dokument anpassen. Die 96 % (ungeimpft oder Impfstatus unbekannt) gelten laut USAFacts für den Stand 5.11.2026. Arbeitsblatt Aufgabe 1 (Beschreibe).">
+<section class="slide" data-min="4" data-note="<b>USA-Datenimpuls (ca. 44–58 Min., Folien 11 bis 14):</b> Folie 11 und 12 sind Pflicht (ca. 8 Min.), Folie 13 und 14 sind Vertiefung (bei Zeitnot überspringen). Folie 11: erst schätzen lassen (Regler), dann auflösen. Quelle: CDC, Stand 12.11.2026: 5.412 bestätigte Fälle in 2026, 2.289 im gesamten Jahr 2025, 43 neue Ausbrüche. Höchster Wert seit 1991. <b>Vor der Stunde auf https://www.cdc.gov/measles/data-research/index.html die Zahlen aktualisieren</b> (sie ändern sich wöchentlich) und hier im Dokument anpassen. Die 96 % (ungeimpft oder Impfstatus unbekannt) gelten laut USAFacts für den Stand 5.11.2026. Arbeitsblatt Aufgabe 1 (Beschreibe).">
   <h1>Masern in den USA</h1>
   <div class="card abs" style="left:64px;top:150px;width:520px;height:450px">
     <div class="q" style="font-size:27px"><span class="hl">Schätze:</span> Wie viele bestätigte Masernfälle gab es 2026 bis Mitte November in den USA?</div>
@@ -405,10 +426,10 @@ svg text{font-family:Andika,Verdana,sans-serif}
   <div class="abs" id="tf" style="left:64px;top:150px;width:1152px"></div>
 </section>
 
-<section class="slide" data-min="8" data-note="<b>Debatte Runde 2 (ca. 56–64 Min.):</b> Gruppen sitzen wie in Runde 1. Jede Rolle liest ihre Zusatzinformation (QR-Code scannen oder Rolle antippen, Seite nur über die Portal-Adresse erreichbar, ohne Handys Papierkarten) und nutzt sie in der Diskussion. Die Rollenkarte aus Runde 1 bleibt gültig. Faktenbasis: CDC (96 % ungeimpft oder Status unbekannt, bis 5.11.), zwei Dosen zu 97 % wirksam, Kindergartenquote 92,4 %, erster Masern-Todesfall eines Kindes im Bundesstaat New York seit rund 30 Jahren, Säugling in Wisconsin gestorben, Kanada und Großbritannien ohne Eliminationsstatus. Beutelsbacher Konsens: Rolle A ernst nehmen; ihre Zusatzinfo gibt ihr ein sachliches Argument (Zahlen sind unsicher, Impfung schützt nicht zu 100 %).">
+<section class="slide" data-min="8" data-note="<b>Debatte Runde 2 (ca. 58–66 Min.):</b> Gruppen sitzen wie in Runde 1. Jede Rolle liest ihre Zusatzinformation (QR-Code scannen oder Rolle antippen, Seite nur über die Portal-Adresse erreichbar, ohne Handys Papierkarten) und nutzt sie in der Diskussion. Die Rollenkarte aus Runde 1 bleibt gültig. Faktenbasis: CDC (96 % ungeimpft oder Status unbekannt, bis 5.11.), zwei Dosen zu 97 % wirksam, Kindergartenquote 92,4 %, erster Masern-Todesfall eines Kindes im Bundesstaat New York seit rund 30 Jahren, Säugling in Wisconsin gestorben, Kanada und Großbritannien ohne Eliminationsstatus. Beutelsbacher Konsens: Rolle A ernst nehmen; ihre Zusatzinfo gibt ihr ein sachliches Argument (Zahlen sind unsicher, Impfung schützt nicht zu 100 %).">
   <h1>Debatte: Runde 2</h1>
   <button class="tmr" data-timer="360" title="Timer starten">6 Min.<small>Start</small></button>
-  <div class="abs" style="left:64px;top:150px;width:1000px;font-size:26px;line-height:1.4">Jede Rolle erhält neue Informationen aus den USA. <b class="hl">Scanne den Code deiner Rolle</b> oder tippe sie an, lies die Karte und nutze sie in der Diskussion.</div>
+  <div class="abs" style="left:64px;top:150px;width:1000px;font-size:26px;line-height:1.4">Jede Rolle erhält zwei neue Belege aus den USA. <b class="hl">Scanne den Code deiner Rolle</b> oder tippe sie an, lies die Karte und nutze sie in der Diskussion.</div>
   <div class="rolle" style="left:64px;top:262px"><button class="rolebtn rolebtn2" data-role="A"><span class="num">A</span>Mutter</button><div class="qr qr2" data-qr="A" role="img" aria-label="QR-Code zur Zusatzkarte A"></div></div>
   <div class="rolle" style="left:358px;top:262px"><button class="rolebtn rolebtn2" data-role="B"><span class="num">B</span>Kinderärztin</button><div class="qr qr2" data-qr="B" role="img" aria-label="QR-Code zur Zusatzkarte B"></div></div>
   <div class="rolle" style="left:652px;top:262px"><button class="rolebtn rolebtn2" data-role="C"><span class="num">C</span>Vater von Mia</button><div class="qr qr2" data-qr="C" role="img" aria-label="QR-Code zur Zusatzkarte C"></div></div>
@@ -417,7 +438,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
   <div class="modal" id="rmodal2"><div class="mcard" id="rcard2"></div></div>
 </section>
 
-<section class="slide" data-min="7" data-note="<b>Runde 3 und Blitzlicht (ca. 64–71 Min.):</b> Erst Gruppenentscheidung (4 Min.), dann Blitzlicht per Handzeichen. Links die Zählung nach der Debatte aus Folie 8 (wird übernommen), rechts die Zählung jetzt. Auswertung: Hat sich etwas verändert? Waren es die Zahlen oder die Argumente? Es gibt keine richtige Position; bewertet wird die Begründung.">
+<section class="slide" data-min="7" data-note="<b>Runde 3 und Blitzlicht (ca. 66–73 Min.):</b> Erst Gruppenentscheidung (4 Min.), dann Blitzlicht per Handzeichen. Links die Zählung nach der Debatte aus Folie 9 (wird übernommen), rechts die Zählung jetzt. Auswertung: Hat sich etwas verändert? Waren es die Zahlen oder die Argumente? Es gibt keine richtige Position; bewertet wird die Begründung.">
   <h1>Runde 3 und Blitzlicht</h1>
   <button class="tmr" data-timer="240" title="Timer starten">4 Min.<small>Start</small></button>
   <div class="abs" style="left:64px;top:130px;width:1000px;font-size:23px;line-height:1.3"><b class="hl">Einigt euch in der Gruppe:</b> Pflicht, keine Pflicht oder eine andere Lösung? Nennt einen Fakt als Grund.</div>
@@ -425,7 +446,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
   <div class="abs" id="bz4" style="left:660px;top:190px;width:556px"></div>
 </section>
 
-<section class="slide" data-min="6" data-note="<b>Sicherung (ca. 71–77 Min.):</b> Die Inhalte sind unscharf. Die Klasse erarbeitet sie, dann wird zum Aufdecken getippt. Links Herdenimmunität mit USA-Beispiel, rechts Pro/Contra aus der Debatte und die Quellenfragen.">
+<section class="slide" data-min="6" data-note="<b>Sicherung (ca. 73–79 Min.):</b> Die Inhalte sind unscharf. Die Klasse erarbeitet sie, dann wird zum Aufdecken getippt. Links Herdenimmunität mit USA-Beispiel, rechts Pro/Contra aus der Debatte und die Quellenfragen.">
   <h1>Herdenimmunität</h1>
   <svg class="abs" style="right:64px;top:18px" viewBox="0 0 150 130" width="190" height="165" role="img" aria-label="Eine nicht impfbare Person in der Mitte, umgeben von geimpften Personen"><g id="ppl"></g></svg>
   <div class="card abs" style="left:64px;top:190px;width:560px;height:390px;font-size:25px;line-height:1.35">
@@ -446,7 +467,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
   <div class="abs hint" style="left:700px;top:606px">Tippe auf unscharfe Stellen zum Aufdecken.</div>
 </section>
 
-<section class="slide" data-min="8" data-note="<b>Exit (ca. 77–85 Min.):</b> Exit-Ticket (A5) schreiben lassen und einsammeln. Die Checkliste hilft beim Selbstcheck. Bewertet wird die Begründung, nicht die Position.">
+<section class="slide" data-min="8" data-note="<b>Exit (ca. 79–87 Min.):</b> Exit-Ticket (A5) schreiben lassen und einsammeln. Die Checkliste hilft beim Selbstcheck. Bewertet wird die Begründung, nicht die Position.">
   <h1>Exit-Ticket</h1>
   <button class="tmr" data-timer="420" title="Timer starten">7 Min.<small>Start</small></button>
   <div class="card abs" style="left:64px;top:150px;width:1152px;height:230px;display:flex;align-items:center">
@@ -607,13 +628,31 @@ svg text{font-family:Andika,Verdana,sans-serif}
   }
   $('#lqs').oninput=lab;$('#lks').oninput=lab;$('#lgo').onclick=lab;lab();
 
+  /* Meinung, Argument, Beleg */
+  (function(){
+    var rows=[
+      ['Eltern sollen selbst über Impfungen entscheiden.',0,'Meinung: keine Begründung.'],
+      ['Eltern sollen entscheiden, weil eine Impfung ein Eingriff in den Körper ist.',1,'Argument: Begründung mit „weil“.'],
+      ['Laut RKI sind für Masern etwa 95 % Geimpfte nötig.',2,'Beleg: Zahl mit Quelle.'],
+      ['Masern sind gefährlich, weil sie zu einer Lungenentzündung führen können.',1,'Argument: Begründung mit „weil“.']
+    ],names=['Meinung','Argument','Beleg'],host=$('#abtf');
+    rows.forEach(function(t){
+      var d=document.createElement('div');d.className='abr';
+      d.innerHTML='<div class="tx"></div><div class="bt"></div><div class="fb"></div>';
+      d.querySelector('.tx').textContent=t[0];
+      var bt=d.querySelector('.bt'),bs=[];
+      names.forEach(function(n,i){var b=document.createElement('button');b.type='button';b.textContent=n;bs.push(b);bt.appendChild(b);
+        b.onclick=function(){bs.forEach(function(x){x.classList.remove('sel');});b.classList.add('sel');var ok=(i===t[1]);d.classList.remove('r','w');d.classList.add(ok?'r':'w');d.querySelector('.fb').textContent=(ok?'✓ ':'✗ Nicht ganz. ')+t[2];};});
+      host.appendChild(d);
+    });
+  })();
+
   /* 7 Rollen */
   var roles=window.IMPF_ROLLEN;
   function openRole(k){
-    var r=roles[k],h='<button class="mclose" id="rclose">✕ Schließen</button><h2>Rolle '+k+': '+r.n+'</h2><div><b>Deine Position:</b> '+r.p+'</div><h4>Wer bist du?</h4><div>'+r.w+'</div>';
-    if(r.t)h+='<h4>Das denkst du</h4><div>'+r.t+'</div>';
-    h+='<h4>'+r.h+'</h4><ul>'+r.a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><h4>Deine Frage an die anderen</h4><div>'+r.q+'</div>';
-    $('#rcard').innerHTML=h;$('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
+    var c=window.impfRolleKarte(k,false);if(!c)return;
+    $('#rcard').innerHTML='<button class="mclose" id="rclose">✕ Schließen</button><h2>'+c.titel+'</h2>'+c.html;
+    $('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
   }
   /* QR-Codes: zeigen auf rolle/?r=A usw., relativ zur Adresse dieser Seite (läuft also unter GitHub Pages, nicht aus dem Dateisystem) */
   $$('.qr:not(.qr2)').forEach(function(h){
@@ -729,19 +768,20 @@ svg text{font-family:Andika,Verdana,sans-serif}
   });
 
   /* 6 Rollen: Zusatzinfos (Texte in ../impfen/assets/rollen.js, Handyseite ../impfen/rolle/?r=A&s=2) */
-  var roles=window.IMPF_ROLLEN_2;
+  
   $$('.qr2').forEach(function(h){
     try{var url=new URL('../impfen/rolle/?r='+h.getAttribute('data-qr')+'&s=2',location.href).href;var q=qrcode(0,'M');q.addData(url);q.make();h.innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true});h.title=url;}catch(e){h.textContent='QR nicht verfügbar';}
   });
   function openRole(k){
-    var r=roles[k],h='<button class="mclose" id="rclose2">✕ Schließen</button><h2>Rolle '+k+': '+r.n+'</h2><h4>'+r.h+'</h4><ul>'+r.a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><h4>Deine Frage an die anderen</h4><div>'+r.q+'</div>';
-    $('#rcard2').innerHTML=h;$('#rmodal2').classList.add('on');$('#rclose2').onclick=function(){$('#rmodal2').classList.remove('on');};
+    var c=window.impfRolleKarte(k,true);if(!c)return;
+    $('#rcard2').innerHTML='<button class="mclose" id="rclose2">✕ Schließen</button><h2>'+c.titel+'</h2>'+c.html;
+    $('#rmodal2').classList.add('on');$('#rclose2').onclick=function(){$('#rmodal2').classList.remove('on');};
   }
   $$('.rolebtn2').forEach(function(b){b.onclick=function(){openRole(b.getAttribute('data-role'));};});
   $('#rmodal2').onclick=function(e){if(e.target===this)this.classList.remove('on');};
 
   /* 7 Blitzlicht: linke Zählung ist die von Folie 8 */
-  bz($('#bz3'),'Nach Runde 1 (Folie 8)',C1);bz($('#bz4'),'Jetzt nach Runde 3');
+  bz($('#bz3'),'Nach Runde 1 (Blitzlicht)',C1);bz($('#bz4'),'Jetzt nach Runde 3');
 
   /* 9 Checkliste */
   var items=['Ich habe mich für eine Position entschieden.','Ich habe Herdenimmunität erklärt.','Ich habe ein Beispiel aus den USA als Beleg genannt.','Ich habe ein Gegenargument ernst genommen.'];
@@ -765,10 +805,9 @@ svg text{font-family:Andika,Verdana,sans-serif}
   window.addEventListener('hashchange',fromHash);fromHash();
 })();
 </script>
-<!-- Spielinhalte für die Belohnungsspiele (Memory, Quiz, Zuordnen, Wortsalat). Nur Inhalte dieser Stunde. -->
+<!-- Spielinhalte für die Belohnungsspiele. ENTWURF: bitte fachlich gegenlesen. -->
 <script type="application/json" id="lp-spiel-daten">
 {
- "geprueft": true,
  "titel": "Impfen",
  "paare": [
  ["Impfstoff", "Mittel, das das Immunsystem auf einen Erreger vorbereitet, ohne krank zu machen", "Impf-stoff"],

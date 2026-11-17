@@ -62,6 +62,18 @@ td[contenteditable]:focus{background:var(--lo)}
 .rolle .rolebtn{position:static;width:100%;justify-content:flex-start}
 .qr{width:140px;height:140px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:9px}
 .qr svg{display:block;width:100%;height:100%}
+
+/* Meinung, Argument, Beleg */
+.abk{position:absolute;top:150px;width:364px;height:156px;border-radius:16px;background:var(--lg);padding:12px 18px;font-size:19px;line-height:1.3}
+.abk b{font-size:24px;color:var(--green);display:block;margin-bottom:2px}
+.abk p{margin:0 0 4px}.abk .bsp{font-weight:700;font-size:18px}
+.abr{display:flex;align-items:center;gap:14px;margin-bottom:8px;padding:6px 14px;border-radius:12px;background:var(--lg)}
+.abr .tx{flex:1;font-size:20px;line-height:1.25}
+.abr .bt{display:flex;gap:6px;flex:none}
+.abr .bt button{border:2px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;font-size:17px;font-weight:700;padding:4px 10px;cursor:pointer;min-height:48px;touch-action:manipulation}
+.abr .bt button.sel{background:var(--green);color:#fff;border-color:var(--green)}
+.abr .fb{width:250px;font-size:16px;line-height:1.2;color:var(--grey);flex:none;min-height:40px}
+.abr.r{background:var(--lg)}.abr.w{background:var(--lo)}
 /* Fortschrittsbalken (wie in der Vorlage) */
 #nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
 #nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
@@ -243,7 +255,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
 </section>
 
 <!-- 5 Spielfeld digital -->
-<section class="slide" data-min="5" data-note="<b>Spielfeld digital:</b> Feld 1 und Feld 2 entsprechen dem Papier-Spielblatt. Mit „Nächste Runde“ klicken SuS die Ansteckung Schritt für Schritt (Zahl im Feld = Runde). Erwartet: Feld 1 → 7 Erkrankte, 4 Runden, 2 N erkrankt. Feld 2 → 1 Erkrankter, 0 Runden, 0 N erkrankt. <b>Experiment (freiwillig, Erweiterung):</b> auf ein Feld tippen ändert G → U → N → G. „Zufallsfeld“ mischt eine Impfquote per Regler. Zufallsfelder können sehr unterschiedlich ausgehen: das ist gewollt (Zufall der Anordnung).">
+<section class="slide" data-min="4" data-note="<b>Spielfeld digital:</b> Feld 1 und Feld 2 entsprechen dem Papier-Spielblatt. Mit „Nächste Runde“ klicken SuS die Ansteckung Schritt für Schritt (Zahl im Feld = Runde). Erwartet: Feld 1 → 7 Erkrankte, 4 Runden, 2 N erkrankt. Feld 2 → 1 Erkrankter, 0 Runden, 0 N erkrankt. <b>Experiment (freiwillig, Erweiterung):</b> auf ein Feld tippen ändert G → U → N → G. „Zufallsfeld“ mischt eine Impfquote per Regler. Zufallsfelder können sehr unterschiedlich ausgehen: das ist gewollt (Zufall der Anordnung).">
   <h1>Spielfeld digital</h1>
   <div class="abs" style="left:64px;top:150px">
     <div id="grid"></div>
@@ -299,10 +311,20 @@ svg text{font-family:Andika,Verdana,sans-serif}
   </section>
 
 <!-- 7 Debatte -->
-<section class="slide" data-min="15" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollen verteilen: SuS scannen den QR-Code ihrer Rolle mit dem Handy (Seite rolle/, nur über die Portal-Adresse, nicht aus einer lokalen Datei) oder tippen hier A–D an, dann öffnet sich die Karte im Fenster. Ohne Handys: Rollenkarten auf Papier. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
+<!-- Meinung, Argument, Beleg -->
+<section class="slide" data-min="3" data-note="<b>Meinung, Argument, Beleg (ca. 3 Min.):</b> Vor der Debatte klären. Erfahrungsgemäß fällt es SuS schwer, Argument (Begründung, oft mit „weil“) und Beleg (Fakt, Zahl oder Quelle) zu trennen. Die vier Beispiele gemeinsam entscheiden lassen, die Begründung nennen lassen. Danach: Jede Rollenkarte hat zwei Argumente, zu jedem Argument steht ein Beleg. Ein gutes Statement folgt dem Muster „Ich finde …, weil … (Argument). Das zeigt: … (Beleg).“ Operatoren auf den Rollenkarten: Nenne, Begründe, Belege.">
+  <h1>Meinung, Argument, Beleg</h1>
+  <div class="abk" style="left:64px"><b>Meinung</b><p>Ich finde etwas. Ohne Grund.</p><p class="bsp">„Ich bin für eine Impfpflicht.“</p></div>
+  <div class="abk" style="left:458px"><b>Argument</b><p>Meinung plus Grund. Der Grund beginnt oft mit „weil“.</p><p class="bsp">„Ich bin für eine Impfpflicht, weil Mia sich nicht selbst schützen kann.“</p></div>
+  <div class="abk" style="left:852px"><b>Beleg</b><p>Fakt, Zahl oder Quelle. Er stützt das Argument.</p><p class="bsp">„Mia darf wegen ihrer Behandlung nicht geimpft werden.“</p></div>
+  <div class="abs hint" style="left:64px;top:318px">Tippe an: Ist die Aussage eine Meinung, ein Argument oder ein Beleg?</div>
+  <div class="abs" id="abtf" style="left:64px;top:352px;width:1152px"></div>
+</section>
+
+<section class="slide" data-min="14" data-note="<b>Vorbereitung (23–29 Min.):</b> Rollen verteilen: SuS scannen den QR-Code ihrer Rolle mit dem Handy (Seite rolle/, nur über die Portal-Adresse, nicht aus einer lokalen Datei) oder tippen hier A–D an, dann öffnet sich die Karte im Fenster. Ohne Handys: Rollenkarten auf Papier. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (29–38 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
   <h1>Debatte in vier Rollen</h1>
   <button class="tmr" data-timer="180,270,90" title="Timer: Runde 1, 2, 3">Timer<small>Runde 1</small></button>
-  <div class="rnd" style="left:64px;top:150px"><h3>Runde 1</h3><div class="t">3 Min.</div><p>Statements: jede Rolle 45 Sekunden</p></div>
+  <div class="rnd" style="left:64px;top:150px"><h3>Runde 1</h3><div class="t">3 Min.</div><p>Statements: jede Rolle 45 Sekunden, ein Argument mit Beleg</p></div>
   <div class="rnd" style="left:452px;top:150px"><h3>Runde 2</h3><div class="t">4,5 Min.</div><p>Diskussion: geht auf andere ein</p></div>
   <div class="rnd o" style="left:840px;top:150px"><h3>Runde 3</h3><div class="t">1,5 Min.</div><p>Entscheidung der Gruppe</p></div>
   <div class="abs hint" style="left:64px;top:358px">Scanne den Code deiner Rolle mit dem Handy oder tippe auf die Rolle.</div>
@@ -310,7 +332,7 @@ svg text{font-family:Andika,Verdana,sans-serif}
   <div class="rolle" style="left:358px"><button class="rolebtn" data-role="B"><span class="num">B</span>Kinderärztin</button><div class="qr" data-qr="B" role="img" aria-label="QR-Code zur Rollenkarte B"></div></div>
   <div class="rolle" style="left:652px"><button class="rolebtn" data-role="C"><span class="num">C</span>Vater von Mia</button><div class="qr" data-qr="C" role="img" aria-label="QR-Code zur Rollenkarte C"></div></div>
   <div class="rolle" style="left:946px"><button class="rolebtn" data-role="D"><span class="num">D</span>Jurist</button><div class="qr" data-qr="D" role="img" aria-label="QR-Code zur Rollenkarte D"></div></div>
-  <div class="abs" style="left:110px;top:622px;font-size:22px;font-weight:700;color:var(--ot)">Argumente statt Meinungen. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
+  <div class="abs" style="left:110px;top:612px;font-size:22px;font-weight:700;color:var(--ot)">Argument und Beleg statt Meinung. Ausreden lassen. Alle Rollen sind ernst zu nehmen.</div>
   <div class="modal" id="rmodal"><div class="mcard" id="rcard"></div></div>
 </section>
 
@@ -504,13 +526,31 @@ svg text{font-family:Andika,Verdana,sans-serif}
   }
   $('#lqs').oninput=lab;$('#lks').oninput=lab;$('#lgo').onclick=lab;lab();
 
+  /* Meinung, Argument, Beleg */
+  (function(){
+    var rows=[
+      ['Eltern sollen selbst über Impfungen entscheiden.',0,'Meinung: keine Begründung.'],
+      ['Eltern sollen entscheiden, weil eine Impfung ein Eingriff in den Körper ist.',1,'Argument: Begründung mit „weil“.'],
+      ['Laut RKI sind für Masern etwa 95 % Geimpfte nötig.',2,'Beleg: Zahl mit Quelle.'],
+      ['Masern sind gefährlich, weil sie zu einer Lungenentzündung führen können.',1,'Argument: Begründung mit „weil“.']
+    ],names=['Meinung','Argument','Beleg'],host=$('#abtf');
+    rows.forEach(function(t){
+      var d=document.createElement('div');d.className='abr';
+      d.innerHTML='<div class="tx"></div><div class="bt"></div><div class="fb"></div>';
+      d.querySelector('.tx').textContent=t[0];
+      var bt=d.querySelector('.bt'),bs=[];
+      names.forEach(function(n,i){var b=document.createElement('button');b.type='button';b.textContent=n;bs.push(b);bt.appendChild(b);
+        b.onclick=function(){bs.forEach(function(x){x.classList.remove('sel');});b.classList.add('sel');var ok=(i===t[1]);d.classList.remove('r','w');d.classList.add(ok?'r':'w');d.querySelector('.fb').textContent=(ok?'✓ ':'✗ Nicht ganz. ')+t[2];};});
+      host.appendChild(d);
+    });
+  })();
+
   /* 7 Rollen */
   var roles=window.IMPF_ROLLEN;
   function openRole(k){
-    var r=roles[k],h='<button class="mclose" id="rclose">✕ Schließen</button><h2>Rolle '+k+': '+r.n+'</h2><div><b>Deine Position:</b> '+r.p+'</div><h4>Wer bist du?</h4><div>'+r.w+'</div>';
-    if(r.t)h+='<h4>Das denkst du</h4><div>'+r.t+'</div>';
-    h+='<h4>'+r.h+'</h4><ul>'+r.a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><h4>Deine Frage an die anderen</h4><div>'+r.q+'</div>';
-    $('#rcard').innerHTML=h;$('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
+    var c=window.impfRolleKarte(k,false);if(!c)return;
+    $('#rcard').innerHTML='<button class="mclose" id="rclose">✕ Schließen</button><h2>'+c.titel+'</h2>'+c.html;
+    $('#rmodal').classList.add('on');$('#rclose').onclick=function(){$('#rmodal').classList.remove('on');};
   }
   /* QR-Codes: zeigen auf rolle/?r=A usw., relativ zur Adresse dieser Seite (läuft also unter GitHub Pages, nicht aus dem Dateisystem) */
   $$('.qr').forEach(function(h){
