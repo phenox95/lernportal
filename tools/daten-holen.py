@@ -8,6 +8,7 @@ nur noch eigene Dateien. So sind "Live"-Daten datenschutzfreundlich, schnell und
 Aufruf (aus dem Hauptordner):
   python3 tools/daten-holen.py karte       Küstenlinien (Natural Earth, gemeinfrei) und Plattengrenzen (Bird 2003, ODC-By) -> daten/weltkarte.json, daten/plattengrenzen.json
   python3 tools/daten-holen.py laender     Länder mit Namen in 8 Sprachen (Natural Earth, gemeinfrei) -> daten/laender.json (Topografie-Quiz, mehrsprachig)
+  python3 tools/daten-holen.py meeresspiegel  Globaler Meeresspiegel 1880 bis 2013 (EPA mit CSIRO und NOAA Satellitenaltimetrie, Datensatz datasets/sea-level-rise, ODC-PDDL) -> daten/meeresspiegel.json
   python3 tools/daten-holen.py erdbeben    Erdbeben der letzten 30 Tage, Stärke 4,5 und mehr (USGS, gemeinfrei) -> daten/erdbeben.json
   python3 tools/daten-holen.py demo        Beispiel-Erdbeben aus den Plattengrenzen SIMULIERT -> daten/erdbeben.json ("demo": true, wird auf der Seite gekennzeichnet)
 """
@@ -17,6 +18,7 @@ WURZEL = pathlib.Path(__file__).resolve().parent.parent / "daten"
 NE = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson"
 PB = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
 LAENDER = "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson"
+MSP = "https://raw.githubusercontent.com/datasets/sea-level-rise/master/data/epa-sea-level.csv"
 USGS = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson"
 
 
@@ -71,6 +73,24 @@ def laender():
     schreiben("laender.json", {"quelle": "Natural Earth, ne_110m_admin_0_countries (gemeinfrei). Grenzen und Namen vereinfacht, kein amtliches Kartenwerk", "laender": aus})
 
 
+def meeresspiegel():
+    import csv, io
+    with urllib.request.urlopen(urllib.request.Request(MSP, headers={"User-Agent": "lernportal-daten"}), timeout=60) as r:
+        text = r.read().decode("utf-8")
+    zeilen = []
+    for z in csv.DictReader(io.StringIO(text)):
+        def mm(k):
+            v = (z.get(k) or "").strip()
+            return round(float(v) * 25.4, 1) if v else None  # Quelle in Zoll (inches)
+        zeilen.append([int(z["Year"]), mm("CSIRO Adjusted Sea Level"), mm("Lower Error Bound"), mm("Upper Error Bound"), mm("NOAA Adjusted Sea Level")])
+    schreiben("meeresspiegel.json", {
+        "quelle": "EPA (US Environmental Protection Agency), Climate Change Indicators: Sea Level, mit Daten von CSIRO (Gezeitenpegel und Satelliten) und NOAA (Satellitenaltimetrie ab 1993); Aufbereitung: datasets/sea-level-rise (Open Data Commons Public Domain Dedication and License 1.0). Quelle in Zoll, hier in Millimeter umgerechnet",
+        "abruf": datetime.date.today().isoformat(),
+        "einheit": "mm gegenüber dem Jahr 1880 (CSIRO) bzw. gleiche Nulllinie (NOAA)",
+        "spalten": ["Jahr", "CSIRO", "CSIRO untere Fehlergrenze", "CSIRO obere Fehlergrenze", "NOAA Satelliten"],
+        "reihe": zeilen})
+
+
 def erdbeben():
     d = holen(USGS)
     bebenliste = []
@@ -114,4 +134,4 @@ def demo():
 
 
 if __name__ == "__main__":
-    {"karte": karte, "laender": laender, "erdbeben": erdbeben, "demo": demo}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()
+    {"karte": karte, "laender": laender, "meeresspiegel": meeresspiegel, "erdbeben": erdbeben, "demo": demo}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Meeresspiegelanstieg</title><link rel="stylesheet" href="../labor.css">
+<style>
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tabs button[aria-selected=true]{background:var(--dk);color:#fff;outline:3px solid var(--y)}
+.regler{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:12px 0}.regler label{display:block;font-weight:700}input[type=range]{width:100%}
+select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);border-radius:10px;background:var(--bg);color:var(--ink)}
+#sv,#gl{width:100%;height:auto;display:block;border:2px solid var(--g);border-radius:14px;background:#fff}@media (prefers-color-scheme:dark){#sv,#gl,#mz{background:#0d1b2a!important}}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.leiste button.on{background:var(--dk);color:#fff}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}th,td{padding:8px 10px;border-bottom:1px solid #8aa59a55;text-align:left}th{background:var(--mint);font-size:14px}td input{width:100%}
+.erg{font-size:clamp(28px,6vw,44px);font-weight:700;color:var(--dk)}.tag{display:inline-block;padding:1px 8px;border-radius:8px;background:#f6e3b8;color:#1A2B24;font-size:13px;font-weight:700}
+.karten{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;padding:0;list-style:none}.karten li{border:2px solid var(--g);border-radius:12px;padding:12px 14px}.karten a{font-weight:700}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Meeresspiegelanstieg modellieren</h1>
+<div class="kasten"><b>Systeme erschließen, Urteilen (Geo 3.6 Klimawandel, 3.1 Risikoräume, Stufe E bis G):</b> <b>Sage vorher</b>, wie viele Häuser bei einem Anstieg von 1 m überflutet werden. <b>Untersuche</b> vier Küstenformen. <b>Berechne</b>, wie viel Meeresspiegel aus Eis an Land entsteht und was schwimmendes Eis ausmacht. <b>Erkläre</b> die Unterschiede und <b>beurteile</b> Maßnahmen wie Deiche.</div>
+<p class="kasten warn"><b>Modell, keine Vorhersage:</b> Alle Küstenformen sind <b>gezeichnete Schnittbilder</b> (schematisch, nicht maßstäblich, keine echten Orte). Die Zahlen zu Eismassen, Wärmeausdehnung und Szenarien sind <b>gerundete Näherungen aus allgemeinem Wissen und nicht an der Quelle geprüft</b>. Vor dem Unterricht an einer Quelle prüfen (zum Beispiel IPCC-Bericht AR6, NASA, Alfred-Wegener-Institut). Ein echtes Höhenmodell für Karten ist noch nicht eingebaut. <b>Reiter 5 nutzt echte Messdaten</b> (Gezeitenpegel und Satelliten).</p>
+<div class="tabs" role="tablist"><button role="tab" id="t1" aria-selected="true">1. Küste</button><button role="tab" id="t2" aria-selected="false" class="sek">2. Woher das Wasser kommt</button><button role="tab" id="t3" aria-selected="false" class="sek">3. Eis im Glas</button><button role="tab" id="t4" aria-selected="false" class="sek">4. Im Internet nachsehen</button><button role="tab" id="t5" aria-selected="false" class="sek">5. Gemessen (Satelliten)</button></div>
+
+<section id="p1">
+<div class="leiste"><label for="pro"><b>Küstenform</b></label><select id="pro"><option value="delta">Flache Küste, Flussdelta</option><option value="steil">Steilküste</option><option value="polder">Küste mit Deich, Land hinter dem Deich unter dem Meeresspiegel</option><option value="atoll">Flache Insel (Atoll)</option></select></div>
+<div class="leiste"><span><b>Beispiele:</b></span><button type="button" class="sek" data-sz="0">Heute: 0 m</button><button type="button" class="sek" data-sz="0.4">Szenario niedrig (um 2100): etwa 0,4 m</button><button type="button" class="sek" data-sz="0.8">Szenario hoch (um 2100): etwa 0,8 m</button><button type="button" class="sek" data-sz="3">Langfristig: 3 m (Beispiel)</button></div>
+<div class="regler"><div><label for="msp">Meeresspiegel steigt um: <output id="mo"></output></label><input type="range" id="msp" min="0" max="10" step="0.1" value="0"></div>
+<div><label for="sf">Sturmflut zusätzlich: <output id="so"></output></label><input type="range" id="sf" min="0" max="5" step="0.1" value="0"></div>
+<div><label for="dk">Deich- oder Dünenhöhe: <output id="do"></output></label><input type="range" id="dk" min="0" max="10" step="0.5" value="6"></div></div>
+<svg id="sv" viewBox="0 0 900 440" role="img" aria-label="Küstenschnitt mit Wasserstand, Beschreibung darunter"></svg>
+<p id="auss" class="kasten" aria-live="polite"></p>
+</section>
+
+<section id="p2" hidden>
+<p>Zwei Ursachen für den Anstieg: <b>Eis an Land</b>, das schmilzt und ins Meer fließt, und <b>Wärmeausdehnung</b> des Meerwassers. Schwimmendes Eis (Meereis, Schelfeis) trägt nicht bei.</p>
+<div class="tw"><table><thead><tr><th>Quelle</th><th>Anstieg, wenn alles schmilzt (gerundet, ungeprüft)</th><th>Wie viel schmilzt?</th><th>Beitrag</th></tr></thead><tbody id="tb"></tbody></table></div>
+<div class="regler"><div><label for="wa">Wärmeausdehnung: obere 700 m des Meeres erwärmen sich um <output id="wo"></output></label><input type="range" id="wa" min="0" max="3" step="0.1" value="0"></div></div>
+<p>Gesamter Anstieg im Modell:</p><p class="erg" id="gs" aria-live="polite"></p>
+<div class="leiste"><button type="button" id="uebernehmen">In den Küstenschnitt übernehmen</button></div>
+<p class="quelle">Rechenhilfe: Die Weltmeere haben etwa 361 Millionen Quadratkilometer Fläche. Ein Millimeter Anstieg entspricht rund 361 Milliarden Tonnen Wasser (<span class="tag">Näherung, ungeprüft</span>). Wärmeausdehnung: Ausdehnungszahl von Meerwasser etwa 0,0002 je Kelvin, mal 700 m Tiefe gibt etwa 0,14 m je Kelvin (<span class="tag">stark vereinfacht</span>).</p>
+</section>
+
+<section id="p3" hidden>
+<div class="kasten"><b>Vorhersage (Erkenntnisse gewinnen):</b> Zwei Gläser mit gleich viel Wasser. In <b>A</b> schwimmt ein Eiswürfel im Wasser. In <b>B</b> liegt ein Eiswürfel auf einem Stein, der aus dem Wasser ragt (wie Eis an Land). <b>Sage vorher</b>, was nach dem Schmelzen mit dem Wasserstand passiert.</div>
+<div class="leiste"><span><b>Meine Vorhersage:</b></span><button type="button" class="sek" data-vh="a">nur A steigt</button><button type="button" class="sek" data-vh="b">nur B steigt</button><button type="button" class="sek" data-vh="ab">beide steigen</button><button type="button" class="sek" data-vh="n">keins steigt</button></div>
+<div class="regler"><div><label for="sm">Eis geschmolzen: <output id="smo"></output></label><input type="range" id="sm" min="0" max="100" step="1" value="0"></div></div>
+<svg id="gl" viewBox="0 0 700 380" role="img" aria-label="Zwei Gläser mit Wasser und Eis"></svg>
+<p id="gla" class="kasten" aria-live="polite"></p>
+<p class="quelle">Vereinfacht: Süßwasser, keine Verdunstung, kein Temperaturunterschied. Bei Salzwasser sinkt schwimmendes Eis beim Schmelzen minimal ein, der Effekt auf den Meeresspiegel ist sehr klein. Wasser aus Eis an Land erhöht den Meeresspiegel dagegen voll.</p>
+</section>
+
+<section id="p4" hidden>
+<p class="kasten warn"><b>Drittseiten:</b> Diese Karten laden Daten von fremden Servern. Die Links öffnen sich erst, wenn du sie anklickst, und werden vom Portal nicht eingebettet. Es gelten die Datenschutzregeln der Anbieter. Die Adressen sind aus der Erinnerung eingetragen und <b>nicht geprüft</b>. Prüfe sie vor dem Einsatz.</p>
+<ul class="karten">
+<li><a href="https://coastal.climatecentral.org/" rel="noopener noreferrer" target="_blank">Climate Central: Coastal Risk Screening Tool</a><p>Karte mit Überflutungsflächen bei verschiedenen Meeresspiegelhöhen weltweit (Anbieter außerhalb der EU). Nutzung durch die Lehrkraft am Beamer.</p></li>
+<li><a href="https://coast.noaa.gov/slr/" rel="noopener noreferrer" target="_blank">NOAA Sea Level Rise Viewer</a><p>Karte der US-Küsten mit Anstieg in Stufen. Regional (USA), nur englisch.</p></li>
+<li><a href="https://flood.firetree.net/" rel="noopener noreferrer" target="_blank">Flood Maps (Firetree)</a><p>Einfache Weltkarte, die Überflutung bei einem eingestellten Anstieg zeigt.</p></li></ul>
+<p><b>Aufgabe:</b> <b>Wähle</b> eine Küstenstadt, <b>stelle</b> 1 m, 3 m und 10 m ein, <b>beschreibe</b> die Veränderung und <b>vergleiche</b> sie mit dem Küstenschnitt oben. <b>Beurteile</b>, was das schematische Modell nicht zeigt (Strömung, Gezeiten, Schutzbauten, Landabsenkung).</p>
+<p class="quelle">Für eine Karte im Portal selbst bräuchte es ein Höhenmodell der Region (zum Beispiel Copernicus DEM, Lizenz vorab lesen), das ein Skript wie <code>tools/daten-holen.py</code> zuschneidet. Das ist noch nicht gebaut.</p>
+</section>
+<section id="p5" hidden>
+<div class="kasten"><b>Daten auswerten (Analysieren, Stufe F bis G):</b> Die Linie zeigt den globalen Meeresspiegel seit 1880: bis 1992 aus Gezeitenpegeln, ab 1993 zusätzlich aus <b>Satelliten</b> (Radarhöhenmessung). <b>Beschreibe</b> den Verlauf. <b>Bestimme</b> die Anstiegsgeschwindigkeit für zwei Zeiträume und <b>vergleiche</b> sie. <b>Zeichne</b> den Verlauf bis 2100 weiter und <b>beurteile</b>, wie sicher so eine Fortsetzung ist.</div>
+<p class="kasten" id="dq">Lade Daten …</p>
+<svg id="mz" viewBox="0 0 900 460" role="img" aria-label="Globaler Meeresspiegel seit 1880, Zahlen in der Tabelle unten" style="width:100%;height:auto;display:block;border:2px solid var(--g);border-radius:14px;background:#fff"></svg>
+<div class="regler"><div><label for="ra">Zeitraum von <output id="rao"></output></label><input type="range" id="ra" min="1880" max="2022" step="1" value="1993"></div>
+<div><label for="rb">bis <output id="rbo"></output></label><input type="range" id="rb" min="1881" max="2023" step="1" value="2023"></div>
+<div><label for="ar">Reihe</label><select id="ar"><option value="n">Satelliten (NOAA, ab 1993)</option><option value="c">Gezeitenpegel und Satelliten (CSIRO, bis 2013)</option></select></div></div>
+<p class="erg" id="rate" aria-live="polite"></p>
+<h3>Weiterzeichnen bis 2100</h3>
+<div class="regler"><div><label for="pr">Anstieg ab 2023: <output id="pro2"></output> mm pro Jahr</label><input type="range" id="pr" min="0" max="15" step="0.1" value="4"></div>
+<div><label for="pb">Beschleunigung: <output id="pbo"></output> mm pro Jahr, in jedem Jahrzehnt zusätzlich</label><input type="range" id="pb" min="0" max="2" step="0.05" value="0"></div></div>
+<p id="pw" class="kasten" aria-live="polite"></p><div class="leiste"><button type="button" id="pu">Anstieg bis 2100 in den Küstenschnitt übernehmen</button><button type="button" class="sek" id="pm">Satelliten-Rate einsetzen</button></div>
+<p class="quelle"><b>Daten:</b> <span id="dqq"></span> Die Reihe endet für Gezeitenpegel 2013 und für Satelliten 2023. Neuere Satellitenreihen (zum Beispiel NASA, Copernicus Marine) waren in dieser Umgebung nicht abrufbar. Die Zukunft ist <b>keine Vorhersage</b>: Eine Gerade oder Parabel ist nur eine Annahme.</p>
+<details><summary>Zahlen als Tabelle</summary><div class="tw" style="max-height:320px"><table><thead><tr><th>Jahr</th><th>Pegel und Satelliten (CSIRO), mm</th><th>Satelliten (NOAA), mm</th></tr></thead><tbody id="mtb"></tbody></table></div></details>
+</section>
+
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}var NS='http://www.w3.org/2000/svg';
+ function z(x,n){return String(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).replace('.',',')}
+ function tab(n){for(var i=1;i<=5;i++){$('p'+i).hidden=i!==n;$('t'+i).setAttribute('aria-selected',String(i===n));$('t'+i).className=i===n?'':'sek'}}
+ [1,2,3,4,5].forEach(function(i){$('t'+i).onclick=function(){tab(i)}});
+ /* ===== 1. Küstenschnitt ===== */
+ var W=900,N=181; /* Spalten im Abstand von 5 px */
+ var PR={
+  delta:{pts:[[0,-12],[150,-6],[260,0],[900,9]],r:false,h:[320,420,520,640,760],lab:'Flussdelta: sehr flach, das Land steigt über viele Kilometer nur wenige Meter an.'},
+  steil:{pts:[[0,-12],[250,-2],[330,0],[360,14],[420,26],[900,32]],r:false,h:[345,380,420,470,540],lab:'Steilküste: das Land steigt schnell an, es wird wenig Fläche überflutet.'},
+  polder:{pts:[[0,-12],[200,-3],[270,0],[300,7],[330,7],[360,-3],[420,-3],[500,-2.5],[900,-1.5]],r:false,h:[420,500,580,660,760],lab:'Küste mit Deich: das Land hinter dem Deich liegt unter dem Meeresspiegel und bleibt nur durch den Deich trocken.',deich:[300,330]},
+  atoll:{pts:[[0,-20],[250,-4],[330,0.4],[360,1.4],[540,1.6],[570,0.4],[650,-4],[900,-20]],r:true,h:[380,430,480,520],lab:'Flache Insel: nur etwa 1 bis 2 m über dem Meer, das Meer umgibt die Insel von beiden Seiten.'}};
+ function terr(p,dk){var P=PR[p],t=[];for(var i=0;i<N;i++){var x=i*5,h=0;for(var k=0;k<P.pts.length-1;k++){var a=P.pts[k],b=P.pts[k+1];if(x>=a[0]&&x<=b[0]){h=a[1]+(b[1]-a[1])*(x-a[0])/(b[0]-a[0]);break}}
+   if(P.deich&&x>=P.deich[0]&&x<=P.deich[1])h=Math.max(h,dk);t.push(h)}return t}
+ function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!==undefined)e.textContent=txt;$('sv').appendChild(e);return e}
+ function zeichnen(){var p=$('pro').value,P=PR[p],ms=+$('msp').value,sf=+$('sf').value,dk=+$('dk').value,lev=ms+sf;var T=terr(p,dk);
+  $('mo').textContent=z(ms,1)+' m';$('so').textContent=z(sf,1)+' m';$('do').textContent=z(dk,1)+' m';$('dk').parentNode.style.display=P.deich?'':'none';
+  var wet=new Array(N).fill(false),i;for(i=0;i<N&&T[i]<lev;i++)wet[i]=true;if(P.r)for(i=N-1;i>=0&&T[i]<lev;i--)wet[i]=true;
+  var sv=$('sv');sv.textContent='';var ink=getComputedStyle(document.body).color;var Y=function(h){return 330-h*8.6},top=Y(34);
+  /* Meer heute (0 m) als Linie, Wasserstand als Fläche */
+  var wp='M0 '+Y(lev)+' L0 440';for(i=0;i<N;i++){}
+  var wd='';for(i=0;i<N;i++){if(wet[i]){wd+='M'+(i*5)+' '+Y(lev)+'L'+(i*5+5)+' '+Y(lev)+'L'+(i*5+5)+' '+Y(Math.min(T[i],lev))+'L'+(i*5)+' '+Y(Math.min(T[i],lev))+'Z'}}
+  el('path',{d:wd,fill:'#2f7fc1','fill-opacity':.85});
+  var ground='M0 440';for(i=0;i<N;i++)ground+=' L'+(i*5)+' '+Y(T[i]);ground+=' L900 440Z';el('path',{d:ground,fill:'#b79a68',stroke:'#6a5530','stroke-width':2});
+  el('line',{x1:0,x2:900,y1:Y(0),y2:Y(0),stroke:ink,'stroke-dasharray':'6 6','stroke-opacity':.55});el('text',{x:8,y:Y(0)-6,'font-size':14,fill:ink},'Meeresspiegel heute (0 m)');
+  if(lev>0.05)el('line',{x1:0,x2:900,y1:Y(lev),y2:Y(lev),stroke:'#0b4f7a','stroke-width':2.5});
+  if(lev>0.05)el('text',{x:892,y:Y(lev)-6,'font-size':15,'text-anchor':'end','font-weight':700,fill:'#0b4f7a'},'Wasserstand +'+z(lev,1)+' m');
+  var tot=0,nass=0;P.h.forEach(function(x){var idx=Math.round(x/5),h=T[idx],bx=idx*5,fl=wet[idx];tot++;if(fl)nass++;var y=Y(h);
+   el('rect',{x:bx-11,y:y-18,width:22,height:18,fill:fl?'#8a5a44':'#e8e0d0',stroke:'#333','stroke-width':1.5});el('path',{d:'M'+(bx-13)+' '+(y-18)+'L'+bx+' '+(y-30)+'L'+(bx+13)+' '+(y-18)+'Z',fill:fl?'#6b3a2a':'#c0392b',stroke:'#333','stroke-width':1.5})});
+  for(var m=0;m<=30;m+=5)el('text',{x:892,y:Y(m)+5,'font-size':12,'text-anchor':'end',fill:ink,'fill-opacity':.6},m===0?'':m+' m');
+  var land=0,flut=0;for(i=0;i<N;i++){if(T[i]>=0)land++;if(T[i]>=0&&wet[i])flut++}
+  $('auss').innerHTML='<b>'+P.lab+'</b><br>Bei einem Wasserstand von +'+z(lev,1)+' m stehen <b>'+nass+' von '+tot+' Häusern</b> im Wasser. Etwa <b>'+(land?Math.round(flut/land*100):0)+' %</b> der gezeichneten Landfläche sind überflutet.'+(P.deich?(lev>dk?' <b>Das Wasser ist über den Deich gelaufen.</b>':' Der Deich hält, das Land dahinter bleibt trocken.'):'')}
+ ['pro','msp','sf','dk'].forEach(function(i){$(i).oninput=$(i).onchange=zeichnen});
+ [].forEach.call(document.querySelectorAll('[data-sz]'),function(b){b.onclick=function(){$('msp').value=b.dataset.sz;zeichnen()}});
+ /* ===== 2. Beiträge ===== */
+ var Q=[['Gebirgsgletscher',0.3,'etwa 0,3 m'],['Grönland (Eisschild)',7.4,'etwa 7 m'],['Westantarktis',4,'etwa 3 bis 5 m, hier 4 m'],['Ostantarktis',53,'etwa 50 m und mehr'],['Meereis, Schelfeis (schwimmt)',0,'0 m (schwimmt bereits im Wasser)']],pc=[0,0,0,0,0];
+ function bau(){$('tb').innerHTML='';Q.forEach(function(q,i){var tr=document.createElement('tr');var a=document.createElement('td');a.textContent=q[0];var b=document.createElement('td');b.innerHTML=q[2]+' <span class="tag">ungeprüft</span>';var c=document.createElement('td');var r=document.createElement('input');r.type='range';r.min=0;r.max=100;r.value=0;r.step=1;r.setAttribute('aria-label','Anteil geschmolzen: '+q[0]);var o=document.createElement('output');o.textContent='0 %';c.appendChild(r);c.appendChild(o);var d=document.createElement('td');d.id='bt'+i;
+   r.oninput=function(){pc[i]=+r.value;o.textContent=r.value+' %';rech()};tr.appendChild(a);tr.appendChild(b);tr.appendChild(c);tr.appendChild(d);$('tb').appendChild(tr)})}
+ function rech(){var s=0;Q.forEach(function(q,i){var b=q[1]*pc[i]/100;s+=b;$('bt'+i).textContent=z(b,2)+' m'});var wa=+$('wa').value;$('wo').textContent=z(wa,1)+' Kelvin';var exp=0.14*wa;s+=exp;window.__ges=s;$('gs').textContent=z(s,2)+' m (davon Wärmeausdehnung '+z(exp,2)+' m)'}
+ $('wa').oninput=rech;$('uebernehmen').onclick=function(){var g=Math.min(10,window.__ges||0);$('msp').value=g;zeichnen();tab(1);if((window.__ges||0)>10)$('auss').textContent='Hinweis: Der Anstieg ist größer als 10 m, der Regler endet bei 10 m. '+$('auss').textContent};
+ bau();rech();
+ /* ===== 3. Glasversuch ===== */
+ var vh=null;function el2(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);$('gl').appendChild(e);return e}
+ function glas(){var f=+$('sm').value/100;$('smo').textContent=Math.round(f*100)+' %';var g=$('gl');g.textContent='';var ink=getComputedStyle(document.body).color;
+  var base=300,y0=200,rise=f*34;/*Anstieg in B in px*/
+  [[40,'A: Eis schwimmt'],[400,'B: Eis auf dem Stein']].forEach(function(gg,k){var x=gg[0];var lvl=k===0?y0:y0-rise;
+   el2('rect',{x:x,y:lvl,width:260,height:base-lvl,fill:'#4aa3df','fill-opacity':.8});
+   if(k===1){el2('rect',{x:x+80,y:y0-22,width:100,height:base-y0+22,rx:8,fill:'#8b8b8b',stroke:'#444','stroke-width':2});
+    var ih=Math.max(0,38*(1-f));el2('rect',{x:x+95,y:y0-22-ih,width:70,height:ih,fill:'#dff3ff',stroke:'#7aaed0','stroke-width':2})}
+   else{var ih2=Math.max(0,44*(1-f));el2('rect',{x:x+85,y:y0-ih2*0.18,width:90,height:ih2,rx:4,fill:'#dff3ff',stroke:'#7aaed0','stroke-width':2,'fill-opacity':.95})}
+   el2('path',{d:'M'+x+' 90 L'+x+' '+base+' L'+(x+260)+' '+base+' L'+(x+260)+' 90',fill:'none',stroke:ink,'stroke-width':4,'stroke-linejoin':'round'});
+   el2('line',{x1:x-10,x2:x+270,y1:y0,y2:y0,stroke:ink,'stroke-dasharray':'6 6','stroke-opacity':.6});
+   var t=document.createElementNS(NS,'text');t.setAttribute('x',x+130);t.setAttribute('y',345);t.setAttribute('text-anchor','middle');t.setAttribute('font-size',18);t.setAttribute('font-weight',700);t.setAttribute('fill',ink);t.textContent=gg[1];g.appendChild(t)});
+  var t2=document.createElementNS(NS,'text');t2.setAttribute('x',350);t2.setAttribute('y',60);t2.setAttribute('text-anchor','middle');t2.setAttribute('font-size',16);t2.setAttribute('fill',ink);t2.textContent='gestrichelt: Wasserstand am Anfang';g.appendChild(t2);
+  var s=$('gla');if(f<1){s.textContent='Schiebe den Regler und beobachte beide Wasserstände.'}else{
+   var richtig='Ergebnis: In A bleibt der Wasserstand gleich, in B steigt er. Schwimmendes Eis verdrängt schon so viel Wasser, wie es als Schmelzwasser hat. Eis an Land kommt neu ins Wasser.';
+   var tipp=vh?(vh==='b'?' Deine Vorhersage stimmt.':' Deine Vorhersage war anders: Vergleiche sie mit dem Ergebnis.'):' Du hast keine Vorhersage gewählt.';s.textContent=richtig+tipp}}
+ [].forEach.call(document.querySelectorAll('[data-vh]'),function(b){b.onclick=function(){vh=b.dataset.vh;[].forEach.call(document.querySelectorAll('[data-vh]'),function(x){x.classList.toggle('on',x===b)});glas()}});
+ $('sm').oninput=glas;
+ zeichnen();glas();
+
+ /* ===== 5. Gemessene Reihe ===== */
+ var MD=null;
+ function ols(pts){var n=pts.length;if(n<3)return null;var sx=0,sy=0,sxx=0,sxy=0;pts.forEach(function(p){sx+=p[0];sy+=p[1];sxx+=p[0]*p[0];sxy+=p[0]*p[1]});var d=n*sxx-sx*sx;if(!d)return null;var b=(n*sxy-sx*sy)/d;return{b:b,a:(sy-b*sx)/n}}
+ function elm(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!==undefined)e.textContent=txt;$('mz').appendChild(e);return e}
+ function mzeichnen(){if(!MD)return;var sv=$('mz');sv.textContent='';var ink=getComputedStyle(document.body).color,R=MD.reihe;
+  var a=+$('ra').value,b=+$('rb').value;if(b<=a+1){b=a+2;$('rb').value=b}$('rao').textContent=a;$('rbo').textContent=b;var ser=$('ar').value==='n'?4:1;
+  var pts=R.filter(function(r){return r[ser]!==null&&r[0]>=a&&r[0]<=b}).map(function(r){return [r[0],r[ser]]});var f=ols(pts);
+  $('rate').textContent=f?z(f.b,1)+' mm pro Jahr ('+pts.length+' Jahre mit Daten, etwa '+z(f.b*10,0)+' mm in 10 Jahren)':'Zu wenig Jahre mit Daten in diesem Zeitraum und dieser Reihe.';
+  var last=R.filter(function(r){return r[4]!==null}).slice(-1)[0],h0=last[4],r0=+$('pr').value,ac=+$('pb').value/10;$('pro2').textContent=z(r0,1);$('pbo').textContent=z(+$('pb').value,2);
+  var h2100=h0+r0*77+0.5*ac*77*77,zu=h2100-h0;window.__pz=zu/1000;
+  $('pw').innerHTML='Mit diesen Annahmen steigt der Meeresspiegel von 2023 bis 2100 um <b>'+z(zu/1000,2)+' m</b> ('+z(zu,0)+' mm). Zum Vergleich: Von 1993 bis 2023 stieg er laut NOAA-Satellitenreihe um '+z(h0-R.filter(function(r){return r[4]!==null})[0][4],0)+' mm.';
+  var L=70,Rr=860,T=20,B=400,X=function(y){return L+(y-1880)/(2100-1880)*(Rr-L)},ymin=-40,ymax=Math.max(500,Math.ceil((h2100+20)/100)*100),Y=function(v){return B-(v-ymin)/(ymax-ymin)*(B-T)};
+  for(var v=0;v<=ymax;v+=100){elm('line',{x1:L,x2:Rr,y1:Y(v),y2:Y(v),stroke:ink,'stroke-opacity':.15});elm('text',{x:L-8,y:Y(v)+5,'text-anchor':'end','font-size':13,fill:ink},v)}
+  for(var y=1880;y<=2100;y+=20){elm('text',{x:X(y),y:B+22,'text-anchor':'middle','font-size':13,fill:ink},y)}
+  elm('text',{x:20,y:210,'font-size':14,fill:ink,'text-anchor':'middle',transform:'rotate(-90 20 210)'},'Meeresspiegel in mm (Nullpunkt 1880)');
+  var band=R.filter(function(r){return r[1]!==null});if(band.length){var d='M'+band.map(function(r){return X(r[0])+' '+Y(r[3])}).join('L')+'L'+band.slice().reverse().map(function(r){return X(r[0])+' '+Y(r[2])}).join('L')+'Z';elm('path',{d:d,fill:'#2f7fc1','fill-opacity':.2})}
+  elm('polyline',{points:band.map(function(r){return X(r[0])+','+Y(r[1])}).join(' '),fill:'none',stroke:'#1f5f94','stroke-width':3});
+  var sat=R.filter(function(r){return r[4]!==null});elm('polyline',{points:sat.map(function(r){return X(r[0])+','+Y(r[4])}).join(' '),fill:'none',stroke:'#e67e22','stroke-width':4});
+  var fp=[];for(var yy=2023;yy<=2100;yy+=1){var t=yy-2023;fp.push(X(yy)+','+Y(h0+r0*t+0.5*ac*t*t))}elm('polyline',{points:fp.join(' '),fill:'none',stroke:'#c0392b','stroke-width':3.5,'stroke-dasharray':'8 6'});
+  if(f){var x1=Math.max(a,pts[0][0]),x2=Math.min(b,pts[pts.length-1][0]);elm('line',{x1:X(x1),x2:X(x2),y1:Y(f.a+f.b*x1),y2:Y(f.a+f.b*x2),stroke:ink,'stroke-width':2.5,'stroke-opacity':.8})}
+  elm('rect',{x:L+10,y:T+6,width:14,height:5,fill:'#1f5f94'});elm('text',{x:L+30,y:T+13,'font-size':13,fill:ink},'Pegel und Satelliten (CSIRO)');elm('rect',{x:L+10,y:T+24,width:14,height:5,fill:'#e67e22'});elm('text',{x:L+30,y:T+31,'font-size':13,fill:ink},'Satelliten (NOAA)');elm('rect',{x:L+10,y:T+42,width:14,height:5,fill:'#c0392b'});elm('text',{x:L+30,y:T+49,'font-size':13,fill:ink},'Weiterzeichnen (Annahme)');}
+ ['ra','rb','ar','pr','pb'].forEach(function(i){$(i).oninput=$(i).onchange=mzeichnen});
+ $('pu').onclick=function(){$('msp').value=Math.min(10,Math.max(0,window.__pz||0));zeichnen();tab(1)};
+ $('pm').onclick=function(){var R=MD.reihe.filter(function(r){return r[4]!==null}).map(function(r){return [r[0],r[4]]}),f=ols(R);if(f){$('pr').value=Math.max(0,Math.min(15,Math.round(f.b*10)/10));mzeichnen()}};
+ fetch('../../daten/meeresspiegel.json').then(function(r){return r.json()}).then(function(d){MD=d;$('dq').textContent='Echte Messdaten, im Portal gespeichert (Abruf '+d.abruf+').';$('dqq').textContent=d.quelle+'.';
+  $('mtb').innerHTML=d.reihe.filter(function(r,i){return r[0]%5===0||r[0]>=2010}).map(function(r){return '<tr><td>'+r[0]+'</td><td>'+(r[1]===null?'–':z(r[1],0))+'</td><td>'+(r[4]===null?'–':z(r[4],0))+'</td></tr>'}).join('');mzeichnen()}).catch(function(){$('dq').textContent='Die Messdaten konnten nicht geladen werden (Seite über einen Server öffnen).'});
+})();
+</script></main></body></html>
