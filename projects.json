@@ -795,8 +795,8 @@
     "sichtbar": true
   },
   {
-    "title": "Gruppen losen",
-    "description": "Zufallsgenerator für Gruppen: Namen oder Nummern eingeben, Gruppenzahl oder Gruppengröße wählen, optional Sprecher/in losen. Nichts wird gespeichert oder gesendet.",
+    "title": "Gruppen losen mit Sitzplan",
+    "description": "Zufallsgenerator für Gruppen mit Sitzplan: Plätze und Nummern frei einstellen, Gruppen losen, Gruppennummer am Platz ablesen. Nichts wird gesendet.",
     "type": "Interaktive Übung",
     "path": "interaktiv/gruppen/",
     "subject": "Interaktiv",
