@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../assets/favicon/apple-touch-icon.png">
+<title>Gruppen losen – Lernportal</title>
+<meta name="description" content="Zufallsgenerator für Gruppen mit Sitzplan: Plätze und Nummern frei einstellen, Gruppen losen, Gruppennummer am Platz ablesen. Nichts wird gesendet.">
+<style>
+@font-face{font-family:Andika;src:url(../../assets/fonts/andika-regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Andika;src:url(../../assets/fonts/andika-bold.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{--g:#2F6F5E;--dk:#1F4F42;--mint:#EAF2EF;--grey:#5B6A63;--ink:#1A2B24;--y:#F4B400;--line:#cfd5d2}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font-family:Andika,Verdana,sans-serif;font-size:19px;line-height:1.45;text-align:left;padding-bottom:env(safe-area-inset-bottom);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+header{background:var(--dk);color:#fff;padding:max(14px,env(safe-area-inset-top)) 16px 16px}
+header p{margin:0;font-size:15px;opacity:.9}
+header h1{margin:2px 0 0;font-size:26px;line-height:1.2}
+main{max-width:62rem;margin:0 auto;padding:14px 16px 40px}
+.feld{border:3px solid var(--g);border-radius:16px;padding:12px 14px;margin:0 0 14px;background:#fff}
+.feld h2{margin:0 0 6px;font-size:20px}
+.hint{font-size:15px;color:var(--grey);margin:6px 0 0}
+button,select{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.b{min-height:52px;border:0;border-radius:14px;background:var(--g);color:#fff;font-weight:700;font-size:19px;padding:0 18px}
+.b.sec{background:var(--grey)}
+.b.gross{width:100%;min-height:68px;font-size:24px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row>.b{flex:1;min-width:8em}
+.modus{display:flex;gap:8px;margin:0 0 10px}
+.modus button{flex:1;min-height:50px;border:3px solid var(--ink);border-radius:14px;background:#fff;color:var(--ink);font-weight:700;font-size:17px}
+.modus button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.stepper{display:flex;align-items:stretch;gap:8px}
+.stepper button{width:52px;min-height:52px;border:3px solid var(--ink);border-radius:14px;background:#fff;font-size:28px;font-weight:700;color:var(--ink)}
+.stepper input,input.txt,select{font:700 24px Andika,Verdana,sans-serif;border:3px solid var(--ink);border-radius:14px;min-height:52px;color:var(--ink);background:#fff;text-align:center;-moz-appearance:textfield}
+.stepper input{width:4em}
+input.txt{width:9em;text-align:left;font-size:19px;padding:0 10px}
+select{font-size:18px;padding:0 8px;text-align:left}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.maße{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 10px}
+.maße label{display:block;font-size:15px;color:var(--grey);margin:0 0 4px}
+label.opt{display:flex;align-items:center;gap:10px;min-height:44px;font-size:18px;margin:6px 0 0}
+label.opt input{width:26px;height:26px;accent-color:var(--g)}
+.status{min-height:1.6em;margin:8px 0 0;font-size:17px;color:var(--grey)}
+.status.fehler{color:#9B1C1C;font-weight:700}
+.tafel{margin:0 auto 8px;max-width:30rem;text-align:center;background:var(--ink);color:#fff;border-radius:8px;font-size:15px;padding:3px 0;letter-spacing:.08em}
+.plan{display:grid;gap:6px;margin:0 auto 10px;max-width:56rem}
+.platz{aspect-ratio:1/.82;min-height:44px;border:3px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;font-size:22px;line-height:1.05;padding:0}
+.platz.gang{border:2px dashed var(--line);background:transparent;color:transparent}
+.platz.wahl{outline:4px solid var(--y);outline-offset:1px}
+.plan.erg .platz{cursor:default;aspect-ratio:1/.9}
+.platz .gr{font-size:min(7vw,38px)}
+.platz .nr{font-size:14px;font-weight:400;opacity:.85}
+.platz.sp{border-width:5px}
+.platz.sp .nr::after{content:" ★"}
+.legende{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.legende span{border:2px solid var(--ink);border-radius:10px;padding:4px 10px;font-size:17px}
+.gruppe{border-radius:10px}
+[hidden]{display:none!important}
+.g1{background:#F6D7D7}.g2{background:#D7E6F6}.g3{background:#DDF0D2}.g4{background:#F9EBB8}.g5{background:#E6D9F3}.g6{background:#CFEFEA}.g7{background:#FADDC4}.g8{background:#E1E1E1}.g9{background:#F3D3E6}.g10{background:#D5E8C0}
+@media (max-width:30rem){.platz{font-size:18px;border-width:2px;border-radius:8px}.plan{gap:4px}.stepper button{width:46px}}
+@media print{header,.feld,.aktionen,#los,.status,.hint,.tafel+.plan:not(.erg){display:none}.platz{border-width:2px}}
+</style>
+</head>
+<body>
+<header>
+  <p>Werkzeug für den Unterricht</p>
+  <h1>Gruppen losen – mit Sitzplan</h1>
+</header>
+<main>
+  <section class="feld" aria-labelledby="h-plan">
+    <h2 id="h-plan">1 · Sitzplan einstellen</h2>
+    <div class="maße">
+      <div><label for="r-n">Reihen</label><div class="stepper"><button type="button" id="r-minus" aria-label="eine Reihe weniger">−</button><input id="r-n" type="number" inputmode="numeric" min="1" max="8" value="4"><button type="button" id="r-plus" aria-label="eine Reihe mehr">+</button></div></div>
+      <div><label for="c-n">Plätze pro Reihe</label><div class="stepper"><button type="button" id="c-minus" aria-label="einen Platz weniger pro Reihe">−</button><input id="c-n" type="number" inputmode="numeric" min="1" max="10" value="6"><button type="button" id="c-plus" aria-label="einen Platz mehr pro Reihe">+</button></div></div>
+    </div>
+    <div class="modus" role="group" aria-label="Bearbeitungsart">
+      <button type="button" id="b-platz" aria-pressed="true">Platz oder Gang</button>
+      <button type="button" id="b-tausch" aria-pressed="false">Nummern tauschen</button>
+    </div>
+    <p class="hint" id="b-hilfe" style="margin:0 0 8px">Tippe ein Feld an: Platz entfernen (Gang) oder wieder setzen.</p>
+    <div class="tafel">TAFEL (vorne)</div>
+    <div class="plan" id="plan" role="group" aria-label="Sitzplan bearbeiten"></div>
+    <p class="hint" id="p-info"></p>
+    <div class="row" style="margin-top:8px">
+      <button type="button" class="b sec" id="renum">Neu nummerieren</button>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <input class="txt" id="pname" type="text" maxlength="24" placeholder="Klasse, z. B. 7a" aria-label="Name für den Plan" autocomplete="off">
+      <button type="button" class="b sec" id="speichern" style="flex:none">Speichern</button>
+      <select id="laden" aria-label="Gespeicherten Plan laden"><option value="">Plan laden …</option></select>
+      <button type="button" class="b sec" id="loeschen" style="flex:none">Löschen</button>
+    </div>
+    <p class="hint">Gespeichert werden nur Raster und Nummern in diesem Browser, keine Namen.</p>
+  </section>
+
+  <section class="feld" aria-labelledby="h-wie">
+    <h2 id="h-wie">2 · Wie wird eingeteilt?</h2>
+    <div class="modus" role="group" aria-label="Einteilungsart">
+      <button type="button" id="e-anz" aria-pressed="true">Anzahl der Gruppen</button>
+      <button type="button" id="e-gr" aria-pressed="false">Größe der Gruppen</button>
+    </div>
+    <div class="stepper"><button type="button" id="g-minus" aria-label="weniger">−</button><input id="g-n" type="number" inputmode="numeric" min="2" max="30" value="4" aria-label="Wert"><button type="button" id="g-plus" aria-label="mehr">+</button></div>
+    <p class="hint" id="g-info"></p>
+    <div class="modus" role="group" aria-label="Verteilung" style="margin-top:10px">
+      <button type="button" id="v-zufall" aria-pressed="true">Zufällig mischen</button>
+      <button type="button" id="v-nachbar" aria-pressed="false">Sitznachbarn zusammen</button>
+    </div>
+    <label class="opt"><input type="checkbox" id="sprecher">In jeder Gruppe eine Sprecher-Nummer losen (★)</label>
+  </section>
+
+  <button type="button" class="b gross" id="los">Gruppen losen</button>
+  <p class="status" id="status" role="status" aria-live="polite"></p>
+
+  <section id="ergebnis" hidden aria-labelledby="h-erg">
+    <h2 id="h-erg" style="font-size:22px;margin:12px 0 8px">Ergebnis am Sitzplan</h2>
+    <p class="hint" style="margin:0 0 8px">Große Zahl = Gruppe, kleine Zahl = Platznummer.</p>
+    <div class="tafel">TAFEL (vorne)</div>
+    <div class="plan erg" id="planerg" role="group" aria-label="Sitzplan mit Gruppen"></div>
+    <div class="legende" id="legende"></div>
+    <div class="row aktionen">
+      <button type="button" class="b sec" id="neu">Neu mischen</button>
+      <button type="button" class="b sec" id="kopie">Als Text kopieren</button>
+      <button type="button" class="b sec" id="druck">Drucken</button>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var rows = 4, cols = 6, seats = [], wahl = -1, bearb = "platz", einteilung = "anz", verteilung = "zufall";
+  var SPEICHER = "lp-gruppen-plaene";
+
+  function zufall(n) {
+    var c = window.crypto || window.msCrypto;
+    if (!c || !c.getRandomValues) return Math.floor(Math.random() * n);
+    var grenze = Math.floor(4294967296 / n) * n, x = new Uint32Array(1);
+    do { c.getRandomValues(x); } while (x[0] >= grenze);
+    return x[0] % n;
+  }
+  function mischen(liste) {
+    var a = liste.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = zufall(i + 1), t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function begrenzen(el, min, max) { var v = parseInt(el.value, 10); if (isNaN(v)) v = min; v = Math.max(min, Math.min(max, v)); el.value = v; return v; }
+  function setze(a, b, an) { a.setAttribute("aria-pressed", an ? "true" : "false"); b.setAttribute("aria-pressed", an ? "false" : "true"); }
+
+  /* ---------- Sitzplan: seats[i] = Nummer oder null (Gang), Reihenfolge zeilenweise ---------- */
+  function neuNummerieren() {
+    var n = 0;
+    seats = seats.map(function (x) { return x === null ? null : ++n; });
+  }
+  function initPlan() { seats = []; for (var i = 0; i < rows * cols; i++) seats.push(0); neuNummerieren(); }
+  function kleinsteFreie() {
+    var benutzt = {}; seats.forEach(function (x) { if (x) benutzt[x] = 1; });
+    var n = 1; while (benutzt[n]) n++; return n;
+  }
+  function groesse(r, c) {
+    var neu = [];
+    for (var i = 0; i < r; i++) for (var j = 0; j < c; j++) neu.push(i < rows && j < cols ? seats[i * cols + j] : null);
+    /* neu hinzugekommene Felder werden Plätze mit freier Nummer */
+    var alt = seats; seats = neu;
+    for (var k = 0; k < seats.length; k++) {
+      var i2 = Math.floor(k / c), j2 = k % c;
+      if (!(i2 < rows && j2 < cols)) seats[k] = kleinsteFreie();
+    }
+    rows = r; cols = c; wahl = -1;
+  }
+  function zeichnePlan(box, ergebnis) {
+    box.textContent = "";
+    box.style.gridTemplateColumns = "repeat(" + cols + ",1fr)";
+    seats.forEach(function (nr, i) {
+      var b = document.createElement(ergebnis ? "div" : "button");
+      b.className = "platz";
+      if (!ergebnis) b.type = "button";
+      if (nr === null) {
+        b.className += " gang";
+        if (!ergebnis) b.setAttribute("aria-label", "Gang, antippen setzt einen Platz");
+        else b.setAttribute("aria-hidden", "true");
+      } else if (ergebnis) {
+        var g = gruppeVon[nr];
+        b.className += " g" + (((g - 1) % 10) + 1);
+        if (sprecherVon[g] === nr) b.className += " sp";
+        var gr = document.createElement("span"); gr.className = "gr"; gr.textContent = g;
+        var n = document.createElement("span"); n.className = "nr"; n.textContent = nr;
+        b.appendChild(gr); b.appendChild(n);
+        b.setAttribute("aria-label", "Platz " + nr + ", Gruppe " + g + (sprecherVon[g] === nr ? ", Sprecher" : ""));
+      } else {
+        b.textContent = nr;
+        if (i === wahl) b.className += " wahl";
+        b.setAttribute("aria-label", "Platz " + nr + (bearb === "platz" ? ", antippen entfernt den Platz" : ", antippen zum Tauschen"));
+      }
+      if (!ergebnis) b.onclick = function () { tippen(i); };
+      box.appendChild(b);
+    });
+  }
+  function tippen(i) {
+    if (bearb === "platz") {
+      seats[i] = seats[i] === null ? kleinsteFreie() : null;
+    } else {
+      if (seats[i] === null) return;
+      if (wahl < 0) wahl = i;
+      else if (wahl === i) wahl = -1;
+      else { var t = seats[wahl]; seats[wahl] = seats[i]; seats[i] = t; wahl = -1; }
+    }
+    plan(); ergebnisWeg();
+  }
+  function plan() { zeichnePlan($("plan"), false); info(); }
+  function anzahl() { return seats.filter(function (x) { return x !== null; }).length; }
+
+  /* ---------- Einteilung ---------- */
+  function anzahlGruppen(n) {
+    var w = Math.max(2, parseInt($("g-n").value, 10) || 2);
+    return einteilung === "anz" ? Math.min(w, Math.max(1, n)) : Math.max(1, Math.ceil(n / w));
+  }
+  function info() {
+    var n = anzahl();
+    $("p-info").textContent = n + (n === 1 ? " Platz" : " Plätze") + " (Nummern " + (n ? "1 bis " + Math.max.apply(null, seats.filter(Boolean)) : "–") + ")";
+    if (n < 2) { $("g-info").textContent = ""; return; }
+    var k = anzahlGruppen(n), klein = Math.floor(n / k), gross = Math.ceil(n / k);
+    $("g-info").textContent = k + (k === 1 ? " Gruppe" : " Gruppen") + " mit " + (klein === gross ? klein : klein + " bis " + gross) + " Plätzen";
+  }
+
+  var gruppeVon = {}, sprecherVon = {}, gruppenListe = [];
+  function losen() {
+    var st = $("status"); st.className = "status";
+    var nummern = seats.filter(function (x) { return x !== null; });
+    if (nummern.length < 2) { st.className = "status fehler"; st.textContent = "Der Sitzplan braucht mindestens 2 Plätze."; return; }
+    var k = anzahlGruppen(nummern.length), gr = [], i;
+    for (i = 0; i < k; i++) gr.push([]);
+    if (verteilung === "zufall") {
+      mischen(nummern).forEach(function (n, j) { gr[j % k].push(n); });
+    } else {                                                  /* Nachbarn: Lesereihenfolge in k gleich große Blöcke */
+      var basis = Math.floor(nummern.length / k), rest = nummern.length % k, pos = 0;
+      for (i = 0; i < k; i++) { var len = basis + (i < rest ? 1 : 0); gr[i] = nummern.slice(pos, pos + len); pos += len; }
+    }
+    gruppeVon = {}; sprecherVon = {};
+    gruppenListe = gr.map(function (g, gi) {
+      g.sort(function (a, b) { return a - b; });
+      g.forEach(function (n) { gruppeVon[n] = gi + 1; });
+      if ($("sprecher").checked) sprecherVon[gi + 1] = g[zufall(g.length)];
+      return g;
+    });
+    zeichnePlan($("planerg"), true);
+    var leg = $("legende"); leg.textContent = "";
+    gruppenListe.forEach(function (g, gi) {
+      var s = document.createElement("span"); s.className = "g" + ((gi % 10) + 1);
+      s.textContent = "Gruppe " + (gi + 1) + ": " + g.map(function (n) { return sprecherVon[gi + 1] === n ? n + " ★" : n; }).join(", ");
+      leg.appendChild(s);
+    });
+    $("ergebnis").hidden = false;
+    $("ergebnis").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function ergebnisWeg() { $("ergebnis").hidden = true; $("status").textContent = ""; }
+  function alsText() {
+    return gruppenListe.map(function (g, gi) {
+      return "Gruppe " + (gi + 1) + ": " + g.map(function (n) { return sprecherVon[gi + 1] === n ? n + " (Sprecher)" : n; }).join(", ");
+    }).join("\n");
+  }
+
+  /* ---------- Speichern (nur Raster und Nummern) ---------- */
+  function lesen() { try { return JSON.parse(localStorage.getItem(SPEICHER)) || {}; } catch (e) { return {}; } }
+  function schreiben(o) { try { localStorage.setItem(SPEICHER, JSON.stringify(o)); return true; } catch (e) { return false; } }
+  function listeFuellen(auswahl) {
+    var sel = $("laden"), o = lesen();
+    sel.textContent = "";
+    var p = document.createElement("option"); p.value = ""; p.textContent = "Plan laden …"; sel.appendChild(p);
+    Object.keys(o).sort().forEach(function (k) { var op = document.createElement("option"); op.value = k; op.textContent = k; sel.appendChild(op); });
+    if (auswahl) sel.value = auswahl;
+  }
+  function meldung(t, fehler) { var st = $("status"); st.className = "status" + (fehler ? " fehler" : ""); st.textContent = t; }
+
+  /* ---------- Bedienung ---------- */
+  $("r-minus").onclick = function () { groesse(begrenzen({ value: rows - 1 }, 1, 8), cols); $("r-n").value = rows; plan(); ergebnisWeg(); };
+  $("r-plus").onclick = function () { groesse(begrenzen({ value: rows + 1 }, 1, 8), cols); $("r-n").value = rows; plan(); ergebnisWeg(); };
+  $("c-minus").onclick = function () { groesse(rows, begrenzen({ value: cols - 1 }, 1, 10)); $("c-n").value = cols; plan(); ergebnisWeg(); };
+  $("c-plus").onclick = function () { groesse(rows, begrenzen({ value: cols + 1 }, 1, 10)); $("c-n").value = cols; plan(); ergebnisWeg(); };
+  $("r-n").addEventListener("change", function () { groesse(begrenzen($("r-n"), 1, 8), cols); plan(); ergebnisWeg(); });
+  $("c-n").addEventListener("change", function () { groesse(rows, begrenzen($("c-n"), 1, 10)); plan(); ergebnisWeg(); });
+  $("b-platz").onclick = function () { bearb = "platz"; wahl = -1; setze($("b-platz"), $("b-tausch"), true); $("b-hilfe").textContent = "Tippe ein Feld an: Platz entfernen (Gang) oder wieder setzen."; plan(); };
+  $("b-tausch").onclick = function () { bearb = "tausch"; wahl = -1; setze($("b-platz"), $("b-tausch"), false); $("b-hilfe").textContent = "Tippe zwei Plätze nacheinander an: Ihre Nummern werden getauscht."; plan(); };
+  $("renum").onclick = function () { neuNummerieren(); wahl = -1; plan(); ergebnisWeg(); };
+  $("e-anz").onclick = function () { einteilung = "anz"; setze($("e-anz"), $("e-gr"), true); info(); };
+  $("e-gr").onclick = function () { einteilung = "gr"; setze($("e-anz"), $("e-gr"), false); info(); };
+  $("v-zufall").onclick = function () { verteilung = "zufall"; setze($("v-zufall"), $("v-nachbar"), true); };
+  $("v-nachbar").onclick = function () { verteilung = "nachbar"; setze($("v-zufall"), $("v-nachbar"), false); };
+  $("g-n").addEventListener("input", info);
+  $("g-n").addEventListener("change", function () { begrenzen($("g-n"), 2, 30); info(); });
+  $("g-minus").onclick = function () { $("g-n").value = (parseInt($("g-n").value, 10) || 2) - 1; begrenzen($("g-n"), 2, 30); info(); };
+  $("g-plus").onclick = function () { $("g-n").value = (parseInt($("g-n").value, 10) || 2) + 1; begrenzen($("g-n"), 2, 30); info(); };
+  $("los").onclick = losen; $("neu").onclick = losen;
+  $("druck").onclick = function () { window.print(); };
+  $("kopie").onclick = function () {
+    var t = alsText();
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function () { meldung("Kopiert."); }, function () { meldung("Kopieren ging nicht.", true); });
+    else meldung("Kopieren ging nicht.", true);
+  };
+  $("speichern").onclick = function () {
+    var name = $("pname").value.trim();
+    if (!name) { meldung("Gib dem Plan einen Namen, zum Beispiel 7a.", true); return; }
+    var o = lesen(); o[name] = { rows: rows, cols: cols, seats: seats };
+    if (schreiben(o)) { listeFuellen(name); meldung("Plan „" + name + "“ gespeichert."); } else meldung("Speichern ging nicht (Browser blockiert den Speicher).", true);
+  };
+  $("laden").onchange = function () {
+    var k = $("laden").value; if (!k) return;
+    var p = lesen()[k];
+    if (!p || !Array.isArray(p.seats) || p.seats.length !== p.rows * p.cols) { meldung("Dieser Plan ist beschädigt.", true); return; }
+    rows = p.rows; cols = p.cols; seats = p.seats.map(function (x) { return x === null ? null : (parseInt(x, 10) || null); });
+    $("r-n").value = rows; $("c-n").value = cols; $("pname").value = k; wahl = -1; plan(); ergebnisWeg(); meldung("Plan „" + k + "“ geladen.");
+  };
+  $("loeschen").onclick = function () {
+    var k = $("laden").value; if (!k) { meldung("Wähle zuerst einen gespeicherten Plan.", true); return; }
+    var o = lesen(); delete o[k]; schreiben(o); listeFuellen(); meldung("Plan „" + k + "“ gelöscht.");
+  };
+
+  initPlan(); listeFuellen(); plan();
+})();
+</script>
+</body>
+</html>

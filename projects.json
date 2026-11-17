@@ -793,5 +793,16 @@
     "dauer": "10 Min.",
     "datum": "2026-11-16",
     "sichtbar": true
+  },
+  {
+    "title": "Gruppen losen mit Sitzplan",
+    "description": "Zufallsgenerator für Gruppen mit Sitzplan: Plätze und Nummern frei einstellen, Gruppen losen, Gruppennummer am Platz ablesen. Nichts wird gesendet.",
+    "type": "Interaktive Übung",
+    "path": "interaktiv/gruppen/",
+    "subject": "Interaktiv",
+    "grade": "Verschiedene",
+    "dauer": "2 Min.",
+    "datum": "2026-11-17",
+    "sichtbar": true
   }
 ]
