@@ -21,24 +21,28 @@ window.IMPF_ROLLEN={
      w:'Du bist die Mutter von Leon (6 Jahre). Du liebst dein Kind und willst es schützen. Du hast von Nebenwirkungen bei Impfungen gelesen und bist unsicher.',
      wichtig:'Eltern sollen über ihr Kind entscheiden.',
      tipp:'M2, M4 und M5 passen zu deiner Position.',
+     satz:['Eltern sollen entscheiden, weil …','Eine Pflicht ist problematisch, weil …'],
      q:'Warum soll der Staat entscheiden und nicht ich?'},
   B:{n:'Dr. Kaya, Kinderärztin',
      p:'Du bist für eine Impfpflicht. Du nimmst die Sorgen der Eltern ernst.',
      w:'Du bist Kinderärztin und behandelst Kinder in einer Praxis. Du siehst, wie Infektionen verlaufen.',
      wichtig:'Kinder sollen gesund bleiben.',
      tipp:'M1, M7 und M8 passen zu deiner Position.',
+     satz:['Masern sind nicht harmlos, weil …','Die Impfung ist verantwortbar, weil …'],
      q:'Was würden Sie sagen, wenn ein ungeimpftes Kind ein krankes Kind ansteckt?'},
   C:{n:'Herr Brandt, Vater von Mia',
      p:'Du bist für eine Impfpflicht.',
      w:'Deine Tochter Mia ist 8 Jahre alt. Wegen ihrer Behandlung ist ihr Immunsystem sehr schwach. Sie geht gern zur Schule. Du hast Angst, dass sie sich ansteckt.',
      wichtig:'Menschen, die sich nicht selbst schützen können, brauchen Schutz.',
      tipp:'M1, M3 und M6 passen zu deiner Position.',
+     satz:['Mia braucht den Schutz der anderen, weil …','Die Entscheidung gegen eine Impfung betrifft auch andere, weil …'],
      q:'Welche Verantwortung haben wir für Menschen, die sich nicht selbst schützen können?'},
   D:{n:'Herr Okafor, Jurist',
      p:'Du wägst ab. Du bist für keine Seite.',
      w:'Du bist Jurist und kennst dich mit Gesetzen aus. Du bewertest beide Seiten und ordnest ein.',
      wichtig:'Beide Seiten haben gute Gründe. Das Gesetz muss verhältnismäßig sein.',
      tipp:'Für eine Pflicht sprechen M1, M4 und M6. Dagegen sprechen M2 und M5.',
+     satz:['Der Staat darf eingreifen, weil …','Der Staat darf nicht zu weit gehen, weil …'],
      auf:['Wähle zwei Belege: einen, der für eine Pflicht spricht, und einen, der dagegen spricht.',
           'Formuliere zu jedem Beleg ein Argument.',
           'Begründe, welche Seite dich mehr überzeugt.'],
@@ -92,6 +96,7 @@ window.impfRolleKarte=function(k,runde2){
     h+='<p class="rk-pos"><b>Deine Position:</b> '+r.p+'</p><p class="rk-wer">'+r.w+'</p><p class="rk-wer"><b>Das ist dir wichtig:</b> '+r.wichtig+'</p>';
     h+='<ol class="rk-auf">'+auf.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';
     h+='<details class="rk-tipp"><summary>Tipp anzeigen</summary><p>'+r.tipp+'</p></details>';
+    h+='<details class="rk-tipp"><summary>Zweiter Tipp: Satzanfänge</summary><ul class="rk-auf">'+r.satz.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></details>';
   }
   h+='<p class="rk-frage">Deine Frage an die anderen: '+r.q+'</p>';
   h+='<p class="rk-satz"><b>So sprichst du:</b> „Ich finde …, weil … (Argument). Das zeigt: … (Beleg).“</p></div>';
@@ -103,4 +108,16 @@ window.impfPoolKarte=function(){
   window.impfRolleKarte('A',false);   // sorgt dafür, dass die Stile geladen sind
   var h='<div class="rk rk-pool">'+window.IMPF_POOL.map(function(t,i){return '<p class="rk-bel" style="margin-left:0"><span class="rk-tag">M'+(i+1)+'</span>'+t+'</p>';}).join('')+'</div>';
   return {titel:'Materialpool: Belege M1 bis M8',html:h};
+};
+
+/* Beispiel „vom Beleg zum Argument“ (anderes Thema, damit nichts für die Debatte vorweggenommen wird) */
+window.impfBeispielKarte=function(){
+  window.impfRolleKarte('A',false);   // lädt die Stile
+  var h='<div class="rk">'+
+    '<p class="rk-pos"><b>Beispiel aus einem anderen Thema:</b> Meine Position ist: Radfahrer sollen einen Helm tragen.</p>'+
+    '<p class="rk-bel" style="margin-left:0"><span class="rk-tag">1 Beleg</span>Crashtests zeigen: Ein Helm dämpft den Aufprall.</p>'+
+    '<p class="rk-wer"><b>2 Frage:</b> Was folgt aus dem Beleg für meine Position?</p>'+
+    '<p class="rk-arg"><span class="rk-tag">3 Argument</span>Radfahrer sollen einen Helm tragen, weil er bei einem Sturz den Kopf schützt. Das zeigen Crashtests.</p>'+
+    '<p class="rk-satz"><b>So gehst du vor:</b> Lies den Beleg. Frage: Was folgt daraus für meine Position? Schreibe einen Satz mit „weil“. Nenne am Ende den Beleg.</p></div>';
+  return {titel:'Vom Beleg zum Argument',html:h};
 };

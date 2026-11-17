@@ -322,13 +322,15 @@ svg text{font-family:Andika,Verdana,sans-serif}
   </div>
   </section>
 
-<section class="slide" data-min="4" data-note="<b>Meinung, Argument, Beleg (ca. 3 Min.):</b> Vor der Debatte klären. Erfahrungsgemäß fällt es SuS schwer, Argument (Begründung, oft mit „weil“) und Beleg (Fakt, Zahl oder Quelle) zu trennen. Die vier Beispiele gemeinsam entscheiden lassen, die Begründung nennen lassen. Danach: Jede Rollenkarte hat zwei Argumente, zu jedem Argument steht ein Beleg. Ein gutes Statement folgt dem Muster „Ich finde …, weil … (Argument). Das zeigt: … (Beleg).“ Operatoren auf den Rollenkarten: Nenne, Begründe, Belege.">
+<section class="slide" data-min="4" data-note="<b>Meinung, Argument, Beleg (ca. 3 Min.):</b> Vor der Debatte klären. Erfahrungsgemäß fällt es SuS schwer, Argument (Begründung, oft mit „weil“) und Beleg (Fakt, Zahl oder Quelle) zu trennen. Die vier Beispiele gemeinsam entscheiden lassen, die Begründung nennen lassen. Danach: Jede Rollenkarte hat zwei Argumente, zu jedem Argument steht ein Beleg. Ein gutes Statement folgt dem Muster „Ich finde …, weil … (Argument). Das zeigt: … (Beleg).“ Der Knopf „Beispiel“ zeigt an einem anderen Thema (Fahrradhelm), wie aus einem Beleg ein Argument wird. Auf den Rollenkarten gibt es zwei Hilfen: Tipp (passende Belege) und Zweiter Tipp (Satzanfänge). Operatoren auf den Rollenkarten: Wähle, Formuliere, Nenne, Begründe.">
   <h1>Meinung, Argument, Beleg</h1>
   <div class="abk" style="left:64px"><b>Meinung</b><p>Ich finde etwas. Ohne Grund.</p><p class="bsp">„Ich bin für eine Impfpflicht.“</p></div>
   <div class="abk" style="left:458px"><b>Argument</b><p>Meinung plus Grund. Der Grund beginnt oft mit „weil“.</p><p class="bsp">„Ich bin für eine Impfpflicht, weil Mia sich nicht selbst schützen kann.“</p></div>
   <div class="abk" style="left:852px"><b>Beleg</b><p>Fakt, Zahl oder Quelle. Er stützt das Argument.</p><p class="bsp">„Mia darf wegen ihrer Behandlung nicht geimpft werden.“</p></div>
   <div class="abs hint" style="left:64px;top:318px">Tippe an: Ist die Aussage eine Meinung, ein Argument oder ein Beleg?</div>
+  <button class="btn sec abs" id="abbsp" type="button" style="left:880px;top:310px;min-height:40px;padding:2px 14px;font-size:17px">Beispiel: vom Beleg zum Argument</button>
   <div class="abs" id="abtf" style="left:64px;top:352px;width:1152px"></div>
+  <div class="modal" id="abmodal"><div class="mcard" id="abcard"></div></div>
 </section>
 
 <section class="slide" data-min="13" data-note="<b>Vorbereitung (27–33 Min.):</b> Rollen verteilen: SuS scannen den QR-Code ihrer Rolle mit dem Handy (Seite rolle/, nur über die Portal-Adresse, nicht aus einer lokalen Datei) oder tippen hier A–D an, dann öffnet sich die Karte im Fenster. Ohne Handys: Rollenkarten auf Papier. Die Karten geben keine fertigen Argumente vor: SuS wählen im Materialpool (M1–M8, Knopf „Materialpool“ oder auf der Handyseite unter der Karte) zwei Belege aus und formulieren die Argumente selbst. Der „Tipp“ auf der Karte nennt passende Belege für SuS, die Hilfe brauchen. Erweiterung: den Beleg der Gegenseite entkräften. Arbeitsblatt S. 3, Aufgabe 3. <b>Debatte (33–40 Min.):</b> Zeiten per Timer starten. Beutelsbacher Konsens: Contra-Argumente (Rolle A) ernst nehmen, nicht abwerten. Falls Mythen genannt werden (z. B. Autismus): ruhig als widerlegt einordnen und zur Leitfrage zurückführen.">
@@ -631,6 +633,10 @@ svg text{font-family:Andika,Verdana,sans-serif}
 
   /* Meinung, Argument, Beleg */
   (function(){
+    $('#abbsp').onclick=function(){var c=window.impfBeispielKarte();
+      $('#abcard').innerHTML='<button class="mclose" id="abclose">✕ Schließen</button><h2>'+c.titel+'</h2>'+c.html;
+      $('#abmodal').classList.add('on');$('#abclose').onclick=function(){$('#abmodal').classList.remove('on');};};
+    $('#abmodal').onclick=function(e){if(e.target===this)this.classList.remove('on');};
     var rows=[
       ['Eltern sollen selbst über Impfungen entscheiden.',0,'Meinung: keine Begründung.'],
       ['Eltern sollen entscheiden, weil eine Impfung ein Eingriff in den Körper ist.',1,'Argument: Begründung mit „weil“.'],
