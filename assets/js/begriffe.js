@@ -95,15 +95,26 @@
     liste.appendChild(gruppe);
     zahl.textContent = "Wähle ein Themenfeld.";
     /* Anzahl der Begriffe je Themenfeld nachtragen (gleiche Zählung wie in der Themenfeld-Ansicht: jeder Begriff einmal) */
+    /* Themenfelder nacheinander zählen (nicht alle Seiten gleichzeitig laden: schont langsame Netze). Das Ergebnis merkt sich die Sitzung. */
+    const ZK = "lp-begriffe-zahl";
+    let alt = {}; try { alt = JSON.parse(sessionStorage.getItem(ZK)) || {}; } catch (e) { alt = {}; }
+    const zeigeZahl = (z, n) => { if (n) z.el.textContent = z.f + " · " + n + (n === 1 ? " Begriff" : " Begriffe"); };
+    zaehlen.forEach((z) => { const k = z.f + "|" + z.nr; if (alt[k]) zeigeZahl(z, alt[k]); });
+    let kette = Promise.resolve();
     zaehlen.forEach((z) => {
-      const quellen = [], schon = new Set();
-      projekte.filter((p) => p.subject === z.f && tfNummer(p) === z.nr).forEach((p) => ordnerVon(p).forEach((q) => {
-        if (!schon.has(q.pfad)) { schon.add(q.pfad); quellen.push(q); }
-      }));
-      Promise.all(quellen.map(ladeBlock)).then((erg) => {
-        const gesehen = new Set();
-        erg.filter(Boolean).forEach((b) => b.paare.forEach((x) => gesehen.add(norm(x.b))));
-        if (gesehen.size) z.el.textContent = z.f + " · " + gesehen.size + (gesehen.size === 1 ? " Begriff" : " Begriffe");
+      const k = z.f + "|" + z.nr;
+      if (alt[k]) return;
+      kette = kette.then(() => {
+        const quellen = [], schon = new Set();
+        projekte.filter((p) => p.subject === z.f && tfNummer(p) === z.nr).forEach((p) => ordnerVon(p).forEach((q) => {
+          if (!schon.has(q.pfad)) { schon.add(q.pfad); quellen.push(q); }
+        }));
+        return Promise.all(quellen.map(ladeBlock)).then((erg) => {
+          const gesehen = new Set();
+          erg.filter(Boolean).forEach((b) => b.paare.forEach((x) => gesehen.add(norm(x.b))));
+          zeigeZahl(z, gesehen.size);
+          if (gesehen.size) { alt[k] = gesehen.size; try { sessionStorage.setItem(ZK, JSON.stringify(alt)); } catch (e) { /* ohne Speicher weiter */ } }
+        });
       });
     });
   }

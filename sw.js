@@ -34,12 +34,13 @@ self.addEventListener("activate", event => {
   );
 });
 
+let seitLetztemKuerzen = 0;                // Kürzen nur alle 25 Kopien: cache.keys() bei jeder Antwort bremst langsame Geräte
 function ablegen(request, response) {
   /* nur vollständige, eigene Antworten (keine Fehlerseiten, keine Teilantworten) */
   if (!response || response.status !== 200 || response.type !== "basic") return;
   const kopie = response.clone();
   caches.open(VERSION)
-    .then(cache => cache.put(request, kopie).then(() => kuerzen(cache)))
+    .then(cache => cache.put(request, kopie).then(() => { if (++seitLetztemKuerzen >= 25) { seitLetztemKuerzen = 0; return kuerzen(cache); } }))
     .catch(() => { /* Speicher voll: ohne Kopie weiter */ });
 }
 
