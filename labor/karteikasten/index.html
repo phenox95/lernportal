@@ -34,4 +34,5 @@
  function start(){KEY='lp-leitner:'+$('qs').value;lad();$('k').textContent='Lade Begriffe …';holen($('qs').value).then(function(o){K=o;K.titel=o.titel||'Begriffe';naechste()}).catch(function(e){$('k').textContent='Nicht geladen: '+e.message})}
  $('qs').onchange=start;start();
 })();
-</script></main></body></html>
+</script><script src="../labor.js" defer></script>
+</main></body></html>

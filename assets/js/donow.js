@@ -59,7 +59,7 @@
   }
 
   var css = document.createElement("style");
-  css.textContent = ".lp-dn{padding-left:1.4em}.lp-dn-a{margin:0 0 18px;font-size:inherit}.lp-dn-t{margin:0 0 8px;font-weight:700}.lp-dn-k{font:inherit;font-weight:700;min-height:44px;margin:0 8px 8px 0;padding:6px 16px;border-radius:12px;border:2px solid currentColor;background:transparent;color:inherit;cursor:pointer}.lp-dn-r{margin:4px 0 0;background:#E8F3EC;color:#1A2B24;border-radius:10px;padding:8px 12px}.lp-dn-q{font-size:.7em;opacity:.7}";
+  css.textContent = ".lp-dn{padding-left:1.4em}.lp-dn-a{margin:0 0 18px;font-size:inherit}.lp-dn-t{margin:0 0 8px;font-weight:700}.lp-dn-k{font:inherit;font-weight:700;min-height:44px;margin:0 8px 8px 0;padding:6px 16px;border-radius:12px;border:2px solid currentColor;background:transparent;color:inherit;cursor:pointer}.lp-dn-r{margin:4px 0 0;background:#E8F3EC;color:#1A2B24;border-radius:10px;padding:8px 12px}.lp-dn-q{font-size:.85em;opacity:.8}";
   document.head.appendChild(css);
 
   function start() {

@@ -83,4 +83,5 @@ input[type=range]{width:100%}.regler{margin:12px 0}.regler label{display:block;f
  fetch('../../daten/hoehe/staedte.json').then(function(r){return r.json()}).then(function(d){ST=d;if(D){stadtBerechnen();zeichnen()}}).catch(function(){});
  fetch('../../daten/hoehe/index.json').then(function(r){return r.json()}).then(function(d){IDX=d;d.regionen.forEach(function(r){var o=document.createElement('option');o.value=r.id;o.textContent=r.name;$('reg').appendChild(o)});$('quelle').textContent=d.hinweis+(d.bevoelkerung_quelle?' Menschen: '+d.bevoelkerung_quelle:'');anwenden();region($('reg').value)}).catch(function(){$('quelle').textContent='Daten nicht geladen (Seite über einen Server öffnen).'});
 })();
-</script></main></body></html>
+</script><script src="../labor.js" defer></script>
+</main></body></html>

@@ -32,4 +32,5 @@
  ['Ein Bild steht unter CC BY-NC 4.0. Ich möchte es auf der öffentlichen Schulwebseite zeigen.','kommt','Kommt darauf an. NC heißt „nicht kommerziell“, die Auslegung ist eng und unklar. Im Zweifel die Lehrkraft fragen oder ein anderes Bild nehmen.']];
  $('faelle').innerHTML='';F.forEach(function(f,i){var d=document.createElement('div');d.className='fall';var p=document.createElement('p');p.textContent=(i+1)+'. '+f[0];d.appendChild(p);var fb=document.createElement('p');fb.className='fb';fb.setAttribute('aria-live','polite');[['ja','Ja'],['nein','Nein'],['kommt','Kommt darauf an']].forEach(function(o){var b=document.createElement('button');b.type='button';b.textContent=o[1];b.onclick=function(){fb.textContent=(o[0]===f[1]?'Richtig. ':'Nicht ganz. ')+f[2]};d.appendChild(b)});d.appendChild(fb);$('faelle').appendChild(d)});
 })();
-</script></main></body></html>
+</script><script src="../labor.js" defer></script>
+</main></body></html>
