@@ -635,3 +635,20 @@ Anlass: Hinweis der Lehrkraft auf den Simulator En-ROADS (Climate Interactive, M
 
 `labor/klimaszenarien/`: **eigenes Lehrmodell**. Kaya-Gleichung für Energie-CO₂ (Bevölkerung, Wohlstand je Kopf, Energieintensität, emissionsfreier Anteil), Kohleausstieg, Landnutzung, andere Gase, CO₂-Entnahme, Erwärmung aus den gesamten Emissionen (0,45 Grad je 1000 Milliarden Tonnen, Start 1,3 Grad). Startwerte (Näherungen, **nicht geprüft**): Primärenergie 640 EJ, emissionsfreier Anteil 23 %, fossile Mischung Kohle 32 %, Öl 38 %, Gas 30 %, Emissionsfaktoren 94,6, 73,3 und 56,1 kg CO₂ je Gigajoule (IPCC-Standardwerte, aus dem Gedächtnis), Basislinie so gewählt, dass die Emissionen bis 2100 auf etwa 70 Milliarden Tonnen steigen. Ergebnis im Test: Basislinie +3,4 Grad, „alles zusammen“ +1,8 Grad. Szenarien: Basislinie, Kohleausstieg 2040, nur Effizienz, schneller Umbau, alles zusammen, „als Vergleich merken“. Die Wirkung der Regler ist **angenommen** (keine Kosten, keine Trägheit, keine Rückkopplungen). Namensnennung: Climate Interactive, En-ROADS User Guide, CC BY 4.0, Bearbeitung durch dieses Portal.
 
+**Nachtrag 12.11 (Startwerte an Quellen geprüft, 18.11.2026):** Nach der Prüfung gelten für `labor/klimaszenarien/`:
+
+| Wert | Befund an der Quelle |
+|---|---|
+| Energie-CO₂ 2024 | OWID-CO₂-Datensatz (aus Global Carbon Project und Energy Institute): Kohle 15,7, Öl 12,6, Gas 8,0, Abfackeln 0,45 Mrd. t, zusammen etwa 36,8. Modell 2025: 36,8 |
+| Landnutzung | OWID 2024: 4,28 Mrd. t. Global Carbon Budget 2025: 4,1 für 2025 (Seite von globalcarbonbudget.org). Modell: 4,3 |
+| Andere Gase und Zement | OWID 2024: Methan 9,5, Lachgas 2,9, Zement 1,5, zusammen 13,9. **Fluorierte Gase fehlen** (nicht im Datensatz). Modell: 13,9, Gesamt 55,0 Mrd. t CO₂-Äquivalent |
+| Primärenergie | OWID 2024: 176.737 TWh gleich 636 EJ. Modell: 636 |
+| Emissionsfaktoren | IPCC-Leitlinien 2006, Band 2, Tabelle 2.2: Rohöl 73.300, Erdgas 56.100, andere bituminöse Kohle 94.600 kg je TJ (andere Kohlearten bis 101.000). Modell: 94,6, 73,3, 56,1 kg je GJ |
+| Fossile Mischung und emissionsfreier Anteil | **Abgeleitet** aus Emissionen geteilt durch Faktoren (Kohle 166, Öl 172, Gas 150 EJ, zusammen 488 EJ, 76,8 Prozent der Primärenergie), also nicht direkt gemessen. Modell: Kohle 34,0, Öl 35,3, Gas 30,7 Prozent, emissionsfrei 23,2 Prozent |
+| Bevölkerung | OWID 2025: 8,23 Mrd. Guide von En-ROADS: 10,2 Mrd. für 2100 |
+| Erwärmung je CO₂ | Forster et al. 2025 (ESSD 17, 2641, CC BY 4.0): „median TCRE estimate of 0.45 °C per 1000 Gt CO₂“ |
+| Erwärmung heute | Forster et al. 2025: menschengemacht 2024 beste Schätzung **1,36 °C**, beobachtet 2024 1,52 °C, Dekade 2015 bis 2024 beobachtet 1,24 °C, Rate 0,27 °C je Jahrzehnt. Modell-Start 2025: 1,4 (Fortschreibung angenommen) |
+| Restbudget 1,5 °C | Forster et al. 2025: 130 Mrd. t CO₂ (50 Prozent) ab Anfang 2025, bei 42 Mrd. t je Jahr in gut drei Jahren aufgebraucht. Global Carbon Budget 2025: 170 Mrd. t CO₂ (1,7 Grad: 525, 2 Grad: 1.055). Das Lehrmodell ergibt etwa 220 (alle Gase wie CO₂, ohne Nachwirkung früherer Emissionen), die Seite nennt den Unterschied |
+
+**Nicht geprüft:** die Basislinie des Lehrmodells (Wachstum 2,2 Prozent, Effizienz 1,6 Prozent, Umbau 0,3 Prozentpunkte, an die Grafik von En-ROADS angelehnt) und die Wirkung der Regler (Annahmen). Der IPCC-AR6-Bericht selbst war nicht abrufbar (403), der Wert 0,45 stammt aus Forster et al. 2025, der den AR6 fortschreibt. Neu freigegebene Hosts: ipcc.ch, report.ipcc.ch, ipcc-nggip.iges.or.jp, globalcarbonbudget.org, globalcarbonproject.org, essd.copernicus.org, climate.copernicus.eu, ourworldindata.org, berkeleyearth.org (mehrere davon nicht gebraucht).
+
