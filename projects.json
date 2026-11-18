@@ -370,6 +370,37 @@
     "begriffe": true
   },
   {
+    "title": "Die Zelle – Stunde 12: Priestley und die Maus",
+    "description": "Priestleys Versuch von 1771 als Impuls: Hypothese aufstellen, Kerze, Pflanze und Maus auswerten, den Gasaustausch selbst zeichnen, vom Partner prüfen lassen und den Merksatz selbst formulieren.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-7/zelle/fotosynthese-3/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-18",
+    "reihe": "Zelle",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-3/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Priestleys Versuch",
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-3/arbeitsblatt-priestley.pdf",
+        "art": "Arbeitsblatt"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-2/",
+        "grund": "Stunde 12 setzt Licht und Kohlenstoffdioxid als Bedingungen der Fotosynthese aus Stunde 11 voraus."
+      }
+    ]
+  },
+  {
     "title": "Feuerwerk aus der Tiefe – Vulkanausbrüche",
     "description": "Entstehung und Ausbruch von Vulkanen, Schicht- und Schildvulkan vergleichen, Kurzprojekt zu Vulkanen und Erdbeben.",
     "type": "Interaktive Präsentation",
@@ -697,6 +728,20 @@
     "datum": "2026-11-15",
     "sichtbar": true,
     "begriffe": true
+  },
+  {
+    "title": "Der Hundezuchtverein – Vertiefung: Mendels erste Regel",
+    "description": "Do Now, Impuls, Kartenmodell zum Ziehen, Uniformitätsregel, Schema in Schritten, Kreuzungsquadrat zum Ausprobieren mit Genotyp und Phänotyp, Anwendung auf das Zuchtbuch, Merksatz.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-10/genetik/hundezuchtverein/mendel-regel-1/",
+    "subject": "Biologie",
+    "grade": "Klasse 10",
+    "themenfeld": "3.7",
+    "reihe": "Der Hundezuchtverein",
+    "folge": 3,
+    "dauer": "45 Min.",
+    "datum": "2026-11-18",
+    "sichtbar": true
   },
   {
     "title": "Erdbeben – Stunde 4: Alarm für Tokio",
