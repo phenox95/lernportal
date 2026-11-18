@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Die Zelle – Stunde 12: Priestley und die Maus</title>
+<meta name="description" content="Biologie Klasse 7, Themenfeld Zelle: Priestleys Versuch mit Kerze, Pflanze und Maus. Hypothese aufstellen, Versuch auswerten, Gasaustausch selbst zeichnen und den Merksatz selbst formulieren.">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<style>
+.hid{visibility:hidden}.hid.show{visibility:visible}
+.im-grid{display:grid;grid-template-columns:370px 1fr;gap:28px;align-items:start}.im-grid svg{width:100%;height:auto;display:block}
+.im-ctl{display:flex;flex-direction:column;align-items:flex-start;gap:8px}.sz2{font-size:27px;margin:8px 0;line-height:1.3}
+.er-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:28px;align-items:start}.m1{font-size:21px;line-height:1.5}.m1 p{margin:0 0 6px}
+.vs-grid{display:grid;grid-template-columns:640px 1fr;gap:28px;align-items:start}.vs-grid svg{width:100%;height:auto;display:block}
+.vs-ctl{display:flex;flex-direction:column;gap:8px;font-size:19px}.vs-ctl select{font:inherit;font-size:18px;margin-left:6px}.vs-ctl label{display:block;margin:3px 0}.cb input{width:22px;height:22px;vertical-align:middle;margin-right:6px}
+.obs{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;font-size:18px;margin-top:6px;align-items:center}.obs label{white-space:nowrap}.obs select{font:inherit;font-size:18px;margin-left:6px}
+.steps{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.sc-grid{display:grid;grid-template-columns:790px 1fr;gap:22px;align-items:start}.sc-grid svg{width:100%;height:auto;display:block}
+.lsgsvg{opacity:0;transition:opacity .4s}.zeigt .lsgsvg{opacity:1}
+.cl{display:flex;flex-direction:column;gap:8px}.ms-grid .cp{font-size:21px;padding:7px 14px}
+.ms-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.md-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.md-ctl{display:flex;flex-direction:column;gap:10px;font-size:22px}.md-ctl input[type=range]{width:100%}
+.bars p{margin:8px 0 2px;font-size:20px}.bb{height:26px;background:var(--g);border-radius:6px;transition:width .3s}.bb.vv{background:#777}
+.flame{opacity:0;transition:opacity .4s}.flame.on{opacity:1;animation:flick .45s ease-in-out infinite alternate}
+@keyframes flick{from{transform:scale(1,1)}to{transform:scale(.93,1.07)}}
+.smoke{opacity:0;transition:opacity .6s}.smoke.on{opacity:1}
+.mo{opacity:0;transition:opacity .5s}.mo.on{opacity:1}
+#plantB{transition:transform 2.5s ease}#m2.wk #plantB{transform:scale(1.07)}
+#ipl{opacity:0;transform:translateY(-40px);transition:opacity .8s,transform .8s}#ipl.on{opacity:1;transform:none}
+#ib{transform:translateY(-330px);transition:transform 1.3s cubic-bezier(.4,0,.8,1)}#ib.dn{transform:none}
+.pt{opacity:0;transition:opacity .8s;animation:drift 5s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(9px,-11px)}}
+#m2.showp .pt.al,#m2.showp:not(.wk) .pt.w0,#m2.showp.wk .pt.w1{opacity:1}
+@media(prefers-reduced-motion:reduce){.pt,.flame.on{animation:none}#ib,#ipl,#plantB,.smoke,.mo,.flame{transition:none}}
+</style>
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Die Zelle – Stunde 12: Priestley und die Maus" data-subject="Biologie" data-grade="Klasse 7">
+<noscript><p style="padding:1rem;font-size:1rem;background:#fff">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+<div id="buehne">
+<div id="stage">
+
+<section class="slide" data-min="3">
+<p class="phase">Einstieg · Do Now · Wiederholung</p>
+<h1 class="k">Do Now</h1>
+<span class="badge">3 Min. · allein, schriftlich</span>
+<div data-zuordnen><p class="task s"><span class="snr">1</span><span><b>Nenne</b> zwei Bedingungen, die eine Pflanze für die Fotosynthese braucht.</span><i class="lvl">●○○ D</i></p><button class="lz" data-lz>Lösung</button><div class="lz-box"><b>Licht</b> und <b>Kohlenstoffdioxid</b> (auch Wasser).</div><p class="task s" style="margin-top:14px"><span class="snr">2</span><span><b>Ergänze</b> die Wortgleichung mit den Wörtern aus dem Kasten.</span><i class="lvl">●○○ D–E</i></p><div class="eqzeile"><div class="dz" data-ans="Kohlenstoffdioxid|Wasser"></div><b>+</b><div class="dz" data-ans="Kohlenstoffdioxid|Wasser"></div><span class="pf">→</span><div class="dz" data-ans="Traubenzucker|Sauerstoff"></div><b>+</b><div class="dz" data-ans="Traubenzucker|Sauerstoff"></div></div><p class="tip" style="margin:0 0 6px">(mit Licht, im Chloroplast)</p><div class="bank"><span class="dg">Sauerstoff</span><span class="dg">Wasser</span><span class="dg">Traubenzucker</span><span class="dg">Kohlenstoffdioxid</span></div><div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><button class="b lsg" style="background:var(--y);color:var(--ink)">Lösung</button><span class="fb"></span></div></div>
+</section>
+<section class="slide" data-min="2">
+<p class="phase">Einstieg · Impuls</p>
+<h1 class="k">Impuls</h1>
+<span class="badge">Plenum · wir sehen zu</span>
+<div class="im-grid"><div class="frame"><svg id="ip" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 470" role="img" aria-label="Kerze, Glasglocke und Pflanze auf einem Tisch"><rect width="420" height="470" fill="#fff"/><rect x="10" y="385" width="400" height="70" fill="#dedede" stroke="#1a1a1a" stroke-width="3"/><rect x="98" y="345" width="224" height="12" fill="#7a7a7a" stroke="#1a1a1a" stroke-width="2"/><g id="ipl"><g><path d="M125 345 C 121 297, 129 261, 125 225" fill="none" stroke="#1a1a1a" stroke-width="3"/><ellipse cx="105" cy="321" rx="19" ry="8" transform="rotate(-25 105 321)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="145" cy="321" rx="19" ry="8" transform="rotate(25 145 321)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="105" cy="291" rx="19" ry="8" transform="rotate(-25 105 291)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="145" cy="291" rx="19" ry="8" transform="rotate(25 145 291)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="105" cy="261" rx="19" ry="8" transform="rotate(-25 105 261)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="145" cy="261" rx="19" ry="8" transform="rotate(25 145 261)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="105" cy="231" rx="19" ry="8" transform="rotate(-25 105 231)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="145" cy="231" rx="19" ry="8" transform="rotate(25 145 231)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="125" cy="215" rx="8" ry="16" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/></g></g><rect x="221" y="283" width="18" height="62" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/><line x1="230" y1="283" x2="230" y2="273" stroke="#1a1a1a" stroke-width="2.5"/><path class="smoke" id="ism" d="M230 271 C 240 255, 220 245, 230 231 C 238 221, 224 213, 230 203" fill="none" stroke="#8a8a8a" stroke-width="3" stroke-dasharray="1 6" stroke-linecap="round"/><g class="flame on" id="if0" style="transform-origin:230px 273px"><path d="M230 229 C 246 253, 242 271, 230 273 C 218 271, 214 253, 230 229 Z" fill="#d9d9d9" stroke="#1a1a1a" stroke-width="2.5"/><g stroke="#1a1a1a" stroke-width="2"><line x1="200" y1="250" x2="208" y2="253"/><line x1="260" y1="250" x2="252" y2="253"/><line x1="230" y1="215" x2="230" y2="221"/></g></g><g id="ib"><path d="M75 413 L75 165 C 75 90, 150 60, 210 60 C 270 60, 345 90, 345 165 L345 413" fill="#ffffff" fill-opacity="0.55" stroke="#1a1a1a" stroke-width="4"/><path d="M97 165 C 97 115, 140 84, 170 78" fill="none" stroke="#9a9a9a" stroke-width="3" stroke-linecap="round"/></g><text id="iday" x="210" y="30" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="22" font-weight="bold" fill="#1a1a1a"></text></svg></div>
+<div><div class="ctl im-ctl" style="flex-direction:row;flex-wrap:wrap"><button class="b" id="st1">1 Glasglocke aufsetzen</button><button class="b" id="st2" disabled>2 Pflanze dazustellen</button><button class="b" id="st3" disabled>3 Eine Woche warten</button><button class="b" id="st4" disabled>4 Kerze anzünden</button><button class="b sec" id="ir">Zurücksetzen</button></div>
+<p id="s1" class="hid sz2">1771: Eine Kerze brennt unter einer Glasglocke. Sie erlischt.</p><p id="s2" class="hid sz2">Eine Pflanze wird dazugestellt. Eine Woche vergeht.</p><p id="s3" class="hid sz2">Dann wird eine neue Kerze angezündet.</p><p id="s4" class="hid sz2"><b>Sie brennt.</b></p></div></div>
+</section>
+<section class="slide" data-min="3">
+<p class="phase">Einstieg · Fragenentwicklung</p>
+<h1 class="k">Fragen entwickeln</h1>
+<span class="badge">Plenum</span>
+<div data-fragenfeld></div>
+</section>
+<section class="slide" data-min="7">
+<p class="phase">Erarbeitung · Lesen und Hypothese</p>
+<h1 class="k">M1: Ein Versuch aus dem Jahr 1771</h1>
+<span class="badge">7 Min. · allein · Arbeitsblatt S. 1</span>
+<div class="er-grid"><div class="frame m1"><p>Joseph Priestley (1733–1804) war ein englischer Naturforscher. Er wollte wissen, was mit der Luft passiert, wenn Lebewesen sie nutzen. Dazu stellte er zwei Glasglocken in ein Wasserbad. So konnte keine Luft hinein oder hinaus. Unter jede Glocke setzte er eine brennende Kerze. Die Kerzen erloschen nach kurzer Zeit. Priestley nannte die Luft nun „verdorben“. In Glocke A änderte er nichts. In Glocke B stellte er einen Minzzweig dazu. Beide Glocken standen eine Woche an einem hellen Platz. Danach zündete er in jeder Glocke eine neue Kerze an. Zuletzt setzte er in jede Glocke eine Maus.</p><p class="quelle">Nach dem historischen Versuch von J. Priestley (1771/72), vereinfacht.</p></div>
+<div><p class="task s"><span class="snr">L</span><span><b>Lies</b> M1 und markiere die wichtigsten Wörter. <b>Beschreibe</b> danach in einem Satz, was Priestley in Glocke B anders macht als in Glocke A.</span><i class="lvl">●○○ D</i></p><button class="lz" data-lz>Lösung</button><div class="lz-box">In Glocke B stellt Priestley einen Minzzweig (eine Pflanze) dazu. In Glocke A nicht.</div>
+<p class="task s" style="margin-top:12px"><span class="snr">1</span><span><b>Stelle</b> eine Hypothese <b>auf</b>, was Priestley mit „verdorbener Luft“ gemeint haben könnte. Schreibe sie auf, <u>bevor</u> du den Versuch ansiehst.</span><i class="lvl">●●○ E</i></p><button class="lz" data-lz>Lösung</button><div class="lz-box">Z. B.: In der verdorbenen Luft fehlt etwas, das die Kerze zum Brennen braucht (Sauerstoff), weil die Kerze erloschen ist. Andere begründete Hypothesen gelten auch.</div>
+<div class="shilfe" style="margin-top:12px;font-size:20px"><b>Satzanfang:</b> Ich vermute, dass in der verdorbenen Luft …, weil die Kerze …<br><b>Wortspeicher:</b> Glas-glo-cke · Was-ser-bad · Min-ze · ver-dor-ben · Sau-er-stoff · Koh-len-stoff-di-oxid<br>Vorlesen lassen ist erlaubt.</div></div></div>
+</section>
+<section class="slide" data-min="3">
+<p class="phase">Erarbeitung · Versuch</p>
+<h1 class="k">M2: Priestleys Versuch</h1>
+<span class="badge">3 Min. · Plenum</span>
+<div class="vs-grid"><div><div class="frame"><svg id="m2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-label="Priestleys Versuch mit zwei Glasglocken"><rect width="900" height="500" fill="#fff"/><text id="ttl" x="450" y="34" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="26" font-weight="bold" fill="#1a1a1a">Beginn: Die Kerzen sind erloschen</text><rect x="20" y="395" width="860" height="70" fill="#dedede" stroke="#1a1a1a" stroke-width="3"/><path d="M100 423 L100 175 C 100 100, 175 70, 235 70 C 295 70, 370 100, 370 175 L370 423" fill="#ffffff" fill-opacity="0.55" stroke="#1a1a1a" stroke-width="4"/><path d="M122 175 C 122 125, 165 94, 195 88" fill="none" stroke="#9a9a9a" stroke-width="3" stroke-linecap="round"/><rect x="123" y="355" width="224" height="12" fill="#7a7a7a" stroke="#1a1a1a" stroke-width="2"/><path d="M530 423 L530 175 C 530 100, 605 70, 665 70 C 725 70, 800 100, 800 175 L800 423" fill="#ffffff" fill-opacity="0.55" stroke="#1a1a1a" stroke-width="4"/><path d="M552 175 C 552 125, 595 94, 625 88" fill="none" stroke="#9a9a9a" stroke-width="3" stroke-linecap="round"/><rect x="553" y="355" width="224" height="12" fill="#7a7a7a" stroke="#1a1a1a" stroke-width="2"/><g id="plantB" style="transform-origin:585px 355px"><path d="M585 355 C 581 307, 589 271, 585 235" fill="none" stroke="#1a1a1a" stroke-width="3"/><ellipse cx="565" cy="331" rx="19" ry="8" transform="rotate(-25 565 331)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="605" cy="331" rx="19" ry="8" transform="rotate(25 605 331)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="565" cy="301" rx="19" ry="8" transform="rotate(-25 565 301)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="605" cy="301" rx="19" ry="8" transform="rotate(25 605 301)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="565" cy="271" rx="19" ry="8" transform="rotate(-25 565 271)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="605" cy="271" rx="19" ry="8" transform="rotate(25 605 271)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="565" cy="241" rx="19" ry="8" transform="rotate(-25 565 241)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="605" cy="241" rx="19" ry="8" transform="rotate(25 605 241)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="585" cy="225" rx="8" ry="16" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/></g><rect x="171" y="293" width="18" height="62" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/><line x1="180" y1="293" x2="180" y2="283" stroke="#1a1a1a" stroke-width="2.5"/><path class="smoke on" id="smA" d="M180 281 C 190 265, 170 255, 180 241 C 188 231, 174 223, 180 213" fill="none" stroke="#8a8a8a" stroke-width="3" stroke-dasharray="1 6" stroke-linecap="round"/><g class="flame" id="fA" style="transform-origin:180px 283px"><path d="M180 239 C 196 263, 192 281, 180 283 C 168 281, 164 263, 180 239 Z" fill="#d9d9d9" stroke="#1a1a1a" stroke-width="2.5"/><g stroke="#1a1a1a" stroke-width="2"><line x1="150" y1="260" x2="158" y2="263"/><line x1="210" y1="260" x2="202" y2="263"/><line x1="180" y1="225" x2="180" y2="231"/></g></g><rect x="646" y="293" width="18" height="62" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/><line x1="655" y1="293" x2="655" y2="283" stroke="#1a1a1a" stroke-width="2.5"/><path class="smoke on" id="smB" d="M655 281 C 665 265, 645 255, 655 241 C 663 231, 649 223, 655 213" fill="none" stroke="#8a8a8a" stroke-width="3" stroke-dasharray="1 6" stroke-linecap="round"/><g class="flame" id="fB" style="transform-origin:655px 283px"><path d="M655 239 C 671 263, 667 281, 655 283 C 643 281, 639 263, 655 239 Z" fill="#d9d9d9" stroke="#1a1a1a" stroke-width="2.5"/><g stroke="#1a1a1a" stroke-width="2"><line x1="625" y1="260" x2="633" y2="263"/><line x1="685" y1="260" x2="677" y2="263"/><line x1="655" y1="225" x2="655" y2="231"/></g></g><g id="mAs" class="mo"><g stroke="#1a1a1a" stroke-width="2.5" fill="#e6e6e6"><path d="M240 351 C 210 351, 202 315, 224 321" fill="none"/><ellipse cx="280" cy="331" rx="34" ry="24"/><circle cx="306" cy="307" r="16"/><circle cx="300" cy="293" r="8" fill="#cfcfcf"/><circle cx="311" cy="304" r="2.6" fill="#1a1a1a"/><circle cx="322" cy="309" r="3" fill="#1a1a1a"/></g><text x="280" y="285" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Maus</text></g><g id="mAl" class="mo"><g stroke="#1a1a1a" stroke-width="2.5" fill="#e6e6e6"><path d="M234 347 C 200 347, 192 329, 210 335" fill="none"/><ellipse cx="280" cy="339" rx="40" ry="16"/><circle cx="318" cy="341" r="14"/><circle cx="310" cy="329" r="7" fill="#cfcfcf"/><line x1="320" y1="337" x2="328" y2="337" stroke-width="2.5"/><circle cx="331" cy="345" r="2.8" fill="#1a1a1a"/></g><text x="280" y="305" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Maus</text></g><g id="mBs" class="mo"><g stroke="#1a1a1a" stroke-width="2.5" fill="#e6e6e6"><path d="M695 351 C 665 351, 657 315, 679 321" fill="none"/><ellipse cx="735" cy="331" rx="34" ry="24"/><circle cx="761" cy="307" r="16"/><circle cx="755" cy="293" r="8" fill="#cfcfcf"/><circle cx="766" cy="304" r="2.6" fill="#1a1a1a"/><circle cx="777" cy="309" r="3" fill="#1a1a1a"/></g><text x="743" y="262" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Maus</text></g><g id="parts"><g class="pt al" style="animation-delay:-0s"><circle cx="310" cy="150" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt al" style="animation-delay:-1.1s"><circle cx="140" cy="260" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt al" style="animation-delay:-0.7s"><rect x="142" y="142" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt al" style="animation-delay:-1.4s"><rect x="207" y="132" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt al" style="animation-delay:-2.0999999999999996s"><rect x="292" y="197" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt al" style="animation-delay:-2.8s"><rect x="127" y="300" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt al" style="animation-delay:-3.5s"><rect x="322" y="247" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt al" style="animation-delay:-4.199999999999999s"><rect x="242" y="177" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt w0" style="animation-delay:-2.2s"><circle cx="740" cy="130" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt w0" style="animation-delay:-0.9s"><rect x="592" y="292" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt w0" style="animation-delay:-1.8s"><rect x="552" y="192" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt w0" style="animation-delay:-2.7s"><rect x="632" y="272" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt w0" style="animation-delay:-3.6s"><rect x="712" y="142" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt w0" style="animation-delay:-4.5s"><rect x="772" y="252" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt w0" style="animation-delay:-5.4s"><rect x="692" y="182" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g><g class="pt w1" style="animation-delay:-0.8s"><circle cx="560" cy="140" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt w1" style="animation-delay:-1.6s"><circle cx="620" cy="150" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt w1" style="animation-delay:-2.4000000000000004s"><circle cx="700" cy="150" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt w1" style="animation-delay:-3.2s"><circle cx="770" cy="180" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt w1" style="animation-delay:-4.0s"><circle cx="570" cy="250" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt w1" style="animation-delay:-4.800000000000001s"><circle cx="780" cy="225" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt w1" style="animation-delay:-5.6000000000000005s"><circle cx="640" cy="125" r="9" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/></g><g class="pt w1" style="animation-delay:-3.3s"><rect x="762" y="192" width="16" height="16" fill="#6a6a6a" stroke="#1a1a1a" stroke-width="1.5"/></g></g><text x="180" y="205" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Kerze</text><text x="705" y="205" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Kerze</text><text x="583" y="205" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="22" fill="#1a1a1a">Minzzweig</text><text x="235" y="440" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="21" font-weight="bold" fill="#1a1a1a">Glocke A: ohne Pflanze</text><text x="665" y="440" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="21" font-weight="bold" fill="#1a1a1a">Glocke B: mit Minzzweig</text></svg></div>
+<div id="obs" class="hid obs"><label>A, Kerze: <select id="o1"><option value="">wählen</option><option>brennt</option><option>erlischt</option></select><span id="o1r"></span></label>
+<label>B, Kerze: <select id="o3"><option value="">wählen</option><option>brennt</option><option>erlischt</option></select><span id="o3r"></span></label>
+<label>A, Maus: <select id="o2"><option value="">wählen</option><option value="sitzt">sitzt munter</option><option value="liegt">liegt ohnmächtig</option></select><span id="o2r"></span></label>
+<label>B, Maus: <select id="o4"><option value="">wählen</option><option value="sitzt">sitzt munter</option><option value="liegt">liegt ohnmächtig</option></select><span id="o4r"></span></label>
+</div></div>
+<div class="ctl vs-ctl"><label class="cb"><input type="checkbox" id="hok"> Meine Hypothese (Aufgabe 1) steht auf dem Blatt.</label>
+<div class="steps"><button class="b" id="bw" disabled>1 Eine Woche warten</button><button class="b" id="bk" disabled>2 Neue Kerzen anzünden</button><button class="b" id="bm" disabled>3 Mäuse hineinsetzen</button><button class="b sec" id="rs">Zurücksetzen</button></div>
+<label class="cb"><input type="checkbox" id="ptc" disabled> Luft sichtbar machen</label><p class="tip" style="margin:0">Kreis = Sauerstoff · Quadrat = Kohlenstoffdioxid</p>
+<p class="tip" style="margin:0">Die Mäuse werden sofort wieder herausgenommen und erholen sich.</p><div id="obsb" class="hid"><button class="b" id="oc">Beobachtung prüfen</button> <b id="om"></b></div></div></div>
+</section>
+<section class="slide" data-min="8">
+<p class="phase">Erarbeitung · Auswerten</p>
+<h1 class="k">Aufgaben 2 bis 5</h1>
+<span class="badge">8 Min. · allein, dann Partner · Arbeitsblatt S. 2</span>
+<div class="aufg"><p class="task" style="grid-template-columns:auto 1fr auto;align-items:center"><span class="snr">2</span><span><b>Vergleiche</b> Glocke A und Glocke B nach einer Woche mit M2: Was geschieht mit Kerze und Maus?</span><span class="rc"><i class="lvl">●○○ D–E</i><button class="lz" data-lz>Lösung</button></span></p><div class="lz-box">Glocke A: Die neue Kerze erlischt, die Maus liegt ohnmächtig. Glocke B: Die Kerze brennt, die Maus sitzt munter.</div></div><div class="aufg"><p class="task" style="grid-template-columns:auto 1fr auto;align-items:center"><span class="snr">3</span><span><b>Erkläre</b> mit der Wortgleichung, warum die Kerze in Glocke B wieder brennt.</span><span class="rc"><i class="lvl">●●○ E</i><button class="lz" data-lz>Lösung</button></span></p><div class="lz-box">Kohlenstoffdioxid + Wasser → Traubenzucker + Sauerstoff (mit Licht). Die Pflanze bildet Sauerstoff. Die Kerze braucht Sauerstoff zum Brennen. Darum brennt sie in Glocke B wieder.</div></div><div class="aufg"><p class="task" style="grid-template-columns:auto 1fr auto;align-items:center"><span class="snr">4</span><span><b>Gib</b> an, ob deine Hypothese aus Aufgabe 1 zur Beobachtung in M2 <b>passt</b>.</span><span class="rc"><i class="lvl">●●○ E</i><button class="lz" data-lz>Lösung</button></span></p><div class="lz-box">Sie passt, wenn du vermutet hast, dass in der verdorbenen Luft etwas fehlt, das die Pflanze wieder bildet (Sauerstoff). Sonst: Hypothese überarbeiten.</div></div><div class="aufg"><p class="task" style="grid-template-columns:auto 1fr auto;align-items:center"><span class="snr">5</span><span><b>Erkläre</b>, woher die Pflanze in Glocke B das Kohlenstoffdioxid für die Fotosynthese bekommt.</span><span class="rc"><i class="lvl">●●○ E</i><button class="lz" data-lz>Lösung</button></span></p><div class="lz-box">Aus der Luft in der Glocke: Die Kerze bildet beim Brennen Kohlenstoffdioxid, Tiere wie die Maus atmen es aus.</div></div><p class="tip">Tipp zu 5: Was entsteht, wenn eine Kerze brennt? Was atmet eine Maus aus? · Schnell fertig? Aufgaben 10 bis 12 am Ende (●●●).</p>
+</section>
+<section class="slide" data-min="4">
+<p class="phase">Sicherung · Schema zeichnen</p>
+<h1 class="k">Zeichne den Austausch der Gase</h1>
+<span class="badge">4 Min. · allein, mit Stift · Arbeitsblatt S. 3</span>
+<div class="sc-grid"><div class="frame"><svg id="sch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 480" role="img" aria-label="Pflanze, Maus und Kerze ohne Pfeile für den Gasaustausch"><defs><marker id="ahs" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="22" refX="18" refY="11" orient="auto"><path d="M0 0 L22 11 L0 22 Z" fill="#1a1a1a"/></marker></defs><rect width="780" height="480" fill="#fff"/><circle cx="70" cy="56" r="30" fill="#e0e0e0" stroke="#1a1a1a" stroke-width="3"/><line x1="108.0" y1="56.0" x2="122.0" y2="56.0" stroke="#1a1a1a" stroke-width="3"/><line x1="102.9" y1="75.0" x2="115.0" y2="82.0" stroke="#1a1a1a" stroke-width="3"/><line x1="89.0" y1="88.9" x2="96.0" y2="101.0" stroke="#1a1a1a" stroke-width="3"/><line x1="70.0" y1="94.0" x2="70.0" y2="108.0" stroke="#1a1a1a" stroke-width="3"/><line x1="51.0" y1="88.9" x2="44.0" y2="101.0" stroke="#1a1a1a" stroke-width="3"/><line x1="37.1" y1="75.0" x2="25.0" y2="82.0" stroke="#1a1a1a" stroke-width="3"/><line x1="32.0" y1="56.0" x2="18.0" y2="56.0" stroke="#1a1a1a" stroke-width="3"/><line x1="37.1" y1="37.0" x2="25.0" y2="30.0" stroke="#1a1a1a" stroke-width="3"/><line x1="51.0" y1="23.1" x2="44.0" y2="11.0" stroke="#1a1a1a" stroke-width="3"/><line x1="70.0" y1="18.0" x2="70.0" y2="4.0" stroke="#1a1a1a" stroke-width="3"/><line x1="89.0" y1="23.1" x2="96.0" y2="11.0" stroke="#1a1a1a" stroke-width="3"/><line x1="102.9" y1="37.0" x2="115.0" y2="30.0" stroke="#1a1a1a" stroke-width="3"/><path d="M100 100 C 120 120, 130 140, 135 162" fill="none" stroke="#1a1a1a" stroke-width="5" marker-end="url(#ahs)"/><text x="150" y="106" text-anchor="start" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Licht</text><rect x="80" y="338" width="120" height="70" fill="#cfcfcf" stroke="#1a1a1a" stroke-width="3"/><rect x="70" y="326" width="140" height="18" fill="#bdbdbd" stroke="#1a1a1a" stroke-width="3"/><g><path d="M140 326 C 136 278, 144 242, 140 206" fill="none" stroke="#1a1a1a" stroke-width="3"/><ellipse cx="120" cy="302" rx="19" ry="8" transform="rotate(-25 120 302)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="160" cy="302" rx="19" ry="8" transform="rotate(25 160 302)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="120" cy="272" rx="19" ry="8" transform="rotate(-25 120 272)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="160" cy="272" rx="19" ry="8" transform="rotate(25 160 272)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="120" cy="242" rx="19" ry="8" transform="rotate(-25 120 242)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="160" cy="242" rx="19" ry="8" transform="rotate(25 160 242)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="120" cy="212" rx="19" ry="8" transform="rotate(-25 120 212)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="160" cy="212" rx="19" ry="8" transform="rotate(25 160 212)" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/><ellipse cx="140" cy="196" rx="8" ry="16" fill="#b5b5b5" stroke="#1a1a1a" stroke-width="2"/></g><text x="140" y="440" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="26" font-weight="bold" fill="#1a1a1a">Pflanze</text><g stroke="#1a1a1a" stroke-width="2.5" fill="#e6e6e6"><path d="M600 190 C 570 190, 562 154, 584 160" fill="none"/><ellipse cx="640" cy="170" rx="34" ry="24"/><circle cx="666" cy="146" r="16"/><circle cx="660" cy="132" r="8" fill="#cfcfcf"/><circle cx="671" cy="143" r="2.6" fill="#1a1a1a"/><circle cx="682" cy="148" r="3" fill="#1a1a1a"/></g><text x="640" y="232" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="26" font-weight="bold" fill="#1a1a1a">Maus</text><rect x="631" y="338" width="18" height="62" fill="#fff" stroke="#1a1a1a" stroke-width="2.5"/><line x1="640" y1="338" x2="640" y2="328" stroke="#1a1a1a" stroke-width="2.5"/><path class="smoke" d="M640 326 C 650 310, 630 300, 640 286 C 648 276, 634 268, 640 258" fill="none" stroke="#8a8a8a" stroke-width="3" stroke-dasharray="1 6" stroke-linecap="round"/><g class="flame on" style="transform-origin:640px 328px"><path d="M640 284 C 656 308, 652 326, 640 328 C 628 326, 624 308, 640 284 Z" fill="#d9d9d9" stroke="#1a1a1a" stroke-width="2.5"/><g stroke="#1a1a1a" stroke-width="2"><line x1="610" y1="305" x2="618" y2="308"/><line x1="670" y1="305" x2="662" y2="308"/><line x1="640" y1="270" x2="640" y2="276"/></g></g><text x="640" y="440" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="26" font-weight="bold" fill="#1a1a1a">Kerze</text><g class="lsgsvg"><path d="M215 205 C 320 135, 430 130, 545 150" fill="none" stroke="#1a1a1a" stroke-width="5" marker-end="url(#ahs)"/><text x="380" y="122" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Sauerstoff</text><path d="M550 205 C 450 240, 330 250, 225 235" fill="none" stroke="#1a1a1a" stroke-width="5" marker-end="url(#ahs)"/><text x="395" y="270" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Kohlenstoffdioxid</text><path d="M215 295 C 320 330, 430 345, 545 355" fill="none" stroke="#1a1a1a" stroke-width="5" marker-end="url(#ahs)"/><text x="385" y="372" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Sauerstoff</text><path d="M555 410 C 440 440, 320 420, 215 350" fill="none" stroke="#1a1a1a" stroke-width="5" marker-end="url(#ahs)"/><text x="385" y="455" text-anchor="middle" font-family="Andika, Verdana, Arial, sans-serif" font-size="24" fill="#1a1a1a">Kohlenstoffdioxid</text></g></svg></div>
+<div><p class="task s"><span class="snr">6</span><span><b>Zeichne</b> vier Pfeile ein und <b>beschrifte</b> sie mit Sauerstoff oder Kohlenstoffdioxid.</span><i class="lvl">●●○ E</i></p>
+<div class="shilfe" style="font-size:20px"><b>Frage dir bei jedem Pfeil:</b><br>Wer gibt das Gas ab? Wer nimmt es auf?<br><b>Wortspeicher:</b> Sau-er-stoff · Koh-len-stoff-di-oxid</div>
+<p class="tip" style="margin-top:10px">Auf dem Arbeitsblatt zeichnest du selbst. Hier zeichnet ein Kind mit dem Stift (Taste P).</p>
+<button class="b lz" data-zeige style="margin-top:10px">Lösung zeigen</button></div></div>
+</section>
+<section class="slide" data-min="2">
+<p class="phase">Sicherung · Partner prüft</p>
+<h1 class="k">Prüft euer Schema gegenseitig</h1>
+<span class="badge">2 Min. · Partnerarbeit</span>
+<p class="task s"><span class="snr">7</span><span><b>Prüfe</b> das Schema deines Partners mit der Checkliste. Tauscht die Blätter. Hake auf dem Blatt ab, was stimmt.</span><i class="lvl">●●○ E</i></p>
+<div data-checkliste class="cl"><div class="cp">Von der Pflanze gehen zwei Pfeile weg: zur Maus und zur Kerze.</div><div class="cp">An den Pfeilen von der Pflanze weg steht Sauerstoff.</div><div class="cp">Zur Pflanze führen zwei Pfeile: von der Maus und von der Kerze.</div><div class="cp">An den Pfeilen zur Pflanze hin steht Kohlenstoffdioxid.</div><p class="cz tip" style="margin:6px 0 0"></p></div>
+<div class="shilfe gelb" style="margin-top:14px;font-size:22px"><b>Sagt euch zum Schluss:</b> „Das ist dir gut gelungen: …“ und „Das kannst du noch verbessern: …“</div>
+</section>
+<section class="slide" data-min="4">
+<p class="phase">Sicherung · Merksatz</p>
+<h1 class="k">Unser Merksatz</h1>
+<span class="badge">4 Min. · Partnerarbeit, dann Plenum</span>
+<div class="ms-grid"><div><p class="task s"><span class="snr">8</span><span><b>Formuliere</b> mit deinem Partner einen Merksatz: Wie verändern Pflanzen die Luft? Schreibt ihn auf das Arbeitsblatt.</span><i class="lvl">●●○ E</i></p>
+<div class="shilfe" style="font-size:20px"><b>Satzbausteine:</b><br>Pflanzen nehmen bei der … auf.<br>Sie bilden …<br>Tiere und Kerzen verbrauchen … und geben … ab.</div></div>
+<div><p style="font-size:21px;margin:0 0 6px"><b>Das gehört in einen guten Merksatz</b> (die Klasse prüft):</p><div data-checkliste class="cl"><div class="cp">Fotosynthese wird genannt.</div><div class="cp">Pflanzen bilden Sauerstoff.</div><div class="cp">Pflanzen nehmen Kohlenstoffdioxid auf.</div><div class="cp">Tiere oder Kerzen liefern das Kohlenstoffdioxid.</div></div></div></div>
+<div class="merk" style="font-size:22px;margin-top:6px;padding:10px 20px"><b>Merksatz der Klasse:</b> <span class="lueck" contenteditable="true" style="min-width:560px" aria-label="Merksatz der Klasse"></span></div>
+<button class="lz" data-lz style="margin-top:6px">Vorschlag zeigen</button><div class="lz-box" style="font-size:19px;padding:6px 12px">Pflanzen nehmen bei der Fotosynthese Kohlenstoffdioxid auf und bilden Sauerstoff. Tiere und brennende Kerzen verbrauchen Sauerstoff und geben Kohlenstoffdioxid ab. So verändern Pflanzen die Luft.</div>
+</section>
+<section class="slide" data-min="4">
+<p class="phase">Reflexion · Exit-Ticket</p>
+<h1 class="k">Exit-Ticket</h1>
+<span class="badge">4 Min. · allein · Arbeitsblatt S. 3</span>
+<p class="tip" style="margin:-6px 0 8px">Unsere Frage von heute: <b data-leitfrage></b></p><div class="aufg"><p class="task" style="grid-template-columns:auto 1fr auto;align-items:center"><span class="snr">9</span><span>Ein Aquarium steht hell am Fenster. Es enthält Fische und Wasserpflanzen. <b>Erkläre</b> in zwei Sätzen, warum die Fische genug Sauerstoff haben.</span><span class="rc"><i class="lvl">●●○ E</i><button class="lz" data-lz>Lösung</button></span></p><div class="lz-box">Die Wasserpflanzen nehmen Kohlenstoffdioxid auf und bilden bei der Fotosynthese Sauerstoff (mit Licht). Die Fische atmen Sauerstoff ein und Kohlenstoffdioxid aus. So bekommen die Pflanzen wieder Kohlenstoffdioxid.</div></div><div class="shilfe" style="font-size:22px"><b>Satzanfang:</b> Die Pflanzen nehmen … auf und bilden … Die Fische …</div>
+</section>
+<section class="slide" data-min="2">
+<p class="phase">Reflexion · Selbsteinschätzung</p>
+<h1 class="k">Ich kann …</h1>
+<span class="badge">2 Min. · allein</span>
+<div data-selbst><p class="lead s" style="margin-bottom:12px">Tippe an, wie sicher du dich fühlst. Das ist nur für dich.</p><div class="sb"><span class="t">Ich kann <b>beschreiben</b>, was Priestley in seinem Versuch beobachtet hat.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div><div class="sb"><span class="t">Ich kann mit der Wortgleichung <b>erklären</b>, warum die Kerze in Glocke B wieder brennt.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div><div class="sb"><span class="t">Ich kann <b>erklären</b>, wie Pflanzen und Tiere die Luft gegenseitig verändern.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div></div>
+</section>
+<section class="slide">
+<p class="phase">Vertiefung · Erweiterung</p>
+<h1 class="k">Erweiterung ●●●</h1>
+<span class="badge">Für Schnelle · Arbeitsblatt S. 4</span>
+<div class="aufg"><p class="task" style="grid-template-columns:auto 1fr auto;align-items:center"><span class="snr">10</span><span>Eine Schülerin wiederholt den Versuch. Im Winter bei kurzen Tagen wird die Maus in Glocke B nach einiger Zeit wieder schwach. Im Sommer geschieht das nicht. <b>Stelle</b> eine Hypothese <b>auf</b>, die den Unterschied erklärt. Prüfe sie am Modell (nächste Folie).</span><span class="rc"><i class="lvl">●●● F</i><button class="lz" data-lz>Lösung</button></span></p><div class="lz-box">Im Winter ist es kürzer hell. Die Pflanze bekommt weniger Licht und bildet weniger Sauerstoff. Maus und Kerze verbrauchen mehr, als die Pflanze bildet. Im Sommer reicht der Sauerstoff.</div></div><div class="aufg"><p class="task" style="grid-template-columns:auto 1fr auto;align-items:center"><span class="snr">11</span><span><b>Begründe</b>, warum Priestley Glocke A ohne Pflanze braucht (Kontrollversuch).</span><span class="rc"><i class="lvl">●●● F</i><button class="lz" data-lz>Lösung</button></span></p><div class="lz-box">Glocke A zeigt, was ohne Pflanze geschieht. Nur im Vergleich sieht man, dass die Pflanze die Luft verändert und nicht die Zeit.</div></div><div class="aufg"><p class="task" style="grid-template-columns:auto 1fr auto;align-items:center"><span class="snr">12</span><span><b>Beurteile</b>, ob die Mäuse für den Versuch nötig waren.</span><span class="rc"><i class="lvl">●●● F</i><button class="lz" data-lz>Lösung</button></span></p><div class="lz-box">Die Kerze zeigt schon, ob Sauerstoff vorhanden ist. Die Maus zeigt zusätzlich, dass Tiere die Luft brauchen, aber nötig ist sie nicht. Jede begründete Beurteilung gilt.</div></div>
+</section>
+<section class="slide">
+<p class="phase">Vertiefung · Modell zu Aufgabe 10</p>
+<h1 class="k">Prüfe deine Hypothese am Modell</h1>
+<span class="badge">Modell, keine Messwerte</span>
+<div class="md-grid"><div class="ctl md-ctl"><label>Licht pro Tag: <b id="hh"></b> Stunden<input type="range" id="sl" min="4" max="16" value="12" aria-label="Stunden Licht pro Tag"></label><button class="b" id="w8">Winter (8 Stunden)</button><button class="b" id="s15">Sommer (15 Stunden)</button>
+<div class="bars"><p>Sauerstoff, den die Pflanze bildet</p><div class="bb" id="bb"></div><p>Sauerstoff, den Maus und Kerze verbrauchen</p><div class="bb vv" id="vv"></div></div></div>
+<div class="frame" style="text-align:center"><svg viewBox="0 0 180 90" style="width:70%" role="img" aria-label="Maus"><g id="mo"><g stroke="#1a1a1a" stroke-width="2.5" fill="#e6e6e6"><path d="M50 80 C 20 80, 12 44, 34 50" fill="none"/><ellipse cx="90" cy="60" rx="34" ry="24"/><circle cx="116" cy="36" r="16"/><circle cx="110" cy="22" r="8" fill="#cfcfcf"/><circle cx="121" cy="33" r="2.6" fill="#1a1a1a"/><circle cx="132" cy="38" r="3" fill="#1a1a1a"/></g></g><g id="ml"><g stroke="#1a1a1a" stroke-width="2.5" fill="#e6e6e6"><path d="M44 76 C 10 76, 2 58, 20 64" fill="none"/><ellipse cx="90" cy="68" rx="40" ry="16"/><circle cx="128" cy="70" r="14"/><circle cx="120" cy="58" r="7" fill="#cfcfcf"/><line x1="130" y1="66" x2="138" y2="66" stroke-width="2.5"/><circle cx="141" cy="74" r="2.8" fill="#1a1a1a"/></g></g></svg><p id="mm" style="font-size:24px;font-weight:700"></p><p class="tip">Die Schwelle im Modell ist ausgedacht, damit man den Zusammenhang sieht.</p></div></div>
+</section>
+<div id="nummer"></div>
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+
+<!-- Spielinhalte für die Belohnungsspiele. ENTWURF: Inhalte noch nicht gegengelesen. Nach dem fachlichen Gegenlesen "geprueft": true ergänzen und diesen Vermerk entfernen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Fotosynthese: Priestley und die Maus",
+ "paare": [
+  ["Fotosynthese", "Die Pflanze baut mit Licht Traubenzucker und Sauerstoff auf", "Fo-to-syn-the-se"],
+  ["Sauerstoff", "Gas, das die Pflanze bildet und das die Kerze zum Brennen braucht", "Sau-er-stoff"],
+  ["Kohlenstoffdioxid", "Gas, das die Pflanze aufnimmt und das Tiere ausatmen", "Koh-len-stoff-di-oxid"],
+  ["Hypothese", "Begründete Vermutung vor dem Versuch", "Hy-po-the-se"],
+  ["Kontrollversuch", "Vergleichsversuch ohne die Änderung, die man prüfen will", "Kon-troll-ver-such"],
+  ["Glasglocke", "Glas, das die Luft im Versuch abschließt", "Glas-glo-cke"],
+  ["verdorbene Luft", "Priestleys Name für Luft, in der eine Kerze erlischt"]
+ ],
+ "spiele": ["memory", "quiz", "zuordnen"]
+}
+</script>
+<script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+<script>
+(function () {
+  "use strict";
+  function $(id) { return document.getElementById(id); }
+  var T = [], V = [];
+  function tm(f, ms) { T.push(setTimeout(f, ms)); }
+  function stop() { T.forEach(clearTimeout); V.forEach(clearInterval); T = []; V = []; }
+  function msg(el, t, ok) { el.textContent = t; el.className = ok ? "ok-t" : "no-t"; }
+
+  /* Impuls: Kerze, Glocke, Pflanze */
+  function istep(n) {
+    if (n === 1) { $("st1").disabled = true; $("ib").classList.add("dn"); tm(function () { $("if0").classList.remove("on"); $("ism").classList.add("on"); $("s1").classList.add("show"); $("st2").disabled = false; }, 3200); }
+    if (n === 2) { $("st2").disabled = true; $("ipl").classList.add("on"); $("s2").classList.add("show"); tm(function () { $("st3").disabled = false; }, 900); }
+    if (n === 3) { $("st3").disabled = true; var d = 0, iv = setInterval(function () { d++; $("iday").textContent = "Tag " + d; if (d >= 7) { clearInterval(iv); $("iday").textContent = "Eine Woche später"; $("st4").disabled = false; } }, 450); V.push(iv); }
+    if (n === 4) { $("st4").disabled = true; $("s3").classList.add("show"); $("ism").classList.remove("on"); $("if0").classList.add("on"); tm(function () { $("s4").classList.add("show"); }, 1400); }
+  }
+  [1, 2, 3, 4].forEach(function (n) { $("st" + n).onclick = function () { istep(n); }; });
+  $("ir").onclick = function () {
+    stop(); $("ib").classList.remove("dn"); $("ipl").classList.remove("on"); $("if0").classList.add("on"); $("ism").classList.remove("on"); $("iday").textContent = "";
+    ["s1", "s2", "s3", "s4"].forEach(function (x) { $(x).classList.remove("show"); });
+    $("st1").disabled = false; ["st2", "st3", "st4"].forEach(function (x) { $(x).disabled = true; });
+  };
+
+  /* Versuch M2 */
+  var m2 = $("m2"), started = false;
+  function m2reset() {
+    stop(); started = false; m2.classList.remove("wk", "showp"); $("ptc").checked = false; $("ptc").disabled = true;
+    ["mAs", "mAl", "mBs"].forEach(function (x) { $(x).classList.remove("on"); });
+    ["fA", "fB"].forEach(function (x) { $(x).classList.remove("on"); }); ["smA", "smB"].forEach(function (x) { $(x).classList.add("on"); });
+    $("ttl").textContent = "Beginn: Die Kerzen sind erloschen";
+    $("bw").disabled = !$("hok").checked; $("bk").disabled = true; $("bm").disabled = true;
+    $("obs").classList.add("hid"); $("obsb").classList.add("hid"); ["o1", "o2", "o3", "o4"].forEach(function (k) { $(k).value = ""; $(k + "r").textContent = ""; }); $("om").textContent = "";
+  }
+  $("hok").onchange = function () { if (!started) $("bw").disabled = !$("hok").checked; };
+  $("bw").onclick = function () {
+    started = true; $("bw").disabled = true; var d = 0, iv = setInterval(function () {
+      d++; $("ttl").textContent = "Tag " + d;
+      if (d >= 7) { clearInterval(iv); m2.classList.add("wk"); $("ttl").textContent = "Nach einer Woche"; $("bk").disabled = false; }
+    }, 450); V.push(iv);
+  };
+  $("bk").onclick = function () {
+    $("bk").disabled = true; $("smA").classList.remove("on"); $("smB").classList.remove("on"); $("fA").classList.add("on"); $("fB").classList.add("on"); $("ttl").textContent = "Neue Kerzen werden angezündet";
+    tm(function () { $("fA").classList.remove("on"); $("smA").classList.add("on"); $("ttl").textContent = "Glocke A: Die Kerze erlischt. Glocke B: Sie brennt."; $("bm").disabled = false; }, 1800);
+  };
+  $("bm").onclick = function () {
+    $("bm").disabled = true; $("mAs").classList.add("on"); $("mBs").classList.add("on"); $("ttl").textContent = "Die Mäuse sind in den Glocken";
+    tm(function () { $("mAs").classList.remove("on"); $("mAl").classList.add("on"); $("ttl").textContent = "Beobachtung: Kerze und Maus"; $("obs").classList.remove("hid"); $("obsb").classList.remove("hid"); $("ptc").disabled = false; }, 1100);
+  };
+  $("ptc").onchange = function () { m2.classList.toggle("showp", $("ptc").checked); };
+  $("rs").onclick = m2reset; m2reset();
+  var OBS = { o1: "erlischt", o2: "liegt", o3: "brennt", o4: "sitzt" };
+  $("oc").onclick = function () {
+    var ok = 0, miss = 0;
+    Object.keys(OBS).forEach(function (k) {
+      var v = $(k).value, r = $(k + "r");
+      if (!v) { r.textContent = ""; miss++; } else if (v === OBS[k]) { r.textContent = " ✓"; r.className = "ok-t"; ok++; } else { r.textContent = " noch nicht"; r.className = "no-t"; }
+    });
+    $("om").textContent = ok === 4 ? "Alles richtig." : miss ? "Wähle in jeder Zeile eine Angabe." : "Sieh dir die Glocken noch einmal an.";
+  };
+
+  /* Modell zu Aufgabe 10 */
+  function mod() {
+    var h = +$("sl").value; $("hh").textContent = h;
+    $("bb").style.width = (h / 16 * 100) + "%"; $("vv").style.width = (9 / 16 * 100) + "%";
+    var ok = h >= 9; $("mm").textContent = ok ? "Die Maus bekommt genug Sauerstoff und ist munter." : "Es entsteht zu wenig Sauerstoff. Die Maus wird schwach.";
+    $("mo").style.display = ok ? "inline" : "none"; $("ml").style.display = ok ? "none" : "inline";
+  }
+  $("sl").oninput = mod; $("w8").onclick = function () { $("sl").value = 8; mod(); }; $("s15").onclick = function () { $("sl").value = 15; mod(); }; mod();
+})();
+</script>
+</body>
+</html>
