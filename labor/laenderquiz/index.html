@@ -49,5 +49,4 @@ path:hover{fill:#f4dd9a}path.ok{fill:#2a9d8f!important}path.bad{fill:#e76f51!imp
  $('reg').onchange=function(){if(L){bau($('reg').value);fragen=null;$('frage').textContent='Wähle die Aufgabe und starte ein neues Spiel.'}};
  fetch('../../daten/laender.json').then(function(r){return r.json()}).then(function(d){L=d.laender;bau('eu');$('quelle').textContent='Quelle: '+d.quelle}).catch(function(){$('frage').textContent='Die Kartendaten konnten nicht geladen werden (über einen Server öffnen).'});
 })();
-</script><script src="../labor.js" defer></script>
-</main></body></html>
+</script></main></body></html>

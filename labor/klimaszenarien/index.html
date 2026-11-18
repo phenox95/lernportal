@@ -2,8 +2,6 @@
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
 <title>Labor: Klimaszenarien</title><link rel="stylesheet" href="../labor.css">
 <style>
-@media (min-width:980px){.wb-bild .oben{grid-template-columns:1fr 1fr;gap:10px}.wb-bild #kz-energie{order:3}.wb-bild svg.d{max-height:calc(50vh - 70px)}.wb-bild #bud{font-size:15px;padding:8px 12px}.wb-bild .temp b{font-size:clamp(40px,6vw,64px)}}
-@media (max-width:979px){.wb-bild .oben{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:8px}.wb-bild .temp{padding:6px}.wb-bild .temp b{font-size:34px}.wb-bild .temp span{font-size:13px}.wb-bild .lg{font-size:12px}}
 .gruppen{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:12px 0}
 .gr{border:2px solid var(--g);border-radius:14px;padding:10px 14px}.gr h3{margin:0 0 6px;font-size:18px;color:var(--dk)}
 .rg{margin:8px 0}.rg label{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:15px}.rg output{font-weight:400;white-space:nowrap}input[type=range]{width:100%}
@@ -22,7 +20,7 @@ svg.d{width:100%;height:auto;display:block;border:2px solid var(--g);border-radi
 <div class="oben">
 <div><div class="temp" aria-live="polite"><span>Erwärmung bis 2100 gegenüber vorindustriell</span><b id="T">–</b><span id="Tb"></span></div>
 <p class="kasten" id="bud" aria-live="polite"></p></div>
-<div id="kz-energie"><svg class="d" id="s1" viewBox="0 0 520 340" role="img" aria-label="Energiequellen bis 2100"></svg><div class="lg" id="l1"></div></div>
+<div><svg class="d" id="s1" viewBox="0 0 520 340" role="img" aria-label="Energiequellen bis 2100"></svg><div class="lg" id="l1"></div></div>
 <div><svg class="d" id="s2" viewBox="0 0 520 340" role="img" aria-label="Treibhausgas-Emissionen bis 2100"></svg><div class="lg" id="l2"></div></div>
 </div>
 <div class="gruppen">
@@ -96,5 +94,4 @@ svg.d{width:100%;height:auto;display:block;border:2px solid var(--g);border-radi
  $('vgl').onclick=function(){VG=rechne(wert());zeichnen()};
  window.LPKlima={rechne:rechne,DEF:DEF};zeichnen();
 })();
-</script><script src="../labor.js" defer></script>
-</main></body></html>
+</script></main></body></html>

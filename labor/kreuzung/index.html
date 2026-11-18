@@ -37,5 +37,4 @@
   var h='<div class="bal" aria-hidden="true">';['violett','weiß'].forEach(function(k){h+='<div style="height:'+Math.max(2,c[k]/n*100)+'%;background:'+(k==='violett'?'#7b3fa0':'#b8b0a0')+'"><i>'+Math.round(c[k]/n*100)+' %</i></div>'});h+='</div><div class="leiste"><div class="col">violett<br>'+c.violett+'</div><div class="col">weiß<br>'+c['weiß']+'</div></div>';
   h+='<p class="kasten">Gewürfelt: '+c.violett+' violett, '+c['weiß']+' weiß von '+n+'. Erwartet: '+Math.round(exp.violett*100)+' % violett, '+Math.round(exp['weiß']*100)+' % weiß. Abweichung violett: '+(Math.round((c.violett/n-exp.violett)*1000)/10).toString().replace('.',',')+' Prozentpunkte.</p>';$('erg').innerHTML=h}
 })();
-</script><script src="../labor.js" defer></script>
-</main></body></html>
+</script></main></body></html>

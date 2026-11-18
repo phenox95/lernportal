@@ -31,12 +31,11 @@
   el('line',{x1:L,x2:R,y1:B,y2:B,stroke:ink,'stroke-width':1.5});el('line',{x1:L,x2:L,y1:T,y2:B,stroke:ink,'stroke-width':1.5});
   el('text',{x:(L+R)/2,y:490,'text-anchor':'middle','font-size':16,'font-weight':700,fill:ink},$('xn').value+(log?' (logarithmisch)':''));var yt=el('text',{x:18,y:(T+B)/2,'text-anchor':'middle','font-size':16,'font-weight':700,fill:ink,transform:'rotate(-90 18 '+(T+B)/2+')'},$('yn').value);
   var gs=[];P.forEach(function(p){if(gs.indexOf(p.g)<0)gs.push(p.g)});var mxs=Math.max.apply(null,P.map(function(p){return p.s}));
-  P.forEach(function(p,i){var c=PAL[gs.indexOf(p.g)%PAL.length],r=(matchMedia('(pointer:coarse)').matches?12:6)+Math.sqrt(p.s/mxs)*16;var cir=el('circle',{cx:X(log?Math.log10(Math.max(p.x,1e-9)):p.x),cy:Y(p.y),r:r,fill:c,'fill-opacity':.65,stroke:i===sel?ink:c,'stroke-width':i===sel?4:1.5,tabindex:0,role:'button','aria-label':p.n+': x '+p.x+', y '+p.y});
+  P.forEach(function(p,i){var c=PAL[gs.indexOf(p.g)%PAL.length],r=6+Math.sqrt(p.s/mxs)*16;var cir=el('circle',{cx:X(log?Math.log10(Math.max(p.x,1e-9)):p.x),cy:Y(p.y),r:r,fill:c,'fill-opacity':.65,stroke:i===sel?ink:c,'stroke-width':i===sel?4:1.5,tabindex:0,role:'button','aria-label':p.n+': x '+p.x+', y '+p.y});
    function pick(){sel=i;$('info').textContent=p.n+': x = '+z(p.x)+', y = '+z(p.y)+', Größe = '+z(p.s)+(p.g?', '+p.g:'');zeichnen()}cir.addEventListener('click',pick);cir.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}})});
   gs.forEach(function(g,i){if(!g)return;el('rect',{x:L+i*150,y:500,width:12,height:12,fill:PAL[i%PAL.length]});el('text',{x:L+i*150+18,y:511,'font-size':13,fill:ink},g)});
   $('tb').innerHTML=P.map(function(p){return '<tr><td>'+esc(p.n)+'</td><td>'+z(p.x)+'</td><td>'+z(p.y)+'</td><td>'+z(p.s)+'</td><td>'+esc(p.g)+'</td></tr>'}).join('')}
  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
  $('d').value=DEMO;['d','lx','xn','yn'].forEach(function(i){$(i).oninput=$(i).onchange=function(){sel=-1;zeichnen()}});zeichnen();
 })();
-</script><script src="../labor.js" defer></script>
-</main></body></html>
+</script></main></body></html>
