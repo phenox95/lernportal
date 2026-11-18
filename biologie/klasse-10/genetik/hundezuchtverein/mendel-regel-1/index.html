@@ -8,7 +8,7 @@
 <link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
 <title>Der Hundezuchtverein – Vertiefung: Mendels erste Regel</title>
-<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Kartenmodell, Mendels erste Regel (Uniformitätsregel), Kreuzungsquadrat, Genotyp und Phänotyp, Anwendung auf das Zuchtbuch.">
+<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Kartenmodell zum Ziehen, Mendels erste Regel (Uniformitätsregel), Kreuzungsquadrat, Genotyp und Phänotyp, Anwendung auf das Zuchtbuch.">
 <link rel="stylesheet" href="../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
@@ -59,6 +59,20 @@
 .mr-fotos img{width:100%;height:170px;object-fit:cover;display:block;border-radius:12px}
 .mr-fotos .cap{font-size:20px;font-weight:700;margin:6px 0 0}
 @media (max-width:820px){.mr-sch{grid-template-columns:1fr}.mr-sch>p:empty{display:none}.mr-f1{grid-template-columns:repeat(2,1fr)}.mr-row{flex-wrap:wrap;justify-content:center}.mr-tier{flex:1 1 100%!important;width:auto!important}}
+.mr-zahlen{display:flex;gap:8px;margin:0 0 0 44px}
+.mr-zahlen button{width:56px;height:48px;border-radius:12px;border:3px solid var(--g);background:#fff;font:inherit;font-weight:700;font-size:24px;color:var(--ink);cursor:pointer}
+.mr-zahlen button[aria-pressed=true]{background:var(--g);color:#fff}
+.mr-slots{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-left:44px}
+.mr-slot{border:3px dashed var(--grey);border-radius:12px;min-height:62px;display:grid;place-items:center;text-align:center;font-size:20px;line-height:1.2;color:var(--grey)}
+.mr-slot.voll{border:3px solid var(--g);background:var(--mint);color:var(--ink)}
+.mr-slot b{font-size:28px;display:block}
+.mr-ergebnis{margin:8px 0 0 44px;font-size:22px;font-weight:700;color:var(--dk);min-height:1.4em}
+.mr-st{display:none}.mr-st.an{display:block}.mr-keim.mr-st.an{display:flex}.mr-f1.mr-st.an{display:grid}
+.mr-eltern{display:flex;gap:10px;align-items:center;justify-content:center;font-size:20px;font-weight:700}
+.mr-eltern select{font:inherit;font-size:24px;padding:6px 10px;border:3px solid var(--g);border-radius:10px;background:#fff;color:var(--ink);min-height:48px}
+.mr-sum{margin:6px 0 0;font-size:21px;line-height:1.35;text-align:center;font-weight:700;color:var(--dk)}
+.mr-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mr-opts .opt{padding:8px 12px;font-size:21px;grid-template-columns:36px 1fr;gap:8px}.mr-opts .opt b{width:36px;height:36px;font-size:20px}
 </style>
 </head>
 <body class="lp-pres" data-root="../../../../../" data-title="Der Hundezuchtverein – Vertiefung: Mendels erste Regel" data-subject="Biologie" data-grade="Klasse 10">
@@ -88,14 +102,14 @@
 <p class="task big"><span class="snr">2</span><span><b>Nenne</b> ein Ergebnis eures Münzwurfs.</span><i class="lvl">D</i></p>
 <p class="shilfe">Logbuch, Feld „Do Now“. Allein und leise. Die Anweisung darf dir jemand vorlesen.</p>
 <div style="margin-top:16px"><button class="b lz" data-zeige>Abgleich zeigen</button></div>
-<div class="lsg-box mint pad" style="margin-top:14px;font-size:24px;line-height:1.4"><b>Kopf</b> = Anlage K (kurzes Fell). <b>Zahl</b> = Anlage l (langes Fell). Zwei Münzen = ein Welpe.<br><b>Neu ab heute:</b> Die Anlage für langes Fell schreiben wir <b>k</b> statt l. Gleicher Buchstabe, nur klein.</div>
+<div class="lsg-box mint pad" style="margin-top:14px;font-size:24px;line-height:1.4"><b>Kopf</b> = Anlage K (kurzes Fell). <b>Zahl</b> = Anlage l (langes Fell). Zwei Münzen = ein Welpe. Zwei verschiedene Anlagen (K und l) ergeben ein kurzhaariges Tier: K setzt sich durch.</div>
 </section>
 
 <!-- 3 IMPULS -->
-<section class="slide" data-min="2">
+<section class="slide" data-min="5">
 <p class="phase" data-ph="im">Impuls</p>
 <h1 class="k">Eine Zucht, ein Ergebnis</h1>
-<span class="badge">2 Min. · Plenum</span>
+<span class="badge">5 Min. · Plenum</span>
 <div class="mr-row" style="margin-top:6px">
 <div class="mr-tier"><b>Rüde</b>aus einer Linie, die seit Generationen nur kurzhaarige Welpen hat</div>
 <span class="mr-x" aria-label="gekreuzt mit">×</span>
@@ -106,18 +120,9 @@
 <div class="mr-welpen" role="list" aria-label="Acht Welpen, alle kurzhaarig">
 <span class="mr-welpe" role="listitem">kurz</span><span class="mr-welpe" role="listitem">kurz</span><span class="mr-welpe" role="listitem">kurz</span><span class="mr-welpe" role="listitem">kurz</span><span class="mr-welpe" role="listitem">kurz</span><span class="mr-welpe" role="listitem">kurz</span><span class="mr-welpe" role="listitem">kurz</span><span class="mr-welpe" role="listitem">kurz</span>
 </div>
-<p class="mr-q">Was fällt euch auf?</p>
+<p class="mr-q">Was fällt euch auf? Was überrascht euch?</p>
 <div class="mr-btns" style="justify-content:center"><button class="b sec" data-zeige>Weiterer Impuls</button></div>
 <div class="lsg-box mr-q" style="margin-top:8px">Passt das zu unserem Münzwurf?</div>
-</section>
-
-<!-- 4 FRAGENENTWICKLUNG -->
-<section class="slide" data-min="3">
-<p class="phase" data-ph="im">Fragenentwicklung</p>
-<h1 class="k">Welche Frage stellt sich euch?</h1>
-<span class="badge">3 Min. · Plenum</span>
-<div data-fragenfeld></div>
-<p class="tip">Tipp: Vergleicht mit eurem Münzwurf aus der letzten Stunde.</p>
 </section>
 
 <!-- 5 KARTENMODELL -->
@@ -126,15 +131,17 @@
 <h1 class="k">Prüft es mit Karten</h1>
 <span class="badge">7 Min. · Paare</span>
 <div class="mr-row">
-<div class="mr-tier" style="flex:none;width:230px"><b>Elter 1</b><span class="mr-an">K K</span></div>
+<div class="mr-tier" style="flex:none;width:200px"><b>Elter 1</b><span class="mr-an" style="font-size:40px">K K</span></div>
 <span class="mr-x" aria-label="gekreuzt mit">×</span>
-<div class="mr-tier dunkel" style="flex:none;width:230px"><b>Elter 2</b><span class="mr-an">k k</span></div>
+<div class="mr-tier dunkel" style="flex:none;width:200px"><b>Elter 2</b><span class="mr-an" style="font-size:40px">l l</span></div>
 <div class="shilfe" style="flex:1;margin:0;font-size:20px"><b>Modell M4:</b> Jeder Welpe bekommt von jedem Elterntier eine Anlage.</div>
 </div>
-<p class="task" style="margin-top:18px"><span class="snr">1</span><span><b>Leite</b> mit dem Modell M4 <b>ab</b>, wie die 8 Welpen aussehen, und schreibe deine Vorhersage auf.</span><i class="lvl">E–F</i></p>
-<div class="kasten" contenteditable="true" aria-label="Meine Vorhersage für die 8 Welpen" style="min-height:56px;margin:0 0 14px 44px"></div>
-<p class="task"><span class="snr">2</span><span><b>Ziehe</b> für jeden Welpen eine Karte von jedem Elter und <b>protokolliere</b> 8-mal.</span><i class="lvl">D–E</i></p>
-<p class="shilfe">Logbuch, Feld „Kartenmodell“: Vorhersage, Strichliste, Ergebnis. Karten zurücklegen, dann neu ziehen.</p>
+<p class="task s" style="margin-top:14px"><span class="snr">1</span><span><b>Leite</b> mit dem Modell M4 <b>ab</b>, wie viele der 8 Welpen langes Fell haben. Tippe deine Vorhersage an.</span><i class="lvl">E–F</i></p>
+<div class="mr-zahlen" id="mrVor" role="group" aria-label="Vorhersage: Welpen mit langem Fell"></div>
+<p class="task s" style="margin-top:12px"><span class="snr">2</span><span><b>Ziehe</b> für jeden Welpen eine Karte von jedem Elter (mit Papierkarten oder hier) und <b>protokolliere</b> 8-mal.</span><i class="lvl">D–E</i></p>
+<div class="mr-btns" style="margin:0 0 8px 44px"><button class="b" id="mrZieh">Welpe ziehen</button><button class="b sec" id="mrAlle">Alle 8 ziehen</button><button class="b sec" id="mrNeu">Neu beginnen</button></div>
+<div class="mr-slots" id="mrSlots" aria-live="polite"></div>
+<p class="mr-ergebnis" id="mrErg">Noch nichts gezogen.</p>
 </section>
 
 <!-- 6 ABGLEICH -->
@@ -142,14 +149,14 @@
 <p class="phase" data-ph="er">Abgleich · Auswertung</p>
 <h1 class="k">Das Ergebnis der Karten</h1>
 <span class="badge">Plenum</span>
-<p class="lead s">Nennt euer Ergebnis. <b>Vergleicht</b> es mit eurer Vorhersage. Was bedeutet das für die Anlage k?</p>
+<p class="lead s">Nennt euer Ergebnis. <b>Vergleicht</b> es mit eurer Vorhersage. Was bedeutet das für die Anlage l?</p>
 <div style="margin-top:8px"><button class="b lz" data-zeige>Ergebnis zeigen</button></div>
 <div class="lsg-box" style="margin-top:14px">
-<div class="mr-welpen" role="list" aria-label="Acht Welpen, alle Kk"><span class="mr-welpe k" role="listitem">Kk</span><span class="mr-welpe k" role="listitem">Kk</span><span class="mr-welpe k" role="listitem">Kk</span><span class="mr-welpe k" role="listitem">Kk</span><span class="mr-welpe k" role="listitem">Kk</span><span class="mr-welpe k" role="listitem">Kk</span><span class="mr-welpe k" role="listitem">Kk</span><span class="mr-welpe k" role="listitem">Kk</span></div>
-<p class="mr-q" style="margin:12px 0 14px;font-size:30px">Alle Welpen: Kk. Alle kurzhaarig. Alle gleich.</p>
+<div class="mr-welpen" role="list" aria-label="Acht Welpen, alle Kl"><span class="mr-welpe k" role="listitem">Kl</span><span class="mr-welpe k" role="listitem">Kl</span><span class="mr-welpe k" role="listitem">Kl</span><span class="mr-welpe k" role="listitem">Kl</span><span class="mr-welpe k" role="listitem">Kl</span><span class="mr-welpe k" role="listitem">Kl</span><span class="mr-welpe k" role="listitem">Kl</span><span class="mr-welpe k" role="listitem">Kl</span></div>
+<p class="mr-q" style="margin:12px 0 14px;font-size:30px">Alle Welpen: Kl. Alle kurzhaarig. Alle gleich.</p>
 <div class="grid2">
 <div class="karte"><h3>Münzwurf (letzte Stunde)</h3><p>Der Zufall entscheidet, ob ein Welpe langes Fell hat.</p></div>
-<div class="karte"><h3>Kartenmodell (heute)</h3><p>Kein Zufall: Jede Ziehung ergibt K und k. Die Anlagen vermischen sich nicht: Kk ist nicht „halb kurz“.</p></div>
+<div class="karte"><h3>Kartenmodell (heute)</h3><p>Kein Zufall: Jede Ziehung ergibt K und l. Die Anlagen vermischen sich nicht: Kl ist nicht „halb kurz“.</p></div>
 </div>
 </div>
 </section>
@@ -169,24 +176,24 @@
 </section>
 
 <!-- 8 SCHEMA -->
-<section class="slide">
+<section class="slide" id="mrSchema">
 <p class="phase" data-ph="si">Input · Schema</p>
 <h1 class="k">Vom Elterntier zum Welpen</h1>
 <span class="badge">Input</span>
 <div class="mr-sch">
 <p class="mr-lbl">P (Eltern)</p>
 <div class="mr-row" style="justify-content:center">
-<div class="mr-tier" style="flex:none;width:300px"><span class="mr-an" style="font-size:40px">K K<small>kurzhaarig, reinerbig</small></span></div><span class="mr-x">×</span><div class="mr-tier dunkel" style="flex:none;width:300px"><span class="mr-an" style="font-size:40px">k k<small>langhaarig, reinerbig</small></span></div>
+<div class="mr-tier" style="flex:none;width:300px"><span class="mr-an" style="font-size:40px">K K<small>kurzhaarig, reinerbig</small></span></div><span class="mr-x">×</span><div class="mr-tier dunkel" style="flex:none;width:300px"><span class="mr-an" style="font-size:40px">l l<small>langhaarig, reinerbig</small></span></div>
 </div>
-<p></p><p class="mr-pfeil" aria-hidden="true">▼ ▼</p>
-<p class="mr-lbl">Keimzellen</p>
-<div class="mr-keim"><span class="mr-kreis">K</span><span>geben je eine Anlage weiter</span><span class="mr-kreis">k</span></div>
-<p></p><p class="mr-pfeil lsg-box" aria-hidden="true">▼</p>
-<p class="mr-lbl lsg-box">F1 (Welpen)</p>
-<div class="mr-f1 lsg-box"><span class="mr-welpe k">Kk</span><span class="mr-welpe k">Kk</span><span class="mr-welpe k">Kk</span><span class="mr-welpe k">Kk</span></div>
+<p class="mr-st" data-st="1"></p><p class="mr-pfeil mr-st" data-st="1" aria-hidden="true">▼ ▼</p>
+<p class="mr-lbl mr-st" data-st="1">Keimzellen</p>
+<div class="mr-keim mr-st" data-st="1"><span class="mr-kreis">K</span><span>geben je eine Anlage weiter</span><span class="mr-kreis">l</span></div>
+<p class="mr-st" data-st="2"></p><p class="mr-pfeil mr-st" data-st="2" aria-hidden="true">▼</p>
+<p class="mr-lbl mr-st" data-st="2">F1 (Welpen)</p>
+<div class="mr-f1 mr-st" data-st="2"><span class="mr-welpe k">Kl</span><span class="mr-welpe k">Kl</span><span class="mr-welpe k">Kl</span><span class="mr-welpe k">Kl</span></div>
 </div>
-<div class="mr-btns" style="margin-top:10px"><button class="b lz" data-zeige>Welpen zeigen</button></div>
-<p class="lsg-box mr-q" style="margin:10px 0 0;font-size:30px">Alle Welpen: Kk, alle kurzhaarig. Alle gleich = uniform.</p>
+<div class="mr-btns" style="margin-top:10px"><button class="b lz" id="mrSchritt">Nächster Schritt: Keimzellen</button></div>
+<p class="mr-q mr-st" data-st="2" style="margin:10px 0 0;font-size:30px">Alle Welpen: Kl, alle kurzhaarig. Alle gleich = uniform.</p>
 </section>
 
 <!-- 9 KREUZUNGSQUADRAT UND BEGRIFFE -->
@@ -196,19 +203,17 @@
 <span class="badge">Input</span>
 <div class="split eq2" style="grid-template-columns:420px 1fr;gap:32px">
 <div>
-<table class="mr-kk" aria-label="Kreuzungsquadrat: oben die Anlagen von KK, links die Anlagen von kk, in allen vier Feldern Kk">
-<tr><th class="e"></th><th scope="col">K</th><th scope="col">K</th></tr>
-<tr><th scope="row">k</th><td>Kk</td><td>Kk</td></tr>
-<tr><th scope="row">k</th><td>Kk</td><td>Kk</td></tr>
-</table>
-<p class="muted" style="margin-top:14px;font-size:20px">Oben: Anlagen von KK. Links: Anlagen von kk. Alle vier Felder gleich: nur eine Kombination.</p>
+<div class="mr-eltern"><label>Elter 1 <select id="mrA"><option>KK</option><option>Kl</option><option>ll</option></select></label><span class="mr-x" style="font-size:30px">×</span><label>Elter 2 <select id="mrB"><option>KK</option><option>Kl</option><option selected>ll</option></select></label></div>
+<table class="mr-kk" id="mrQ" aria-label="Kreuzungsquadrat"></table>
+<p class="mr-sum" id="mrSum" aria-live="polite"></p>
+<p class="muted" style="margin-top:8px;font-size:19px">Oben: Anlagen von Elter 1. Links: Anlagen von Elter 2. Ändere die Eltern und probiere aus.</p>
 </div>
 <dl class="mr-begr">
-<dt>reinerbig</dt><dd>beide Anlagen gleich (KK, kk)</dd>
-<dt>mischerbig</dt><dd>zwei verschiedene Anlagen (Kk)</dd>
+<dt>reinerbig</dt><dd>beide Anlagen gleich (KK, ll)</dd>
+<dt>mischerbig</dt><dd>zwei verschiedene Anlagen (Kl)</dd>
 <dt>dominant</dt><dd>setzt sich durch (K)</dd>
-<dt>rezessiv</dt><dd>bleibt versteckt (k)</dd>
-<dt>Genotyp</dt><dd>die Anlagen (Kk)</dd>
+<dt>rezessiv</dt><dd>bleibt versteckt (l)</dd>
+<dt>Genotyp</dt><dd>die Anlagen (Kl)</dd>
 <dt>Phänotyp</dt><dd>was man sieht (kurz)</dd>
 <dt>uniform</dt><dd>alle gleich</dd>
 <dt>P / F1</dt><dd>Eltern / ihre Kinder</dd>
@@ -223,17 +228,18 @@
 <h1 class="k">Aufgaben</h1>
 <span class="badge">10 Min. · allein</span>
 <p class="task s"><span class="snr">1</span><span><b>Beschreibe</b> Mendels Kreuzung aus M1 in zwei Sätzen.</span><i class="lvl">E</i></p>
-<p class="task s"><span class="snr">2</span><span><b>Erkläre</b> mit dem Kreuzungsquadrat, warum alle Welpen aus KK × kk den Genotyp Kk haben.</span><i class="lvl">F</i></p>
+<p class="task s"><span class="snr">2</span><span><b>Erkläre</b> mit dem Kreuzungsquadrat, warum alle Welpen aus KK × ll den Genotyp Kl haben.</span><i class="lvl">F</i></p>
 <p class="task s"><span class="snr">3</span><span><b>Bestimme</b> Genotyp und Phänotyp der F1 aus RR (rund) × rr (runzlig). Rund ist dominant.</span><i class="lvl">F–G</i></p>
 <p class="task s"><span class="snr">5</span><span>Wer schnell fertig ist: <b>Vergleiche</b> die Regel mit dem Münzwurf. Warum spielt der Zufall hier keine Rolle?</span><i class="lvl">H</i></p>
 <p class="shilfe" style="font-size:20px;padding:8px 14px">Infoblatt Seite 3: Aufgaben mit Schreiblinien.</p>
-<div class="mr-btns"><button class="b sec" id="mrHilfe">Hilfe zu Aufgabe 2: Stufe 1 zeigen</button><button class="b lz" data-zeige>Lösungen zeigen</button></div>
+<div class="mr-btns"><button class="b sec" id="mrHilfe">Hilfe zu Aufgabe 2: Stufe 1 zeigen</button><button class="b sec" id="mrPr">Aufgabe 3 prüfen</button><button class="b lz" data-zeige>Lösungen zeigen</button></div>
+<div class="mr-hilfe-box mint pad" id="mrPrBox"><div data-quiz><div class="mr-opts"><button class="opt" data-fb="Nein. RR gibt nur R, rr gibt nur r. Jeder Nachkomme bekommt R und r."><b>A</b><span>RR, rund</span></button><button class="opt" data-ok data-fb="Richtig. Alle F1 sind Rr. R setzt sich durch, also sind alle rund."><b>B</b><span>Rr, rund</span></button><button class="opt" data-fb="Nein. Rr heißt: R ist da, R ist dominant. Dann sind die Erbsen rund."><b>C</b><span>Rr, runzlig</span></button><button class="opt" data-fb="Nein. rr hätte kein R. Aber jeder Nachkomme bekommt ein R vom einen Elter."><b>D</b><span>rr, runzlig</span></button></div><p class="qfb" aria-live="polite" style="margin:6px 0 0;font-size:21px;min-height:1.4em"></p></div></div>
 <div class="mr-hilfe-box mint pad" id="mrHilfeBox">
-<span data-s>Wohin schauen: Infoblatt Seite 2, das Kreuzungsquadrat.</span>
-<span data-s>Wie vorgehen: Schreibe über das Quadrat die Anlagen von KK und links die von kk. Schreibe in jedes Feld die zwei Anlagen, die sich treffen.</span>
+<span data-s>Wohin schauen: die Folie davor, das Kreuzungsquadrat.</span>
+<span data-s>Wie vorgehen: Schreibe über das Quadrat die Anlagen von KK und links die von ll. Schreibe in jedes Feld die zwei Anlagen, die sich treffen.</span>
 <span data-s>Teilergebnis: In jedem Feld steht ______.</span>
 </div>
-<div class="lsg-box mint pad" style="margin-top:8px;font-size:21px;line-height:1.35"><b>1</b> Mendel kreuzte runde mit runzligen Erbsen. Alle F1 waren rund. · <b>2</b> KK gibt nur K, kk gibt nur k. In jedes Feld kommt K und k: alle Kk. · <b>3</b> F1: Rr, alle rund.</div>
+<div class="lsg-box mint pad" style="margin-top:8px;font-size:21px;line-height:1.35"><b>1</b> Mendel kreuzte runde mit runzligen Erbsen. Alle F1 waren rund. · <b>2</b> KK gibt nur K, ll gibt nur l. In jedes Feld kommt K und l: alle Kl. · <b>3</b> F1: Rr, alle rund.</div>
 </section>
 
 <!-- 11 TRANSFER -->
@@ -260,11 +266,10 @@
 <div class="mr-3">
 <div class="karte"><h3>Was folgt daraus?</h3><div class="kasten" contenteditable="true" aria-label="Was folgt daraus?"></div><p class="antw">Eine Anlage kann versteckt sein (H2 aus Stunde 2).</p></div>
 <div class="karte"><h3>Was folgt daraus nicht?</h3><div class="kasten" contenteditable="true" aria-label="Was folgt daraus nicht?"></div><p class="antw">Dass das Zuchtbuch falsch ist.</p></div>
-<div class="karte"><h3>Welche andere Erklärung bleibt?</h3><div class="kasten" contenteditable="true" aria-label="Welche andere Erklärung bleibt?"></div><p class="antw">Beide Eltern tragen k (Kk).</p></div>
+<div class="karte"><h3>Welche andere Erklärung bleibt?</h3><div class="kasten" contenteditable="true" aria-label="Welche andere Erklärung bleibt?"></div><p class="antw">Beide Eltern tragen l (Kl).</p></div>
 </div>
 <div class="mr-btns"><button class="b lz" data-zeige>Antworten zeigen</button></div>
-<div class="lsg-box mint pad" style="margin-top:10px;font-size:23px;line-height:1.35"><b>Zwei Welpen mit gleichem Fell können verschiedene Genotypen haben: KK oder Kk.</b></div>
-<p class="tip" style="margin-top:8px">Unsere Frage von heute: <b data-leitfrage></b></p>
+<div class="lsg-box mint pad" style="margin-top:10px;font-size:23px;line-height:1.35"><b>Zwei Welpen mit gleichem Fell können verschiedene Genotypen haben: KK oder Kl.</b></div>
 </section>
 
 <!-- 13 MERKSATZ -->
@@ -290,11 +295,11 @@
  "titel": "Mendels erste Regel",
  "geprueft": false,
  "paare": [
-  ["reinerbig", "Beide Anlagen für ein Merkmal sind gleich (KK oder kk)", "rein-er-big"],
-  ["mischerbig", "Die zwei Anlagen für ein Merkmal sind verschieden (Kk)", "misch-er-big"],
+  ["reinerbig", "Beide Anlagen für ein Merkmal sind gleich (KK oder ll)", "rein-er-big"],
+  ["mischerbig", "Die zwei Anlagen für ein Merkmal sind verschieden (Kl)", "misch-er-big"],
   ["dominant", "Diese Anlage setzt sich durch (K)", "do-mi-nant"],
-  ["rezessiv", "Diese Anlage bleibt versteckt, geht aber nicht verloren (k)", "re-zes-siv"],
-  ["Genotyp", "Die Anlagen eines Lebewesens (Kk)", "Ge-no-typ"],
+  ["rezessiv", "Diese Anlage bleibt versteckt, geht aber nicht verloren (l)", "re-zes-siv"],
+  ["Genotyp", "Die Anlagen eines Lebewesens (Kl)", "Ge-no-typ"],
   ["Phänotyp", "Das, was man von außen sieht (kurzes Fell)", "Phä-no-typ"],
   ["uniform", "Alle Nachkommen sind gleich", "uni-form"],
   ["F1", "Die erste Generation der Kinder nach einer Kreuzung"]
@@ -311,6 +316,38 @@ if(b&&box){var st=[].slice.call(box.querySelectorAll("[data-s]")),n=0;
  st.forEach(function(s){s.style.display="none"});
  b.onclick=function(){if(n>=st.length)return;box.classList.add("on");st.forEach(function(s){s.style.display="none"});st[n].style.display="block";n++;
   b.textContent=n<st.length?"Hilfe zu Aufgabe 2: Stufe "+(n+1)+" zeigen":"Alle Stufen offen";if(n>=st.length)b.disabled=true}}
+})();
+
+/* Kartenmodell, Schema, Kreuzungsquadrat, Prüfen */
+(function(){
+var $=function(s){return document.getElementById(s)};
+/* Kartenmodell: Elter 1 = KK, Elter 2 = ll. Jede Ziehung ergibt K und l. */
+var vor=$("mrVor"),sl=$("mrSlots"),erg=$("mrErg"),pred=null,n=0,N=8,i;
+if(vor&&sl){
+ for(i=0;i<=N;i++){(function(k){var b=document.createElement("button");b.type="button";b.textContent=k;b.setAttribute("aria-pressed","false");b.setAttribute("aria-label",k+" Welpen mit langem Fell");b.onclick=function(){pred=k;[].forEach.call(vor.children,function(c){c.setAttribute("aria-pressed",c===b?"true":"false")});text()};vor.appendChild(b)})(i)}
+ for(i=0;i<N;i++){var d=document.createElement("div");d.className="mr-slot";d.textContent="Welpe "+(i+1);sl.appendChild(d)}
+ function text(){
+  if(!n){erg.textContent=pred===null?"Noch nichts gezogen.":"Vorhersage: "+pred+" langhaarig. Jetzt ziehen.";return}
+  var t=n+" von 8 gezogen, 0 mit langem Fell. Die Karten ergeben immer K und l.";
+  if(n===N&&pred!==null)t+=pred===0?" Deine Vorhersage 0 stimmt.":" Du hattest "+pred+" vorhergesagt: Das war nicht der Fall.";
+  erg.textContent=t}
+ function eins(){if(n>=N)return;var s=sl.children[n++];s.className="mr-slot voll";s.innerHTML="<b>K l</b>kurz";text()}
+ $("mrZieh").onclick=eins;$("mrAlle").onclick=function(){while(n<N)eins()};
+ $("mrNeu").onclick=function(){n=0;[].forEach.call(sl.children,function(s,k){s.className="mr-slot";s.textContent="Welpe "+(k+1)});text()};
+}
+/* Schema in Schritten */
+var sb=$("mrSchritt");
+if(sb){var step=0,lab=["Nächster Schritt: Keimzellen","Nächster Schritt: Welpen","Alles zu"];
+ sb.onclick=function(){step=(step+1)%3;[].forEach.call(document.querySelectorAll("#mrSchema .mr-st"),function(e){e.classList.toggle("an",+e.getAttribute("data-st")<=step)});sb.textContent=step===0?lab[0]:step===1?lab[1]:"Von vorn"}}
+/* Kreuzungsquadrat */
+var A=$("mrA"),B=$("mrB"),Q=$("mrQ"),S=$("mrSum");
+function ord(x,y){return x===y||x==="K"?x+y:y+x}
+function quad(){var a=A.value.split(""),b=B.value.split(""),h="<tr><th class='e'></th><th scope='col'>"+a[0]+"</th><th scope='col'>"+a[1]+"</th></tr>",g={},p={kurz:0,lang:0};
+ b.forEach(function(x){h+="<tr><th scope='row'>"+x+"</th>";a.forEach(function(y){var o=ord(y,x);g[o]=(g[o]||0)+1;p[o.indexOf("K")>=0?"kurz":"lang"]++;h+="<td>"+o+"</td>"});h+="</tr>"});
+ Q.innerHTML=h;
+ S.textContent="Genotypen: "+Object.keys(g).map(function(k){return g[k]+"× "+k}).join(", ")+" · Phänotypen: "+(p.kurz?p.kurz+"× kurz":"")+(p.kurz&&p.lang?", ":"")+(p.lang?p.lang+"× lang":"")}
+if(A&&B){A.onchange=B.onchange=quad;quad()}
+var pr=$("mrPr"),pb=$("mrPrBox"),hb=$("mrHilfeBox");if(pr&&pb)pr.onclick=function(){hb.classList.remove("on");pb.classList.toggle("on")};if($("mrHilfe"))$("mrHilfe").addEventListener("click",function(){pb.classList.remove("on")});
 })();
 </script>
 <script src="../../../../../assets/js/stunde.js" defer></script>
