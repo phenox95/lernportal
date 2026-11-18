@@ -730,6 +730,20 @@
     "begriffe": true
   },
   {
+    "title": "Der Hundezuchtverein – Vertiefung: Mendels erste Regel",
+    "description": "Do Now, Impuls und Fragenentwicklung, Kartenmodell, Uniformitätsregel, Kreuzungsquadrat mit Genotyp und Phänotyp, Anwendung auf das Zuchtbuch, Merksatz.",
+    "type": "Interaktive Präsentation",
+    "path": "biologie/klasse-10/genetik/hundezuchtverein/mendel-regel-1/",
+    "subject": "Biologie",
+    "grade": "Klasse 10",
+    "themenfeld": "3.7",
+    "reihe": "Der Hundezuchtverein",
+    "folge": 3,
+    "dauer": "45 Min.",
+    "datum": "2026-11-18",
+    "sichtbar": true
+  },
+  {
     "title": "Erdbeben – Stunde 4: Alarm für Tokio",
     "description": "Do Now, Impuls mit Meldungen aus Japan, Fragenentwicklung, Rollen der Erdbebenkonferenz vorbereiten, Beobachtungsaufgabe.",
     "type": "Materialseite",
