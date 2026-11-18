@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Labor: Klimaszenarien</title><link rel="stylesheet" href="../labor.css">
+<style>
+.gruppen{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:12px 0}
+.gr{border:2px solid var(--g);border-radius:14px;padding:10px 14px}.gr h3{margin:0 0 6px;font-size:18px;color:var(--dk)}
+.rg{margin:8px 0}.rg label{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:15px}.rg output{font-weight:400;white-space:nowrap}input[type=range]{width:100%}
+.oben{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px;align-items:start}
+svg.d{width:100%;height:auto;display:block;border:2px solid var(--g);border-radius:14px;background:#fff}@media (prefers-color-scheme:dark){svg.d{background:#0d1b2a}}
+.temp{border:3px solid var(--g);border-radius:16px;padding:14px;text-align:center}.temp b{display:block;font-size:clamp(44px,9vw,76px);line-height:1;color:var(--dk)}
+.leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.tag{display:inline-block;padding:1px 8px;border-radius:8px;background:#f6e3b8;color:#1A2B24;font-size:13px;font-weight:700}
+.lg{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:14px;margin:6px 0}.lg i{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid #0006;margin-right:5px;vertical-align:-2px}
+</style></head>
+<body><main>
+<a class="zurueck" href="../">← Labor</a>
+<h1>Klimaszenarien: Wie kommen wir zu 1,5 oder 2 Grad?</h1>
+<div class="kasten"><b>Systeme erschließen, Urteilen (Geo 3.6 Klimawandel, Stufe F bis H):</b> <b>Sage vorher</b>, welcher Regler die Erwärmung am stärksten senkt. <b>Verändere</b> Regler einzeln und dann kombiniert und <b>vergleiche</b> die Szenarien mit der Basislinie. <b>Erkläre</b> mit der Kaya-Gleichung (Bevölkerung mal Wohlstand mal Energieintensität mal Kohlenstoffintensität), warum Emissionen steigen oder sinken. <b>Beurteile</b> die Grenzen dieses Lehrmodells und vergleiche mit dem echten Simulator En-ROADS.</div>
+<p class="kasten warn"><b>Lehrmodell, kein En-ROADS und keine Vorhersage.</b> Aufbau und Größenordnungen folgen dem frei lizenzierten <a href="https://docs.climateinteractive.org/projects/en-roads/en/latest/guide/structure.html" rel="noopener noreferrer" target="_blank">En-ROADS User Guide</a> von Climate Interactive (CC BY 4.0): Energie-CO₂ (etwa 67 %), Landnutzung (etwa 7 %) und andere Gase (etwa 26 %), Energie-CO₂ nach der Kaya-Gleichung, Bevölkerung etwa 10,2 Milliarden am Ende des Jahrhunderts. Die Rechnung ist selbst gebaut und <b>viel einfacher</b>: keine Kosten, keine Trägheit, keine Rückkopplungen, die <b>Wirkung der Regler ist angenommen</b>. Die <b>Startwerte</b> (Emissionen 2024, Energie, Erwärmung) habe ich am 18.11.2026 an Quellen geprüft, siehe „Startwerte und Rechenweg“. Die Basislinie ist an den Verlauf von En-ROADS angelehnt, nicht an eine Prognose.</p>
+<div class="leiste"><b>Szenarien:</b><button type="button" class="sek" data-p="basis">Basislinie</button><button type="button" class="sek" data-p="kohle">Kohleausstieg 2040</button><button type="button" class="sek" data-p="eff">Nur Effizienz</button><button type="button" class="sek" data-p="erneu">Schneller Umbau der Energie</button><button type="button" class="sek" data-p="alles">Alles zusammen</button><button type="button" id="vgl">Als Vergleich merken</button></div>
+<div class="oben">
+<div><div class="temp" aria-live="polite"><span>Erwärmung bis 2100 gegenüber vorindustriell</span><b id="T">–</b><span id="Tb"></span></div>
+<p class="kasten" id="bud" aria-live="polite"></p></div>
+<div><svg class="d" id="s1" viewBox="0 0 520 340" role="img" aria-label="Energiequellen bis 2100"></svg><div class="lg" id="l1"></div></div>
+<div><svg class="d" id="s2" viewBox="0 0 520 340" role="img" aria-label="Treibhausgas-Emissionen bis 2100"></svg><div class="lg" id="l2"></div></div>
+</div>
+<div class="gruppen">
+<div class="gr"><h3>Wachstum</h3>
+<div class="rg"><label for="pop">Bevölkerung 2100 <output id="popo"></output></label><input type="range" id="pop" min="7" max="12" step="0.1" value="10.2"></div>
+<div class="rg"><label for="gdp">Wirtschaftswachstum je Kopf <output id="gdpo"></output></label><input type="range" id="gdp" min="0" max="3.5" step="0.1" value="2.2"></div></div>
+<div class="gr"><h3>Energie</h3>
+<div class="rg"><label for="eff">Effizienz: Energie je Wirtschaftsleistung sinkt um <output id="effo"></output></label><input type="range" id="eff" min="0" max="4" step="0.1" value="1.6"></div>
+<div class="rg"><label for="lc">Umbau: emissionsfreier Anteil wächst um <output id="lco"></output></label><input type="range" id="lc" min="0" max="2" step="0.05" value="0.3"></div>
+<div class="rg"><label for="ky">Kohleausstieg bis <output id="kyo"></output></label><input type="range" id="ky" min="2030" max="2105" step="5" value="2105"></div></div>
+<div class="gr"><h3>Landnutzung und andere Gase</h3>
+<div class="rg"><label for="ent">Entwaldung und Landnutzung: Minderung bis 2050 <output id="ento"></output></label><input type="range" id="ent" min="0" max="100" step="5" value="0"></div>
+<div class="rg"><label for="ag">Landwirtschaft, Methan, Abfall: Minderung bis 2050 <output id="ago"></output></label><input type="range" id="ag" min="0" max="80" step="5" value="0"></div></div>
+<div class="gr"><h3>CO₂ aus der Luft entfernen</h3>
+<div class="rg"><label for="nat">Natürlich (Wälder, Böden) bis 2075 <output id="nato"></output></label><input type="range" id="nat" min="0" max="5" step="0.25" value="0"></div>
+<div class="rg"><label for="tec">Technisch bis 2075 <output id="teco"></output></label><input type="range" id="tec" min="0" max="5" step="0.25" value="0"></div></div>
+</div>
+<details open><summary><b>Startwerte und Rechenweg</b> (am 18.11.2026 an Quellen geprüft)</summary>
+<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%;min-width:620px;font-size:15px"><thead><tr><th style="text-align:left">Wert im Modell</th><th style="text-align:left">Quelle und Befund</th><th style="text-align:left">Status</th></tr></thead><tbody>
+<tr><td>Energie-CO₂ 2024: etwa 36,8 Mrd. t (Kohle 15,7, Öl 12,6, Gas 8,0, Abfackeln 0,4)</td><td>Our World in Data CO₂-Datensatz (Global Carbon Project, Energy Institute), CC BY 4.0</td><td><span class="tag">geprüft</span></td></tr>
+<tr><td>Landnutzung (Entwaldung): 4,3 Mrd. t CO₂</td><td>OWID 2024: 4,28. Global Carbon Budget 2025: 4,1 für 2025</td><td><span class="tag">geprüft</span></td></tr>
+<tr><td>Andere Gase und Zement: 13,9 Mrd. t CO₂-Äquivalent (Methan 9,5, Lachgas 2,9, Zement 1,5)</td><td>OWID 2024. <b>Fluorierte Gase nicht enthalten</b></td><td><span class="tag">geprüft</span></td></tr>
+<tr><td>Primärenergie 2024: 636 EJ</td><td>OWID: 176.737 TWh gleich 636 EJ (Methode des Energy Institute)</td><td><span class="tag">geprüft</span></td></tr>
+<tr><td>Emissionsfreier Anteil 23,2 %, fossile Mischung Kohle 34,0 %, Öl 35,3 %, Gas 30,7 %</td><td><b>Abgeleitet</b> aus den Emissionen der drei Brennstoffe geteilt durch ihre Emissionsfaktoren (nicht direkt gemessen)</td><td><span class="tag">abgeleitet</span></td></tr>
+<tr><td>Emissionsfaktoren Kohle 94,6, Öl 73,3, Gas 56,1 kg CO₂ je Gigajoule</td><td>IPCC-Leitlinien 2006, Band 2, Tabelle 2.2 (Kohle: „other bituminous coal“, andere Kohlearten bis 101)</td><td><span class="tag">geprüft</span></td></tr>
+<tr><td>Bevölkerung 2025: 8,2 Mrd., 2100: 10,2 Mrd.</td><td>OWID 2025: 8,23. Guide von En-ROADS nennt 10,2 (UN-Projektion)</td><td><span class="tag">geprüft</span></td></tr>
+<tr><td>Erwärmung je 1000 Mrd. t CO₂: 0,45 Grad</td><td>Forster et al. 2025 (Earth System Science Data, CC BY 4.0): „median TCRE estimate of 0.45 °C per 1000 Gt CO₂“</td><td><span class="tag">geprüft</span></td></tr>
+<tr><td>Startwert der Erwärmung 1,4 Grad (2025)</td><td>Forster et al. 2025: menschengemachte Erwärmung 2024 beste Schätzung 1,36 Grad, beobachtet 1,52 Grad. 1,4 ist 1,36 plus etwa 0,03 je Jahr (Rate 0,27 Grad je Jahrzehnt)</td><td><span class="tag">geprüft</span>, Fortschreibung angenommen</td></tr>
+<tr><td>Wachstum 2,2 % je Kopf, Effizienz 1,6 %, Umbau 0,3 Prozentpunkte je Jahr</td><td>Selbst angepasst, so dass die Emissionen ähnlich wie in der Basislinie von En-ROADS auf etwa 70 Mrd. t steigen</td><td><span class="tag">angenommen</span></td></tr>
+<tr><td>Wirkung der Regler (Kohleausstieg, Entwaldung, Methan, CO₂-Entnahme)</td><td>Reine Annahmen zum Ausprobieren, keine Quelle</td><td><span class="tag">angenommen</span></td></tr></tbody></table></div>
+<p><b>Rechenweg:</b> Energie-CO₂ = Primärenergie (wächst mit Bevölkerung × Wohlstand × Energieintensität) × (1 − emissionsfreier Anteil) × mittlerer Emissionsfaktor. Kohleausstieg: Die Kohle sinkt linear bis zum gewählten Jahr auf null und wird durch emissionsfreie Energie ersetzt. Erwärmung = 1,4 Grad + 0,00045 Grad je Mrd. t CO₂-Äquivalent seit 2025 (alle Gase gleich behandelt).</p>
+<p><b>Vergleich der Restbudgets für 1,5 Grad:</b> Dieses Lehrmodell ergibt etwa 220 Mrd. t, weil es einfacher rechnet (alle Gase wie CO₂, ohne Nachwirkung früherer Emissionen und ohne die Erwärmung durch andere Gase). Die Fachliteratur gibt <b>130 Mrd. t CO₂</b> ab Anfang 2025 (Forster et al. 2025, Wahrscheinlichkeit 50 %) und <b>170 Mrd. t CO₂</b> im Global Carbon Budget 2025. <b>Erkläre</b> den Unterschied.</p></details>
+<div class="kasten"><b>Zum Vergleich:</b> Das echte Werkzeug ist <a href="https://en-roads.climateinteractive.org/scenario.html" rel="noopener noreferrer" target="_blank">En-ROADS</a> (Climate Interactive, MIT Sloan, Drittseite, öffnet erst beim Anklicken). <b>Aufgabe:</b> Stelle ein ähnliches Szenario in beiden Werkzeugen ein, <b>vergleiche</b> die Ergebnisse und <b>erkläre</b> Unterschiede.</div>
+<p class="quelle">Quellen: Climate Interactive, En-ROADS User Guide, <a href="https://creativecommons.org/licenses/by/4.0/deed.de" rel="noopener noreferrer" target="_blank">CC BY 4.0</a>, Struktur und Größenordnungen übernommen und selbst vereinfacht (Bearbeitung durch dieses Portal). Der Guide wurde am 18.11.2026 gelesen. Startwerte: <a href="https://github.com/owid/co2-data" rel="noopener noreferrer" target="_blank">Our World in Data, CO₂-Datensatz</a> (CC BY 4.0; Daten des Global Carbon Project und des Energy Institute), Forster et al. 2025, „Indicators of Global Climate Change 2024“, Earth System Science Data 17, 2641 (CC BY 4.0, <a href="https://doi.org/10.5194/essd-17-2641-2025" rel="noopener noreferrer" target="_blank">doi 10.5194/essd-17-2641-2025</a>), Global Carbon Budget 2025 (Global Carbon Project), IPCC-Leitlinien 2006.</p>
+<script>
+(function(){
+ function $(i){return document.getElementById(i)}var NS='http://www.w3.org/2000/svg';function z(x,n){return String(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).replace('.',',')}
+ var DEF={pop:10.2,gdp:2.2,eff:1.6,lc:0.3,ky:2105,ent:0,ag:0,nat:0,tec:0},VG=null;
+ var P0=8.2,E0=636,S0=0.232,FK=0.340,FO=0.353,FG=0.307,EF={k:94.6,o:73.3,g:56.1},T0=1.4,TC=0.00045,L0=4.3,N0=13.9;
+ function wert(){var w={};Object.keys(DEF).forEach(function(k){w[k]=+$(k).value});return w}
+ function rechne(w){var R={j:[],K:[],O:[],G:[],C:[],E:[],L:[],N:[],D:[],net:[],T:[],cum:0};var cum=0;
+  for(var i=0;i<=75;i++){var t=2025+i,P=P0+(w.pop-P0)*i/75,gd=Math.exp(Math.log(1+w.gdp/100)*i),ei=Math.exp(-Math.log(1+w.eff/100)*i),En=E0*(P/P0)*gd*ei;
+   var sh=Math.min(1,S0+w.lc/100*i),fos=En*(1-sh),ramp=w.ky>2100?0:Math.min(1,i/(w.ky-2025));
+   var k=fos*FK*(1-ramp),o=fos*FO,g=fos*FG,lc=En-k-o-g,ec=(k*EF.k+o*EF.o+g*EF.g)/1000;
+   var L=L0*(1-w.ent/100*Math.min(1,i/25)),N=N0*(1-w.ag/100*Math.min(1,i/25)),D=(w.nat+w.tec)*Math.min(1,i/50),net=ec+L+N-D;cum+=net;
+   R.j.push(t);R.K.push(k);R.O.push(o);R.G.push(g);R.C.push(lc);R.E.push(ec);R.L.push(L);R.N.push(N);R.D.push(D);R.net.push(net);R.T.push(T0+TC*cum)}
+  R.cum=cum;return R}
+ function el(s,t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!==undefined)e.textContent=txt;$(s).appendChild(e);return e}
+ function achse(s,X,Y,x0,x1,y0,y1,ink,ytxt){for(var v=Math.ceil(y0/20)*20;v<=y1;v+=y1>200?100:20){el(s,'line',{x1:X(2025),x2:X(2100),y1:Y(v),y2:Y(v),stroke:ink,'stroke-opacity':.15});el(s,'text',{x:X(2025)-6,y:Y(v)+4,'text-anchor':'end','font-size':11,fill:ink},v)}
+  [2025,2050,2075,2100].forEach(function(y){el(s,'text',{x:X(y),y:318,'text-anchor':'middle','font-size':11,fill:ink},y)});el(s,'text',{x:14,y:170,'font-size':11,fill:ink,'text-anchor':'middle',transform:'rotate(-90 14 170)'},ytxt)}
+ function zeichnen(){var w=wert();Object.keys(w).forEach(function(k){var o=$(k+'o');if(!o)return;var v=w[k];o.textContent={pop:z(v,1)+' Mrd.',gdp:z(v,1)+' % pro Jahr',eff:z(v,1)+' % pro Jahr',lc:z(v,2)+' Prozentpunkte pro Jahr',ky:v>2100?'nie':v,ent:z(v,0)+' %',ag:z(v,0)+' %',nat:z(v,2)+' Mrd. t pro Jahr',tec:z(v,2)+' Mrd. t pro Jahr'}[k]});
+  var R=rechne(w),B=rechne(DEF),ink=getComputedStyle(document.body).color;
+  $('T').textContent='+'+z(R.T[75],1)+' °C';$('Tb').textContent='Basislinie: +'+z(B.T[75],1)+' °C'+(VG?' · Vergleich: +'+z(VG.T[75],1)+' °C':'');
+  function budg(R,g){var j=null;for(var i=0;i<=75;i++)if(R.T[i]>=g){j=R.j[i];break}return j}
+  var b15=budg(R,1.5),b20=budg(R,2.0);$('bud').innerHTML='<b>1,5 Grad</b> werden '+(b15?'im Szenario <b>'+b15+'</b> überschritten':'bis 2100 <b>nicht</b> überschritten')+'. <b>2 Grad</b> '+(b20?'werden <b>'+b20+'</b> überschritten':'werden bis 2100 <b>nicht</b> überschritten')+'. Restbudget ab 2025 im Lehrmodell: für 1,5 Grad etwa '+Math.round((1.5-T0)/TC)+' Milliarden Tonnen CO₂-Äquivalent, für 2 Grad etwa '+Math.round((2-T0)/TC).toLocaleString('de-DE')+'. Fachliteratur für 1,5 Grad: 130 bis 170 Milliarden Tonnen CO₂ (siehe Rechenweg).';
+  /* Energie */
+  $('s1').textContent='';var X=function(y){return 55+(y-2025)/75*445},mx=Math.max.apply(null,R.K.map(function(_,i){return R.K[i]+R.O[i]+R.G[i]+R.C[i]}).concat(B.K.map(function(_,i){return B.K[i]+B.O[i]+B.G[i]+B.C[i]})));mx=Math.ceil(mx/200)*200;var Y=function(v){return 300-v/mx*270};
+  achse('s1',X,Y,2025,2100,0,mx,ink,'Primärenergie in Exajoule pro Jahr');var st=[['K','#4a2f2a'],['O','#c4532a'],['G','#6f87b8'],['C','#2fa06b']],acc=R.j.map(function(){return 0});
+  st.forEach(function(s){var lo=acc.slice(),hi=acc.map(function(a,i){return a+R[s[0]][i]});var d='M'+R.j.map(function(y,i){return X(y)+' '+Y(hi[i])}).join('L')+'L'+R.j.map(function(y,i){return X(R.j[75-i])+' '+Y(lo[75-i])}).join('L')+'Z';el('s1','path',{d:d,fill:s[1],'fill-opacity':.9});acc=hi});
+  $('l1').innerHTML='<span><i style="background:#4a2f2a"></i>Kohle</span><span><i style="background:#c4532a"></i>Öl</span><span><i style="background:#6f87b8"></i>Gas</span><span><i style="background:#2fa06b"></i>emissionsfrei (Wind, Sonne, Wasser, Atom, Biomasse)</span>';
+  /* Emissionen */
+  $('s2').textContent='';var mn=Math.min(-10,Math.min.apply(null,R.net)),mx2=Math.ceil(Math.max(70,Math.max.apply(null,B.net),Math.max.apply(null,R.net))/20)*20;mn=Math.floor(mn/20)*20;var Y2=function(v){return 300-(v-mn)/(mx2-mn)*270};
+  for(var v=mn;v<=mx2;v+=20){el('s2','line',{x1:X(2025),x2:X(2100),y1:Y2(v),y2:Y2(v),stroke:ink,'stroke-opacity':v===0?.6:.15});el('s2','text',{x:49,y:Y2(v)+4,'text-anchor':'end','font-size':11,fill:ink},v)}
+  [2025,2050,2075,2100].forEach(function(y){el('s2','text',{x:X(y),y:318,'text-anchor':'middle','font-size':11,fill:ink},y)});el('s2','text',{x:14,y:170,'font-size':11,fill:ink,'text-anchor':'middle',transform:'rotate(-90 14 170)'},'Milliarden Tonnen CO₂-Äquivalent pro Jahr (netto)');
+  function lin(Rr,c,wd,da){el('s2','polyline',{points:Rr.j.map(function(y,i){return X(y)+','+Y2(Rr.net[i])}).join(' '),fill:'none',stroke:c,'stroke-width':wd,'stroke-dasharray':da||''})}
+  lin(B,'#777',3,'7 5');if(VG)lin(VG,'#e67e22',3,'3 3');lin(R,'#1f77d0',4);
+  $('l2').innerHTML='<span><i style="background:#777"></i>Basislinie</span>'+(VG?'<span><i style="background:#e67e22"></i>Vergleich</span>':'')+'<span><i style="background:#1f77d0"></i>aktuelles Szenario</span>'}
+ Object.keys(DEF).forEach(function(k){$(k).oninput=zeichnen});
+ var P={basis:{},kohle:{ky:2040},eff:{eff:3.5},erneu:{lc:1.5,ky:2045},alles:{eff:3.2,lc:1.6,ky:2040,ent:100,ag:50,nat:3,tec:2,pop:9.5}};
+ [].forEach.call(document.querySelectorAll('[data-p]'),function(b){b.onclick=function(){var s=Object.assign({},DEF,P[b.dataset.p]);Object.keys(s).forEach(function(k){$(k).value=s[k]});zeichnen()}});
+ $('vgl').onclick=function(){VG=rechne(wert());zeichnen()};
+ window.LPKlima={rechne:rechne,DEF:DEF};zeichnen();
+})();
+</script></main></body></html>
