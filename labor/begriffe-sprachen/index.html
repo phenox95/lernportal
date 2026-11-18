@@ -27,4 +27,5 @@
   $('stm').textContent=(kann?'':'Für diese Sprache hat dieses Gerät keine lokale Stimme, deshalb kein Vorlesen. ')+'Die Daten liegen im Portal (daten/begriffe-sprachen.json), nichts wird aus dem Netz geladen.'}
  fetch('../../daten/begriffe-sprachen.json').then(function(r){return r.json()}).then(function(d){D=d;$('qu').textContent=d.quelle;Object.keys(d.sprachen).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=d.sprachen[k];$('sp').appendChild(o)});$('sp').onchange=zeichnen;$('su').oninput=zeichnen;zeichnen()}).catch(function(){$('stm').textContent='Daten nicht geladen (über einen Server öffnen).'});
 })();
-</script></main></body></html>
+</script><script src="../labor.js" defer></script>
+</main></body></html>

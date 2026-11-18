@@ -61,4 +61,5 @@
   $('qu').innerHTML='<b>Quelle:</b> '+d.vermerk+' Lizenz <a href="'+d.lizenz+'" rel="noopener noreferrer" target="_blank">CC BY 4.0</a>. '+d.quelle+'.';$('tag').onchange=zeichnen;$('t2').onchange=vergleich;zeichnen()}
  fetch('../../daten/strom.json').then(function(r){return r.json()}).then(lade).catch(function(){$('dq').textContent='Daten nicht geladen (Seite über einen Server öffnen).'});
 })();
-</script></main></body></html>
+</script><script src="../labor.js" defer></script>
+</main></body></html>

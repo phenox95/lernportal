@@ -31,4 +31,5 @@
   $('tb').innerHTML=D.map(function(d){return '<tr><td>'+d.y+'</td><td>'+String(d.v).replace('.',',')+'</td><td>'+String((d.v-mean).toFixed(2)).replace('.',',')+'</td></tr>'}).join('')}
  $('d').oninput=zeichnen;$('pal').onchange=zeichnen;$('demo').onclick=function(){demo();zeichnen()};demo();zeichnen();
 })();
-</script></main></body></html>
+</script><script src="../labor.js" defer></script>
+</main></body></html>

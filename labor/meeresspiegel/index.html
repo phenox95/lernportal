@@ -170,4 +170,5 @@ select{font:inherit;min-height:44px;padding:6px 10px;border:2px solid var(--g);b
  fetch('../../daten/meeresspiegel.json').then(function(r){return r.json()}).then(function(d){MD=d;$('dq').textContent='Echte Messdaten, im Portal gespeichert (Abruf '+d.abruf+').';$('dqq').textContent=d.quelle+'.';
   $('mtb').innerHTML=d.reihe.filter(function(r,i){return r[0]%5===0||r[0]>=2010}).map(function(r){return '<tr><td>'+r[0]+'</td><td>'+(r[1]===null?'–':z(r[1],0))+'</td><td>'+(r[4]===null?'–':z(r[4],0))+'</td></tr>'}).join('');mzeichnen()}).catch(function(){$('dq').textContent='Die Messdaten konnten nicht geladen werden (Seite über einen Server öffnen).'});
 })();
-</script></main></body></html>
+</script><script src="../labor.js" defer></script>
+</main></body></html>

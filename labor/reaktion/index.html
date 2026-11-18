@@ -33,4 +33,5 @@
  $('re').onclick=function(){clearTimeout(timer);werte=[];zustand='ruhe';f.className='';f.textContent='Tippe hier, um zu starten';$('tb').innerHTML='';['mw','md','mn'].forEach(function(i){$(i).textContent='–'});st.textContent='Neu begonnen.'};
  $('cp').onclick=function(){var tx=werte.map(fmt).join(', ');if(navigator.clipboard)navigator.clipboard.writeText(tx).then(function(){st.textContent='Kopiert: '+tx},function(){st.textContent='Kopieren nicht erlaubt.'})};
 })();
-</script></main></body></html>
+</script><script src="../labor.js" defer></script>
+</main></body></html>
