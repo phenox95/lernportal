@@ -447,3 +447,16 @@ body.lp-seite[data-dichte="9-10"] { --lp-abstand: 1rem; --lp-radius: 0.5rem; }
 
 .lp-fuss { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--lp-linie); font-size: 0.875rem; color: var(--lp-text2); }
 .lp-noscript { margin: 0; padding: 0.75rem 1rem; background: var(--lp-gruppe); font-family: var(--lp-schrift); }
+
+/* Block „Aktuell dazu“ (assets/js/aktuell.js): neueste Meldungen zum Thema der Seite */
+.lp-aktuell { margin-top: 1.5rem; padding: 0.9rem 1.1rem; border: 1px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); }
+.lp-aktuell .lp-label { color: var(--lp-text); }
+.lp-aktuell-hinweis { margin: 0 0 0.5rem; font-size: 0.875rem; color: var(--lp-text2); max-width: 60ch; }
+.lp-aktuell-liste { margin: 0; padding: 0; list-style: none; }
+.lp-aktuell-liste li { border-top: 1px solid var(--lp-linie); }
+.lp-aktuell-liste a { display: block; padding: 0.75rem 0; text-decoration: none; color: inherit; }
+.lp-aktuell-liste a:hover strong { text-decoration: underline; text-underline-offset: 0.2em; }
+.lp-aktuell-liste strong { display: block; line-height: 1.35; }
+.lp-aktuell-meta, .lp-aktuell-ein { display: block; margin-top: 0.2rem; font-size: 0.875rem; color: var(--lp-text2); }
+.lp-aktuell-ein { font-size: 0.9375rem; color: var(--lp-text); max-width: 60ch; }
+@media print { .lp-aktuell { display: none; } }

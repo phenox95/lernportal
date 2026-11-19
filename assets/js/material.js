@@ -132,6 +132,15 @@
     }
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", baue);
-  else baue();
+  /* Block „Aktuell dazu“ (Meldungen zum Thema) nachladen, nicht auf Präsentationen */
+  function ladeAktuell() {
+    if (document.body.classList.contains("lp-pres") || !document.querySelector("main")) return;
+    const s = document.createElement("script");
+    s.src = wurzel(document.body.dataset.root) + "assets/js/aktuell.js";
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { baue(); ladeAktuell(); });
+  else { baue(); ladeAktuell(); }
 })();

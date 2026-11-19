@@ -249,6 +249,18 @@ for i, n in enumerate(nach.get("eintraege", [])):
         if n["link"] in links:
             err(f"{nn}: link doppelt")
         links.add(n["link"])
+    th = n.get("themen", [])
+    if not isinstance(th, list) or not all(isinstance(x, str) and x for x in th):
+        err(f"{nn}: themen muss eine Liste von Texten sein")
+    else:
+        fnr = {f"{p.get('subject')} {p.get('themenfeld')}" for p in projekte if isinstance(p, dict) and p.get("themenfeld")}
+        pfade_p = [p.get("path", "") for p in projekte if isinstance(p, dict)]
+        for x in th:
+            if "/" in x:
+                if not any(q.startswith(x) for q in pfade_p):
+                    wrn(f"{nn}: themen „{x}“ passt zu keinem Material in projects.json")
+            elif x not in fnr:
+                wrn(f"{nn}: themen „{x}“ passt zu keinem Fach/Themenfeld in projects.json (Beispiel: Geografie 3.6)")
     if n.get("bild") and not str(n["bild"]).startswith("https://"):
         err(f"{nn}: bild muss mit https:// beginnen")
     if n.get("art") and n["art"] not in ("Medienbericht", "Regierung", "Position"):
