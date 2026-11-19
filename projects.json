@@ -171,7 +171,13 @@
         "art": "Arbeitsblatt"
       }
     ],
-    "begriffe": true
+    "begriffe": true,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/zelldifferenzierung/",
+        "grund": "Gleiche Reihe: Stunde 3 zeigt an Nervenzelle, roter Blutzelle und Muskelzelle, dass die Form zur Aufgabe passt; Stunde 8 erklärt diese Spezialisierung als Zelldifferenzierung."
+      }
+    ]
   },
   {
     "title": "Die Zelle – Stunde 4: Mikroskopieren leicht gemacht",
@@ -727,7 +733,13 @@
     "dauer": "45 Min.",
     "datum": "2026-11-15",
     "sichtbar": true,
-    "begriffe": true
+    "begriffe": true,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-10/genetik/hundezuchtverein/muenzwurf/",
+        "grund": "Das Handy-Werkzeug gehört zur Stunde: Mit ihm werfen die Schülerinnen und Schüler im Münzmodell 20 Welpen und vergleichen das Ergebnis mit ihrer Vorhersage."
+      }
+    ]
   },
   {
     "title": "Der Hundezuchtverein – Vertiefung: Mendels erste Regel",
@@ -741,7 +753,13 @@
     "folge": 3,
     "dauer": "45 Min.",
     "datum": "2026-11-18",
-    "sichtbar": true
+    "sichtbar": true,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-10/genetik/hundezuchtverein/teil-2/",
+        "grund": "Aufbauende Stunde: Die Vertiefung knüpft an das Münzmodell und den Münzwurf aus Teil 2 an und leitet daraus Mendels erste Regel für das Zuchtbuch ab."
+      }
+    ]
   },
   {
     "title": "Erdbeben – Stunde 4: Alarm für Tokio",
@@ -822,6 +840,15 @@
         "titel": "Präsentation zur Stunde",
         "pfad": "biologie/klasse-9/gesundheit/lek-rueckgabe/praesentation/",
         "art": "Präsentation"
+      }
+    ],
+    "bne": [
+      3
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Gleiche Reihe: Der LEK-Check wiederholt, wie eine Impfung über das Immunsystem vor Erregern schützt."
       }
     ],
     "begriffe": true
