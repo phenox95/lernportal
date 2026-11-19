@@ -17,6 +17,8 @@
    [data-explorer]  Zeichnung mit .hot[data-n][data-t] antippen, Anzeige .ex-name .ex-text .ex-zahl
    [data-schalter]  Schalter .sch button[data-m=tier|pflanze] blendet [data-nur=pflanze] aus
    [data-schritte]  Sätze .sz nacheinander zeigen mit Knopf .sz-weiter
+   [data-aufbau]    Schrittweise aufbauen: Elemente mit data-s="1", "2" … erscheinen nacheinander.
+                    Pfeil vor/zurück deckt erst Schritte auf oder zu, dann wird geblättert.
    [data-lz]        Knopf zeigt die direkt folgende .lz-box (Lösung je Aufgabe)
    [data-kette]     Gewebekette: circle.kp und ein Knopf
    [data-matrix]    Tabelle mit td.m (antippen) und .summe
@@ -44,15 +46,34 @@
     if (vor) vor.disabled = cur === slides.length - 1;
     try { history.replaceState(null, "", "#" + (cur + 1)); } catch (e) { /* ohne Adresszeile */ }
   }
+  /* Schrittweiser Aufbau: liefert true, wenn ein Schritt auf- oder zugedeckt wurde (dann nicht blättern) */
+  function aufbau(sl) { return sl && sl.querySelector("[data-aufbau]"); }
+  function schritte(a) { var m = 0; [].forEach.call(a.querySelectorAll("[data-s]"), function (e) { m = Math.max(m, +e.getAttribute("data-s") || 0); }); return m; }
+  function stufe(a, n) {
+    a.setAttribute("data-stand", n);
+    [].forEach.call(a.querySelectorAll("[data-s]"), function (e) { e.classList.toggle("an", (+e.getAttribute("data-s") || 0) <= n); });
+  }
+  function schritt(d) {
+    var a = aufbau(slides[cur]); if (!a || document.documentElement.classList.contains("lp-lesen")) return false;
+    var n = +a.getAttribute("data-stand") || 0, m = schritte(a);
+    if (d > 0 && n < m) { stufe(a, n + 1); return true; }
+    if (d < 0 && n > 0) { stufe(a, n - 1); return true; }
+    return false;
+  }
+  function blaettern(d) {
+    if (schritt(d)) return;
+    var alt = cur; show(cur + d);
+    var a = aufbau(slides[cur]); if (a && cur !== alt) stufe(a, d > 0 ? 0 : schritte(a));
+  }
   function tippt(t) { return t && (t.isContentEditable || /INPUT|TEXTAREA|SELECT/.test(t.tagName)); }
   document.addEventListener("keydown", function (e) {
     if (tippt(e.target) || e.ctrlKey || e.metaKey || e.altKey) return;
-    if (e.key === "ArrowRight" || e.key === "PageDown" || (e.key === " " && e.target.tagName !== "BUTTON")) { e.preventDefault(); show(cur + 1); }
-    else if (e.key === "ArrowLeft" || e.key === "PageUp") { show(cur - 1); }
+    if (e.key === "ArrowRight" || e.key === "PageDown" || (e.key === " " && e.target.tagName !== "BUTTON")) { e.preventDefault(); blaettern(1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { blaettern(-1); }
     else if (e.key === "f" || e.key === "F") { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch (x) { /* nicht möglich */ } }
   });
-  if (vor) vor.onclick = function () { show(cur + 1); };
-  if (zur) zur.onclick = function () { show(cur - 1); };
+  if (vor) vor.onclick = function () { blaettern(1); };
+  if (zur) zur.onclick = function () { blaettern(-1); };
   window.addEventListener("resize", fit);
   window.addEventListener("load", fit);
   if (window.ResizeObserver) new ResizeObserver(fit).observe(buehne);
@@ -444,6 +465,7 @@
     p.setAttribute("data-ph", k);
   });
 
+  [].forEach.call(document.querySelectorAll("[data-aufbau]"), function (a) { stufe(a, 0); });
   var h = parseInt((location.hash || "").replace("#", ""), 10);
   show(isNaN(h) ? 0 : h - 1);
 })();

@@ -251,6 +251,10 @@ table.mx td.obj img{width:46px;height:34px;object-fit:cover;border-radius:6px;ve
 /* ===== Sätze nacheinander, Lösung je Aufgabe ===== */
 .sz{font-size:30px;line-height:1.35;margin:0 0 14px;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
 .sz.an{opacity:1;transform:none}
+[data-aufbau] [data-s]{opacity:0;transition:opacity .45s,transform .45s}
+[data-aufbau] .karte[data-s],[data-aufbau] p[data-s]{transform:translateY(8px)}
+[data-aufbau] [data-s].an,html.lp-lesen [data-aufbau] [data-s]{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){[data-aufbau] [data-s]{transition:none}}
 .lz{font:700 17px Andika,Verdana,sans-serif;min-height:38px;padding:0 14px;border:0;border-radius:10px;background:var(--y);color:var(--ink);cursor:pointer;touch-action:manipulation}
 .lz-box{display:none;margin:8px 0 0;padding:10px 14px;border-radius:12px;background:#FFF4D6;font-size:20px;line-height:1.35}.lz-box.an{display:block}
 .aufg{background:var(--mint);border-radius:14px;padding:10px 16px;margin:0 0 10px}
