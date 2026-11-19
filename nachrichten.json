@@ -45,7 +45,10 @@
       "themenfeld": [
         "3.5"
       ],
-      "bild": "https://www.rbb-online.de/content/dam/rbb/rbb/rbb24/2026/2026_11/rbb-reporter/windpark-im-wald-bei-teupitz.jpg.jpg/size=1280x720.jpg"
+      "bild": "https://www.rbb-online.de/content/dam/rbb/rbb/rbb24/2026/2026_11/rbb-reporter/windpark-im-wald-bei-teupitz.jpg.jpg/size=1280x720.jpg",
+      "material": [
+        "geografie/klasse-9/ressourcen/erneuerbare-energien/"
+      ]
     },
     {
       "datum": "2026-10-27",
@@ -83,7 +86,11 @@
       "themenfeld": [
         "3.5"
       ],
-      "bild": "https://www.rbb-online.de/content/dam/rbb/rbb/rbb24/2026/2026_11/dpa-account/diphtherie-impfung.jpg.jpg/size=1280x720.jpg"
+      "bild": "https://www.rbb-online.de/content/dam/rbb/rbb/rbb24/2026/2026_11/dpa-account/diphtherie-impfung.jpg.jpg/size=1280x720.jpg",
+      "material": [
+        "biologie/klasse-9/gesundheit/impfen/",
+        "biologie/klasse-9/gesundheit/impfen-doppelstunde/"
+      ]
     },
     {
       "datum": "2026-10-14",
