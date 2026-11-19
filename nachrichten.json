@@ -29,6 +29,82 @@
   ],
   "eintraege": [
     {
+      "datum": "2026-11-17",
+      "titel": "Antrag zurückgezogen: Windpark in Wald bei Teupitz wird doch nicht gebaut",
+      "quelle": "rbb24",
+      "link": "https://www.rbb24.de/wirtschaft/beitrag/2026/11/teupitz-halbe-windkraft-energie-windpark-abgesagt-energiequelle.html",
+      "einordnung": "Ein geplanter Windpark mit 29 Windrädern in einem Kiefernwald südlich von Berlin wird nicht gebaut, das Unternehmen nennt geänderte Planungsregeln. Laut Bericht ist die Bevölkerung vor Ort gespalten. Ein Beispiel aus der Nähe zur Frage der Woche.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        7
+      ],
+      "woche": "2026-11-23",
+      "themenfeld": [
+        "3.5"
+      ],
+      "bild": "https://www.rbb-online.de/content/dam/rbb/rbb/rbb24/2026/2026_11/rbb-reporter/windpark-im-wald-bei-teupitz.jpg.jpg/size=1280x720.jpg"
+    },
+    {
+      "datum": "2026-10-27",
+      "titel": "Bundeswirtschaftsministerin Reiche geht auf Länder-Forderung zur Windkraft ein",
+      "quelle": "tagesschau.de",
+      "link": "https://www.tagesschau.de/inland/innenpolitik/windkraft-reiche-100.html",
+      "einordnung": "Es geht um Windparks auf See: Acht Ministerpräsidenten warnen vor einem stockenden Ausbau und vor Jobverlusten, die Ministerin will nicht genutzte Flächen neu vergeben lassen. Der Bericht zeigt die Sicht von Politik und Industrie. Vergleiche sie mit der Sicht von Anwohnern.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        7
+      ],
+      "woche": "2026-11-23",
+      "themenfeld": [
+        "3.5"
+      ],
+      "bild": "https://images.tagesschau.de/image/dd654c71-4238-4669-9d99-8bc680e9429f/AAABoXw5P5w/AAABnSSvrFg/16x9-big/offshore-windpark-126.jpg?width=1280"
+    },
+    {
+      "datum": "2026-11-14",
+      "titel": "Neuer Höchststand: Acht Diphtherie-Fälle in Berlin",
+      "quelle": "rbb24",
+      "link": "https://www.rbb24.de/panorama/beitrag/2026/11/diphtherie-infektion-lageso-impfung-berlin.html",
+      "einordnung": "In Berlin wurden 2026 so viele Diphtherie-Fälle gemeldet wie nie seit 2001, vor allem bei wohnungslosen Menschen. Der Bericht erklärt, wovor die Impfung schützt und wann die Stiko auffrischen rät. Passt zur Frage, warum Impfen auch andere betrifft.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Biologie"
+      ],
+      "bne": [
+        3
+      ],
+      "woche": "2026-11-16",
+      "themenfeld": [
+        "3.5"
+      ],
+      "bild": "https://www.rbb-online.de/content/dam/rbb/rbb/rbb24/2026/2026_11/dpa-account/diphtherie-impfung.jpg.jpg/size=1280x720.jpg"
+    },
+    {
+      "datum": "2026-10-14",
+      "titel": "Welternährungstag: Kampf gegen Hungerkrisen stagniert weltweit",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/politik/ausland/hunger-weltweit-welternaehrungstag-konflikte-hilfe-100.html",
+      "einordnung": "Laut Welthunger-Index hat sich die Ernährungslage weltweit erstmals seit Beginn der Datenreihe verschlechtert. Als Gründe nennt der Bericht Konflikte, Vertreibung und Wetterextreme. Passt zur Frage, warum fruchtbare Böden wie am Ätna so wertvoll sind.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        2
+      ],
+      "woche": "2026-12-07",
+      "themenfeld": [
+        "3.4"
+      ],
+      "bild": "https://www.zdfheute.de/assets/hunger-krise-not-sudan-lebensmittel-hilfe-100~1280x720?cb=1791946190150"
+    },
+    {
       "datum": "2026-10-30",
       "titel": "Vulkan Mayon ausgebrochen: 3.000 Meter hohe Aschewolke über den Philippinen",
       "quelle": "ZDFheute",
