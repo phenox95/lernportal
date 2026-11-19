@@ -1,23 +1,172 @@
-/* Rollenkarten der Mini-COP31. Gemeinsame Quelle für die Handyseite (rolle/) und die Präsentation.
-   Der Text steht auch auf dem Druck-Arbeitsblatt (arbeitsblatt-1.pdf, Seite 3). Bei Änderungen beides anpassen.
-   Die Rollen sind vereinfachte, typisierte Positionen, keine Meinung der Lehrkraft oder der Klasse. */
+/* Rollen der Mini-COP31. Gemeinsame Quelle für die Handyseite (rolle/), die Präsentation und die Druck-Rollenmappe
+   (tools/mini-cop31-rollenmappe.js erzeugt daraus arbeitsblatt-rollenmappe.pdf).
+   Aufbau je Rolle:
+   - n, s, wer, kopf, liste, a1, a2, ziel: Text der ausgeschnittenen Rollenkarte (arbeitsblatt-1.pdf, Seite 3)
+   - auftrag: ein Satz, der die Position klar sagt
+   - st: Haltung zu den Varianten A, B, C je Antrag (w = wollen, m = mitgehen, n = Nein, o = offen)
+   - infos: Infokarten M-R1 bis M-R3. Eine Zeile = ein Satz. Es stehen nur Fakten drin, keine fertigen Argumente.
+   - aufg: Arbeitsaufträge. Die SuS erarbeiten Argumente, Kompromisse und rote Linien selbst.
+   Fakten sind vereinfacht und stammen aus allgemein bekannten Quellen (UNFCCC, IPCC, EU-Kommission, IEA, UNEP). Geprüft am 19.11.2026 per Websuche (Sekundärquellen, Primärtexte nicht abgerufen).
+   Die Rollen sind typisiert: Sie sind keine Meinung der Lehrkraft oder der Klasse. */
+window.COP_VAR={
+ 1:{A:'Alle Länder kehren sich von Kohle, Öl und Gas ab. Sie legen einen Plan vor.',
+    B:'Strom liefert mehr Energie (E-Autos, Wärmepumpen). Jedes Land wählt seinen Weg.',
+    C:'Der Beschluss sagt nichts zu Kohle, Öl und Gas.'},
+ 2:{A:'Nur reiche Industrieländer zahlen.',B:'Auch große Schwellenländer und Firmen zahlen mit.',C:'Es gibt keine neue Regel.'}
+};
+window.COP_TITEL={1:'Antrag 1: Kohle, Öl und Gas',2:'Antrag 2: Geld für Klimaschutz (ab 2035 mindestens 300 Milliarden US-Dollar im Jahr)'};
+window.COP_HALTUNG={w:'Wir wollen',m:'Wir können mitgehen',n:'Wir sagen Nein',o:'Offen: Das klärt ihr in der Verhandlung'};
+window.COP_TISCH=[
+ ['1 Europäische Union','ein Zusammenschluss von 27 Staaten'],['2 Ölförderland','lebt von Öl und Gas'],
+ ['3 Inselstaat','kleines Land im Meer'],['4 Großes Schwellenland','Wirtschaft wächst schnell'],
+ ['5 Präsidentschaft','leitet, keine Stimme'],['6 Umweltorganisation','Beobachter, keine Stimme']
+];
 window.COP_ROLLEN={
- 1:{n:'Europäische Union',s:'stimmberechtigt',wer:'Wir sind die EU. Wir wollen Klimaschutz. Unsere Wirtschaft soll stark bleiben.',
-    liste:['Kohle, Öl und Gas sollen im Beschluss stehen.','Mehr Länder sollen zahlen, nicht nur wir.'],kopf:'Uns ist wichtig:',
-    a1:'Wir wollen A. Zweite Wahl: B. Wir sagen Nein zu C.',a2:'Wir wollen B. Wir sagen Nein zu A.'},
- 2:{n:'Ölförderland',s:'stimmberechtigt · typisiert',wer:'Wir verdienen viel Geld mit Öl und Gas. Davon bezahlen wir Schulen, Straßen und Arbeitsplätze.',
-    liste:['Kein Beschluss soll uns zwingen, Öl und Gas zu stoppen.','Wir brauchen Zeit für den Umbau.'],kopf:'Uns ist wichtig:',
-    a1:'Wir wollen C. B ist auch möglich. Wir sagen Nein zu A.',a2:'Wir wollen C. Wir sagen Nein zu B.'},
- 3:{n:'Inselstaat',s:'stimmberechtigt · typisiert',wer:'Wir sind ein kleines Land im Meer. Der Meeresspiegel steigt. Unsere Küsten sind in Gefahr.',
-    liste:['Die Erwärmung soll so klein wie möglich bleiben.','Wir brauchen sicheres Geld für Schutz und Schäden.'],kopf:'Uns ist wichtig:',
-    a1:'Wir wollen A. Zweite Wahl: B. Wir sagen Nein zu C.',a2:'Wir wollen A. B ist auch möglich. Wir sagen Nein zu C.'},
- 4:{n:'Großes Schwellenland',s:'stimmberechtigt · typisiert',wer:'Unsere Wirtschaft wächst schnell. Wir bauen Wind und Sonne aus. Wir brauchen aber noch Kohle und Gas.',
-    liste:['Wir brauchen Energie für Arbeit und Wachstum.','Reiche Länder haben lange viel CO<sub>2</sub> ausgestoßen. Sie sollen zahlen.'],kopf:'Uns ist wichtig:',
-    a1:'Wir wollen B. Wir sagen Nein zu A.',a2:'Wir wollen A. Wir sagen Nein zu B.'},
- 5:{n:'Präsidentschaft',s:'leitet · keine Stimme',wer:'Wir leiten die Konferenz. Die Türkei ist Gastgeber. Australien führt die Verhandlungen.',
-    liste:['Hört allen Gruppen zu.','Schreibt Kompromiss-Sätze zu Antrag 1 und 2.','Wir wollen mehr Strom im Energieverbrauch.'],kopf:'Unsere Aufgabe:',
-    ziel:'Ein Beschluss, dem alle zustimmen können. Fragt in der Abstimmung: „Sagt jemand Nein?“'},
- 6:{n:'Umweltorganisation',s:'Beobachter · keine Stimme',wer:'Wir sind eine Umweltorganisation. Wir dürfen im Raum sein und reden. Wir dürfen nicht abstimmen.',
-    liste:['Haltet ein Statement mit 3 Sätzen (1 Minute). Fordert Variante A bei Antrag 1 und Geld für arme Länder.','Beobachtet: Welche Gruppe setzt sich durch? Notiert Stichpunkte.'],kopf:'Unsere Aufgabe:',
-    ziel:'Der Beschluss soll das Klima schützen.'}
+ 1:{n:'Europäische Union',s:'stimmberechtigt',
+    auftrag:'Ihr vertretet die EU. Ihr wollt Kohle, Öl und Gas im Beschluss. Ihr wollt, dass mehr Länder zahlen.',
+    wer:'Wir sind die EU. Wir wollen Klimaschutz. Unsere Wirtschaft soll stark bleiben.',kopf:'Uns ist wichtig:',
+    liste:['Kohle, Öl und Gas sollen im Beschluss stehen.','Mehr Länder sollen zahlen, nicht nur wir.'],
+    a1:'Wir wollen A. Zweite Wahl: B. Wir sagen Nein zu C.',a2:'Wir wollen B. Wir sagen Nein zu A.',
+    st:{1:'wmn',2:'nwo'},
+    infos:[
+     {t:'Unsere Lage',z:['Die EU will bis 2050 klimaneutral sein. Das steht im Europäischen Klimagesetz.',
+       'Bis 2030 sollen die Treibhausgase um mindestens 55 % sinken (netto, im Vergleich zu 1990).','Die EU baut viele Wind- und Solaranlagen.',
+       'Sie führt aber noch Öl und Gas aus anderen Ländern ein.','Die EU und ihre Mitgliedsländer gehören zu den größten Geldgebern für Klimaschutz in ärmeren Ländern.'],
+      q:'nach EU-Kommission, vereinfacht'},
+     {t:'Was schon beschlossen ist',z:['2015 in Paris: Die Staaten wollen die Erwärmung auf deutlich unter 2 Grad begrenzen, möglichst auf 1,5 Grad.',
+       '2023 auf der COP28 in Dubai: Alle Staaten beschließen, sich von fossilen Energien abzuwenden.',
+       'Zum ersten Mal standen fossile Brennstoffe in einem COP-Beschluss.','Seitdem streiten die Staaten: Wie schnell? Wie genau?'],
+      q:'nach UNFCCC, vereinfacht'},
+     {t:'Wer zahlt?',z:['2009 versprachen reiche Länder: 100 Milliarden US-Dollar im Jahr für ärmere Länder.',
+       '2024 auf der COP29 in Baku: Ab 2035 sollen es mindestens 300 Milliarden im Jahr sein.',
+       'Die UN-Einteilung der Länder stammt von 1992. Große Schwellenländer gelten dort noch als Entwicklungsländer.',
+       'Sie müssen deshalb nach der Konvention nicht zahlen. Sie dürfen freiwillig mitzahlen.'],q:'nach UNFCCC, vereinfacht'}],
+    aufg:[
+     {t:'**Beschreibe** in zwei Sätzen, welche Position deine Gruppe bei Antrag 1 und bei Antrag 2 vertritt.',n:'E'},
+     {t:'**Begründe** mit zwei Belegen aus M-R1 bis M-R3, warum ihr bei Antrag 1 Variante A wollt. Schreibe zwei Sätze mit „weil“.',n:'F'},
+     {t:'**Begründe** mit einem Beleg, warum ihr bei Antrag 2 Variante B wollt und Variante A ablehnt.',n:'F'},
+     {t:'**Erkläre**, welche Gruppe euch am ehesten widerspricht. **Nenne** ihr Interesse und eure Antwort darauf.',n:'F–G'},
+     {t:'**Entwickle** einen Kompromiss-Satz, dem ihr noch zustimmen könntet. **Lege** eure rote Linie fest: Bei welchem Satz sagt ihr Nein?',n:'G'},
+     {t:'**Recherchiere** mit dem Handy: Wie viel Prozent des Stroms in der EU kommen aus Wind und Sonne? **Nenne** Zahl und Quelle.',n:'G',opt:true}],
+    sb:['Wir wollen Variante …, weil …','Wir können zustimmen, wenn …','Unsere rote Linie ist …, weil …']},
+ 2:{n:'Ölförderland',s:'stimmberechtigt · typisiert',
+    auftrag:'Ihr vertretet ein Land, das von Öl und Gas lebt. Ihr wollt nicht gezwungen werden, Öl und Gas zu stoppen. Ihr wollt keine neue Zahlungsregel.',
+    wer:'Wir verdienen viel Geld mit Öl und Gas. Davon bezahlen wir Schulen, Straßen und Arbeitsplätze.',kopf:'Uns ist wichtig:',
+    liste:['Kein Beschluss soll uns zwingen, Öl und Gas zu stoppen.','Wir brauchen Zeit für den Umbau.'],
+    a1:'Wir wollen C. B ist auch möglich. Wir sagen Nein zu A.',a2:'Wir wollen C. Wir sagen Nein zu B.',
+    st:{1:'nmw',2:'onw'},
+    infos:[
+     {t:'Unsere Lage',z:['Euer Land fördert Erdöl und Erdgas und verkauft sie an andere Länder.',
+       'Die Einnahmen bezahlen einen großen Teil des Staatshaushalts.','Viele Menschen arbeiten direkt oder indirekt in der Öl- und Gasbranche.',
+       'Eine neue Wirtschaft (Solar, Industrie, Tourismus) aufzubauen dauert viele Jahre.'],q:'typisiertes Land, vereinfacht'},
+     {t:'Was schon beschlossen ist',z:['2023 auf der COP28 in Dubai beschlossen alle Staaten: Abkehr von fossilen Energien in den Energiesystemen.',
+       'Im Text steht: „gerecht, geordnet und fair“.','Der Text nennt kein Datum für den Ausstieg aus Öl und Gas.',
+       'Im Text steht auch: Erdgas kann als Übergangsbrennstoff eine Rolle spielen. Darauf könnt ihr euch berufen.'],q:'nach UNFCCC, vereinfacht'},
+     {t:'Der Preis des Umbaus',z:['Kohle, Öl und Gas liefern weltweit noch etwa 80 % der Energie.',
+       'Öl braucht man auch für Verkehr und Kunststoffe, Gas für Strom und Wärme.',
+       'Neue Zahlungen (Antrag 2) würden euren Haushalt zusätzlich belasten.','Manche Förderländer bauen selbst große Solarparks.'],q:'nach IEA, vereinfacht'}],
+    aufg:[
+     {t:'**Beschreibe** in zwei Sätzen, welche Position deine Gruppe bei Antrag 1 und bei Antrag 2 vertritt.',n:'E'},
+     {t:'**Begründe** mit zwei Belegen aus M-R1 bis M-R3, warum ihr bei Antrag 1 Variante C wollt. Schreibe zwei Sätze mit „weil“.',n:'F'},
+     {t:'**Begründe** mit einem Beleg, warum ihr bei Antrag 2 keine neue Regel wollt und Variante B ablehnt.',n:'F'},
+     {t:'**Erkläre**, welche Gruppe euch am ehesten widerspricht. **Nenne** ihr Interesse und eure Antwort darauf.',n:'F–G'},
+     {t:'**Entwickle** einen Kompromiss-Satz, dem ihr noch zustimmen könntet. **Lege** eure rote Linie fest: Bei welchem Satz sagt ihr Nein?',n:'G'},
+     {t:'**Recherchiere** mit dem Handy: Suche ein echtes Förderland, das in Solar- oder Windenergie investiert. **Nenne** ein Beispiel und die Quelle.',n:'G',opt:true}],
+    sb:['Wir wollen Variante …, weil …','Wir brauchen Zeit, weil …','Unsere rote Linie ist …, weil …']},
+ 3:{n:'Inselstaat',s:'stimmberechtigt · typisiert',
+    auftrag:'Ihr vertretet ein kleines Land im Meer. Ihr wollt, dass die Erwärmung klein bleibt. Ihr wollt sicheres Geld für Schutz und Schäden.',
+    wer:'Wir sind ein kleines Land im Meer. Der Meeresspiegel steigt. Unsere Küsten sind in Gefahr.',kopf:'Uns ist wichtig:',
+    liste:['Die Erwärmung soll so klein wie möglich bleiben.','Wir brauchen sicheres Geld für Schutz und Schäden.'],
+    a1:'Wir wollen A. Zweite Wahl: B. Wir sagen Nein zu C.',a2:'Wir wollen A. B ist auch möglich. Wir sagen Nein zu C.',
+    st:{1:'wmn',2:'wmn'},
+    infos:[
+     {t:'Unsere Lage',z:['Euer Land besteht aus niedrigen Inseln. Viele Orte liegen nur wenige Meter über dem Meer.',
+       'Der Meeresspiegel ist seit 1900 weltweit um etwa 20 cm gestiegen.','Heute steigt er schneller als früher: über 3 mm im Jahr.',
+       'Bei Sturmfluten kommt Salzwasser auf Felder und in Brunnen.','Euer Land hat sehr wenig CO2 ausgestoßen, spürt die Folgen aber früh.'],
+      q:'nach IPCC (2021), vereinfacht'},
+     {t:'Drei Arten von Klimageld',z:['Klimaschutz: weniger Treibhausgase, zum Beispiel durch Solaranlagen.',
+       'Anpassung: Schutz vor den Folgen, zum Beispiel Deiche und Frühwarnung.','Schäden und Verluste: Hilfe, wenn Schutz nicht mehr reicht.',
+       'Für Schäden und Verluste gibt es seit 2023 einen Fonds. Er ist im Vergleich zu den Schäden noch klein.',
+       'Ab 2035 sollen reiche Länder mindestens 300 Milliarden US-Dollar im Jahr geben.'],q:'nach UNFCCC, vereinfacht'},
+     {t:'Kleine Länder, eine Stimme',z:['Viele kleine Inselstaaten haben sich zur Gruppe AOSIS zusammengeschlossen.',
+       'Auf der COP sprechen sie mit einer Stimme.','2015 in Paris haben sie sich stark dafür eingesetzt, dass das 1,5-Grad-Ziel im Text steht.',
+       'Ihr Satz: „Jedes Zehntel Grad zählt.“'],q:'nach AOSIS, vereinfacht'}],
+    aufg:[
+     {t:'**Beschreibe** in zwei Sätzen, welche Position deine Gruppe bei Antrag 1 und bei Antrag 2 vertritt.',n:'E'},
+     {t:'**Begründe** mit zwei Belegen aus M-R1 bis M-R3, warum ihr bei Antrag 1 Variante A wollt. Schreibe zwei Sätze mit „weil“.',n:'F'},
+     {t:'**Begründe** mit einem Beleg, warum ihr bei Antrag 2 Variante A wollt und Variante C ablehnt.',n:'F'},
+     {t:'**Erkläre**, welche Gruppe euch am ehesten widerspricht. **Nenne** ihr Interesse und eure Antwort darauf.',n:'F–G'},
+     {t:'**Entwickle** einen Kompromiss-Satz, dem ihr noch zustimmen könntet. **Lege** eure rote Linie fest: Bei welchem Satz sagt ihr Nein?',n:'G'},
+     {t:'**Recherchiere** mit dem Handy: Suche einen echten Inselstaat (zum Beispiel Tuvalu, Malediven oder Kiribati). **Nenne**, wie hoch das Land über dem Meer liegt, und die Quelle.',n:'G',opt:true}],
+    sb:['Wir wollen Variante …, weil …','Für uns ist wichtig, dass …','Unsere rote Linie ist …, weil …']},
+ 4:{n:'Großes Schwellenland',s:'stimmberechtigt · typisiert',
+    auftrag:'Ihr vertretet ein großes Land mit schnell wachsender Wirtschaft. Ihr braucht Energie für Wachstum. Reiche Länder sollen zahlen, nicht ihr.',
+    wer:'Unsere Wirtschaft wächst schnell. Wir bauen Wind und Sonne aus. Wir brauchen aber noch Kohle und Gas.',kopf:'Uns ist wichtig:',
+    liste:['Wir brauchen Energie für Arbeit und Wachstum.','Reiche Länder haben lange viel CO<sub>2</sub> ausgestoßen. Sie sollen zahlen.'],
+    a1:'Wir wollen B. Wir sagen Nein zu A.',a2:'Wir wollen A. Wir sagen Nein zu B.',
+    st:{1:'nwo',2:'wno'},
+    infos:[
+     {t:'Unsere Lage',z:['Euer Land hat viele Millionen Einwohner. Die Wirtschaft wächst schnell.','Der Energiebedarf steigt jedes Jahr.',
+       'Ihr baut Wind und Sonne stark aus.','Kohle und Gas braucht ihr noch für verlässlichen Strom.',
+       'Der CO2-Ausstoß pro Person ist in vielen Schwellenländern kleiner als in Industrieländern.'],q:'typisiertes Land, vereinfacht'},
+     {t:'Wer trägt die Verantwortung?',z:['Die UN-Klimakonvention von 1992 sagt: „gemeinsame, aber unterschiedliche Verantwortung“.',
+       'Industrieländer haben seit 1850 einen sehr großen Teil des CO2 ausgestoßen.','Deshalb gelten sie als Geldgeber. Ihr wollt, dass das so bleibt.',
+       'Andere Länder sagen: Große Schwellenländer sind heute reicher und stoßen viel aus. Sie sollen mitzahlen.'],q:'nach UNFCCC, vereinfacht'},
+     {t:'Energie und Strom',z:['Wind und Sonne liefern nicht immer Strom. In der Nacht oder bei Flaute braucht ihr Reserven.',
+       'Speicher und Stromnetze kosten viel Geld.','Antrag 1 Variante B (mehr Strom) hilft dem Klima nur, wenn der Strom erneuerbar ist.',
+       'Für euren Ausbau braucht ihr Geld und Technik.'],q:'nach UNFCCC und UBA, vereinfacht'}],
+    aufg:[
+     {t:'**Beschreibe** in zwei Sätzen, welche Position deine Gruppe bei Antrag 1 und bei Antrag 2 vertritt.',n:'E'},
+     {t:'**Begründe** mit zwei Belegen aus M-R1 bis M-R3, warum ihr bei Antrag 1 Variante B wollt und Variante A ablehnt. Schreibe zwei Sätze mit „weil“.',n:'F'},
+     {t:'**Begründe** mit einem Beleg, warum ihr bei Antrag 2 Variante A wollt und Variante B ablehnt.',n:'F'},
+     {t:'**Erkläre**, welche Gruppe euch am ehesten widerspricht. **Nenne** ihr Interesse und eure Antwort darauf.',n:'F–G'},
+     {t:'**Entwickle** einen Kompromiss-Satz, dem ihr noch zustimmen könntet. **Lege** eure rote Linie fest: Bei welchem Satz sagt ihr Nein?',n:'G'},
+     {t:'**Recherchiere** mit dem Handy: **Vergleiche** den CO2-Ausstoß pro Person in Deutschland und in einem Schwellenland deiner Wahl. **Nenne** die Zahlen und die Quelle.',n:'G',opt:true}],
+    sb:['Wir wollen Variante …, weil …','Reiche Länder sollen zahlen, weil …','Unsere rote Linie ist …, weil …']},
+ 5:{n:'Präsidentschaft',s:'leitet · keine Stimme',
+    auftrag:'Ihr leitet die Konferenz und habt keine Stimme. Ihr schreibt Kompromiss-Sätze, denen alle zustimmen können.',
+    wer:'Wir leiten die Konferenz. Die Türkei ist Gastgeber. Australien führt die Verhandlungen.',kopf:'Unsere Aufgabe:',
+    liste:['Hört allen Gruppen zu.','Schreibt Kompromiss-Sätze zu Antrag 1 und 2.','Wir wollen mehr Strom im Energieverbrauch.'],
+    ziel:'Ein Beschluss, dem alle zustimmen können. Fragt in der Abstimmung: „Sagt jemand Nein?“',
+    infos:[
+     {t:'Die Regel: Konsens',z:['Auf einer COP gilt das Konsens-Prinzip: Ein Beschluss gilt nur, wenn niemand widerspricht.',
+       'Fast 200 Staaten sitzen am Tisch. Ein einziges Land kann einen Satz stoppen.','Die Präsidentschaft sammelt Wünsche und schreibt Entwürfe.',
+       'Am Ende fragt sie: „Sagt jemand Nein?“','Sie ist neutral und hat keine Stimme.'],q:'nach UNFCCC, vereinfacht'},
+     {t:'Werkzeugkasten für Kompromisse',z:['1 Abschwächen: Aus „müssen“ wird „sollen“ oder „werden eingeladen“.',
+       '2 Streichen: Ein umstrittener Satz fällt weg.','3 Wahl lassen: „Jedes Land wählt seinen Weg.“',
+       '4 Zeit geben: Statt eines Datums steht „so bald wie möglich“.','5 Verbinden: Zwei Wünsche stehen im selben Satz.'],q:'nach Praxis der Klimakonferenzen, vereinfacht'},
+     {t:'Beispiel: Glasgow 2021',z:['In der letzten Verhandlungsnacht wollten einige Länder keinen „Kohleausstieg“.',
+       'Aus „auslaufen lassen“ (phase out) wurde „schrittweise verringern“ (phase down).','Der Satz blieb im Text, aber er war schwächer.',
+       'Alle haben zugestimmt, einige waren unzufrieden.'],q:'nach UNFCCC und Medienberichten, vereinfacht'}],
+    aufg:[
+     {t:'**Beschreibe** in zwei Sätzen, was die Präsidentschaft tut und was sie nicht darf.',n:'E'},
+     {t:'**Erkläre** mit M-R1, warum ein einziges Nein genügt, um einen Satz zu stoppen.',n:'F'},
+     {t:'**Notiere** in der Eröffnung für jede Gruppe: Was will sie? Wozu sagt sie Nein? (Tabelle)',n:'E–F'},
+     {t:'**Entwickle** je einen Kompromiss-Satz zu Antrag 1 und zu Antrag 2. **Nutze** mindestens ein Werkzeug aus M-R2.',n:'G'},
+     {t:'**Erkläre**, bei welchem Antrag ein Kompromiss schwerer wird und warum.',n:'F–G'},
+     {t:'**Recherchiere** mit dem Handy: Wie lief die Einigung in Glasgow 2021 zur Kohle ab? **Nenne** zwei Fakten und die Quelle.',n:'G',opt:true}],
+    sb:['Wir schlagen vor: …','Dem könnt ihr zustimmen, weil …','Sagt jemand Nein?']},
+ 6:{n:'Umweltorganisation',s:'Beobachter · keine Stimme',
+    auftrag:'Ihr seid Beobachter und dürft reden, aber nicht abstimmen. Ihr haltet ein Statement mit 3 Sätzen. Ihr fordert Variante A bei Antrag 1 und Geld für arme Länder.',
+    wer:'Wir sind eine Umweltorganisation. Wir dürfen im Raum sein und reden. Wir dürfen nicht abstimmen.',kopf:'Unsere Aufgabe:',
+    liste:['Haltet ein Statement mit 3 Sätzen (1 Minute). Fordert Variante A bei Antrag 1 und Geld für arme Länder.','Beobachtet: Welche Gruppe setzt sich durch? Notiert Stichpunkte.'],
+    ziel:'Der Beschluss soll das Klima schützen.',
+    st:{1:'wou',2:'oou'},lab:{w:'Wir fordern',o:'Nur unter Bedingungen',u:'Wir lehnen ab'},
+    infos:[
+     {t:'Unsere Rolle',z:['Umweltorganisationen sind Beobachter. Sie dürfen im Raum sein und reden.','Sie dürfen nicht abstimmen.',
+       'Sie veröffentlichen Analysen, schreiben Kommentare zu den Entwürfen und sprechen mit Medien.','So machen sie Druck auf die Staaten.'],q:'nach UNFCCC, vereinfacht'},
+     {t:'Warum Variante A?',z:['Das Energiesystem verursacht etwa drei Viertel der Treibhausgase. Es beruht noch größtenteils auf Kohle, Öl und Gas.',
+       'Laut UNEP-Bericht vom Oktober 2026 ist die 1,5-Grad-Grenze kaum noch zu halten. Jetzt geht es darum, die Überschreitung so klein wie möglich zu halten.',
+       'Je wärmer es wird, desto mehr Hitzewellen, Dürren und Starkregen gibt es.',
+       'Mehr Strom hilft nur, wenn er aus erneuerbaren Quellen kommt.'],q:'nach IEA und UNEP (Emissions Gap Report 2026), vereinfacht'},
+     {t:'Ein Statement schreiben',z:['Ein Statement hat drei Teile:','1 Forderung: Was verlangt ihr?','2 Beleg: Welcher Fakt stützt das?','3 Appell: Was sollen die Staaten tun?',
+       'Ihr habt 1 Minute. Sprecht in kurzen Sätzen.'],q:'Methode, vereinfacht'}],
+    aufg:[
+     {t:'**Beschreibe** in zwei Sätzen, wer ihr seid und was ihr bei der Mini-COP dürft.',n:'E'},
+     {t:'**Begründe** mit zwei Belegen aus M-R2, warum ihr bei Antrag 1 Variante A fordert.',n:'F'},
+     {t:'**Entwickle** ein Statement mit 3 Sätzen: Forderung, Beleg, Appell.',n:'F–G'},
+     {t:'**Notiere** beim Verhandeln: Welche Gruppe setzt sich durch? Wer gibt nach? Wer sagt Nein? (Tabelle)',n:'E–F'},
+     {t:'**Beurteile** nach der Abstimmung: Schützt der Beschluss das Klima? **Nenne** ein Kriterium und begründe.',n:'G'},
+     {t:'**Recherchiere** mit dem Handy: Suche eine Forderung einer echten Umweltorganisation zur COP31. **Fasse** sie in zwei Sätzen **zusammen** und **nenne** die Quelle.',n:'G',opt:true}],
+    sb:['Wir fordern: …','Der Grund: …','Deshalb bitten wir die Staaten: …']}
 };
