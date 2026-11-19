@@ -6,7 +6,7 @@
    - st: Haltung zu den Varianten A, B, C je Antrag (w = wollen, m = mitgehen, n = Nein, o = offen)
    - infos: Infokarten M-R1 bis M-R3. Eine Zeile = ein Satz. Es stehen nur Fakten drin, keine fertigen Argumente.
    - aufg: Arbeitsaufträge. Die SuS erarbeiten Argumente, Kompromisse und rote Linien selbst.
-   Fakten sind vereinfacht und stammen aus allgemein bekannten Quellen (UNFCCC, IPCC, EU-Kommission, UNEP). Vor dem Einsatz gegenlesen.
+   Fakten sind vereinfacht und stammen aus allgemein bekannten Quellen (UNFCCC, IPCC, EU-Kommission, IEA, UNEP). Geprüft am 19.11.2026 per Websuche (Sekundärquellen, Primärtexte nicht abgerufen).
    Die Rollen sind typisiert: Sie sind keine Meinung der Lehrkraft oder der Klasse. */
 window.COP_VAR={
  1:{A:'Alle Länder kehren sich von Kohle, Öl und Gas ab. Sie legen einen Plan vor.',
@@ -30,7 +30,7 @@ window.COP_ROLLEN={
     st:{1:'wmn',2:'nwo'},
     infos:[
      {t:'Unsere Lage',z:['Die EU will bis 2050 klimaneutral sein. Das steht im Europäischen Klimagesetz.',
-       'Bis 2030 sollen die Treibhausgase um 55 % sinken (im Vergleich zu 1990).','Die EU baut viele Wind- und Solaranlagen.',
+       'Bis 2030 sollen die Treibhausgase um mindestens 55 % sinken (netto, im Vergleich zu 1990).','Die EU baut viele Wind- und Solaranlagen.',
        'Sie führt aber noch Öl und Gas aus anderen Ländern ein.','Die EU und ihre Mitgliedsländer gehören zu den größten Geldgebern für Klimaschutz in ärmeren Ländern.'],
       q:'nach EU-Kommission, vereinfacht'},
      {t:'Was schon beschlossen ist',z:['2015 in Paris: Die Staaten wollen die Erwärmung auf deutlich unter 2 Grad begrenzen, möglichst auf 1,5 Grad.',
@@ -40,7 +40,7 @@ window.COP_ROLLEN={
      {t:'Wer zahlt?',z:['2009 versprachen reiche Länder: 100 Milliarden US-Dollar im Jahr für ärmere Länder.',
        '2024 auf der COP29 in Baku: Ab 2035 sollen es mindestens 300 Milliarden im Jahr sein.',
        'Die UN-Einteilung der Länder stammt von 1992. Große Schwellenländer gelten dort noch als Entwicklungsländer.',
-       'Sie müssen deshalb bisher nicht zahlen.'],q:'nach UNFCCC, vereinfacht'}],
+       'Sie müssen deshalb nach der Konvention nicht zahlen. Sie dürfen freiwillig mitzahlen.'],q:'nach UNFCCC, vereinfacht'}],
     aufg:[
      {t:'**Beschreibe** in zwei Sätzen, welche Position deine Gruppe bei Antrag 1 und bei Antrag 2 vertritt.',n:'E'},
      {t:'**Begründe** mit zwei Belegen aus M-R1 bis M-R3, warum ihr bei Antrag 1 Variante A wollt. Schreibe zwei Sätze mit „weil“.',n:'F'},
@@ -61,7 +61,7 @@ window.COP_ROLLEN={
        'Eine neue Wirtschaft (Solar, Industrie, Tourismus) aufzubauen dauert viele Jahre.'],q:'typisiertes Land, vereinfacht'},
      {t:'Was schon beschlossen ist',z:['2023 auf der COP28 in Dubai beschlossen alle Staaten: Abkehr von fossilen Energien in den Energiesystemen.',
        'Im Text steht: „gerecht, geordnet und fair“.','Der Text nennt kein Datum für den Ausstieg aus Öl und Gas.',
-       'Jedes Land darf seinen Weg wählen. Darauf könnt ihr euch berufen.'],q:'nach UNFCCC, vereinfacht'},
+       'Im Text steht auch: Erdgas kann als Übergangsbrennstoff eine Rolle spielen. Darauf könnt ihr euch berufen.'],q:'nach UNFCCC, vereinfacht'},
      {t:'Der Preis des Umbaus',z:['Kohle, Öl und Gas liefern weltweit noch etwa 80 % der Energie.',
        'Öl braucht man auch für Verkehr und Kunststoffe, Gas für Strom und Wärme.',
        'Neue Zahlungen (Antrag 2) würden euren Haushalt zusätzlich belasten.','Manche Förderländer bauen selbst große Solarparks.'],q:'nach IEA, vereinfacht'}],
@@ -89,7 +89,7 @@ window.COP_ROLLEN={
        'Für Schäden und Verluste gibt es seit 2023 einen Fonds. Er ist im Vergleich zu den Schäden noch klein.',
        'Ab 2035 sollen reiche Länder mindestens 300 Milliarden US-Dollar im Jahr geben.'],q:'nach UNFCCC, vereinfacht'},
      {t:'Kleine Länder, eine Stimme',z:['Viele kleine Inselstaaten haben sich zur Gruppe AOSIS zusammengeschlossen.',
-       'Auf der COP sprechen sie mit einer Stimme.','2015 in Paris haben sie erreicht, dass das 1,5-Grad-Ziel im Text steht.',
+       'Auf der COP sprechen sie mit einer Stimme.','2015 in Paris haben sie sich stark dafür eingesetzt, dass das 1,5-Grad-Ziel im Text steht.',
        'Ihr Satz: „Jedes Zehntel Grad zählt.“'],q:'nach AOSIS, vereinfacht'}],
     aufg:[
      {t:'**Beschreibe** in zwei Sätzen, welche Position deine Gruppe bei Antrag 1 und bei Antrag 2 vertritt.',n:'E'},
@@ -110,7 +110,7 @@ window.COP_ROLLEN={
        'Ihr baut Wind und Sonne stark aus.','Kohle und Gas braucht ihr noch für verlässlichen Strom.',
        'Der CO2-Ausstoß pro Person ist in vielen Schwellenländern kleiner als in Industrieländern.'],q:'typisiertes Land, vereinfacht'},
      {t:'Wer trägt die Verantwortung?',z:['Die UN-Klimakonvention von 1992 sagt: „gemeinsame, aber unterschiedliche Verantwortung“.',
-       'Industrieländer haben seit 1850 den größten Teil des CO2 ausgestoßen.','Deshalb gelten sie als Geldgeber. Ihr wollt, dass das so bleibt.',
+       'Industrieländer haben seit 1850 einen sehr großen Teil des CO2 ausgestoßen.','Deshalb gelten sie als Geldgeber. Ihr wollt, dass das so bleibt.',
        'Andere Länder sagen: Große Schwellenländer sind heute reicher und stoßen viel aus. Sie sollen mitzahlen.'],q:'nach UNFCCC, vereinfacht'},
      {t:'Energie und Strom',z:['Wind und Sonne liefern nicht immer Strom. In der Nacht oder bei Flaute braucht ihr Reserven.',
        'Speicher und Stromnetze kosten viel Geld.','Antrag 1 Variante B (mehr Strom) hilft dem Klima nur, wenn der Strom erneuerbar ist.',
@@ -155,10 +155,10 @@ window.COP_ROLLEN={
     infos:[
      {t:'Unsere Rolle',z:['Umweltorganisationen sind Beobachter. Sie dürfen im Raum sein und reden.','Sie dürfen nicht abstimmen.',
        'Sie veröffentlichen Analysen, schreiben Kommentare zu den Entwürfen und sprechen mit Medien.','So machen sie Druck auf die Staaten.'],q:'nach UNFCCC, vereinfacht'},
-     {t:'Warum Variante A?',z:['Mehr als drei Viertel der Treibhausgase stammen aus Kohle, Öl und Gas.',
-       'Laut UNEP wird die 1,5-Grad-Grenze im nächsten Jahrzehnt überschritten, wenn die Staaten nicht mehr tun (nach UBA, 2026).',
+     {t:'Warum Variante A?',z:['Das Energiesystem verursacht etwa drei Viertel der Treibhausgase. Es beruht noch größtenteils auf Kohle, Öl und Gas.',
+       'Laut UNEP-Bericht vom Oktober 2026 ist die 1,5-Grad-Grenze kaum noch zu halten. Jetzt geht es darum, die Überschreitung so klein wie möglich zu halten.',
        'Je wärmer es wird, desto mehr Hitzewellen, Dürren und Starkregen gibt es.',
-       'Mehr Strom hilft nur, wenn er aus erneuerbaren Quellen kommt.'],q:'nach IPCC, UNEP, UBA, vereinfacht'},
+       'Mehr Strom hilft nur, wenn er aus erneuerbaren Quellen kommt.'],q:'nach IEA und UNEP (Emissions Gap Report 2026), vereinfacht'},
      {t:'Ein Statement schreiben',z:['Ein Statement hat drei Teile:','1 Forderung: Was verlangt ihr?','2 Beleg: Welcher Fakt stützt das?','3 Appell: Was sollen die Staaten tun?',
        'Ihr habt 1 Minute. Sprecht in kurzen Sätzen.'],q:'Methode, vereinfacht'}],
     aufg:[
