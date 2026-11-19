@@ -7,15 +7,18 @@
      (Tabelle auf Seite 2 der Mappe). Erwartete Haltungen: nur in der Lehrkraftdatei (Verlaufsplan).
    - infos: Infokarten M-R1 bis M-R3. Eine Zeile = ein Satz. Es stehen nur Fakten drin, keine fertigen Argumente.
    - aufg: Arbeitsaufträge. Die SuS erarbeiten Argumente, Kompromisse und rote Linien selbst.
-   Gestaltungsregel: Interessen sind allgemein formuliert (nicht im Wortlaut der Varianten). Die Infokarten nennen Belege, die für und gegen eine Variante sprechen,
+   Gestaltungsregel: Die Varianten sind nicht nach Ehrgeiz sortiert und nicht wertend formuliert. Jede hat Vor- und Nachteile, je nach Rolle gibt es Zielkonflikte.
+   Interessen sind allgemein formuliert (nicht im Wortlaut der Varianten). Die Infokarten nennen Belege, die für und gegen eine Variante sprechen,
    aber keine Folgerung. Die SuS müssen Belege den Varianten zuordnen und abwägen.
    Fakten sind vereinfacht und stammen aus allgemein bekannten Quellen (UNFCCC, IPCC, EU-Kommission, IEA, UNEP). Geprüft am 19.11.2026 per Websuche (Sekundärquellen, Primärtexte nicht abgerufen).
    Die Rollen sind typisiert: Sie sind keine Meinung der Lehrkraft oder der Klasse. */
 window.COP_VAR={
- 1:{A:'Alle Länder kehren sich von Kohle, Öl und Gas ab. Sie legen einen Plan vor.',
-    B:'Strom liefert mehr Energie (E-Autos, Wärmepumpen). Jedes Land wählt seinen Weg.',
-    C:'Der Beschluss sagt nichts zu Kohle, Öl und Gas.'},
- 2:{A:'Nur reiche Industrieländer zahlen.',B:'Auch große Schwellenländer und Firmen zahlen mit.',C:'Es gibt keine neue Regel.'}
+ 1:{A:'Jedes Land legt in seinem Klimaplan (NDC) selbst fest, wie es Kohle, Öl und Gas verringert. Die Pläne sind öffentlich.',
+    B:'Der Beschluss nennt ein gemeinsames Enddatum: Bis 2050 beenden alle Länder die Nutzung von Kohle, Öl und Gas.',
+    C:'Der Beschluss setzt ein Ziel für mehr Strom: Bis 2035 soll Strom 35 % des Energieverbrauchs decken (E-Autos, Wärmepumpen). Kohle, Öl und Gas stehen nicht darin.'},
+ 2:{A:'Die Industrieländer geben das Geld. Mindestens die Hälfte kommt als Zuschuss, nicht als Kredit.',
+    B:'Alle Länder mit starker Wirtschaft geben Geld. Wer dazugehört, richtet sich nach Wirtschaftskraft und CO2-Ausstoß. Zuschuss oder Kredit ist frei.',
+    C:'Es gibt keine neue Regel. Jedes Land entscheidet freiwillig, wie viel es gibt.'}
 };
 window.COP_TITEL={1:'Antrag 1: Kohle, Öl und Gas',2:'Antrag 2: Geld für Klimaschutz (ab 2035 mindestens 300 Milliarden US-Dollar im Jahr)'};
 window.COP_HALTUNG={w:'Wir wollen',m:'Wir können mitgehen',n:'Wir sagen Nein',o:'Offen: Das klärt ihr in der Verhandlung'};
@@ -27,7 +30,7 @@ window.COP_TISCH=[
 window.COP_F={
  paris:'2015 in Paris: Die Staaten wollen die Erwärmung auf deutlich unter 2 Grad begrenzen, möglichst auf 1,5 Grad.',
  ndc:'Dafür legt jedes Land alle 5 Jahre einen nationalen Klimaplan (NDC) vor. Er steht in einem öffentlichen Register.',
- cop28:'2023 auf der COP28 in Dubai: Alle Staaten beschließen, sich von fossilen Energien abzuwenden. Zum ersten Mal standen fossile Brennstoffe in einem COP-Beschluss.',
+ cop28:'2023 auf der COP28 in Dubai: Alle Staaten beschließen, sich von fossilen Energien abzuwenden. Zum ersten Mal standen fossile Brennstoffe in einem COP-Beschluss. Der Text nennt Netto-Null bis 2050.',
  cop30:'Die COP30 (2025) endete ohne ausdrückliche Nennung fossiler Energien. Viele Länder fordern deshalb jetzt klare Sätze dazu.',
  geld:'2009 versprachen reiche Länder 100 Milliarden US-Dollar im Jahr. Erreicht wurde das erst 2022, zwei Jahre zu spät.',
  geld35:'Ab 2035 sollen es mindestens 300 Milliarden US-Dollar im Jahr sein.',
@@ -62,15 +65,16 @@ window.COP_ROLLEN={
     liste:['Wir brauchen stabile Einnahmen für den Staat.','Wir brauchen Zeit für den Umbau unserer Wirtschaft.'],
     infos:[
      {t:'Unsere Lage',z:['Euer Land fördert Erdöl und Erdgas und verkauft sie an andere Länder.',
-       'Die Einnahmen bezahlen einen großen Teil des Staatshaushalts.','Viele Menschen arbeiten direkt oder indirekt in der Öl- und Gasbranche.',
-       'Öl- und Gasfirmen in eurem Land gehören oft dem Staat.',
+       'Die Einnahmen bezahlen einen großen Teil des Staatshaushalts.',
+       'Viele Menschen arbeiten in der Öl- und Gasbranche. Die Firmen gehören oft dem Staat.',
+       'Euer Land hat ein hohes Einkommen pro Kopf. Nach der UN-Einteilung von 1992 zählt es nicht zu den Industrieländern.',
        'Eine neue Wirtschaft aufzubauen (zum Beispiel Solarenergie, Industrie, Tourismus) dauert viele Jahre.'],q:'typisiertes Land, vereinfacht'},
      {t:'Was schon beschlossen ist',z:['2023 auf der COP28 in Dubai beschließen alle Staaten: Abkehr von fossilen Energien in den Energiesystemen.',
-       'Im Text steht: „gerecht, geordnet und fair“. Er nennt kein Datum für den Ausstieg.',
+       'Im Text steht: „gerecht, geordnet und fair“. Er nennt Netto-Null bis 2050, aber kein Datum für das Ende von Öl und Gas.',
        'Im Text steht auch: Erdgas kann als Übergangsbrennstoff eine Rolle spielen.',window.COP_F.ndc,window.COP_F.cop30],q:'nach UNFCCC und Medienberichten, vereinfacht'},
      {t:'Die Anträge aus Sicht eures Landes',z:['Kohle, Öl und Gas liefern weltweit noch etwa 80 % der Energie. Öl braucht man auch für Verkehr und Kunststoffe, Gas für Strom und Wärme.',
        'Ein nationaler Klimaplan steht in einem öffentlichen Register. Andere Länder und Medien können ihn prüfen.',
-       'Zu den „Firmen“ in Antrag 2 Variante B können auch Öl- und Gasfirmen gehören.',
+       'Länder mit hohem Einkommen pro Kopf gelten oft als zahlungsfähig, auch wenn sie 1992 nicht als Industrieländer eingestuft wurden.',
        'Manche Förderländer bauen selbst große Solarparks.','Inselstaaten und andere Länder fordern klare Sätze zu fossilen Energien.'],q:'nach IEA und UNFCCC, vereinfacht'}],
     aufg:window.COP_AUFG.concat([{t:'**Recherchiere** mit dem Handy: Suche ein echtes Förderland, das in Solar- oder Windenergie investiert. **Nenne** ein Beispiel und die Quelle.',n:'G',opt:true}]),
     sb:['Wir halten Variante … für passend, weil …','Wir brauchen Zeit, weil …','Unsere rote Linie ist …, weil …']},
@@ -87,8 +91,8 @@ window.COP_ROLLEN={
        'Anpassung: Schutz vor den Folgen, zum Beispiel Deiche und Frühwarnung.','Schäden und Verluste: Hilfe, wenn Schutz nicht mehr reicht.',
        'Für Schäden und Verluste gibt es seit 2023 einen Fonds. Er ist im Vergleich zu den Schäden noch klein.'],q:'nach UNFCCC, vereinfacht'},
      {t:'Die Anträge aus eurer Sicht',z:['Das Energiesystem mit Kohle, Öl und Gas verursacht etwa drei Viertel der Treibhausgase.',
-       window.COP_F.geld,'2022 waren etwa 69 % des öffentlichen Klimageldes Kredite. Kredite müssen zurückgezahlt werden.',
-       'Ab 2035 sollen es mindestens 300 Milliarden US-Dollar im Jahr sein. Große Schwellenländer dürfen freiwillig mitzahlen, müssen aber nicht.',
+       window.COP_F.strom,window.COP_F.geld,'2022 waren etwa 69 % des öffentlichen Klimageldes Kredite. Kredite müssen zurückgezahlt werden.',
+       'Ab 2035 sollen es mindestens 300 Milliarden US-Dollar im Jahr sein. Große Schwellenländer dürfen freiwillig mitzahlen.',
        'Viele kleine Inselstaaten sind in der Gruppe AOSIS vereint. 2015 in Paris setzten sie sich stark für das 1,5-Grad-Ziel ein.'],q:'nach IEA, OECD, UNFCCC, vereinfacht'}],
     aufg:window.COP_AUFG.concat([{t:'**Recherchiere** mit dem Handy: Suche einen echten Inselstaat (zum Beispiel Tuvalu, Malediven oder Kiribati). **Nenne**, wie hoch das Land über dem Meer liegt, und die Quelle.',n:'G',opt:true}]),
     sb:['Wir halten Variante … für passend, weil …','Für uns ist wichtig, dass …','Unsere rote Linie ist …, weil …']},
@@ -105,8 +109,8 @@ window.COP_ROLLEN={
        'Industrieländer haben seit 1850 einen sehr großen Teil des CO2 ausgestoßen.',
        'Die Einteilung in Industrie- und Entwicklungsländer stammt von 1992. Euer Land zählt dort zu den Entwicklungsländern.',
        'Heute sagen manche Länder: Große Schwellenländer sind reicher und stoßen viel aus. Sie sollen mitzahlen.'],q:'nach UNFCCC, vereinfacht'},
-     {t:'Die Anträge aus Sicht eures Landes',z:['Wind und Sonne liefern nicht immer Strom. Nachts oder bei Flaute braucht ihr Reserven.',
-       'Speicher und Stromnetze kosten viel Geld.',window.COP_F.strom,window.COP_F.ndc,
+     {t:'Die Anträge aus Sicht eures Landes',z:['Wind und Sonne liefern nicht immer Strom. Reserven, Speicher und Netze kosten viel Geld.',
+       'Kohlekraftwerke laufen oft 40 Jahre und länger.',window.COP_F.strom,window.COP_F.ndc,
        '2022 erreichten reiche Länder erstmals 100 Milliarden US-Dollar im Jahr. Ab 2035 sollen es mindestens 300 Milliarden sein.'],q:'nach UNFCCC, IEA, OECD, vereinfacht'}],
     aufg:window.COP_AUFG.concat([{t:'**Recherchiere** mit dem Handy: **Vergleiche** den CO2-Ausstoß pro Person in Deutschland und in einem Schwellenland deiner Wahl. **Nenne** die Zahlen und die Quelle.',n:'G',opt:true}]),
     sb:['Wir halten Variante … für passend, weil …','Wir können nicht allein zahlen, weil …','Unsere rote Linie ist …, weil …']},

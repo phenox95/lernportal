@@ -23,8 +23,8 @@ const M3=['Am Montag (16.11.) lag ein Entwurf mit 18 Seiten vor.','Er nannte fos
 const m3=()=>`<div class="mat"><div class="mk">M3 Der Entwurf der echten COP31 (Stand: 19.11.2026)</div>${z(M3)}<div class="qu">Quelle: Reuters und ORF, 19.11.2026, vereinfacht</div></div>`;
 const wortspeicher=`<div class="box"><b>Wortspeicher</b><br>De-le-ga-ti-on · An-trag · Kon-sens<br>Kom-pro-miss · Ab-stim-mung<br>Ent-hal-tung · Be-schluss · Ent-wurf</div>`;
 const frage=`<div class="box"><b>Unsere Frage für heute:</b>${lines(2)}</div>`;
-const tabelleEin=()=>{let h='<div class="hint">Trage ein: Passt die Variante zu euch (✓), geht sie noch (±) oder sagt ihr Nein (✗)? Begründe mit einem Beleg.</div>';
- [1,2].forEach(a=>{h+=`<table class="ein"><caption>${W.COP_TITEL[a].split(' (')[0]}</caption><tr><th>Var.</th><th>Was steht darin?</th><th>✓</th><th>±</th><th>✗</th><th>Begründung mit Beleg</th></tr>`;['A','B','C'].forEach(v=>{h+=`<tr><td><b>${v}</b></td><td>${W.COP_VAR[a][v]}</td><td></td><td></td><td></td><td></td></tr>`});h+='</table>'});return h};
+const tabelleEin=()=>{let h='<div class="hint">Schritt 1: Was bedeutet die Variante für euer Land? Nenne einen Beleg. Schritt 2: Passt sie zu euch (✓), geht sie noch (±) oder sagt ihr Nein (✗)?</div>';
+ [1,2].forEach(a=>{h+=`<table class="ein"><caption>${W.COP_TITEL[a].split(' (')[0]}</caption><tr><th>Var.</th><th>Was steht darin?</th><th>Was bedeutet das für uns? (Beleg)</th><th>✓</th><th>±</th><th>✗</th></tr>`;['A','B','C'].forEach(v=>{h+=`<tr><td><b>${v}</b></td><td>${W.COP_VAR[a][v]}</td><td></td><td></td><td></td><td></td></tr>`});h+='</table>'});return h};
 const auswertung=(handy)=>`<div class="seite">${kopf('Geografie · Klimawandel und Klimaschutz · Auswertung')}<h1>Mini-COP31: Wir werten aus</h1>
  ${aufg('4','<b>Trage</b> das Ergebnis eurer Abstimmung ein. Es zählen nur die 4 stimmberechtigten Gruppen.','E',`<table class="erg"><tr><th>Antrag</th><th>Variante</th><th>Ja (von 4)</th><th>Nein</th><th>Enthaltung</th><th>angenommen?</th></tr><tr><td>1 Kohle, Öl, Gas</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2 Geld</td><td></td><td></td><td></td><td></td><td></td></tr></table>
  <div class="box"><b>Wer hat eine Stimme?</b> Stimmberechtigt: 1 Europäische Union, 2 Ölförderland, 3 Inselstaat, 4 Großes Schwellenland. Dabei, aber ohne Stimme: 5 Präsidentschaft (leitet), 6 Umweltorganisation (Beobachter). Sie zählen nicht mit.${handy?'<br><b>Mit Handy:</b> Gruppen 1 bis 4 tragen ihre Stimmen auf der Handyseite ein und zeigen den Ergebnis-Code.':''}</div>`)}
@@ -53,7 +53,7 @@ body{font-family:Andika,Verdana,Arial,sans-serif;color:#111;font-size:9pt;line-h
 .kopf{display:flex;justify-content:space-between;border-bottom:1.5pt solid #111;padding-bottom:2mm;margin-bottom:3mm;font-weight:700}
 h1{font-size:16pt;margin:0 0 2mm;line-height:1.15}.box{border:1.5pt solid #111;padding:2mm 3mm;margin:2mm 0;background:#efefef}.hint{margin:0 0 2mm}
 table{width:100%;border-collapse:collapse;margin:1mm 0 2mm}caption{text-align:left;font-weight:700;padding-bottom:.5mm}th,td{border:1pt solid #111;padding:.8mm 2mm;text-align:left;vertical-align:top}th{background:#efefef}
-.ein td{height:9mm}.ein td:nth-child(2){width:62mm}.ein th:nth-child(n+3):nth-child(-n+5),.ein td:nth-child(n+3):nth-child(-n+5){width:7mm;text-align:center}
+.ein td{height:10mm}.ein td:nth-child(2){width:84mm}.ein th:nth-child(1),.ein td:nth-child(1){width:9mm}.ein th:nth-child(n+4),.ein td:nth-child(n+4){width:7mm;text-align:center}
 .erg td{height:8mm}
 .mat{border:1pt solid #111;padding:2mm 3mm;margin:0 0 2.5mm}.mk{font-weight:700;margin-bottom:1mm}.zl{display:grid;grid-template-columns:6mm 1fr}.zl i{font-style:normal;font-size:8pt}.qu{font-size:8pt;margin-top:1mm}
 .auf{margin:2mm 0}.ar{display:grid;grid-template-columns:5mm 6mm 1fr 10mm;gap:1mm}.cb{width:4mm;height:4mm;border:1pt solid #111;margin-top:.7mm}.lv{font-weight:700;text-align:right}

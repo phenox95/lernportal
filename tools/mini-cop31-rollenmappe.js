@@ -13,8 +13,8 @@ function qrsvg(u){const q=QR(0,'M');q.addData(u);q.make();const n=q.getModuleCou
 const md=t=>t.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
 const font=f=>'file://'+path.join(root,'assets/fonts',f);
 const lines=n=>Array.from({length:n},()=>'<div class="lin"></div>').join('');
-function einschaetzung(k,r){if(k===5)return '';let h='<h2>Eure Einschätzung der Varianten</h2><div class="hint">Trage ein: Passt die Variante zu euch (✓), geht sie noch (±) oder sagt ihr Nein (✗)? Begründe mit einem Beleg (zum Beispiel M-R1, Z. 3).</div>';
- [1,2].forEach(a=>{h+=`<table class="ein"><caption>${W.COP_TITEL[a].split(' (')[0]}</caption><tr><th>Var.</th><th>Was steht darin?</th><th>✓</th><th>±</th><th>✗</th><th>Begründung mit Beleg</th></tr>`;
+function einschaetzung(k,r){if(k===5)return '';let h='<h2>Eure Einschätzung der Varianten</h2><div class="hint">Schritt 1: Was bedeutet die Variante für euer Land? Nenne einen Beleg (zum Beispiel M-R1, Z. 3). Schritt 2: Passt sie zu euch (✓), geht sie noch (±) oder sagt ihr Nein (✗)?</div>';
+ [1,2].forEach(a=>{h+=`<table class="ein"><caption>${W.COP_TITEL[a].split(' (')[0]}</caption><tr><th>Var.</th><th>Was steht darin?</th><th>Was bedeutet das für uns? (Beleg)</th><th>✓</th><th>±</th><th>✗</th></tr>`;
   ['A','B','C'].forEach(v=>{h+=`<tr><td><b>${v}</b></td><td>${W.COP_VAR[a][v]}</td><td></td><td></td><td></td><td></td></tr>`});h+='</table>'});return h}
 const tisch=W.COP_TISCH.map(t=>`<span><b>${t[0]}</b>: ${t[1]}</span>`).join('');
 function seite1(k,r){
@@ -26,10 +26,10 @@ function seite1(k,r){
  ${infos}
  <div class="zwei"><div class="box"><b>Satzbausteine</b><br>${r.sb.join('<br>')}</div><div class="box"><b>Wer sitzt noch am Tisch?</b><br>${tisch}</div></div></div>`}
 function seite2(k,r){
- const nl=[1,1,1,2,2,2];
+ const nl=[1,1,1,1,2,1];
  const tab=(k===5)?`<table class="beo"><tr><th>Gruppe</th><th>Das will sie</th><th>Dazu sagt sie Nein</th></tr>${[1,2,3,4].map(i=>`<tr><td>${i} ${W.COP_ROLLEN[i].n}</td><td></td><td></td></tr>`).join('')}</table>`:
   (k===6)?`<table class="beo"><tr><th>Gruppe</th><th>Setzt sich durch?</th><th>Gibt nach?</th><th>Sagt Nein?</th></tr>${[1,2,3,4].map(i=>`<tr><td>${i} ${W.COP_ROLLEN[i].n}</td><td></td><td></td><td></td></tr>`).join('')}</table>`:'';
- const a=r.aufg.map((x,i)=>{const t=(k===5&&i===2||k===6&&i===3)?tab:lines(x.opt?2:nl[i]);
+ const a=r.aufg.map((x,i)=>{const t=(k===5&&i===2||k===6&&i===3)?tab:lines(x.opt?1:(k===6&&i===4?1:nl[i]));
   return `<div class="auf"><div class="ar"><span class="cb"></span><b>R${i+1}</b><span>${md(x.t)}${x.opt?' (Erweiterung)':''}</span><span class="lv">${x.n}</span></div>${t}</div>`}).join('');
  return `<div class="seite"><div class="kopf"><span>Geografie · Mini-COP31 · Rollenmappe</span><span>${k} ${r.n} · Seite 2</span></div>
  ${einschaetzung(k,r)}<h2>Das erarbeitet ihr selbst</h2><div class="hint">Das hilft dir bei Aufgabe 1 bis 3 auf dem Arbeitsblatt. Schreibe in ganzen Sätzen.</div>${a}
@@ -48,7 +48,7 @@ table{width:100%;border-collapse:collapse;margin:1mm 0 2mm}caption{text-align:le
 .zl{display:grid;grid-template-columns:6mm 1fr}.zl i{font-style:normal;font-size:8pt}.qu{font-size:8pt;margin-top:1mm}
 .auf{margin-bottom:2mm}.ar{display:grid;grid-template-columns:5mm 7mm 1fr 10mm;gap:1mm}.cb{width:4mm;height:4mm;border:1pt solid #111;margin-top:.7mm}.lv{font-weight:700;text-align:right}
 .lin{height:9mm;border-bottom:.7pt solid #777}.zwei{display:grid;grid-template-columns:1fr 1.4fr;gap:3mm}.zwei .box span{display:block}
-.ein td{height:9mm}.ein td:nth-child(2){width:62mm}.ein th:nth-child(n+3):nth-child(-n+5),.ein td:nth-child(n+3):nth-child(-n+5){width:7mm;text-align:center}.beo td{height:7mm}.beo th,.beo td{width:auto}`;
+.ein td{height:10mm}.ein td:nth-child(2){width:84mm}.ein th:nth-child(1),.ein td:nth-child(1){width:9mm}.ein th:nth-child(n+4),.ein td:nth-child(n+4){width:7mm;text-align:center}.beo td{height:7mm}.beo th,.beo td{width:auto}`;
 function karte(k,r){return `<div class="rk"><div class="rkh"><b>${k} ${r.n}</b><span>${r.s}</span></div><div><b>Wer wir sind:</b> ${r.wer}</div><div class="rkk"><b>${r.kopf}</b></div><ul>${r.liste.map(x=>`<li>${x}</li>`).join('')}</ul>${r.ziel?`<div><b>Unser Ziel:</b> ${r.ziel}</div>`:''}<div class="rkq"><div class="t"><b>Auf dem Handy lesen:</b><br>QR-Code scannen. Du kannst dir die Karte vorlesen lassen.</div><div class="q" role="img" aria-label="QR-Code zur Rollenkarte ${k}">${qrsvg(BASE+k)}</div></div></div>`}
 const csskarten=`.kseite{width:210mm;height:296mm;padding:10mm;background:#fff;overflow:hidden}.kk{font-size:8pt;margin-bottom:2mm}.kgrid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,87.9mm);gap:3mm}
 .rk{position:relative;border:1pt dashed #111;padding:3mm 3.5mm;font-size:9pt;line-height:1.3}.rkh{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1.5pt solid #111;margin-bottom:2mm;font-size:10.5pt}.rkh span{font-size:8pt}
