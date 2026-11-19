@@ -900,8 +900,14 @@
         "art": "Präsentation"
       },
       {
-        "titel": "Arbeitsblatt und Rollenkarten",
+        "titel": "Arbeitsblatt und Rollenkarten (Druck)",
         "pfad": "geografie/klasse-9/klimawandel/mini-cop31/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      },
+      {
+        "titel": "Arbeitsblatt für Gruppen mit Handy",
+        "pfad": "geografie/klasse-9/klimawandel/mini-cop31/arbeitsblatt-handy.pdf",
         "art": "Arbeitsblatt",
         "stufe": 2
       },
