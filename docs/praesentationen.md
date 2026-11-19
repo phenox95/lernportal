@@ -20,7 +20,7 @@ Jede Präsentation (HTML) hat denselben Grundaufbau und bekommt dieselben Werkze
 <script src="../../../../assets/js/praesentation.js" defer></script>
 ```
 
-Am rechten Bildrand stehen Haus (zurück zur Seite, von der die Präsentation geöffnet wurde, sonst zur Portal-Startseite), Vollbild und die drei Werkzeuge. Jeder öffnet ein Fenster, das sich am Kopf frei verschieben lässt und mit × schließt. **Die Größe ist über den Griff unten rechts frei verstellbar** (Doppelklick auf den Griff setzt die Standardgröße zurück, die Größe bleibt im Browser gemerkt). Ampel, Schrift und Timer-Ziffern wachsen mit der Fensterbreite mit. Das Fenster bleibt immer vollständig im Bild, zu langer Inhalt scrollt im Fenster.
+Am rechten Bildrand stehen Haus (zurück zur Seite, von der die Präsentation geöffnet wurde, sonst zur Portal-Startseite), Vollbild und die drei Werkzeuge. Kann der Browser kein Vollbild (Brave und einige Browser auf dem iPad), erscheint ein Hinweis mit dem Weg über den Home-Bildschirm (Teilen, Zum Home-Bildschirm) oder in Safari über „aA“ und „Symbolleiste ausblenden“. Jeder öffnet ein Fenster, das sich am Kopf frei verschieben lässt und mit × schließt. **Die Größe ist über den Griff unten rechts frei verstellbar** (Doppelklick auf den Griff setzt die Standardgröße zurück, die Größe bleibt im Browser gemerkt). Ampel, Schrift und Timer-Ziffern wachsen mit der Fensterbreite mit. Das Fenster bleibt immer vollständig im Bild, zu langer Inhalt scrollt im Fenster.
 
 | Werkzeug | Taste | Funktion |
 |---|---|---|

@@ -331,3 +331,10 @@ html.lp-lesen .lp-pr-minuten::before { content: none; }
 .lp-pr-iframe { flex: 1; width: 100%; height: 100%; border: 0; background: #fff; border-radius: 0 0 11px 11px; }
 @media print { .lp-pr-mini, .lp-pr-blende { display: none !important; } }
 html.lp-lesen .lp-pr-mini, html.lp-lesen .lp-pr-blende { display: none !important; }
+
+/* Hinweis, wenn der Browser kein Vollbild kann (z. B. Brave auf dem iPad) */
+.lp-pr-toast { position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%); z-index: 3200; width: min(560px, calc(100vw - 32px)); padding: 14px 16px; background: #1a1a1a; color: #fff; border: 3px solid #fff; border-radius: 14px; box-shadow: 0 8px 28px rgba(0,0,0,.5); font: 16px/1.4 Verdana, Arial, sans-serif; display: grid; gap: 10px; }
+.lp-pr-toast[hidden] { display: none; }
+.lp-pr-toast .lp-pr-klein { justify-self: start; }
+@media print { .lp-pr-toast { display: none !important; } }
+html.lp-lesen .lp-pr-toast { display: none !important; }

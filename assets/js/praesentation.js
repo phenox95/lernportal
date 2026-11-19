@@ -81,9 +81,36 @@
     const voll = knopf("lp-pr-btn", "", "Vollbild (Taste F)");
     voll.innerHTML = ICON.voll;
     voll.title = "Vollbild (F)";
-    voll.addEventListener("click", () => {
-      try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch (e) { /* ok */ }
-    });
+    /* Vollbild: mit und ohne Herstellervorsatz (iPad-Safari nutzt webkit…). Geht es nicht (z. B. Brave und andere Browser auf dem iPad,
+       dort fehlt die Funktion), erscheint ein Hinweis mit dem Weg über den Home-Bildschirm. */
+    const el = document.documentElement;
+    const imVollbild = () => document.fullscreenElement || document.webkitFullscreenElement;
+    function vollbildHinweis() {
+      let h = document.getElementById("lp-pr-hinweisfeld");
+      if (!h) {
+        h = neu("div", "lp-pr-toast");
+        h.id = "lp-pr-hinweisfeld";
+        h.setAttribute("role", "status");
+        h.appendChild(neu("strong", "", "Dieser Browser kann kein Vollbild."));
+        h.appendChild(neu("span", "", " Auf dem iPad: Teilen-Symbol, dann „Zum Home-Bildschirm“, und das Portal von dort öffnen. Dann steht die Seite ohne Browserleiste da. In Safari geht auch: Symbol „aA“, dann „Symbolleiste ausblenden“."));
+        const zu = knopf("lp-pr-klein", "Schließen", "Hinweis schließen");
+        zu.addEventListener("click", () => { h.hidden = true; });
+        h.appendChild(zu);
+        document.body.appendChild(h);
+      }
+      h.hidden = false;
+      clearTimeout(h._t); h._t = setTimeout(() => { h.hidden = true; }, 15000);
+    }
+    window.LPVollbild = function () {
+      try {
+        if (imVollbild()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+        const anfrage = el.requestFullscreen || el.webkitRequestFullscreen;
+        if (!anfrage) { vollbildHinweis(); return; }
+        const r = anfrage.call(el);
+        if (r && r.catch) r.catch(vollbildHinweis);
+      } catch (e) { vollbildHinweis(); }
+    };
+    voll.addEventListener("click", () => window.LPVollbild());
     dock.appendChild(voll);
     const teilen = knopf("lp-pr-btn", "", "Link und QR-Code (Taste Q)");
     teilen.innerHTML = ICON.teilen;
