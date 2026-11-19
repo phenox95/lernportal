@@ -36,6 +36,34 @@
     });
   }
 
+  /* Aktuell: Gibt es in nachrichten.json Meldungen, deren Feld "material" diese Seite (oder eine übergeordnete
+     Materialseite) nennt, erscheint in der Leiste ein Link auf die gefilterte Meldungsliste.
+     Materialseiten mit materialseite.js zeigen die Meldungen selbst als Block „Aktuell dazu“. */
+  function aktuellLink(innen, vor, root) {
+    if (document.querySelector('script[src*="materialseite.js"]') || !window.fetch) return;
+    const basis = new URL(root, location.href).pathname;
+    let eigen = decodeURIComponent(location.pathname);
+    if (!eigen.startsWith(basis)) return;
+    eigen = eigen.slice(basis.length).replace(/index\.html?$/i, "");
+    const norm = p => { const s = String(p || "").trim().replace(/^\.?\//, ""); return s && !s.endsWith("/") ? s + "/" : s; };
+    fetch(root + "nachrichten.json").then(r => (r.ok ? r.json() : {})).catch(() => ({})).then(daten => {
+      const liste = daten && Array.isArray(daten.eintraege) ? daten.eintraege : [];
+      let pfad = "";
+      const zahl = liste.filter(n => n && n.sichtbar !== false && typeof n.link === "string" && /^https:\/\//.test(n.link)
+        && Array.isArray(n.material) && n.material.some(m => {
+          const k = norm(m);
+          if (k && eigen.startsWith(k)) { pfad = pfad || k; return true; }
+          return false;
+        })).length;
+      if (!zahl || !pfad) return;
+      const a = neu("a", "lp-aktuell-btn", "Aktuell");
+      a.href = root + "nachrichten/?material=" + encodeURIComponent(pfad);
+      a.setAttribute("aria-label", "Aktuelle Meldungen zu diesem Thema (" + zahl + ")");
+      a.appendChild(neu("span", "lp-aktuell-zahl", String(zahl))).setAttribute("aria-hidden", "true");
+      innen.insertBefore(a, vor);
+    });
+  }
+
   function baue() {
     icon();
     const body = document.body;
@@ -101,6 +129,7 @@
     });
     innen.appendChild(teilen);
     innen.appendChild(werkzeuge);
+    aktuellLink(innen, teilen, wurzel(d.root));
     kopf.appendChild(innen);
     body.insertBefore(kopf, body.firstChild);
 
