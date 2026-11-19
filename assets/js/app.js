@@ -367,7 +367,7 @@
   const datumLang = d => /^\d{4}-\d{2}-\d{2}$/.test(d || "") ? new Date(d + "T12:00:00").toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : "";
   const zielNummern = list => (Array.isArray(list) ? list : []).map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 17);
   /* Kürzel der Quelle für das Kästchen neben der Schlagzeile (lokal, kein Fremdbild). Unbekannte Quellen: Anfangsbuchstaben der Wörter. */
-  const QUELLE_KURZ = { "zdfheute": "ZDF", "zdf": "ZDF", "tagesschau": "TS", "deutschlandfunk": "DLF", "rbb24": "rbb", "germanwatch": "GW", "deutsche umwelthilfe": "DUH", "umweltbundesamt": "UBA", "bundesumweltministerium (bmukn)": "BMUKN", "bundesumweltministerium": "BMUKN", "robert koch-institut": "RKI", "spektrum": "SPK", "destatis": "DST" };
+  const QUELLE_KURZ = { "zdfheute": "ZDF", "zdf": "ZDF", "tagesschau": "TS", "tagesschau.de": "TS", "deutschlandfunk": "DLF", "rbb24": "rbb", "germanwatch": "GW", "deutsche umwelthilfe": "DUH", "umweltbundesamt": "UBA", "bundesumweltministerium (bmukn)": "BMUKN", "bundesumweltministerium": "BMUKN", "robert koch-institut": "RKI", "spektrum": "SPK", "destatis": "DST" };
   function quelleKurz(q) {
     const k = QUELLE_KURZ[String(q || "").trim().toLowerCase()];
     if (k) return k;
@@ -481,7 +481,12 @@
 
 
       /* ----- Meldungen ----- */
-      const st = { q: "", fach: "Alle", ziel: "Alle" };
+      const st = { q: "", fach: "Alle", ziel: "Alle", material: "" };
+      /* ?material=<Pfad aus projects.json>: nur Meldungen, deren Feld "material" diesen Pfad nennt (Link „Aktuell“ in Präsentationen) */
+      const normPfad = p => { const s = String(p || "").trim().replace(/^\.?\//, ""); return s && !s.endsWith("/") ? s + "/" : s; };
+      const hatMaterial = n => !st.material || (Array.isArray(n.material) && n.material.some(m => normPfad(m) === st.material));
+      const mParam = normPfad(new URLSearchParams(location.search).get("material"));
+      if (mParam && projects.some(p => normPfad(p.path) === mParam)) st.material = mParam;
       const zielSelect = $("#n-ziel");
       zielSelect.innerHTML = '<option value="Alle">Alle Ziele</option>' + bneZiele.map(z =>
         `<option value="${z.nr}">${escapeHtml(z.nr + " " + z.kurz)} (${news.filter(n => zielNummern(n.bne).includes(z.nr)).length})</option>`).join("");
@@ -492,19 +497,20 @@
       const mRow = n => newsRow(n, { fach: true, neu: String(n.datum || "") >= grenzeNeu });
       const fachM = fachSegment($("#n-fach"), () => {
         const tokens = fold(st.q).split(/\s+/).filter(Boolean);
-        const basis = news.filter(n => (st.ziel === "Alle" || zielNummern(n.bne).includes(Number(st.ziel))) && passtSuche(n, tokens));
+        const basis = news.filter(n => hatMaterial(n) && (st.ziel === "Alle" || zielNummern(n.bne).includes(Number(st.ziel))) && passtSuche(n, tokens));
         return { Alle: basis.length, Biologie: basis.filter(n => hatFach(n, "Biologie")).length, Geografie: basis.filter(n => hatFach(n, "Geografie")).length };
       }, v => { st.fach = v; renderM(); });
       const renderM = () => {
         const tokens = fold(st.q).split(/\s+/).filter(Boolean);
-        const treffer = news.filter(n => hatFach(n, st.fach) && (st.ziel === "Alle" || zielNummern(n.bne).includes(Number(st.ziel))) && passtSuche(n, tokens));
-        const gefiltert = st.q || st.fach !== "Alle" || st.ziel !== "Alle";
-        $("#n-count").innerHTML = escapeHtml(zaehle(treffer.length, "Meldung", "Meldungen")) + (gefiltert ? ' · <button type="button" class="n-reset" id="n-reset">Filter zurücksetzen</button>' : "");
+        const treffer = news.filter(n => hatMaterial(n) && hatFach(n, st.fach) && (st.ziel === "Alle" || zielNummern(n.bne).includes(Number(st.ziel))) && passtSuche(n, tokens));
+        const gefiltert = st.q || st.fach !== "Alle" || st.ziel !== "Alle" || st.material;
+        const matTitel = st.material ? String((projects.find(p => normPfad(p.path) === st.material) || {}).title || "") : "";
+        $("#n-count").innerHTML = escapeHtml(zaehle(treffer.length, "Meldung", "Meldungen") + (matTitel ? " zu „" + matTitel + "“" : "")) + (gefiltert ? ' · <button type="button" class="n-reset" id="n-reset">Filter zurücksetzen</button>' : "");
         liste.innerHTML = treffer.length
           ? monatsGruppen(treffer, "datum", mRow, gefiltert)
           : '<p class="empty-message">' + (news.length ? "Dazu gibt es keine Meldung. Ändere die Suche oder den Filter." : "Es gibt noch keine Meldungen.") + "</p>";
         const r = $("#n-reset");
-        if (r) r.addEventListener("click", () => { st.q = ""; st.fach = "Alle"; st.ziel = "Alle"; $("#n-q").value = ""; zielSelect.value = "Alle"; fachM.set("Alle"); renderM(); });
+        if (r) r.addEventListener("click", () => { st.q = ""; st.fach = "Alle"; st.ziel = "Alle"; st.material = ""; history.replaceState(null, "", location.pathname + location.hash); $("#n-q").value = ""; zielSelect.value = "Alle"; fachM.set("Alle"); renderM(); });
         fachM.refresh();
         hydrateIcons();
       };

@@ -271,6 +271,14 @@ for i, n in enumerate(nach.get("eintraege", [])):
             err(f"{nn}: themenfeld muss eine Liste von Texten wie \"3.5\" sein")
         elif gueltig and not set(tfn) <= gueltig:
             err(f"{nn}: themenfeld enthält Nummern, die es im Fach nicht gibt")
+    mat = n.get("material")
+    if mat is not None:
+        if not isinstance(mat, list) or not all(isinstance(x, str) for x in mat):
+            err(f"{nn}: material muss eine Liste von Pfaden aus projects.json sein")
+        else:
+            for x in mat:
+                if x not in alle_pfade:
+                    err(f"{nn}: material „{x}“ steht nicht in projects.json")
     if n.get("woche") and n["woche"] not in woche_ab:
         wrn(f"{nn}: woche „{n['woche']}“ steht nicht als ab-Datum in impuls.json")
     if not n.get("bne") and not n.get("woche"):

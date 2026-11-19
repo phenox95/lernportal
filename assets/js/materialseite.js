@@ -234,7 +234,53 @@
     main.appendChild(abschnitt);
   }
 
-  function zeigen(eintrag, alle, bne) {
+  /* Aktuell dazu (optional): Meldungen aus nachrichten.json, deren Feld "material" diesen Pfad enthält, höchstens 3, neueste zuerst */
+  const ART = { Medienbericht: "Medienbericht", Regierung: "Sicht der Regierung", Position: "Position eines Verbands" };
+  function datumLang(d) {
+    return /^\d{4}-\d{2}-\d{2}$/.test(d || "") ? new Date(d + "T12:00:00").toLocaleDateString("de-DE", { day: "numeric", month: "long", year: "numeric" }) : "";
+  }
+  function aktuell(eintrag, meldungen) {
+    const ich = normPfad(eintrag.path);
+    const passend = (Array.isArray(meldungen) ? meldungen : [])
+      .filter(n => n && n.sichtbar !== false && typeof n.titel === "string" && n.titel.trim()
+        && typeof n.link === "string" && /^https:\/\//.test(n.link)
+        && Array.isArray(n.material) && n.material.some(m => normPfad(m) === ich))
+      .sort((a, b) => String(b.datum || "").localeCompare(String(a.datum || "")))
+      .slice(0, 3);
+    if (!passend.length) return;
+    const abschnitt = neu("section", "ms-gruppe");
+    const h = neu("h2", "ms-gruppentitel", "Aktuell dazu");
+    h.id = "ms-aktuell";
+    abschnitt.appendChild(h);
+    abschnitt.appendChild(neu("p", "ms-bne", "Ausgewählte Meldungen mit kurzer Einordnung. Sie führen auf Seiten anderer Anbieter. Vergleiche verschiedene Quellen."));
+    const ul = neu("ul", "ms-liste");
+    ul.setAttribute("aria-labelledby", h.id);
+    passend.forEach(n => {
+      const li = neu("li", "ms-zeile ms-verweis");
+      const text = neu("div", "ms-text");
+      const kopf = neu("p", "ms-titel");
+      const a = neu("a", "ms-link", n.titel.trim());
+      a.href = n.link;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.appendChild(neu("span", "lp-sr", " (externe Seite, öffnet in neuem Tab)"));
+      kopf.appendChild(a);
+      text.appendChild(kopf);
+      text.appendChild(neu("p", "ms-art", [n.quelle, datumLang(n.datum), ART[n.art] || ""].filter(Boolean).join(" · ")));
+      if (typeof n.einordnung === "string" && n.einordnung.trim()) text.appendChild(neu("p", "ms-art", n.einordnung.trim()));
+      li.appendChild(text);
+      ul.appendChild(li);
+    });
+    abschnitt.appendChild(ul);
+    const mehr = neu("p", "ms-bne");
+    const alle = neu("a", "ms-link", "Alle Meldungen");
+    alle.href = root + "nachrichten/";
+    mehr.appendChild(alle);
+    abschnitt.appendChild(mehr);
+    main.appendChild(abschnitt);
+  }
+
+  function zeigen(eintrag, alle, bne, meldungen) {
     kopfSetzen(eintrag);
     const roh = Array.isArray(eintrag.dateien) ? eintrag.dateien : [];
     const dateien = roh.map(d => {
@@ -264,6 +310,8 @@
 
     querbezuege(eintrag, Array.isArray(alle) ? alle : [], bne);
 
+    aktuell(eintrag, meldungen);
+
     if (dateien.some(d => d.gruppe === "ueben")) {
       const hinweis = neu("aside", "lp-hilfe ms-hinweis");
       hinweis.appendChild(neu("span", "lp-label", "Hinweis"));
@@ -280,12 +328,13 @@
 
   Promise.all([
     fetch(root + "projects.json").then(r => { if (!r.ok) throw new Error("projects.json nicht ladbar"); return r.json(); }),
-    fetch(root + "bne.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}))
+    fetch(root + "bne.json").then(r => (r.ok ? r.json() : {})).catch(() => ({})),
+    fetch(root + "nachrichten.json").then(r => (r.ok ? r.json() : {})).catch(() => ({}))
   ])
-    .then(([daten, bne]) => {
+    .then(([daten, bne, nachrichten]) => {
       const eintrag = Array.isArray(daten) ? eigenerEintrag(daten) : null;
       if (!eintrag) { meldung("Zu dieser Seite gibt es keinen Eintrag in der Materialliste.", true); return; }
-      zeigen(eintrag, daten, bne);
+      zeigen(eintrag, daten, bne, nachrichten && Array.isArray(nachrichten.eintraege) ? nachrichten.eintraege : []);
     })
     .catch(() => meldung("Die Materialien konnten nicht geladen werden.", true));
 })();
