@@ -68,12 +68,11 @@ nav a[aria-current="page"]{background:var(--y);color:var(--ink)}
   var h='<span class="status">'+r.s+'</span>';
   h+='<div class="auftrag"><b>Dein Auftrag</b>'+r.auftrag+'</div><div class="pos"><b>Wer wir sind:</b> '+r.wer+'</div>';
   h+='<h2>'+r.kopf+'</h2><ul>'+r.liste.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';
-  if(r.st){
-    h+='<h2>Eure Haltung zu den Varianten</h2>';
+  if(k!==5){
+    h+='<h2>Die Anträge und ihre Varianten</h2><p class="hinweis" style="margin:0 0 8px">Welche Variante passt zu eurer Rolle? Das beurteilt ihr selbst (Aufgabe R2 und R3).</p>';
     [1,2].forEach(function(a){
-      h+='<table><caption style="text-align:left;font-weight:700;padding:0 0 4px">'+window.COP_TITEL[a]+'</caption><tr><th>Variante</th><th>Was steht darin?</th><th>Haltung</th></tr>';
-      ['A','B','C'].forEach(function(v,i){var c=r.st[a].charAt(i),lab=(r.lab&&r.lab[c])||window.COP_HALTUNG[c]||window.COP_HALTUNG.n;
-        h+='<tr><td><b>'+v+'</b></td><td>'+window.COP_VAR[a][v]+'</td><td class="'+(c==='w'?'w':(c==='n'||c==='u')?'n':'')+'">'+lab+'</td></tr>'});
+      h+='<table><caption style="text-align:left;font-weight:700;padding:0 0 4px">'+window.COP_TITEL[a]+'</caption><tr><th>Variante</th><th>Was steht darin?</th></tr>';
+      ['A','B','C'].forEach(function(v){h+='<tr><td><b>'+v+'</b></td><td>'+window.COP_VAR[a][v]+'</td></tr>'});
       h+='</table>';
     });
   }
