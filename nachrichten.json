@@ -1,5 +1,5 @@
 {
-  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden und Ministerien, Fachinstitute, Wissenschaftsmedien, anerkannte Umweltverbände). Optional art: Medienbericht, Regierung oder Position (zeigt in der Liste, wessen Sicht die Meldung wiedergibt). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional bild (https-Adresse des Vorschaubilds der Artikelseite, wird direkt von dort geladen, siehe Datenschutz), optional themenfeld (Liste von RLP-Nummern wie \"3.5\", zeigt die Meldung auf der Themenfeld-Seite des Fachs), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
+  "hinweis": "Ausgewählte aktuelle Meldungen zu den Fächern und Nachhaltigkeitszielen. Nur Quellen aus erlaubteQuellen (öffentlich-rechtliche Medien, Bundesbehörden und Ministerien, Fachinstitute, Wissenschaftsmedien, anerkannte Umweltverbände). Optional art: Medienbericht, Regierung oder Position (zeigt in der Liste, wessen Sicht die Meldung wiedergibt). Pro Eintrag: datum (JJJJ-MM-TT), titel (wie veröffentlicht), quelle (Name des Mediums), link (https), einordnung (ein bis zwei eigene Sätze, kein Zitat, kein Artikeltext), faecher (Biologie, Geografie), bne (Zielnummern 1-17), optional bild (https-Adresse des Vorschaubilds der Artikelseite, wird direkt von dort geladen, siehe Datenschutz), optional themenfeld (Liste von RLP-Nummern wie \"3.5\", zeigt die Meldung auf der Themenfeld-Seite des Fachs), optional material (Liste von Pfaden aus projects.json, zeigt die Meldung unter „Aktuell dazu“ auf der Materialseite und als Link „Aktuell“ in der Präsentation), optional woche (Datum 'ab' einer Woche aus impuls.json) und sichtbar (false blendet aus). Zu kontroversen Themen Meldungen mit unterschiedlichen Blickwinkeln wählen (Beutelsbacher Konsens). Nur verlinken, nichts kopieren.",
   "erlaubteQuellen": [
     "tagesschau.de",
     "deutschlandfunk.de",
@@ -44,6 +44,10 @@
       "woche": "2026-11-16",
       "themenfeld": [
         "3.5"
+      ],
+      "material": [
+        "biologie/klasse-9/gesundheit/impfen-usa/",
+        "biologie/klasse-9/gesundheit/impfen-doppelstunde/"
       ]
     },
     {
@@ -62,6 +66,9 @@
       "woche": "2026-11-23",
       "themenfeld": [
         "3.5"
+      ],
+      "material": [
+        "geografie/klasse-9/ressourcen/erneuerbare-energien/"
       ]
     },
     {
@@ -77,7 +84,11 @@
       "bne": [
         11
       ],
-      "woche": "2026-11-30"
+      "woche": "2026-11-30",
+      "material": [
+        "geografie/klasse-7/risikoraeume/aetna-tourismus/",
+        "geografie/klasse-7/risikoraeume/vulkanausbruch/"
+      ]
     },
     {
       "datum": "2026-10-11",
@@ -92,7 +103,10 @@
       "bne": [
         7
       ],
-      "woche": "2026-11-23"
+      "woche": "2026-11-23",
+      "material": [
+        "geografie/klasse-9/ressourcen/erneuerbare-energien/"
+      ]
     },
     {
       "datum": "2026-11-08",
@@ -203,7 +217,10 @@
         "3.5",
         "3.6"
       ],
-      "bild": "https://www.zdfheute.de/assets/25-sven-simon006sn-verbrenner-161225-jpgu16-12-die-eu-kommission-will-heute-vorschlaege-fuer-aenderung-100~1280x720?cb=1792168313272"
+      "bild": "https://www.zdfheute.de/assets/25-sven-simon006sn-verbrenner-161225-jpgu16-12-die-eu-kommission-will-heute-vorschlaege-fuer-aenderung-100~1280x720?cb=1792168313272",
+      "material": [
+        "geografie/klasse-9/ressourcen/e-fuels/"
+      ]
     },
     {
       "datum": "2026-10-16",
@@ -222,7 +239,10 @@
         "3.5",
         "3.6"
       ],
-      "bild": "https://www.zdfheute.de/assets/verbrennungsmotor-104~1280x720?cb=1666943987025"
+      "bild": "https://www.zdfheute.de/assets/verbrennungsmotor-104~1280x720?cb=1666943987025",
+      "material": [
+        "geografie/klasse-9/ressourcen/e-fuels/"
+      ]
     },
     {
       "datum": "2026-09-16",
@@ -241,6 +261,10 @@
       "bild": "https://www.zdfheute.de/assets/impfen-impfschutz-schutzimpfung-masernschutzgesetz-100~1280x720?cb=1788864104176",
       "themenfeld": [
         "3.5"
+      ],
+      "material": [
+        "biologie/klasse-9/gesundheit/impfen/",
+        "biologie/klasse-9/gesundheit/impfen-doppelstunde/"
       ]
     },
     {
@@ -260,7 +284,10 @@
       "themenfeld": [
         "3.5"
       ],
-      "bild": "https://www.zdfheute.de/assets/tanken-diesel-verbrenner-100~1280x720?cb=1765273822927"
+      "bild": "https://www.zdfheute.de/assets/tanken-diesel-verbrenner-100~1280x720?cb=1765273822927",
+      "material": [
+        "geografie/klasse-9/ressourcen/e-fuels/"
+      ]
     }
   ]
 }

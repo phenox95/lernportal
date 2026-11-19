@@ -310,6 +310,19 @@ body[data-subject="Geografie"] { --lp-akzent: var(--lp-geo); }
   border: 0; border-radius: 0.75em; background: transparent; color: var(--lp-text); cursor: pointer;
 }
 .lp-kopf .lp-teilen-btn:hover { background: var(--lp-feld); }
+/* Link „Aktuell“ (material.js, nur wenn nachrichten.json Meldungen zu dieser Seite hat) */
+.lp-kopf .lp-aktuell-btn {
+  display: inline-flex; align-items: center; gap: 0.4em; flex: none;
+  min-height: 2.75em; padding: 0 0.75em; border-radius: 0.75em;
+  color: var(--lp-text); font-weight: 600; text-decoration: none;
+}
+.lp-kopf .lp-aktuell-btn:hover { background: var(--lp-feld); }
+.lp-kopf .lp-aktuell-zahl {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 1.5em; height: 1.5em; padding: 0 0.35em;
+  border-radius: 999px; background: var(--lp-akzent); color: var(--lp-flaeche); font-size: 0.8125em; font-weight: 700;
+}
+.lp-schlank .lp-aktuell-btn { margin-left: auto; }
+.lp-schlank .lp-aktuell-btn + .lp-teilen-btn { margin-left: 0; }
 .lp-kopf .icon-btn {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 2.75em; min-height: 2.75em; padding: 0 0.6em; margin: 0;
