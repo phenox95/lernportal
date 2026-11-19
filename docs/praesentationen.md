@@ -136,6 +136,7 @@ Für Stunden mit Aufgaben zum Ausfüllen, Zuordnen und Prüfen gibt es **eine** 
 | Rechner | `[data-gv]` mit `.gv-o`, `.gv-k`, `.gv-e` | Objektiv mal Okular |
 | Strichliste | `[data-strich]` mit `.tc` (`.tn`, `.tm`) | Antippen zählt hoch |
 | Eingabefelder | `contenteditable="true"` an `td`, `.kasten`, `.lueck` | Texte tippen, nichts wird gespeichert |
+| Schrittweiser Aufbau | `<div data-aufbau>` mit Elementen `[data-s="1"]`, `[data-s="2"]` … (Text und SVG-Gruppen) | Pfeil vor (Taste oder Knopf) deckt den nächsten Schritt auf, erst nach dem letzten Schritt wird geblättert; Pfeil zurück deckt wieder zu. In der Leseansicht ist alles sichtbar |
 | Kartenablage | `<div data-sortieren>` mit `.pool` (Karten `.ks`, optional `data-ziel`) und Feldern `.zone[data-z]` mit `.inh`, optional `.chk` | Karten in Felder ziehen oder antippen, mehrere je Feld, Prüfen nur mit `data-ziel` |
 | Zoom-Regler | `<div data-zoom data-labels="A\|B">` mit `.zstapel > .zebene` (Ebenen), `input.zr`, `.zl` | Regler blendet Ebenen ineinander über (Lupe, Zoom) |
 | Mikroskop-Trainer | `<div data-mikro>` mit `.mk-sicht`, `.mk-obj button[data-o]`, `.mk-fokus`, `.mk-gv`, `.mk-fd`, `.mk-hint` | Objektiv wählen, scharf stellen, Sichtfeld und Gesamtvergrößerung ablesen |
