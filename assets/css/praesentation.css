@@ -5,7 +5,7 @@
 :root { --lp-pr-ink: #1a1a1a; --lp-pr-papier: #ffffff; --lp-pr-rand: #1a1a1a; --lp-pr-grau: #e9e9e6; --lp-pr-akzent: #1a1a1a; }
 
 /* ---------- Dock am rechten Rand ---------- */
-.lp-pr-dock { position: fixed; right: 6px; top: 50%; transform: translateY(-50%); z-index: 3000; display: flex; flex-direction: column; gap: 8px; font-family: Verdana, Arial, sans-serif; }
+.lp-pr-dock { position: fixed; right: 6px; top: 50%; transform: translateY(-50%); z-index: 3000; display: flex; flex-direction: column; gap: 6px; font-family: Verdana, Arial, sans-serif; }
 .lp-pr-btn { text-decoration: none; position: relative; width: 48px; min-height: 48px; border: 2px solid #fff; border-radius: 12px; background: rgba(26,26,26,.72); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; cursor: pointer; padding: 0; opacity: .55; transition: opacity .15s; touch-action: manipulation; }
 .lp-pr-btn:hover, .lp-pr-btn:focus-visible, .lp-pr-btn.on, .lp-pr-btn.lp-pr-lauf { opacity: 1; }
 .lp-pr-portal { width: 56px; min-height: 56px; gap: 0; font-family: Andika, Verdana, Arial, sans-serif; font-size: 11px; font-weight: 700; line-height: 1.1; }
@@ -331,3 +331,24 @@ html.lp-lesen .lp-pr-minuten::before { content: none; }
 .lp-pr-iframe { flex: 1; width: 100%; height: 100%; border: 0; background: #fff; border-radius: 0 0 11px 11px; }
 @media print { .lp-pr-mini, .lp-pr-blende { display: none !important; } }
 html.lp-lesen .lp-pr-mini, html.lp-lesen .lp-pr-blende { display: none !important; }
+
+/* Hinweis, wenn der Browser kein Vollbild kann (z. B. Brave auf dem iPad) */
+.lp-pr-toast { position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%); z-index: 3200; width: min(560px, calc(100vw - 32px)); padding: 14px 16px; background: #1a1a1a; color: #fff; border: 3px solid #fff; border-radius: 14px; box-shadow: 0 8px 28px rgba(0,0,0,.5); font: 16px/1.4 Verdana, Arial, sans-serif; display: grid; gap: 10px; }
+.lp-pr-toast[hidden] { display: none; }
+.lp-pr-toast .lp-pr-klein { justify-self: start; }
+@media print { .lp-pr-toast { display: none !important; } }
+html.lp-lesen .lp-pr-toast { display: none !important; }
+
+/* ---------- Dock kompakter: einklappbar, Folie ausblenden ---------- */
+.lp-pr-dock .lp-pr-btn { width: 46px; min-height: 46px; }
+.lp-pr-dock .lp-pr-portal { width: 54px; min-height: 54px; }
+.lp-pr-klappe { min-height: 30px !important; opacity: .8; }
+.lp-pr-klappe svg { width: 20px; height: 20px; transition: transform .15s; }
+.lp-pr-dock.eingeklappt .lp-pr-klappe svg { transform: rotate(180deg); }
+.lp-pr-dock.eingeklappt > .lp-pr-btn:not(.lp-pr-klappe):not(.lp-pr-ausbtn) { display: none; }
+.lp-pr-aus { position: fixed; inset: 0; z-index: 2900; background: #000; display: grid; place-items: end center; padding-bottom: 28px; cursor: pointer; outline: none; }
+.lp-pr-aus[hidden] { display: none; }
+.lp-pr-aus span { color: #555; font: 15px Verdana, Arial, sans-serif; }
+@media print { .lp-pr-aus { display: none !important; } }
+html.lp-lesen .lp-pr-aus { display: none !important; }
+@media (prefers-reduced-motion: reduce) { .lp-pr-klappe svg { transition: none; } }
