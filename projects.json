@@ -918,5 +918,34 @@
       }
     ],
     "sichtbar": true
+  },
+  {
+    "title": "Gesundheit – Krankheit – Stunde 5: Allergie",
+    "description": "Allergie als Fehlalarm des Immunsystems: Do Now Impfung, Impuls Wiese, Fragenentwicklung, Ablauf einer Allergie (Erstkontakt bis Histamin), Fall Familie Weber und die Katze, Abstimmung, Reflexion.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/gesundheit/allergie/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "45 Min.",
+    "datum": "2026-11-19",
+    "folge": 5,
+    "reihe": "Gesundheit – Krankheit",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/gesundheit/allergie/praesentation/",
+        "art": "Präsentation"
+      }
+    ],
+    "bne": [
+      3
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/impfen/",
+        "grund": "Gleicher Ablauf im Immunsystem: Bei der Impfung schützt das Gedächtnis vor Erregern, bei der Allergie löst es beim Zweitkontakt Beschwerden aus."
+      }
+    ]
   }
 ]
