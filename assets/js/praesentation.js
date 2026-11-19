@@ -26,6 +26,8 @@
     zurueck: SVG('<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>'),
     voll: SVG('<path d="M4 9V4h5"/><path d="M20 9V4h-5"/><path d="M4 15v5h5"/><path d="M20 15v5h-5"/>'),
     teilen: SVG('<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 14h2.5v2.5H14zM19 14v.01M14 19.5v.01M17 19h3.5v1.5"/>'),
+    aus: SVG('<path d="M3 3l18 18"/><path d="M10.6 5.1A9.7 9.7 0 0 1 12 5c5 0 8.5 4 10 7a15 15 0 0 1-3 3.9"/><path d="M6.6 6.7C4.5 8.1 3 10.2 2 12c1.5 3 5 7 10 7 1.7 0 3.2-.5 4.4-1.2"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>'),
+    klappe: SVG('<path d="m7 14 5-5 5 5"/>'),
     mehr: SVG('<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>'),
     ampel: SVG('<rect x="7" y="2.5" width="10" height="19" rx="3"/><circle cx="12" cy="7.5" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="16.5" r="1.4"/>')
   };
@@ -69,9 +71,35 @@
   dock.setAttribute("aria-label", "Werkzeuge");
   document.body.appendChild(dock);
 
+  /* ---------- Folie ausblenden: schwarzer Bildschirm, Antippen, Punkt-Taste oder Esc zeigt sie wieder ---------- */
+  const ausEl = neu("div", "lp-pr-aus");
+  ausEl.hidden = true;
+  ausEl.setAttribute("role", "button");
+  ausEl.tabIndex = 0;
+  ausEl.setAttribute("aria-label", "Folie ist ausgeblendet. Antippen zeigt sie wieder.");
+  ausEl.appendChild(neu("span", "", "Folie ausgeblendet · antippen zeigt sie wieder"));
+  document.body.appendChild(ausEl);
+  let ausTaste = null;
+  function ausSchalte(an) {
+    const zeigen = an === undefined ? ausEl.hidden : an;
+    ausEl.hidden = !zeigen;
+    if (ausTaste) { ausTaste.classList.toggle("on", zeigen); ausTaste.setAttribute("aria-pressed", String(zeigen)); }
+    if (zeigen) ausEl.focus();
+  }
+  ausEl.addEventListener("click", () => ausSchalte(false));
+  ausEl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); ausSchalte(false); } });
+
   /* Klar beschrifteter Rückweg zum Portal und Vollbild */
   (function randKnoepfe() {
     const wurzel = /^(\.\.\/|\.\/)+$/.test(document.body.dataset.root || "") ? document.body.dataset.root : "./";
+    /* Dock einklappen: nur Klappe und „Folie ausblenden“ bleiben stehen, der Zustand bleibt im Browser gemerkt */
+    const klappe = knopf("lp-pr-btn lp-pr-klappe", "", "Werkzeugleiste einklappen");
+    klappe.innerHTML = ICON.klappe;
+    klappe.title = "Leiste ein- oder ausklappen";
+    const setzeKlappe = (zu) => { dock.classList.toggle("eingeklappt", zu); klappe.setAttribute("aria-expanded", String(!zu)); klappe.setAttribute("aria-label", zu ? "Werkzeugleiste ausklappen" : "Werkzeugleiste einklappen"); speichern("lp-pr-dockzu", zu); };
+    klappe.addEventListener("click", () => setzeKlappe(!dock.classList.contains("eingeklappt")));
+    dock.appendChild(klappe);
+    setzeKlappe(!!laden("lp-pr-dockzu", false));
     const zurueck = neu("a", "lp-pr-btn lp-pr-portal");
     zurueck.href = wurzel;
     zurueck.innerHTML = ICON.zurueck + '<span>Portal</span>';
@@ -112,11 +140,17 @@
     };
     voll.addEventListener("click", () => window.LPVollbild());
     dock.appendChild(voll);
+    ausTaste = knopf("lp-pr-btn lp-pr-ausbtn", "", "Folie ausblenden (Punkt-Taste)");
+    ausTaste.innerHTML = ICON.aus;
+    ausTaste.title = "Folie ausblenden (.)";
+    ausTaste.setAttribute("aria-pressed", "false");
+    ausTaste.addEventListener("click", () => ausSchalte());
+    dock.appendChild(ausTaste);
     const teilen = knopf("lp-pr-btn", "", "Link und QR-Code (Taste Q)");
     teilen.innerHTML = ICON.teilen;
     teilen.title = "Link und QR-Code (Q)";
     teilen.addEventListener("click", () => teilenOeffnen(teilen));
-    dock.appendChild(teilen);
+    /* Der Knopf „Link und QR-Code“ steht unter „Weitere Werkzeuge“ (spart Platz im Dock) */
     /* teilen.js wird erst beim ersten Öffnen nachgeladen */
     window.teilenOeffnenInt = teilenOeffnen;
     function teilenOeffnen(opener) {
@@ -1221,6 +1255,8 @@
     eintrag("Gruppen losen", "G", () => schalte("gruppen"), "Gruppen losen");
     eintrag("Stoppuhr", "S", () => schalte("stoppuhr"), "Stoppuhr");
     eintrag("Notizzettel", "", () => schalte("notiz"), "Notizzettel");
+    eintrag("Link und QR-Code", "Q", () => { schalte("weitere", false); if (window.teilenOeffnenInt) window.teilenOeffnenInt(); }, "Link und QR-Code zeigen");
+    eintrag("Leseansicht", "", () => { schalte("weitere", false); lesenSetzen(true); }, "Leseansicht: alle Folien untereinander");
     z.appendChild(raster);
   })();
 
@@ -1229,7 +1265,7 @@
     const n = aktuelleFolie();
     if (n === folie && cv.dataset.f) return;
     folie = n; cv.dataset.f = "1";
-    zeichne(); folienMinuten(); blendeWeg();
+    zeichne(); folienMinuten(); blendeWeg(); ausSchalte(false);
   }
   const beob = new MutationObserver(folieAktualisieren);
   slides().forEach((s) => beob.observe(s, { attributes: true, attributeFilter: ["class"] }));
@@ -1338,7 +1374,7 @@
   const leseBtn = knopf("lp-pr-btn", "", "Leseansicht: alle Folien untereinander");
   leseBtn.innerHTML = ICON.buch;                          // feste, eigene Zeichenkette
   leseBtn.title = "Leseansicht";
-  dock.appendChild(leseBtn);
+  /* Die Leseansicht startet aus „Weitere Werkzeuge“, nicht aus dem Dock */
   const folienBtn = knopf("lp-pr-zurfolie", "", "Als Präsentation zeigen");
   folienBtn.innerHTML = ICON.folien;                      // feste, eigene Zeichenkette
   folienBtn.appendChild(neu("span", "", "Folien"));
@@ -1394,19 +1430,21 @@
     if (wahl === "lesen" || (wahl !== "folien" && handy)) lesenSetzen(true);
   })();
 
-  /* ---------- Tasten: P Stift, T Timer, L Lärmampel, W Weitere, B Blende, Z Zufall, G Gruppen, S Stoppuhr, Esc schließt Stift ---------- */
+  /* ---------- Tasten: P Stift, T Timer, L Lärmampel, Punkt Folie ausblenden, W Weitere, B Blende, Z Zufall, G Gruppen, S Stoppuhr, Esc schließt Stift ---------- */
   addEventListener("keydown", (e) => {
     if (tippt(e.target) || e.ctrlKey || e.metaKey || e.altKey) return;
     const k = e.key.toLowerCase();
     if (k === "p") { e.preventDefault(); stiftSetzen(!penAn); }
     else if (k === "t") { schalte("timer"); }
     else if (k === "l") { schalte("laerm"); }
+    else if (k === ".") { e.preventDefault(); ausSchalte(); }
     else if (k === "w") { schalte("weitere"); }
     else if (k === "b") { blendeSchalte(); }
     else if (k === "z") { schalte("zufall"); }
     else if (k === "g") { schalte("gruppen"); }
     else if (k === "s") { schalte("stoppuhr"); }
     else if (k === "q") { e.preventDefault(); if (window.teilenOeffnenInt) window.teilenOeffnenInt(); }
+    else if (k === "escape" && !ausEl.hidden) { ausSchalte(false); }
     else if (k === "escape" && penAn) { stiftSetzen(false); }
   });
 
