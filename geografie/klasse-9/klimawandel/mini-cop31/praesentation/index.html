@@ -33,6 +33,51 @@
 .eingabe{border:3px dashed var(--g);border-radius:16px;padding:18px 24px;font-size:30px;line-height:1.7;min-height:300px;background:#fff}
 .kriterien{display:grid;gap:12px;margin:14px 0 0;padding:0;list-style:none;font-size:30px}
 .kriterien li{background:var(--mint);border-radius:14px;padding:12px 20px}
+
+.stat{display:flex;gap:10px;align-items:center;margin-top:14px}
+.bar{height:26px;border-radius:8px;background:var(--g);transition:width .8s}
+.bar.k{background:var(--o)}
+.marken{display:flex;gap:8px;margin-top:10px;min-height:34px;font-size:26px}
+.marke.gestr{text-decoration:line-through;opacity:.55;border-style:dashed}.marke{background:#fff;color:#B3261E;border:3px solid #B3261E;border-radius:8px;padding:0 10px;font-weight:700;font-size:20px}
+.ja-nein{display:grid;gap:10px}
+.aussage{display:grid;grid-template-columns:1fr 150px 150px 48px;gap:10px;align-items:center;font-size:25px;line-height:1.3}
+.aussage button,.wahl{font:inherit;font-weight:700;min-height:48px;border-radius:12px;border:3px solid var(--g);background:#fff;color:var(--ink);cursor:pointer}
+.aussage button[aria-pressed=true],.wahl[aria-pressed=true]{background:var(--g);color:#fff}
+.aussage .erg{font-size:30px;font-weight:700;text-align:center}
+.aussage.ok button[aria-pressed=true]{background:#1B6E3C;border-color:#1B6E3C}
+.aussage.falsch button[aria-pressed=true]{background:#B3261E;border-color:#B3261E}
+.rollenraster{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rk{border:3px solid var(--g);border-radius:14px;padding:8px 10px;display:grid;grid-template-columns:1fr 112px;gap:8px;align-items:center;background:#fff}
+.rk b{font-size:23px;line-height:1.2;display:block}.rk small{font-size:16px;color:var(--grey)}
+.rk .qr{width:112px;height:112px;background:#fff;padding:5px;border:2px solid var(--grey);border-radius:8px}.rk .qr svg{display:block;width:100%;height:100%}
+.uhr{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.phasen{display:grid;gap:10px}
+.ph{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:10px 14px;border-radius:14px;border:3px solid var(--mint);background:#fff;font-size:24px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink)}
+.ph b.n{background:var(--grey);color:#fff;border-radius:50%;width:44px;height:44px;display:grid;place-items:center}
+.ph[aria-current=step]{border-color:var(--g);background:var(--mint)}.ph[aria-current=step] b.n{background:var(--g)}
+.ph.fertig b.n{background:#1B6E3C}
+.digits{font-size:150px;font-weight:700;line-height:1;text-align:center;font-variant-numeric:tabular-nums}
+.digits.rot{color:#B3261E;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:.45}}
+.sub{text-align:center;font-size:26px;margin:6px 0 14px;min-height:70px}
+.ctrl{display:flex;gap:12px;justify-content:center}
+.ctrl button,.btn{font:inherit;font-weight:700;font-size:24px;min-height:56px;padding:0 24px;border-radius:14px;border:0;background:var(--g);color:#fff;cursor:pointer}
+.ctrl button.zweit,.btn.zweit{background:#fff;color:var(--ink);border:3px solid var(--g)}
+.tafel{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.antrag{border:3px solid var(--g);border-radius:16px;padding:14px 16px;background:#fff}
+.antrag h2{margin:0 0 8px;font-size:28px}
+.varianten{display:flex;gap:8px;margin-bottom:10px}.varianten .wahl{flex:1}
+.stimmen{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.st{font:inherit;display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px;min-height:56px;border-radius:12px;border:3px solid var(--mint);background:var(--mint);padding:4px 12px;font-size:21px;cursor:pointer;color:var(--ink);text-align:left}
+.st b{font-size:26px;min-width:2.3em;text-align:center}
+.st[data-v=ja]{border-color:#1B6E3C}.st[data-v=nein]{border-color:#B3261E;background:#FBE4E2}.st[data-v=enth]{border-color:var(--grey)}
+.urteil{margin-top:12px;font-size:30px;font-weight:700;border-radius:14px;padding:10px 16px;min-height:104px;border:3px dashed var(--grey)}
+.urteil.ja{border:3px solid #1B6E3C;background:#E3F2E8}.urteil.nein{border:3px solid #B3261E;background:#FBE4E2}
+.urteil small{display:block;font-size:20px;font-weight:400;margin-top:4px}
+.vgl{width:100%;border-collapse:collapse;font-size:21px}.vgl th,.vgl td{border:3px solid var(--g);padding:6px 10px;text-align:left;vertical-align:top}.vgl th{background:var(--mint)}
+.krit{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:10px;font-size:27px}
+.drei{display:flex;gap:8px}.drei button{font:inherit;font-weight:700;min-width:140px;white-space:nowrap;padding:0 8px;min-height:52px;border-radius:12px;border:3px solid var(--g);background:#fff;color:var(--ink);cursor:pointer;font-size:22px}
+.drei button[aria-pressed=true]{background:var(--g);color:#fff}
+.waage{margin-top:8px;font-size:26px;border:3px solid var(--g);border-radius:14px;padding:10px 16px;background:var(--mint)}
 @media print{#nav,#notiz{display:none}}
 </style>
 </head>
@@ -42,21 +87,20 @@
 <div id="stage">
 
 <!-- 1 Do Now -->
-<section class="slide" data-min="3" data-notes="Do Now (Wiederholung der Vorstunde). Annahme: Vorstunde = Erneuerbare Energien. Bei anderer Vorstunde die Aussagen austauschen. Währenddessen Anwesenheit und Organisatorisches. Abgleich 2 Minuten mit Knopf „Lösung zeigen“, dann direkt Folie 2. SuS mit LRS dürfen sich die Aussagen vorlesen lassen.">
+<section class="slide" data-min="3" data-notes="Do Now (Wiederholung der Vorstunde). Annahme: Vorstunde = Erneuerbare Energien. Bei anderer Vorstunde die Aussagen und data-ok austauschen. Währenddessen Anwesenheit und Organisatorisches. SuS tippen richtig oder falsch, „Prüfen“ zeigt ✓ und ✗ (nicht nur Farbe), danach die Begründung. Abgleich 2 Minuten, dann direkt Folie 2. LRS: Aussagen dürfen vorgelesen werden.">
   <h1>Do Now: Erinnerst du dich?</h1><span class="badge">3 Min. · allein</span>
   <div class="mint pad">
-    <p class="task"><span class="snr">1</span><span><b>Entscheide</b>, ob die Aussage richtig oder falsch ist:</span><i class="lvl">E</i></p>
-    <ol style="font-size:28px;line-height:1.45;margin:0 0 14px">
-      <li>Wind und Sonne sind erneuerbare Energien.</li>
-      <li>Erdöl entsteht in wenigen Jahren.</li>
-      <li>Beim Verbrennen von Kohle, Öl und Gas entsteht CO<sub>2</sub>.</li>
-      <li>Eine Dunkelflaute ist eine Zeit mit viel Wind und Sonne.</li>
-    </ol>
-    <p class="task" style="margin:0"><span class="snr">2</span><span><b>Begründe</b> eine falsche Aussage in einem Satz.</span><i class="lvl">F</i></p>
+    <p class="task" style="margin-bottom:10px"><span class="snr">1</span><span><b>Entscheide</b>: richtig oder falsch? Tippe an.</span><i class="lvl">E</i></p>
+    <div class="ja-nein" id="donow">
+      <div class="aussage" data-ok="1"><span>1 · Wind und Sonne sind erneuerbare Energien.</span><button type="button" data-a="1">Richtig</button><button type="button" data-a="0">Falsch</button><span class="erg" aria-live="polite"></span></div>
+      <div class="aussage" data-ok="0"><span>2 · Erdöl entsteht in wenigen Jahren.</span><button type="button" data-a="1">Richtig</button><button type="button" data-a="0">Falsch</button><span class="erg" aria-live="polite"></span></div>
+      <div class="aussage" data-ok="1"><span>3 · Beim Verbrennen von Kohle, Öl und Gas entsteht CO<sub>2</sub>.</span><button type="button" data-a="1">Richtig</button><button type="button" data-a="0">Falsch</button><span class="erg" aria-live="polite"></span></div>
+      <div class="aussage" data-ok="0"><span>4 · Eine Dunkelflaute ist eine Zeit mit viel Wind und Sonne.</span><button type="button" data-a="1">Richtig</button><button type="button" data-a="0">Falsch</button><span class="erg" aria-live="polite"></span></div>
+    </div>
+    <p class="task" style="margin:14px 0 0"><span class="snr">2</span><span><b>Begründe</b> eine falsche Aussage in einem Satz.</span><i class="lvl">F</i></p>
   </div>
-  <div class="shilfe sm" style="margin-top:16px">Du darfst dir die Aussagen vorlesen lassen. Arbeite leise und allein.</div>
-  <p style="margin-top:14px"><button class="b" data-reveal="l1">Lösung zeigen</button></p>
-  <div class="shilfe show-no" id="l1" style="margin-top:12px"><b>1</b> richtig · <b>2</b> falsch (Erdöl braucht Jahrmillionen) · <b>3</b> richtig · <b>4</b> falsch (Dunkelflaute heißt: wenig Wind und Sonne)</div>
+  <p style="margin-top:12px"><button class="b" id="pruefen">Prüfen</button> <span class="shilfe sm" style="display:inline-block;margin-left:10px">Du darfst dir die Aussagen vorlesen lassen.</span></p>
+  <div class="shilfe sm show-no" id="l1" style="margin-top:10px"><b>2</b> falsch: Erdöl braucht Jahrmillionen. <b>4</b> falsch: Dunkelflaute heißt wenig Wind und Sonne.</div>
 </section>
 
 <!-- 2 Video -->
@@ -70,13 +114,13 @@
 </section>
 
 <!-- 3 Impuls -->
-<section class="slide dark" data-min="3" data-notes="Impuls (stumm). 30 Sekunden Stille, dann laut vorlesen (LRS). Keine Erklärung, keine Frage vorgeben. Moderationsfragen: Was fällt euch auf? Was überrascht euch? Was wollt ihr herausfinden? Welche Frage stellt sich euch? Erwartete Fragen: Warum wurde das gestrichen? Wer wollte das? Wer entscheidet das? Abweichende, tragfähige Fragen aufgreifen. Impuls plus Fragenentwicklung höchstens 10 Minuten.">
+<section class="slide dark" data-min="3" data-notes="Impuls (stumm). 30 Sekunden Stille, dann laut vorlesen (LRS). Keine Erklärung, keine Frage vorgeben. Mit „Streichungen zeigen“ erscheinen beim Donnerstags-Entwurf die zwei Stellen aus dem Montags-Entwurf durchgestrichen (erst nach der Fragenentwicklung nutzen, nicht als Erklärung vorab). Moderationsfragen: Was fällt euch auf? Was überrascht euch? Was wollt ihr herausfinden? Welche Frage stellt sich euch? Erwartete Fragen: Warum wurde das gestrichen? Wer wollte das? Wer entscheidet das? Abweichende, tragfähige Fragen aufgreifen. Impuls plus Fragenentwicklung höchstens 10 Minuten.">
   <h1>COP31 in Antalya: zwei Entwürfe</h1><span class="badge">3 Min. · Plenum</span>
   <div class="row2">
-    <div class="entwurf"><h2>Entwurf vom Montag, 16.11.</h2><div class="zahl">18 Seiten</div><div class="z2">Fossile Brennstoffe: <b>2 Stellen</b></div></div>
-    <div class="entwurf"><h2>Entwurf vom Donnerstag, 19.11.</h2><div class="zahl">9 Seiten</div><div class="z2">Fossile Brennstoffe: <b>0 Stellen</b></div></div>
+    <div class="entwurf"><h2>Entwurf vom Montag, 16.11.</h2><div class="zahl">18 Seiten</div><div class="bar" style="width:100%" role="img" aria-label="Balken: 18 von 18 Seiten"></div><div class="z2">Fossile Brennstoffe: <b>2 Stellen</b></div><div class="marken" aria-hidden="true"><span class="marke">Kohle, Öl, Gas</span><span class="marke">Kohle, Öl, Gas</span></div></div>
+    <div class="entwurf"><h2>Entwurf vom Donnerstag, 19.11.</h2><div class="zahl">9 Seiten</div><div class="bar k" id="bar2" style="width:50%" role="img" aria-label="Balken: 9 von 18 Seiten"></div><div class="z2">Fossile Brennstoffe: <b>0 Stellen</b></div><div class="marken" id="marken2" aria-hidden="true" style="visibility:hidden"><span class="marke gestr">Kohle, Öl, Gas</span><span class="marke gestr">Kohle, Öl, Gas</span></div></div>
   </div>
-  <p class="src" style="margin-top:18px;color:#E6D3C8">Quelle: Reuters, ORF (19.11.2026)</p>
+  <p style="margin-top:18px"><button class="btn" id="zeige" type="button">Streichungen zeigen</button> <span class="src" style="color:#E6D3C8;margin-left:12px">Quelle: Reuters, ORF (19.11.2026)</span></p>
 </section>
 
 <!-- 4 Fragenentwicklung -->
@@ -85,34 +129,71 @@
   <div data-fragenfeld data-impulse="Was fällt euch auf?|Was überrascht euch?|Was wollt ihr herausfinden?|Welche Frage stellt sich euch?"></div>
 </section>
 
-<!-- 5 Ablauf -->
-<section class="slide" data-min="24" data-notes="Rollen verdeckt ziehen (Umschlag), Gruppen à 4. Vorbereitung 18 Minuten mit Arbeitsblatt Seite 1 (Aufgaben 1 bis 3), danach diese Folie für den Ablauf der Mini-COP. Präsidentschaft und Umweltorganisation haben keine Stimme. Phasenuhr nutzen, die Abstimmung nicht streichen. Die Rollen sind typisiert und keine Meinung der Lehrkraft oder der Klasse.">
-  <h1>So läuft die Mini-COP</h1><span class="badge">24 Min. · Gruppen</span>
-  <div class="ablauf">
-    <div class="schritt"><b class="n">1</b><span><b>Eröffnung</b> (6 Min.): Jede Gruppe stellt ihre Position vor. 1 Minute.</span></div>
-    <div class="schritt"><b class="n">2</b><span><b>Verhandlung</b> (10 Min.): 2 Botschafter gehen zu anderen Gruppen. 2 bleiben am Tisch.</span></div>
-    <div class="schritt"><b class="n">3</b><span><b>Abstimmung</b> (5 Min.): Handzeichen. Ein Antrag gilt, wenn niemand Nein sagt.</span></div>
+<!-- 5 Rollen -->
+<section class="slide" data-min="18" data-notes="Gruppen à 4, jede Gruppe zieht eine Rolle verdeckt aus dem Umschlag, oder mit „Rolle ziehen“ hier. Jede Karte hat einen QR-Code: Auf dem Handy öffnet er die Rollenkarte (nur über die Portal-Adresse, nicht aus einer lokalen Datei), mit Vorlesen-Knopf. Die QR-Codes hier öffnen dieselben Seiten. Arbeitsblatt Seite 1: M1, M2, Aufgaben 1 bis 3. Leseauftrag vor dem Text: Lies deine Rollenkarte. Nenne zwei Dinge, die deiner Rolle wichtig sind. Lesestrategie: Schlüsselwörter markieren (1 bis 2 je Absatz). Präsidentschaft: Kompromiss-Sätze vorbereiten. Umweltorganisation: Statement mit 3 Sätzen. Die Rollen sind typisiert und keine Meinung der Lehrkraft oder der Klasse.">
+  <h1>Eure Rolle bei der Mini-COP</h1><span class="badge">18 Min. · Gruppen</span>
+  <p class="task" style="margin-bottom:10px"><span class="snr">1</span><span><b>Lies</b> deine Rollenkarte. <b>Nenne</b> zwei Dinge, die deiner Rolle wichtig sind. Dann Aufgabe 2 und 3 auf dem Blatt.</span><i class="lvl">E–G</i></p>
+  <div class="rollenraster" id="rollen"></div>
+  <p style="margin-top:14px"><button class="btn" id="ziehe" type="button">Rolle ziehen</button> <span id="zug" class="lead s" style="display:inline-block;margin:0 0 0 14px;font-size:28px" aria-live="polite"></span></p>
+</section>
+
+<!-- 6 Phasenuhr -->
+<section class="slide" data-min="24" data-notes="Phasenuhr für die Mini-COP (24 Minuten). Phase antippen oder „Start“. Am Ende einer Phase piept es und die Zeit blinkt rot, „Nächste Phase“ geht weiter (die Lehrkraft entscheidet, nicht die Uhr). Die Abstimmung nicht streichen. Wenn es knapp wird, kürzt die Verhandlung. Präsidentschaft und Umweltorganisation haben keine Stimme.">
+  <h1>Mini-COP: Phasenuhr</h1><span class="badge">Phasen</span>
+  <div class="uhr">
+    <div class="phasen" id="phasen"></div>
+    <div>
+      <div class="digits" id="digits" aria-live="off">06:00</div>
+      <div class="sub" id="phtext"></div>
+      <div class="ctrl"><button type="button" id="go">Start</button><button type="button" class="zweit" id="reset">Zurück auf Anfang</button><button type="button" class="zweit" id="next">Nächste Phase</button></div>
+    </div>
   </div>
-  <div class="shilfe sm" style="margin-top:22px">Enthaltung ist erlaubt. Präsidentschaft und Umweltorganisation haben keine Stimme. Trage das Ergebnis in Aufgabe 4 ein.</div>
 </section>
 
-<!-- 6 Stand der echten COP -->
-<section class="slide" data-min="14" data-notes="VOR DER STUNDE ausfüllen (Feld anklicken und tippen, Uhrzeit und Quelle eintragen). Quellen: Reuters, ORF, enb.iisd.org. Eingaben gehen beim Neuladen verloren, deshalb Seite nicht mehr neu laden. Danach Arbeitsblatt Seite 2: Aufgabe 5 Vergleichen (Paar, 5 Min.), Aufgabe 6 Erklären (allein, 4 Min.), Besprechung und Tafelbild 5 Min. M3 auf dem Arbeitsblatt bleibt auf Stand 19.11. Zu Antrag 2: Der echte Streit „Wer zahlt?“ ist offen.">
+<!-- 7 Abstimmungstafel -->
+<section class="slide" data-min="5" data-notes="Abstimmungstafel für Aufgabe 4. Zuerst die Variante wählen, über die abgestimmt wird (A, B oder C). Dann tippt die Lehrkraft für jede stimmberechtigte Gruppe Ja, Nein oder Enthaltung ein (Tippen wechselt). Ein einziges Nein stoppt den Antrag, so funktioniert der Konsens. Eine Variante nach der anderen abstimmen. Präsidentschaft und Umweltorganisation haben keine Stimme. SuS tragen das Ergebnis in Aufgabe 4 ein. Planungsannahme: Bei Antrag 1 bleibt nur Variante B ohne Nein.">
+  <h1>Abstimmung: Wer sagt Nein?</h1><span class="badge">Abstimmung</span>
+  <div class="tafel" id="tafel"></div>
+  <div class="shilfe sm" style="margin-top:12px">Ein Antrag gilt, wenn keine stimmberechtigte Gruppe Nein sagt. Enthaltung ist erlaubt.</div>
+</section>
+
+<!-- 8 Stand der echten COP -->
+<section class="slide" data-min="14" data-notes="VOR DER STUNDE ausfüllen (Feld anklicken und tippen, Uhrzeit und Quelle eintragen). Quellen: Reuters, ORF, enb.iisd.org. Eingaben gehen beim Neuladen verloren, deshalb Seite nicht mehr neu laden. Rechts: Vergleichstabelle für Aufgabe 5, die Spalte „Unser Beschluss“ füllt die Klasse. Danach Arbeitsblatt Seite 2: Aufgabe 5 Vergleichen (Paar, 5 Min.), Aufgabe 6 Erklären (allein, 4 Min.), Besprechung und Tafelbild 5 Min. M3 auf dem Arbeitsblatt bleibt auf Stand 19.11. Zu Antrag 2: Der echte Streit „Wer zahlt?“ ist offen.">
   <h1>Und was sagt die echte COP?</h1><span class="badge">14 Min. · Paar, allein</span>
-  <div class="eingabe" contenteditable="true" role="textbox" aria-label="Stand der echten COP31">Stand: Fr 20.11.2026, __:__ Uhr<br>Quelle: ____________________<br>Beschluss oder Entwurf: <br>Kohle, Öl, Gas: <br>Geld: </div>
+  <div class="row2">
+    <div class="eingabe" style="font-size:24px;min-height:330px" contenteditable="true" role="textbox" aria-label="Stand der echten COP31">Stand: Fr 20.11.2026, __:__ Uhr<br>Quelle: ____________________<br>Beschluss oder Entwurf: <br>Kohle, Öl, Gas: <br>Geld: </div>
+    <div>
+      <p class="task" style="margin-bottom:8px;font-size:23px"><span class="snr">5</span><span><b>Vergleiche</b> euren Beschluss zu Antrag 1 mit dem Entwurf vom Donnerstag.</span><i class="lvl">F</i></p>
+      <table class="vgl"><tr><th></th><th>Unser Beschluss</th><th>Entwurf (Do. 19.11.)</th></tr>
+      <tr><th>Kohle, Öl, Gas</th><td contenteditable="true" aria-label="Unser Beschluss zu Kohle, Öl, Gas"></td><td>nicht erwähnt</td></tr>
+      <tr><th>mehr Strom</th><td contenteditable="true" aria-label="Unser Beschluss zu mehr Strom"></td><td>Elektrifizierung und nationale Energiepläne</td></tr></table>
+      <p class="task" style="margin:10px 0 0;font-size:23px"><span class="snr">6</span><span><b>Erkläre</b>, warum ein Satz zu fossilen Energien im Konsens schnell verschwinden kann.</span><i class="lvl">F</i></p>
+    </div>
+  </div>
 </section>
 
-<!-- 7 Urteil -->
-<section class="slide" data-min="10" data-notes="Aufgabe 7 auf dem Arbeitsblatt: 5 Minuten schreiben, 3 Minuten Blitzlicht mit Pro und Contra. Basis: zwei Kriterien aus dem Kasten. Erweiterung: eigene Kriterien und Gewichtung. Wird die Zeit knapp: Aufgabe 7 als Hausaufgabe. Exit-Ticket in den letzten 4 Minuten, offene Fragen auf einen Parkplatz an der Tafel.">
+<!-- 9 Urteil -->
+<section class="slide" data-min="10" data-notes="Aufgabe 7 auf dem Arbeitsblatt: 5 Minuten schreiben, 3 Minuten Blitzlicht mit Pro und Contra. Die Klasse prüft die drei Kriterien mit Ja, Teils oder Nein. Es gibt kein richtiges Ergebnis: Das Urteil entsteht aus der Gewichtung und der Begründung (Beutelsbacher Konsens). Basis: zwei Kriterien aus dem Kasten. Erweiterung: eigene Kriterien und Gewichtung. Wird die Zeit knapp: Aufgabe 7 als Hausaufgabe.">
   <h1>Ist die COP31 ein Erfolg?</h1><span class="badge">10 Min. · allein</span>
-  <p class="lead s" style="font-size:26px;margin:0 0 10px">Unsere Frage: <b data-leitfrage>…</b></p>
-  <p class="task"><span class="snr">7</span><span><b>Beurteile</b>, ob die COP31 ein Erfolg ist. <b>Nenne</b> dafür zwei Kriterien.</span><i class="lvl">G</i></p>
-  <ul class="kriterien">
-    <li>Bleibt das 1,5-Grad-Ziel geschützt?</li>
-    <li>Haben alle zugestimmt?</li>
-    <li>Hilft der Text armen Ländern?</li>
-  </ul>
-  <div class="shilfe sm" style="margin-top:18px"><b>Exit-Ticket:</b> Das nehme ich heute mit: ______________________</div>
+  <p class="lead s" style="font-size:26px;margin:0 0 8px">Unsere Frage: <b data-leitfrage>…</b></p>
+  <p class="task" style="margin-bottom:12px"><span class="snr">7</span><span><b>Beurteile</b>, ob die COP31 ein Erfolg ist. <b>Prüfe</b> die Kriterien und <b>begründe</b> dein Urteil.</span><i class="lvl">G</i></p>
+  <div id="krit">
+    <div class="krit"><span>Bleibt das 1,5-Grad-Ziel geschützt?</span><div class="drei"><button type="button" data-w="j">✓ Ja</button><button type="button" data-w="t">± Teils</button><button type="button" data-w="n">✗ Nein</button></div></div>
+    <div class="krit"><span>Haben alle zugestimmt?</span><div class="drei"><button type="button" data-w="j">✓ Ja</button><button type="button" data-w="t">± Teils</button><button type="button" data-w="n">✗ Nein</button></div></div>
+    <div class="krit"><span>Hilft der Text armen Ländern?</span><div class="drei"><button type="button" data-w="j">✓ Ja</button><button type="button" data-w="t">± Teils</button><button type="button" data-w="n">✗ Nein</button></div></div>
+  </div>
+  <div class="waage" id="waage" aria-live="polite">Tippe zu jedem Kriterium. Dann <b>begründe</b>, welches Kriterium für dich am meisten zählt.</div>
+</section>
+
+<!-- 10 Exit-Ticket -->
+<section class="slide" data-min="4" data-notes="Exit-Ticket (4 Minuten). SuS schätzen sich ein (nur auf dem Gerät, nichts wird gespeichert oder gesendet) und schreiben einen Satz ins Heft oder auf einen Zettel. Offene Fragen auf einen Parkplatz an der Tafel. Auswertung per Handzeichen möglich.">
+  <h1>Exit-Ticket</h1><span class="badge">4 Min. · allein</span>
+  <div id="selbst">
+    <div class="krit"><span>Ich kann <b>erklären</b>, warum Beschlüsse im Konsens schwächer werden.</span><div class="drei"><button type="button">sicher</button><button type="button">fast</button><button type="button">noch nicht</button></div></div>
+    <div class="krit"><span>Ich kann einen Beschluss mit dem echten Entwurf <b>vergleichen</b>.</span><div class="drei"><button type="button">sicher</button><button type="button">fast</button><button type="button">noch nicht</button></div></div>
+    <div class="krit"><span>Ich kann mit Kriterien <b>beurteilen</b>, ob die COP31 ein Erfolg ist.</span><div class="drei"><button type="button">sicher</button><button type="button">fast</button><button type="button">noch nicht</button></div></div>
+  </div>
+  <div class="mint pad" style="margin-top:18px;font-size:28px"><b>Schreibe</b> einen Satz: Das nehme ich heute mit: ______________________</div>
 </section>
 
 <div id="nav"><i></i></div>
@@ -122,6 +203,8 @@
 </div>
 <div id="notiz"></div>
 
+<script src="../../../../../assets/js/qrcode.js"></script>
+<script src="../assets/rollen.js"></script>
 <script>
 (function(){
   var buehne=document.getElementById('buehne'),stage=document.getElementById('stage'),notiz=document.getElementById('notiz'),balken=document.querySelector('#nav i');
@@ -145,13 +228,92 @@
   });
   document.getElementById('vor').onclick=function(){show(cur+1)};
   document.getElementById('zur').onclick=function(){show(cur-1)};
-  [].forEach.call(document.querySelectorAll('[data-reveal]'),function(b){
-    b.addEventListener('click',function(){var el=document.getElementById(b.getAttribute('data-reveal'));if(el)el.classList.toggle('show')});
-  });
   window.addEventListener('resize',fit);fit();
   function ausHash(){var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1)}
   window.addEventListener('hashchange',ausHash);
   ausHash();
+
+  function $(id){return document.getElementById(id)}
+  function einzeln(box,sel){[].forEach.call(box.querySelectorAll(sel),function(b){b.addEventListener('click',function(){
+    [].forEach.call(b.parentNode.querySelectorAll('button'),function(o){o.setAttribute('aria-pressed',o===b?'true':'false')});b.dispatchEvent(new CustomEvent('gewaehlt',{bubbles:true}))})})}
+
+  /* 1 Do Now: antippen, prüfen */
+  einzeln($('donow'),'.aussage button');
+  $('pruefen').onclick=function(){
+    [].forEach.call(document.querySelectorAll('#donow .aussage'),function(z){
+      var p=z.querySelector('[aria-pressed=true]'),erg=z.querySelector('.erg');z.classList.remove('ok','falsch');
+      if(!p){erg.textContent='–';return}
+      var ok=p.getAttribute('data-a')===z.getAttribute('data-ok');z.classList.add(ok?'ok':'falsch');erg.textContent=ok?'✓':'✗';
+    });$('l1').classList.add('show');
+  };
+
+  /* 3 Impuls: Entwurf zeigen */
+  var m2=$('marken2'),gezeigt=false;
+  function entwurf(an){gezeigt=an;m2.style.visibility=an?'visible':'hidden';$('zeige').textContent=an?'Streichungen ausblenden':'Streichungen zeigen'}
+  $('zeige').onclick=function(){entwurf(!gezeigt)};
+
+  /* 5 Rollen mit QR-Code und Ziehen */
+  var R=window.COP_ROLLEN,rh='';
+  for(var i=1;i<=6;i++)rh+='<div class="rk"><div><b>'+i+' '+R[i].n+'</b><small>'+R[i].s+'</small></div><div class="qr" data-qr="'+i+'" role="img" aria-label="QR-Code zur Rollenkarte '+i+'"></div></div>';
+  $('rollen').innerHTML=rh;
+  [].forEach.call(document.querySelectorAll('[data-qr]'),function(h){
+    try{var u=new URL('../rolle/?r='+h.getAttribute('data-qr'),location.href).href,q=qrcode(0,'M');q.addData(u);q.make();h.innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true});h.title=u}catch(e){h.textContent='QR nicht verfügbar'}
+  });
+  var rest=[],gr=0;
+  $('ziehe').onclick=function(){
+    if(!rest.length){rest=[1,2,3,4,5,6];gr=0}
+    var k=Math.floor(Math.random()*rest.length),r=rest.splice(k,1)[0];gr++;
+    $('zug').innerHTML='Gruppe '+gr+' zieht: <b>'+r+' '+R[r].n+'</b>'+(rest.length?'':' (letzte Rolle)');
+  };
+
+  /* 6 Phasenuhr */
+  var PH=[{n:'Eröffnung',m:6,t:'Jede Gruppe stellt ihre Position vor: 1 Minute. Die Umweltorganisation hält ihr Statement.'},
+          {n:'Verhandlung',m:10,t:'2 Botschafter gehen zu anderen Gruppen. 2 bleiben am Tisch. Die Präsidentschaft sammelt Kompromisse.'},
+          {n:'Abstimmung',m:5,t:'Handzeichen. Ein Antrag gilt, wenn niemand Nein sagt. Trage das Ergebnis in Aufgabe 4 ein.'},
+          {n:'Nachbesprechung',m:3,t:'Wer hat sich durchgesetzt? Warum?'}];
+  var pi=0,rest_s=PH[0].m*60,ende=0,lauf=false,iv=null,ac=null;
+  var ph=$('phasen'),h='';PH.forEach(function(p,i){h+='<button type="button" class="ph" data-i="'+i+'"><b class="n">'+(i+1)+'</b><span><b>'+p.n+'</b></span><span>'+p.m+' Min.</span></button>'});ph.innerHTML=h;
+  function piep(){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(function(t){var o=ac.createOscillator(),g=ac.createGain();o.frequency.value=660;g.gain.value=.15;o.connect(g);g.connect(ac.destination);o.start(ac.currentTime+t);o.stop(ac.currentTime+t+.2)})}catch(e){}}
+  function zeit(){var s=Math.max(0,Math.ceil(rest_s)),d=$('digits');d.textContent=('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2);d.classList.toggle('rot',s===0&&lauf===false&&rest_s<=0)}
+  function zeichne(){[].forEach.call(ph.children,function(b,i){b.removeAttribute('aria-current');b.classList.toggle('fertig',i<pi);if(i===pi)b.setAttribute('aria-current','step')});$('phtext').textContent=PH[pi].t;$('go').textContent=lauf?'Pause':'Start';zeit()}
+  function stopp(){lauf=false;clearInterval(iv)}
+  function tick(){rest_s=(ende-Date.now())/1000;if(rest_s<=0){rest_s=0;stopp();piep()}zeichne()}
+  function phase(i){stopp();pi=Math.max(0,Math.min(PH.length-1,i));rest_s=PH[pi].m*60;zeichne()}
+  $('go').onclick=function(){if(lauf){stopp()}else{if(rest_s<=0)rest_s=PH[pi].m*60;ende=Date.now()+rest_s*1000;lauf=true;iv=setInterval(tick,250)}zeichne()};
+  $('next').onclick=function(){phase(pi+1)};$('reset').onclick=function(){phase(0)};
+  ph.addEventListener('click',function(e){var b=e.target.closest('.ph');if(b)phase(+b.getAttribute('data-i'))});
+  phase(0);
+
+  /* 7 Abstimmungstafel */
+  var G=['Europäische Union','Ölförderland','Inselstaat','Schwellenland'],SYM={'':'–',ja:'✓ Ja',nein:'✗ Nein',enth:'Enth.'},FOLGE=['','ja','nein','enth'];
+  var T={1:{v:'A',s:{}},2:{v:'A',s:{}}},TT={1:'Antrag 1: Kohle, Öl und Gas',2:'Antrag 2: Geld für Klimaschutz'};
+  function stimmen(a){var k=a+T[a].v;return T[a].s[k]=T[a].s[k]||['','','','']}
+  function tafel(){
+    var h='';[1,2].forEach(function(a){
+      h+='<div class="antrag"><h2>'+TT[a]+'</h2><div class="varianten">';
+      ['A','B','C'].forEach(function(v){h+='<button type="button" class="wahl" data-a="'+a+'" data-v="'+v+'" aria-pressed="'+(T[a].v===v)+'">Variante '+v+'</button>'});
+      h+='</div><div class="stimmen">';
+      var st=stimmen(a);G.forEach(function(g,i){h+='<button type="button" class="st" data-a="'+a+'" data-g="'+i+'" data-v="'+st[i]+'"><span>'+g+'</span><b>'+SYM[st[i]]+'</b></button>'});
+      var nein=[],leer=0;st.forEach(function(x,i){if(x==='nein')nein.push(G[i]);if(!x)leer++});
+      var c='',tx='Es fehlen noch '+leer+' Stimme'+(leer===1?'':'n')+'.';
+      if(nein.length){c='nein';tx='✗ Nicht angenommen.<small>Nein von: '+nein.join(', ')+'. Ein Nein genügt.</small>'}
+      else if(!leer){c='ja';tx='✓ Angenommen im Konsens.<small>Kein Nein.</small>'}
+      h+='</div><div class="urteil '+c+'" aria-live="polite">'+tx+'</div></div>';
+    });$('tafel').innerHTML=h;
+  }
+  $('tafel').addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b)return;var a=b.getAttribute('data-a');
+    if(b.classList.contains('wahl')){T[a].v=b.getAttribute('data-v')}
+    else if(b.classList.contains('st')){var st=stimmen(a),i=+b.getAttribute('data-g');st[i]=FOLGE[(FOLGE.indexOf(st[i])+1)%FOLGE.length]}
+    tafel();
+  });tafel();
+
+  /* 9 Kriterien-Check, 10 Selbsteinschätzung */
+  einzeln($('krit'),'.drei button');
+  function waage(){var n={j:0,t:0,n:0},f=0;[].forEach.call($('krit').querySelectorAll('[aria-pressed=true]'),function(b){n[b.getAttribute('data-w')]++;f++});
+    $('waage').innerHTML=f<3?'Tippe zu jedem Kriterium. Dann <b>begründe</b>, welches Kriterium für dich am meisten zählt.':'✓ '+n.j+' · ± '+n.t+' · ✗ '+n.n+'. Das ist kein Ergebnis, sondern Material für dein Urteil. <b>Begründe</b>, welches Kriterium für dich am meisten zählt.'}
+  $('krit').addEventListener('gewaehlt',waage);
+  einzeln($('selbst'),'.drei button');
 })();
 </script>
 <!-- ENTWURF: Spielinhalte bitte fachlich gegenlesen, dann "geprueft": true und "begriffe": true in projects.json. -->

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Rollenkarte – Mini-COP31</title>
+<style>
+@font-face{font-family:Andika;src:url(../../../../../assets/fonts/andika-regular.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Andika;src:url(../../../../../assets/fonts/andika-bold.woff2) format('woff2');font-weight:700;font-display:swap}
+:root{--dk:#7A3B42;--g:#8C4350;--mint:#F5E9EB;--y:#F4B400;--ink:#2A1B1E}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--ink);font-family:Andika,Verdana,sans-serif;font-size:20px;line-height:1.5;text-align:left}
+header{background:var(--dk);color:#fff;padding:18px 16px}
+header p{margin:0;font-size:16px;color:#F0DADD}
+header h1{margin:2px 0 0;font-size:30px;line-height:1.2}
+main{max-width:40em;margin:0 auto;padding:18px 16px 40px}
+.pos{background:var(--mint);border-radius:14px;padding:14px 16px;margin:0 0 12px}
+.pos.a{border:3px solid var(--g);background:#fff}
+h2{font-size:20px;color:var(--g);margin:22px 0 6px}
+ul{margin:0;padding-left:1.2em}li{margin-bottom:10px}
+.status{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:2px 12px;font-size:16px;font-weight:700;margin-bottom:10px}
+button{font:inherit;min-height:56px;padding:0 20px;border-radius:12px;border:0;background:var(--g);color:#fff;font-weight:700;margin-top:18px}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+nav a{display:inline-flex;align-items:center;justify-content:center;min-width:56px;min-height:56px;border-radius:12px;background:var(--g);color:#fff;font-weight:700;text-decoration:none;font-size:22px}
+nav a[aria-current="page"]{background:var(--y);color:var(--ink)}
+.fehler{padding:24px 16px}.hinweis{font-size:16px;color:#5b4a4d;margin-top:24px}
+</style>
+</head>
+<body>
+<header><p>Mini-COP31: Wir verhandeln</p><h1 id="titel">Rollenkarte</h1></header>
+<main id="inhalt"><p class="fehler">Die Rollenkarte wird geladen. Dafür braucht die Seite JavaScript.</p></main>
+<script src="../assets/rollen.js"></script>
+<script>
+(function(){
+  var m=/[?&]r=([1-6])\b/.exec(location.search),k=m?+m[1]:0,r=window.COP_ROLLEN[k],main=document.getElementById('inhalt');
+  if(!r){main.innerHTML='<p class="fehler">Diese Rollenkarte gibt es nicht. Scanne den QR-Code auf deiner Karte noch einmal.</p>';return;}
+  document.title=r.n+' – Mini-COP31';
+  document.getElementById('titel').textContent=k+' '+r.n;
+  var h='<span class="status">'+r.s+'</span><div class="pos"><b>Wer wir sind:</b> '+r.wer+'</div>';
+  h+='<h2>'+r.kopf+'</h2><ul>'+r.liste.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';
+  if(r.a1)h+='<h2>Eure Anträge</h2><div class="pos a"><b>Antrag 1:</b> '+r.a1+'</div><div class="pos a"><b>Antrag 2:</b> '+r.a2+'</div>';
+  if(r.ziel)h+='<h2>Unser Ziel</h2><div class="pos a">'+r.ziel+'</div>';
+  h+='<button id="vl" type="button">Vorlesen lassen</button><nav aria-label="Andere Rollenkarten">';
+  for(var i=1;i<=6;i++)h+='<a href="?r='+i+'"'+(i===k?' aria-current="page"':'')+' aria-label="Rolle '+i+': '+window.COP_ROLLEN[i].n+'">'+i+'</a>';
+  h+='</nav><p class="hinweis">Die Rollen sind vereinfachte Positionen, keine Meinung der Lehrkraft oder der Klasse.</p>';
+  main.innerHTML=h;
+  var b=document.getElementById('vl'),ss=window.speechSynthesis;
+  if(!ss){b.style.display='none';return;}
+  b.onclick=function(){if(ss.speaking){ss.cancel();return}
+    var u=new SpeechSynthesisUtterance(main.innerText.replace(/Vorlesen lassen/,'').replace(/\d\s*$/,''));u.lang='de-DE';ss.speak(u)};
+})();
+</script>
+</body>
+</html>
