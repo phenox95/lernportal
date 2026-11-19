@@ -927,7 +927,7 @@
   },
   {
     "title": "Gesundheit – Krankheit – Stunde 5: Allergie",
-    "description": "Allergie als Fehlalarm des Immunsystems: Do Now Impfung, Impuls Wiese, Fragenentwicklung, Ablauf einer Allergie (Erstkontakt bis Histamin), Fall Familie Weber und die Katze, Abstimmung, Reflexion.",
+    "description": "Allergie als Fehlalarm des Immunsystems: Do Now Impfung, Impuls Wiese, Fragenentwicklung, Ablauf einer Allergie Schritt für Schritt (Erstkontakt bis Histamin), Fall Familie Tran und die Katze, Abstimmung, Reflexion.",
     "type": "Materialseite",
     "path": "biologie/klasse-9/gesundheit/allergie/",
     "subject": "Biologie",
@@ -942,6 +942,12 @@
         "titel": "Präsentation zur Stunde",
         "pfad": "biologie/klasse-9/gesundheit/allergie/praesentation/",
         "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Allergie und Familie Tran",
+        "pfad": "biologie/klasse-9/gesundheit/allergie/arbeitsblatt.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
       }
     ],
     "bne": [
