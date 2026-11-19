@@ -29,6 +29,42 @@
   ],
   "eintraege": [
     {
+      "datum": "2026-11-18",
+      "titel": "Warum die USA nicht mehr masernfrei sind",
+      "quelle": "tagesschau.de",
+      "link": "https://www.tagesschau.de/ausland/amerika/masern-usa-118.html",
+      "einordnung": "In den USA gibt es so viele Masernfälle wie seit über 35 Jahren nicht. Darum gelten die USA nicht mehr als masernfrei. Der Bericht fragt nach den Gründen. Gut zum Vergleich: Was passiert, wenn weniger Menschen geimpft sind?",
+      "art": "Medienbericht",
+      "faecher": [
+        "Biologie"
+      ],
+      "bne": [
+        3
+      ],
+      "woche": "2026-11-16",
+      "themenfeld": [
+        "3.5"
+      ]
+    },
+    {
+      "datum": "2026-11-09",
+      "titel": "FAQ: Wo kann Berlin seine Windräder aufstellen?",
+      "quelle": "rbb24",
+      "link": "https://www.rbb24.de/politik/beitrag/2026/11/berlin-windenergie-windraeder-flaechen-beteiligung-pankow-koepenick-spandau-faq.html",
+      "einordnung": "Berlin muss per Gesetz Flächen für Windräder festlegen. Vier Gebiete in Pankow, Spandau und Treptow-Köpenick sind noch im Gespräch. Der Bericht zeigt Gründe dafür und Einwände dagegen. Bis 12. Dezember können alle ihre Meinung sagen.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        7
+      ],
+      "woche": "2026-11-23",
+      "themenfeld": [
+        "3.5"
+      ]
+    },
+    {
       "datum": "2026-10-30",
       "titel": "Vulkan Mayon ausgebrochen: 3.000 Meter hohe Aschewolke über den Philippinen",
       "quelle": "ZDFheute",
