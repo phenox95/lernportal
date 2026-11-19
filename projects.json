@@ -876,5 +876,42 @@
     "dauer": "2 Min.",
     "datum": "2026-11-17",
     "sichtbar": true
+  },
+  {
+    "title": "Mini-COP31: Wir verhandeln",
+    "description": "Doppelstunde: Planspiel zur Weltklimakonferenz COP31 mit Rollenkarten, Abstimmung und Vergleich mit dem echten Entwurf. Stichwörter: Klimakonferenz, Konsens, Kompromiss, Klimaschutz.",
+    "type": "Materialseite",
+    "path": "geografie/klasse-9/klimawandel/mini-cop31/",
+    "subject": "Geografie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "Doppelstunde",
+    "niveau": "F–G",
+    "datum": "2026-11-19",
+    "reihe": "Klimawandel",
+    "bne": [
+      13,
+      16
+    ],
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "geografie/klasse-9/klimawandel/mini-cop31/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt und Rollenkarten",
+        "pfad": "geografie/klasse-9/klimawandel/mini-cop31/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-9/ressourcen/erneuerbare-energien/",
+        "grund": "Vorstunde: Der Streit um Kohle, Öl und Gas auf der COP31 knüpft an die Energiewende an."
+      }
+    ],
+    "sichtbar": true
   }
 ]

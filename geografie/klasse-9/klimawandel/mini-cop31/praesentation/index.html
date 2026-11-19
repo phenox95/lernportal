@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Mini-COP31: Wir verhandeln</title>
+<meta name="description" content="Doppelstunde Geografie Klasse 9: Planspiel zur Weltklimakonferenz COP31 mit Rollen, Abstimmung und Vergleich mit dem echten Entwurf.">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+<style>
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+#notiz{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding:14px 28px;font-size:17px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000}
+#notiz.an{display:block}
+.mint{background:var(--mint);border-radius:16px}
+.shilfe.sm{font-size:20px;padding:12px 16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.entwurf{border:3px solid var(--g);border-radius:16px;padding:22px 26px;background:#fff;color:var(--ink)}
+.entwurf h2{margin:0 0 10px;font-size:30px}
+.entwurf .zahl{font-size:76px;font-weight:700;line-height:1.05}
+.entwurf .z2{font-size:32px;margin-top:8px}
+.ablauf{display:grid;gap:16px}
+.ablauf .schritt{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:start;font-size:29px;line-height:1.35}
+.ablauf .schritt b.n{background:var(--g);color:#fff;border-radius:50%;width:56px;height:56px;display:grid;place-items:center;font-size:30px}
+.show-no{display:none}.show-no.show{display:block}
+.eingabe{border:3px dashed var(--g);border-radius:16px;padding:18px 24px;font-size:30px;line-height:1.7;min-height:300px;background:#fff}
+.kriterien{display:grid;gap:12px;margin:14px 0 0;padding:0;list-style:none;font-size:30px}
+.kriterien li{background:var(--mint);border-radius:14px;padding:12px 20px}
+@media print{#nav,#notiz{display:none}}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Mini-COP31: Wir verhandeln" data-subject="Geografie" data-grade="Klasse 9">
+<noscript><p class="lp-noscript"><a href="../../../../../">Zurück zum Portal</a> · Diese Seite benötigt JavaScript für die vollständige Darstellung.</p></noscript>
+<div id="buehne">
+<div id="stage">
+
+<!-- 1 Do Now -->
+<section class="slide" data-min="3" data-notes="Do Now (Wiederholung der Vorstunde). Annahme: Vorstunde = Erneuerbare Energien. Bei anderer Vorstunde die Aussagen austauschen. Währenddessen Anwesenheit und Organisatorisches. Abgleich 2 Minuten mit Knopf „Lösung zeigen“, dann direkt Folie 2. SuS mit LRS dürfen sich die Aussagen vorlesen lassen.">
+  <h1>Do Now: Erinnerst du dich?</h1><span class="badge">3 Min. · allein</span>
+  <div class="mint pad">
+    <p class="task"><span class="snr">1</span><span><b>Entscheide</b>, ob die Aussage richtig oder falsch ist:</span><i class="lvl">E</i></p>
+    <ol style="font-size:28px;line-height:1.45;margin:0 0 14px">
+      <li>Wind und Sonne sind erneuerbare Energien.</li>
+      <li>Erdöl entsteht in wenigen Jahren.</li>
+      <li>Beim Verbrennen von Kohle, Öl und Gas entsteht CO<sub>2</sub>.</li>
+      <li>Eine Dunkelflaute ist eine Zeit mit viel Wind und Sonne.</li>
+    </ol>
+    <p class="task" style="margin:0"><span class="snr">2</span><span><b>Begründe</b> eine falsche Aussage in einem Satz.</span><i class="lvl">F</i></p>
+  </div>
+  <div class="shilfe sm" style="margin-top:16px">Du darfst dir die Aussagen vorlesen lassen. Arbeite leise und allein.</div>
+  <p style="margin-top:14px"><button class="b" data-reveal="l1">Lösung zeigen</button></p>
+  <div class="shilfe show-no" id="l1" style="margin-top:12px"><b>1</b> richtig · <b>2</b> falsch (Erdöl braucht Jahrmillionen) · <b>3</b> richtig · <b>4</b> falsch (Dunkelflaute heißt: wenig Wind und Sonne)</div>
+</section>
+
+<!-- 2 Video -->
+<section class="slide" data-min="5" data-notes="Vorwissen zur Klimakonferenz, nicht zur Fragenentwicklung. Das Video wurde nicht gesichtet: vorher ansehen (Länge, Tempo, Sprachniveau, kommt die Konsens-Regel vor?). Plan B: Video weglassen, M1 auf dem Arbeitsblatt im Plenum vorlesen lassen (2 Min.). Nach dem Video zwei Antworten sammeln. Fehlt die Konsens-Regel, ergänzt die Lehrkraft sie in einem Satz.">
+  <h1>Die Weltklimakonferenz: kurz erklärt</h1><span class="badge">5 Min. · Plenum</span>
+  <div class="mint pad">
+    <p class="task"><span class="snr">1</span><span><b>Nenne</b> beim Schauen: Wer verhandelt? Wie wird entschieden?</span><i class="lvl">E</i></p>
+    <div class="shilfe sm">Schreibe Stichwörter in dein Heft.</div>
+  </div>
+  <p class="lead s" style="margin-top:22px">Video: Germanwatch, „Die Weltklimakonferenz: kurz erklärt“<br><a href="https://youtu.be/f5Vqv1Kugyg" target="_blank" rel="noopener">youtu.be/f5Vqv1Kugyg</a></p>
+</section>
+
+<!-- 3 Impuls -->
+<section class="slide dark" data-min="3" data-notes="Impuls (stumm). 30 Sekunden Stille, dann laut vorlesen (LRS). Keine Erklärung, keine Frage vorgeben. Moderationsfragen: Was fällt euch auf? Was überrascht euch? Was wollt ihr herausfinden? Welche Frage stellt sich euch? Erwartete Fragen: Warum wurde das gestrichen? Wer wollte das? Wer entscheidet das? Abweichende, tragfähige Fragen aufgreifen. Impuls plus Fragenentwicklung höchstens 10 Minuten.">
+  <h1>COP31 in Antalya: zwei Entwürfe</h1><span class="badge">3 Min. · Plenum</span>
+  <div class="row2">
+    <div class="entwurf"><h2>Entwurf vom Montag, 16.11.</h2><div class="zahl">18 Seiten</div><div class="z2">Fossile Brennstoffe: <b>2 Stellen</b></div></div>
+    <div class="entwurf"><h2>Entwurf vom Donnerstag, 19.11.</h2><div class="zahl">9 Seiten</div><div class="z2">Fossile Brennstoffe: <b>0 Stellen</b></div></div>
+  </div>
+  <p class="src" style="margin-top:18px;color:#E6D3C8">Quelle: Reuters, ORF (19.11.2026)</p>
+</section>
+
+<!-- 4 Fragenentwicklung -->
+<section class="slide" data-min="4" data-notes="Fragenentwicklung. Paar-Austausch 1 Minute, dann Fragen im Fragenfeld sammeln, mit 👍 priorisieren, mit „→ Leitfrage“ fixieren. SuS schreiben die Frage oben auf das Arbeitsblatt (Zeile „Unsere Frage für heute“). Basis: gelenkt (Was steht am Montag? Was am Donnerstag? Was ist anders?). Erweiterung: offen. Zielkorridor (nicht nennen): Warum einigen sich fast 200 Staaten so schwer auf Klimaschutz, und warum fehlen die fossilen Energien im neuen Text?">
+  <h1>Eure Fragen</h1><span class="badge">4 Min. · Paar, Plenum</span>
+  <div data-fragenfeld data-impulse="Was fällt euch auf?|Was überrascht euch?|Was wollt ihr herausfinden?|Welche Frage stellt sich euch?"></div>
+</section>
+
+<!-- 5 Ablauf -->
+<section class="slide" data-min="24" data-notes="Rollen verdeckt ziehen (Umschlag), Gruppen à 4. Vorbereitung 18 Minuten mit Arbeitsblatt Seite 1 (Aufgaben 1 bis 3), danach diese Folie für den Ablauf der Mini-COP. Präsidentschaft und Umweltorganisation haben keine Stimme. Phasenuhr nutzen, die Abstimmung nicht streichen. Die Rollen sind typisiert und keine Meinung der Lehrkraft oder der Klasse.">
+  <h1>So läuft die Mini-COP</h1><span class="badge">24 Min. · Gruppen</span>
+  <div class="ablauf">
+    <div class="schritt"><b class="n">1</b><span><b>Eröffnung</b> (6 Min.): Jede Gruppe stellt ihre Position vor. 1 Minute.</span></div>
+    <div class="schritt"><b class="n">2</b><span><b>Verhandlung</b> (10 Min.): 2 Botschafter gehen zu anderen Gruppen. 2 bleiben am Tisch.</span></div>
+    <div class="schritt"><b class="n">3</b><span><b>Abstimmung</b> (5 Min.): Handzeichen. Ein Antrag gilt, wenn niemand Nein sagt.</span></div>
+  </div>
+  <div class="shilfe sm" style="margin-top:22px">Enthaltung ist erlaubt. Präsidentschaft und Umweltorganisation haben keine Stimme. Trage das Ergebnis in Aufgabe 4 ein.</div>
+</section>
+
+<!-- 6 Stand der echten COP -->
+<section class="slide" data-min="14" data-notes="VOR DER STUNDE ausfüllen (Feld anklicken und tippen, Uhrzeit und Quelle eintragen). Quellen: Reuters, ORF, enb.iisd.org. Eingaben gehen beim Neuladen verloren, deshalb Seite nicht mehr neu laden. Danach Arbeitsblatt Seite 2: Aufgabe 5 Vergleichen (Paar, 5 Min.), Aufgabe 6 Erklären (allein, 4 Min.), Besprechung und Tafelbild 5 Min. M3 auf dem Arbeitsblatt bleibt auf Stand 19.11. Zu Antrag 2: Der echte Streit „Wer zahlt?“ ist offen.">
+  <h1>Und was sagt die echte COP?</h1><span class="badge">14 Min. · Paar, allein</span>
+  <div class="eingabe" contenteditable="true" role="textbox" aria-label="Stand der echten COP31">Stand: Fr 20.11.2026, __:__ Uhr<br>Quelle: ____________________<br>Beschluss oder Entwurf: <br>Kohle, Öl, Gas: <br>Geld: </div>
+</section>
+
+<!-- 7 Urteil -->
+<section class="slide" data-min="10" data-notes="Aufgabe 7 auf dem Arbeitsblatt: 5 Minuten schreiben, 3 Minuten Blitzlicht mit Pro und Contra. Basis: zwei Kriterien aus dem Kasten. Erweiterung: eigene Kriterien und Gewichtung. Wird die Zeit knapp: Aufgabe 7 als Hausaufgabe. Exit-Ticket in den letzten 4 Minuten, offene Fragen auf einen Parkplatz an der Tafel.">
+  <h1>Ist die COP31 ein Erfolg?</h1><span class="badge">10 Min. · allein</span>
+  <p class="lead s" style="font-size:26px;margin:0 0 10px">Unsere Frage: <b data-leitfrage>…</b></p>
+  <p class="task"><span class="snr">7</span><span><b>Beurteile</b>, ob die COP31 ein Erfolg ist. <b>Nenne</b> dafür zwei Kriterien.</span><i class="lvl">G</i></p>
+  <ul class="kriterien">
+    <li>Bleibt das 1,5-Grad-Ziel geschützt?</li>
+    <li>Haben alle zugestimmt?</li>
+    <li>Hilft der Text armen Ländern?</li>
+  </ul>
+  <div class="shilfe sm" style="margin-top:18px"><b>Exit-Ticket:</b> Das nehme ich heute mit: ______________________</div>
+</section>
+
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+<div id="notiz"></div>
+
+<script>
+(function(){
+  var buehne=document.getElementById('buehne'),stage=document.getElementById('stage'),notiz=document.getElementById('notiz'),balken=document.querySelector('#nav i');
+  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
+  function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+  function show(n){
+    cur=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
+    balken.style.width=((cur+1)/slides.length*100)+'%';
+    document.getElementById('zur').disabled=cur===0;document.getElementById('vor').disabled=cur===slides.length-1;
+    notiz.textContent=slides[cur].getAttribute('data-notes')||'';
+    try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
+  }
+  function tippt(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
+  document.addEventListener('keydown',function(e){
+    if(tippt(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&e.target.tagName!=='BUTTON')){e.preventDefault();show(cur+1)}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(cur-1)}
+    else if(e.key==='n'||e.key==='N'){notiz.classList.toggle('an')}
+    else if(e.key==='f'||e.key==='F'){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(x){}}
+  });
+  document.getElementById('vor').onclick=function(){show(cur+1)};
+  document.getElementById('zur').onclick=function(){show(cur-1)};
+  [].forEach.call(document.querySelectorAll('[data-reveal]'),function(b){
+    b.addEventListener('click',function(){var el=document.getElementById(b.getAttribute('data-reveal'));if(el)el.classList.toggle('show')});
+  });
+  window.addEventListener('resize',fit);fit();
+  function ausHash(){var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1)}
+  window.addEventListener('hashchange',ausHash);
+  ausHash();
+})();
+</script>
+<!-- ENTWURF: Spielinhalte bitte fachlich gegenlesen, dann "geprueft": true und "begriffe": true in projects.json. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "geprueft": false,
+ "titel": "Mini-COP31",
+ "paare": [
+ ["Delegation", "Gruppe, die ein Land auf der Konferenz vertritt", "De-le-ga-ti-on"],
+ ["Antrag", "Vorschlag für einen Satz im Beschluss", "An-trag"],
+ ["Konsens", "Alle stimmen zu. Ein Nein stoppt den Satz", "Kon-sens"],
+ ["Kompromiss", "Einigung, bei der alle etwas nachgeben", "Kom-pro-miss"],
+ ["Abstimmung", "Die Gruppen zeigen, ob sie zustimmen", "Ab-stim-mung"],
+ ["Enthaltung", "Eine Gruppe stimmt weder Ja noch Nein", "Ent-hal-tung"],
+ ["Beschluss", "Text, dem alle zugestimmt haben", "Be-schluss"],
+ ["Entwurf", "Text, der noch verhandelt wird", "Ent-wurf"]
+ ],
+ "spiele": ["memory", "quiz", "zuordnen"]
+}
+</script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>
