@@ -61,6 +61,10 @@ nav a[aria-current="page"]{background:var(--y);color:var(--ink)}
 <script>
 (function(){
   var m=/[?&]r=([1-6])\b/.exec(location.search),k=m?+m[1]:0,R=window.COP_ROLLEN,r=R[k],main=document.getElementById('inhalt');
+  if(!r&&!/[?&]r=/.test(location.search)){
+    var ph='<h2>Welche Rolle hat deine Gruppe?</h2><p class="hinweis" style="margin:0 0 10px">Tippe die Nummer der Rolle, die deine Gruppe gezogen hat.</p><div style="display:grid;gap:10px">';
+    for(var i=1;i<=6;i++)ph+='<a href="?r='+i+'" style="display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:center;min-height:64px;border:3px solid var(--g);border-radius:14px;padding:6px 14px;color:var(--ink);text-decoration:none"><b style="background:var(--g);color:#fff;border-radius:10px;text-align:center;font-size:26px">'+i+'</b><span><b>'+R[i].n+'</b><br><small style="font-size:15px;color:var(--grey)">'+R[i].s+'</small></span></a>';
+    main.innerHTML=ph+'</div><p class="hinweis">Die Rollen sind vereinfachte Positionen, keine Meinung der Lehrkraft oder der Klasse.</p>';document.getElementById('titel').textContent='Rolle wählen';return;}
   if(!r){main.innerHTML='<p class="fehler">Diese Rollenkarte gibt es nicht. Scanne den QR-Code auf deiner Karte noch einmal.</p>';return;}
   function md(t){return t.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')}
   document.title=r.n+' – Mini-COP31';

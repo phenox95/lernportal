@@ -29,6 +29,14 @@
 .ablauf{display:grid;gap:16px}
 .ablauf .schritt{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:start;font-size:29px;line-height:1.35}
 .ablauf .schritt b.n{background:var(--g);color:#fff;border-radius:50%;width:56px;height:56px;display:grid;place-items:center;font-size:30px}
+.vidrow{display:grid;grid-template-columns:1fr 600px;gap:28px;align-items:start}
+.vp{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;color:#fff;text-decoration:none;box-shadow:0 10px 30px rgba(62,30,35,.35);border:3px solid #fff}
+.vp .art{position:absolute;inset:0;width:100%;height:100%;display:block}
+.vp .vplay{transform-origin:320px 168px;transition:transform .2s}.vp:hover .vplay,.vp:focus-visible .vplay{transform:scale(1.12)}
+.vp:focus-visible{outline:5px solid var(--y);outline-offset:3px}
+.vtag{position:absolute;left:18px;top:16px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.6);border-radius:999px;padding:2px 14px;font-weight:700;font-size:18px}
+.vtitle{position:absolute;left:22px;right:22px;bottom:40px;font-size:30px;font-weight:700;line-height:1.2;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.vsub{position:absolute;left:22px;right:22px;bottom:12px;font-size:17px;opacity:.9}
 .show-no{display:none}.show-no.show{display:block}
 .eingabe{border:3px dashed var(--g);border-radius:16px;padding:18px 24px;font-size:30px;line-height:1.7;min-height:300px;background:#fff}
 .kriterien{display:grid;gap:12px;margin:14px 0 0;padding:0;list-style:none;font-size:30px}
@@ -62,17 +70,18 @@
 .ctrl{display:flex;gap:12px;justify-content:center}
 .ctrl button,.btn{font:inherit;font-weight:700;font-size:24px;min-height:56px;padding:0 24px;border-radius:14px;border:0;background:var(--g);color:#fff;cursor:pointer}
 .ctrl button.zweit,.btn.zweit{background:#fff;color:var(--ink);border:3px solid var(--g)}
-.tafel{display:grid;grid-template-columns:1fr 1fr;gap:18px}.leiste{display:flex;gap:12px;align-items:center;margin-top:8px}.leiste .shilfe{flex:1}.komp{margin:6px 100px 0;border:3px solid var(--g);border-radius:14px;padding:4px 14px;font-size:19px;line-height:1.3;background:#fff}.komp div{margin-top:2px}#scan{position:absolute;right:96px;top:64px;z-index:20;width:360px;background:#000;border:4px solid var(--y);border-radius:14px;padding:8px}#scan video{display:block;width:100%;border-radius:8px}
+.tafel{display:grid;grid-template-columns:1fr 1fr;gap:18px}.leiste{display:flex;gap:12px;align-items:center;margin:8px 96px 0 84px}.leiste .shilfe{flex:1}.komp{position:absolute;left:110px;right:130px;top:200px;z-index:15;border:4px solid var(--g);border-radius:16px;padding:14px 20px;font-size:26px;line-height:1.4;background:#fff;box-shadow:0 14px 40px rgba(0,0,0,.35)}.komp b{display:block;font-size:22px;color:var(--g);margin-bottom:6px}.komp div{margin-top:4px}.komp div{margin-top:2px}#scan{position:absolute;right:96px;top:64px;z-index:20;width:360px;background:#000;border:4px solid var(--y);border-radius:14px;padding:8px}#scan video{display:block;width:100%;border-radius:8px}
 .antrag{border:3px solid var(--g);border-radius:16px;padding:10px 14px;background:#fff}
 .antrag h2{margin:0 0 6px;font-size:25px}
 .varianten{display:flex;gap:8px;margin-bottom:10px}.varianten .wahl{flex:1}
 .stimmen{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.st{font:inherit;display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px;min-height:48px;border-radius:12px;border:3px solid var(--mint);background:var(--mint);padding:2px 12px;font-size:20px;cursor:pointer;color:var(--ink);text-align:left}
+.st{font:inherit;display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px;min-height:44px;border-radius:12px;border:3px solid var(--mint);background:var(--mint);padding:0 12px;font-size:19px;cursor:pointer;color:var(--ink);text-align:left}
 .st b{font-size:26px;min-width:2.3em;text-align:center}
 .st[data-v=ja]{border-color:#1B6E3C}.st[data-v=nein]{border-color:#B3261E;background:#FBE4E2}.st[data-v=enth]{border-color:var(--grey)}
-.urteil{margin-top:8px;font-size:26px;font-weight:700;border-radius:14px;padding:6px 14px;min-height:72px;border:3px dashed var(--grey)}
+.nsk{grid-column:1/-1;font-size:16px;color:var(--grey);margin-top:2px}.ns{display:flex;flex-direction:column;justify-content:center;min-height:44px;padding:2px 12px;border:3px dashed var(--grey);border-radius:12px;background:#fff;color:var(--grey);font-size:19px;line-height:1.15}.ns small{font-size:14px}
+.urteil{margin-top:6px;font-size:24px;font-weight:700;border-radius:14px;padding:4px 14px;min-height:60px;border:3px dashed var(--grey)}
 .urteil.ja{border:3px solid #1B6E3C;background:#E3F2E8}.urteil.nein{border:3px solid #B3261E;background:#FBE4E2}
-.urteil small{display:block;font-size:20px;font-weight:400;margin-top:4px}
+.urteil small{display:block;font-size:17px;font-weight:400;margin-top:2px}
 .vgl{width:100%;border-collapse:collapse;font-size:21px}.vgl th,.vgl td{border:3px solid var(--g);padding:6px 10px;text-align:left;vertical-align:top}.vgl th{background:var(--mint)}
 .krit{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:10px;font-size:27px}
 .drei{display:flex;gap:8px}.drei button{font:inherit;font-weight:700;min-width:140px;white-space:nowrap;padding:0 8px;min-height:52px;border-radius:12px;border:3px solid var(--g);background:#fff;color:var(--ink);cursor:pointer;font-size:22px}
@@ -106,11 +115,21 @@
 <!-- 2 Video -->
 <section class="slide" data-min="5" data-notes="Vorwissen zur Klimakonferenz, nicht zur Fragenentwicklung. Das Video wurde nicht gesichtet: vorher ansehen (Länge, Tempo, Sprachniveau, kommt die Konsens-Regel vor?). Plan B: Video weglassen, M1 auf dem Arbeitsblatt im Plenum vorlesen lassen (2 Min.). Nach dem Video zwei Antworten sammeln. Fehlt die Konsens-Regel, ergänzt die Lehrkraft sie in einem Satz.">
   <h1>Die Weltklimakonferenz: kurz erklärt</h1><span class="badge">5 Min. · Plenum</span>
-  <div class="mint pad">
-    <p class="task"><span class="snr">1</span><span><b>Nenne</b> beim Schauen: Wer verhandelt? Wie wird entschieden?</span><i class="lvl">E</i></p>
-    <div class="shilfe sm">Schreibe Stichwörter in dein Heft.</div>
+  <div class="vidrow">
+    <div>
+      <div class="mint pad">
+        <p class="task"><span class="snr">1</span><span><b>Nenne</b> beim Schauen: Wer verhandelt? Wie wird entschieden?</span><i class="lvl">E</i></p>
+        <div class="shilfe sm">Schreibe Stichwörter in dein Heft.</div>
+      </div>
+      <p class="lead s" style="margin-top:18px;font-size:24px">Video von Germanwatch. Antippen öffnet YouTube in einem neuen Tab. Danach kommen wir hierher zurück.</p>
+    </div>
+    <a class="vp" href="https://youtu.be/f5Vqv1Kugyg" target="_blank" rel="noopener" aria-label="Video ansehen: Die Weltklimakonferenz kurz erklärt, von Germanwatch. Öffnet YouTube in einem neuen Tab.">
+      <svg class="art" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><linearGradient id="vpg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A5535F"/><stop offset=".55" stop-color="#7A3B42"/><stop offset="1" stop-color="#3E1E23"/></linearGradient><radialGradient id="vpk" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></radialGradient><linearGradient id="vps" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".62"/></linearGradient></defs><rect width="640" height="360" fill="url(#vpg)"/><circle cx="320" cy="168" r="142" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="2" stroke-dasharray="3 7"/><circle cx="320" cy="168" r="100" fill="url(#vpk)" stroke="#fff" stroke-opacity=".5" stroke-width="3"/><ellipse cx="320" cy="168" rx="100.0" ry="100" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><ellipse cx="320" cy="168" rx="86.6" ry="100" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><ellipse cx="320" cy="168" rx="50.0" ry="100" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><ellipse cx="320" cy="168" rx="-50.0" ry="100" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><ellipse cx="320" cy="168" rx="-86.6" ry="100" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><line x1="244.9" x2="395.1" y1="102" y2="102" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><line x1="225.6" x2="414.4" y1="135" y2="135" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><line x1="220.0" x2="420.0" y1="168" y2="168" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><line x1="225.6" x2="414.4" y1="201" y2="201" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><line x1="244.9" x2="395.1" y1="234" y2="234" stroke="#fff" stroke-opacity=".28" stroke-width="2"/><circle cx="320.0" cy="26.0" r="8.5" fill="#F4B400" opacity="0.95"/><circle cx="342.2" cy="27.7" r="6.5" fill="#fff" opacity="0.55"/><circle cx="363.9" cy="32.9" r="6.5" fill="#fff" opacity="0.55"/><circle cx="384.5" cy="41.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="403.5" cy="53.1" r="6.5" fill="#fff" opacity="0.55"/><circle cx="420.4" cy="67.6" r="8.5" fill="#fff" opacity="0.55"/><circle cx="434.9" cy="84.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="446.5" cy="103.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="455.1" cy="124.1" r="6.5" fill="#fff" opacity="0.55"/><circle cx="460.3" cy="145.8" r="6.5" fill="#fff" opacity="0.55"/><circle cx="462.0" cy="168.0" r="8.5" fill="#F4B400" opacity="0.95"/><circle cx="460.3" cy="190.2" r="6.5" fill="#fff" opacity="0.55"/><circle cx="455.1" cy="211.9" r="6.5" fill="#fff" opacity="0.55"/><circle cx="446.5" cy="232.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="434.9" cy="251.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="420.4" cy="268.4" r="8.5" fill="#fff" opacity="0.55"/><circle cx="403.5" cy="282.9" r="6.5" fill="#fff" opacity="0.55"/><circle cx="384.5" cy="294.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="363.9" cy="303.1" r="6.5" fill="#fff" opacity="0.55"/><circle cx="342.2" cy="308.3" r="6.5" fill="#fff" opacity="0.55"/><circle cx="320.0" cy="310.0" r="8.5" fill="#F4B400" opacity="0.95"/><circle cx="297.8" cy="308.3" r="6.5" fill="#fff" opacity="0.55"/><circle cx="276.1" cy="303.1" r="6.5" fill="#fff" opacity="0.55"/><circle cx="255.5" cy="294.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="236.5" cy="282.9" r="6.5" fill="#fff" opacity="0.55"/><circle cx="219.6" cy="268.4" r="8.5" fill="#fff" opacity="0.55"/><circle cx="205.1" cy="251.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="193.5" cy="232.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="184.9" cy="211.9" r="6.5" fill="#fff" opacity="0.55"/><circle cx="179.7" cy="190.2" r="6.5" fill="#fff" opacity="0.55"/><circle cx="178.0" cy="168.0" r="8.5" fill="#F4B400" opacity="0.95"/><circle cx="179.7" cy="145.8" r="6.5" fill="#fff" opacity="0.55"/><circle cx="184.9" cy="124.1" r="6.5" fill="#fff" opacity="0.55"/><circle cx="193.5" cy="103.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="205.1" cy="84.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="219.6" cy="67.6" r="8.5" fill="#fff" opacity="0.55"/><circle cx="236.5" cy="53.1" r="6.5" fill="#fff" opacity="0.55"/><circle cx="255.5" cy="41.5" r="6.5" fill="#fff" opacity="0.55"/><circle cx="276.1" cy="32.9" r="6.5" fill="#fff" opacity="0.55"/><circle cx="297.8" cy="27.7" r="6.5" fill="#fff" opacity="0.55"/><rect y="200" width="640" height="160" fill="url(#vps)"/><g class="vplay"><circle cx="320" cy="168" r="46" fill="#fff"/><path d="M306 144L346 168L306 192Z" fill="#7A3B42"/></g></svg>
+      <span class="vtag">VIDEO · Germanwatch</span>
+      <span class="vtitle">Die Weltklimakonferenz: kurz erklärt</span>
+      <span class="vsub">youtu.be/f5Vqv1Kugyg</span>
+    </a>
   </div>
-  <p class="lead s" style="margin-top:22px">Video: Germanwatch, „Die Weltklimakonferenz: kurz erklärt“<br><a href="https://youtu.be/f5Vqv1Kugyg" target="_blank" rel="noopener">youtu.be/f5Vqv1Kugyg</a></p>
 </section>
 
 <!-- 3 Impuls -->
@@ -158,8 +177,8 @@
 <section class="slide" data-min="5" data-notes="Abstimmungstafel für Aufgabe 4 mit Rückkanal per QR: „Ergebnisse einscannen“ startet die Kamera (nur über die Portal-Adresse, https). Jede stimmberechtigte Gruppe trägt auf ihrer Handyseite ihre Stimmen ein (Rolle 1 bis 4, Abschnitt „Abstimmung: Ergebnis senden“) und hält den Code vor die Kamera. Die Stimmen erscheinen in der Tafel, die Präsidentschaft kann ihre Kompromiss-Sätze auf demselben Weg schicken. Der Code enthält nur Rollennummer und Stimmen, keine Namen, nichts geht ins Internet. Ohne Handy: Stimmen selbst eintippen oder Handzeichen. Zuerst die Variante wählen, über die abgestimmt wird (A, B oder C). Dann tippt die Lehrkraft für jede stimmberechtigte Gruppe Ja, Nein oder Enthaltung ein (Tippen wechselt). Ein einziges Nein stoppt den Antrag, so funktioniert der Konsens. Eine Variante nach der anderen abstimmen. Präsidentschaft und Umweltorganisation haben keine Stimme. SuS tragen das Ergebnis in Aufgabe 4 ein. Planungsannahme: Bei Antrag 1 bleibt nur Variante B ohne Nein.">
   <h1>Abstimmung: Wer sagt Nein?</h1><span class="badge">Abstimmung</span>
   <div class="tafel" id="tafel"></div>
-  <div class="leiste"><button class="btn" id="scanbtn" type="button">Ergebnisse einscannen</button><span id="scanst" class="shilfe sm" aria-live="polite">Ein Antrag gilt, wenn keine stimmberechtigte Gruppe Nein sagt. Enthaltung ist erlaubt.</span></div>
-  <div class="komp" id="komp" hidden><b>Kompromiss-Vorschläge der Präsidentschaft</b><div id="kompt"></div></div>
+  <div class="leiste"><button class="btn" id="scanbtn" type="button">Ergebnisse einscannen</button><button class="btn zweit" id="kompbtn" type="button" hidden>Kompromisse</button><span id="scanst" class="shilfe sm" aria-live="polite">Ein Antrag gilt, wenn keine stimmberechtigte Gruppe Nein sagt. Enthaltung ist erlaubt.</span></div>
+  <div class="komp" id="komp" hidden role="dialog" aria-label="Kompromiss-Vorschläge der Präsidentschaft"><b>Kompromiss-Vorschläge der Präsidentschaft</b><div id="kompt"></div><button class="btn zweit" id="kompx" type="button" style="margin-top:8px;min-height:44px;font-size:20px">Schließen</button></div>
   <div id="scan" hidden><video id="scv" playsinline muted aria-label="Kamerabild zum Scannen"></video><button class="btn zweit" id="scx" type="button" style="margin-top:8px;min-height:44px;font-size:20px">Kamera stoppen</button></div>
 </section>
 
@@ -216,6 +235,7 @@
   var buehne=document.getElementById('buehne'),stage=document.getElementById('stage'),notiz=document.getElementById('notiz'),balken=document.querySelector('#nav i');
   var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
   function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+  function $k(){return document.getElementById('komp')}
   function show(n){
     cur=Math.max(0,Math.min(slides.length-1,n));
     slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
@@ -223,7 +243,7 @@
     document.getElementById('zur').disabled=cur===0;document.getElementById('vor').disabled=cur===slides.length-1;
     notiz.textContent=slides[cur].getAttribute('data-notes')||'';
     try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
-    if(window.copStopp&&cur!==6)window.copStopp();
+    if(window.copStopp&&cur!==6)window.copStopp();if(cur!==6&&$k())$k().hidden=true;
   }
   function tippt(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
   document.addEventListener('keydown',function(e){
@@ -293,6 +313,7 @@
 
   /* 7 Abstimmungstafel */
   var G=['Europäische Union','Ölförderland','Inselstaat','Schwellenland'],SYM={'':'–',ja:'✓ Ja',nein:'✗ Nein',enth:'Enth.'},FOLGE=['','ja','nein','enth'];
+  var NS=[['Präsidentschaft','leitet · keine Stimme','p'],['Umweltorganisation','Beobachter · keine Stimme','u']],gesendet={};
   var T={1:{v:'A',s:{}},2:{v:'A',s:{}}},TT={1:'Antrag 1: Kohle, Öl und Gas',2:'Antrag 2: Geld für Klimaschutz'};
   function stimmen(a){var k=a+T[a].v;return T[a].s[k]=T[a].s[k]||['','','','']}
   function tafel(){
@@ -305,6 +326,7 @@
       var c='',tx='Es fehlen noch '+leer+' Stimme'+(leer===1?'':'n')+'.';
       if(nein.length){c='nein';tx='✗ Nicht angenommen.<small>Nein von: '+nein.join(', ')+'. Ein Nein genügt.</small>'}
       else if(!leer){c='ja';tx='✓ Angenommen im Konsens.<small>Kein Nein.</small>'}
+      h+='<div class="nsk">Am Tisch, aber ohne Stimme:</div>'+NS.map(function(x){return '<div class="ns" aria-label="'+x[0]+', '+x[1]+'"><span>'+x[0]+'</span><small>'+x[1]+(x[2]&&gesendet[x[2]]?' · ✓ Code gelesen':'')+'</small></div>'}).join('');
       h+='</div><div class="urteil '+c+'" aria-live="polite">'+tx+'</div></div>';
     });$('tafel').innerHTML=h;
   }
@@ -326,7 +348,7 @@
       [1,2].forEach(function(a){['A','B','C'].forEach(function(v,i){var c=o['a'+a].charAt(i);T[a].s[a+v]=T[a].s[a+v]||['','','',''];T[a].s[a+v][o.r-1]=VOTE[c]||''})});
       tafel();return 'Gruppe '+o.r+' ('+window.COP_ROLLEN[o.r].n+') eingelesen ✓'}
     if(o.r===5&&Array.isArray(o.k)){var t=o.k.slice(0,2).map(function(x){return String(x).slice(0,140)});
-      $('kompt').textContent='';t.forEach(function(x,i){if(x){var d=document.createElement('div');d.textContent='Antrag '+(i+1)+': '+x;$('kompt').appendChild(d)}});$('komp').hidden=false;return 'Kompromiss-Sätze der Präsidentschaft eingelesen ✓'}
+      $('kompt').textContent='';t.forEach(function(x,i){if(x){var d=document.createElement('div');d.textContent='Antrag '+(i+1)+': '+x;$('kompt').appendChild(d)}});$('komp').hidden=false;$('kompbtn').hidden=false;gesendet.p=1;tafel();return 'Kompromiss-Sätze der Präsidentschaft eingelesen ✓'}
     return null}
   function takt(){var v=$('scv');if(!v.videoWidth||!window.jsQR)return;cv.width=v.videoWidth;cv.height=v.videoHeight;cx.drawImage(v,0,0);
     var id=cx.getImageData(0,0,cv.width,cv.height),c=window.jsQR(id.data,id.width,id.height,{inversionAttempts:'dontInvert'});
@@ -337,6 +359,7 @@
     if(strom){stopp();return}
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$('scanst').textContent='Kein Kamerazugriff (nur über die Portal-Adresse mit https). Tippe die Stimmen selbst ein.';return}
     jsqrLaden(function(){navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}).then(function(s){strom=s;var v=$('scv');v.srcObject=s;$('scan').hidden=false;v.play();$('scanbtn').textContent='Kamera stoppen';$('scanst').textContent='Gruppen zeigen den Ergebnis-Code vor der Kamera.';schl=setInterval(takt,300)},function(){$('scanst').textContent='Die Kamera wurde nicht freigegeben. Tippe die Stimmen selbst ein.'})})};
+  $('kompx').onclick=function(){$('komp').hidden=true};$('kompbtn').onclick=function(){$('komp').hidden=!$('komp').hidden};
   $('scx').onclick=stopp;addEventListener('pagehide',stopp);
 
   /* 9 Kriterien-Check, 10 Selbsteinschätzung */
