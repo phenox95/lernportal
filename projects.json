@@ -879,7 +879,7 @@
   },
   {
     "title": "Mini-COP31: Wir verhandeln",
-    "description": "Doppelstunde: Planspiel zur Weltklimakonferenz COP31 mit Rollenkarten, Abstimmung und Vergleich mit dem echten Entwurf. Stichwörter: Klimakonferenz, Konsens, Kompromiss, Klimaschutz.",
+    "description": "Doppelstunde: Planspiel zur Weltklimakonferenz COP31 mit Rollenkarten, Rollenmappe, Abstimmung per Ergebnis-QR und Vergleich mit dem echten Entwurf. Stichwörter: Klimakonferenz, Konsens, Kompromiss, Klimaschutz.",
     "type": "Materialseite",
     "path": "geografie/klasse-9/klimawandel/mini-cop31/",
     "subject": "Geografie",
@@ -904,6 +904,11 @@
         "pfad": "geografie/klasse-9/klimawandel/mini-cop31/arbeitsblatt-1.pdf",
         "art": "Arbeitsblatt",
         "stufe": 2
+      },
+      {
+        "titel": "Rollenmappe (Infos und Aufgaben zu den 6 Rollen)",
+        "pfad": "geografie/klasse-9/klimawandel/mini-cop31/arbeitsblatt-rollenmappe.pdf",
+        "art": "Arbeitsblatt"
       }
     ],
     "verweise": [
