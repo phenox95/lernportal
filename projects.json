@@ -936,6 +936,12 @@
         "titel": "Präsentation zur Stunde",
         "pfad": "biologie/klasse-9/gesundheit/allergie/praesentation/",
         "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Allergie und Familie Tran",
+        "pfad": "biologie/klasse-9/gesundheit/allergie/arbeitsblatt.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
       }
     ],
     "bne": [
