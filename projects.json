@@ -974,5 +974,36 @@
       13
     ],
     "sichtbar": true
+  },
+  {
+    "title": "Weltklimakonferenz COP31: Entwurf und Interessen",
+    "description": "Zwei Entwürfe der COP31 vergleichen, Interessen von vier Stimmen erschließen, die These „Ein schwacher Beschluss ist besser als keiner“ beurteilen. Mit Do Now, Positionierungslinie und Arbeitsblatt (2 Seiten). Stichwörter: Klimakonferenz, Konsens, Interessen, Globalisierung.",
+    "type": "Materialseite",
+    "path": "geografie/klasse-10/globalisierung/weltklimakonferenz-cop31/",
+    "subject": "Geografie",
+    "grade": "Klasse 10",
+    "themenfeld": "3.7",
+    "dauer": "45 Min.",
+    "niveau": "F–H",
+    "datum": "2026-11-20",
+    "reihe": "Globalisierung",
+    "bne": [
+      13,
+      16
+    ],
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "geografie/klasse-10/globalisierung/weltklimakonferenz-cop31/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt (Druck, 2 Seiten)",
+        "pfad": "geografie/klasse-10/globalisierung/weltklimakonferenz-cop31/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      }
+    ],
+    "sichtbar": true
   }
 ]
