@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Weltklimakonferenz COP31: Entwurf und Interessen</title>
+<meta name="description" content="Geografie Klasse 10, Globalisierung: Zwei Entwürfe der COP31 vergleichen, Interessen von vier Stimmen erschließen und die These beurteilen, ob ein schwacher Beschluss besser ist als keiner.">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+<style>
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+#notiz{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding:14px 28px;font-size:18px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000}
+#notiz.an{display:block}
+.mint{background:var(--mint);border-radius:16px}
+.shilfe.sm{font-size:22px;padding:12px 16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.entwurf{border:3px solid var(--g);border-radius:16px;padding:22px 26px;background:#fff;color:var(--ink)}
+.entwurf h2{margin:0 0 10px;font-size:30px}
+.entwurf .zahl{font-size:76px;font-weight:700;line-height:1.05}
+.entwurf .z2{font-size:28px;margin-top:8px}
+.bar{height:26px;border-radius:8px;background:var(--g);margin-top:8px}
+.bar.k{background:var(--o)}
+.marken{display:flex;gap:8px;margin-top:10px;min-height:34px}
+.marke{background:#fff;color:#B3261E;border:3px solid #B3261E;border-radius:8px;padding:0 10px;font-weight:700;font-size:22px}
+.src{font-size:18px;line-height:1.35;color:var(--grey);margin:8px 0 0 110px}
+.slide.dark .src{color:#E6D3C8}
+.ja-nein{display:grid;gap:10px}
+.zeile{display:grid;grid-template-columns:240px 1fr 54px;gap:12px;align-items:center;font-size:27px}
+.zeile .eb{display:flex;gap:8px;flex-wrap:wrap}
+.zeile button,.wahl{font:inherit;font-weight:700;min-height:48px;padding:0 14px;border-radius:12px;border:3px solid var(--g);background:#fff;color:var(--ink);cursor:pointer;font-size:24px}
+.zeile button[aria-pressed=true]{background:var(--g);color:#fff}
+.zeile .erg{font-size:34px;font-weight:700;text-align:center}
+.btn{font:inherit;font-weight:700;font-size:24px;min-height:56px;padding:0 24px;border-radius:14px;border:0;background:var(--g);color:#fff;cursor:pointer}
+.btn.zweit{background:#fff;color:var(--ink);border:3px solid var(--g)}
+.show-no{display:none}.show-no.show{display:block}
+.schritte .task{font-size:26px;margin:0 0 10px}
+.tab{width:100%;border-collapse:collapse;font-size:24px}
+.tab th,.tab td{border:3px solid var(--g);padding:8px 12px;text-align:left;vertical-align:top}
+.tab th{background:var(--mint)}
+.tab td[contenteditable]{min-height:70px;outline:none}
+.tab td[contenteditable]:focus{background:#fff8dc}
+.linie{display:flex;align-items:center;gap:22px;margin:14px 70px 14px 0}
+.linie .strich{flex:1;border-top:6px solid var(--g);position:relative}
+.linie .strich:before,.linie .strich:after{content:"";position:absolute;top:-14px;width:6px;height:22px;background:var(--g)}
+.linie .strich:before{left:0}.linie .strich:after{right:0}
+.linie b{font-size:32px}
+.these{border:4px solid var(--g);border-radius:18px;padding:18px 26px;background:#fff;font-size:38px;font-weight:700;line-height:1.25;color:var(--ink)}
+.eingabe{border:3px dashed var(--g);border-radius:16px;padding:18px 24px;font-size:26px;line-height:1.6;min-height:300px;background:#fff;color:var(--ink)}
+.merk{font-size:40px;line-height:1.7;background:var(--mint);border-radius:18px;padding:26px 34px}
+.lueck{display:inline-block;min-width:170px;border-bottom:5px solid var(--g);text-align:center;font-weight:700;outline:none}
+.merk.auf .lueck{border-bottom:0;background:#fff;border-radius:8px;padding:0 10px}
+@media print{#nav,#notiz{display:none}}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Weltklimakonferenz COP31: Entwurf und Interessen" data-subject="Geografie" data-grade="Klasse 10">
+<noscript><p class="lp-noscript"><a href="../../../../../">Zurück zum Portal</a> · Diese Seite benötigt JavaScript für die vollständige Darstellung.</p></noscript>
+<div id="buehne">
+<div id="stage">
+
+<!-- 1 Do Now -->
+<section class="slide" data-min="3" data-notes="Do Now (Wiederholung Std. 2). Schriftlich ins Arbeitsblatt oder hier antippen. Prüfen zeigt ✓ und ✗, Lösung zeigen den Abgleich. Währenddessen Anwesenheit. Die UNO-Konferenz führt zum Impuls.">
+  <h1>Do Now: Welche Ebene passt?</h1><span class="badge">3 Min. · allein</span>
+  <div class="mint pad">
+    <p class="task" style="margin-bottom:12px"><span class="snr">1</span><span><b>Ordne</b> jedes Beispiel einer Ebene der Globalisierung zu. Tippe an.</span><i class="lvl">E</i></p>
+    <div class="ja-nein" id="donow">
+      <div class="zeile" data-ok="Verkehr"><span>Container-Schiff</span><div class="eb"><button type="button">Politik</button><button type="button">Kultur</button><button type="button">Wirtschaft</button><button type="button">Verkehr</button></div><span class="erg" aria-live="polite"></span></div>
+      <div class="zeile" data-ok="Politik"><span>UNO-Konferenz</span><div class="eb"><button type="button">Politik</button><button type="button">Kultur</button><button type="button">Wirtschaft</button><button type="button">Verkehr</button></div><span class="erg" aria-live="polite"></span></div>
+      <div class="zeile" data-ok="Kultur"><span>Karneval</span><div class="eb"><button type="button">Politik</button><button type="button">Kultur</button><button type="button">Wirtschaft</button><button type="button">Verkehr</button></div><span class="erg" aria-live="polite"></span></div>
+      <div class="zeile" data-ok="Wirtschaft"><span>Börse</span><div class="eb"><button type="button">Politik</button><button type="button">Kultur</button><button type="button">Wirtschaft</button><button type="button">Verkehr</button></div><span class="erg" aria-live="polite"></span></div>
+    </div>
+  </div>
+  <p style="margin-top:14px"><button class="btn" id="pruefen" type="button">Prüfen</button> <button class="btn zweit" id="loesung" type="button">Lösung zeigen</button> <span class="shilfe sm" style="display:inline-block;margin-left:10px">Du darfst dir die Aufgabe vorlesen lassen.</span></p>
+  <div class="shilfe sm show-no" id="l1" style="margin-top:10px">Container-Schiff: Verkehr · UNO-Konferenz: Politik · Karneval: Kultur · Börse: Wirtschaft</div>
+</section>
+
+<!-- 2 Impuls -->
+<section class="slide dark" data-min="5" data-notes="Impuls (stumm), 30 Sekunden schauen, dann vorlesen. Keine Erklärung, keine Leitfrage. Offene Impulsfragen: Was fällt euch auf? Was überrascht euch? Danach Arbeitsblatt Aufgabe 1 (Vergleiche). Beide Texte sind Entwürfe, kein Beschluss.">
+  <h1>COP31 in Antalya: zwei Entwürfe</h1><span class="badge">5 Min. · Plenum, allein</span>
+  <div class="row2">
+    <div class="entwurf"><h2>Entwurf vom Montag, 16.11.</h2><div class="zahl">18 Seiten</div><div class="bar" style="width:100%" role="img" aria-label="Balken: 18 von 18 Seiten"></div><div class="z2">Fossile Brennstoffe: <b>2 Stellen</b></div><div class="marken" aria-hidden="true"><span class="marke">Ausstieg</span><span class="marke">Ausstieg</span></div></div>
+    <div class="entwurf"><h2>Entwurf vom Donnerstag, 19.11.</h2><div class="zahl" style="font-size:60px">halb so lang</div><div class="bar k" style="width:50%" role="img" aria-label="Balken: etwa halb so lang wie der Montags-Entwurf"></div><div class="z2">Fossile Brennstoffe: <b>0 Stellen</b></div></div>
+  </div>
+  <p class="task" style="margin-top:14px;color:#fff;font-size:26px"><span class="snr">1</span><span><b>Vergleiche</b> die Entwürfe. Nenne zwei Unterschiede (Aufgabe 1).</span><i class="lvl">E–F</i></p>
+  <p class="src">Quellen: Reuters, 16.11.2026; ORF.at, 19.11.2026. Beide Texte sind Entwürfe, kein Beschluss.</p>
+</section>
+
+<!-- 3 Erarbeitung -->
+<section class="slide" data-min="12" data-notes="Erarbeitung, Partnerarbeit auf dem Arbeitsblatt. Lesen zu zweit: eine Person liest vor (Vorlesen), die andere markiert Schlüsselwörter. Dann Tabelle (Aufgabe 2), dann Vermutung (Aufgabe 3). Alle Interessen sind Vermutungen, die Quellen nennen keine Motive.">
+  <h1>M2 auswerten: Wer will was, und warum?</h1><span class="badge">12 Min. · Partner</span>
+  <div class="schritte">
+    <p class="task"><span class="snr">1</span><span><b>Lest</b> M2 zu zweit. Eine Person liest vor, die andere markiert Schlüsselwörter. (3 Min.)</span><i class="lvl">E</i></p>
+    <p class="task"><span class="snr">2</span><span><b>Erkläre</b> mit M2: Was sagt jede Stimme? Welches Interesse steckt dahinter? Aufgabe 2. (6 Min.)</span><i class="lvl">F</i></p>
+    <p class="task"><span class="snr">3</span><span><b>Verknüpfe</b> M1 und M2: Stelle eine begründete Vermutung auf, warum der neue Entwurf kürzer ist. Aufgabe 3. (3 Min.)</span><i class="lvl">F–G</i></p>
+  </div>
+  <div class="shilfe sm"><b>Satzbausteine:</b> Wer … verkauft, will …, weil … · Wer … fordert, will …, weil … · Die Verhandlungsleitung will …, weil …</div>
+</section>
+
+<!-- 4 Sicherung -->
+<section class="slide" data-min="6" data-notes="Sicherung im Plenum. Die Lehrkraft oder ein Schüler trägt die Ergebnisse in die Felder ein (anklicken und tippen). Eingaben gehen beim Neuladen verloren. Danach Vermutungen aus Aufgabe 3 sammeln. Alle Interessen sind Vermutungen.">
+  <h1>Wir sammeln die Ergebnisse</h1><span class="badge">6 Min. · Plenum</span>
+  <table class="tab">
+    <tr><th style="width:90px">Wer?</th><th>Was sagt oder fordert sie?</th><th>Welches Interesse steckt dahinter?</th></tr>
+    <tr><td><b>A</b></td><td contenteditable="true" aria-label="A: Was"></td><td contenteditable="true" aria-label="A: Interesse"></td></tr>
+    <tr><td><b>B</b></td><td contenteditable="true" aria-label="B: Was"></td><td contenteditable="true" aria-label="B: Interesse"></td></tr>
+    <tr><td><b>C</b></td><td contenteditable="true" aria-label="C: Was"></td><td contenteditable="true" aria-label="C: Interesse"></td></tr>
+    <tr><td><b>D</b></td><td contenteditable="true" aria-label="D: Was"></td><td contenteditable="true" aria-label="D: Interesse"></td></tr>
+  </table>
+  <p class="shilfe sm" style="margin-top:14px"><b>Aufgabe 3:</b> Welche Vermutungen habt ihr, warum der neue Entwurf kürzer ist?</p>
+</section>
+
+<!-- 5 Urteilen -->
+<section class="slide" data-min="9" data-notes="Positionierungslinie (aus Std. 2 bekannt). Erst allein ankreuzen und Argument notieren (Aufgabe 4a). Dann aufstellen, abwechselnd begründen (links, rechts), Positionswechsel erlaubt. Jede begründete Position gilt, auch Skepsis (Beutelsbacher Konsens). Bei Müdigkeit: Handzeichen statt Aufstehen.">
+  <h1>Beurteile die These</h1><span class="badge">9 Min. · allein, Plenum</span>
+  <div class="these">„Ein schwacher Beschluss ist besser als gar keiner.“</div>
+  <div class="linie"><b>Ich stimme nicht zu</b><span class="strich"></span><b>Ich stimme zu</b></div>
+  <div class="schritte">
+    <p class="task"><span class="snr">1</span><span><b>Beurteile</b> allein: Kreuze an und nenne ein Argument (Aufgabe 4a). (3 Min.)</span><i class="lvl">G–H</i></p>
+    <p class="task"><span class="snr">2</span><span>Stellt euch auf der Linie auf. Begründet abwechselnd von links und von rechts. (5 Min.)</span><i class="lvl">G–H</i></p>
+    <p class="task"><span class="snr">3</span><span><b>Nenne</b> ein Gegenargument, das du ernst nehmen musst (Aufgabe 4b). (1 Min.)</span><i class="lvl">G–H</i></p>
+  </div>
+  <div class="shilfe sm">Jede begründete Position gilt. Auch Skepsis ist ein Argument.</div>
+</section>
+
+<!-- 6 Merksatz -->
+<section class="slide" data-min="4" data-notes="Sicherung. Erst eigene Ideen in die Lücken auf dem Arbeitsblatt, dann vergleichen, dann Vorschlag zeigen. Eigene sinnvolle Formulierungen gelten.">
+  <h1>Merksatz</h1><span class="badge">4 Min. · allein</span>
+  <div class="merk" id="merk">Auf einer Klimakonferenz müssen <span class="lueck" data-w="alle" contenteditable="true">&nbsp;</span> Staaten zustimmen. Deshalb werden Beschlüsse oft <span class="lueck" data-w="schwächer" contenteditable="true">&nbsp;</span>, wenn Interessen sich <span class="lueck" data-w="widersprechen" contenteditable="true">&nbsp;</span>.</div>
+  <p class="shilfe sm" style="margin-top:18px">Schreibe zuerst deine Idee in die Lücken. Dann vergleichen wir.</p>
+  <p><button class="btn" id="mk" type="button">Vorschlag zeigen</button></p>
+</section>
+
+<!-- 7 Stand -->
+<section class="slide" data-min="6" data-notes="VOR DER STUNDE prüfen: Reuters, ORF, enb.iisd.org. Das Feld ist anklickbar, Uhrzeit und Stand eintragen. Eingaben gehen beim Neuladen verloren, Seite nicht mehr neu laden. Danach Exit-Ticket auf dem Arbeitsblatt (Rückseite).">
+  <h1>Wie geht es in Antalya weiter?</h1><span class="badge">6 Min. · Plenum, allein</span>
+  <div class="eingabe" contenteditable="true" role="textbox" aria-label="Stand der COP31">Stand: Fr 20.11.2026, __:__ Uhr (eintragen)<br>Die Konferenz endet laut Plan am 20. November.<br>Letzter geprüfter Stand (19.11.): gekürzter Entwurf mit 9 Seiten, fossile Brennstoffe nicht mehr erwähnt, noch kein Beschluss.<br>Quellen: Reuters, ORF.at, Earth Negotiations Bulletin</div>
+  <p class="task" style="margin-top:16px"><span class="snr">1</span><span><b>Schreibe</b> ins Exit-Ticket: Eine Sache, die mich heute überrascht hat.</span><i class="lvl">E</i></p>
+</section>
+
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+<div id="notiz"></div>
+
+<script>
+(function(){
+  var buehne=document.getElementById('buehne'),stage=document.getElementById('stage'),notiz=document.getElementById('notiz'),balken=document.querySelector('#nav i');
+  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
+  function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+  function show(n){
+    cur=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
+    balken.style.width=((cur+1)/slides.length*100)+'%';
+    document.getElementById('zur').disabled=cur===0;document.getElementById('vor').disabled=cur===slides.length-1;
+    notiz.textContent=slides[cur].getAttribute('data-notes')||'';
+    try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
+  }
+  function tippt(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
+  document.addEventListener('keydown',function(e){
+    if(tippt(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&e.target.tagName!=='BUTTON')){e.preventDefault();show(cur+1)}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(cur-1)}
+    else if(e.key==='n'||e.key==='N'){notiz.classList.toggle('an')}
+    else if(e.key==='f'||e.key==='F'){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(x){}}
+  });
+  document.getElementById('vor').onclick=function(){show(cur+1)};
+  document.getElementById('zur').onclick=function(){show(cur-1)};
+  window.addEventListener('resize',fit);fit();
+
+  /* Do Now: Zuordnen */
+  var zeilen=[].slice.call(document.querySelectorAll('#donow .zeile'));
+  zeilen.forEach(function(z){
+    var bs=[].slice.call(z.querySelectorAll('button'));
+    bs.forEach(function(b){b.addEventListener('click',function(){
+      bs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      z.querySelector('.erg').textContent='';
+    })});
+  });
+  document.getElementById('pruefen').onclick=function(){
+    zeilen.forEach(function(z){
+      var b=z.querySelector('button[aria-pressed=true]'),erg=z.querySelector('.erg');
+      if(!b){erg.textContent='';return}
+      var ok=b.textContent===z.getAttribute('data-ok');
+      erg.textContent=ok?'✓':'✗';erg.style.color=ok?'#1B6E3C':'#B3261E';
+      erg.setAttribute('aria-label',ok?'richtig':'falsch');
+    });
+  };
+  document.getElementById('loesung').onclick=function(){document.getElementById('l1').classList.toggle('show')};
+
+  /* Merksatz: Vorschlag zeigen */
+  document.getElementById('mk').onclick=function(){
+    var m=document.getElementById('merk');m.classList.add('auf');
+    [].slice.call(m.querySelectorAll('.lueck')).forEach(function(l){l.textContent=l.getAttribute('data-w')});
+    this.style.display='none';
+  };
+
+  var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1);
+})();
+</script>
+<!-- ENTWURF: Spielinhalte bitte fachlich gegenlesen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Weltklimakonferenz",
+ "geprueft": false,
+ "paare": [
+ ["Klimakonferenz", "Treffen von Staaten, bei dem über gemeinsamen Klimaschutz verhandelt wird", "Kli-ma-kon-fe-renz"],
+ ["Entwurf", "Text, der noch verändert werden kann, bevor über ihn abgestimmt wird", "Ent-wurf"],
+ ["Beschluss", "Text, dem die Staaten zugestimmt haben", "Be-schluss"],
+ ["Konsens", "Alle Beteiligten stimmen zu, niemand sagt Nein", "Kon-sens"],
+ ["Interesse", "Das, was jemand erreichen will, zum Beispiel Einnahmen oder Schutz", "In-te-res-se"],
+ ["fossile Brennstoffe", "Kohle, Öl und Gas, bei deren Verbrennung CO2 entsteht", "fos-si-le Brenn-stof-fe"]
+ ],
+ "spiele": ["memory", "quiz", "zuordnen"]
+}
+</script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>
