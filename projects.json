@@ -959,5 +959,20 @@
         "grund": "Gleicher Ablauf im Immunsystem: Bei der Impfung schützt das Gedächtnis vor Erregern, bei der Allergie löst es beim Zweitkontakt Beschwerden aus."
       }
     ]
+  },
+  {
+    "title": "Escape Climate Change: Klima-Escape-Spiel zum Selberbauen",
+    "description": "Vorstellung des frei verfügbaren Escape-Spiels ECC DIY: Ablauf in sechs Stufen, Material zum Bauen und drei Ideen für die Umwelt-AG. Stichwörter: Escape Game, Klimaschutz, Klimagerechtigkeit, CO2-Bilanz.",
+    "type": "Präsentation",
+    "path": "geografie/klasse-9/klimawandel/escape-climate-change/",
+    "subject": "Geografie",
+    "grade": "Klasse 9/10",
+    "themenfeld": "3.6",
+    "dauer": "15 Min.",
+    "datum": "2026-11-20",
+    "bne": [
+      13
+    ],
+    "sichtbar": true
   }
 ]
