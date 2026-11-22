@@ -1004,6 +1004,12 @@
         "stufe": 2
       }
     ],
-    "sichtbar": true
+    "sichtbar": true,
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-9/klimawandel/mini-cop31/",
+        "grund": "Gleicher Fall: Im Planspiel Mini-COP31 verhandelt die Klasse selbst über die COP31 in Antalya, hier werden die echten Entwürfe der Konferenz und die Interessen dahinter verglichen."
+      }
+    ]
   }
 ]
