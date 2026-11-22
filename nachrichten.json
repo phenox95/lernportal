@@ -29,6 +29,75 @@
   ],
   "eintraege": [
     {
+      "datum": "2026-11-22",
+      "titel": "COP in Antalya gescheitert: \"Kein Text ist besser als dieser Text\"",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/politik/ausland/cop-31-tuerkei-endet-ergebnislos-100.html",
+      "einordnung": "Die Weltklimakonferenz in Antalya endet ohne gemeinsame Erklärung. Der Bericht zeigt, warum viele Staaten lieber keinen Text wollten als einen schwachen. Im Entwurf fehlte der Ausstieg aus Kohle, Öl und Gas.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13,
+        16
+      ],
+      "themenfeld": [
+        "3.6",
+        "3.7"
+      ],
+      "bild": "https://www.zdfheute.de/assets/klimakonferenz-cop31-haupteingang-politik-klimawandel-100~1280x720?cb=1793997253767",
+      "material": [
+        "geografie/klasse-10/globalisierung/weltklimakonferenz-cop31/",
+        "geografie/klasse-9/klimawandel/mini-cop31/"
+      ]
+    },
+    {
+      "datum": "2026-11-22",
+      "titel": "Weltklimakonferenz in Antalya: Keine Abschlusserklärung, aber konkrete Fortschritte bei Umsetzung",
+      "quelle": "Bundesumweltministerium (BMUKN)",
+      "link": "https://www.bundesumweltministerium.de/pressemitteilung/weltklimakonferenz-in-antalya-keine-abschlusserklaerung-aber-konkrete-fortschritte-bei-umsetzung",
+      "einordnung": "Das ist die Sicht der Bundesregierung. Sie erklärt, warum Deutschland den Entwurf abgelehnt hat. Sie nennt Fortschritte, zum Beispiel mehr Strom statt Öl und Gas. Vergleiche mit einem Medienbericht.",
+      "art": "Regierung",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13,
+        16
+      ],
+      "themenfeld": [
+        "3.6",
+        "3.7"
+      ],
+      "bild": "https://www.bundesumweltministerium.de/typo3temp/assets/images/_c__AP__csm_261122_cop31_schneider_lp_1200_62428210f9_64732d5373744075b660e1fd770baf39.jpg",
+      "material": [
+        "geografie/klasse-10/globalisierung/weltklimakonferenz-cop31/",
+        "geografie/klasse-9/klimawandel/mini-cop31/"
+      ]
+    },
+    {
+      "datum": "2026-11-20",
+      "titel": "Weltklimakonferenz endet: Deutsche Umwelthilfe fordert ehrlichen Einsatz der Bundesregierung für Methanreduzierung und fossilen Ausstieg",
+      "quelle": "Deutsche Umwelthilfe",
+      "link": "https://www.duh.de/presse/pressemitteilungen/pressemitteilung/weltklimakonferenz-endet-deutsche-umwelthilfe-fordert-ehrlichen-einsatz-der-bundesregierung-fuer-met/",
+      "einordnung": "Das ist die Position eines Umweltverbands, geschrieben kurz vor dem Ende der Konferenz. Er kritisiert den Entwurf und auch die Bundesregierung. Es geht um Methan und den Ausstieg aus Öl und Gas. Vergleiche mit der Sicht der Regierung.",
+      "art": "Position",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13
+      ],
+      "themenfeld": [
+        "3.7"
+      ],
+      "bild": "https://www.duh.de/fileadmin/_processed_/1/d/csm_AdobeStock_112706083_Methan_c_salman2_8bbbe3dd7c.jpg",
+      "material": [
+        "geografie/klasse-10/globalisierung/weltklimakonferenz-cop31/"
+      ]
+    },
+    {
       "datum": "2026-11-17",
       "titel": "Antrag zurückgezogen: Windpark in Wald bei Teupitz wird doch nicht gebaut",
       "quelle": "rbb24",
