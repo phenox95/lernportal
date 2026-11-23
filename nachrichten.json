@@ -29,6 +29,54 @@
   ],
   "eintraege": [
     {
+      "datum": "2026-11-22",
+      "titel": "COP31: Weltklimakonferenz in Antalya endet ergebnislos",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/politik/ausland/cop-31-klimakonferenz-antalya-100.html",
+      "einordnung": "Die Weltklimakonferenz endete ohne gemeinsame Abschlusserklärung. Streitpunkt war der Ausstieg aus Kohle, Öl und Gas. Passt zur Frage, was Einzelne und was Staaten beim Klimaschutz ändern können.",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13
+      ],
+      "woche": "2026-12-14"
+    },
+    {
+      "datum": "2026-11-22",
+      "titel": "Weltklimakonferenz in Antalya: Keine Abschlusserklärung, aber konkrete Fortschritte bei Umsetzung",
+      "quelle": "Bundesumweltministerium (BMUKN)",
+      "link": "https://www.bundesumweltministerium.de/pressemitteilung/weltklimakonferenz-in-antalya-keine-abschlusserklaerung-aber-konkrete-fortschritte-bei-umsetzung",
+      "einordnung": "Das ist die Sicht der Bundesregierung: Sie betont Fortschritte neben den Verhandlungen, etwa bei Strom statt Öl und Gas. Vergleiche mit dem Medienbericht zum Scheitern der Konferenz.",
+      "art": "Regierung",
+      "faecher": [
+        "Geografie"
+      ],
+      "bne": [
+        13,
+        7
+      ],
+      "woche": "2026-12-14"
+    },
+    {
+      "datum": "2026-10-16",
+      "titel": "Wie Kenias Bäuerinnen Wetterextremen trotzen",
+      "quelle": "ZDFheute",
+      "link": "https://www.zdfheute.de/politik/ausland/kenia-hunger-wetterextreme-landwirtschaft-ernaehrung-100.html",
+      "einordnung": "Kleinbäuerinnen in Kenia halten mit einfachen Pflanzgruben Regenwasser im Boden und ernten so trotz Dürre mehr. Ein Vergleich zum Ätna: Wie nutzen Menschen schwierige Orte für die Landwirtschaft?",
+      "art": "Medienbericht",
+      "faecher": [
+        "Geografie",
+        "Biologie"
+      ],
+      "bne": [
+        2,
+        13
+      ],
+      "woche": "2026-12-07"
+    },
+    {
       "datum": "2026-11-17",
       "titel": "Antrag zurückgezogen: Windpark in Wald bei Teupitz wird doch nicht gebaut",
       "quelle": "rbb24",
