@@ -6,12 +6,16 @@
    Signatur = kurzer grüner Strich (Blattnerv) über jeder Überschrift. Schrift bleibt Andika (bewusste Entscheidung). */
 @font-face{font-family:Andika;src:url(../fonts/andika-regular.woff2) format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:Andika;src:url(../fonts/andika-bold.woff2) format('woff2');font-weight:700;font-display:swap}
-:root{--g:#0F6E56;--dk:#0B4F3C;--ink:#1A2B24;--fach-rgb:15,110,86}
-body{--paper:#F7F6F2;--ink2:#4F5B55;--ink3:#66716B;--line:rgba(26,43,36,.14);
- --tint:color-mix(in srgb,var(--g) 11%,#fff);--ad:#5FC8A4;--y:var(--g);--o:var(--g);--b:var(--g);--p:var(--g);
- --mint:var(--tint);--grey:var(--ink3);
+:root{--g:#0F6E56;--dk:#0B4F3C;--ink:#1A2B24;--fach-rgb:15,110,86;
+ --paper:#F7F6F2;--ink2:#4F5B55;--ink3:#66716B;--line:rgba(26,43,36,.14);--ad:#5FC8A4;
+ --tint:color-mix(in srgb,var(--g) 11%,#fff);--mint:var(--tint);--grey:var(--ink3);
+ --y:var(--g);--o:var(--g);--b:var(--g);--p:var(--g);
  --ok:#1F7A4D;--okbg:#E6F2EA;--bad:#B3382C;--badbg:#F8E8E5;
  --s-co2:#5B6760;--s-h2o:#2F6F9F;--s-licht:#C58A12;--s-zucker:#C2561F;--s-o2:#A63D68}
+/* Feste Werte stehen auf :root, damit eigene :root-Variablen einer Präsentation (z. B. --line) gewinnen
+   und Kürzel wie --lg:var(--mint) auf :root gültig bleiben. Was von der Fachfarbe abhängt, wird am body
+   neu berechnet, weil themenfarben.css --g am body setzt. */
+body{--tint:color-mix(in srgb,var(--g) 11%,#fff);--mint:var(--tint);--y:var(--g);--o:var(--g);--b:var(--g);--p:var(--g)}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:#111;font-family:Andika,Verdana,sans-serif;color:var(--ink);overflow:hidden}
 body{display:flex;flex-direction:column}
@@ -84,14 +88,14 @@ small{font-size:20px;color:var(--ink3)}
 body[data-subject="Geografie"]{--g:#A9442B;--dk:#7C2F1C;--ink:#2B211E;--ad:#EE9A7F;--fach-rgb:169,68,43}
 body[data-subject="Biologie"]{--fach-rgb:15,110,86}
 /* Helles Akzent je Themenfeld. Biologie Zelle (Kl. 7) behält das abgenommene Grün.
-   --y war früher Gelb und ist in älteren Präsentationen ein heller Hervorhebungston (Fläche mit dunkler Schrift, Akzent auf dunklem Grund).
+   --y (früher Gelb) und --o (früher Orange) sind in älteren Präsentationen helle Hervorhebungstöne (Fläche mit dunkler Schrift, Akzent auf dunklem Grund).
    Außerhalb von Zelle bleibt diese Rolle erhalten, nur in der Farbe des Themenfelds. */
-body[data-tf]:not([data-tf="zelle"]){--ad:color-mix(in srgb,var(--g) 40%,#fff);--y:var(--ad)}
+body[data-tf]:not([data-tf="zelle"]){--ad:color-mix(in srgb,var(--g) 40%,#fff);--y:var(--ad);--o:var(--ad)}
 /* Auf dunklen Folien ist jede Hervorhebung hell */
-.dark{--y:var(--ad);--b:var(--ad);--o:var(--ad)}
+.dark,.merk.dk{--y:var(--ad);--b:var(--ad);--o:var(--ad)}
 /* stunde.css setzt dunkle Schrift auf --y. Wo --y die Fachfarbe ist, braucht es weiße Schrift. */
-body:not([data-tf]) .slide:not(.dark) :is(.lz,.num.y,.ord figure .rang,.sb button:nth-child(2).an),
-body[data-tf="zelle"] .slide:not(.dark) :is(.lz,.num.y,.ord figure .rang,.sb button:nth-child(2).an){color:#fff}
+body:not([data-tf]) .slide:not(.dark) :is(.lz,.num.y,.ord figure .rang,.sb button:nth-child(2).an,.sb button:nth-child(3).an),
+body[data-tf="zelle"] .slide:not(.dark) :is(.lz,.num.y,.ord figure .rang,.sb button:nth-child(2).an,.sb button:nth-child(3).an){color:#fff}
 
 /* Fragenfeld (gebaut von praesentation.js) */
 .fragen{display:grid;grid-template-columns:400px 1fr;gap:20px 40px;margin-top:8px}

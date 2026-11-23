@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- Gestaltung nach dem Skill "unslop" von Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop -->
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -22,25 +23,25 @@
 .b:disabled{opacity:.45;cursor:default}
 /* Do Now: richtig oder falsch antippen */
 .m2-rf{display:grid;gap:8px}
-.m2-rfz{display:grid;grid-template-columns:44px 1fr auto;gap:4px 14px;align-items:center;background:var(--mint);border-radius:14px;padding:6px 14px;border:3px solid transparent}
-.m2-rfz .snr{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;font-weight:700;font-size:22px}
+.m2-rfz{display:grid;grid-template-columns:44px 1fr auto;gap:4px 14px;align-items:center;background:var(--mint);border-radius:14px;padding:6px 14px;border:2px solid transparent}
+.m2-rfz .snr{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;font-weight:500;font-size:22px}
 .m2-rfz .t{font-size:24px;line-height:1.3}
 .m2-rfz .w{display:flex;gap:8px}
-.m2-rfz .w button{font:700 20px Andika,Verdana,sans-serif;min-width:110px;min-height:46px;border:3px solid var(--g);background:#fff;color:var(--dk);border-radius:12px;cursor:pointer;touch-action:manipulation}
+.m2-rfz .w button{font:500 20px Andika,Verdana,sans-serif;min-width:110px;min-height:46px;border:2px solid var(--g);background:#fff;color:var(--dk);border-radius:12px;cursor:pointer;touch-action:manipulation}
 .m2-rfz .w button[aria-pressed=true]{background:var(--g);color:#fff}
 .m2-rfz .bg{grid-column:2/4;display:none;margin:0;font-size:19px;line-height:1.3;color:var(--ink)}
-.m2-rfz.ok{border-color:#2e9e4f;background:#e4f6e8}.m2-rfz.bad{border-color:#d62828;background:#fdeaea}
+.m2-rfz.ok{border-color:var(--ok);background:var(--okbg)}.m2-rfz.bad{border-color:var(--bad);background:var(--badbg)}
 .m2-rfz.ok .bg,.m2-rfz.bad .bg{display:block}
 /* Impuls: Welpen kommen nacheinander */
 .m2-wer{font-size:23px;line-height:1.4}
 .m2-wer h3{margin:0 0 6px}
 .m2-welpen{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;min-height:60px}
-.m2-welpe{border:3px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);text-align:center;font-weight:700;font-size:21px;padding:9px 4px;animation:m2rein .45s ease both}
+.m2-welpe{border:2px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);text-align:center;font-weight:500;font-size:21px;padding:9px 4px;animation:m2rein .45s ease both}
 .m2-welpe.s{background:#222;color:#fff;border-color:#222}
 @keyframes m2rein{from{opacity:0;transform:translateY(14px) scale(.85)}to{opacity:1;transform:none}}
 .m2-abst{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin-top:14px}
 .m2-abst .m2-q{margin:0;text-align:left}
-.m2-q{font-size:30px;font-weight:700;color:var(--g);text-align:center;margin:14px 0 0}
+.m2-q{font-size:30px;font-weight:500;color:var(--g);text-align:center;margin:14px 0 0}
 .m2-abst .tally{grid-template-columns:repeat(3,1fr)}
 .m2-abst .tc{padding:6px 8px 8px;font-size:21px}.m2-abst .tc .tn{font-size:34px}
 /* Hilfe in Stufen */
@@ -62,32 +63,32 @@
 /* Simulation */
 .m2-sim{display:grid;grid-template-columns:1fr 390px;gap:22px}
 .m2-eltern{display:flex;gap:14px;align-items:center;font-size:22px}
-.m2-eltern .t{border:3px solid var(--g);border-radius:14px;background:#222;color:#fff;font-weight:700;padding:8px 16px;text-align:center;line-height:1.2}
+.m2-eltern .t{border:2px solid var(--g);border-radius:14px;background:#222;color:#fff;font-weight:500;padding:8px 16px;text-align:center;line-height:1.2}
 .m2-eltern .t small{display:block;font-weight:400;font-size:17px;color:#ddd}
 .m2-zahlen{display:flex;gap:6px;flex-wrap:wrap}
 .m2-klein .b{font-size:19px;padding:8px 16px}
-.m2-zahlen button{width:50px;height:44px;border-radius:12px;border:3px solid var(--g);background:#fff;font:inherit;font-weight:700;font-size:22px;color:var(--ink);cursor:pointer}
+.m2-zahlen button{width:50px;height:44px;border-radius:12px;border:2px solid var(--g);background:#fff;font:inherit;font-weight:500;font-size:22px;color:var(--ink);cursor:pointer}
 .m2-zahlen button[aria-pressed=true]{background:var(--g);color:#fff}
 .m2-wurf{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;min-height:64px;margin-top:8px}
 .m2-wurf .m2-welpe{font-size:18px;padding:6px 2px;line-height:1.15}
 .m2-wurf .m2-welpe b{display:block;font-size:22px}
-.m2-slot{border:3px dashed var(--grey);border-radius:12px;min-height:64px}
-.m2-erg{font-size:21px;font-weight:700;color:var(--dk);min-height:1.4em;margin:6px 0 0}
+.m2-slot{border:2px dashed var(--grey);border-radius:12px;min-height:64px}
+.m2-erg{font-size:21px;font-weight:500;color:var(--dk);min-height:1.4em;margin:6px 0 0}
 .m2-stat{background:var(--mint);border-radius:16px;padding:12px 16px;font-size:20px;line-height:1.35}
 .m2-stat h3{margin:0 0 6px;font-size:22px}
 .m2-bar{display:grid;grid-template-columns:78px 1fr 54px;gap:8px;align-items:center;margin:6px 0}
 .m2-bar i{display:block;height:28px;border-radius:6px;background:#222;width:0;transition:width .4s ease}
 .m2-bar.w i{background:#fff;border:2px solid var(--ink)}
-.m2-anteil{font-size:24px;font-weight:700;color:var(--dk);margin:8px 0 0}
+.m2-anteil{font-size:24px;font-weight:500;color:var(--dk);margin:8px 0 0}
 .m2-wuerfe{font-size:18px;color:var(--grey);margin:4px 0 0;min-height:1.4em}
 /* Tafelbild */
 .m2-lin{display:grid;grid-template-columns:1fr 44px 1fr 44px 1.15fr;align-items:stretch}
-.m2-gen{border:3px solid var(--g);border-radius:16px;background:#fff;padding:10px 12px;text-align:center;font-size:22px;line-height:1.35}
+.m2-gen{border:2px solid var(--g);border-radius:16px;background:#fff;padding:10px 12px;text-align:center;font-size:22px;line-height:1.35}
 .m2-gen b.t{display:block;font-size:28px;color:var(--dk)}
 .m2-pf{display:grid;place-items:center;font-size:30px;color:var(--grey)}
 .m2-dot{display:inline-block;width:20px;height:20px;border-radius:50%;border:2px solid var(--ink);vertical-align:-3px;margin:0 3px}
 .m2-dot.v{background:#7a4fc4}.m2-dot.w{background:#fff}
-.m2-regel{border:3px solid var(--g);border-left-width:10px;border-radius:12px;background:var(--mint);padding:8px 16px;font-size:23px;line-height:1.35;margin-top:12px}
+.m2-regel{border:2px solid var(--g);border-left-width:10px;border-radius:12px;background:var(--mint);padding:8px 16px;font-size:23px;line-height:1.35;margin-top:12px}
 .m2-jana{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
 .m2-jana p{margin:0;background:var(--dk);color:#fff;border-radius:14px;padding:10px 16px;font-size:22px;line-height:1.35}
 @media (prefers-reduced-motion:reduce){.m2-welpe{animation:none}.m2-bar i{transition:none}}
@@ -196,7 +197,7 @@
 <span class="badge">6 Min. · Paare, dann Plenum</span>
 <div class="m2-sim">
 <div>
-<div class="m2-eltern"><span class="t">Aa<small>schwarz</small></span><span style="font-size:30px;font-weight:700">×</span><span class="t">Aa<small>schwarz</small></span><span class="muted" style="font-size:18px;line-height:1.3">Jeder Welpe bekommt von jedem Elterntier zufällig A oder a, wie beim Münzwurf aus Stunde 2.</span></div>
+<div class="m2-eltern"><span class="t">Aa<small>schwarz</small></span><span style="font-size:30px;font-weight:500">×</span><span class="t">Aa<small>schwarz</small></span><span class="muted" style="font-size:18px;line-height:1.3">Jeder Welpe bekommt von jedem Elterntier zufällig A oder a, wie beim Münzwurf aus Stunde 2.</span></div>
 <p class="task s" style="margin:8px 0 4px"><span class="snr">1</span><span><b>Vermute</b>: Wie viele von 8 Welpen sind weiß?</span><i class="lvl">●○○ E</i></p>
 <div class="m2-zahlen" id="m2Vor" role="group" aria-label="Vermutung: weiße Welpen von 8"></div>
 <p class="task s" style="margin:8px 0 4px"><span class="snr">2</span><span><b>Vergleiche</b> fünf Würfe mit deiner Vermutung und mit Janas Wurf.</span><i class="lvl">●●○ F</i></p>
@@ -225,9 +226,9 @@
 <div data-aufbau>
 <div class="m2-lin">
 <div class="m2-gen"><b class="t">P</b>AA × aa<br><span class="m2-dot v"></span>violett × <span class="m2-dot w"></span>weiß</div>
-<div class="m2-pf" aria-hidden="true">→</div>
+<div class="m2-pf" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:32px;height:32px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 <div class="m2-gen" data-s="1"><b class="t">F1</b>Aa · Aa · Aa · Aa<br>alle <span class="m2-dot v"></span>violett</div>
-<div class="m2-pf" aria-hidden="true">→</div>
+<div class="m2-pf" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" style="width:32px;height:32px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
 <div class="m2-gen" data-s="3"><b class="t">F2 (F1 × F1)</b>AA · Aa · Aa · aa<br>3 <span class="m2-dot v"></span>violett : 1 <span class="m2-dot w"></span>weiß</div>
 </div>
 <p class="m2-regel" data-s="2"><b>1. Regel (P → F1):</b> Die Nachkommen sind einheitlich (uniform).</p>
@@ -284,7 +285,7 @@ function rfMarks(){zeilen.forEach(function(z){z.classList.remove("ok","bad")});r
 zeilen.forEach(function(z){var bt=[].slice.call(z.querySelectorAll(".w button"));
  bt.forEach(function(b,k){b.onclick=function(){bt.forEach(function(x,j){x.setAttribute("aria-pressed",j===k?"true":"false")});z.dataset.w=k?"f":"r";rfMarks()}})});
 $("m2RfChk").onclick=function(){var ok=0;zeilen.forEach(function(z){var r=z.dataset.w===z.dataset.a;z.classList.remove("ok","bad");z.classList.add(r?"ok":"bad");if(r)ok++});
- rfFb.textContent=ok===zeilen.length?"✓ Alles richtig!":ok+" von "+zeilen.length+" richtig. Lies die Begründung.";rfFb.className="fb "+(ok===zeilen.length?"good":"warn")};
+ rfFb.textContent=ok===zeilen.length?"Alles richtig":ok+" von "+zeilen.length+" richtig. Lies die Begründung.";rfFb.className="fb "+(ok===zeilen.length?"good":"warn")};
 $("m2RfNeu").onclick=function(){zeilen.forEach(function(z){delete z.dataset.w;[].forEach.call(z.querySelectorAll("button"),function(b){b.setAttribute("aria-pressed","false")})});rfMarks()};
 
 /* Impuls: Welpen kommen nacheinander zur Welt */
@@ -315,7 +316,7 @@ $("m2Eins").onclick=function(){var w=0,s=0,g=[];for(var i=0;i<8;i++){g.push(zieh
  wurf.innerHTML="";g.forEach(function(x,i){var e=document.createElement("span");var weiss=x==="aa";if(weiss)w++;else s++;
   e.className="m2-welpe"+(weiss?"":" s");e.style.animationDelay=(ruhig?0:i*.12)+"s";e.innerHTML="<b>"+x+"</b>"+(weiss?"weiß":"schwarz");wurf.appendChild(e)});
  S+=s;W+=w;wuerfe.push(s+" : "+w);stat();
- text("Dieser Wurf: "+s+" schwarz, "+w+" weiß."+(pred!==null?(w===pred?" Genau wie vermutet.":" Vermutet waren "+pred+" weiße."):"")+(s===6&&w===2?" Wie bei Jana!":""))};
+ text("Dieser Wurf: "+s+" schwarz, "+w+" weiß."+(pred!==null?(w===pred?" Genau wie vermutet.":" Vermutet waren "+pred+" weiße."):"")+(s===6&&w===2?" Wie bei Jana.":""))};
 $("m2Hundert").onclick=function(){var s=0,w=0;for(var i=0;i<100;i++){zieh()==="aa"?w++:s++}S+=s;W+=w;stat();text("100 Welpen dazu: "+s+" schwarz, "+w+" weiß. Je mehr Welpen, desto näher an 3 : 1.")};
 $("m2Neu").onclick=function(){S=W=0;wuerfe=[];leer();stat();text()};
 leer();stat();
