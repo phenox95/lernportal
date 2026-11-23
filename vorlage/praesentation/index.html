@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- Gestaltung nach dem Skill "unslop" von Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop -->
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -29,7 +30,10 @@
 <div id="buehne">
 <div id="stage">
 
-<!-- Jede Folie: <section class="slide">. data-min="3" schlägt dem Timer 3 Minuten vor.
+<!-- Gestaltung (Regeln in docs/praesentationen.md, Abschnitt „Gestaltung“): Titel ohne Doppelpunkt und ohne Dauer,
+     die Dauer steht im .badge. Keine Emoji und keine Zeichen wie ✓ ✗ → in Titeln, Knöpfen und Rückmeldungen,
+     Rückmeldungen ohne Ausrufezeichen („Alles richtig“). Fett nur mit <b> im Fließtext und beim Operator.
+     Jede Folie: <section class="slide">. data-min="3" schlägt dem Timer 3 Minuten vor.
      Die Minutenangabe oben rechts (<span class="badge">3 Min. · allein</span>) ist antippbar und startet den Timer (nochmal antippen: Pause).
      data-notes enthält Lehrkrafthinweise (Taste N). ACHTUNG: Alles im Repository ist öffentlich,
      keine Erwartungshorizonte oder Lösungen für die Lehrkraft in data-notes schreiben. -->
@@ -45,7 +49,7 @@
   <p class="lead">Platz für Bild, Karte oder Diagramm.</p>
 </section>
 
-<!-- Fragenentwicklung: ein einziges div genügt, praesentation.js baut Eingabe, Abstimmung (👍) und Leitfrage-Feld.
+<!-- Fragenentwicklung: ein einziges div genügt, praesentation.js baut Eingabe, Abstimmung und Leitfrage-Feld.
      Optional data-impulse="Frage 1|Frage 2|Frage 3" ersetzt die Moderationsfragen links.
      Jedes Element mit data-leitfrage zeigt später die Leitfrage der Klasse an. -->
 <section class="slide" data-min="4" data-notes="Fragenentwicklung: SuS nennen Fragen, die Lehrkraft tippt sie ein, die Klasse priorisiert mit Handzeichen (👍). Mit „→ Leitfrage“ wird die Favoritin unten eingetragen und kann gemeinsam umformuliert werden. Impuls plus Fragenentwicklung höchstens 5 Minuten.">
@@ -55,7 +59,9 @@
 
 <section class="slide" data-min="10" data-notes="Erarbeitung. Jede Aufgabe beginnt mit einem Operator.">
   <h1>Erarbeitung</h1><span class="badge">10 Min. · Partner</span>
-  <p class="lead"><b>Beschreibe</b> die Abbildung in zwei Sätzen.</p>
+  <div class="task"><span class="snr">1</span><span><b>Beschreibe</b> die Abbildung in zwei Sätzen.</span><i class="lvl">●○○ D</i></div>
+  <div class="task"><span class="snr">2</span><span><b>Erkläre</b>, warum … </span><i class="lvl">●●○ E</i></div>
+  <div class="shilfe"><b>Hilfe</b><br>Satzanfang: Auf der Abbildung sieht man …</div>
 </section>
 
 <div id="nav"><i></i></div>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Gestaltung nach dem Skill "unslop" von Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop -->
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -27,9 +28,9 @@ h1{margin:0;font-size:36px;line-height:1.15;height:56px}
 .btn:hover{filter:brightness(1.1)}
 .btn.alt{background:#fff;color:var(--ac)}
 .btn.sm{font-size:14px;padding:6px 11px}
-.badge{position:static;display:inline-block;background:var(--ac);color:#fff;border-radius:16px;padding:4px 12px;font-size:13px;font-weight:bold;white-space:nowrap}
+.badge{position:static;display:inline-block;background:var(--ac);color:#fff;border-radius:16px;padding:4px 12px;font-size:13px;font-weight:500;white-space:nowrap}
 .badge.or{background:var(--or)}
-.num{width:44px;height:44px;border-radius:50%;background:var(--ac);color:#fff;font-weight:bold;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none}
+.num{width:44px;height:44px;border-radius:50%;background:var(--ac);color:#fff;font-weight:500;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none}
 .num.or{background:var(--or)}
 .row{display:flex;align-items:center;gap:16px}
 .hidden{display:none!important}
@@ -38,22 +39,22 @@ h1{margin:0;font-size:36px;line-height:1.15;height:56px}
 body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
 /* Timer */
 .timer{display:inline-flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--ac);border-radius:12px;padding:6px 12px}
-.timer .t{font-size:30px;font-weight:bold;color:var(--dk);min-width:92px;text-align:center;font-variant-numeric:tabular-nums}
+.timer .t{font-size:30px;font-weight:500;color:var(--dk);min-width:92px;text-align:center;font-variant-numeric:tabular-nums}
 .timer.done{background:#fde7e7;border-color:var(--bad)}
 .timer.done .t{color:var(--bad);animation:blink .6s infinite alternate}
 @keyframes blink{to{opacity:.25}}
 /* Kacheln und Leiter */
 .tile{position:relative;width:132px;height:150px;background:#fff;border:2px solid #222;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:grab;user-select:none}
 .tile img{max-width:112px;max-height:124px;pointer-events:none}
-.tile .n{position:absolute;left:5px;top:5px;width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid #222;font-weight:bold;font-size:14px;display:flex;align-items:center;justify-content:center}
-.tile.sel{outline:4px solid var(--or);outline-offset:2px}
-.slotImg{width:112px;height:112px;border:3px dashed #9aa5a0;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center}
+.tile .n{position:absolute;left:5px;top:5px;width:26px;height:26px;border-radius:50%;background:#fff;border:2px solid #222;font-weight:500;font-size:14px;display:flex;align-items:center;justify-content:center}
+.tile.sel{outline:2px solid var(--or);outline-offset:2px}
+.slotImg{width:112px;height:112px;border:2px dashed #9aa5a0;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center}
 .slotImg .tile{width:106px;height:106px;border-width:1px}
 .slotImg .tile img{max-width:90px;max-height:86px}
 .slotImg .tile .n{width:22px;height:22px;font-size:12px}
-.slotTerm{width:300px;height:56px;border:3px dashed #9aa5a0;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center}
-.chip{display:inline-block;background:var(--ac);color:#fff;border-radius:20px;padding:8px 16px;font-size:18px;font-weight:bold;cursor:grab;user-select:none}
-.chip.sel{outline:4px solid var(--or);outline-offset:2px}
+.slotTerm{width:300px;height:56px;border:2px dashed #9aa5a0;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center}
+.chip{display:inline-block;background:var(--ac);color:#fff;border-radius:20px;padding:8px 16px;font-size:18px;font-weight:500;cursor:grab;user-select:none}
+.chip.sel{outline:2px solid var(--or);outline-offset:2px}
 .ok{border-color:var(--ok)!important;background:#eaf6ea!important;border-style:solid!important}
 .bad{border-color:var(--bad)!important;background:#fdeaea!important;border-style:solid!important}
 .ladder .lrow{display:flex;align-items:center;gap:14px;height:118px}
@@ -61,23 +62,23 @@ body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
 .small{font-size:13px;color:var(--gr)}
 /* Tafelbild */
 .tb{display:grid;grid-template-columns:230px 1fr 1fr;gap:10px 14px;align-items:center}
-.tb .lab{background:var(--ac);color:#fff;border-radius:12px;padding:0 16px;font-size:24px;font-weight:bold;height:78px;display:flex;align-items:center}
+.tb .lab{background:var(--ac);color:#fff;border-radius:12px;padding:0 16px;font-size:24px;font-weight:500;height:78px;display:flex;align-items:center}
 .tb .ex{background:var(--lt);border-radius:12px;height:78px;display:flex;align-items:center;gap:14px;padding:0 14px;font-size:18px}
 .tb .ex img{height:66px;max-width:84px;object-fit:contain;background:#fff;border-radius:6px}
 .tb .cell{transition:opacity .4s,transform .4s}
 .tb .cell.off{opacity:0;transform:translateY(14px);pointer-events:none}
-.gap{display:inline-block;min-width:130px;border-bottom:3px solid var(--ac);text-align:center;cursor:pointer;color:transparent;font-weight:bold}
+.gap{display:inline-block;min-width:130px;border-bottom:2px solid var(--ac);text-align:center;cursor:pointer;color:transparent;font-weight:500}
 .gap.on{color:var(--ac)}
 /* Punktetafel (links und rechts Platz für die Blätterpfeile) */
 .sb{position:absolute;left:110px;right:110px;bottom:20px;height:74px;display:flex;gap:8px;align-items:stretch}
 .team{flex:1;background:var(--lt);border-radius:10px;padding:4px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0}
 .team .nm{font-size:12px;color:var(--gr)}
-.team .sc{font-size:26px;font-weight:bold;color:var(--dk);line-height:1}
+.team .sc{font-size:26px;font-weight:500;color:var(--dk);line-height:1}
 .team .bt{display:flex;gap:4px;margin-top:2px}
-.team button{font:inherit;font-weight:bold;font-size:15px;width:34px;height:28px;border:0;border-radius:6px;background:var(--ac);color:#fff;cursor:pointer;padding:0}
+.team button{font:inherit;font-weight:500;font-size:15px;width:34px;height:28px;border:0;border-radius:6px;background:var(--ac);color:#fff;cursor:pointer;padding:0}
 .team button.minus{background:#fff;color:var(--ac);border:2px solid var(--ac)}
 /* Ampel */
-.lamp{width:130px;height:130px;border-radius:50%;border:0;color:#fff;font:inherit;font-size:54px;font-weight:bold;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lamp{width:130px;height:130px;border-radius:50%;border:0;color:#fff;font:inherit;font-size:54px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center}
 /* Fortschritt, Notizfeld und Bildansicht */
 #nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
 #nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
@@ -112,7 +113,7 @@ body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
     <span class="muted" style="font-size:15px">allein · ohne Absprache · schriftlich</span>
   </div>
   <div id="donowans" class="row hidden" style="margin-top:14px;gap:18px;align-items:stretch">
-    <div class="card dark" style="width:200px;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:bold">Falsch.</div>
+    <div class="card dark" style="width:200px;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:500">Falsch.</div>
     <div class="card ed" data-k="donowsol" style="flex:1;font-size:18px;line-height:1.45;padding:12px 22px">Chloroplasten kommen in grünen Pflanzenteilen vor, zum Beispiel in Blättern. Das Zwiebelhäutchen ist nicht grün und wächst unter der Erde. Im Bild sieht man nur Zellwand und Zellkern.</div>
   </div>
 </section>
@@ -125,7 +126,7 @@ body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
   <div id="impTiles" class="row" style="gap:20px;justify-content:center;margin-top:6px"></div>
   <div class="row" style="margin-top:22px;gap:26px">
     <button class="btn" id="bigBtn">Zahl zeigen</button>
-    <div id="bigNum" style="font-size:46px;font-weight:bold;color:var(--ac);min-width:360px"></div>
+    <div id="bigNum" style="font-size:46px;font-weight:500;color:var(--ac);min-width:360px"></div>
     <div id="bigTxt" class="hidden" style="font-size:22px">Zellen stecken im Körper eines Menschen.</div>
   </div>
   <div class="small" style="margin-top:14px">Quelle: Lehrbuch Klasse 7, Kapitel „Die Zelle“ (Abbildungen ohne Beschriftung zugeschnitten). Bild anklicken zum Vergrößern.</div>
@@ -158,7 +159,7 @@ body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
     <div class="ladder" id="ladder" style="flex:1"></div>
   </div>
   <div class="row" style="position:absolute;left:110px;bottom:20px;gap:10px">
-    <button class="btn" id="chk">Prüfen</button><button class="btn alt" id="sol">Lösung zeigen</button><button class="btn alt" id="rst">Zurücksetzen</button><span id="chkRes" style="font-size:18px;font-weight:bold;margin-left:10px"></span>
+    <button class="btn" id="chk">Prüfen</button><button class="btn alt" id="sol">Lösung zeigen</button><button class="btn alt" id="rst">Zurücksetzen</button><span id="chkRes" style="font-size:18px;font-weight:500;margin-left:10px"></span>
   </div>
 </section>
 
@@ -167,13 +168,13 @@ body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
   <div class="row" style="justify-content:space-between"><h1>Aufgabe 3</h1><div class="timer" data-key="erarb" data-sec="900"><span class="t">15:00</span><button class="btn sm">Start</button><button class="btn sm alt">↺</button></div></div>
   <p class="lf"><b>Unsere Frage:</b> <span data-leitfrage>…</span></p>
   <div class="card row" style="gap:18px;padding:16px 22px"><div class="num">3</div><div style="font-size:22px;line-height:1.4;flex:1"><b>Erkläre</b>, warum ein Organ mehr leisten kann als eine einzelne Zelle. Nutze M1 oder M2 als Beispiel.</div><span class="badge">Niveau F</span></div>
-  <div class="card dark" style="margin-top:14px;padding:12px 22px"><div style="font-size:13px;font-weight:bold">Wortspeicher</div><div style="font-size:26px;font-weight:bold;margin-top:2px">Zel-le &nbsp;·&nbsp; Ge-we-be &nbsp;·&nbsp; Or-gan &nbsp;·&nbsp; Or-ga-nis-mus</div></div>
+  <div class="card dark" style="margin-top:14px;padding:12px 22px"><div style="font-size:13px;font-weight:500">Wortspeicher</div><div style="font-size:26px;font-weight:500;margin-top:2px">Zel-le &nbsp;·&nbsp; Ge-we-be &nbsp;·&nbsp; Or-gan &nbsp;·&nbsp; Or-ga-nis-mus</div></div>
   <div class="row" style="margin-top:14px;gap:14px;align-items:flex-start">
     <button class="btn alt reveal" data-target="bst3" style="flex:none">Satzbausteine zeigen</button>
     <div id="bst3" class="card hidden" style="flex:1;padding:12px 18px;font-size:16px;line-height:1.5"><b style="color:var(--ac)">Zu Aufgabe 3:</b> Eine einzelne Zelle kann nur … · In einem Organ übernimmt jedes Gewebe … · Dadurch kann das Organ …</div>
   </div>
   <div class="card row" style="margin-top:16px;gap:18px;padding:14px 22px;border-left:8px solid var(--or)">
-    <div style="flex:none"><div style="font-size:13px;font-weight:bold;color:var(--or);margin-bottom:4px">Zusatz für Schnelle</div><div class="num or">4</div></div>
+    <div style="flex:none"><div style="font-size:13px;font-weight:500;color:var(--or);margin-bottom:4px">Zusatz für Schnelle</div><div class="num or">4</div></div>
     <div style="font-size:19px;line-height:1.4;flex:1"><b>Beurteile</b>, ob die Leiter aus Aufgabe 1 und 2 auch für das Pantoffeltierchen passt. Es besteht nur aus einer Zelle.</div>
     <img src="bilder/pantoffeltierchen.png" alt="Schematisches Pantoffeltierchen" style="height:120px;border:1px solid #222;border-radius:6px;background:#fff">
     <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end"><span class="badge">Niveau F–G</span><button class="btn sm alt reveal" data-target="bst4">Satzbausteine</button></div>
@@ -186,7 +187,7 @@ body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
   <h1>Tafelbild</h1>
   <p class="lf"><b>Unsere Frage:</b> <span data-leitfrage>…</span></p>
   <div class="tb" id="tb">
-    <div></div><div class="small" style="text-align:center;font-weight:bold">Beispiel Magen (Mensch)</div><div class="small" style="text-align:center;font-weight:bold">Beispiel Pflanze (Baum)</div>
+    <div></div><div class="small" style="text-align:center;font-weight:500">Beispiel Magen (Mensch)</div><div class="small" style="text-align:center;font-weight:500">Beispiel Pflanze (Baum)</div>
   </div>
   <div class="row" style="position:absolute;left:40px;top:504px;gap:10px"><button class="btn" id="tbNext">Nächste Stufe ▲</button><button class="btn alt" id="tbAll">Alle zeigen</button><button class="btn alt" id="tbRst">↺</button></div>
   <div class="card" style="position:absolute;left:110px;right:110px;top:556px;height:84px;padding:10px 22px;font-size:20px;line-height:1.5">
@@ -259,13 +260,13 @@ body.editing .ed{outline:2px dashed var(--or);outline-offset:3px;cursor:text}
   <p class="lf">&nbsp;</p>
   <div class="row" style="align-items:flex-start;gap:34px">
     <div class="card" style="flex:1;height:420px">
-      <div style="font-size:22px;font-weight:bold;color:var(--ac);margin-bottom:12px">Ich kann …</div>
+      <div style="font-size:22px;font-weight:500;color:var(--ac);margin-bottom:12px">Ich kann …</div>
       <div style="font-size:20px;line-height:1.8">1&nbsp; die vier Ebenen Zelle, Gewebe, Organ und Organismus nennen<br>2&nbsp; Bilder den Ebenen zuordnen<br>3&nbsp; erklären, warum ein Organ mehr leistet als eine Zelle<br>4&nbsp; Beispiele für Mensch und Pflanze nennen</div>
       <div class="muted" style="margin-top:16px;font-size:15px">Kreuze die Ampel auf dem Arbeitsblatt an (Seite 2).</div>
     </div>
     <div style="width:440px;flex:none">
       <div class="card" style="padding:14px 18px">
-        <div style="font-size:16px;font-weight:bold;margin-bottom:8px">Meinungsbild per Handzeichen</div>
+        <div style="font-size:16px;font-weight:500;margin-bottom:8px">Meinungsbild per Handzeichen</div>
         <div class="row" style="justify-content:space-around">
           <div style="text-align:center"><button class="lamp lampBtn" data-c="r" style="background:#C62828">0</button><div style="margin-top:6px;font-size:15px">rot: üben</div></div>
           <div style="text-align:center"><button class="lamp lampBtn" data-c="y" style="background:#F9A825;color:#1A1A1A">0</button><div style="margin-top:6px;font-size:15px">gelb: wiederholen</div></div>
