@@ -8,7 +8,7 @@
 <link rel="icon" href="../../../../../../assets/favicon/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="../../../../../../assets/favicon/apple-touch-icon.png">
 <title>Der Hundezuchtverein – Stunde 4: Mendels zweite Regel</title>
-<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Janas Wurf mit weißen Welpen, Kreuzung der F1, Kreuzungsquadrat Aa × Aa, Spaltungsregel 3 : 1 und 1 : 2 : 1.">
+<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Janas Wurf mit weißen Welpen, Abstimmung, Kreuzungsquadrat Aa × Aa zum Ziehen und Prüfen, Wurf-Simulation Aa × Aa, Spaltungsregel 3 : 1 und 1 : 2 : 1.">
 <link rel="stylesheet" href="../../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../../assets/css/praesentation.css">
@@ -18,25 +18,69 @@
 <style>
 /* Nur, was diese Stunde zusätzlich braucht. Farben über Variablen des Designs. */
 .slide{padding-right:132px}.slide .badge{right:132px}/* Platz für den Werkzeugrand */
-.m2-rf{display:grid;gap:10px;margin-top:6px}
-.m2-rf .task{margin:0}
-.m2-rf .task .snr{background:var(--g);color:#fff}
-.m2-welpen{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin-top:14px}
-.m2-welpe{border:3px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);text-align:center;font-weight:700;font-size:22px;padding:10px 4px}
-.m2-welpe.s{background:#222;color:#fff;border-color:#222}
-.m2-wer{font-size:24px;line-height:1.4}
+.m2-btns{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.b:disabled{opacity:.45;cursor:default}
+/* Do Now: richtig oder falsch antippen */
+.m2-rf{display:grid;gap:8px}
+.m2-rfz{display:grid;grid-template-columns:44px 1fr auto;gap:4px 14px;align-items:center;background:var(--mint);border-radius:14px;padding:6px 14px;border:3px solid transparent}
+.m2-rfz .snr{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;font-weight:700;font-size:22px}
+.m2-rfz .t{font-size:24px;line-height:1.3}
+.m2-rfz .w{display:flex;gap:8px}
+.m2-rfz .w button{font:700 20px Andika,Verdana,sans-serif;min-width:110px;min-height:46px;border:3px solid var(--g);background:#fff;color:var(--dk);border-radius:12px;cursor:pointer;touch-action:manipulation}
+.m2-rfz .w button[aria-pressed=true]{background:var(--g);color:#fff}
+.m2-rfz .bg{grid-column:2/4;display:none;margin:0;font-size:19px;line-height:1.3;color:var(--ink)}
+.m2-rfz.ok{border-color:#2e9e4f;background:#e4f6e8}.m2-rfz.bad{border-color:#d62828;background:#fdeaea}
+.m2-rfz.ok .bg,.m2-rfz.bad .bg{display:block}
+/* Impuls: Welpen kommen nacheinander */
+.m2-wer{font-size:23px;line-height:1.4}
 .m2-wer h3{margin:0 0 6px}
-.m2-q{font-size:30px;font-weight:700;color:var(--g);text-align:center;margin:16px 0 0}
-.m2-kk{border-collapse:separate;border-spacing:6px;font-size:34px;font-weight:700;text-align:center;margin:0 auto}
-.m2-kk th{width:92px;height:70px;color:var(--dk);font-size:30px}
-.m2-kk td{width:92px;height:70px;border:3px solid var(--g);border-radius:12px;background:#fff;outline:none}
-.m2-kk td:focus-visible{outline:3px solid var(--y)}
-.m2-kk.voll td{background:var(--mint)}
-.m2-kk .e{background:none;border:0}
-.m2-kk th[contenteditable]{border:3px dashed var(--grey);border-radius:12px;outline:none}
-.m2-kk small{display:block;font-size:16px;font-weight:400;color:var(--grey)}
-.m2-cap{font-size:19px;color:var(--grey);text-align:center;margin:6px 0 0}
-.m2-vh{font-size:24px;line-height:1.5;margin:12px 0 0}
+.m2-welpen{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;min-height:60px}
+.m2-welpe{border:3px solid var(--ink);border-radius:12px;background:#fff;color:var(--ink);text-align:center;font-weight:700;font-size:21px;padding:9px 4px;animation:m2rein .45s ease both}
+.m2-welpe.s{background:#222;color:#fff;border-color:#222}
+@keyframes m2rein{from{opacity:0;transform:translateY(14px) scale(.85)}to{opacity:1;transform:none}}
+.m2-abst{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin-top:14px}
+.m2-abst .m2-q{margin:0;text-align:left}
+.m2-q{font-size:30px;font-weight:700;color:var(--g);text-align:center;margin:14px 0 0}
+.m2-abst .tally{grid-template-columns:repeat(3,1fr)}
+.m2-abst .tc{padding:6px 8px 8px;font-size:21px}.m2-abst .tc .tn{font-size:34px}
+/* Hilfe in Stufen */
+.m2-hilfe{display:none;margin-top:8px;font-size:20px;line-height:1.4;padding:8px 14px}
+.m2-hilfe.on{display:block}
+.m2-hilfe span.nw{white-space:nowrap}
+/* Kreuzungsquadrat zum Ziehen */
+.m2-kk{border-collapse:separate;border-spacing:8px;text-align:center}
+.m2-kk th{font-size:19px;color:var(--grey);font-weight:400;padding:0}
+.m2-kk td{width:132px;height:72px;padding:0}
+.m2-kk td.g{width:96px}
+.m2-kk .dz{height:68px;min-height:0;width:100%}
+.m2-kk td.f .dz{background:var(--mint)}
+.m2-kk .dg{font-size:28px;padding:6px 14px}
+.m2-quad .bank .dg{font-size:26px;padding:6px 16px}
+.m2-vh{font-size:25px;line-height:2.1;margin:0}
+.m2-vh .dz.il{min-width:64px;min-height:48px}
+.m2-vh .dz.il .dg{font-size:24px;padding:4px 14px}
+/* Simulation */
+.m2-sim{display:grid;grid-template-columns:1fr 390px;gap:22px}
+.m2-eltern{display:flex;gap:14px;align-items:center;font-size:22px}
+.m2-eltern .t{border:3px solid var(--g);border-radius:14px;background:#222;color:#fff;font-weight:700;padding:8px 16px;text-align:center;line-height:1.2}
+.m2-eltern .t small{display:block;font-weight:400;font-size:17px;color:#ddd}
+.m2-zahlen{display:flex;gap:6px;flex-wrap:wrap}
+.m2-klein .b{font-size:19px;padding:8px 16px}
+.m2-zahlen button{width:50px;height:44px;border-radius:12px;border:3px solid var(--g);background:#fff;font:inherit;font-weight:700;font-size:22px;color:var(--ink);cursor:pointer}
+.m2-zahlen button[aria-pressed=true]{background:var(--g);color:#fff}
+.m2-wurf{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;min-height:64px;margin-top:8px}
+.m2-wurf .m2-welpe{font-size:18px;padding:6px 2px;line-height:1.15}
+.m2-wurf .m2-welpe b{display:block;font-size:22px}
+.m2-slot{border:3px dashed var(--grey);border-radius:12px;min-height:64px}
+.m2-erg{font-size:21px;font-weight:700;color:var(--dk);min-height:1.4em;margin:6px 0 0}
+.m2-stat{background:var(--mint);border-radius:16px;padding:12px 16px;font-size:20px;line-height:1.35}
+.m2-stat h3{margin:0 0 6px;font-size:22px}
+.m2-bar{display:grid;grid-template-columns:78px 1fr 54px;gap:8px;align-items:center;margin:6px 0}
+.m2-bar i{display:block;height:28px;border-radius:6px;background:#222;width:0;transition:width .4s ease}
+.m2-bar.w i{background:#fff;border:2px solid var(--ink)}
+.m2-anteil{font-size:24px;font-weight:700;color:var(--dk);margin:8px 0 0}
+.m2-wuerfe{font-size:18px;color:var(--grey);margin:4px 0 0;min-height:1.4em}
+/* Tafelbild */
 .m2-lin{display:grid;grid-template-columns:1fr 44px 1fr 44px 1.15fr;align-items:stretch}
 .m2-gen{border:3px solid var(--g);border-radius:16px;background:#fff;padding:10px 12px;text-align:center;font-size:22px;line-height:1.35}
 .m2-gen b.t{display:block;font-size:28px;color:var(--dk)}
@@ -46,11 +90,8 @@
 .m2-regel{border:3px solid var(--g);border-left-width:10px;border-radius:12px;background:var(--mint);padding:8px 16px;font-size:23px;line-height:1.35;margin-top:12px}
 .m2-jana{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
 .m2-jana p{margin:0;background:var(--dk);color:#fff;border-radius:14px;padding:10px 16px;font-size:22px;line-height:1.35}
-.m2-hilfe{display:none;margin-top:10px;font-size:21px;line-height:1.5}
-.m2-hilfe.on{display:block}
-.m2-hilfe span{white-space:nowrap}
-.m2-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-@media (max-width:820px){.m2-welpen{grid-template-columns:repeat(4,1fr)}.m2-lin{grid-template-columns:1fr}.m2-pf{transform:rotate(90deg)}.m2-jana{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.m2-welpe{animation:none}.m2-bar i{transition:none}}
+@media (max-width:820px){.m2-welpen,.m2-wurf{grid-template-columns:repeat(4,1fr)}.m2-lin,.m2-sim,.m2-abst{grid-template-columns:1fr}.m2-pf{transform:rotate(90deg)}.m2-jana{grid-template-columns:1fr}.m2-rfz{grid-template-columns:44px 1fr}.m2-rfz .w{grid-column:2}.m2-rfz .bg{grid-column:1/3}}
 </style>
 </head>
 <body class="lp-pres" data-root="../../../../../../" data-title="Der Hundezuchtverein – Stunde 4: Mendels zweite Regel" data-subject="Biologie" data-grade="Klasse 10">
@@ -63,16 +104,14 @@
 <p class="phase" data-ph="dn">Do Now · Wiederholung der letzten Stunde</p>
 <h1 class="k">Richtig oder falsch?</h1>
 <span class="badge">3 Min. · allein, ins Heft</span>
-<p class="lead s" style="margin:0 0 10px">Schreibe ins Heft: A richtig oder falsch, B …, C …, D …</p>
-<div class="m2-rf">
-<p class="task s"><span class="snr">A</span><span>Die Eltern in der P-Generation sind reinerbig.</span><i class="lvl">●○○ D</i></p>
-<p class="task s"><span class="snr">B</span><span>In der F1 sehen alle Nachkommen gleich aus.</span><i class="lvl">●○○ D</i></p>
-<p class="task s"><span class="snr">C</span><span>Alle Nachkommen der F1 sind reinerbig.</span><i class="lvl">●●○ E</i></p>
-<p class="task s"><span class="snr">D</span><span>Die versteckte Anlage geht in der F1 verloren.</span><i class="lvl">●●○ E</i></p>
+<p class="lead s" style="margin:0 0 8px">Schreibe ins Heft: A richtig oder falsch, B …, C …, D … Danach gleichen wir hier ab.</p>
+<div class="m2-rf" id="m2Rf">
+<div class="m2-rfz" data-a="r"><span class="snr">A</span><span class="t">Die Eltern in der P-Generation sind reinerbig.</span><span class="w"><button type="button" aria-pressed="false">richtig</button><button type="button" aria-pressed="false">falsch</button></span><p class="bg">Richtig: Beide Elterntiere haben zwei gleiche Anlagen (KK und ll).</p></div>
+<div class="m2-rfz" data-a="r"><span class="snr">B</span><span class="t">In der F1 sehen alle Nachkommen gleich aus.</span><span class="w"><button type="button" aria-pressed="false">richtig</button><button type="button" aria-pressed="false">falsch</button></span><p class="bg">Richtig: Das ist die 1. Regel (uniform).</p></div>
+<div class="m2-rfz" data-a="f"><span class="snr">C</span><span class="t">Alle Nachkommen der F1 sind reinerbig.</span><span class="w"><button type="button" aria-pressed="false">richtig</button><button type="button" aria-pressed="false">falsch</button></span><p class="bg">Falsch: Die F1 ist mischerbig (Kl). Sie hat zwei verschiedene Anlagen.</p></div>
+<div class="m2-rfz" data-a="f"><span class="snr">D</span><span class="t">Die versteckte Anlage geht in der F1 verloren.</span><span class="w"><button type="button" aria-pressed="false">richtig</button><button type="button" aria-pressed="false">falsch</button></span><p class="bg">Falsch: Die Anlage l ist in der F1 noch da. Man sieht sie nur nicht.</p></div>
 </div>
-<p class="shilfe" style="margin-top:12px">Allein und leise. Die Sätze darf dir jemand vorlesen.</p>
-<div style="margin-top:10px"><button class="b lz" data-zeige>Abgleich zeigen</button></div>
-<div class="lsg-box mint pad" style="margin-top:10px;font-size:22px;line-height:1.4"><b>A</b> richtig · <b>B</b> richtig · <b>C</b> falsch: Die F1 ist mischerbig (Kl), sie hat zwei verschiedene Anlagen. · <b>D</b> falsch: Die Anlage l ist in der F1 noch da. Man sieht sie nur nicht.</div>
+<div class="ctl"><button class="b" id="m2RfChk">Prüfen</button><button class="b sec" id="m2RfNeu">Neu</button><span class="fb" id="m2RfFb"></span></div>
 </section>
 
 <!-- 2 IMPULS -->
@@ -84,11 +123,17 @@
 <div class="karte m2-wer"><h3>Züchterin Jana</h3><p>„Ich habe zwei schwarze Welpen aus meinem ersten Wurf gekreuzt. Im neuen Wurf sind 6 schwarze und 2 weiße Welpen. Weiß kann gar nicht mehr vorkommen, alle Eltern sind schwarz.“</p></div>
 <div class="karte m2-wer"><h3>Züchter Tom</h3><p>„Doch. Das habe ich erwartet.“</p></div>
 </div>
-<div class="m2-welpen" role="list" aria-label="Janas neuer Wurf: 6 schwarze und 2 weiße Welpen">
-<span class="m2-welpe s" role="listitem">schwarz</span><span class="m2-welpe s" role="listitem">schwarz</span><span class="m2-welpe" role="listitem">weiß</span><span class="m2-welpe s" role="listitem">schwarz</span><span class="m2-welpe s" role="listitem">schwarz</span><span class="m2-welpe s" role="listitem">schwarz</span><span class="m2-welpe" role="listitem">weiß</span><span class="m2-welpe s" role="listitem">schwarz</span>
+<div class="m2-btns" style="margin:12px 0 8px"><button class="b lz" id="m2WurfBtn">Wurf ansehen</button></div>
+<div class="m2-welpen" id="m2Welpen" role="list" aria-label="Janas neuer Wurf" aria-live="polite"></div>
+<div class="m2-abst">
+<p class="m2-q">Wer hat recht? Stimmt ab.</p>
+<div class="tally" data-strich>
+<div class="tc"><span class="tn">0</span><span>Jana</span><button class="tm" title="Strich zurück" aria-label="Strich zurück">−</button></div>
+<div class="tc"><span class="tn">0</span><span>Tom</span><button class="tm" title="Strich zurück" aria-label="Strich zurück">−</button></div>
+<div class="tc"><span class="tn">0</span><span>weiß nicht</span><button class="tm" title="Strich zurück" aria-label="Strich zurück">−</button></div>
 </div>
-<p class="m2-q">Wer hat recht?</p>
-<p class="quelle" style="margin-top:10px">Vereinfachtes Modell: ein Merkmal, schwarz ist dominant. Echtes Hundefell wird von mehreren Genen bestimmt. Eigene Darstellung.</p>
+</div>
+<p class="quelle" style="margin-top:8px">Vereinfachtes Modell: ein Merkmal, schwarz ist dominant. Echtes Hundefell wird von mehreren Genen bestimmt. Eigene Darstellung.</p>
 </section>
 
 <!-- 3 FRAGENENTWICKLUNG -->
@@ -100,74 +145,107 @@
 </section>
 
 <!-- 4 ERARBEITUNG -->
-<section class="slide" data-min="15">
-<p class="phase" data-ph="er">Erarbeitung · Lesen und anwenden</p>
+<section class="slide" data-min="12">
+<p class="phase" data-ph="er">Erarbeitung 1 · Lesen und anwenden</p>
 <h1 class="k">Mendels Erbsen in der F2</h1>
-<span class="badge">15 Min. · allein, dann Partner-Abgleich · AB</span>
-<p class="tip" style="margin:0 0 8px;font-size:21px"><b>Lies</b> Buch S. 118 ab „MENDEL vermutete“ und die Abb. 03 und 04. Markiere je Absatz 1–2 Schlüsselwörter. Der Text darf dir vorgelesen werden.</p>
+<span class="badge">12 Min. · allein, dann Partner-Abgleich · AB</span>
+<p class="tip" style="margin:0 0 8px;font-size:21px"><b>Lies</b> Buch S. 118 ab „MENDEL vermutete“ und Abb. 03 und 04. Markiere je Absatz 1–2 Schlüsselwörter.</p>
 <p class="task s"><span class="snr">1</span><span><b>Erstelle</b> das Kreuzungsquadrat für die F1-Pflanzen (Aa × Aa). Trage zuerst die Geschlechtszellen ein, dann die vier Kombinationen. (A = violett, a = weiß)</span><i class="lvl">●●○ F</i></p>
 <p class="task s"><span class="snr">2</span><span><b>Gib</b> das Verhältnis der Genotypen und der Phänotypen in der F2 <b>an</b>.</span><i class="lvl">●●○ F</i></p>
 <p class="task s"><span class="snr">3</span><span><b>Erkläre</b>, weshalb in der F2 wieder weiße Blüten auftreten, obwohl die F1 nur violett blühte.</span><i class="lvl">●●○ F</i></p>
-<p class="task s" style="border-style:dashed;padding:6px 10px"><span class="snr">4</span><span>Wer schnell fertig ist: <b>Erstelle</b> das Kreuzungsquadrat für Janas Welpen (S = schwarz, s = weiß) und <b>begründe</b>, ob Janas Wurf dazu passt.</span><i class="lvl">●●● G</i></p>
-<div class="m2-btns"><button class="b sec" id="m2HilfeBtn" aria-expanded="false" aria-controls="m2Hilfe">Hilfe anzeigen</button></div>
-<div class="m2-hilfe shilfe" id="m2Hilfe"><b>Wortspeicher:</b> <span>Al-lel</span> · <span>ho-mo-zy-got</span> · <span>he-te-ro-zy-got</span> · <span>Ge-schlechts-zel-le</span> · <span>Kreu-zungs-qua-drat</span> · <span>do-mi-nant</span> · <span>re-zes-siv</span><br><b>Satzbausteine:</b> Jede Geschlechtszelle enthält … Allel. · Weiß tritt wieder auf, weil …</div>
+<p class="task s" style="border-style:dashed;padding:6px 10px"><span class="snr">4</span><span>Wer schnell fertig ist: <b>Erstelle</b> das Kreuzungsquadrat für Janas Welpen (A = schwarz, a = weiß) und <b>begründe</b>, ob Janas Wurf dazu passt.</span><i class="lvl">●●● G</i></p>
+<div class="m2-btns"><button class="b sec" id="m2HilfeBtn" aria-controls="m2Hilfe">Hilfe: Stufe 1 zeigen</button><span class="muted" style="font-size:18px">Erst selbst versuchen, dann Stufe für Stufe. Vorlesen ist erlaubt.</span></div>
+<div class="m2-hilfe shilfe" id="m2Hilfe" aria-live="polite">
+<p data-hs style="margin:0"><b>Stufe 1 · Wörter:</b> <span class="nw">Al-lel</span> · <span class="nw">ho-mo-zy-got</span> · <span class="nw">he-te-ro-zy-got</span> · <span class="nw">Ge-schlechts-zel-le</span> · <span class="nw">Kreu-zungs-qua-drat</span> · <span class="nw">do-mi-nant</span> · <span class="nw">re-zes-siv</span></p>
+<p data-hs style="margin:0"><b>Stufe 2 · Vorgehen:</b> Eine Pflanze Aa bildet zwei Sorten Geschlechtszellen: A und a. Schreibe A und a über das Quadrat und A und a links daneben. In jedes Feld kommen die zwei Allele, die sich treffen.</p>
+<p data-hs style="margin:0"><b>Stufe 3 · Satzbausteine:</b> Jede Geschlechtszelle enthält nur ein Allel. · Weiß tritt wieder auf, weil zwei Geschlechtszellen mit a zusammentreffen können: aa.</p>
+</div>
 </section>
 
-<!-- 5 SICHERUNG 1: KREUZUNGSQUADRAT -->
-<section class="slide" data-min="5">
+<!-- 5 SICHERUNG 1: KREUZUNGSQUADRAT ZUM ZIEHEN -->
+<section class="slide" data-min="4">
 <p class="phase" data-ph="si">Sicherung · Aufgaben 1 und 2</p>
 <h1 class="k">Das Kreuzungsquadrat Aa × Aa</h1>
-<span class="badge">5 Min. · Plenum</span>
-<p class="tip" style="margin:-4px 0 10px;font-size:20px">Unsere Frage von heute: <b data-leitfrage></b></p>
-<div class="split" style="grid-template-columns:1fr 1fr;gap:30px;align-items:start">
-<div>
+<span class="badge">4 Min. · Plenum · ziehen oder antippen</span>
+<p class="tip" style="margin:-4px 0 8px;font-size:20px">Unsere Frage von heute: <b data-leitfrage></b></p>
+<div class="split" style="grid-template-columns:560px 1fr;gap:30px;align-items:start">
+<div data-zuordnen class="m2-quad">
 <table class="m2-kk" aria-label="Kreuzungsquadrat zum Ausfüllen">
-<tr><th class="e"></th><th scope="col" contenteditable="true" aria-label="Spermienzelle 1"></th><th scope="col" contenteditable="true" aria-label="Spermienzelle 2"></th></tr>
-<tr><th scope="row" contenteditable="true" aria-label="Eizelle 1"></th><td contenteditable="true" aria-label="Feld oben links"></td><td contenteditable="true" aria-label="Feld oben rechts"></td></tr>
-<tr><th scope="row" contenteditable="true" aria-label="Eizelle 2"></th><td contenteditable="true" aria-label="Feld unten links"></td><td contenteditable="true" aria-label="Feld unten rechts"></td></tr>
+<tr><th></th><th scope="col">Spermienzelle</th><th scope="col">Spermienzelle</th></tr>
+<tr><th></th><td class="g"><span class="dz" data-ans="A" aria-label="Spermienzelle 1"></span></td><td class="g"><span class="dz" data-ans="a" aria-label="Spermienzelle 2"></span></td></tr>
+<tr><td class="g"><span class="dz" data-ans="A" aria-label="Eizelle 1"></span></td><td class="f"><span class="dz" data-ans="AA" aria-label="Feld oben links"></span></td><td class="f"><span class="dz" data-ans="Aa" aria-label="Feld oben rechts"></span></td></tr>
+<tr><td class="g"><span class="dz" data-ans="a" aria-label="Eizelle 2"></span></td><td class="f"><span class="dz" data-ans="Aa" aria-label="Feld unten links"></span></td><td class="f"><span class="dz" data-ans="aa" aria-label="Feld unten rechts"></span></td></tr>
 </table>
-<p class="m2-cap">Oben: Spermienzellen · links: Eizellen. Tippe Ergebnisse der Klasse ein.</p>
-<div class="m2-btns" style="justify-content:center"><button class="b lz" data-zeige>Lösung zeigen</button></div>
+<p class="muted" style="font-size:18px;margin:2px 0 0">Links: Eizellen. Das dominante Allel A steht immer zuerst.</p>
+<div class="bank"><span class="dg">Aa</span><span class="dg">a</span><span class="dg">AA</span><span class="dg">A</span><span class="dg">aa</span><span class="dg">a</span><span class="dg">Aa</span><span class="dg">A</span></div>
+<div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><button class="b lsg" style="background:var(--y);color:var(--ink)">Lösung</button><span class="fb"></span></div>
 </div>
-<div class="lsg-box">
-<table class="m2-kk voll" aria-label="Lösung: Kreuzungsquadrat Aa mal Aa">
-<tr><th class="e"></th><th scope="col">A</th><th scope="col">a</th></tr>
-<tr><th scope="row">A</th><td>AA<small>violett</small></td><td>Aa<small>violett</small></td></tr>
-<tr><th scope="row">a</th><td>Aa<small>violett</small></td><td>aa<small>weiß</small></td></tr>
-</table>
-<p class="m2-vh"><b>Genotypen</b> AA : Aa : aa = <b>1 : 2 : 1</b><br><b>Phänotypen</b> violett : weiß = <b>3 : 1</b></p>
+<div data-zuordnen>
+<p class="m2-vh"><b>Genotypen</b><br>AA : Aa : aa = <span class="dz il" data-ans="1"></span> : <span class="dz il" data-ans="2"></span> : <span class="dz il" data-ans="1"></span></p>
+<p class="m2-vh" style="margin-top:6px"><b>Phänotypen</b><br>violett : weiß = <span class="dz il" data-ans="3"></span> : <span class="dz il" data-ans="1"></span></p>
+<div class="bank"><span class="dg">2</span><span class="dg">1</span><span class="dg">3</span><span class="dg">4</span><span class="dg">1</span><span class="dg">1</span></div>
+<div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><button class="b lsg" style="background:var(--y);color:var(--ink)">Lösung</button><span class="fb"></span></div>
 </div>
 </div>
 </section>
 
-<!-- 6 SICHERUNG 2: TAFELBILD -->
-<section class="slide" data-min="5">
+<!-- 6 ERARBEITUNG 2: SIMULATION -->
+<section class="slide" data-min="6">
+<p class="phase" data-ph="er">Erarbeitung 2 · Modell testen</p>
+<h1 class="k">Janas Wurf im Modell</h1>
+<span class="badge">6 Min. · Paare, dann Plenum</span>
+<div class="m2-sim">
+<div>
+<div class="m2-eltern"><span class="t">Aa<small>schwarz</small></span><span style="font-size:30px;font-weight:700">×</span><span class="t">Aa<small>schwarz</small></span><span class="muted" style="font-size:18px;line-height:1.3">Jeder Welpe bekommt von jedem Elterntier zufällig A oder a, wie beim Münzwurf aus Stunde 2.</span></div>
+<p class="task s" style="margin:8px 0 4px"><span class="snr">1</span><span><b>Vermute</b>: Wie viele von 8 Welpen sind weiß?</span><i class="lvl">●○○ E</i></p>
+<div class="m2-zahlen" id="m2Vor" role="group" aria-label="Vermutung: weiße Welpen von 8"></div>
+<p class="task s" style="margin:8px 0 4px"><span class="snr">2</span><span><b>Vergleiche</b> fünf Würfe mit deiner Vermutung und mit Janas Wurf.</span><i class="lvl">●●○ F</i></p>
+<div class="m2-btns m2-klein" style="margin:0"><button class="b" id="m2Eins">Wurf mit 8 Welpen</button><button class="b sec" id="m2Hundert">100 Welpen auf einmal</button><button class="b sec" id="m2Neu">Neu beginnen</button></div>
+<div class="m2-wurf" id="m2Wurf" aria-live="polite"></div>
+<p class="m2-erg" id="m2Erg">Noch kein Wurf.</p>
+</div>
+<div class="m2-stat">
+<h3>Alle Welpen bisher</h3>
+<div class="m2-bar"><span>schwarz</span><i id="m2BarS"></i><b id="m2NS">0</b></div>
+<div class="m2-bar w"><span>weiß</span><i id="m2BarW"></i><b id="m2NW">0</b></div>
+<p class="m2-anteil" id="m2Anteil">–</p>
+<p style="margin:8px 0 0;font-size:18px">Würfe bisher (schwarz : weiß):</p>
+<p class="m2-wuerfe" id="m2Wuerfe">–</p>
+<p class="quelle" style="margin-top:4px">Simuliert mit Zufallszahlen auf diesem Gerät.</p>
+<p class="task s" style="margin:10px 0 0;font-size:20px"><span class="snr">3</span><span><b>Begründe</b>, warum ein einzelner Wurf von 3 : 1 abweichen kann und Janas 6 : 2 trotzdem zur Regel passt.</span><i class="lvl">●●● G</i></p>
+</div>
+</div>
+</section>
+
+<!-- 7 SICHERUNG 2: TAFELBILD -->
+<section class="slide" data-min="4">
 <p class="phase" data-ph="si">Sicherung · Tafelbild</p>
 <h1 class="k">Von P bis F2</h1>
-<span class="badge">5 Min. · Plenum · Hefteintrag</span>
+<span class="badge">4 Min. · Plenum · Hefteintrag</span>
 <div data-aufbau>
 <div class="m2-lin">
 <div class="m2-gen"><b class="t">P</b>AA × aa<br><span class="m2-dot v"></span>violett × <span class="m2-dot w"></span>weiß</div>
 <div class="m2-pf" aria-hidden="true">→</div>
-<div class="m2-gen"><b class="t">F1</b>Aa · Aa · Aa · Aa<br>alle <span class="m2-dot v"></span>violett</div>
+<div class="m2-gen" data-s="1"><b class="t">F1</b>Aa · Aa · Aa · Aa<br>alle <span class="m2-dot v"></span>violett</div>
 <div class="m2-pf" aria-hidden="true">→</div>
-<div class="m2-gen"><b class="t">F2 (F1 × F1)</b>AA · Aa · Aa · aa<br>3 <span class="m2-dot v"></span>violett : 1 <span class="m2-dot w"></span>weiß</div>
+<div class="m2-gen" data-s="3"><b class="t">F2 (F1 × F1)</b>AA · Aa · Aa · aa<br>3 <span class="m2-dot v"></span>violett : 1 <span class="m2-dot w"></span>weiß</div>
 </div>
-<p class="m2-regel" data-s="1"><b>1. Regel (P → F1):</b> Die Nachkommen sind einheitlich (uniform).</p>
-<p class="m2-regel" data-s="2"><b>2. Regel (F1 × F1 → F2):</b> Die Nachkommen spalten auf. Phänotypen 3 : 1, Genotypen 1 : 2 : 1.</p>
-<div class="m2-jana" data-s="3"><p><b>Janas Welpen</b> sind mischerbig (Ss). Sie tragen die Anlage für weiß.</p><p><b>Tom hat recht:</b> Weiße Welpen sind zu erwarten, etwa 1 von 4.</p></div>
+<p class="m2-regel" data-s="2"><b>1. Regel (P → F1):</b> Die Nachkommen sind einheitlich (uniform).</p>
+<p class="m2-regel" data-s="4"><b>2. Regel (F1 × F1 → F2):</b> Die Nachkommen spalten auf. Phänotypen 3 : 1, Genotypen 1 : 2 : 1.</p>
+<div class="m2-jana" data-s="5"><p><b>Janas Welpen</b> sind mischerbig (Aa). Sie tragen die Anlage für weiß.</p><p><b>Tom hat recht:</b> Weiße Welpen sind zu erwarten, etwa 1 von 4. Ein einzelner Wurf kann davon abweichen.</p></div>
 </div>
-<p class="tip" style="margin-top:12px;font-size:19px">Pfeil nach rechts: nächster Schritt.</p>
+<p class="tip" style="margin-top:12px;font-size:19px">Pfeil nach rechts: nächster Schritt. Vermutet vorher, was als Nächstes kommt.</p>
 </section>
 
-<!-- 7 EXIT-TICKET -->
+<!-- 8 EXIT-TICKET -->
 <section class="slide" data-min="3">
-<p class="phase" data-ph="re">Exit-Ticket</p>
+<p class="phase" data-ph="re">Exit-Ticket · Selbsteinschätzung</p>
 <h1 class="k">Die 2. Regel in einem Satz</h1>
 <span class="badge">3 Min. · allein, ins Heft</span>
-<p class="task"><span class="snr">1</span><span><b>Formuliere</b> die 2. Regel in einem Satz mit „<b>Wenn …, dann …</b>“.</span><i class="lvl">●●○ F</i></p>
-<div class="wort" style="margin-left:44px"><span>F1</span><span>untereinander kreuzen</span><span>F2</span><span>3 : 1</span></div>
-<div class="kasten" contenteditable="true" aria-label="Die 2. Regel mit Wenn und dann" style="min-height:130px;margin:18px 0 0 44px"></div>
+<p class="task s"><span class="snr">1</span><span><b>Formuliere</b> die 2. Regel in einem Satz mit „<b>Wenn …, dann …</b>“. Benutze die Wörter:</span><i class="lvl">●●○ F</i></p>
+<div class="wort" style="margin:0 0 0 44px"><span>F1</span><span>untereinander kreuzen</span><span>F2</span><span>3 : 1</span></div>
+<div class="kasten" contenteditable="true" aria-label="Die 2. Regel mit Wenn und dann" style="min-height:84px;margin:12px 0 14px 44px"></div>
+<div data-selbst><p class="lead s" style="margin-bottom:8px;font-size:21px">Tippe an, wie sicher du dich fühlst. Das ist nur für dich.</p><div class="sb"><span class="t">Ich kann ein Kreuzungsquadrat für Aa × Aa <b>erstellen</b>.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div><div class="sb"><span class="t">Ich kann <b>erklären</b>, warum in der F2 das rezessive Merkmal wieder auftritt.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div></div>
 </section>
 
 <div id="nummer"></div>
@@ -197,8 +275,50 @@
 <script>
 (function(){
 "use strict";
-var b=document.getElementById("m2HilfeBtn"),h=document.getElementById("m2Hilfe");
-if(b&&h)b.onclick=function(){var on=h.classList.toggle("on");b.setAttribute("aria-expanded",on);b.textContent=on?"Hilfe ausblenden":"Hilfe anzeigen"};
+var $=function(id){return document.getElementById(id)};
+var ruhig=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* Do Now: richtig oder falsch antippen, dann prüfen */
+var zeilen=[].slice.call(document.querySelectorAll("#m2Rf .m2-rfz")),rfFb=$("m2RfFb");
+function rfMarks(){zeilen.forEach(function(z){z.classList.remove("ok","bad")});rfFb.textContent="";rfFb.className="fb"}
+zeilen.forEach(function(z){var bt=[].slice.call(z.querySelectorAll(".w button"));
+ bt.forEach(function(b,k){b.onclick=function(){bt.forEach(function(x,j){x.setAttribute("aria-pressed",j===k?"true":"false")});z.dataset.w=k?"f":"r";rfMarks()}})});
+$("m2RfChk").onclick=function(){var ok=0;zeilen.forEach(function(z){var r=z.dataset.w===z.dataset.a;z.classList.remove("ok","bad");z.classList.add(r?"ok":"bad");if(r)ok++});
+ rfFb.textContent=ok===zeilen.length?"✓ Alles richtig!":ok+" von "+zeilen.length+" richtig. Lies die Begründung.";rfFb.className="fb "+(ok===zeilen.length?"good":"warn")};
+$("m2RfNeu").onclick=function(){zeilen.forEach(function(z){delete z.dataset.w;[].forEach.call(z.querySelectorAll("button"),function(b){b.setAttribute("aria-pressed","false")})});rfMarks()};
+
+/* Impuls: Welpen kommen nacheinander zur Welt */
+var WURF=["s","s","s","w","s","s","w","s"],wl=$("m2Welpen"),wb=$("m2WurfBtn");
+function welpe(f){var e=document.createElement("span");e.className="m2-welpe"+(f==="s"?" s":"");e.setAttribute("role","listitem");e.textContent=f==="s"?"schwarz":"weiß";return e}
+wb.onclick=function(){wl.innerHTML="";wb.disabled=true;var i=0;
+ (function n(){if(i>=WURF.length){wb.disabled=false;wb.textContent="Noch einmal ansehen";return}wl.appendChild(welpe(WURF[i++]));setTimeout(n,ruhig?0:450)})()};
+if(document.documentElement.classList.contains("lp-lesen"))WURF.forEach(function(f){wl.appendChild(welpe(f))});
+
+/* Hilfe in drei Stufen */
+var hb=$("m2HilfeBtn"),hbox=$("m2Hilfe"),hs=[].slice.call(hbox.querySelectorAll("[data-hs]")),hn=0;
+hs.forEach(function(s){s.hidden=true});
+hb.onclick=function(){if(hn>=hs.length){hn=0;hs.forEach(function(s){s.hidden=true});hbox.classList.remove("on");hb.textContent="Hilfe: Stufe 1 zeigen";return}
+ hbox.classList.add("on");hs.forEach(function(s){s.hidden=true});hs[hn++].hidden=false;hb.textContent=hn<hs.length?"Hilfe: Stufe "+(hn+1)+" zeigen":"Hilfe schließen"};
+
+/* Simulation: Aa × Aa */
+var vor=$("m2Vor"),wurf=$("m2Wurf"),erg=$("m2Erg"),pred=null,S=0,W=0,wuerfe=[];
+for(var k=0;k<=8;k++)(function(k){var b=document.createElement("button");b.type="button";b.textContent=k;b.setAttribute("aria-pressed","false");b.setAttribute("aria-label",k+" weiße Welpen");
+ b.onclick=function(){pred=k;[].forEach.call(vor.children,function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});text()};vor.appendChild(b)})(k);
+function leer(){wurf.innerHTML="";for(var i=0;i<8;i++){var d=document.createElement("span");d.className="m2-slot";wurf.appendChild(d)}}
+function zieh(){var a=Math.random()<.5?"A":"a",b=Math.random()<.5?"A":"a";return a==="a"&&b==="A"?"Aa":a+b}
+function stat(){var n=S+W;$("m2NS").textContent=S;$("m2NW").textContent=W;
+ $("m2BarS").style.width=(n?S/n*100:0)+"%";$("m2BarW").style.width=(n?W/n*100:0)+"%";
+ $("m2Anteil").textContent=n?"schwarz : weiß ≈ "+(W?(S/W).toFixed(1).replace(".",","):"–")+" : 1":"–";
+ $("m2Wuerfe").textContent=wuerfe.length?wuerfe.slice(-6).join(" · "):"–"}
+function text(t){if(t){erg.textContent=t;return}erg.textContent=pred===null?"Noch kein Wurf.":"Vermutung: "+pred+" von 8 weiß. Jetzt einen Wurf geboren werden lassen."}
+$("m2Eins").onclick=function(){var w=0,s=0,g=[];for(var i=0;i<8;i++){g.push(zieh())}
+ wurf.innerHTML="";g.forEach(function(x,i){var e=document.createElement("span");var weiss=x==="aa";if(weiss)w++;else s++;
+  e.className="m2-welpe"+(weiss?"":" s");e.style.animationDelay=(ruhig?0:i*.12)+"s";e.innerHTML="<b>"+x+"</b>"+(weiss?"weiß":"schwarz");wurf.appendChild(e)});
+ S+=s;W+=w;wuerfe.push(s+" : "+w);stat();
+ text("Dieser Wurf: "+s+" schwarz, "+w+" weiß."+(pred!==null?(w===pred?" Genau wie vermutet.":" Vermutet waren "+pred+" weiße."):"")+(s===6&&w===2?" Wie bei Jana!":""))};
+$("m2Hundert").onclick=function(){var s=0,w=0;for(var i=0;i<100;i++){zieh()==="aa"?w++:s++}S+=s;W+=w;stat();text("100 Welpen dazu: "+s+" schwarz, "+w+" weiß. Je mehr Welpen, desto näher an 3 : 1.")};
+$("m2Neu").onclick=function(){S=W=0;wuerfe=[];leer();stat();text()};
+leer();stat();
 })();
 </script>
 <script src="../../../../../../assets/js/stunde.js" defer></script>
