@@ -961,6 +961,41 @@
     ]
   },
   {
+    "title": "Gesundheit – Krankheit – Stunde 6: Gesund leben",
+    "description": "Was können wir selbst für unsere Gesundheit tun? Do Now Allergie, Impuls zwei Aussagen, Fragenentwicklung, Maßnahmen begründen, Aussagen beurteilen, Sicherung im Tafelbild, Reflexion.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/gesundheit/gesund-leben/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.5",
+    "dauer": "45 Min.",
+    "datum": "2026-11-27",
+    "folge": 6,
+    "reihe": "Gesundheit – Krankheit",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/gesundheit/gesund-leben/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Gesund leben",
+        "pfad": "biologie/klasse-9/gesundheit/gesund-leben/arbeitsblatt.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      }
+    ],
+    "bne": [
+      3
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/gesundheit/allergie/",
+        "grund": "Vorstunde: Die Allergie zeigt, dass das Immunsystem auch ohne Erreger Beschwerden auslösen kann. Hier geht es darum, was man selbst für die Gesundheit tun kann."
+      }
+    ]
+  },
+  {
     "title": "Escape Climate Change: Klima-Escape-Spiel zum Selberbauen",
     "description": "Vorstellung des frei verfügbaren Escape-Spiels ECC DIY: Ablauf in sechs Stufen, Material zum Bauen und drei Ideen für die Umwelt-AG. Stichwörter: Escape Game, Klimaschutz, Klimagerechtigkeit, CO2-Bilanz.",
     "type": "Präsentation",
