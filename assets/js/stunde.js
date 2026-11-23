@@ -133,7 +133,7 @@
         if (richtig(z, it)) { z.classList.add("ok"); ok++; } else z.classList.add("bad");
       });
       if (fb) {
-        fb.textContent = ok === zones.length ? "✓ Alles richtig!" : ok + " von " + zones.length + " richtig. Rot: noch einmal versuchen.";
+        fb.textContent = ok === zones.length ? "Alles richtig" : ok + " von " + zones.length + " richtig. Rot: noch einmal versuchen.";
         fb.className = "fb " + (ok === zones.length ? "good" : "warn");
       }
     };
@@ -197,7 +197,7 @@
         if (richtig) ok++;
       });
       if (fb) {
-        fb.textContent = ok === figs.length ? "✓ Richtige Reihenfolge!" : ok + " von " + figs.length + " am richtigen Platz. Tippe die Bilder noch einmal der Reihe nach an.";
+        fb.textContent = ok === figs.length ? "Richtige Reihenfolge" : ok + " von " + figs.length + " am richtigen Platz. Tippe die Bilder noch einmal der Reihe nach an.";
         fb.className = "fb " + (ok === figs.length ? "good" : "warn");
       }
     };
@@ -240,7 +240,7 @@
     if (chk) chk.onclick = function () {
       var ok = 0;
       zellen.forEach(function (z) { var r = z.textContent === z.dataset.a; z.classList.remove("ok", "bad"); z.classList.add(r ? "ok" : "bad"); if (r) ok++; });
-      if (fb) { fb.textContent = ok === zellen.length ? "✓ Alles richtig!" : ok + " von " + zellen.length + " richtig. Rot: noch einmal versuchen."; fb.className = "fb " + (ok === zellen.length ? "good" : "warn"); }
+      if (fb) { fb.textContent = ok === zellen.length ? "Alles richtig" : ok + " von " + zellen.length + " richtig. Rot: noch einmal versuchen."; fb.className = "fb " + (ok === zellen.length ? "good" : "warn"); }
     };
   });
 
@@ -306,7 +306,7 @@
         var z = k.parentElement.closest(".zone"), r = z && z.dataset.z === k.dataset.ziel;
         k.classList.remove("ok", "bad"); k.classList.add(r ? "ok" : "bad"); if (r) ok++;
       });
-      if (fb) { fb.textContent = ok === karten.length ? "✓ Alles richtig!" : ok + " von " + karten.length + " richtig. Rot: noch einmal überlegen."; fb.className = "fb " + (ok === karten.length ? "good" : "warn"); }
+      if (fb) { fb.textContent = ok === karten.length ? "Alles richtig" : ok + " von " + karten.length + " richtig. Rot: noch einmal überlegen."; fb.className = "fb " + (ok === karten.length ? "good" : "warn"); }
     };
   });
 
@@ -350,7 +350,7 @@
     function unscharf() { var v = +fokus.value, d = Math.abs(v - ziel); sicht.style.filter = "blur(" + Math.min(14, d / 4.5).toFixed(1) + "px)"; return d; }
     function status() {
       var d = unscharf();
-      if (d <= 4) { hint.textContent = "✓ Das Bild ist scharf."; hint.className = "mk-hint good"; scharfMal[obj] = true; hatScharf = true; }
+      if (d <= 4) { hint.textContent = "Das Bild ist scharf."; hint.className = "mk-hint good"; scharfMal[obj] = true; hatScharf = true; }
       else { hint.textContent = "Drehe am Feintrieb, bis das Bild scharf ist."; hint.className = "mk-hint"; }
     }
     function waehle(o) {
@@ -400,7 +400,7 @@
   [].forEach.call(document.querySelectorAll("[data-kette]"), function (root) {
     var punkte = [].slice.call(root.querySelectorAll("circle.kp")), knopf = root.querySelector("button"), kurz = false;
     function lege() { punkte.forEach(function (p, i) { p.style.transform = "translateX(" + (kurz ? (i * 26 - i * 46) : 0) + "px)"; }); }
-    knopf.addEventListener("click", function () { kurz = !kurz; lege(); knopf.textContent = kurz ? "Zurück zur langen Kette" : "Signal: Arme anwinkeln!"; });
+    knopf.addEventListener("click", function () { kurz = !kurz; lege(); knopf.textContent = kurz ? "Zurück zur langen Kette" : "Signal: Arme anwinkeln"; });
     lege();
   });
 
