@@ -407,6 +407,41 @@
     ]
   },
   {
+    "title": "Die Zelle – Stunde 13: Das Laubblatt",
+    "description": "Vom Blatt zum Querschnitt zoomen, die sieben Schichten des Laubblatts beschriften, jeder Schicht ihre Aufgabe bei der Fotosynthese zuordnen, Licht, Gase, Wasser und Zucker im Blatt verfolgen und eine Hypothese zum Seerosenblatt am Modell prüfen.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-7/zelle/fotosynthese-4/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-23",
+    "reihe": "Zelle",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-4/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Das Laubblatt",
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-4/arbeitsblatt-laubblatt.pdf",
+        "art": "Arbeitsblatt"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-2/",
+        "grund": "Stunde 13 zeigt, wo im Blatt Licht, Kohlenstoffdioxid und Wasser für die Fotosynthese aus Stunde 11 ankommen."
+      },
+      {
+        "pfad": "biologie/klasse-7/zelle/zelle-zum-organismus/",
+        "grund": "Das Laubblatt ist ein Organ aus mehreren Geweben, wie in Stunde 9 eingeführt."
+      }
+    ]
+  },
+  {
     "title": "Feuerwerk aus der Tiefe – Vulkanausbrüche",
     "description": "Entstehung und Ausbruch von Vulkanen, Schicht- und Schildvulkan vergleichen, Kurzprojekt zu Vulkanen und Erdbeben.",
     "type": "Interaktive Präsentation",
