@@ -1,0 +1,69 @@
+name: Sicherung
+# Sichert jeden Sonntag den Stand von main als Release "Sicherung JJJJ-MM-TT" (siehe docs/betrieb.md, Abschnitt "Sicherung").
+#   lernportal-JJJJ-MM-TT.zip     alle Dateien des Portals, ohne Versionsgeschichte (zum Durchsehen oder Neu-Hochladen)
+#   lernportal-JJJJ-MM-TT.bundle  das komplette Repository mit allen Versionen (zum Wiederherstellen mit git clone)
+# Hat sich seit der letzten Sicherung nichts geändert, entsteht keine neue.
+# Von den Releases bleiben die 12 neuesten. Die Tags "sicherung-..." bleiben immer, ältere Stände sind darüber weiter erreichbar.
+# Von Hand starten: Actions -> Sicherung -> Run workflow.
+on:
+  schedule:
+    - cron: "23 2 * * 0"
+  workflow_dispatch:
+    inputs:
+      erzwingen:
+        description: "Auch sichern, wenn sich nichts geändert hat"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+concurrency:
+  group: sicherung
+jobs:
+  sicherung:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BEHALTEN: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Prüfen, ob sich etwas geändert hat
+        id: pruefen
+        run: |
+          git fetch --tags --force
+          letzte=$(git tag -l 'sicherung-*' --sort=-creatordate | head -n 1)
+          if [ -n "$letzte" ] && [ "$(git rev-parse "$letzte^{commit}")" = "$(git rev-parse HEAD)" ] && [ "${{ inputs.erzwingen }}" != "true" ]; then
+            echo "Keine Änderung seit $letzte, keine neue Sicherung."
+            echo "neu=nein" >> "$GITHUB_OUTPUT"
+          else
+            echo "neu=ja" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Sicherung anlegen
+        if: steps.pruefen.outputs.neu == 'ja'
+        run: |
+          datum=$(date -u +%F)
+          tag="sicherung-$datum"
+          if git rev-parse -q --verify "refs/tags/$tag" > /dev/null; then
+            tag="sicherung-$(date -u +%F-%H%M)"
+            datum=${tag#sicherung-}
+          fi
+          git archive --format=zip --prefix="lernportal-$datum/" -o "lernportal-$datum.zip" HEAD
+          git bundle create "lernportal-$datum.bundle" --all
+          git bundle verify "lernportal-$datum.bundle"
+          gh release create "$tag" "lernportal-$datum.zip" "lernportal-$datum.bundle" \
+            --target "$(git rev-parse HEAD)" \
+            --title "Sicherung $datum" \
+            --latest=false \
+            --notes "Automatische Sicherung von main (Stand $(git log -1 --format='%h, %cd' --date=format:'%d.%m.%Y %H:%M')).
+          ZIP: alle Dateien ohne Versionsgeschichte. Bundle: komplettes Repository. Wiederherstellen: siehe docs/betrieb.md, Abschnitt Sicherung."
+      - name: Alte Sicherungen aufräumen (Tags bleiben)
+        if: steps.pruefen.outputs.neu == 'ja'
+        run: |
+          gh release list --limit 200 --json tagName,createdAt \
+            --jq '[.[] | select(.tagName | startswith("sicherung-"))] | sort_by(.createdAt) | reverse | .[env.BEHALTEN | tonumber:] | .[].tagName' |
+          while read -r alt; do
+            echo "Entferne Release $alt (Tag bleibt)"
+            gh release delete "$alt" --yes
+          done
