@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- Gestaltung nach dem Skill "unslop" von Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop -->
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -22,23 +23,23 @@
 .mint{background:var(--mint);border-radius:16px}
 .shilfe.sm{font-size:20px;padding:12px 16px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.entwurf{border:3px solid var(--g);border-radius:16px;padding:22px 26px;background:#fff;color:var(--ink)}
+.entwurf{border:2px solid var(--g);border-radius:16px;padding:22px 26px;background:#fff;color:var(--ink)}
 .entwurf h2{margin:0 0 10px;font-size:30px}
-.entwurf .zahl{font-size:76px;font-weight:700;line-height:1.05}
+.entwurf .zahl{font-size:76px;font-weight:500;line-height:1.05}
 .entwurf .z2{font-size:32px;margin-top:8px}
 .ablauf{display:grid;gap:16px}
 .ablauf .schritt{display:grid;grid-template-columns:70px 1fr;gap:16px;align-items:start;font-size:29px;line-height:1.35}
 .ablauf .schritt b.n{background:var(--g);color:#fff;border-radius:50%;width:56px;height:56px;display:grid;place-items:center;font-size:30px}
 .vidrow{display:grid;grid-template-columns:1fr 600px;gap:28px;align-items:start}
-.vp{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;color:#fff;text-decoration:none;box-shadow:0 10px 30px rgba(62,30,35,.35);border:3px solid #fff}
+.vp{position:relative;display:block;width:100%;aspect-ratio:16/9;border-radius:18px;overflow:hidden;color:#fff;text-decoration:none;border:2px solid #fff}
 .vp .art{position:absolute;inset:0;width:100%;height:100%;display:block}
 .vp .vplay{transform-origin:320px 168px;transition:transform .2s}.vp:hover .vplay,.vp:focus-visible .vplay{transform:scale(1.12)}
 .vp:focus-visible{outline:5px solid var(--y);outline-offset:3px}
-.vtag{position:absolute;left:18px;top:16px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.6);border-radius:999px;padding:2px 14px;font-weight:700;font-size:18px}
-.vtitle{position:absolute;left:22px;right:22px;bottom:40px;font-size:30px;font-weight:700;line-height:1.2;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.vtag{position:absolute;left:18px;top:16px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.6);border-radius:999px;padding:2px 14px;font-weight:500;font-size:18px}
+.vtitle{position:absolute;left:22px;right:22px;bottom:40px;font-size:30px;font-weight:500;line-height:1.2}
 .vsub{position:absolute;left:22px;right:22px;bottom:12px;font-size:17px;opacity:.9}
 .show-no{display:none}.show-no.show{display:block}
-.eingabe{border:3px dashed var(--g);border-radius:16px;padding:18px 24px;font-size:30px;line-height:1.7;min-height:300px;background:#fff}
+.eingabe{border:2px dashed var(--g);border-radius:16px;padding:18px 24px;font-size:30px;line-height:1.7;min-height:300px;background:#fff}
 .kriterien{display:grid;gap:12px;margin:14px 0 0;padding:0;list-style:none;font-size:30px}
 .kriterien li{background:var(--mint);border-radius:14px;padding:12px 20px}
 
@@ -46,47 +47,47 @@
 .bar{height:26px;border-radius:8px;background:var(--g);transition:width .8s}
 .bar.k{background:var(--o)}
 .marken{display:flex;gap:8px;margin-top:10px;min-height:34px;font-size:26px}
-.marke.gestr{text-decoration:line-through;opacity:.55;border-style:dashed}.marke{background:#fff;color:#B3261E;border:3px solid #B3261E;border-radius:8px;padding:0 10px;font-weight:700;font-size:20px}
+.marke.gestr{text-decoration:line-through;opacity:.55;border-style:dashed}.marke{background:#fff;color:#B3261E;border:2px solid #B3261E;border-radius:8px;padding:0 10px;font-weight:500;font-size:20px}
 .ja-nein{display:grid;gap:10px}
 .aussage{display:grid;grid-template-columns:1fr 150px 150px 48px;gap:10px;align-items:center;font-size:25px;line-height:1.3}
-.aussage button,.wahl{font:inherit;font-weight:700;min-height:48px;border-radius:12px;border:3px solid var(--g);background:#fff;color:var(--ink);cursor:pointer}
+.aussage button,.wahl{font:inherit;font-weight:500;min-height:48px;border-radius:12px;border:2px solid var(--g);background:#fff;color:var(--ink);cursor:pointer}
 .aussage button[aria-pressed=true],.wahl[aria-pressed=true]{background:var(--g);color:#fff}
-.aussage .erg{font-size:30px;font-weight:700;text-align:center}
+.aussage .erg{font-size:30px;font-weight:500;text-align:center}
 .aussage.ok button[aria-pressed=true]{background:#1B6E3C;border-color:#1B6E3C}
 .aussage.falsch button[aria-pressed=true]{background:#B3261E;border-color:#B3261E}
 .schritte .task{font-size:23px;margin:0 0 6px}.rollenraster{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.rk{border:3px solid var(--g);border-radius:14px;padding:6px 10px;display:grid;grid-template-columns:1fr 96px;gap:8px;align-items:center;background:#fff}
+.rk{border:2px solid var(--g);border-radius:14px;padding:6px 10px;display:grid;grid-template-columns:1fr 96px;gap:8px;align-items:center;background:#fff}
 .rk b{font-size:23px;line-height:1.2;display:block}.rk small{font-size:16px;color:var(--grey)}
 .rk .qr{width:96px;height:96px;background:#fff;padding:5px;border:2px solid var(--grey);border-radius:8px}.rk .qr svg{display:block;width:100%;height:100%}
 .uhr{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
 .phasen{display:grid;gap:10px}
-.ph{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:10px 14px;border-radius:14px;border:3px solid var(--mint);background:#fff;font-size:24px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink)}
+.ph{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:10px 14px;border-radius:14px;border:2px solid var(--mint);background:#fff;font-size:24px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink)}
 .ph b.n{background:var(--grey);color:#fff;border-radius:50%;width:44px;height:44px;display:grid;place-items:center}
 .ph[aria-current=step]{border-color:var(--g);background:var(--mint)}.ph[aria-current=step] b.n{background:var(--g)}
 .ph.fertig b.n{background:#1B6E3C}
-.digits{font-size:150px;font-weight:700;line-height:1;text-align:center;font-variant-numeric:tabular-nums}
+.digits{font-size:150px;font-weight:500;line-height:1;text-align:center;font-variant-numeric:tabular-nums}
 .digits.rot{color:#B3261E;animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:.45}}
 .sub{text-align:center;font-size:26px;margin:6px 0 14px;min-height:70px}
 .ctrl{display:flex;gap:12px;justify-content:center}
-.ctrl button,.btn{font:inherit;font-weight:700;font-size:24px;min-height:56px;padding:0 24px;border-radius:14px;border:0;background:var(--g);color:#fff;cursor:pointer}
-.ctrl button.zweit,.btn.zweit{background:#fff;color:var(--ink);border:3px solid var(--g)}
-.tafel{display:grid;grid-template-columns:1fr 1fr;gap:18px}.leiste{display:flex;gap:12px;align-items:center;margin:8px 96px 0 84px}.leiste .shilfe{flex:1}.komp{position:absolute;left:110px;right:130px;top:200px;z-index:15;border:4px solid var(--g);border-radius:16px;padding:14px 20px;font-size:26px;line-height:1.4;background:#fff;box-shadow:0 14px 40px rgba(0,0,0,.35)}.komp b{display:block;font-size:22px;color:var(--g);margin-bottom:6px}.komp div{margin-top:4px}.komp div{margin-top:2px}#scan{position:absolute;left:740px;top:6px;z-index:20;width:250px;height:122px;background:#000;border:4px solid var(--y);border-radius:14px;overflow:hidden;pointer-events:none}#scan video{display:block;width:100%;height:100%;object-fit:cover}
-.antrag{border:3px solid var(--g);border-radius:16px;padding:10px 14px;background:#fff}
+.ctrl button,.btn{font:inherit;font-weight:500;font-size:24px;min-height:56px;padding:0 24px;border-radius:14px;border:0;background:var(--g);color:#fff;cursor:pointer}
+.ctrl button.zweit,.btn.zweit{background:#fff;color:var(--ink);border:2px solid var(--g)}
+.tafel{display:grid;grid-template-columns:1fr 1fr;gap:18px}.leiste{display:flex;gap:12px;align-items:center;margin:8px 96px 0 84px}.leiste .shilfe{flex:1}.komp{position:absolute;left:110px;right:130px;top:200px;z-index:15;border:2px solid var(--g);border-radius:16px;padding:14px 20px;font-size:26px;line-height:1.4;background:#fff}.komp b{display:block;font-size:22px;color:var(--g);margin-bottom:6px}.komp div{margin-top:4px}.komp div{margin-top:2px}#scan{position:absolute;left:740px;top:6px;z-index:20;width:250px;height:122px;background:#000;border:2px solid var(--y);border-radius:14px;overflow:hidden;pointer-events:none}#scan video{display:block;width:100%;height:100%;object-fit:cover}
+.antrag{border:2px solid var(--g);border-radius:16px;padding:10px 14px;background:#fff}
 .antrag h2{margin:0 0 6px;font-size:25px}
 .varianten{display:flex;gap:8px;margin-bottom:10px}.varianten .wahl{flex:1}
 .stimmen{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.st{font:inherit;display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px;min-height:44px;border-radius:12px;border:3px solid var(--mint);background:var(--mint);padding:0 12px;font-size:19px;cursor:pointer;color:var(--ink);text-align:left}
+.st{font:inherit;display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px;min-height:44px;border-radius:12px;border:2px solid var(--mint);background:var(--mint);padding:0 12px;font-size:19px;cursor:pointer;color:var(--ink);text-align:left}
 .st b{font-size:26px;min-width:2.3em;text-align:center}
 .st[data-v=ja]{border-color:#1B6E3C}.st[data-v=nein]{border-color:#B3261E;background:#FBE4E2}.st[data-v=enth]{border-color:var(--grey)}
-.nsk{grid-column:1/-1;font-size:16px;color:var(--grey);margin-top:2px}.ns{display:flex;flex-direction:column;justify-content:center;min-height:44px;padding:2px 12px;border:3px dashed var(--grey);border-radius:12px;background:#fff;color:var(--grey);font-size:19px;line-height:1.15}.ns small{font-size:14px}
-.urteil{margin-top:6px;font-size:24px;font-weight:700;border-radius:14px;padding:4px 14px;min-height:60px;border:3px dashed var(--grey)}
-.urteil.ja{border:3px solid #1B6E3C;background:#E3F2E8}.urteil.nein{border:3px solid #B3261E;background:#FBE4E2}
+.nsk{grid-column:1/-1;font-size:16px;color:var(--grey);margin-top:2px}.ns{display:flex;flex-direction:column;justify-content:center;min-height:44px;padding:2px 12px;border:2px dashed var(--grey);border-radius:12px;background:#fff;color:var(--grey);font-size:19px;line-height:1.15}.ns small{font-size:14px}
+.urteil{margin-top:6px;font-size:24px;font-weight:500;border-radius:14px;padding:4px 14px;min-height:60px;border:2px dashed var(--grey)}
+.urteil.ja{border:2px solid #1B6E3C;background:#E3F2E8}.urteil.nein{border:2px solid #B3261E;background:#FBE4E2}
 .urteil small{display:block;font-size:17px;font-weight:400;margin-top:2px}
-.vgl{width:100%;border-collapse:collapse;font-size:21px}.vgl th,.vgl td{border:3px solid var(--g);padding:6px 10px;text-align:left;vertical-align:top}.vgl th{background:var(--mint)}
+.vgl{width:100%;border-collapse:collapse;font-size:21px}.vgl th,.vgl td{border:2px solid var(--g);padding:6px 10px;text-align:left;vertical-align:top}.vgl th{background:var(--mint)}
 .krit{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:10px;font-size:27px}
-.drei{display:flex;gap:8px}.drei button{font:inherit;font-weight:700;min-width:140px;white-space:nowrap;padding:0 8px;min-height:52px;border-radius:12px;border:3px solid var(--g);background:#fff;color:var(--ink);cursor:pointer;font-size:22px}
+.drei{display:flex;gap:8px}.drei button{font:inherit;font-weight:500;min-width:140px;white-space:nowrap;padding:0 8px;min-height:52px;border-radius:12px;border:2px solid var(--g);background:#fff;color:var(--ink);cursor:pointer;font-size:22px}
 .drei button[aria-pressed=true]{background:var(--g);color:#fff}
-.waage{margin-top:8px;font-size:26px;border:3px solid var(--g);border-radius:14px;padding:10px 16px;background:var(--mint)}
+.waage{margin-top:8px;font-size:26px;border:2px solid var(--g);border-radius:14px;padding:10px 16px;background:var(--mint)}
 @media print{#nav,#notiz{display:none}}
 </style>
 </head>
@@ -203,9 +204,9 @@
   <p class="lead s" style="font-size:26px;margin:0 0 8px">Unsere Frage: <b data-leitfrage>…</b></p>
   <p class="task" style="margin-bottom:12px"><span class="snr">7</span><span><b>Beurteile</b>, ob die COP31 ein Erfolg ist. <b>Prüfe</b> die Kriterien und <b>begründe</b> dein Urteil.</span><i class="lvl">G</i></p>
   <div id="krit">
-    <div class="krit"><span>Bleibt das 1,5-Grad-Ziel geschützt?</span><div class="drei"><button type="button" data-w="j">✓ Ja</button><button type="button" data-w="t">± Teils</button><button type="button" data-w="n">✗ Nein</button></div></div>
-    <div class="krit"><span>Haben alle zugestimmt?</span><div class="drei"><button type="button" data-w="j">✓ Ja</button><button type="button" data-w="t">± Teils</button><button type="button" data-w="n">✗ Nein</button></div></div>
-    <div class="krit"><span>Hilft der Text armen Ländern?</span><div class="drei"><button type="button" data-w="j">✓ Ja</button><button type="button" data-w="t">± Teils</button><button type="button" data-w="n">✗ Nein</button></div></div>
+    <div class="krit"><span>Bleibt das 1,5-Grad-Ziel geschützt?</span><div class="drei"><button type="button" data-w="j">Ja</button><button type="button" data-w="t">Teils</button><button type="button" data-w="n">Nein</button></div></div>
+    <div class="krit"><span>Haben alle zugestimmt?</span><div class="drei"><button type="button" data-w="j">Ja</button><button type="button" data-w="t">Teils</button><button type="button" data-w="n">Nein</button></div></div>
+    <div class="krit"><span>Hilft der Text armen Ländern?</span><div class="drei"><button type="button" data-w="j">Ja</button><button type="button" data-w="t">Teils</button><button type="button" data-w="n">Nein</button></div></div>
   </div>
   <div class="waage" id="waage" aria-live="polite">Tippe zu jedem Kriterium. Dann <b>begründe</b>, welches Kriterium für dich am meisten zählt.</div>
 </section>
@@ -270,7 +271,7 @@
     [].forEach.call(document.querySelectorAll('#donow .aussage'),function(z){
       var p=z.querySelector('[aria-pressed=true]'),erg=z.querySelector('.erg');z.classList.remove('ok','falsch');
       if(!p){erg.textContent='–';return}
-      var ok=p.getAttribute('data-a')===z.getAttribute('data-ok');z.classList.add(ok?'ok':'falsch');erg.textContent=ok?'✓':'✗';
+      var ok=p.getAttribute('data-a')===z.getAttribute('data-ok');z.classList.add(ok?'ok':'falsch');erg.innerHTML=ok?'<svg viewBox="0 0 24 24" aria-hidden="true" style="width:.9em;height:.9em;vertical-align:-.1em;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M20 6 9 17l-5-5"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true" style="width:.9em;height:.9em;vertical-align:-.1em;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M6 6l12 12M18 6 6 18"/></svg>';
     });$('l1').classList.add('show');
   };
 
@@ -312,7 +313,7 @@
   phase(0);
 
   /* 7 Abstimmungstafel */
-  var G=['Europäische Union','Ölförderland','Inselstaat','Schwellenland'],SYM={'':'–',ja:'✓ Ja',nein:'✗ Nein',enth:'Enth.'},FOLGE=['','ja','nein','enth'];
+  var G=['Europäische Union','Ölförderland','Inselstaat','Schwellenland'],SYM={'':'–',ja:'Ja',nein:'Nein',enth:'Enth.'},FOLGE=['','ja','nein','enth'];
   var NS=[['Präsidentschaft','leitet · keine Stimme','p'],['Umweltorganisation','Beobachter · keine Stimme','u']],gesendet={};
   var T={1:{v:'A',s:{}},2:{v:'A',s:{}}},TT={1:'Antrag 1: Kohle, Öl und Gas',2:'Antrag 2: Geld für Klimaschutz'};
   function stimmen(a){var k=a+T[a].v;return T[a].s[k]=T[a].s[k]||['','','','']}
@@ -324,9 +325,9 @@
       var st=stimmen(a);G.forEach(function(g,i){h+='<button type="button" class="st" data-a="'+a+'" data-g="'+i+'" data-v="'+st[i]+'"><span>'+g+'</span><b>'+SYM[st[i]]+'</b></button>'});
       var nein=[],leer=0;st.forEach(function(x,i){if(x==='nein')nein.push(G[i]);if(!x)leer++});
       var c='',tx='Es fehlen noch '+leer+' Stimme'+(leer===1?'':'n')+'.';
-      if(nein.length){c='nein';tx='✗ Nicht angenommen.<small>Nein von: '+nein.join(', ')+'. Ein Nein genügt.</small>'}
-      else if(!leer){c='ja';tx='✓ Angenommen im Konsens.<small>Kein Nein.</small>'}
-      h+='<div class="nsk">Am Tisch, aber ohne Stimme:</div>'+NS.map(function(x){return '<div class="ns" aria-label="'+x[0]+', '+x[1]+'"><span>'+x[0]+'</span><small>'+x[1]+(x[2]&&gesendet[x[2]]?' · ✓ Code gelesen':'')+'</small></div>'}).join('');
+      if(nein.length){c='nein';tx='Nicht angenommen.<small>Nein von: '+nein.join(', ')+'. Ein Nein genügt.</small>'}
+      else if(!leer){c='ja';tx='Angenommen im Konsens.<small>Kein Nein.</small>'}
+      h+='<div class="nsk">Am Tisch, aber ohne Stimme:</div>'+NS.map(function(x){return '<div class="ns" aria-label="'+x[0]+', '+x[1]+'"><span>'+x[0]+'</span><small>'+x[1]+(x[2]&&gesendet[x[2]]?' · Code gelesen':'')+'</small></div>'}).join('');
       h+='</div><div class="urteil '+c+'" aria-live="polite">'+tx+'</div></div>';
     });$('tafel').innerHTML=h;
   }
@@ -346,9 +347,9 @@
     if(!o||o.t!=='cop31'||!(o.r>=1&&o.r<=6))return null;
     if(o.r<=4){var ok=true;['a1','a2'].forEach(function(f){if(!/^[jne-]{3}$/.test(o[f]||''))ok=false});if(!ok)return null;
       [1,2].forEach(function(a){['A','B','C'].forEach(function(v,i){var c=o['a'+a].charAt(i);T[a].s[a+v]=T[a].s[a+v]||['','','',''];T[a].s[a+v][o.r-1]=VOTE[c]||''})});
-      tafel();return 'Gruppe '+o.r+' ('+window.COP_ROLLEN[o.r].n+') eingelesen ✓'}
+      tafel();return 'Gruppe '+o.r+' ('+window.COP_ROLLEN[o.r].n+') eingelesen'}
     if(o.r===5&&Array.isArray(o.k)){var t=o.k.slice(0,2).map(function(x){return String(x).slice(0,140)});
-      $('kompt').textContent='';t.forEach(function(x,i){if(x){var d=document.createElement('div');d.textContent='Antrag '+(i+1)+': '+x;$('kompt').appendChild(d)}});$('kompbtn').hidden=false;$('kompbtn').textContent='Kompromisse anzeigen';gesendet.p=1;tafel();return 'Kompromiss-Sätze der Präsidentschaft eingelesen ✓ (Knopf „Kompromisse anzeigen“)'}
+      $('kompt').textContent='';t.forEach(function(x,i){if(x){var d=document.createElement('div');d.textContent='Antrag '+(i+1)+': '+x;$('kompt').appendChild(d)}});$('kompbtn').hidden=false;$('kompbtn').textContent='Kompromisse anzeigen';gesendet.p=1;tafel();return 'Kompromiss-Sätze der Präsidentschaft eingelesen (Knopf „Kompromisse anzeigen“)'}
     return null}
   function takt(){var v=$('scv');if(!v.videoWidth||!window.jsQR)return;cv.width=v.videoWidth;cv.height=v.videoHeight;cx.drawImage(v,0,0);
     var id=cx.getImageData(0,0,cv.width,cv.height),c=window.jsQR(id.data,id.width,id.height,{inversionAttempts:'dontInvert'});
@@ -365,7 +366,7 @@
   /* 9 Kriterien-Check, 10 Selbsteinschätzung */
   einzeln($('krit'),'.drei button');
   function waage(){var n={j:0,t:0,n:0},f=0;[].forEach.call($('krit').querySelectorAll('[aria-pressed=true]'),function(b){n[b.getAttribute('data-w')]++;f++});
-    $('waage').innerHTML=f<3?'Tippe zu jedem Kriterium. Dann <b>begründe</b>, welches Kriterium für dich am meisten zählt.':'✓ '+n.j+' · ± '+n.t+' · ✗ '+n.n+'. Das ist kein Ergebnis, sondern Material für dein Urteil. <b>Begründe</b>, welches Kriterium für dich am meisten zählt.'}
+    $('waage').innerHTML=f<3?'Tippe zu jedem Kriterium. Dann <b>begründe</b>, welches Kriterium für dich am meisten zählt.':'Ja '+n.j+' · Teils '+n.t+' · Nein '+n.n+'. Das ist kein Ergebnis, sondern Material für dein Urteil. <b>Begründe</b>, welches Kriterium für dich am meisten zählt.'}
   $('krit').addEventListener('gewaehlt',waage);
   einzeln($('selbst'),'.drei button');
 })();
