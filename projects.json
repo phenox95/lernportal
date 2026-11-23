@@ -797,6 +797,40 @@
     ]
   },
   {
+    "title": "Der Hundezuchtverein – Stunde 4: Mendels zweite Regel",
+    "description": "Do Now zur ersten Regel, Impuls mit Janas Wurf (6 schwarze, 2 weiße Welpen), Fragenentwicklung, Kreuzung der F1 mit dem Kreuzungsquadrat Aa × Aa, Spaltungsregel 3 : 1 und 1 : 2 : 1, Tafelbild von P bis F2, Exit-Ticket. Stichwörter: Spaltungsregel, F2, Allel, homozygot, heterozygot.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-10/genetik/hundezuchtverein/mendel-regel-2/",
+    "subject": "Biologie",
+    "grade": "Klasse 10",
+    "themenfeld": "3.7",
+    "reihe": "Der Hundezuchtverein",
+    "folge": 4,
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-23",
+    "sichtbar": true,
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-10/genetik/hundezuchtverein/mendel-regel-2/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Die 2. Mendelsche Regel",
+        "pfad": "biologie/klasse-10/genetik/hundezuchtverein/mendel-regel-2/arbeitsblatt-mendel-2.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-10/genetik/hundezuchtverein/mendel-regel-1/",
+        "grund": "Aufbauende Stunde: Die zweite Regel setzt die Uniformitätsregel und die Begriffe reinerbig, mischerbig, dominant und rezessiv aus Stunde 3 voraus."
+      }
+    ]
+  },
+  {
     "title": "Erdbeben – Stunde 4: Alarm für Tokio",
     "description": "Do Now, Impuls mit Meldungen aus Japan, Fragenentwicklung, Rollen der Erdbebenkonferenz vorbereiten, Beobachtungsaufgabe.",
     "type": "Materialseite",
