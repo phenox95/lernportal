@@ -8,11 +8,12 @@
 <link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
 <title>Nervensystem – Reiz und Reaktion</title>
-<meta name="description" content="Biologie Klasse 9, Themenfeld 3.6: Reiz und Reaktion. Do Now, Lineal-Fall-Test, Fragenentwicklung, Reaktionszeit messen, Reiz-Reaktions-Kette, Bremsweg, Exit-Ticket.">
+<meta name="description" content="Biologie Klasse 9, Themenfeld 3.6: Reiz und Reaktion. Do Now, Lineal-Fall-Test, Fragenentwicklung, Reaktionszeit messen, Klassenwerte als Punktdiagramm, Reiz-Reaktions-Kette, Reaktionsweg mit Regler, Exit-Ticket.">
 <link rel="stylesheet" href="../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
 <link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<link rel="stylesheet" href="../../../../../assets/css/messen.css">
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
 <style>
@@ -119,20 +120,31 @@
 </div>
 </section>
 
-<section class="slide" data-min="10">
+<section class="slide" data-min="3">
+<p class="phase" data-ph="si">Zwischensicherung</p>
+<h1 class="k">Unsere Klasse misst</h1>
+<span class="badge">3 Min. · Plenum</span>
+<div class="split" style="grid-template-columns:1fr 1fr;gap:24px;margin-bottom:8px">
+<p class="task s" style="margin:0"><span class="snr">1</span><span><b>Nenne</b> deinen Mittelwert in cm.</span><i class="lvl">●○○</i></p>
+<p class="task s" style="margin:0"><span class="snr">2</span><span><b>Erkläre</b>, warum die Werte streuen.</span><i class="lvl">●●●</i></p>
+</div>
+<div data-klassenmessung data-max="50" data-key="lp-reiz-reaktion-klasse"></div>
+</section>
+
+<section class="slide" data-min="8">
 <p class="phase" data-ph="er">Erarbeitung II</p>
 <h1 class="k">Was passiert zwischen Fallen und Fangen?</h1>
-<span class="badge">10 Min. · allein, dann Partner</span>
+<span class="badge">8 Min. · allein, dann Partner</span>
 <p class="task"><span class="snr">1</span><span><b>Beschreibe</b> in einer Kette, was zwischen Fallen und Fangen in deinem Körper passiert.</span><i class="lvl">●●○</i></p>
 <p class="task"><span class="snr">2</span><span><b>Vergleiche</b> deine Kette mit deinem Partner oder deiner Partnerin. Ergänze, was fehlt.</span></p>
 <div class="wort"><span>Reiz</span><span>Re-ak-ti-on</span><span>Sin-nes-or-gan</span><span>Nerv</span><span>Ge-hirn</span><span>Mus-kel</span></div>
 <div class="shilfe" style="margin-top:16px">Satzbausteine: Zuerst nimmt … den Reiz auf. Dann leitet … das Signal zum … Danach …<br>●○○ Lege die Bildkarten in die richtige Reihenfolge.</div>
 </section>
 
-<section class="slide" data-min="8">
+<section class="slide" data-min="7">
 <p class="phase" data-ph="si">Sicherung</p>
 <h1 class="k">Vom Reiz zur Reaktion</h1>
-<span class="badge">8 Min. · Plenum</span>
+<span class="badge">7 Min. · Plenum</span>
 <p class="task s"><span class="snr">1</span><span><b>Vergleiche</b> die Kette Schritt für Schritt mit deiner Kette. Ergänze sie in deinem Heft.</span></p>
 <div data-aufbau>
 <div class="kette">
@@ -153,12 +165,31 @@
 <p class="phase" data-ph="er">Transfer</p>
 <h1 class="k">Reaktionszeit im Straßenverkehr</h1>
 <span class="badge">5 Min. · allein, dann Partner</span>
-<p class="lead s">Ein Auto fährt 50 km/h. Das sind 14 Meter pro Sekunde.</p>
+<div class="split" style="grid-template-columns:1fr 1.25fr;gap:28px">
+<div>
+<p class="lead s" style="margin-bottom:12px">Ein Auto fährt 50 km/h. Das sind 14 Meter pro Sekunde.</p>
 <p class="task"><span class="snr">1</span><span><b>Berechne</b>, wie weit das Auto fährt, bevor eine Fahrerin mit 0,2 Sekunden Reaktionszeit bremst.</span><i class="lvl">●●○</i></p>
 <p class="task"><span class="snr">2</span><span><b>Erläutere</b>, was ein Blick aufs Handy daran ändert.</span><i class="lvl">●●●</i></p>
 <div class="shilfe" style="font-size:21px">Hilfe: Weg = Meter pro Sekunde · Sekunden</div>
-<div style="margin-top:14px"><button class="b sec" data-zeige>Rechnung prüfen</button></div>
-<div class="lsg-box" style="margin-top:10px"><div class="mint pad"><p>14 m pro Sekunde · 0,2 s = 2,8 m</p></div></div>
+</div>
+<div data-vermuten>
+<p class="vm-frage"><b>Vermute</b>: Die Fahrerin schaut 1 Sekunde aufs Handy. Wie weit fährt das Auto, bevor sie bremst?</p>
+<div class="vm-wahl"><button>etwa 3 m</button><button>etwa 14 m</button><button>etwa 40 m</button></div>
+<div class="vm-pruefen" data-reaktionsweg>
+<svg class="rg-bild rw-bild" viewBox="0 0 640 128" role="img" aria-label="Straße von oben mit Meter-Skala von 0 bis 30 Metern, Zebrastreifen bei 12 Metern. Ein Auto steht an der Stelle, an der die Fahrerin zu bremsen beginnt.">
+ <rect x="0" y="20" width="640" height="64" fill="var(--tint)"/>
+ <path d="M0 52 H640" stroke="var(--line)" stroke-width="3" stroke-dasharray="20 16"/>
+ <g fill="var(--ink)"><rect x="248" y="22" width="24" height="8"/><rect x="248" y="38" width="24" height="8"/><rect x="248" y="54" width="24" height="8"/><rect x="248" y="70" width="24" height="8"/></g>
+ <rect class="rw-weg" x="20" y="60" width="600" height="10" fill="var(--g)"/>
+ <g class="rw-auto"><g transform="translate(20 0)"><rect x="-48" y="26" width="48" height="26" rx="6" fill="var(--dk)"/><rect x="-18" y="30" width="10" height="18" rx="2" fill="#fff" opacity=".8"/></g></g>
+ <g stroke="var(--ink)" stroke-width="2"><path d="M20 92 H620"/><path d="M20 92 v8 M120 92 v8 M220 92 v8 M320 92 v8 M420 92 v8 M520 92 v8 M620 92 v8"/></g>
+ <g font-size="18" text-anchor="middle"><text x="20" y="122">0</text><text x="120" y="122">5</text><text x="220" y="122">10</text><text x="320" y="122">15</text><text x="420" y="122">20</text><text x="520" y="122">25</text><text x="608" y="122">30 m</text><text x="260" y="15">Zebrastreifen</text></g>
+</svg>
+<div class="rg-zeile"><label for="rw-t" style="min-width:0">Reaktionszeit</label><input type="range" id="rw-t" min="2" max="20" value="2" step="1"><output for="rw-t" id="rw-t-aus" style="min-width:80px">0,2 s</output></div>
+<div class="rg-zeile"><button type="button" class="b" id="rw-los">Fahrt zeigen</button><p class="rg-erg" id="rw-erg" aria-live="polite" style="flex:1;margin:0">Weg bis zum Bremsen: 2,8 m</p></div>
+</div>
+</div>
+</div>
 </section>
 
 <section class="slide" data-min="4">
@@ -195,7 +226,33 @@
  "spiele": ["memory", "quiz", "zuordnen"]
 }
 </script>
+<script>
+/* Regler Reaktionsweg bei 50 km/h: Weg = Geschwindigkeit · Reaktionszeit, Zebrastreifen bei 12 m, Skala 20 px je Meter */
+(function () {
+  var box = document.querySelector("[data-reaktionsweg]"); if (!box) return;
+  var t = box.querySelector("#rw-t"), aus = box.querySelector("#rw-t-aus"), erg = box.querySelector("#rw-erg"), los = box.querySelector("#rw-los");
+  var auto = box.querySelector(".rw-auto"), weg = box.querySelector(".rw-weg");
+  var kmh = 50, PX = 20, ZEBRA = 12, ruhig = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function k(x) { return x.toFixed(1).replace(".", ","); }
+  function setzen(fahrt) {
+    var s = t.value / 10, m = kmh / 3.6 * s, px = Math.min(m, 30) * PX;
+    aus.textContent = k(s) + " s";
+    var dauer = fahrt && !ruhig ? s : 0;
+    auto.style.transition = weg.style.transition = dauer ? "transform " + dauer + "s linear" : "none";
+    if (fahrt && !ruhig) { auto.style.transform = "translateX(0px)"; weg.style.transform = "scaleX(0)"; void auto.getBoundingClientRect(); }
+    auto.style.transform = "translateX(" + px + "px)";
+    weg.style.transformOrigin = "20px 0"; weg.style.transformBox = "view-box"; weg.style.transform = "scaleX(" + (px / 600) + ")";
+    erg.textContent = "Weg bis zum Bremsen: " + k(m) + " m";
+    box.querySelector(".rw-bild").setAttribute("aria-label", "Straße mit Meter-Skala. Das Auto fährt " + k(m) + " Meter, bis die Fahrerin bremst. Der Bremsbeginn liegt " + (m < ZEBRA ? "vor" : "hinter") + " dem Zebrastreifen bei 12 Metern.");
+  }
+  t.addEventListener("input", function () { setzen(false); });
+  los.addEventListener("click", function () { setzen(true); });
+  if (ruhig) los.hidden = true;
+  setzen(false);
+})();
+</script>
 <script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/messen.js" defer></script>
 <script src="../../../../../assets/js/impulsfilm.js" defer></script>
 <script src="../../../../../assets/js/praesentation.js" defer></script>
 </body>

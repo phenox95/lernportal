@@ -1,0 +1,75 @@
+/* Lernportal – Messen und Prüfen in Präsentationen (Skript assets/js/messen.js).
+   Nach stunde.css laden. Farben nur über die Variablen des Designs, keine Schatten, Bewegung nur über transform/opacity. */
+
+[data-vermuten] [hidden],[data-klassenmessung] [hidden],[data-qr-sammeln] [hidden],[data-reaktionsweg] [hidden]{display:none!important}
+/* ---------- Vermuten, dann prüfen ---------- */
+[data-vermuten] .vm-frage{font-size:22px;line-height:1.35;margin:0 0 8px}
+[data-vermuten] .vm-wahl{display:flex;flex-wrap:wrap;gap:8px}
+[data-vermuten] .vm-wahl .b{min-height:48px}
+[data-vermuten] .vm-wahl .b[aria-pressed="true"]{background:var(--g);color:#fff;outline-color:var(--g)}
+[data-vermuten] .vm-status{font-size:18px;color:var(--ink2);margin:4px 0 8px;min-height:44px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+[data-vermuten] .vm-status .b.s{margin-left:8px}
+[data-vermuten] .vm-pruefen{position:relative}
+[data-vermuten].vm-zu .vm-pruefen>*{visibility:hidden}
+[data-vermuten].vm-zu .vm-pruefen::after{content:"Erst vermuten, dann prüfen";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border:2px dashed var(--line);border-radius:12px;color:var(--ink3);font-size:24px;background:var(--paper,#fff)}
+
+/* ---------- Gemeinsam für Regler der Stunden ---------- */
+.rg-zeile{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:4px 0;font-size:22px}
+.rg-zeile label{min-width:150px}
+.rg-zeile input[type=range]{flex:1;min-width:200px;height:44px;accent-color:var(--g)}
+.rg-zeile output{font-size:26px;font-weight:500;color:var(--dk);min-width:130px}
+.rg-knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.rg-knoepfe .b.s{margin-left:0}
+.rg-knoepfe .b[aria-pressed="true"]{background:var(--g);color:#fff;outline-color:var(--g)}
+.rg-erg{font-size:22px;line-height:1.35;margin:8px 0 0;padding:8px 16px;border-left:6px solid var(--g);background:var(--tint)}
+.rg-bild{display:block;width:100%;height:auto}
+.rg-bild text{font-family:inherit;fill:var(--ink)}
+.rg-hinweis{font-size:18px;color:var(--ink3);margin:6px 0 0}
+
+/* ---------- Klassenmessung ---------- */
+.km{position:relative}
+.km-plot{display:block;width:100%;height:auto;max-height:236px}
+.km-achse path{stroke:var(--ink);stroke-width:2;fill:none}
+.km-achse text{font-family:inherit;font-size:24px;fill:var(--ink)}
+.km-achse .km-s{fill:var(--ink3);font-size:20px}
+.km-voll{fill:var(--g)}
+.km-ring{fill:none;stroke:var(--dk);stroke-width:3.5}
+.km-punkte circle{animation:km-neu .4s ease-out both}
+@keyframes km-neu{from{opacity:0}to{opacity:1}}
+.km-mw path{stroke:var(--dk);stroke-width:2.5;stroke-dasharray:8 6}
+.km-mw text{font-family:inherit;font-size:20px;fill:var(--dk)}
+.km-unter{display:flex;gap:8px 24px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.km-legende{display:flex;gap:24px;font-size:18px;color:var(--ink2);margin:0}
+.km-legende span{display:inline-flex;align-items:center;gap:6px}
+.km-legende svg{width:20px;height:20px}
+.km-legende .km-l circle{fill:var(--g)}
+.km-legende .km-b circle{fill:none;stroke:var(--dk);stroke-width:3}
+.km-zahlen{display:flex;flex-wrap:wrap;gap:8px 32px;font-size:22px;margin:0 0 12px}
+.km-zahlen span{color:var(--ink3);margin-right:8px}
+.km-zahlen b{font-weight:500;color:var(--ink)}
+.km-ein{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:22px}
+.km-ein input{font:inherit;width:120px;min-height:48px;padding:4px 12px;border:2px solid var(--g);border-radius:10px;background:#fff;color:var(--ink)}
+.km-ein .b:disabled{opacity:.45;cursor:default}
+.km-status{font-size:18px;color:var(--ink2);margin:0}
+.km-test{position:absolute;inset:0;background:var(--paper,#fff);display:flex;flex-direction:column;gap:12px;z-index:2}
+.km-feld{flex:1;min-height:200px;width:100%;border:2px solid var(--line);border-radius:16px;background:var(--tint);color:var(--ink);font-family:inherit;font-size:40px;font-weight:500;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.km-feld.warte{background:var(--dk);color:#fff;border-color:var(--dk)}
+.km-feld.los{background:var(--g);color:#fff;border-color:var(--g);font-size:72px}
+.km-feld:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+.km-leiste{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.km-info{font-size:20px;margin:0;color:var(--ink2)}
+
+/* ---------- Gruppenwerte per QR-Code ---------- */
+.qs-leiste{display:flex;gap:8px;flex-wrap:wrap}
+.qs-hand{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:20px}
+.qs-hand input{font:inherit;flex:1;min-width:240px;min-height:48px;padding:4px 12px;border:2px solid var(--g);border-radius:10px;background:#fff;color:var(--ink)}
+.qs video{display:block;width:240px;max-width:100%;border-radius:12px;background:var(--dk);margin-top:10px;transform:scaleX(-1)}
+.qs-status{font-size:20px;color:var(--ink2);margin:8px 0}
+.qs-tabelle{max-height:320px;overflow:auto}
+.qs-tabelle table{width:100%;border-collapse:collapse;font-size:19px;line-height:1.3}
+.qs-tabelle th,.qs-tabelle td{border:1.5px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
+.qs-tabelle td:nth-child(-n+2){white-space:nowrap}
+.qs-tabelle th{background:var(--mint);font-weight:500}
+.qs-leer{font-size:20px;color:var(--ink3)}
+
+@media (prefers-reduced-motion:reduce){.km-punkte circle{animation:none}}
