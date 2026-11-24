@@ -118,6 +118,8 @@
 /* Abbildungen */
 .lm-abb { padding: 0.5rem; background: var(--lp-flaeche); }
 .lm-abb svg { display: block; width: 100%; height: auto; }
+/* Foto im Material: höchstens etwa halbe Bildschirmhöhe, Text mit Abstand darunter */
+.lp-seite .lm-foto { width: 100%; max-width: 34rem; height: auto; margin: 0 auto 0.9rem; border-radius: calc(var(--lp-radius) * 0.6); }
 .lm-abb text { fill: var(--lp-text); font-family: var(--lp-schrift); }
 .lm-zwei { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
 @media (max-width: 48rem) { .lm-zwei { grid-template-columns: minmax(0, 1fr); } }
