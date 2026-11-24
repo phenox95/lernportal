@@ -296,6 +296,30 @@
     ]
   },
   {
+    "title": "Beschriften üben: Nervenzelle und Reflexbogen",
+    "description": "Nervenzelle und Reflexbogen beschriften: Wörter ziehen oder antippen, auf drei Niveaus, mit Selbstprüfung.",
+    "type": "Interaktive Übung",
+    "path": "biologie/klasse-9/nervensystem/beschriften/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "10 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 9,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",
+        "grund": "Dort steht der Bau der Nervenzelle, den Aufgabe 1 wiederholt."
+      },
+      {
+        "pfad": "biologie/klasse-9/nervensystem/kniereflex/",
+        "grund": "Dort läuft der Kniesehnenreflex Schritt für Schritt, den Aufgabe 2 wiederholt."
+      }
+    ]
+  },
+  {
     "title": "Synapsen-Baukasten: Wie springt das Signal über die Lücke?",
     "description": "Löse ein Signal an der Synapse aus, verfolge Bläschen, Transmitter und Rezeptoren und teste, was Stoff X am Modell verändert.",
     "type": "Lernmodul",
