@@ -331,6 +331,38 @@
     ]
   },
   {
+    "title": "Erregungsleitung: Schnecke oder Rennwagen?",
+    "description": "Warum sind manche Signale 100-mal schneller? Im Modell zwei Signale um die Wette laufen lassen, die Myelinscheide erklären und einen Domino-Vergleich beurteilen.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/erregungsleitung-stunde/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 7,
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/nervensystem/erregungsleitung-stunde/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Lernmodul: Wettlauf der Signale",
+        "pfad": "biologie/klasse-9/nervensystem/erregungsleitung/",
+        "art": "Übung"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/nervenzelle-stunde/",
+        "grund": "Dort lernst du Axon, Myelinscheide und Schnürring kennen."
+      }
+    ]
+  },
+  {
     "title": "Wettlauf der Signale: Wozu die Myelinscheide?",
     "description": "Modell zur Erregungsleitung: vermuten, zwei Signale um die Wette laufen lassen und mit einem Regler zeigen, was beschädigte Myelinscheiden bei Multipler Sklerose bewirken.",
     "type": "Lernmodul",
@@ -351,6 +383,43 @@
     ]
   },
   {
+    "title": "Vom Reiz zur Reaktion: Warum zuckt die Hand zuerst?",
+    "description": "Den Signalweg vom Reiz bis zur Reaktion legen, ZNS und PNS zuordnen und Reflex und willkürliche Bewegung im Modell vergleichen.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/signalweg-stunde/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 9,
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/nervensystem/signalweg-stunde/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Lernmodul: Signalweg und Reflex",
+        "pfad": "biologie/klasse-9/nervensystem/signalweg/",
+        "art": "Übung"
+      },
+      {
+        "titel": "Übung: Nervenzelle und Reflexbogen beschriften",
+        "pfad": "biologie/klasse-9/nervensystem/beschriften/",
+        "art": "Übung"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/reiz-reaktion/",
+        "grund": "In Nr. 1 habt ihr die Kette vom Reiz zur Reaktion zum ersten Mal gelegt."
+      }
+    ]
+  },
+  {
     "title": "Vom Reiz zur Reaktion: Signalweg und Reflex",
     "description": "Lege den Signalweg vom Reiz bis zur Reaktion, ordne ZNS und PNS zu und vergleiche Reflex und willkürliche Bewegung im Modell.",
     "type": "Lernmodul",
@@ -367,6 +436,48 @@
       {
         "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",
         "grund": "Nervenzellen bilden die Nerven, die das Signal vom Reiz zum Muskel leiten."
+      }
+    ]
+  },
+  {
+    "title": "Reflex oder Reaktion? Ein Experiment",
+    "description": "Zwei Stunden: Den Kniesehnenreflex Schritt für Schritt verfolgen, Reflex und Reaktion vergleichen, dann mit Kontrolle messen, ob Ablenkung die Reaktion langsamer macht.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/reflex-stunde/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "2 × 45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 10,
+    "dateien": [
+      {
+        "titel": "Präsentation Teil 1: Reflex oder Reaktion?",
+        "pfad": "biologie/klasse-9/nervensystem/reflex-stunde/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Präsentation Teil 2: Macht Ablenkung langsamer?",
+        "pfad": "biologie/klasse-9/nervensystem/reflex-stunde/experiment/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Lernmodul: Der Kniesehnenreflex",
+        "pfad": "biologie/klasse-9/nervensystem/kniereflex/",
+        "art": "Übung"
+      },
+      {
+        "titel": "Arbeitsblatt: Reaktionszeit messen",
+        "pfad": "biologie/klasse-9/nervensystem/reiz-reaktion/arbeitsblatt-reaktionszeit.pdf",
+        "art": "Arbeitsblatt"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/signalweg-stunde/",
+        "grund": "Dort steht der Reflex an der heißen Herdplatte."
       }
     ]
   },
@@ -411,6 +522,43 @@
       {
         "pfad": "biologie/klasse-9/nervensystem/kniereflex/",
         "grund": "Dort läuft der Kniesehnenreflex Schritt für Schritt, den Aufgabe 2 wiederholt."
+      }
+    ]
+  },
+  {
+    "title": "Synapse: Wie springt das Signal über die Lücke?",
+    "description": "Zwei Stunden: Mit dem Synapsen-Baukasten die Schritte an der Synapse erarbeiten, dann das Modell beurteilen und einen eigenen Vergleich entwickeln.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/synapse-stunde/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "2 × 45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 8,
+    "dateien": [
+      {
+        "titel": "Präsentation Teil 1: Die Synapse",
+        "pfad": "biologie/klasse-9/nervensystem/synapse-stunde/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Präsentation Teil 2: Die Synapse im Modell",
+        "pfad": "biologie/klasse-9/nervensystem/synapse-stunde/modell/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Lernmodul: Synapsen-Baukasten",
+        "pfad": "biologie/klasse-9/nervensystem/synapse/",
+        "art": "Übung"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/erregungsleitung-stunde/",
+        "grund": "Dort läuft das Signal bis zum Endknöpfchen."
       }
     ]
   },

@@ -1,0 +1,184 @@
+<!doctype html>
+<!-- Gestaltung nach dem Skill "unslop" von Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Nervensystem – Vom Reiz zur Reaktion</title>
+<meta name="description" content="Biologie Klasse 9, Themenfeld 3.6, Nr. 9: ZNS, PNS und Reiz-Reaktions-Schema. Do Now, Impuls heiße Herdplatte, Fragenentwicklung, Lernmodul Signalweg, Reflex und willkürliche Bewegung, Tafelbild, Transfer, Exit-Ticket.">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+<style>
+.lf{font-size:30px;line-height:1.35;font-weight:500}
+.qrbox{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px;display:inline-block}
+.qrbox svg{display:block;width:180px;height:180px}
+.tab{width:100%;border-collapse:collapse;font-size:22px}
+.tab th,.tab td{border:1.5px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+.abb{display:block;width:100%;height:auto}
+.abb text{font-family:inherit;fill:var(--ink)}
+.dunkel text{fill:#fff}
+.kette{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;align-items:stretch;margin:12px 0 18px}
+.kette .karte{padding:12px 10px;text-align:center;position:relative}
+.kette .karte p{margin:0;font-size:20px;line-height:1.3}
+.kette .karte b{display:block;font-size:21px;font-weight:500;color:var(--dk);margin-bottom:4px}
+.kette .karte+.karte::before{content:"";position:absolute;left:-10px;top:50%;width:10px;height:2px;background:var(--g)}
+
+.hand{transform-box:fill-box;transform-origin:0 50%}
+[data-film].spielt .hand{animation:zuck 2.4s ease-in-out .4s both}
+[data-film].spielt .aua{animation:auf .3s ease-out 1.8s both}
+@keyframes zuck{0%{transform:translateY(40px)}30%{transform:translateY(40px)}40%,100%{transform:translateY(0)}}
+@keyframes auf{from{opacity:0}to{opacity:1}}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Nervensystem – Vom Reiz zur Reaktion" data-subject="Biologie" data-grade="Klasse 9">
+<noscript><p style="padding:1rem;font-size:1rem;background:#fff">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+<div id="buehne">
+<div id="stage">
+<section class="slide">
+<p class="phase">Themenfeld 3.6 · Bau und Funktion des Nervensystems</p>
+<h1 class="k" style="font-size:60px;margin-top:140px">Vom Reiz zur Reaktion</h1>
+<p class="lead">Biologie · Jahrgang 9 · Nr. 9</p>
+</section>
+<section class="slide" data-min="3">
+<p class="phase" data-ph="dn">Do Now · Wiederholung</p>
+<h1 class="k">Die Synapse</h1>
+<span class="badge">3 Min. · allein · Heft</span>
+<p class="task big"><span class="snr">1</span><span><b>Erkläre</b>, warum das Signal an der Synapse nur in eine Richtung läuft.</span></p>
+<div class="wort"><span>Bläs-chen</span><span>Re-zep-tor</span><span>End-knöpf-chen</span></div>
+<p class="tip" style="margin-top:20px">Du arbeitest allein und leise. Du darfst dir die Aufgabe vorlesen lassen.</p>
+<div style="margin-top:14px"><button class="b sec" data-zeige>Lösung prüfen</button></div>
+<div class="lsg-box" style="margin-top:12px"><div class="mint pad"><p>Die Bläschen mit Transmittern liegen nur im Endknöpfchen. Die Rezeptoren liegen nur an der nächsten Zelle. Deshalb geht es nur in eine Richtung.</p></div></div>
+</section>
+
+<section class="slide dark" data-min="3">
+<p class="phase" data-ph="im">Impuls</p>
+<h1 class="k">Die heiße Herdplatte</h1>
+<div class="split" data-film style="grid-template-columns:1fr 1.1fr;align-items:center;margin-top:12px">
+<svg class="abb dunkel" viewBox="0 0 400 300" role="img" aria-label="Eine Hand über einer glühenden Herdplatte. Die Hand zuckt nach oben. Erst danach erscheint das Wort Aua.">
+ <rect x="40" y="220" width="320" height="30" rx="6" fill="none" stroke="#fff" stroke-width="4"/>
+ <ellipse cx="200" cy="214" rx="110" ry="14" fill="var(--ad)" opacity=".8"/>
+ <g class="hand" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"><path d="M40 140 H170 q30 0 30 20 q0 16 -30 16 H40"/><path d="M170 140 q40 -4 60 10"/></g>
+ <text class="aua" x="260" y="90" font-size="48" style="fill:var(--ad)">Aua</text>
+</svg>
+<div>
+<p style="font-size:32px;line-height:1.35;color:#fff;margin:0">Lena kocht Nudeln. Sie fasst aus Versehen auf die heiße Herdplatte.</p>
+<p style="font-size:36px;line-height:1.3;color:var(--ad);margin:24px 0 0;font-weight:500">Ihre Hand zuckt sofort zurück. Erst danach spürt sie den Schmerz.</p>
+</div>
+</div>
+</section>
+<section class="slide" data-min="2">
+<p class="phase" data-ph="im">Fragenentwicklung</p>
+<h1 class="k">Welche Fragen stellen sich euch?</h1>
+<span class="badge">2 Min. · Plenum</span>
+<div data-fragenfeld data-impulse="Was überrascht euch?|Was passiert zuerst, was danach?|Welche Frage stellt sich euch?"></div>
+</section>
+
+<section class="slide" data-min="12">
+<p class="phase" data-ph="er">Erarbeitung I</p>
+<h1 class="k">Der Weg des Signals</h1>
+<span class="badge">12 Min. · allein · Vorlesen-Knopf</span>
+<div class="split" style="grid-template-columns:1.55fr 1fr;align-items:start">
+<div>
+<p class="task"><span class="snr">1</span><span><b>Lies</b> M1. Markiere pro Absatz höchstens zwei Schlüsselwörter.</span></p>
+<p class="task"><span class="snr">2</span><span><b>Ordne</b> die Karten vom Reiz bis zur Reaktion (Aufgabe 1).</span><i class="lvl">●○○</i></p>
+<p class="task"><span class="snr">3</span><span><b>Ordne</b> zu: Gehört der Teil zum ZNS oder zum PNS (Aufgabe 2)?</span><i class="lvl">●●○</i></p>
+
+<div class="wort"><span>sen-so-ri-scher Nerv</span><span>mo-to-ri-scher Nerv</span><span>ZNS</span><span>PNS</span><span>Rü-cken-mark</span></div>
+</div>
+<div style="text-align:center"><div class="qrbox" data-qr="../../signalweg/" role="img" aria-label="QR-Code: Lernmodul Vom Reiz zur Reaktion"></div><p class="tip" style="margin-top:8px">Lernmodul im Portal</p></div>
+</div>
+</section>
+
+<section class="slide" data-min="10">
+<p class="phase" data-ph="er">Erarbeitung II · Modell</p>
+<h1 class="k">Zwei Wege</h1>
+<span class="badge">10 Min. · Partner</span>
+<p class="task"><span class="snr">1</span><span><b>Vergleiche</b> den Reflex mit der willkürlichen Bewegung. Starte beide Wege in M2. Entscheide in jeder Zeile: ja oder nein (Aufgabe 3).</span><i class="lvl">●○○</i></p>
+<p class="task"><span class="snr">2</span><span><b>Erkläre</b>, warum Lenas Hand zurückzuckt, bevor sie den Schmerz spürt (Aufgabe 4).</span><i class="lvl">●●○</i></p>
+
+<div class="shilfe" style="font-size:21px;margin-top:10px">Satzbausteine: Beim Reflex läuft das Signal nur bis zum … · Der Weg zum Gehirn ist … · Deshalb spürt Lena den Schmerz erst …</div>
+</section>
+
+<section class="slide" data-min="8">
+<p class="phase" data-ph="si">Sicherung</p>
+<h1 class="k">Reiz-Reaktions-Schema</h1>
+<span class="badge">8 Min. · Plenum · Heft</span>
+<div data-aufbau>
+<div class="kette">
+ <div class="karte mint" data-s="1"><b>Reiz</b><p>Hitze</p></div>
+ <div class="karte mint" data-s="2"><b>Sinneszellen</b><p>in der Haut</p></div>
+ <div class="karte mint" data-s="3"><b>sensorischer Nerv</b><p>PNS</p></div>
+ <div class="karte" data-s="4" style="background:var(--g);color:#fff"><b style="color:#fff">Rückenmark</b><p>ZNS</p></div>
+ <div class="karte mint" data-s="5"><b>motorischer Nerv</b><p>PNS</p></div>
+ <div class="karte mint" data-s="6"><b>Muskel</b><p>im Arm</p></div>
+ <div class="karte mint" data-s="7"><b>Reaktion</b><p>Hand zuckt</p></div>
+</div>
+<div class="merk" data-s="8" style="font-size:23px">Beim <b>Reflex</b> schaltet das Rückenmark das Signal direkt um. Das ist der kurze Weg. Gleichzeitig läuft ein Signal zum Gehirn. Dort entsteht der Schmerz, etwas später.</div>
+<p class="tip" data-s="9" style="margin-top:10px">ZNS = Gehirn und Rückenmark. PNS = alle Nerven außerhalb davon.</p>
+</div>
+</section>
+
+<section class="slide" data-min="4">
+<p class="phase" data-ph="er">Transfer</p>
+<h1 class="k">Tom sagt …</h1>
+<span class="badge">4 Min. · allein, dann Partner</span>
+<div class="mint pad"><p style="font-size:28px;margin:0">„Beim Reflex braucht man das Gehirn gar nicht.“</p></div>
+<p class="task"><span class="snr">1</span><span><b>Beurteile</b> die Aussage von Tom. Begründe mit M2 (Aufgabe 5).</span><i class="lvl">●●●</i></p>
+
+<p class="tip" style="margin-top:12px">Zum Üben (freiwillig): Reflexbogen beschriften im Portal.</p>
+</section>
+<section class="slide" data-min="3">
+<p class="phase" data-ph="re">Reflexion</p>
+<h1 class="k">Exit-Ticket</h1>
+<span class="badge">3 Min. · allein · Zettel</span>
+<div class="mint pad"><p class="lf" data-leitfrage></p></div>
+<p class="task big"><span class="snr">1</span><span><b>Erkläre</b> in zwei Sätzen den Unterschied zwischen Reflex und willkürlicher Bewegung.</span></p>
+<p class="tip">Neue Fragen kommen auf die Lernlandkarte.</p>
+</section>
+<div id="nummer"></div>
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+
+<!-- ENTWURF: Begriffe fachlich gegenlesen, dann "geprueft": true setzen und in projects.json "begriffe": true ergänzen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Vom Reiz zur Reaktion",
+ "geprueft": false,
+ "paare": [
+  ["ZNS", "Zentrales Nervensystem: Gehirn und Rückenmark"],
+  ["PNS", "Peripheres Nervensystem: alle Nerven außerhalb von Gehirn und Rückenmark"],
+  ["sensorischer Nerv", "Leitet Signale von den Sinneszellen zum ZNS"],
+  ["motorischer Nerv", "Leitet Signale vom ZNS zum Muskel"],
+  ["Reflex", "Schnelle Reaktion, die immer gleich abläuft und über das Rückenmark geht", "Re-flex"],
+  ["Rückenmark", "Teil des ZNS im Rücken, schaltet Reflexe um", "Rü-cken-mark"]
+ ],
+ "spiele": ["memory", "quiz", "zuordnen"]
+}
+</script>
+<script src="../../../../../assets/js/qrcode.js"></script>
+<script>
+(function () {
+  if (typeof qrcode !== "function" || !/^https?:/.test(location.protocol)) return;
+  [].forEach.call(document.querySelectorAll("[data-qr]"), function (ziel) {
+    try {
+      var url = new URL(ziel.getAttribute("data-qr"), location.href).href, q = qrcode(0, "M"); q.addData(url); q.make();
+      ziel.innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+    } catch (e) { /* ohne QR-Code bleibt der Hinweis */ }
+  });
+})();
+</script>
+<script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/impulsfilm.js" defer></script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>

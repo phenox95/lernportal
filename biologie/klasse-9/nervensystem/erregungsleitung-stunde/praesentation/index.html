@@ -1,0 +1,183 @@
+<!doctype html>
+<!-- Gestaltung nach dem Skill "unslop" von Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Nervensystem – Wettlauf der Signale</title>
+<meta name="description" content="Biologie Klasse 9, Themenfeld 3.6, Nr. 7: Erregungsleitung. Do Now, Impuls 1 m/s und 100 m/s, Fragenentwicklung, Lernmodul Wettlauf der Signale, MS-Regler, Tafelbild, Domino-Modellkritik, Exit-Ticket.">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+<style>
+.lf{font-size:30px;line-height:1.35;font-weight:500}
+.qrbox{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px;display:inline-block}
+.qrbox svg{display:block;width:180px;height:180px}
+.tab{width:100%;border-collapse:collapse;font-size:22px}
+.tab th,.tab td{border:1.5px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+.abb{display:block;width:100%;height:auto}
+.abb text{font-family:inherit;fill:var(--ink)}
+.dunkel text{fill:#fff}
+.kette{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;align-items:stretch;margin:12px 0 18px}
+.kette .karte{padding:12px 10px;text-align:center;position:relative}
+.kette .karte p{margin:0;font-size:20px;line-height:1.3}
+.kette .karte b{display:block;font-size:21px;font-weight:500;color:var(--dk);margin-bottom:4px}
+.kette .karte+.karte::before{content:"";position:absolute;left:-10px;top:50%;width:10px;height:2px;background:var(--g)}
+
+[data-film].spielt .lauf-a{animation:lauf 6s linear .5s both}
+[data-film].spielt .lauf-b{animation:lauf .9s linear .5s both}
+[data-film].spielt .zeit{animation:auf .4s ease-out 1.6s both}
+.lauf-a,.lauf-b{transform:translateX(560px)}
+@keyframes lauf{from{transform:translateX(0)}to{transform:translateX(560px)}}
+@keyframes auf{from{opacity:0}to{opacity:1}}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Nervensystem – Wettlauf der Signale" data-subject="Biologie" data-grade="Klasse 9">
+<noscript><p style="padding:1rem;font-size:1rem;background:#fff">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+<div id="buehne">
+<div id="stage">
+<section class="slide">
+<p class="phase">Themenfeld 3.6 · Bau und Funktion des Nervensystems</p>
+<h1 class="k" style="font-size:60px;margin-top:140px">Wettlauf der Signale</h1>
+<p class="lead">Biologie · Jahrgang 9 · Nr. 7</p>
+</section>
+<section class="slide" data-min="3">
+<p class="phase" data-ph="dn">Do Now · Wiederholung</p>
+<h1 class="k">Schema und Mikroskop</h1>
+<span class="badge">3 Min. · allein · Heft</span>
+<p class="task big"><span class="snr">1</span><span><b>Nenne</b> zwei Dinge, die das Schema der Nervenzelle zeigt, aber das Mikroskop nicht.</span></p>
+<p class="task big"><span class="snr">2</span><span><b>Erkläre</b> in einem Satz, warum ein Schema ein Modell ist.</span></p>
+<div class="wort"><span>My-e-lin-schei-de</span><span>Sig-nal-rich-tung</span><span>Mo-dell</span><span>ver-ein-facht</span></div>
+<p class="tip" style="margin-top:20px">Du arbeitest allein und leise. Du darfst dir die Aufgabe vorlesen lassen.</p>
+<div style="margin-top:14px"><button class="b sec" data-zeige>Lösung prüfen</button></div>
+<div class="lsg-box" style="margin-top:12px"><div class="mint pad"><p>1 zum Beispiel Myelinscheide, Endknöpfchen, Signalrichtung. 2 Ein Schema vereinfacht die Wirklichkeit und zeigt nur das Wichtige.</p></div></div>
+</section>
+
+<section class="slide dark" data-min="3">
+<p class="phase" data-ph="im">Impuls</p>
+<h1 class="k">Schnecke oder Rennwagen?</h1>
+<div data-film style="margin-top:20px">
+<svg class="abb dunkel" style="max-height:290px" viewBox="0 0 760 250" role="img" aria-label="Zwei Nervenfasern gleich lang. Auf der oberen läuft ein Signal langsam, auf der unteren sehr schnell. Das untere Signal ist zuerst am Ende.">
+ <g stroke="#fff" stroke-width="5"><path d="M40 70 H640"/><path d="M40 180 H640"/></g>
+ <circle class="lauf-a" cx="60" cy="70" r="14" fill="var(--ad)"/>
+ <circle class="lauf-b" cx="60" cy="180" r="14" fill="var(--ad)"/>
+ <g font-size="26"><text x="40" y="38">Nervenfaser A: etwa 1 m pro Sekunde</text><text x="40" y="148">Nervenfaser B: etwa 100 m pro Sekunde</text></g>
+ <g class="zeit" font-size="24"><text x="660" y="188">Ziel</text></g>
+</svg>
+<p style="font-size:34px;line-height:1.35;color:#fff;margin:20px 0 0">Beide Nervenfasern sind in deinem Körper.</p>
+<p style="font-size:26px;line-height:1.35;color:var(--ad);margin:8px 0 0">1 m pro Sekunde ist langsames Gehen. 100 m pro Sekunde sind 360 km/h.</p>
+</div>
+</section>
+<section class="slide" data-min="2">
+<p class="phase" data-ph="im">Fragenentwicklung</p>
+<h1 class="k">Welche Fragen stellen sich euch?</h1>
+<span class="badge">2 Min. · Plenum</span>
+<div data-fragenfeld data-impulse="Was überrascht euch?|Woran könnte der Unterschied liegen?|Welche Frage stellt sich euch?"></div>
+</section>
+
+<section class="slide" data-min="14">
+<p class="phase" data-ph="er">Erarbeitung I · Modell</p>
+<h1 class="k">Der Wettlauf im Modell</h1>
+<span class="badge">14 Min. · Partner · ein Gerät</span>
+<div class="split" style="grid-template-columns:1.55fr 1fr;align-items:start">
+<div>
+<p class="task"><span class="snr">1</span><span><b>Vermute</b> zuerst: Welches Signal kommt zuerst an? Startet dann den Wettlauf in M1 (Aufgabe 1).</span></p>
+<p class="task"><span class="snr">2</span><span><b>Beschreibe</b> deine Beobachtungen. Entscheide in jeder Zeile: ja oder nein (Aufgabe 2).</span><i class="lvl">●○○</i></p>
+<p class="task"><span class="snr">3</span><span><b>Erkläre</b>, warum das Signal mit Myelinscheide schneller am Ziel ist (Aufgabe 3).</span><i class="lvl">●●○</i></p>
+
+<div class="shilfe" style="font-size:20px">Satzbaustein: Das Signal springt von … zu … Deshalb …</div>
+</div>
+<div style="text-align:center"><div class="qrbox" data-qr="../../erregungsleitung/" role="img" aria-label="QR-Code: Lernmodul Wettlauf der Signale"></div><p class="tip" style="margin-top:8px">Lernmodul im Portal</p></div>
+</div>
+</section>
+
+<section class="slide" data-min="8">
+<p class="phase" data-ph="er">Erarbeitung II · Modell</p>
+<h1 class="k">Wenn die Hülle kaputt ist</h1>
+<span class="badge">8 Min. · Partner</span>
+<p class="task"><span class="snr">1</span><span><b>Untersuche</b> mit dem Regler in M1: Wie ändert sich die Zeit bei 1, 2 und 4 beschädigten Abschnitten? Notiere die Zeiten (Aufgabe 4).</span><i class="lvl">●●○</i></p>
+<p class="task"><span class="snr">2</span><span><b>Erläutere</b>, welche Folgen das bei Multipler Sklerose für Bewegungen haben kann (Aufgabe 5).</span><i class="lvl">●●●</i></p>
+
+<p class="tip" style="margin-top:12px">Das kennt ihr aus Nr. 6: Bei MS greift das Abwehrsystem die Myelinscheiden an.</p>
+</section>
+
+<section class="slide" data-min="7">
+<p class="phase" data-ph="si">Sicherung</p>
+<h1 class="k">So läuft das Signal durch das Axon</h1>
+<span class="badge">7 Min. · Plenum · Heft</span>
+<div data-aufbau>
+<svg class="abb" viewBox="0 0 940 300" role="img" aria-label="Oben ein Axon ohne Myelinscheide, viele kleine Pfeile hintereinander. Unten ein Axon mit Myelinscheide, große Pfeilbögen springen von Lücke zu Lücke." style="max-height:300px">
+ <text x="60" y="36" font-size="26">ohne Myelinscheide</text>
+ <path d="M60 80 H880" stroke="var(--ink)" stroke-width="6"/>
+ <g data-s="1" fill="none" stroke="var(--g)" stroke-width="3"><path d="M70 104 q20 14 40 0"/><path d="M120 104 q20 14 40 0"/><path d="M170 104 q20 14 40 0"/><path d="M220 104 q20 14 40 0"/><path d="M270 104 q20 14 40 0"/><path d="M320 104 q20 14 40 0"/><path d="M370 104 q20 14 40 0"/><path d="M420 104 q20 14 40 0"/><path d="M470 104 q20 14 40 0"/><path d="M520 104 q20 14 40 0"/><path d="M570 104 q20 14 40 0"/><path d="M620 104 q20 14 40 0"/><path d="M670 104 q20 14 40 0"/><path d="M720 104 q20 14 40 0"/><path d="M770 104 q20 14 40 0"/><path d="M820 104 q20 14 40 0"/></g>
+ <text x="60" y="160" font-size="26">mit Myelinscheide</text>
+ <path d="M60 230 H880" stroke="var(--ink)" stroke-width="6"/><rect x="80" y="214" width="140" height="32" rx="16" fill="var(--tint)" stroke="var(--g)" stroke-width="2.5"/><rect x="240" y="214" width="140" height="32" rx="16" fill="var(--tint)" stroke="var(--g)" stroke-width="2.5"/><rect x="400" y="214" width="140" height="32" rx="16" fill="var(--tint)" stroke="var(--g)" stroke-width="2.5"/><rect x="560" y="214" width="140" height="32" rx="16" fill="var(--tint)" stroke="var(--g)" stroke-width="2.5"/><rect x="720" y="214" width="140" height="32" rx="16" fill="var(--tint)" stroke="var(--g)" stroke-width="2.5"/>
+ <g data-s="2" fill="none" stroke="var(--g)" stroke-width="4"><path d="M70 210 q80 -40 160 0"/><path d="M230 210 q80 -40 160 0"/><path d="M390 210 q80 -40 160 0"/><path d="M550 210 q80 -40 160 0"/><path d="M710 210 q80 -40 160 0"/></g>
+ <g data-s="2" font-size="20"><text x="226" y="290">Schnürring</text><path d="M230 270 V250" stroke="var(--ink3)" stroke-width="1.5"/></g>
+</svg>
+<div class="merk" data-s="3" style="font-size:24px">Ohne Hülle läuft das Signal Stück für Stück. Mit <b>Myelinscheide</b> springt es von <b>Schnürring</b> zu Schnürring. So ist es viel schneller.</div>
+</div>
+</section>
+
+<section class="slide" data-min="4">
+<p class="phase" data-ph="er">Transfer · Modellkritik</p>
+<h1 class="k">Wie Dominosteine?</h1>
+<span class="badge">4 Min. · allein, dann Partner</span>
+<div class="mint pad"><p style="font-size:26px;margin:0">Ein Schüler sagt: „Das Signal im Axon ist wie eine Reihe Dominosteine. Ein Stein stößt den nächsten an.“</p></div>
+<p class="task"><span class="snr">1</span><span><b>Nenne</b> eine Gemeinsamkeit zwischen Dominoreihe und Signal im Axon.</span><i class="lvl">●○○</i></p>
+<p class="task"><span class="snr">2</span><span><b>Beurteile</b> den Vergleich: Was passt, was passt nicht? Denke an die Myelinscheide und daran, dass ein Axon viele Signale nacheinander leitet.</span><i class="lvl">●●●</i></p>
+
+</section>
+<section class="slide" data-min="3">
+<p class="phase" data-ph="re">Reflexion</p>
+<h1 class="k">Exit-Ticket</h1>
+<span class="badge">3 Min. · allein · Zettel</span>
+<div class="mint pad"><p class="lf" data-leitfrage></p></div>
+<p class="task big"><span class="snr">1</span><span><b>Erkläre</b> in zwei Sätzen, warum manche Signale so viel schneller sind als andere.</span></p>
+<p class="tip">Neue Fragen kommen auf die Lernlandkarte.</p>
+</section>
+<div id="nummer"></div>
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+
+<!-- ENTWURF: Begriffe fachlich gegenlesen, dann "geprueft": true setzen und in projects.json "begriffe": true ergänzen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Wettlauf der Signale",
+ "geprueft": false,
+ "paare": [
+  ["Axon", "Langer Fortsatz der Nervenzelle, leitet das Signal weiter", "A-xon"],
+  ["Myelinscheide", "Hülle um das Axon, macht die Leitung schneller", "My-e-lin-schei-de"],
+  ["Schnürring", "Lücke in der Myelinscheide, hier springt das Signal weiter", "Schnür-ring"],
+  ["Erregungsleitung", "Weiterleiten eines Signals im Axon", "Er-re-gungs-lei-tung"],
+  ["Multiple Sklerose", "Krankheit, bei der Myelinscheiden beschädigt werden", "Mul-ti-ple Skle-ro-se"]
+ ],
+ "spiele": ["memory", "quiz", "zuordnen"]
+}
+</script>
+<script src="../../../../../assets/js/qrcode.js"></script>
+<script>
+(function () {
+  if (typeof qrcode !== "function" || !/^https?:/.test(location.protocol)) return;
+  [].forEach.call(document.querySelectorAll("[data-qr]"), function (ziel) {
+    try {
+      var url = new URL(ziel.getAttribute("data-qr"), location.href).href, q = qrcode(0, "M"); q.addData(url); q.make();
+      ziel.innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+    } catch (e) { /* ohne QR-Code bleibt der Hinweis */ }
+  });
+})();
+</script>
+<script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/impulsfilm.js" defer></script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>
