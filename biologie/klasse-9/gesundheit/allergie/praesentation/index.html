@@ -8,11 +8,12 @@
 <link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
 <title>Gesundheit – Krankheit – Stunde 5: Allergie</title>
-<meta name="description" content="Biologie Klasse 9, Themenfeld 3.5 Gesundheit – Krankheit: Allergie als Fehlalarm des Immunsystems. Do Now Impfung, Impuls Wiese, Fragenentwicklung, Ablauf einer Allergie, Fall Familie Tran, Abstimmung, Reflexion.">
+<meta name="description" content="Biologie Klasse 9, Themenfeld 3.5 Gesundheit – Krankheit: Allergie als Fehlalarm des Immunsystems. Do Now Impfung, Impuls Wiese, Fragenentwicklung, Ablauf einer Allergie zum Antippen, Beschriften, Fall Familie Tran, Abstimmung, Reflexion.">
 <link rel="stylesheet" href="../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
 <link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<link rel="stylesheet" href="../../../../../assets/css/beschriften.css">
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
 <style>
@@ -25,7 +26,40 @@
 .mast{width:100%;max-width:330px;height:auto;display:block;margin:0 auto}
 .tally.f3{grid-template-columns:repeat(3,1fr)}
 .tally.f3 .tc{font-size:22px}
-.lf{font-size:30px;line-height:1.35;font-weight:500}
+.lf{font-size:28px;line-height:1.35;font-weight:500}
+.al-wiese{display:block;width:100%;height:190px;border-radius:14px}
+.al-p{opacity:.9}
+[data-film].spielt .al-p{animation:al-flug 3s ease-in-out var(--d) infinite alternate both}
+@keyframes al-flug{from{transform:translate(0,0)}to{transform:translate(var(--dx),var(--dy))}}
+.al-z{display:flex;align-items:center;gap:16px;margin:6px 0 8px;font-size:24px}
+.slide .aus{font-size:22px;padding:10px 16px}.al-z b{font-size:36px;color:var(--dk);font-variant-numeric:tabular-nums}.al-neu{margin-left:auto}
+.al-l{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;font-size:18px;color:var(--grey);margin:2px 0 8px}
+.al-l i{display:block;height:16px;border-radius:8px;background:var(--mint);border:1.5px solid var(--line);overflow:hidden}
+.al-l b{display:block;height:100%;width:var(--w);background:#B5543A;transform-origin:left}
+.al-s{display:block}
+[data-film].spielt .al-l b{animation:al-bar 2.5s ease-out 1.5s both}
+[data-film].spielt .al-s{animation:al-auf .6s ease-out 4.2s both}
+@keyframes al-bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes al-auf{from{opacity:0}to{opacity:1}}
+.mast2{display:block;width:100%;height:auto}
+.al-sym{transition:opacity .5s}[data-stand="5"] .al-sym{opacity:.15}
+.ablauf{gap:6px}.ablauf .karte{padding:7px 12px}.ablauf .karte p{font-size:19px;line-height:1.3}
+.ablauf .tp-satz{font-size:22px}
+[data-aufbau] .al-s1.an circle{animation:al-rein 1s ease-out both}
+[data-aufbau] .al-s3.an circle{animation:al-poch .5s ease-in-out 2}
+[data-aufbau] .al-s4.an .al-h{animation:al-raus 1.4s cubic-bezier(.3,.7,.4,1) var(--d) both}
+@keyframes al-rein{from{transform:translate(-60px,-40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes al-poch{50%{opacity:.35}}
+@keyframes al-raus{from{transform:translate(-40px,0);opacity:0}to{transform:translate(var(--tx),var(--ty));opacity:1}}
+.al-s4 .al-h{transform:translate(var(--tx),var(--ty))}
+@media (prefers-reduced-motion:reduce){[data-aufbau] .al-s1.an circle,[data-aufbau] .al-s3.an circle,[data-aufbau] .al-s4.an .al-h{animation:none}}
+.al-bs{display:grid;grid-template-columns:660px 1fr;column-gap:24px;align-content:start}
+.al-bs .bs-bild{grid-column:1;grid-row:1 / span 8;margin:0;align-self:start}
+.al-bs{grid-auto-rows:min-content;align-items:start}
+.al-bs > :not(.bs-bild){grid-column:2}
+.al-bs .bs-stufen{flex-direction:column;align-items:stretch}
+.al-bs .bs-feld{font-size:17px;min-height:38px}
+
 </style>
 </head>
 <body class="lp-pres" data-root="../../../../../" data-title="Gesundheit – Krankheit – Stunde 5: Allergie" data-subject="Biologie" data-grade="Klasse 9">
@@ -50,20 +84,14 @@
 <div class="lsg-box" style="margin-top:12px"><div class="mint pad"><p>Bei der Impfung lernt das Immunsystem das Antigen eines Erregers kennen. Es bildet Antikörper und Gedächtniszellen. Bei einer echten Infektion erkennen die Gedächtniszellen das Antigen sofort. Deshalb entstehen schnell viele Antikörper.</p></div></div>
 </section>
 
-<section class="slide" data-min="2">
+<section class="slide" data-min="2" data-notes="Impuls stumm zeigen, erst schauen lassen. Dann Noch einmal. Die Zahl ist ein Beispielwert für einen Tag mit starkem Gräserpollenflug. Moderationsfragen: Was fällt euch auf? Was ist bei Linh anders? Zielkorridor (nicht nennen): Warum reagiert Linh auf harmlose Pollen?">
 <p class="phase" data-ph="im">Impuls</p>
 <h1 class="k" role="heading" aria-level="2">Zwei Menschen auf einer Wiese</h1>
-<span class="badge">2 Min. · Plenum</span>
-<svg class="wiese" viewBox="0 40 1000 110" role="img" aria-label="Blühende Wiese mit Blumen und Pollen in der Luft">
- <rect y="40" width="1000" height="110" fill="#E3EEEA" rx="14"/><path d="M0 110 Q250 80 500 105 T1000 95 V150 H0Z" fill="#8DB59E"/>
- <g stroke="#2F5D50" stroke-width="3"><path d="M80 150V105M190 150V95M310 150V110M430 150V100M560 150V108M690 150V96M810 150V106M920 150V100"/></g>
- <g fill="#D97F4A"><circle cx="80" cy="102" r="10"/><circle cx="310" cy="107" r="10"/><circle cx="560" cy="105" r="10"/><circle cx="810" cy="103" r="10"/></g>
- <g fill="#F2C94C"><circle cx="190" cy="92" r="10"/><circle cx="430" cy="97" r="10"/><circle cx="690" cy="93" r="10"/><circle cx="920" cy="97" r="10"/></g>
- <g fill="#fff" opacity=".85"><circle cx="140" cy="60" r="3"/><circle cx="260" cy="48" r="3"/><circle cx="380" cy="70" r="3"/><circle cx="520" cy="50" r="3"/><circle cx="650" cy="65" r="3"/><circle cx="760" cy="46" r="3"/><circle cx="880" cy="62" r="3"/></g>
-</svg>
-<div class="split eq2">
-<div class="aus"><span class="wer">Tarek (13)</span>„Ich liege auf der Wiese. Mir geht es gut.“</div>
-<div class="aus"><span class="wer">Linh (14)</span>„Ich liege auf derselben Wiese. Meine Augen brennen, meine Nase läuft. Dabei ist hier kein einziger Krankheitserreger!“</div>
+<span class="badge">2 Min. · Plenum · erst still schauen</span>
+<div data-film>
+<svg class="al-wiese" viewBox="0 0 1000 250" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Eigene Zeichnung: Blühende Wiese. Viele Pollen fliegen durch die Luft. Tarek und Linh sitzen auf derselben Wiese."><rect width="1000" height="250" fill="#E3EEEA" rx="14"/><path d="M0 170 Q250 140 500 165 T1000 155 V250 H0Z" fill="#8DB59E"/><g stroke="#2F5D50" stroke-width="3"><path d="M80 250V165M190 250V155M430 250V160M560 250V168M810 250V166M920 250V160"/></g><g fill="#D97F4A"><circle cx="80" cy="162" r="10"/><circle cx="560" cy="165" r="10"/><circle cx="810" cy="163" r="10"/></g><g fill="#F2C94C"><circle cx="190" cy="152" r="10"/><circle cx="430" cy="157" r="10"/><circle cx="920" cy="157" r="10"/></g><g transform="translate(300 0)"><circle cx="0" cy="150" r="17" fill="#F3D6B8" stroke="#2F5D50" stroke-width="3"/><path d="M-26 206 q26 -34 52 0" fill="#fff" stroke="#2F5D50" stroke-width="3"/><text x="0" y="238" text-anchor="middle" font-size="22" fill="#1A2B24">Tarek</text></g><g transform="translate(690 0)"><circle cx="0" cy="150" r="17" fill="#F3D6B8" stroke="#2F5D50" stroke-width="3"/><path d="M-26 206 q26 -34 52 0" fill="#fff" stroke="#2F5D50" stroke-width="3"/><text x="0" y="238" text-anchor="middle" font-size="22" fill="#1A2B24">Linh</text></g><g fill="#C9A227"><circle class="al-p" cx="283" cy="105" r="3.6" style="--d:0.92s;--dx:17px;--dy:0px"/><circle class="al-p" cx="680" cy="104" r="2.6" style="--d:0.03s;--dx:47px;--dy:0px"/><circle class="al-p" cx="305" cy="100" r="3.0" style="--d:2.49s;--dx:0px;--dy:4px"/><circle class="al-p" cx="896" cy="100" r="3.5" style="--d:1.60s;--dx:-41px;--dy:-16px"/><circle class="al-p" cx="690" cy="49" r="4.2" style="--d:1.31s;--dx:34px;--dy:-30px"/><circle class="al-p" cx="727" cy="129" r="2.6" style="--d:1.90s;--dx:15px;--dy:-28px"/><circle class="al-p" cx="348" cy="129" r="2.6" style="--d:2.16s;--dx:0px;--dy:8px"/><circle class="al-p" cx="776" cy="147" r="4.3" style="--d:1.79s;--dx:57px;--dy:-3px"/><circle class="al-p" cx="444" cy="123" r="4.1" style="--d:1.11s;--dx:59px;--dy:-22px"/><circle class="al-p" cx="939" cy="76" r="2.7" style="--d:0.34s;--dx:-33px;--dy:-14px"/><circle class="al-p" cx="728" cy="85" r="4.1" style="--d:2.14s;--dx:-7px;--dy:2px"/><circle class="al-p" cx="893" cy="79" r="3.6" style="--d:1.34s;--dx:-8px;--dy:7px"/><circle class="al-p" cx="277" cy="145" r="3.2" style="--d:2.29s;--dx:-57px;--dy:24px"/><circle class="al-p" cx="326" cy="107" r="3.8" style="--d:0.41s;--dx:50px;--dy:-10px"/><circle class="al-p" cx="594" cy="145" r="3.6" style="--d:0.26s;--dx:23px;--dy:-17px"/><circle class="al-p" cx="688" cy="136" r="4.5" style="--d:0.67s;--dx:-45px;--dy:-26px"/><circle class="al-p" cx="533" cy="139" r="3.8" style="--d:1.21s;--dx:-16px;--dy:21px"/><circle class="al-p" cx="108" cy="82" r="4.3" style="--d:0.05s;--dx:-6px;--dy:19px"/><circle class="al-p" cx="465" cy="141" r="2.7" style="--d:1.51s;--dx:37px;--dy:-28px"/><circle class="al-p" cx="426" cy="121" r="3.7" style="--d:1.38s;--dx:58px;--dy:-13px"/><circle class="al-p" cx="557" cy="60" r="4.5" style="--d:0.77s;--dx:-51px;--dy:-24px"/><circle class="al-p" cx="654" cy="98" r="2.6" style="--d:0.49s;--dx:-8px;--dy:-12px"/><circle class="al-p" cx="665" cy="63" r="2.8" style="--d:0.11s;--dx:51px;--dy:-9px"/><circle class="al-p" cx="361" cy="76" r="4.4" style="--d:2.24s;--dx:-12px;--dy:-6px"/><circle class="al-p" cx="511" cy="141" r="3.5" style="--d:1.61s;--dx:16px;--dy:13px"/><circle class="al-p" cx="612" cy="43" r="3.7" style="--d:2.35s;--dx:4px;--dy:-13px"/><circle class="al-p" cx="481" cy="111" r="3.9" style="--d:0.59s;--dx:-22px;--dy:-3px"/><circle class="al-p" cx="304" cy="96" r="3.1" style="--d:0.85s;--dx:40px;--dy:-4px"/><circle class="al-p" cx="633" cy="70" r="2.5" style="--d:1.54s;--dx:20px;--dy:-22px"/><circle class="al-p" cx="101" cy="111" r="3.8" style="--d:1.17s;--dx:26px;--dy:28px"/><circle class="al-p" cx="401" cy="107" r="3.9" style="--d:1.85s;--dx:-58px;--dy:7px"/><circle class="al-p" cx="102" cy="116" r="2.5" style="--d:0.92s;--dx:20px;--dy:-1px"/><circle class="al-p" cx="345" cy="105" r="3.7" style="--d:0.44s;--dx:-37px;--dy:-10px"/><circle class="al-p" cx="816" cy="77" r="4.2" style="--d:0.66s;--dx:40px;--dy:-6px"/><circle class="al-p" cx="147" cy="128" r="4.1" style="--d:2.43s;--dx:27px;--dy:17px"/><circle class="al-p" cx="174" cy="69" r="3.5" style="--d:1.63s;--dx:-26px;--dy:-15px"/><circle class="al-p" cx="375" cy="53" r="3.9" style="--d:1.62s;--dx:-48px;--dy:-24px"/><circle class="al-p" cx="655" cy="71" r="4.4" style="--d:1.69s;--dx:-32px;--dy:-2px"/><circle class="al-p" cx="869" cy="139" r="4.4" style="--d:0.20s;--dx:34px;--dy:11px"/><circle class="al-p" cx="263" cy="143" r="3.6" style="--d:0.68s;--dx:40px;--dy:-23px"/><circle class="al-p" cx="74" cy="97" r="4.4" style="--d:0.79s;--dx:47px;--dy:23px"/><circle class="al-p" cx="628" cy="53" r="4.2" style="--d:0.85s;--dx:45px;--dy:11px"/><circle class="al-p" cx="127" cy="133" r="3.7" style="--d:1.47s;--dx:-7px;--dy:-12px"/><circle class="al-p" cx="570" cy="131" r="4.2" style="--d:1.16s;--dx:21px;--dy:-4px"/><circle class="al-p" cx="337" cy="83" r="3.6" style="--d:0.09s;--dx:-8px;--dy:-21px"/><circle class="al-p" cx="244" cy="30" r="3.5" style="--d:2.08s;--dx:19px;--dy:2px"/></g></svg>
+<p class="al-z">Pollen in 1 m³ Luft: <b><span data-zaehler data-bis="180" data-stellen="0" data-start="300" data-dauer="4500">180</span></b><button class="b sec al-neu" data-film-neu>Noch einmal</button></p>
+<div class="split eq2"><div class="aus"><span class="wer">Tarek (13)</span><span class="al-l"><span>Beschwerden</span><i><b style="--w:4%"></b></i></span><span class="al-s">„Ich liege auf der Wiese. Mir geht es gut.“</span></div><div class="aus"><span class="wer">Linh (14)</span><span class="al-l"><span>Beschwerden</span><i><b style="--w:92%"></b></i></span><span class="al-s">„Ich liege auf derselben Wiese. Meine Augen brennen, meine Nase läuft. Dabei ist hier kein einziger Krankheitserreger!“</span></div></div>
 </div>
 </section>
 
@@ -84,32 +112,21 @@
 <div class="mint pad" style="font-size:24px;line-height:1.4;margin-top:10px">Du darfst dir M1 vorlesen lassen.<br>Hilfen: Wortspeicher und Satzbausteine auf dem Blatt.</div>
 </section>
 
-<section class="slide" data-min="5">
+<section class="slide" data-min="4" data-notes="Erst die Frage, dann tippt jemand am Board. Pfeil nach rechts zeigt den Schritt auch ohne Tippen. Schritt 5 ist neu gegenüber M1: Antihistaminika. Nur Wirkprinzip, keine Medikamentenempfehlung.">
 <p class="phase" data-ph="si">Sicherung</p>
 <h1 class="k" role="heading" aria-level="2">Wie entsteht eine Allergie?</h1>
-<span class="badge">5 Min. · Plenum</span>
-<p class="task s"><span class="snr">1</span><span><b>Vergleiche</b> den Ablauf Schritt für Schritt mit deiner Lösung auf dem Arbeitsblatt.</span></p>
-<div data-aufbau class="split" style="grid-template-columns:1.5fr 1fr;gap:24px;align-items:center">
-<div class="ablauf">
-<div class="karte" data-s="1"><p><b>① Erstkontakt:</b> Das Allergen gelangt in den Körper. Der Körper bildet Antikörper.</p></div>
-<div class="karte" data-s="2"><p><b>② Sensibilisierung:</b> Die Antikörper setzen sich an die Mastzelle. Noch keine Beschwerden.</p></div>
-<div class="karte" data-s="3"><p><b>③ Zweitkontakt:</b> Das Allergen bindet an die Antikörper auf der Mastzelle.</p></div>
-<div class="karte" data-s="4"><p><b>④ Allergische Reaktion:</b> Die Mastzelle schüttet Histamin aus. Die Augen tränen, die Nase läuft.</p></div>
+<span class="badge">4 Min. · am Board tippen</span>
+<div data-aufbau data-tippen class="split" style="grid-template-columns:700px 1fr;gap:22px;align-items:start">
+<div><svg class="mast2" viewBox="0 0 760 430" role="img" aria-label="Eigene Zeichnung: links eine Mastzelle mit Histamin-Körnchen, rechts eine Zelle in der Nase mit Andockstellen. Schritt für Schritt kommen Allergene, Antikörper, gebundene Allergene, Histamin und ein Medikament dazu."><rect x="560" y="120" width="190" height="240" rx="18" fill="#FCE9E2" stroke="#B5543A" stroke-width="3"/><text x="655" y="395" text-anchor="middle" font-size="20" fill="#1A2B24">Zelle in der Nase</text><path d="M560 160 h-14 v-10 M560 180 h-14 v10" fill="none" stroke="#2F5D50" stroke-width="4"/><path d="M560 210 h-14 v-10 M560 230 h-14 v10" fill="none" stroke="#2F5D50" stroke-width="4"/><path d="M560 260 h-14 v-10 M560 280 h-14 v10" fill="none" stroke="#2F5D50" stroke-width="4"/><path d="M560 310 h-14 v-10 M560 330 h-14 v10" fill="none" stroke="#2F5D50" stroke-width="4"/><circle cx="250" cy="220" r="120" fill="#F2E3A0" stroke="#2F5D50" stroke-width="4"/><circle cx="250" cy="220" r="30" fill="#B5543A"/><g fill="#2F5D50" opacity=".55"><circle cx="291" cy="206" r="7"/><circle cx="188" cy="266" r="7"/><circle cx="312" cy="223" r="7"/><circle cx="319" cy="237" r="7"/><circle cx="238" cy="167" r="7"/><circle cx="253" cy="180" r="7"/><circle cx="242" cy="161" r="7"/><circle cx="188" cy="281" r="7"/><circle cx="230" cy="260" r="7"/><circle cx="192" cy="153" r="7"/><circle cx="303" cy="180" r="7"/><circle cx="223" cy="278" r="7"/><circle cx="256" cy="211" r="7"/><circle cx="185" cy="284" r="7"/></g><text x="250" y="395" text-anchor="middle" font-size="20" fill="#1A2B24">Mastzelle</text><g data-s="1" class="al-s1"><g fill="#D97F4A"><circle cx="60" cy="60" r="10"/><circle cx="110" cy="40" r="10"/><circle cx="40" cy="120" r="10"/></g><text x="30" y="24" font-size="20" fill="#9a4a1f">Allergen</text></g><g data-s="2"><g stroke="#2F5D50" stroke-width="6" fill="none" stroke-linecap="round"><g transform="translate(250 100) rotate(0)"><path d="M0 0 V-26 M0 -26 L-13 -42 M0 -26 L13 -42"/></g><g transform="translate(370 220) rotate(90)"><path d="M0 0 V-26 M0 -26 L-13 -42 M0 -26 L13 -42"/></g><g transform="translate(335 305) rotate(135)"><path d="M0 0 V-26 M0 -26 L-13 -42 M0 -26 L13 -42"/></g><g transform="translate(165 135) rotate(-45)"><path d="M0 0 V-26 M0 -26 L-13 -42 M0 -26 L13 -42"/></g></g><text x="290" y="58" font-size="20" fill="#1A2B24">Antikörper</text><g class="tp-orte"><circle class="tp-ort" data-ort="antikoerper" data-name="Antikörper" cx="250" cy="70" r="30"/><circle class="tp-ort" data-ort="antikoerper" data-name="Antikörper" cx="400" cy="220" r="30"/><circle class="tp-ort" data-ort="antikoerper" data-name="Antikörper" cx="356" cy="326" r="30"/><circle class="tp-ort" data-ort="antikoerper" data-name="Antikörper" cx="144" cy="114" r="30"/></g></g><g data-s="3" class="al-s3" fill="#D97F4A"><circle cx="250" cy="58" r="10"/><circle cx="412" cy="220" r="10"/><circle cx="365" cy="335" r="10"/><circle cx="135" cy="105" r="10"/></g><g data-s="4" class="al-s4"><g fill="#2F5D50"><circle class="al-h" style="--tx:239px;--ty:35px;--d:0.03s" cx="300" cy="230" r="7"/><circle class="al-h" style="--tx:241px;--ty:-41px;--d:0.20s" cx="300" cy="230" r="7"/><circle class="al-h" style="--tx:230px;--ty:68px;--d:0.29s" cx="300" cy="230" r="7"/><circle class="al-h" style="--tx:247px;--ty:-55px;--d:0.21s" cx="300" cy="230" r="7"/><circle class="al-h" style="--tx:228px;--ty:-39px;--d:0.32s" cx="300" cy="230" r="7"/><circle class="al-h" style="--tx:248px;--ty:-40px;--d:0.10s" cx="300" cy="230" r="7"/><circle class="al-h" style="--tx:247px;--ty:0px;--d:0.55s" cx="300" cy="230" r="7"/><circle class="al-h" style="--tx:247px;--ty:-38px;--d:0.49s" cx="300" cy="230" r="7"/><circle class="al-h" style="--tx:222px;--ty:54px;--d:0.38s" cx="300" cy="230" r="7"/></g><text x="420" y="110" font-size="20" fill="#1A2B24">Histamin</text><g class="al-sym" transform="translate(655 240)" fill="none" stroke="#B5543A" stroke-width="3" stroke-linecap="round"><path d="M-30 -40 q10 12 0 24 M0 -48 q10 12 0 24 M30 -40 q10 12 0 24"/><text x="0" y="40" text-anchor="middle" font-size="18" stroke="none" fill="#B5543A">Schwellung, Tränen</text></g></g><g data-s="5"><g><rect x="546" y="163" width="14" height="14" rx="2" fill="#7B5EA7"/><rect x="546" y="213" width="14" height="14" rx="2" fill="#7B5EA7"/><rect x="546" y="263" width="14" height="14" rx="2" fill="#7B5EA7"/><rect x="546" y="313" width="14" height="14" rx="2" fill="#7B5EA7"/></g><text x="600" y="100" font-size="20" fill="#7B5EA7">Medikament</text></g><g class="tp-orte"><circle class="tp-ort" data-ort="mastzelle" data-name="Mastzelle" cx="250" cy="220" r="122"/><rect class="tp-ort" data-ort="nase" data-name="Zelle in der Nase" x="560" y="120" width="190" height="240" rx="18"/><rect class="tp-ort" data-ort="rezeptor" data-name="Andockstelle" x="532" y="152" width="40" height="36" rx="8"/><rect class="tp-ort" data-ort="rezeptor" data-name="Andockstelle" x="532" y="202" width="40" height="36" rx="8"/><rect class="tp-ort" data-ort="rezeptor" data-name="Andockstelle" x="532" y="252" width="40" height="36" rx="8"/><rect class="tp-ort" data-ort="rezeptor" data-name="Andockstelle" x="532" y="302" width="40" height="36" rx="8"/></g></svg><p class="tip" style="margin:2px 0 0">Pfeil nach rechts: erst die Frage, dann die Stelle antippen.</p></div>
+<div class="ablauf"><div class="tp-frage"></div><div class="karte" data-s="1"><p><b>① Erstkontakt:</b> Das Allergen gelangt in den Körper. Der Körper bildet Antikörper.</p></div><div class="karte" data-s="2" data-frage="Wo setzen sich die Antikörper fest?" data-ort-ok="mastzelle"><p><b>② Sensibilisierung:</b> Die Antikörper setzen sich an die Mastzelle. Noch keine Beschwerden.</p></div><div class="karte" data-s="3" data-frage="Wo bindet das Allergen beim zweiten Kontakt?" data-ort-ok="antikoerper"><p><b>③ Zweitkontakt:</b> Das Allergen bindet an die Antikörper auf der Mastzelle.</p></div><div class="karte" data-s="4" data-frage="Wohin wandert das Histamin?" data-ort-ok="nase|rezeptor"><p><b>④ Allergische Reaktion:</b> Die Mastzelle schüttet Histamin aus. Es dockt an Zellen in Nase und Augen an. Sie schwellen an und tränen.</p></div><div class="karte" data-s="5" data-frage="Wo muss ein Medikament angreifen, damit Histamin nicht wirkt?" data-ort-ok="rezeptor"><p><b>⑤ Medikament:</b> Ein Antihistaminikum besetzt die Andockstellen. Histamin kann nicht mehr wirken.</p></div></div>
 </div>
-<svg class="mast" viewBox="0 0 420 380" role="img" aria-label="Schema: Mastzelle. Schritt für Schritt kommen Allergene, Antikörper, gebundene Allergene und Histamin dazu.">
- <g data-s="1"><g fill="#D97F4A"><circle cx="40" cy="60" r="8"/><circle cx="70" cy="110" r="8"/><circle cx="30" cy="160" r="8"/></g><text x="10" y="30" font-size="20" fill="#9a4a1f">Allergen</text></g>
- <circle cx="230" cy="200" r="95" fill="#F2E3A0" stroke="#2F5D50" stroke-width="4"/><circle cx="230" cy="200" r="28" fill="#B5543A"/>
- <text x="190" y="330" font-size="20" fill="#2F5D50">Mastzelle</text>
- <g data-s="2"><g stroke="#2F5D50" stroke-width="5" fill="none" stroke-linecap="round">
-  <path d="M230 105V75M230 75L214 55M230 75L246 55"/><path d="M325 200H355M355 200L375 184M355 200L375 216"/>
-  <path d="M163 133L142 112M142 112L126 120M142 112L140 94"/><path d="M163 267L142 288M142 288L126 280M142 288L140 306"/></g>
-  <text x="250" y="68" font-size="18" fill="#2F5D50">Antikörper</text></g>
- <g data-s="3" fill="#D97F4A"><circle cx="214" cy="46" r="8"/><circle cx="246" cy="46" r="8"/><circle cx="384" cy="176" r="8"/><circle cx="384" cy="224" r="8"/></g>
- <g data-s="4"><g fill="#2F5D50"><circle cx="340" cy="300" r="6"/><circle cx="370" cy="320" r="6"/><circle cx="300" cy="330" r="6"/><circle cx="330" cy="350" r="6"/><circle cx="380" cy="280" r="6"/></g>
-  <text x="300" y="374" font-size="20" fill="#2F5D50">Histamin</text></g>
-</svg>
-</div>
-<p class="tip" style="margin-top:12px">Pfeil nach rechts zeigt den nächsten Schritt.</p>
+</section>
+<section class="slide" data-min="3">
+<p class="phase" data-ph="si">Sicherung · Beschriften</p>
+<h1 class="k" role="heading" aria-level="2">Beschrifte die Allergie</h1>
+<span class="badge">3 Min. · allein, dann Partner prüft</span>
+<p class="task s"><span class="snr">2</span><span><b>Beschrifte</b> die Abbildung. Wähle dein Niveau.</span><i class="lvl">D–F</i></p>
+<div data-beschriften class="al-bs"><div class="bs-bild"><svg viewBox="-20 -40 800 460" role="img" aria-label="Mastzelle und Zelle in der Nase ohne Beschriftung. Die Felder zeigen mit Linien auf die Teile."><rect x="560" y="120" width="190" height="240" rx="18" fill="#FCE9E2" stroke="#B5543A" stroke-width="3"/><path d="M560 160 h-14 v-10 M560 180 h-14 v10" fill="none" stroke="#2F5D50" stroke-width="4"/><path d="M560 210 h-14 v-10 M560 230 h-14 v10" fill="none" stroke="#2F5D50" stroke-width="4"/><path d="M560 260 h-14 v-10 M560 280 h-14 v10" fill="none" stroke="#2F5D50" stroke-width="4"/><path d="M560 310 h-14 v-10 M560 330 h-14 v10" fill="none" stroke="#2F5D50" stroke-width="4"/><circle cx="250" cy="220" r="120" fill="#F2E3A0" stroke="#2F5D50" stroke-width="4"/><circle cx="250" cy="220" r="30" fill="#B5543A"/><g stroke="#2F5D50" stroke-width="6" fill="none" stroke-linecap="round"><g transform="translate(250 100) rotate(0)"><path d="M0 0 V-26 M0 -26 L-13 -42 M0 -26 L13 -42"/></g><g transform="translate(370 220) rotate(90)"><path d="M0 0 V-26 M0 -26 L-13 -42 M0 -26 L13 -42"/></g><g transform="translate(335 305) rotate(135)"><path d="M0 0 V-26 M0 -26 L-13 -42 M0 -26 L13 -42"/></g><g transform="translate(165 135) rotate(-45)"><path d="M0 0 V-26 M0 -26 L-13 -42 M0 -26 L13 -42"/></g></g><g fill="#D97F4A"><circle cx="250" cy="58" r="10"/><circle cx="412" cy="220" r="10"/><circle cx="365" cy="335" r="10"/><circle cx="135" cy="105" r="10"/></g><g fill="#2F5D50"><circle cx="450" cy="190" r="7"/><circle cx="480" cy="250" r="7"/><circle cx="430" cy="290" r="7"/><circle cx="520" cy="210" r="7"/></g></svg></div><ul class="bs-felder"><li data-wort="Mastzelle" data-silben="Mast-zel-le" data-x="60" data-y="400" data-zeigt="170,300" data-basis></li><li data-wort="Antikörper" data-silben="An-ti-kör-per" data-x="420" data-y="20" data-zeigt="270,92" data-basis></li><li data-wort="Allergen" data-silben="Al-ler-gen" data-x="60" data-y="0" data-zeigt="250,58"></li><li data-wort="Histamin" data-silben="His-ta-min" data-x="420" data-y="400" data-zeigt="480,250" data-basis></li><li data-wort="Andockstelle" data-silben="An-dock-stel-le" data-x="600" data-y="20" data-zeigt="548,170"></li></ul></div>
 </section>
 
 <section class="slide" data-min="10">
@@ -141,9 +158,10 @@
 <section class="slide" data-min="3">
 <p class="phase" data-ph="re">Reflexion</p>
 <h1 class="k" role="heading" aria-level="2">Zurück zu unserer Frage</h1>
-<span class="badge">3 Min. · Plenum</span>
+<span class="badge">3 Min. · Plenum, dann allein</span>
 <div class="mint pad"><p class="lf" data-leitfrage></p></div>
-<p class="task" style="margin-top:14px"><span class="snr">1</span><span><b>Erkläre</b> mündlich: Eine Allergie ist ein Fehlalarm des Immunsystems, weil …</span></p>
+<p class="task" style="margin-top:10px"><span class="snr">1</span><span><b>Erkläre</b> mündlich: Eine Allergie ist ein Fehlalarm des Immunsystems, weil …</span></p>
+<div data-selbst><div class="sb"><span class="t">Ich kann den Ablauf einer Allergie in vier Schritten <b>beschreiben</b>.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div><div class="sb"><span class="t">Ich kann <b>erklären</b>, warum beim ersten Kontakt noch nichts passiert.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div></div>
 <p class="tip">Hausaufgabe (freiwillig): A3 fertigstellen oder Sprinter bearbeiten.</p>
 </section>
 
@@ -172,6 +190,8 @@
 }
 </script>
 <script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/impulsfilm.js" defer></script>
+<script src="../../../../../assets/js/beschriften.js" defer></script>
 <script src="../../../../../assets/js/praesentation.js" defer></script>
 </body>
 </html>

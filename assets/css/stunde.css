@@ -265,6 +265,7 @@ table.mx td.obj img{width:46px;height:34px;object-fit:cover;border-radius:6px;ve
 [data-tippen].tp-an .tp-ort:hover,[data-tippen].tp-an .tp-ort:focus-visible{fill:rgba(var(--fach-rgb),.16)}
 [data-tippen] .tp-ort.tp-ok{fill:rgba(31,122,77,.35)}
 [data-tippen] .tp-ort.tp-nein{fill:rgba(179,56,44,.3)}
+[data-tippen] [data-s]:not(.an) .tp-ort{pointer-events:none!important;stroke:none!important}
 html.lp-lesen .tp-frage{display:none}
 .lz{font:500 17px Andika,Verdana,sans-serif;min-height:38px;padding:0 14px;border:0;border-radius:10px;background:var(--y);color:var(--ink);cursor:pointer;touch-action:manipulation}
 .lz-box{display:none;margin:8px 0 0;padding:10px 14px;border-radius:12px;background:var(--tint);font-size:20px;line-height:1.35}.lz-box.an{display:block}
