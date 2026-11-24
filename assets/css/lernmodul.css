@@ -167,3 +167,53 @@
 .lm-unter { margin-top: 0.75rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .lm-unter .lm-knoepfe { margin-top: 0; }
 @media (max-width: 48rem) { .lm-unter { grid-template-columns: minmax(0, 1fr); } }
+
+/* Lernlandkarte */
+.llk-steuer { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.llk-steuer input[type="text"], .llk-eingabe input {
+  flex: 1 1 14rem; min-height: 2.75rem; padding: 0.4rem 0.75rem; font: inherit; color: var(--lp-text);
+  background: var(--lp-flaeche); border: 2px solid var(--lp-rahmen); border-radius: calc(var(--lp-radius) * 0.9);
+}
+.llk-eingabe { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+.llk-namen { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 0; padding: 0; list-style: none; }
+.llk-namen .lm-knopf[aria-pressed="true"] { border-color: var(--lp-akzent); box-shadow: inset 0 0 0 2px var(--lp-akzent); }
+.llk-stand { margin: 0.5rem 0 0; font-size: 0.9375rem; color: var(--lp-text2); }
+.lm-vorrat.ziel { border-color: var(--lp-akzent); }
+.llk-felder { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.llk-felder .lm-feld-ziel { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); column-gap: 0.6rem; align-items: center; }
+.llk-felder .lm-feld-ziel svg { grid-row: span 3; width: 2.5rem; height: 2.5rem; fill: none; stroke: var(--lp-akzent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.llk-zahl { font-size: 0.875rem; font-weight: 400; color: var(--lp-text2); }
+.llk-karte { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.25rem 0.5rem; align-items: start; }
+.lm-vorrat .llk-karte { flex: 1 1 14rem; }
+.llk-karte .lm-karte { width: 100%; }
+.llk-karte.ok .lm-karte { border-color: var(--lm-ok); background: var(--lm-ok-bg); }
+.llk-karte.ok .lm-karte span::before { content: "beantwortet: "; font-weight: 700; color: var(--lm-ok); }
+.llk-haken { display: flex; gap: 0.4rem; align-items: center; min-height: 2.75rem; font-size: 0.9375rem; cursor: pointer; }
+.llk-haken input { width: 1.4rem; height: 1.4rem; accent-color: var(--lp-akzent); }
+.llk-weg { min-height: 2.75rem; padding: 0 0.6rem; font: inherit; font-size: 0.875rem; color: var(--lp-text2); background: transparent; border: 1px solid var(--lp-rahmen); border-radius: 0.5rem; cursor: pointer; }
+.llk-karte .llk-haken { grid-column: 1; }
+.llk-karte .llk-weg { grid-column: 2; grid-row: 1; }
+.llk-mythos-chip { margin: 0; padding: 0.35rem 0.7rem; font-size: 0.9375rem; border: 2px dashed var(--lp-rahmen); border-radius: 0.5rem; }
+.llk-mythos-chip.ok { border-style: solid; border-color: var(--lm-ok); }
+.llk-mythen { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 0.75rem; margin: 0.75rem 0 0; padding: 0; list-style: none; }
+.llk-myth { padding: 0.8rem 1rem; border: 2px dashed var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-gruppe); }
+.llk-myth.auf { border-style: solid; background: var(--lp-flaeche); }
+.llk-myth h4 { margin: 0 0 0.3rem; font-size: 1rem; }
+.llk-verdeckt { color: var(--lp-text2); }
+.llk-aussage { font-size: 1.125rem; font-weight: 700; }
+.llk-stimmen { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }
+.llk-stimme { display: flex; gap: 0.2rem; }
+.llk-minus { min-width: 2.75rem; min-height: 2.75rem; font: inherit; color: var(--lp-text); background: transparent; border: 1px solid var(--lp-rahmen); border-radius: 0.5rem; cursor: pointer; }
+.llk-zeile { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0.3rem 0; }
+.llk-zeile select { min-height: 2.75rem; font: inherit; color: var(--lp-text); background: var(--lp-flaeche); border: 2px solid var(--lp-rahmen); border-radius: 0.5rem; }
+.llk-ergebnis { min-height: 4.5rem; }
+
+/* Ich-kann-Liste */
+.lm-ichkann th[scope="row"] { font-weight: 400; }
+.lm-stufen { display: flex; gap: 0.3rem; }
+.lm-stufen button {
+  min-width: 3.25rem; min-height: 2.75rem; padding: 0.2rem 0.4rem; font: inherit; letter-spacing: 0.05em;
+  color: var(--lp-text); background: var(--lp-flaeche); border: 2px solid var(--lp-rahmen); border-radius: 0.5rem; cursor: pointer;
+}
+.lm-stufen button[aria-pressed="true"] { color: #fff; background: var(--lp-akzent); border-color: var(--lp-akzent); font-weight: 700; }
+.lp-inhalt[data-lernlandkarte] .lm-vorrat:empty::before { content: "Keine offenen Fragen."; }

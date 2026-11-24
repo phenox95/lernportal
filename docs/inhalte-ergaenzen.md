@@ -174,7 +174,7 @@ Bausteine der Vorlage: Einstieg, Material (M1, M2 …) mit Quelle, Text mit Zeil
 
 ### Interaktive Bausteine für Lernmodule (`lernmodul.js`)
 
-Vorlagenseiten können Übungen mit Selbstprüfung bekommen. Im `<head>` nach `material.css` ergänzen: `<link rel="stylesheet" href="…/assets/css/lernmodul.css">` und `<script src="…/assets/js/lernmodul.js" defer></script>`. Die Fachinhalte stehen nur im HTML, das Skript speichert nichts. Rückmeldungen zeigen Zeichen und Text (✓ richtig, ✗ noch nicht), nie nur Farbe. Alles geht mit Tippen und mit der Tastatur. Die Lösung prüfen die SuS selbst per Knopf, es gibt keinen Lösungsknopf.
+Vorlagenseiten können Übungen mit Selbstprüfung bekommen. Im `<head>` nach `material.css` ergänzen: `<link rel="stylesheet" href="…/assets/css/lernmodul.css">` und `<script src="…/assets/js/lernmodul.js" defer></script>`. Die Fachinhalte stehen nur im HTML. Nur Lernlandkarte und Ich-kann-Liste speichern etwas, und zwar im `localStorage` des Geräts (kein Server). Rückmeldungen zeigen Zeichen und Text (✓ richtig, ✗ noch nicht), nie nur Farbe. Alles geht mit Tippen und mit der Tastatur. Die Lösung prüfen die SuS selbst per Knopf, es gibt keinen Lösungsknopf.
 
 | Baustein | Aufbau im HTML | Wirkung |
 |---|---|---|
@@ -183,8 +183,10 @@ Vorlagenseiten können Übungen mit Selbstprüfung bekommen. Im `<head>` nach `m
 | Ja/Nein-Tabelle | `<div data-jn>` mit Tabelle, Zellen `td.lm-jn[data-ok="ja"]` oder `"nein"` | Antippen wechselt leer, ja, nein. Prüfen markiert jede Zelle |
 | Entdecker | `<div data-entdecker>` mit eingebundener SVG (Teile `.lm-teil[data-teil]`), Liste `ul.lm-daten` mit `li[data-teil][data-name][data-silben]` (Text = Funktion), `.lm-info`, `.lm-knoepfe`, `.lm-zaehler` | Teil antippen zeigt Name, Silben und Funktion, Zähler „3 von 7 Teilen angesehen“. Ohne JavaScript bleibt die Liste lesbar |
 | Signal-Modell | `<div data-signal data-tempo="110">` mit SVG-Pfaden `path[id]` (optional `data-ende`, `data-pause`, `data-zeige`), Knöpfen `button[data-ablauf="a; b + c"]` und `ol.lm-protokoll` | Ein Punkt läuft die Pfade ab (`;` nacheinander, `+` gleichzeitig). Das Protokoll zeigt, was nacheinander passiert, mit Modellzeit |
+| Lernlandkarte | `<main data-lernlandkarte data-speicher="…">` mit `.llk-name`, `.llk-laden`, Eingabe `.llk-neu` + `.llk-dazu`, Rückkanal-Import `.llk-import` + `.llk-einfuegen`, `.lm-vorrat`, Stationen `.lm-feld[data-feld]`, Mythen `.llk-mythos[data-id]` in `.llk-mythen`, `.llk-export`, `.llk-importdatei`, `.llk-leeren` | Die Klasse sammelt Fragen und ordnet sie Stationen zu. Mythen sind verdeckt und werden aufgedeckt, abgestimmt und einer Station zugeordnet. Eine Karte pro Klassenname, Sicherung als JSON-Datei. Keine Auflösungen im HTML |
+| Ich-kann-Liste | `<section data-ichkann data-speicher="…">` mit `ol` aus Sätzen und `.lm-leeren` | Wird zur Tabelle mit Vorher/Nachher, je ●○○ noch nicht, ●●○ teilweise, ●●● sicher |
 
-Beispiele: `biologie/klasse-9/nervensystem/signalweg/` und `biologie/klasse-9/nervensystem/nervenzelle/`.
+Beispiele: `biologie/klasse-9/nervensystem/signalweg/`, `…/nervenzelle/` und `…/lernlandkarte/`.
 
 ### Bestehende Anwendung einhängen
 
