@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Stundenkalender: Was war in meiner Lerngruppe wann dran? – Lernportal.">
+  <link rel="icon" href="../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+  <title>Kalender – Lernportal</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/kalender.css">
+  <script src="../assets/js/prefs.js"></script>
+  <script src="../assets/js/nav.js" defer></script>
+  <script src="../assets/js/kalender.js" defer></script>
+</head>
+<body data-page="kalender" data-root="../">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href=".././" aria-label="Lernportal Startseite"><span class="brand-dot" aria-hidden="true"></span>Lernportal</a>
+      <nav class="top-nav" aria-label="Hauptnavigation">
+        <a href="../biologie/">Biologie</a>
+        <a href="../geografie/">Geografie</a>
+        <a href="../alle/">Alle Materialien</a>
+        <a href="../fakten/">Fakten-Check</a>
+        <a href="../kalender/" aria-current="page">Kalender</a>
+        <a href="../begriffe/">Begriffe</a>
+        <a href="../bne/">Nachhaltigkeit</a>
+        <a href="../nachrichten/">Nachrichten</a>
+        <a href="../hilfe/">Hilfe</a>
+      </nav>
+      <div class="header-tools" id="prefs-slot"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="fach-intro">
+      <div class="wrap">
+        <p class="eyebrow">Stundenkalender</p>
+        <h1 class="title">Kalender</h1>
+        <p class="lead">Hier siehst du, was in deiner Lerngruppe wann dran war. Wähle zuerst deine Gruppe.</p>
+      </div>
+    </section>
+    <div class="wrap kal">
+      <noscript><p class="empty-message">Diese Seite braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
+      <div class="kal-gruppe">
+        <label for="kal-gruppe">Meine Lerngruppe</label>
+        <select id="kal-gruppe" aria-describedby="kal-naechste"></select>
+      </div>
+      <p class="kal-naechste" id="kal-naechste" aria-live="polite"></p>
+
+      <section aria-labelledby="kal-monat">
+        <div class="kal-kopf">
+          <button type="button" class="kal-pfeil" id="kal-zurueck" aria-label="Voriger Monat">‹</button>
+          <h2 id="kal-monat" aria-live="polite"></h2>
+          <button type="button" class="kal-pfeil" id="kal-weiter" aria-label="Nächster Monat">›</button>
+          <button type="button" class="kal-heute" id="kal-heute">Heute</button>
+        </div>
+        <div class="kal-raster" id="kal-raster" role="grid" aria-labelledby="kal-monat"></div>
+        <p class="kal-legende"><span class="kal-punkt kal-unterricht" aria-hidden="true"></span> Unterricht <span class="kal-punkt kal-eintrag" aria-hidden="true"></span> Eintrag vorhanden</p>
+      </section>
+
+      <section class="kal-tag" id="kal-tag" aria-live="polite" aria-labelledby="kal-tag-titel">
+        <h2 id="kal-tag-titel">Tag wählen</h2>
+        <div id="kal-tag-inhalt"><p class="hint">Tippe im Kalender auf einen Tag.</p></div>
+      </section>
+
+      <section aria-labelledby="kal-liste-titel">
+        <h2 id="kal-liste-titel">Was war dran?</h2>
+        <div id="kal-liste"><p class="loading-message">Kalender wird geladen …</p></div>
+      </section>
+    </div>
+  </main>
+
+  <div class="wrap">
+    <footer class="site-footer">
+      <span>Lernportal · Biologie &amp; Geografie · © <span id="year"></span></span>
+      <span class="footer-links"><a href="../hilfe/">Hilfe</a><a href="../impressum/">Impressum</a><a href="../datenschutz/">Datenschutz</a></span>
+    </footer>
+  </div>
+</body>
+</html>

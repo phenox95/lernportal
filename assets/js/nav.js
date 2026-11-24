@@ -21,6 +21,7 @@
     { id: "geografie", titel: "Geografie", pfad: "geografie/", symbol: "erde", ort: "leiste" },
     { id: "alle", titel: "Alle Materialien", kurz: "Alle", pfad: "alle/", symbol: "stapel", ort: "leiste" },
     { id: "fakten", titel: "Fakten-Check", kurz: "Fakten", pfad: "fakten/", symbol: "fakten", ort: "leiste" },
+    { id: "kalender", titel: "Kalender", pfad: "kalender/", ort: "mehr" },
     { id: "begriffe", titel: "Begriffe", pfad: "begriffe/", ort: "mehr" },
     { id: "bne", titel: "Nachhaltigkeit", pfad: "bne/", ort: "mehr" },
     { id: "nachrichten", titel: "Nachrichten", pfad: "nachrichten/", ort: "mehr" },

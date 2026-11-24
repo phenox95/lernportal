@@ -308,6 +308,34 @@ for seite in sorted(ROOT.glob("*/index.html")) + [ROOT / "index.html"]:
     if 'class="top-nav"' in t and "assets/js/nav.js" not in t:
         err(f"{seite.relative_to(ROOT)}: Portalseite ohne assets/js/nav.js (keine Navigation auf dem Handy)")
 
+# Stundenkalender (kalender.json): Lerngruppen mit Wochenrhythmus, Einträge mit Datum, Gruppe und Material aus projects.json
+ka = laden("kalender.json") or {}
+gruppen_ids = set()
+for g in ka.get("lerngruppen", []):
+    gg = f"kalender.json Lerngruppe „{g.get('id', '?')}“"
+    if not g.get("id") or g["id"] in gruppen_ids:
+        err(f"{gg}: id fehlt oder doppelt")
+    gruppen_ids.add(g.get("id"))
+    if g.get("fach") not in ("Biologie", "Geografie"):
+        err(f"{gg}: fach muss Biologie oder Geografie sein")
+    if not re.match(r"^\d{1,2}[a-z]$", str(g.get("klasse", ""))):
+        err(f"{gg}: klasse wie 7a erwartet")
+    for w in g.get("woche", []):
+        if w.get("tag") not in (1, 2, 3, 4, 5) or not w.get("stunden") or any(not isinstance(x, int) or not 1 <= x <= 11 for x in w["stunden"]):
+            err(f"{gg}: Wochentag (1–5) oder Stunden (1–11) ungültig")
+kal_pfade = {p.get("path"): p for p in projekte if isinstance(p, dict)}
+for i, e in enumerate(ka.get("eintraege", [])):
+    ee = f"kalender.json eintraege[{i}] {e.get('datum', '?')}"
+    if not re.match(r"^\d{4}-\d{2}-\d{2}$", str(e.get("datum", ""))):
+        err(f"{ee}: datum im Format JJJJ-MM-TT erwartet")
+    if e.get("gruppe") not in gruppen_ids:
+        err(f"{ee}: gruppe „{e.get('gruppe')}“ steht nicht unter lerngruppen")
+    if not e.get("material") and not e.get("notiz"):
+        wrn(f"{ee}: weder material noch notiz")
+    for m in e.get("material", []):
+        if m not in kal_pfade:
+            err(f"{ee}: material „{m}“ steht nicht in projects.json")
+
 # Mythen-Check (mythen.json): Aussagen mit belegter Quelle
 my = laden("mythen.json") or {}
 themen_ids = {x.get("id") for x in my.get("themen", []) if isinstance(x, dict)}
