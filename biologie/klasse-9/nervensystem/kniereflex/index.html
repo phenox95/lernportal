@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="de" class="lp-vorlage">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../../../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../../../assets/favicon/apple-touch-icon.png">
+  <title>Der Kniesehnenreflex Schritt für Schritt – Lernportal</title>
+  <meta name="description" content="Schrittfilm zum Reflexbogen: Erst vermuten, dann Schritt für Schritt sehen, wie der Kniesehnenreflex abläuft. Mit Ordnen, Vergleich und Erklärung.">
+  <link rel="stylesheet" href="../../../../assets/css/material.css">
+  <link rel="stylesheet" href="../../../../assets/css/lernmodul.css">
+  <link rel="stylesheet" href="../../../../assets/css/schrittfilm.css">
+  <script src="../../../../assets/js/prefs.js"></script>
+  <script src="../../../../assets/js/material.js" defer></script>
+  <script src="../../../../assets/js/lernmodul.js" defer></script>
+  <script src="../../../../assets/js/schrittfilm.js" defer></script>
+  <script src="../../../../assets/js/vorlesen.js" defer></script>
+  <style>
+    /* Unterschenkel dreht um das Knie (440|200) */
+    .kr-bein { transform-box: view-box; transform-origin: 440px 200px; }
+    .kr-bein.sf-zu { transform: rotate(-38deg); }
+    .kr-hammer { transform-box: view-box; transform-origin: 590px 300px; transform: rotate(18deg); }
+    .kr-hammer.sf-zu { transform: none; }
+    .kr-nerv { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.45; }
+    .kr-signal { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+</head>
+<body class="lp-seite" data-root="../../../../" data-title="Der Kniesehnenreflex Schritt für Schritt" data-subject="Biologie" data-grade="Klasse 9" data-tf="nervensystem">
+  <noscript><p class="lp-noscript"><a href="../../../../">Zurück zum Portal</a> · Diese Seite braucht JavaScript für den Schrittfilm und die Übungen.</p></noscript>
+
+  <main class="lp-inhalt">
+
+    <!-- Impuls: Anlass für die Fragenentwicklung. Die Frage der Stunde steht hier bewusst nicht. -->
+    <section class="lp-material" aria-labelledby="impuls">
+      <div class="lp-material-kopf"><strong id="impuls">Impuls</strong><span>Das Bein, das von allein hochschnellt</span></div>
+      <div class="lp-material-inhalt" data-vorlesen>
+        <p>Die Ärztin klopft mit einem kleinen Hammer unter die Kniescheibe. Das Bein schnellt nach vorn.</p>
+        <p><strong>Probiert es zu zweit:</strong> Eine Person sitzt auf dem Tisch. Die Beine hängen locker. Die andere Person klopft mit der Handkante leicht unter die Kniescheibe.</p>
+        <p>Klopft nur leicht. Versucht danach, das Bein festzuhalten.</p>
+      </div>
+      <p class="lp-quelle">Quelle: eigener Text</p>
+    </section>
+
+    <aside class="lp-leitfrage lm-frage" aria-labelledby="frage-label">
+      <label class="lp-label" id="frage-label" for="klassenfrage">Unsere Frage für heute</label>
+      <textarea class="lp-schreib" id="klassenfrage" rows="2"></textarea>
+    </aside>
+
+    <!-- M1: Schrittfilm Kniesehnenreflex -->
+    <figure class="lp-material lp-breit lp-abbildung" aria-labelledby="m1">
+      <div class="lp-material-kopf"><strong id="m1">M1</strong><span>Schrittfilm: Der Kniesehnenreflex</span></div>
+      <div class="lp-material-inhalt">
+        <p class="lm-hinweis">Tippe auf „Weiter“. Vor den meisten Schritten vermutet ihr zuerst, was als Nächstes passiert.</p>
+        <div data-schrittfilm data-vermuten="an">
+          <svg class="sf-bild" viewBox="0 0 640 390" role="img" aria-labelledby="m1-titel">
+            <title id="m1-titel">Modell: Sitzender Mensch von der Seite mit Oberschenkel, Unterschenkel, Kniesehne, Oberschenkelmuskel, Nerven und Rückenmark im Querschnitt</title>
+            <!-- Tisch -->
+            <rect x="190" y="226" width="250" height="10" rx="3" fill="var(--lm-platte)"/>
+            <path d="M 205 236 V 380 M 425 236 V 380" stroke="var(--lm-platte)" stroke-width="6"/>
+            <!-- Rückenmark im Querschnitt -->
+            <circle cx="95" cy="200" r="50" fill="var(--lm-zns)" stroke="var(--lm-zns-rand)" stroke-width="2"/>
+            <path d="M 95 168 C 70 160 66 180 80 192 C 66 206 70 232 95 222 C 120 232 124 206 110 192 C 124 180 120 160 95 168 Z" fill="none" stroke="var(--lm-zns-rand)" stroke-width="1.5" opacity="0.7"/>
+            <!-- Oberschenkel -->
+            <path d="M 200 202 L 440 202" stroke="var(--lm-haut-rand)" stroke-width="48" stroke-linecap="round"/>
+            <path d="M 200 202 L 440 202" stroke="var(--lm-haut)" stroke-width="44" stroke-linecap="round"/>
+            <!-- Unterschenkel mit Fuß -->
+            <g class="kr-bein" data-zu="6">
+              <path d="M 440 202 L 446 350" stroke="var(--lm-haut-rand)" stroke-width="40" stroke-linecap="round"/>
+              <path d="M 440 202 L 446 350" stroke="var(--lm-haut)" stroke-width="36" stroke-linecap="round"/>
+              <path d="M 446 352 L 492 358" stroke="var(--lm-haut-rand)" stroke-width="20" stroke-linecap="round"/>
+              <path d="M 446 352 L 492 358" stroke="var(--lm-haut)" stroke-width="16" stroke-linecap="round"/>
+              <!-- Kniesehne -->
+              <path d="M 432 184 C 458 186 466 208 458 238" fill="none" stroke="var(--lm-muskel-rand)" stroke-width="5" stroke-linecap="round" data-hl="1"/>
+            </g>
+            <!-- Oberschenkelmuskel mit Sinneszellen -->
+            <ellipse cx="320" cy="188" rx="104" ry="15" fill="var(--lm-muskel)" stroke="var(--lm-muskel-rand)" stroke-width="2" data-hl="2 6"/>
+            <path d="M 284 188 l 6 -5 l 6 10 l 6 -10 l 6 10 l 6 -10 l 6 5" fill="none" stroke="var(--lm-sens)" stroke-width="2.5" stroke-linejoin="round" data-hl="2"/>
+            <!-- Nerven (immer zu sehen, blass) -->
+            <path class="kr-nerv" stroke="var(--lm-sens)" d="M 296 186 C 260 150 190 150 150 168 L 108 186"/>
+            <path class="kr-nerv" stroke="var(--lm-motor)" d="M 88 210 L 140 236 C 210 256 300 226 352 196"/>
+            <path class="kr-nerv" stroke="var(--lm-zns-rand)" stroke-dasharray="3 5" d="M 95 150 V 30"/>
+            <!-- Signale (laufen in ihrem Schritt) -->
+            <path class="kr-signal" stroke="var(--lm-sens)" data-lauf="3" d="M 296 186 C 260 150 190 150 150 168 L 108 186"/>
+            <path class="kr-signal" stroke="var(--lm-hl)" data-lauf="4" d="M 108 186 C 100 192 94 200 88 210"/>
+            <circle cx="98" cy="198" r="9" fill="none" stroke="var(--lm-zns-rand)" stroke-width="2" data-hl="4"/>
+            <path class="kr-signal" stroke="var(--lm-motor)" data-lauf="5" d="M 88 210 L 140 236 C 210 256 300 226 352 196"/>
+            <path class="kr-signal" stroke="var(--lm-zns-rand)" data-lauf="7" d="M 95 150 V 30"/>
+            <!-- Hammer -->
+            <g data-nur="1">
+              <g class="kr-hammer" data-zu="1">
+                <path d="M 590 300 L 486 236" stroke="var(--lm-platte)" stroke-width="7" stroke-linecap="round"/>
+                <rect x="458" y="214" width="34" height="22" rx="5" transform="rotate(32 475 225)" fill="var(--lm-hitze)"/>
+              </g>
+            </g>
+            <!-- Beschriftung -->
+            <g font-size="15">
+              <text x="95" y="275" text-anchor="middle">Rückenmark</text>
+              <text x="95" y="293" text-anchor="middle">(Querschnitt)</text>
+              <text x="360" y="160" text-anchor="middle">Oberschenkelmuskel</text>
+              <text x="490" y="176">Kniesehne</text>
+              <line x1="488" y1="180" x2="462" y2="194" stroke="var(--lp-text)" stroke-width="1"/>
+              <text x="128" y="128" style="fill:var(--lm-sens)">sensorischer Nerv</text>
+              <text x="170" y="275" style="fill:var(--lm-motor)">motorischer Nerv</text>
+              <text x="108" y="24">zum Gehirn</text>
+              <text x="296" y="222" text-anchor="middle" font-size="13" data-ab="2">Sinneszellen im Muskel</text>
+            </g>
+            <g font-size="17" font-weight="700">
+              <text x="600" y="120" text-anchor="end" data-ab="6">Das Bein schnellt nach vorn!</text>
+              <text x="108" y="60" data-ab="7">„Mein Bein hat gezuckt.“</text>
+            </g>
+          </svg>
+          <ol class="sf-schritte">
+            <li><b>Reiz:</b> Der Hammer trifft die Kniesehne unter der Kniescheibe.</li>
+            <li data-frage="Der Hammer trifft die Kniesehne. Was passiert als Nächstes?" data-wahl="Der Oberschenkelmuskel wird kurz gedehnt.|Das Gehirn entscheidet: Bein hoch.|Das Bein schnellt sofort hoch." data-ok="1">Die Sehne zieht am Oberschenkelmuskel. Der Muskel wird kurz <b>gedehnt</b>. <b>Sinneszellen im Muskel</b> nehmen die Dehnung auf.</li>
+            <li data-frage="Die Sinneszellen im Muskel bilden ein Signal. Wohin läuft es?" data-wahl="direkt zum Gehirn|zum Rückenmark|direkt zum Unterschenkel" data-ok="2">Der <b>sensorische Nerv</b> leitet das Signal zum <b>Rückenmark</b>.</li>
+            <li data-frage="Das Signal ist im Rückenmark. Was passiert dort?" data-wahl="Es wartet, bis das Gehirn entscheidet.|Es endet dort.|Es wird direkt auf einen motorischen Nerv umgeschaltet." data-ok="3">Im Rückenmark wird das Signal <b>direkt umgeschaltet</b>: vom sensorischen Nerv auf den motorischen Nerv. Das Gehirn wird dafür nicht gefragt.</li>
+            <li data-frage="Wohin leitet der motorische Nerv das Signal?" data-wahl="zum Oberschenkelmuskel|zur Kniesehne|zum Gehirn" data-ok="1">Der <b>motorische Nerv</b> leitet das Signal zurück zum Oberschenkelmuskel.</li>
+            <li data-frage="Das Signal kommt im Oberschenkelmuskel an. Was passiert?" data-wahl="Der Muskel wird länger.|Der Muskel zieht sich zusammen.|Nichts. Das Gehirn muss erst zustimmen." data-ok="2">Der Muskel <b>zieht sich zusammen</b>. Der Unterschenkel schnellt nach vorn. Das ist die <b>Reaktion</b>.</li>
+            <li data-frage="Wann merkst du, dass dein Bein gezuckt hat?" data-wahl="vor der Bewegung|erst nach der Bewegung|gar nicht" data-ok="2">Ein Signal läuft auch vom Rückenmark zum <b>Gehirn</b>. Es kommt erst an, wenn das Bein schon zuckt. Darum merkst du die Bewegung erst danach.</li>
+          </ol>
+        </div>
+        <p class="lm-hinweis">Im Film läuft alles sehr langsam. In Wirklichkeit dauert der Kniesehnenreflex weniger als eine Zehntelsekunde.</p>
+      </div>
+      <figcaption class="lp-quelle">Quelle: eigene, stark vereinfachte Zeichnung, CC BY 4.0</figcaption>
+    </figure>
+
+    <!-- Aufgabe 1: Reflexbogen ordnen -->
+    <section class="lp-aufgabe" aria-labelledby="a1">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a1">Aufgabe 1</span>
+        <span class="lp-niveau" data-stufe="1" role="img" aria-label="Niveau 1 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <div data-reihe>
+        <p class="lp-auftrag"><strong class="lp-op">Ordne</strong> die Stationen des Kniesehnenreflexes in die richtige Reihenfolge. Nutze M1.</p>
+        <p class="lm-hinweis">Tippe eine Karte an. Sie kommt auf den nächsten freien Platz. Tippe sie noch einmal an, dann kommt sie zurück.</p>
+        <div class="lm-vorrat" aria-label="Karten zum Ordnen">
+          <button class="lm-karte" data-pos="1"><strong>Reiz</strong><small>Der Hammer trifft die Kniesehne.</small></button>
+          <button class="lm-karte" data-pos="2"><strong>Sinneszellen im Muskel</strong><small>Sie nehmen die Dehnung auf.</small></button>
+          <button class="lm-karte" data-pos="3"><strong>sensorischer Nerv</strong><small>Er leitet das Signal zum Rückenmark.</small></button>
+          <button class="lm-karte" data-pos="4"><strong>Rückenmark</strong><small>Das Signal wird umgeschaltet.</small></button>
+          <button class="lm-karte" data-pos="5"><strong>motorischer Nerv</strong><small>Er leitet das Signal zum Muskel.</small></button>
+          <button class="lm-karte" data-pos="6"><strong>Muskel</strong><small>Der Oberschenkelmuskel zieht sich zusammen.</small></button>
+          <button class="lm-karte" data-pos="7"><strong>Reaktion</strong><small>Das Bein schnellt nach vorn.</small></button>
+        </div>
+        <ol class="lm-kette" aria-label="Reihenfolge des Kniesehnenreflexes"></ol>
+        <div class="lm-leiste">
+          <button class="lm-knopf lm-pruefen" type="button">Prüfen</button>
+          <button class="lm-knopf zweit lm-neu" type="button">Neu mischen</button>
+        </div>
+        <p class="lm-rm" aria-live="polite"></p>
+      </div>
+      <div class="lp-hilfe">
+        <span class="lp-label">Wortspeicher</span>
+        <ul class="lp-woerter">
+          <li><span class="lp-wort" aria-hidden="true">Knie-seh-ne</span><span class="lp-sr">Kniesehne</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Ober-schen-kel-mus-kel</span><span class="lp-sr">Oberschenkelmuskel</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Sin-nes-zel-le</span><span class="lp-sr">Sinneszelle</span></li>
+          <li><span class="lp-wort" aria-hidden="true">sen-so-ri-scher Nerv</span><span class="lp-sr">sensorischer Nerv</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Rü-cken-mark</span><span class="lp-sr">Rückenmark</span></li>
+          <li><span class="lp-wort" aria-hidden="true">mo-to-ri-scher Nerv</span><span class="lp-sr">motorischer Nerv</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Re-flex-bo-gen</span><span class="lp-sr">Reflexbogen</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Aufgabe 2: Vergleichen mit dem Rückziehreflex -->
+    <section class="lp-aufgabe" aria-labelledby="a2">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a2">Aufgabe 2</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Vergleiche</strong> den Kniesehnenreflex mit dem Reflex an der heißen Herdplatte. Nenne zwei Gemeinsamkeiten und einen Unterschied.</p>
+      <p class="lm-hinweis">Den Reflex an der Herdplatte findest du auf der Seite <a href="../signalweg/">Vom Reiz zur Reaktion</a> in M2.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine">
+          <li>Bei beiden Reflexen …</li>
+          <li>Beim Kniesehnenreflex liegen die Sinneszellen im …, an der Herdplatte in der …</li>
+          <li>Ein Unterschied ist, dass …</li>
+        </ul>
+      </div>
+      <label class="lp-sr" for="schreib2">Schreibraum für Aufgabe 2</label>
+      <textarea class="lp-schreib" id="schreib2" rows="5"></textarea>
+    </section>
+
+    <!-- Aufgabe 3: Erklären und beurteilen -->
+    <section class="lp-aufgabe" aria-labelledby="a3">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a3">Aufgabe 3</span>
+        <span class="lp-niveau" data-stufe="3" role="img" aria-label="Niveau 3 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <ul class="lp-teile">
+        <li><label class="lp-teil"><input type="checkbox"><span>a) <strong class="lp-op">Erkläre</strong>, warum du das Bein beim Klopfen kaum festhalten kannst.</span></label></li>
+        <li><label class="lp-teil"><input type="checkbox"><span>b) <strong class="lp-op">Beurteile</strong>, was die Ärztin erfährt, wenn das Bein beim Klopfen gar nicht zuckt. Begründe mit M1.</span></label></li>
+      </ul>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine">
+          <li>Das Signal läuft nicht über das Gehirn, sondern …</li>
+          <li>Wenn das Bein nicht zuckt, könnte eine Station … gestört sein, zum Beispiel …</li>
+          <li>Ich vermute, dass …, weil …</li>
+        </ul>
+      </div>
+      <label class="lp-sr" for="schreib3">Schreibraum für Aufgabe 3</label>
+      <textarea class="lp-schreib" id="schreib3" rows="7"></textarea>
+    </section>
+
+    <p class="lp-fuss">Eingaben bleiben auf diesem Gerät und werden nicht gespeichert oder übertragen.</p>
+  </main>
+
+  <!-- Spielinhalte für Begriffe und Belohnungsspiele. Entwurf: vor dem Einsatz gegenlesen und dann "geprueft": true setzen. -->
+  <script type="application/json" id="lp-spiel-daten">
+  {
+   "geprueft": false,
+   "titel": "Der Kniesehnenreflex",
+   "paare": [
+    ["Reflex", "Schnelle Reaktion, die immer gleich abläuft und über das Rückenmark geschaltet wird", "Re-flex"],
+    ["Reflexbogen", "Weg des Signals bei einem Reflex: Sinneszellen, sensorischer Nerv, Rückenmark, motorischer Nerv, Muskel", "Re-flex-bo-gen"],
+    ["Kniesehne", "Sehne unter der Kniescheibe, die den Oberschenkelmuskel mit dem Unterschenkel verbindet", "Knie-seh-ne"],
+    ["Sinneszellen im Muskel", "Nehmen auf, wenn der Muskel gedehnt wird", "Sin-nes-zel-len"],
+    ["Rückenmark", "Teil des ZNS im Rücken; schaltet beim Reflex das Signal direkt um", "Rü-cken-mark"]
+   ],
+   "spiele": ["memory", "quiz", "zuordnen"]
+  }
+  </script>
+</body>
+</html>

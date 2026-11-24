@@ -276,6 +276,26 @@
     ]
   },
   {
+    "title": "Der Kniesehnenreflex Schritt für Schritt",
+    "description": "Schrittfilm zum Reflexbogen: Erst vermuten, dann sehen, wie das Signal vom Muskel über das Rückenmark zurück zum Muskel läuft.",
+    "type": "Lernmodul",
+    "path": "biologie/klasse-9/nervensystem/kniereflex/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 9,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/signalweg/",
+        "grund": "Dort steht der Reflex an der heißen Herdplatte, den Aufgabe 2 zum Vergleich braucht."
+      }
+    ]
+  },
+  {
     "title": "Synapsen-Baukasten: Wie springt das Signal über die Lücke?",
     "description": "Löse ein Signal an der Synapse aus, verfolge Bläschen, Transmitter und Rezeptoren und teste, was Stoff X am Modell verändert.",
     "type": "Lernmodul",

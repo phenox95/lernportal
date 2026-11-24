@@ -1,0 +1,49 @@
+/* Lernportal – Schrittfilm (Skript assets/js/schrittfilm.js).
+   Farben über die Variablen von Portal (lp-) oder Präsentation, mit Ersatzwerten. Bewegung nur über transform, opacity und stroke-dashoffset. */
+
+.sf [hidden] { display: none !important; }
+.sf-kopf { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+.sf-zaehler { margin: 0; font-weight: 700; color: var(--lp-text2, var(--ink2, #444)); }
+.sf-punkte { display: flex; gap: 0.35rem; }
+.sf-punkte i { width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 2px solid var(--lp-akzent, var(--g, #494294)); }
+.sf-punkte i.an { background: var(--lp-akzent, var(--g, #494294)); }
+.sf-bild { display: block; width: 100%; height: auto; max-height: 62vh; }
+.sf-bild text { font-family: inherit; fill: var(--lp-text, var(--ink, #111)); }
+
+/* Sichtbarkeit und Hervorheben */
+.sf-bild .sf-weg { opacity: 0; }
+.sf-bild [data-ab], .sf-bild [data-nur] { transition: opacity 0.35s; }
+.sf-bild .sf-hl { stroke: var(--lm-hl, #c24a08) !important; stroke-width: 4 !important; animation: sf-blink 0.5s ease-in-out 3; }
+@keyframes sf-blink { 50% { opacity: 0.35; } }
+
+/* Laufender Signalpfad: wird von Anfang bis Ende gezeichnet */
+.sf-bild .sf-lauf { stroke-dasharray: var(--sf-len) var(--sf-len); stroke-dashoffset: var(--sf-len); }
+.sf-bild .sf-lauf.sf-laeuft { animation: sf-lauf 1.6s ease-in-out forwards; }
+.sf-bild .sf-lauf.sf-fertig { stroke-dashoffset: 0; }
+@keyframes sf-lauf { to { stroke-dashoffset: 0; } }
+
+/* Endzustände (data-zu): Übergang nur im Schritt selbst */
+.sf-bild [data-zu] { transition: transform 0.35s cubic-bezier(.2,.9,.3,1.2); }
+.sf-bild [data-zu].sf-ohne { transition: none; }
+
+/* Text, Frage, Rückmeldung */
+.sf-unten { min-height: 6.5rem; margin-top: 0.6rem; }
+.sf-text p { margin: 0; padding: 0.6rem 0.9rem; border-left: 6px solid var(--lp-akzent, var(--g, #494294)); background: var(--lp-flaeche, var(--tint, #f1f0f8)); font-size: 1.1em; line-height: 1.45; }
+.sf-frage { padding: 0.6rem 0.9rem; border: 2px dashed var(--lp-rahmen, var(--line, #bbb)); border-radius: 12px; }
+.sf-frage-satz { margin: 0 0 0.5rem; font-size: 1.1em; }
+.sf-wahl { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sf-wahl button { min-height: 48px; }
+.sf-rm { margin: 0 0 0.4rem; font-weight: 700; }
+.sf-rm.ok { color: var(--lm-ok, #0c6a49); }
+.sf-rm.falsch { color: var(--lm-bad, #a12a1a); }
+.sf-leiste { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 0.75rem; }
+.sf-leiste .sf-weiter { min-width: 8rem; }
+.sf-leiste button[disabled] { opacity: 0.5; cursor: not-allowed; }
+.sf-schalter { display: inline-flex; align-items: center; gap: 0.35rem; margin-left: auto; min-height: 44px; cursor: pointer; }
+.sf-schalter input { width: 1.3rem; height: 1.3rem; accent-color: var(--lp-akzent, var(--g, #494294)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-bild .sf-hl { animation: none; }
+  .sf-bild [data-ab], .sf-bild [data-nur], .sf-bild [data-zu] { transition: none; }
+  .sf-bild .sf-lauf.sf-laeuft { animation: none; stroke-dashoffset: 0; }
+}
