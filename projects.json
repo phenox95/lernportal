@@ -103,21 +103,26 @@
   },
   {
     "title": "Sinnesleistungen: Experimente mit Kontrolle",
-    "description": "Pflichtexperiment: Blinder Fleck, Zweipunktschwelle und Hörbereich an drei Stationen messen, jeweils mit Kontrolle.",
+    "description": "Pflichtexperiment in zwei Stunden: Blinder Fleck, Zweipunktschwelle und Hörbereich mit Kontrolle messen, dann die Klassenwerte deuten und Messfehler erläutern.",
     "type": "Materialseite",
     "path": "biologie/klasse-9/nervensystem/sinnes-stationen/",
     "subject": "Biologie",
     "grade": "Klasse 9",
     "themenfeld": "3.6",
-    "dauer": "45 Min.",
+    "dauer": "2 × 45 Min.",
     "niveau": "E–G",
     "datum": "2026-11-24",
     "reihe": "Neurobiologie",
     "folge": 5,
     "dateien": [
       {
-        "titel": "Präsentation zur Stunde",
+        "titel": "Präsentation Teil 1: Messen an Stationen",
         "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Präsentation Teil 2: Klassenwerte auswerten",
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-auswertung/praesentation/",
         "art": "Präsentation"
       },
       {
@@ -132,53 +137,15 @@
         "stufe": 2
       },
       {
-        "titel": "Sinnes-Stationen: Zufallsplan, Hörtest, Gruppenwert",
-        "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/stationen/",
-        "art": "Übung"
-      }
-    ],
-    "verweise": [
-      {
-        "pfad": "biologie/klasse-9/nervensystem/sinnes-auswertung/",
-        "grund": "In der folgenden Stunde wertet die Klasse die Messwerte aus."
-      }
-    ]
-  },
-  {
-    "title": "Sinnesleistungen auswerten",
-    "description": "Klassenwerte aus den Sinnes-Stationen deuten: Ergebnisse mit den Sinneszellen erklären und Messfehler erläutern.",
-    "type": "Materialseite",
-    "path": "biologie/klasse-9/nervensystem/sinnes-auswertung/",
-    "subject": "Biologie",
-    "grade": "Klasse 9",
-    "themenfeld": "3.6",
-    "dauer": "45 Min.",
-    "niveau": "E–G",
-    "datum": "2026-11-24",
-    "reihe": "Neurobiologie",
-    "folge": 5,
-    "dateien": [
-      {
-        "titel": "Präsentation zur Stunde",
-        "pfad": "biologie/klasse-9/nervensystem/sinnes-auswertung/praesentation/",
-        "art": "Präsentation"
-      },
-      {
         "titel": "Infokarten und Versuchsprotokoll",
         "pfad": "biologie/klasse-9/nervensystem/sinnes-auswertung/arbeitsblatt-infokarten.pdf",
         "art": "Arbeitsblatt",
         "stufe": 2
       },
       {
-        "titel": "Klassentabelle (Sinnes-Stationen)",
+        "titel": "Sinnes-Stationen: Zufallsplan, Hörtest, Gruppenwert, Klassentabelle",
         "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/stationen/",
         "art": "Übung"
-      }
-    ],
-    "verweise": [
-      {
-        "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/",
-        "grund": "Die Messwerte stammen aus dem Pflichtexperiment der Vorstunde."
       }
     ]
   },
@@ -267,7 +234,7 @@
     "niveau": "E–G",
     "datum": "2026-11-24",
     "reihe": "Neurobiologie",
-    "folge": 6,
+    "folge": 7,
     "verweise": [
       {
         "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",
@@ -307,7 +274,7 @@
     "niveau": "E–G",
     "datum": "2026-11-24",
     "reihe": "Neurobiologie",
-    "folge": 9,
+    "folge": 10,
     "verweise": [
       {
         "pfad": "biologie/klasse-9/nervensystem/signalweg/",
@@ -350,6 +317,8 @@
     "dauer": "45 Min.",
     "niveau": "E–G",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 8,
     "verweise": [
       {
         "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",
@@ -369,6 +338,7 @@
     "niveau": "E–G",
     "datum": "2026-11-24",
     "reihe": "Neurobiologie",
+    "folge": 13,
     "verweise": [
       {
         "pfad": "biologie/klasse-9/nervensystem/synapse/",

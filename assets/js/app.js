@@ -196,10 +196,11 @@
       ? `<span class="row-description">${escapeHtml(project.description)}</span>` : "";
     const nr = opts.nr;
     const kurz = nr != null && STUNDE_VORSATZ.test(project.title) ? String(project.title).replace(STUNDE_VORSATZ, "") : project.title;
-    const vorsatz = nr != null ? `<span class="sr-only">Stunde ${nr}: </span>` : "";
-    const lead = nr != null ? `<span class="numeral row-nr" aria-hidden="true">${nr}</span>` : `<span class="dot ${tileClass(project)}" aria-hidden="true"></span>`;
+    /* opts.teil: weiteres Material zur selben Stunde, Nummer steht schon in der ersten Zeile des Blocks */
+    const vorsatz = nr != null ? `<span class="sr-only">${opts.teil ? "Auch" : "Stunde " + nr}: </span>` : "";
+    const lead = nr != null ? `<span class="numeral row-nr" aria-hidden="true">${opts.teil ? "" : nr}</span>` : `<span class="dot ${tileClass(project)}" aria-hidden="true"></span>`;
     return `
-      <a class="row" href="${escapeHtml(resolvePath(project.path))}">
+      <a class="row${opts.teil ? " row-teil" : ""}" href="${escapeHtml(resolvePath(project.path))}">
         ${lead}
         <span class="row-main">
           <span class="row-title">${vorsatz}${escapeHtml(kurz)}${badge}</span>${beschreibung}${meta ? `
@@ -871,6 +872,26 @@
     });
   }
 
+  /* Eine Nummer je Stunde: Einträge einer Reihe mit derselben Nummer bilden einen Block. Die erste Zeile trägt die Nummer,
+     weitere Einträge stehen ohne Nummer darunter. Ein Eintrag, dessen Seite die erste Zeile schon unter "dateien" führt, erscheint nicht noch einmal. */
+  function stundenBloecke(mine, name, ohne) {
+    const bloecke = [];
+    mine.forEach(p => {
+      const nr = reihenNr(p, name);
+      const letzter = bloecke[bloecke.length - 1];
+      if (nr != null && letzter && letzter.nr === nr) letzter.eintraege.push(p);
+      else bloecke.push({ nr, eintraege: [p] });
+    });
+    const norm = x => String(x || "").trim().replace(/^\.?\//, "").replace(/index\.html?$/i, "").replace(/([^/])$/, "$1/");
+    return bloecke.map(({ nr, eintraege }) => {
+      const [kopf, ...rest] = eintraege;
+      const schon = new Set(dateienOf(kopf).map(d => norm(d.pfad)));
+      const teile = rest.filter(p => !schon.has(norm(p.path)));
+      const zeilen = row(kopf, false, { nr, ohne }) + teile.map(p => row(p, false, { nr, ohne, teil: true })).join("");
+      return teile.length ? `<div class="stunde-block">${zeilen}</div>` : zeilen;
+    }).join("");
+  }
+
   /* Materialien eines Themenfelds nach Unterrichtsreihe (Sequenz) gruppiert, mit den Zielen der Reihe */
   function reihenListe(items) {
     /* optionales Feld "folge" (Zahl): Reihenfolge innerhalb einer Reihe, Einträge ohne folge behalten ihre Reihenfolge */
@@ -884,9 +905,13 @@
       /* Klasse und Dauer einmal im Kopf, wenn sie bei allen Einträgen gleich sind */
       const gleich = f => mine.length > 1 && mine.every(p => p[f] && p[f] === mine[0][f]);
       const ohne = ["grade", "dauer"].filter(gleich);
-      const kopfMeta = [countText(mine.length), ...ohne.map(f => mine[0][f])].map(escapeHtml).join(" · ");
+      /* Reihe mit Nummern: Zahl der Stunden statt der Einträge (eine Nummer je Stunde) */
+      const nummern = name ? mine.map(p => reihenNr(p, name)) : [];
+      const stunden = nummern.length && nummern.every(n => n != null) ? new Set(nummern).size : 0;
+      const zahl = stunden ? stunden + (stunden === 1 ? " Stunde" : " Stunden") : countText(mine.length);
+      const kopfMeta = [zahl, ...ohne.map(f => mine[0][f])].map(escapeHtml).join(" · ");
       return `<section class="reihe"><div class="reihe-kopf"><h2 class="reihe-titel">${escapeHtml(titel)}</h2><span class="reihe-zahl">${kopfMeta}</span>${ziele}</div>
-        <div class="group">${mine.map(p => row(p, false, { nr: name ? reihenNr(p, name) : null, ohne })).join("")}</div></section>`;
+        <div class="group">${name ? stundenBloecke(mine, name, ohne) : mine.map(p => row(p, false, { ohne })).join("")}</div></section>`;
     };
     const parts = namen.map(n => gruppe("Reihe: " + n, items.filter(p => String(p.reihe || "").trim() === n), n));
     const ohne = items.filter(p => !String(p.reihe || "").trim());
