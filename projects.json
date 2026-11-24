@@ -50,12 +50,125 @@
         "titel": "Präsentation zur Stunde",
         "pfad": "biologie/klasse-9/nervensystem/reiz-reaktion/praesentation/",
         "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Reaktionszeit messen",
+        "pfad": "biologie/klasse-9/nervensystem/reiz-reaktion/arbeitsblatt-reaktionszeit.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
       }
     ],
     "verweise": [
       {
         "pfad": "biologie/klasse-9/nervensystem/signalweg/",
         "grund": "Später in der Reihe wird die Kette vom Reiz zur Reaktion mit Rückenmark und Reflex genauer."
+      }
+    ]
+  },
+  {
+    "title": "Sinnesorgane und Reizarten",
+    "description": "Was ist in der Dose? Sinnesorganen ihre Reizart und ihre Sinneszellen zuordnen und erklären, was eine Sinneszelle mit dem Reiz macht.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/sinnesorgane/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/nervensystem/sinnesorgane/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Sinnesorgane und Reizarten",
+        "pfad": "biologie/klasse-9/nervensystem/sinnesorgane/arbeitsblatt-sinne.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      },
+      {
+        "titel": "Übung: Sinne zuordnen",
+        "pfad": "biologie/klasse-9/nervensystem/sinnesorgane/uebung/",
+        "art": "Übung"
+      }
+    ]
+  },
+  {
+    "title": "Sinnesleistungen: Experimente mit Kontrolle",
+    "description": "Pflichtexperiment: Blinder Fleck, Zweipunktschwelle und Hörbereich an drei Stationen messen, jeweils mit Kontrolle.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/sinnes-stationen/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Stationskarten A bis C",
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/arbeitsblatt-stationskarten.pdf",
+        "art": "Arbeitsblatt"
+      },
+      {
+        "titel": "Planungsbogen mit Messtabelle",
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/arbeitsblatt-planungsbogen.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      },
+      {
+        "titel": "Sinnes-Stationen: Zufallsplan, Hörtest, Gruppenwert",
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/stationen/",
+        "art": "Übung"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-auswertung/",
+        "grund": "In der folgenden Stunde wertet die Klasse die Messwerte aus."
+      }
+    ]
+  },
+  {
+    "title": "Sinnesleistungen auswerten",
+    "description": "Klassenwerte aus den Sinnes-Stationen deuten: Ergebnisse mit den Sinneszellen erklären und Messfehler erläutern.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/sinnes-auswertung/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-auswertung/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Infokarten und Versuchsprotokoll",
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-auswertung/arbeitsblatt-infokarten.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      },
+      {
+        "titel": "Klassentabelle (Sinnes-Stationen)",
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/stationen/",
+        "art": "Übung"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/sinnes-stationen/",
+        "grund": "Die Messwerte stammen aus dem Pflichtexperiment der Vorstunde."
       }
     ]
   },

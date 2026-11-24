@@ -106,6 +106,7 @@ biologie/klasse-9/auge/
 - **Alles im Repository ist öffentlich.** `sichtbar: false` blendet nur aus und schützt nicht. Nie hochladen: Erwartungshorizonte, Lehrkrafthinweise, Klassenarbeiten, Lösungen für die Lehrkraft.
 - **Rechte:** Nur eigene oder klar lizenzierte Bilder und Texte. Schulbuchabbildungen und Fremdmaterial nicht hochladen. Fremde Fundstellen nur verlinken.
 - **PDF-Export:** Foliennotizen vor dem Export entfernen. PDFs mit echtem Text exportieren (nicht als Bild), damit Vorlesefunktionen funktionieren. Bilder komprimieren, damit die Dateien schlank bleiben.
+- **Druck-Arbeitsblätter aus HTML:** Beispiel `biologie/klasse-9/nervensystem/quelle/`. Eine HTML-Datei je Arbeitsblatt mit `druck.css` (A4, Andika 9 pt, Rand 10 mm, nur Schwarz, Weiß, Grau). `node build.js` (bei laufendem `python3 -m http.server 8765` im Repository-Stamm) erzeugt die PDFs mit echtem Text in den Stundenordnern und bricht bei Überlauf einer Seite ab.
 - **Benennung:** Fassungen nur über das Niveau kennzeichnen (●○○ …). Keine Kennzeichnung „LRS" oder Ähnliches in Titeln oder Dateinamen.
 - **Exit-Games:** Ohne Konten gibt es keine Auswertung für die Lehrkraft. Ergebnisse bleiben im Browser der SuS.
 - Das Beispiel `biologie/klasse-9/beispiel-materialseite/` (Status „Beispiel") enthält nur Platzhalter. Löschen, sobald echtes Material da ist, samt Eintrag in `projects.json`.
