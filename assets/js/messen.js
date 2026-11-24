@@ -15,6 +15,12 @@
       „Am Board messen“ öffnet einen Reaktionstest zum Antippen; diese Werte erscheinen als Ringe.
       Gespeichert in localStorage (data-key, sonst je Seite), „Neu beginnen“ leert.
 
+   2b) Reaktionstest am Board als Impuls
+      <div data-boardtest data-key="lp-…" data-ziel="0.4" data-ja="schneller als der Ball" data-nein="langsamer als der Ball"></div>
+      Großes Tippfeld für die ganze Folie: Eine Person nach der anderen tippt am Board.
+      Die Zeiten landen unter demselben data-key wie die Klassenmessung (als Ringe im Punktdiagramm).
+      Ohne Mittelwert, nur die letzten Versuche. data-ziel (Sekunden) ist optional: Zeiten bis dahin bekommen den Text data-ja, langsamere data-nein.
+
    3) Gruppenwerte per QR-Code sammeln
       <div data-qr-sammeln data-key="lp-…" data-namen="A=Blinder Fleck|B=Zwei Spitzen"></div>
       Liest Codes im Format des Rückkanals ({"v":1,"g":"Gruppe 2","a":"B: Fingerkuppe 3"}) mit der Kamera
@@ -77,11 +83,50 @@
   function median(a) { if (!a.length) return null; var s = a.slice().sort(function (x, y) { return x - y; }), n = s.length; return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2; }
   function mittel(a) { return a.length ? a.reduce(function (x, y) { return x + y; }, 0) / a.length : null; }
 
+  /* Gemeinsamer Speicher je data-key: Board-Test (Impuls) und Klassenmessung zeigen dieselben Werte */
+  var speicher = {}, hoerer = {};
+  function messDaten(key) {
+    if (!speicher[key]) {
+      var d = { l: [], b: [] };
+      try { var alt = JSON.parse(lies(key) || "null"); if (alt && alt.l && alt.b) d = alt; } catch (e) { /* neu */ }
+      speicher[key] = d;
+    }
+    return speicher[key];
+  }
+  function messGeaendert(key, von) {
+    schreib(key, JSON.stringify(speicher[key]));
+    (hoerer[key] || []).forEach(function (f) { if (f !== von) f(); });
+  }
+  function messHoeren(key, f) { (hoerer[key] = hoerer[key] || []).push(f); }
+
+  /* Tippfeld: ruhe -> warte (zufällig 1,5 bis 4,5 s) -> los -> ruhe. wert(s) bekommt die Zeit in Sekunden. */
+  function tippTest(feld, info, wert) {
+    var zustand = "ruhe", uhr = null, t0 = 0;
+    function text(t, cls) { feld.textContent = t; feld.className = feld.className.replace(/\s*\b(warte|los)\b/g, "") + (cls ? " " + cls : ""); }
+    function tippen() {
+      var jetzt = performance.now();
+      if (zustand === "ruhe") {
+        zustand = "warte"; text("Warte …", "warte"); info("Noch nicht tippen.");
+        uhr = setTimeout(function () { zustand = "los"; text("Jetzt!", "los"); t0 = performance.now(); }, 1500 + Math.random() * 3000);
+      } else if (zustand === "warte") {
+        clearTimeout(uhr); zustand = "ruhe"; text("Zu früh. Antippen für einen neuen Versuch.");
+        info("Zu früh getippt. Der Versuch zählt nicht.");
+      } else if (zustand === "los") {
+        var s = (jetzt - t0) / 1000; zustand = "ruhe";
+        if (s > 1.5) { text("Zu langsam. Antippen für einen neuen Versuch."); info("Über 1,5 Sekunden: Der Versuch zählt nicht."); return; }
+        text(komma(s, 2) + " s. Antippen für den nächsten Versuch."); wert(s);
+      }
+    }
+    feld.addEventListener("pointerdown", function (e) { if (e.button > 0) return; e.preventDefault(); e.stopPropagation(); tippen(); });
+    feld.addEventListener("keydown", function (e) { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); if (!e.repeat) tippen(); } });
+    feld.addEventListener("click", function (e) { e.preventDefault(); });
+    return { stopp: function (t) { clearTimeout(uhr); zustand = "ruhe"; text(t || "Antippen zum Start"); } };
+  }
+
   [].forEach.call(document.querySelectorAll("[data-klassenmessung]"), function (root, nr) {
     var MAX = +root.getAttribute("data-max") || 50, KEY = root.getAttribute("data-key") || ("lp-klassenmessung:" + location.pathname + ":" + nr);
     var NS = "http://www.w3.org/2000/svg", W = 1000, H = 260, X0 = 70, X1 = 970, Y0 = 176, R = 11;
-    var daten = { l: [], b: [] };
-    try { var alt = JSON.parse(lies(KEY) || "null"); if (alt && alt.l && alt.b) daten = alt; } catch (e) { /* neu */ }
+    var daten = messDaten(KEY);
     function x(cm) { return X0 + (Math.min(cm, MAX) / MAX) * (X1 - X0); }
     function sv(tag, at) { var e = document.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); return e; }
 
@@ -117,7 +162,7 @@
     var unter = el("div", null, "km-unter"); unter.appendChild(legende); unter.appendChild(status);
     root.appendChild(svg); root.appendChild(zahlen); root.appendChild(ein); root.appendChild(unter); root.appendChild(test);
 
-    function speichern() { schreib(KEY, JSON.stringify(daten)); }
+    function speichern() { messGeaendert(KEY, zeichnen); }
     function zeichnen() {
       punkte.textContent = ""; linie.textContent = "";
       var stapel = {};
@@ -128,6 +173,11 @@
       }
       daten.l.forEach(function (v) { punkt(v, "l"); });
       daten.b.forEach(function (s) { punkt(sZuCm(s), "b"); });
+      var drueber = daten.l.filter(function (v) { return v > MAX; }).length + daten.b.filter(function (s) { return sZuCm(s) > MAX; }).length;
+      if (drueber) { /* längere Zeiten liegen am rechten Rand gestapelt */
+        var h = stapel[MAX] || 1, ty = Math.max(R, Y0 - R - 4 - (h - 1) * (2 * R + 2)) - R - 8;
+        var tl = sv("text", { x: X1 + 24, y: Math.max(20, ty), "text-anchor": "end", "class": "km-mehr" }); tl.textContent = drueber + "× länger"; punkte.appendChild(tl);
+      }
       var m = mittel(daten.l), md = median(daten.l), teile = [];
       if (m != null) {
         linie.appendChild(sv("path", { d: "M" + x(m) + " 8 V" + Y0 }));
@@ -157,35 +207,56 @@
       if (daten[art].length) daten[art].pop(); else if (daten.l.length) daten.l.pop();
       speichern(); zeichnen(); status.textContent = "Letzten Wert gelöscht.";
     });
-    scharf(leer, "Neu beginnen", function () { daten = { l: [], b: [] }; letzte = []; speichern(); zeichnen(); status.textContent = "Neu begonnen. Die Tabelle ist leer."; });
+    scharf(leer, "Neu beginnen", function () { daten.l.length = 0; daten.b.length = 0; letzte = []; speichern(); zeichnen(); status.textContent = "Neu begonnen. Die Tabelle ist leer."; });
 
-    /* Ablauf des Tests: ruhe -> warte -> los -> ruhe */
-    var zustand = "ruhe", uhr = null, t0 = 0;
-    function feldText(t, cls) { feld.textContent = t; feld.className = "km-feld" + (cls ? " " + cls : ""); }
-    function testZu() { clearTimeout(uhr); zustand = "ruhe"; test.hidden = true; root.classList.remove("km-testet"); }
-    function tippen() {
-      var jetzt = performance.now();
-      if (zustand === "ruhe") {
-        zustand = "warte"; feldText("Warte …", "warte"); testInfo.textContent = "Noch nicht tippen.";
-        uhr = setTimeout(function () { zustand = "los"; feldText("Jetzt", "los"); t0 = performance.now(); }, 1500 + Math.random() * 3000);
-      } else if (zustand === "warte") {
-        clearTimeout(uhr); zustand = "ruhe"; feldText("Zu früh. Antippen für einen neuen Versuch.");
-        testInfo.textContent = "Zu früh getippt. Der Versuch zählt nicht.";
-      } else if (zustand === "los") {
-        var s = (jetzt - t0) / 1000; zustand = "ruhe";
-        if (s > 1.5) { feldText("Zu langsam gezählt. Antippen für einen neuen Versuch."); return; }
-        daten.b.push(s); letzte.push("b"); speichern(); zeichnen();
-        feldText(komma(s, 2) + " s. Antippen für den nächsten Versuch.");
-        testInfo.textContent = komma(s, 2) + " s entsprechen " + komma(sZuCm(s)) + " cm am Lineal.";
-      }
-    }
-    feld.addEventListener("pointerdown", function (e) { e.preventDefault(); tippen(); });
-    feld.addEventListener("keydown", function (e) { if (e.key === " " || e.key === "Enter") { e.preventDefault(); e.stopPropagation(); if (!e.repeat) tippen(); } });
-    feld.addEventListener("click", function (e) { e.preventDefault(); });
-    board.addEventListener("click", function () { test.hidden = false; root.classList.add("km-testet"); feldText("Antippen zum Start"); testInfo.textContent = "Warte, bis das Feld „Jetzt“ zeigt. Dann tippe so schnell du kannst."; feld.focus(); });
+    var test1 = tippTest(feld, function (t) { testInfo.textContent = t; }, function (s) {
+      daten.b.push(s); letzte.push("b"); speichern(); zeichnen();
+      testInfo.textContent = komma(s, 2) + " s entsprechen " + komma(sZuCm(s)) + " cm am Lineal.";
+    });
+    function testZu() { test1.stopp(); test.hidden = true; root.classList.remove("km-testet"); }
+    board.addEventListener("click", function () { test.hidden = false; root.classList.add("km-testet"); test1.stopp(); testInfo.textContent = "Warte, bis das Feld „Jetzt“ zeigt. Dann tippe so schnell du kannst."; feld.focus(); });
     fertig.addEventListener("click", function () { testZu(); board.focus(); });
     beiFolienwechsel(root, testZu);
+    messHoeren(KEY, zeichnen);
     zeichnen();
+  });
+
+  /* ---------- 2b) Reaktionstest am Board als Impuls ---------- */
+  [].forEach.call(document.querySelectorAll("[data-boardtest]"), function (root, nr) {
+    var KEY = root.getAttribute("data-key") || ("lp-klassenmessung:" + location.pathname + ":0");
+    var ZIEL = parseFloat(root.getAttribute("data-ziel")), JA = root.getAttribute("data-ja") || "", NEIN = root.getAttribute("data-nein") || "";
+    var daten = messDaten(KEY), neu = [];
+    root.classList.add("bt");
+    var feld = knopf("Antippen zum Start", "km-feld bt-feld");
+    var seite = el("div", null, "bt-seite");
+    var titel = el("p", "Eure Zeiten", "bt-titel");
+    var liste = el("ol", null, "bt-liste"); liste.setAttribute("aria-live", "polite");
+    var info = el("p", "Warte, bis das Feld „Jetzt!“ zeigt. Dann tippe so schnell du kannst.", "bt-info"); info.setAttribute("aria-live", "polite");
+    var weg = knopf("Letzten Versuch löschen", "b sec s");
+    seite.appendChild(titel); seite.appendChild(liste); seite.appendChild(info); seite.appendChild(weg);
+    root.appendChild(feld); root.appendChild(seite);
+
+    function zeigen() {
+      liste.textContent = "";
+      if (!neu.length) { liste.appendChild(el("li", "Noch keine Zeit. Wer tippt zuerst?", "bt-leer")); }
+      neu.slice(-5).forEach(function (s) {
+        var li = el("li"); li.appendChild(el("b", komma(s, 2) + " s"));
+        if (isFinite(ZIEL)) li.appendChild(el("span", s <= ZIEL ? JA : NEIN));
+        liste.appendChild(li);
+      });
+      weg.disabled = !neu.length;
+    }
+    var test = tippTest(feld, function (t) { info.textContent = t; }, function (s) {
+      neu.push(s); daten.b.push(s); messGeaendert(KEY, zeigen); zeigen();
+      info.textContent = "Nächste Person: Tippe auf das Feld.";
+    });
+    weg.addEventListener("click", function () {
+      if (!neu.length) return;
+      var s = neu.pop(), i = daten.b.lastIndexOf(s); if (i >= 0) daten.b.splice(i, 1);
+      messGeaendert(KEY, zeigen); zeigen(); info.textContent = "Letzten Versuch gelöscht.";
+    });
+    beiFolienwechsel(root, function () { test.stopp(); });
+    zeigen();
   });
 
   /* ---------- 3) Gruppenwerte per QR-Code sammeln ---------- */
