@@ -358,6 +358,25 @@
     ]
   },
   {
+    "title": "Stoff X1 bis X3 an der Synapse Schritt für Schritt",
+    "description": "Drei Schrittfilme: Wie verändern Stoff X1, X2 und X3 die Signalübertragung an der Synapse? Erst vermuten, dann sehen.",
+    "type": "Lernmodul",
+    "path": "biologie/klasse-9/nervensystem/synapse-stoffe/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/synapse/",
+        "grund": "Im Synapsen-Baukasten probierst du Stoff X1 bis X3 zuerst selbst aus."
+      }
+    ]
+  },
+  {
     "title": "Urlaub auf dem Vulkan – Tourismus am Ätna",
     "description": "Chancen und Risiken des Tourismus am Ätna: Impuls, Partnerpuzzle und begründetes Urteil.",
     "type": "Interaktive Präsentation",
