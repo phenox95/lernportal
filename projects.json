@@ -203,6 +203,43 @@
     "begriffe": true
   },
   {
+    "title": "Nervenzelle: Bau und Mikroskopie",
+    "description": "Zwei Stunden: Eine Zelle, über 1 m lang. Den Bau der Nervenzelle erkunden und Form und Aufgabe verknüpfen, dann Nervenzellen im Dauerpräparat mikroskopieren und mit dem Schema vergleichen.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/nervenzelle-stunde/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "2 × 45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 6,
+    "dateien": [
+      {
+        "titel": "Präsentation Teil 1: Bau der Nervenzelle",
+        "pfad": "biologie/klasse-9/nervensystem/nervenzelle-stunde/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Präsentation Teil 2: Nervenzellen mikroskopieren",
+        "pfad": "biologie/klasse-9/nervensystem/nervenzelle-stunde/mikroskopie/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Lernmodul: Die Nervenzelle entdecken",
+        "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",
+        "art": "Übung"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/mikroskopieren-leicht-gemacht/",
+        "grund": "Dort steht, wie man ein Mikroskop bedient. Das braucht ihr in Teil 2."
+      }
+    ]
+  },
+  {
     "title": "Die Nervenzelle: Bau und Funktion",
     "description": "Entdecke die Teile der Nervenzelle, ordne ihre Aufgaben zu und vergleiche sie mit Muskel- und Hautzelle.",
     "type": "Lernmodul",
