@@ -203,7 +203,8 @@
         "pfad": "biologie/klasse-9/nervensystem/sinnesorgane/",
         "grund": "Dort habt ihr das Auge als Sinnesorgan für Licht kennengelernt."
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Das Auge: Bau und Funktion",
@@ -249,7 +250,8 @@
         "pfad": "biologie/klasse-9/nervensystem/auge-stunde/",
         "grund": "Der Bau des Auges und der Weg des Lichts sind die Grundlage für diese Stunde."
       }
-    ]
+    ],
+    "begriffe": true
   },
   {
     "title": "Kurzsichtigkeit und Brille",
