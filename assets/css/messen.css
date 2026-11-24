@@ -1,7 +1,7 @@
 /* Lernportal – Messen und Prüfen in Präsentationen (Skript assets/js/messen.js).
    Nach stunde.css laden. Farben nur über die Variablen des Designs, keine Schatten, Bewegung nur über transform/opacity. */
 
-[data-vermuten] [hidden],[data-klassenmessung] [hidden],[data-qr-sammeln] [hidden],[data-reaktionsweg] [hidden]{display:none!important}
+[data-vermuten] [hidden],[data-klassenmessung] [hidden],[data-boardtest] [hidden],[data-qr-sammeln] [hidden],[data-reaktionsweg] [hidden]{display:none!important}
 /* ---------- Vermuten, dann prüfen ---------- */
 [data-vermuten] .vm-frage{font-size:22px;line-height:1.35;margin:0 0 8px}
 [data-vermuten] .vm-wahl{display:flex;flex-wrap:wrap;gap:8px}
@@ -34,6 +34,7 @@
 .km-achse .km-s{fill:var(--ink3);font-size:20px}
 .km-voll{fill:var(--g)}
 .km-ring{fill:none;stroke:var(--dk);stroke-width:3.5}
+.km-punkte .km-mehr{font-family:inherit;font-size:20px;fill:var(--dk);animation:none}
 .km-punkte circle{animation:km-neu .4s ease-out both}
 @keyframes km-neu{from{opacity:0}to{opacity:1}}
 .km-mw path{stroke:var(--dk);stroke-width:2.5;stroke-dasharray:8 6}
@@ -58,6 +59,21 @@
 .km-feld:focus-visible{outline:3px solid var(--g);outline-offset:2px}
 .km-leiste{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .km-info{font-size:20px;margin:0;color:var(--ink2)}
+
+/* ---------- Reaktionstest am Board (Impuls) ---------- */
+.bt{display:grid;grid-template-columns:1.7fr 1fr;gap:24px;align-items:stretch;min-height:380px}
+.bt .bt-feld{min-height:380px;font-size:44px;padding:24px}
+.bt .bt-feld.los{font-size:96px}
+.bt-seite{display:flex;flex-direction:column;gap:10px}
+.bt-titel{font-size:22px;color:var(--ink3);margin:0}
+.bt-liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;flex:1}
+.bt-liste li{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:6px 12px;border-left:6px solid var(--g);background:var(--tint)}
+.bt-liste li:last-child:not(.bt-leer){border-left-color:var(--dk)}
+.bt-liste b{font-size:36px;font-weight:500;color:var(--dk)}
+.bt-liste span{font-size:19px;color:var(--ink2)}
+.bt-liste .bt-leer{font-size:22px;color:var(--ink3);border-left-color:var(--line)}
+.bt-info{font-size:20px;color:var(--ink2);margin:0;min-height:52px}
+.bt .b:disabled{opacity:.45;cursor:default}
 
 /* ---------- Gruppenwerte per QR-Code ---------- */
 .qs-leiste{display:flex;gap:8px;flex-wrap:wrap}
