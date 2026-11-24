@@ -19,6 +19,9 @@
    [data-schritte]  Sätze .sz nacheinander zeigen mit Knopf .sz-weiter
    [data-aufbau]    Schrittweise aufbauen: Elemente mit data-s="1", "2" … erscheinen nacheinander.
                     Pfeil vor/zurück deckt erst Schritte auf oder zu, dann wird geblättert.
+                    Mit data-tippen: Hat ein Schritt-Element data-frage und data-ort-ok, erscheint vor dem Schritt
+                    erst die Frage (in .tp-frage, sonst oben im Aufbau). Die Klasse tippt die Stelle im Bild an
+                    (Elemente .tp-ort[data-ort][data-name]). Richtig: Schritt erscheint. Pfeil vor zeigt ihn ohne Tippen.
    [data-lz]        Knopf zeigt die direkt folgende .lz-box (Lösung je Aufgabe)
    [data-kette]     Gewebekette: circle.kp und ein Knopf
    [data-matrix]    Tabelle mit td.m (antippen) und .summe
@@ -49,14 +52,41 @@
   /* Schrittweiser Aufbau: liefert true, wenn ein Schritt auf- oder zugedeckt wurde (dann nicht blättern) */
   function aufbau(sl) { return sl && sl.querySelector("[data-aufbau]"); }
   function schritte(a) { var m = 0; [].forEach.call(a.querySelectorAll("[data-s]"), function (e) { m = Math.max(m, +e.getAttribute("data-s") || 0); }); return m; }
+  /* Stelle tippen vor einem Schritt (data-tippen am Aufbau) */
+  function tpFrage(a, n) {
+    if (!a.hasAttribute("data-tippen")) return null;
+    return a.querySelector('[data-s="' + n + '"][data-frage][data-ort-ok]');
+  }
+  function tpFeld(a) {
+    var f = a.querySelector(".tp-frage");
+    if (!f) { f = document.createElement("div"); f.className = "tp-frage"; a.insertBefore(f, a.firstChild); }
+    return f;
+  }
+  function tpZu(a) {
+    a.removeAttribute("data-fragt"); a.classList.remove("tp-an");
+    var f = a.querySelector(".tp-frage"); if (f) { f.classList.remove("an"); f.innerHTML = ""; }
+  }
+  function tpAuf(a, n, q) {
+    a.setAttribute("data-fragt", n); a.classList.add("tp-an");
+    var f = tpFeld(a); f.innerHTML = "";
+    var p = document.createElement("p"); p.className = "tp-satz"; p.textContent = q.getAttribute("data-frage"); f.appendChild(p);
+    var r = document.createElement("p"); r.className = "tp-rm"; r.setAttribute("aria-live", "polite"); r.textContent = "Tippe die Stelle im Bild an."; f.appendChild(r);
+    f.classList.add("an");
+  }
   function stufe(a, n) {
+    tpZu(a);
     a.setAttribute("data-stand", n);
     [].forEach.call(a.querySelectorAll("[data-s]"), function (e) { e.classList.toggle("an", (+e.getAttribute("data-s") || 0) <= n); });
   }
   function schritt(d) {
     var a = aufbau(slides[cur]); if (!a || document.documentElement.classList.contains("lp-lesen")) return false;
     var n = +a.getAttribute("data-stand") || 0, m = schritte(a);
-    if (d > 0 && n < m) { stufe(a, n + 1); return true; }
+    if (d > 0 && n < m) {
+      var q = tpFrage(a, n + 1);
+      if (q && +a.getAttribute("data-fragt") !== n + 1) { tpAuf(a, n + 1, q); return true; }
+      stufe(a, n + 1); return true;
+    }
+    if (d < 0 && a.hasAttribute("data-fragt")) { tpZu(a); return true; }
     if (d < 0 && n > 0) { stufe(a, n - 1); return true; }
     return false;
   }
@@ -65,6 +95,26 @@
     var alt = cur; show(cur + d);
     var a = aufbau(slides[cur]); if (a && cur !== alt) stufe(a, d > 0 ? 0 : schritte(a));
   }
+  /* Antippen einer Stelle */
+  [].forEach.call(document.querySelectorAll("[data-aufbau][data-tippen] .tp-ort"), function (o) {
+    var a = o.closest("[data-aufbau]");
+    o.setAttribute("tabindex", "0"); o.setAttribute("role", "button");
+    if (o.getAttribute("data-name")) o.setAttribute("aria-label", o.getAttribute("data-name"));
+    function tipp() {
+      var n = +a.getAttribute("data-fragt"); if (!n) return;
+      var q = tpFrage(a, n); if (!q) return;
+      var ok = q.getAttribute("data-ort-ok").split("|").indexOf(o.getAttribute("data-ort")) >= 0;
+      var name = o.getAttribute("data-name") || "";
+      o.classList.remove("tp-ok", "tp-nein"); void o.getBoundingClientRect();
+      o.classList.add(ok ? "tp-ok" : "tp-nein");
+      setTimeout(function () { o.classList.remove("tp-ok", "tp-nein"); }, 900);
+      var r = a.querySelector(".tp-rm");
+      if (ok) { stufe(a, n); }
+      else if (r) { r.textContent = name ? "Das ist: " + name + ". Versuche es noch einmal." : "Versuche es noch einmal."; }
+    }
+    o.addEventListener("click", function (e) { e.stopPropagation(); tipp(); });
+    o.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); tipp(); } });
+  });
   function tippt(t) { return t && (t.isContentEditable || /INPUT|TEXTAREA|SELECT/.test(t.tagName)); }
   document.addEventListener("keydown", function (e) {
     if (tippt(e.target) || e.ctrlKey || e.metaKey || e.altKey) return;
