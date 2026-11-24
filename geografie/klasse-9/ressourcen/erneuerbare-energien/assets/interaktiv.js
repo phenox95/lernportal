@@ -23,7 +23,7 @@
         $$(".choice", box).forEach(function (x) { x.classList.remove("ok", "bad"); });
         c.classList.add(ok ? "ok" : "bad");
         fb.className = "ia-fb " + (ok ? "ok" : "bad");
-        fb.textContent = ok ? "✓ Richtig. " + (box.dataset.feedback || "") : "✗ Nicht ganz. Lies die Aussage noch einmal und prüfe deine Begründung.";
+        fb.textContent = ok ? "Richtig. " + (box.dataset.feedback || "") : "Nicht ganz. Lies die Aussage noch einmal und prüfe deine Begründung.";
       });
     });
   });
@@ -76,7 +76,7 @@
       press(c, function () {
         if (c.classList.contains("used")) return;
         var next = blanks.filter(function (b) { return !b.dataset.f && b.dataset.l === w; })[0];
-        if (next) { next.textContent = w; next.dataset.f = "1"; next.classList.add("filled"); c.classList.add("used"); msg.textContent = blanks.every(function (b) { return b.dataset.f; }) ? "✓ Der Satz ist vollständig." : "✓ Passt."; }
+        if (next) { next.textContent = w; next.dataset.f = "1"; next.classList.add("filled"); c.classList.add("used"); msg.textContent = blanks.every(function (b) { return b.dataset.f; }) ? "Der Satz ist vollständig." : "Passt."; }
         else { shake(c); msg.textContent = "Das Wort passt zu keiner freien Lücke."; }
       });
       bank.appendChild(c);
@@ -135,8 +135,8 @@
         if (!sel) { fb.textContent = "Tippe zuerst eine Aussage an."; fb.className = "ia-fb"; return; }
         if (sel.dataset.k === cat.dataset.k) {
           sel.classList.remove("sel"); sel.classList.add("placed"); cat.querySelector(".ia-drop").appendChild(sel); sel.removeAttribute("tabindex"); sel.removeAttribute("role"); sel = null; done++;
-          fb.className = "ia-fb ok"; fb.textContent = done === chips.length ? "✓ Alles zugeordnet. Fehlversuche: " + wrong + "." : "✓ Passt.";
-        } else { wrong++; shake(sel); fb.className = "ia-fb bad"; fb.textContent = "✗ Das passt nicht zu " + cat.querySelector("b").textContent + ". Versuche es noch einmal."; }
+          fb.className = "ia-fb ok"; fb.textContent = done === chips.length ? "Alles zugeordnet. Fehlversuche: " + wrong + "." : "Passt.";
+        } else { wrong++; shake(sel); fb.className = "ia-fb bad"; fb.textContent = "Das passt nicht zu " + cat.querySelector("b").textContent + ". Versuche es noch einmal."; }
       });
     });
   });
@@ -151,8 +151,8 @@
       var c = mk("span", "ia-ocard", t); c.dataset.i = i;
       press(c, function () {
         if (c.classList.contains("placed")) return;
-        if (+c.dataset.i === next) { c.classList.add("placed"); slots.children[next].querySelector("span").appendChild(c); c.removeAttribute("tabindex"); c.removeAttribute("role"); next++; fb.className = "ia-fb ok"; fb.textContent = next === items.length ? "✓ Die Kette stimmt." : "✓ Weiter mit dem nächsten Schritt."; }
-        else { shake(c); fb.className = "ia-fb bad"; fb.textContent = "✗ Das ist noch nicht dran. Welcher Schritt kommt zuerst?"; }
+        if (+c.dataset.i === next) { c.classList.add("placed"); slots.children[next].querySelector("span").appendChild(c); c.removeAttribute("tabindex"); c.removeAttribute("role"); next++; fb.className = "ia-fb ok"; fb.textContent = next === items.length ? "Die Kette stimmt." : "Weiter mit dem nächsten Schritt."; }
+        else { shake(c); fb.className = "ia-fb bad"; fb.textContent = "Das ist noch nicht dran. Welcher Schritt kommt zuerst?"; }
       });
       return c;
     });
