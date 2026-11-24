@@ -217,3 +217,31 @@
 }
 .lm-stufen button[aria-pressed="true"] { color: #fff; background: var(--lp-akzent); border-color: var(--lp-akzent); font-weight: 700; }
 .lp-inhalt[data-lernlandkarte] .lm-vorrat:empty::before { content: "Keine offenen Fragen."; }
+
+/* ---------- Synapsen-Baukasten ---------- */
+[data-synapse] .sy-svg { display: block; width: 100%; height: auto; max-width: 760px; margin: 0 auto; touch-action: manipulation; }
+[data-synapse] .sy-svg text { font-family: inherit; fill: var(--lp-text); }
+[data-synapse] .sy-ohne-text .sy-beschriftung { display: none; }
+[data-synapse] [data-sy="blaeschen"] { fill: var(--lm-myelin); stroke: var(--lm-myelin-rand); stroke-width: 2; transition: fill .3s; }
+[data-synapse] [data-sy="blaeschen"].sy-leer { fill: transparent; stroke-dasharray: 4 3; }
+[data-synapse] .sy-tr { fill: var(--lm-hl); stroke: var(--lp-text); stroke-width: .8; }
+[data-synapse] .sy-x { fill: var(--lp-flaeche); stroke: var(--lp-text); stroke-width: 2; }
+[data-synapse] [data-sy="rezeptor"] path { fill: var(--lm-zns); stroke: var(--lm-zns-rand); stroke-width: 2.5; }
+[data-synapse] [data-sy="rezeptor"].sy-besetzt path { fill: var(--lm-zns-rand); }
+[data-synapse] [data-sy="rezeptor"] .sy-sperre, [data-synapse] [data-sy="transporter"] .sy-sperre { display: none; stroke: var(--lp-text); stroke-width: 3; }
+[data-synapse] .sy-gesperrt .sy-sperre { display: inline; }
+[data-synapse] [data-sy="transporter"] rect { fill: var(--lm-zelle); stroke: var(--lm-zelle-rand); stroke-width: 2; }
+[data-synapse] [data-sy="anzeige"] { fill: var(--lm-zns-rand); }
+[data-synapse] .sy-ereignisse { display: none; }
+[data-synapse] .sy-stoff { border: 1px solid var(--lp-linie); border-radius: 12px; padding: 10px 14px; margin: 12px 0; }
+[data-synapse] .sy-stoff legend { font-weight: 700; padding: 0 6px; }
+[data-synapse] .sy-stoff label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-right: 16px; }
+[data-synapse] .sy-stoff input { width: 22px; height: 22px; }
+[data-synapse] .sy-stoff p { margin: 4px 0 0; color: var(--lp-text2); }
+[data-synapse] .sy-verlauf { display: block; width: 100%; height: auto; max-width: 620px; }
+[data-synapse] .sy-verlauf text { font-family: inherit; font-size: 12px; fill: var(--lp-text2); }
+[data-synapse] .sy-verlauf .sy-neu { fill: none; stroke: var(--lm-zns-rand); stroke-width: 3; }
+[data-synapse] .sy-verlauf .sy-alt { fill: none; stroke: var(--lp-text2); stroke-width: 2; stroke-dasharray: 6 4; }
+[data-synapse] .sy-vergleich td.zahl, [data-synapse] .sy-vergleich th.zahl { text-align: right; font-variant-numeric: tabular-nums; }
+[data-synapse] .sy-status { border-left: 4px solid var(--lp-rahmen); padding: 6px 12px; margin: 8px 0; min-height: 1.5em; }
+[data-synapse] button[aria-pressed="true"] { outline: 3px solid var(--lp-fokus); outline-offset: 1px; }

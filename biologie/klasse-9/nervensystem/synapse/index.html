@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="de" class="lp-vorlage">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../../../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../../../assets/favicon/apple-touch-icon.png">
+  <title>Synapsen-Baukasten – Lernportal</title>
+  <meta name="description" content="Löse an einer Synapse ein Signal aus, beobachte Bläschen, Transmitter und Rezeptoren und teste, was Stoff X verändert.">
+  <link rel="stylesheet" href="../../../../assets/css/material.css">
+  <link rel="stylesheet" href="../../../../assets/css/lernmodul.css">
+  <script src="../../../../assets/js/prefs.js"></script>
+  <script src="../../../../assets/js/material.js" defer></script>
+  <script src="../../../../assets/js/lernmodul.js" defer></script>
+  <script src="../../../../assets/js/vorlesen.js" defer></script>
+</head>
+<body class="lp-seite" data-root="../../../../" data-title="Synapsen-Baukasten" data-subject="Biologie" data-grade="Klasse 9" data-tf="nervensystem">
+  <noscript><p class="lp-noscript"><a href="../../../../">Zurück zum Portal</a> · Diese Seite braucht JavaScript für den Baukasten.</p></noscript>
+
+  <main class="lp-inhalt">
+
+    <!-- Impuls: Anlass für die Fragenentwicklung. Die Frage der Stunde steht hier bewusst nicht. -->
+    <section class="lp-material" aria-labelledby="impuls">
+      <div class="lp-material-kopf"><strong id="impuls">Impuls</strong><span>Eine Lücke zwischen den Zellen</span></div>
+      <div class="lp-material-inhalt" data-vorlesen>
+        <p>Forschende schauen mit dem Elektronenmikroskop auf das Ende einer Nervenzelle.</p>
+        <p>Sie sehen: Das Endknöpfchen berührt die nächste Zelle nicht. Dazwischen liegt ein Spalt.</p>
+        <p>Der Spalt ist etwa 20 bis 40 Nanometer breit. Das ist rund 2.000-mal dünner als ein Haar.</p>
+        <p>Trotzdem kommt das Signal in der nächsten Zelle an.</p>
+      </div>
+      <p class="lp-quelle">Quelle: eigener Text, CC BY 4.0</p>
+    </section>
+
+    <aside class="lp-leitfrage lm-frage" aria-labelledby="frage-label">
+      <label class="lp-label" id="frage-label" for="klassenfrage">Unsere Frage für heute</label>
+      <textarea class="lp-schreib" id="klassenfrage" rows="2"></textarea>
+    </aside>
+
+    <!-- M1: Baukasten -->
+    <figure class="lp-material lp-breit lp-abbildung" aria-labelledby="m1">
+      <div class="lp-material-kopf"><strong id="m1">M1</strong><span>Modell: Synapse</span></div>
+      <div class="lp-material-inhalt" data-synapse>
+        <svg class="sy-svg" viewBox="0 0 720 420" role="img" aria-labelledby="m1-titel">
+          <title id="m1-titel">Modell einer Synapse. Oben das Endknöpfchen einer Nervenzelle mit Bläschen. Darunter der synaptische Spalt. Unten die nächste Zelle mit Rezeptoren und einer Anzeige für die Stärke des Signals.</title>
+          <path d="M335 0 V40 C215 48 175 110 175 170 V190 H545 V170 C545 110 505 48 385 40 V0 Z" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="3"/>
+          <path data-sy="signalweg" d="M360 0 V70" fill="none" stroke="none"/>
+          <rect data-sy="spalt" x="175" y="190" width="370" height="60" fill="var(--lp-feld)" opacity=".6"/>
+          <path d="M150 250 H570 Q590 250 590 270 V400 H130 V270 Q130 250 150 250 Z" fill="var(--lm-zns)" stroke="var(--lm-zns-rand)" stroke-width="3"/>
+          <circle data-sy="blaeschen" cx="240" cy="150" r="18"/>
+          <circle data-sy="blaeschen" cx="292" cy="108" r="18"/>
+          <circle data-sy="blaeschen" cx="346" cy="152" r="18"/>
+          <circle data-sy="blaeschen" cx="400" cy="108" r="18"/>
+          <circle data-sy="blaeschen" cx="454" cy="150" r="18"/>
+          <circle data-sy="blaeschen" cx="498" cy="112" r="18"/>
+          <g data-sy="transporter"><rect x="190" y="180" width="20" height="16" rx="3"/><path class="sy-sperre" d="M188 178 L212 198 M212 178 L188 198"/></g>
+          <g data-sy="transporter"><rect x="510" y="180" width="20" height="16" rx="3"/><path class="sy-sperre" d="M508 178 L532 198 M532 178 L508 198"/></g>
+          <g data-sy="rezeptor"><path d="M208 264 L208 252 L214 252 L214 258 L226 258 L226 252 L232 252 L232 264 Z"/><path class="sy-sperre" d="M206 250 L234 250"/></g>
+          <g data-sy="rezeptor"><path d="M264 264 L264 252 L270 252 L270 258 L282 258 L282 252 L288 252 L288 264 Z"/><path class="sy-sperre" d="M262 250 L290 250"/></g>
+          <g data-sy="rezeptor"><path d="M320 264 L320 252 L326 252 L326 258 L338 258 L338 252 L344 252 L344 264 Z"/><path class="sy-sperre" d="M318 250 L346 250"/></g>
+          <g data-sy="rezeptor"><path d="M376 264 L376 252 L382 252 L382 258 L394 258 L394 252 L400 252 L400 264 Z"/><path class="sy-sperre" d="M374 250 L402 250"/></g>
+          <g data-sy="rezeptor"><path d="M432 264 L432 252 L438 252 L438 258 L450 258 L450 252 L456 252 L456 264 Z"/><path class="sy-sperre" d="M430 250 L458 250"/></g>
+          <g data-sy="rezeptor"><path d="M488 264 L488 252 L494 252 L494 258 L506 258 L506 252 L512 252 L512 264 Z"/><path class="sy-sperre" d="M486 250 L514 250"/></g>
+          <text x="160" y="300" font-size="16">Signal in der nächsten Zelle</text>
+          <rect x="160" y="312" width="300" height="24" fill="var(--lp-flaeche)" stroke="var(--lm-zns-rand)" stroke-width="2"/>
+          <rect data-sy="anzeige" x="160" y="312" width="0" height="24" data-max-breite="300"/>
+          <text data-sy="anzeige-text" x="472" y="330" font-size="16" font-weight="700">0 %</text>
+          <g class="sy-beschriftung" font-size="15">
+            <text x="372" y="22">Axon</text>
+            <text x="600" y="72">Endknöpfchen</text><path d="M596 68 L532 96" stroke="var(--lp-text)" stroke-width="1"/>
+            <text x="600" y="128">Bläschen</text><path d="M596 124 L518 114" stroke="var(--lp-text)" stroke-width="1"/>
+            <text x="600" y="186">Transporter</text><path d="M596 182 L532 188" stroke="var(--lp-text)" stroke-width="1"/>
+            <text x="600" y="218">synaptischer</text><text x="600" y="235">Spalt</text><path d="M596 224 L548 222" stroke="var(--lp-text)" stroke-width="1"/>
+            <text x="600" y="268">Rezeptor</text><path d="M596 264 L514 258" stroke="var(--lp-text)" stroke-width="1"/>
+            <text x="600" y="380">nächste Zelle</text>
+          </g>
+        </svg>
+        <p class="lm-hinweis">Kreis: Transmitter (Botenstoff). Quadrat: Stoff X. Ein besetzter Rezeptor wird dunkel. Ein Strich über Rezeptor oder Transporter heißt: gesperrt.</p>
+        <div class="lm-leiste">
+          <button class="lm-knopf sy-senden" type="button">Signal senden</button>
+          <button class="lm-knopf zweit sy-zeitlupe" type="button" aria-pressed="false">Zeitlupe</button>
+          <button class="lm-knopf zweit sy-pause" type="button" aria-pressed="false">Pause</button>
+          <button class="lm-knopf zweit sy-beschriftung-knopf" type="button" aria-pressed="false">Beschriftung aus</button>
+          <button class="lm-knopf zweit sy-reset" type="button">Zurücksetzen</button>
+        </div>
+        <p class="sy-status" aria-live="polite">Tippe auf „Signal senden“.</p>
+        <fieldset class="sy-stoff">
+          <legend>Stoff im Spalt</legend>
+          <input type="radio" name="sy-stoff" id="stoff-ohne" data-wirkung="ohne" checked><label for="stoff-ohne">ohne Stoff</label>
+          <input type="radio" name="sy-stoff" id="stoff-x1" data-wirkung="rezeptor-blocker"><label for="stoff-x1">Stoff X1</label>
+          <input type="radio" name="sy-stoff" id="stoff-x2" data-wirkung="wiederaufnahme-hemmer"><label for="stoff-x2">Stoff X2</label>
+          <input type="radio" name="sy-stoff" id="stoff-x3" data-wirkung="wie-transmitter"><label for="stoff-x3">Stoff X3</label>
+          <p>Stoff X brauchst du erst später in der Reihe (Teil 2).</p>
+        </fieldset>
+        <div class="lm-zwei">
+          <div>
+            <p class="lp-label">Was passiert nacheinander?</p>
+            <ol class="lm-protokoll" aria-live="polite"></ol>
+          </div>
+          <div>
+            <p class="lp-label">Stärke des Signals in der nächsten Zelle</p>
+            <svg class="sy-verlauf" viewBox="0 0 600 130" role="img" aria-label="Verlauf der Signalstärke über die Modellzeit. Durchgezogen: letzter Durchgang. Gestrichelt: Durchgang davor.">
+              <path d="M40 10 V100 H590" fill="none" stroke="var(--lp-rahmen)" stroke-width="1.5"/>
+              <path d="M40 55 H590" stroke="var(--lp-linie)" stroke-width="1"/>
+              <text x="34" y="14" text-anchor="end">100 %</text><text x="34" y="59" text-anchor="end">50 %</text><text x="34" y="104" text-anchor="end">0</text>
+              <text x="40" y="120" text-anchor="middle">0 s</text><text x="223" y="120" text-anchor="middle">4 s</text><text x="407" y="120" text-anchor="middle">8 s</text><text x="580" y="120" text-anchor="end">12 s</text>
+              <path class="sy-alt" d=""/><path class="sy-neu" d=""/>
+            </svg>
+            <p class="lm-hinweis">Durchgezogen: letzter Durchgang. Gestrichelt: der Durchgang davor.</p>
+          </div>
+        </div>
+        <div class="lp-scroll" tabindex="0" role="region" aria-label="Vergleichstabelle, seitlich wischbar">
+          <table class="lp-tabelle sy-vergleich">
+            <thead><tr><th scope="col">Durchgang</th><th scope="col" class="zahl">stärkstes Signal</th><th scope="col" class="zahl">Dauer des Signals</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <ul class="sy-ereignisse">
+          <li data-e="ankunft">Das elektrische Signal kommt am Endknöpfchen an.</li>
+          <li data-e="verschmelzen">Bläschen wandern zur Membran und verschmelzen mit ihr.</li>
+          <li data-e="spalt">Transmitter gelangen in den synaptischen Spalt.</li>
+          <li data-e="andocken">Erste Transmitter docken an Rezeptoren an.</li>
+          <li data-e="signal">In der nächsten Zelle entsteht ein neues Signal.</li>
+          <li data-e="zurueck">Transporter holen Transmitter zurück ins Endknöpfchen.</li>
+          <li data-e="abbau">Transmitter werden langsam im Spalt abgebaut.</li>
+          <li data-e="ruhe">Ohne Signal sind Rezeptoren besetzt. Signal in der nächsten Zelle:</li>
+          <li data-e="ende">Der Spalt ist leer. Das Signal ist zu Ende.</li>
+        </ul>
+      </div>
+      <figcaption class="lp-quelle">Quelle: eigenes, stark vereinfachtes Modell, nicht maßstabsgetreu. Die Modellzeit ist stark verlangsamt: In echt dauert alles nur etwa eine tausendstel Sekunde. CC BY 4.0</figcaption>
+    </figure>
+
+    <section class="lp-aufgabe" aria-labelledby="a1">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a1">Aufgabe 1</span>
+        <span class="lp-niveau" data-stufe="1" role="img" aria-label="Niveau 1 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Ordne</strong> die Schritte in der richtigen Reihenfolge. Sage zuerst vorher, dann prüfe mit dem Modell in M1.</p>
+      <div data-reihe>
+        <div class="lm-vorrat" aria-label="Schritte zum Ordnen">
+          <button class="lm-karte" data-pos="1">Ein elektrisches Signal kommt am Endknöpfchen an.</button>
+          <button class="lm-karte" data-pos="2">Bläschen verschmelzen mit der Membran.</button>
+          <button class="lm-karte" data-pos="3">Transmitter wandern durch den Spalt.</button>
+          <button class="lm-karte" data-pos="4">Transmitter docken an Rezeptoren an.</button>
+          <button class="lm-karte" data-pos="5">In der nächsten Zelle entsteht ein neues Signal.</button>
+          <button class="lm-karte" data-pos="6">Transporter holen die Transmitter zurück.</button>
+        </div>
+        <ol class="lm-kette"></ol>
+        <div class="lm-leiste">
+          <button class="lm-knopf lm-pruefen" type="button">Prüfen</button>
+          <button class="lm-knopf zweit lm-neu" type="button">Neu mischen</button>
+        </div>
+        <p class="lm-rm" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="lp-aufgabe" aria-labelledby="a2">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a2">Aufgabe 2</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Beschreibe</strong>, wie das Signal über den synaptischen Spalt kommt. Nutze die Begriffe aus dem Wortspeicher.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Wortspeicher</span>
+        <ul class="lp-woerter">
+          <li><span class="lp-wort" aria-hidden="true">Syn-ap-se</span><span class="lp-sr">Synapse</span></li>
+          <li><span class="lp-wort" aria-hidden="true">End-knöpf-chen</span><span class="lp-sr">Endknöpfchen</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Bläs-chen</span><span class="lp-sr">Bläschen</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Trans-mit-ter</span><span class="lp-sr">Transmitter</span></li>
+          <li><span class="lp-wort" aria-hidden="true">syn-ap-ti-scher Spalt</span><span class="lp-sr">synaptischer Spalt</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Re-zep-tor</span><span class="lp-sr">Rezeptor</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Trans-por-ter</span><span class="lp-sr">Transporter</span></li>
+        </ul>
+      </div>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine"><li>Wenn das Signal am Endknöpfchen ankommt, …</li><li>Die Transmitter …</li><li>An den Rezeptoren …</li><li>Zum Schluss …</li></ul>
+      </div>
+      <label class="lp-sr" for="schreib2">Schreibraum für Aufgabe 2</label>
+      <textarea class="lp-schreib" id="schreib2" rows="6"></textarea>
+    </section>
+
+    <section class="lp-aufgabe" aria-labelledby="a3">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a3">Aufgabe 3</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Entscheide</strong> bei jeder Aussage: stimmt oder stimmt nicht. Teste dazu das Modell.</p>
+      <div data-jn>
+        <div class="lp-scroll" tabindex="0" role="region" aria-label="Tabelle zu Aufgabe 3, seitlich wischbar">
+          <table class="lp-tabelle">
+            <thead><tr><th scope="col">Aussage</th><th scope="col">Stimmt</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Das elektrische Signal springt direkt über den Spalt.</th><td class="lm-jn" data-ok="nein"></td></tr>
+              <tr><th scope="row">Transmitter sind Botenstoffe, die in Bläschen gespeichert sind.</th><td class="lm-jn" data-ok="ja"></td></tr>
+              <tr><th scope="row">Ein Rezeptor passt zum Transmitter wie ein Schloss zum Schlüssel.</th><td class="lm-jn" data-ok="ja"></td></tr>
+              <tr><th scope="row">Das Signal in der nächsten Zelle hört auf, wenn keine Transmitter mehr an Rezeptoren sitzen.</th><td class="lm-jn" data-ok="ja"></td></tr>
+              <tr><th scope="row">Die Transmitter bleiben für immer im Spalt.</th><td class="lm-jn" data-ok="nein"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lm-leiste"><button class="lm-knopf lm-pruefen" type="button">Prüfen</button></div>
+        <p class="lm-rm" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="lp-aufgabe" aria-labelledby="a4">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a4">Aufgabe 4</span>
+        <span class="lp-niveau" data-stufe="3" role="img" aria-label="Niveau 3 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Beurteile</strong> das Modell in M1: Was zeigt es gut? Was zeigt es nicht oder falsch? Nenne zu beidem mindestens zwei Punkte.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Tipp</span>
+        <p>Achte auf Größe, Zeit, Anzahl der Teilchen, Form der Teile und auf die Frage, wie viele Zellen beteiligt sind. Lies auch die Quelle unter M1.</p>
+      </div>
+      <label class="lp-sr" for="schreib4">Schreibraum für Aufgabe 4</label>
+      <textarea class="lp-schreib" id="schreib4" rows="6"></textarea>
+    </section>
+
+    <aside class="lp-material" aria-labelledby="teil2">
+      <div class="lp-material-kopf"><strong id="teil2">Teil 2</strong><span>Später in der Reihe: Stoff X</span></div>
+      <div class="lp-material-inhalt" data-vorlesen>
+        <p>Manche Stoffe gelangen in den synaptischen Spalt und verändern, was dort passiert. In M1 kannst du drei solche Stoffe testen: Stoff X1, X2 und X3.</p>
+      </div>
+    </aside>
+
+    <section class="lp-aufgabe" aria-labelledby="a5">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a5">Aufgabe 5</span>
+        <span class="lp-niveau" data-stufe="1" role="img" aria-label="Niveau 1 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Vergleiche</strong> das Signal ohne Stoff mit dem Signal bei Stoff X1, X2 und X3. Wähle in M1 einen Stoff und sende jedes Mal ein Signal. Notiere stärkstes Signal und Dauer aus der Tabelle.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbaustein</span>
+        <ul class="lp-bausteine"><li>Mit Stoff X1 ist das Signal schwächer / stärker / länger / kürzer als ohne Stoff.</li></ul>
+      </div>
+      <label class="lp-sr" for="schreib5">Schreibraum für Aufgabe 5</label>
+      <textarea class="lp-schreib" id="schreib5" rows="5"></textarea>
+    </section>
+
+    <section class="lp-aufgabe" aria-labelledby="a6">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a6">Aufgabe 6</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Erkläre</strong> für jeden Stoff, an welcher Stelle der Synapse er wirkt und warum sich das Signal dadurch ändert. Beobachte dazu Rezeptoren und Transporter.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine"><li>Stoff X… wirkt an den Rezeptoren / an den Transportern.</li><li>Dadurch können die Transmitter …</li><li>Deshalb ist das Signal …</li></ul>
+      </div>
+      <label class="lp-sr" for="schreib6">Schreibraum für Aufgabe 6</label>
+      <textarea class="lp-schreib" id="schreib6" rows="6"></textarea>
+    </section>
+
+    <section class="lp-aufgabe" aria-labelledby="a7">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a7">Aufgabe 7</span>
+        <span class="lp-niveau" data-stufe="3" role="img" aria-label="Niveau 3 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Stelle</strong> eine Hypothese <strong>auf</strong>: Was könnte die nächste Zelle verändern, wenn jeden Tag Stoff X3 im Spalt ist? Begründe mit dem Modell.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbaustein</span>
+        <ul class="lp-bausteine"><li>Ich vermute: Wenn jeden Tag …, dann …, weil …</li></ul>
+      </div>
+      <label class="lp-sr" for="schreib7">Schreibraum für Aufgabe 7</label>
+      <textarea class="lp-schreib" id="schreib7" rows="5"></textarea>
+    </section>
+
+    <p class="lp-fuss">Eingaben bleiben auf diesem Gerät und werden nicht gespeichert oder übertragen.</p>
+  </main>
+
+  <!-- Spielinhalte für Begriffe und Belohnungsspiele. Entwurf: vor dem Einsatz gegenlesen und dann "geprueft": true setzen. -->
+  <script type="application/json" id="lp-spiel-daten">
+  {
+   "geprueft": false,
+   "titel": "Die Synapse",
+   "paare": [
+    ["Synapse", "Verbindungsstelle zwischen einer Nervenzelle und der nächsten Zelle", "Syn-ap-se"],
+    ["Endknöpfchen", "Verdicktes Ende des Axons, in dem die Bläschen liegen", "End-knöpf-chen"],
+    ["Bläschen", "Kleine Hülle im Endknöpfchen, in der Transmitter gespeichert sind", "Bläs-chen"],
+    ["Transmitter", "Botenstoff, der das Signal über den Spalt trägt", "Trans-mit-ter"],
+    ["synaptischer Spalt", "Schmale Lücke zwischen Endknöpfchen und nächster Zelle", "syn-ap-ti-scher Spalt"],
+    ["Rezeptor", "Andockstelle der nächsten Zelle, an die nur der passende Transmitter passt", "Re-zep-tor"],
+    ["Transporter", "Holt Transmitter aus dem Spalt zurück ins Endknöpfchen", "Trans-por-ter"]
+   ],
+   "spiele": ["memory", "quiz", "zuordnen"]
+  }
+  </script>
+</body>
+</html>

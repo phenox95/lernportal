@@ -256,6 +256,24 @@
     ]
   },
   {
+    "title": "Synapsen-Baukasten: Wie springt das Signal über die Lücke?",
+    "description": "Löse ein Signal an der Synapse aus, verfolge Bläschen, Transmitter und Rezeptoren und teste, was Stoff X am Modell verändert.",
+    "type": "Lernmodul",
+    "path": "biologie/klasse-9/nervensystem/synapse/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",
+        "grund": "Das Endknöpfchen der Nervenzelle ist der Anfang der Synapse."
+      }
+    ]
+  },
+  {
     "title": "Urlaub auf dem Vulkan – Tourismus am Ätna",
     "description": "Chancen und Risiken des Tourismus am Ätna: Impuls, Partnerpuzzle und begründetes Urteil.",
     "type": "Interaktive Präsentation",

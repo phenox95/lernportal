@@ -28,7 +28,15 @@
                     Speichert nur in diesem Browser (localStorage), je Karten-Name getrennt. Keine Lösungen.
    [data-ichkann data-speicher="name"]
                     Ich-kann-Liste vorher und nachher: ol mit li je Satz. Drei Stufen (noch nicht, teilweise, sicher).
-                    Speichert nur in diesem Browser. */
+                    Speichert nur in diesem Browser.
+   [data-synapse]   Synapsen-Baukasten. SVG svg.sy-svg mit Teilen [data-sy]: "signalweg" (Pfad zum Endknöpfchen),
+                    "blaeschen" (circle mit cx, cy), "transporter", "rezeptor", "spalt" (rect), "anzeige" (rect mit
+                    data-max-breite) und "anzeige-text". Texte fürs Protokoll in ul.sy-ereignisse li[data-e="ankunft|
+                    verschmelzen|spalt|andocken|signal|zurueck|abbau|ende"],
+                    optional li[data-e="ruhe"] (Status, wenn ohne Signal Rezeptoren besetzt sind). Stoff-Auswahl input[name="sy-stoff"] mit
+                    data-wirkung="ohne|rezeptor-blocker|wiederaufnahme-hemmer|wie-transmitter" und label[for].
+                    Knöpfe .sy-senden, .sy-pause, .sy-zeitlupe, .sy-beschriftung-knopf, .sy-reset. Ausgabe:
+                    ol.lm-protokoll, .sy-status, svg.sy-verlauf (Pfade .sy-alt, .sy-neu), table.sy-vergleich. */
 (function () {
   "use strict";
 
@@ -314,6 +322,217 @@
   }
 
 
+  /* ---------- Synapsen-Baukasten ---------- */
+  function synapse(root) {
+    var svg = root.querySelector("svg.sy-svg"); if (!svg) return;
+    var NS = "http://www.w3.org/2000/svg";
+    function teil(n) { return svg.querySelector('[data-sy="' + n + '"]'); }
+    function teile(n) { return alle(svg, '[data-sy="' + n + '"]'); }
+    function mitte(e) { var b = e.getBBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2, b: b }; }
+    var spalt = teil("spalt").getBBox();
+    var weg = teil("signalweg"), balken = teil("anzeige"), balkenText = teil("anzeige-text");
+    var balkenMax = balken ? +balken.getAttribute("data-max-breite") || +balken.getAttribute("width") : 0;
+    var blaeschen = teile("blaeschen").map(function (b) { return { el: b, x: +b.getAttribute("cx"), y: +b.getAttribute("cy"), voll: true }; });
+    var rezeptoren = teile("rezeptor").map(function (r) { var m = mitte(r); return { el: r, x: m.x, y: spalt.y + spalt.height, frei: true, gesperrt: false }; });
+    var transporter = teile("transporter").map(function (t) { var m = mitte(t); return { el: t, x: m.x }; });
+    var texte = {}; alle(root, ".sy-ereignisse [data-e]").forEach(function (li) { texte[li.getAttribute("data-e")] = li.textContent.trim(); });
+    var protokoll = root.querySelector(".lm-protokoll"), status = root.querySelector(".sy-status");
+    var verlauf = root.querySelector("svg.sy-verlauf"), vergleich = root.querySelector(".sy-vergleich tbody");
+    var schicht = document.createElementNS(NS, "g"); schicht.setAttribute("class", "sy-teilchen"); svg.appendChild(schicht);
+    var punkt = document.createElementNS(NS, "circle"); punkt.setAttribute("r", "8"); punkt.setAttribute("class", "lm-punkt"); punkt.style.display = "none"; svg.appendChild(punkt);
+
+    var stoff = "ohne", stoffName = "", zeitlupe = false, pause = false;
+    var mol = [], t = 0, letzt = null, lauf = null, kurve = [], alteKurve = null, gesehen = {}, maxSig = 0, sigAn = null, sigAus = null;
+
+    function wirkung() {
+      var r = root.querySelector('input[name="sy-stoff"]:checked');
+      stoff = r ? r.getAttribute("data-wirkung") : "ohne";
+      var l = r && root.querySelector('label[for="' + r.id + '"]'); stoffName = l ? l.textContent.trim() : "";
+    }
+    function zeit(s) { return s.toFixed(1).replace(".", ",") + " s"; }
+    function melde(e) {
+      if (gesehen[e] || !texte[e]) return; gesehen[e] = true;
+      if (!protokoll) return;
+      var li = el("li"), z = el("span", "lm-zeit", zeit(t - t0)); li.appendChild(z); li.appendChild(document.createTextNode(": " + texte[e])); protokoll.appendChild(li);
+    }
+    function sage(s) { if (status) status.textContent = s; }
+    function neuesTeilchen(x, y, art) {
+      var e;
+      if (art === "x") { e = document.createElementNS(NS, "rect"); e.setAttribute("width", "9"); e.setAttribute("height", "9"); e.setAttribute("class", "sy-x"); }
+      else { e = document.createElementNS(NS, "circle"); e.setAttribute("r", "4.5"); e.setAttribute("class", "sy-tr"); }
+      schicht.appendChild(e);
+      var m = { el: e, x: x, y: y, art: art, frei: true, r: null, bis: 0 }; mol.push(m); setze(m); return m;
+    }
+    function setze(m) {
+      if (m.art === "x") { m.el.setAttribute("x", (m.x - 4.5).toFixed(1)); m.el.setAttribute("y", (m.y - 4.5).toFixed(1)); }
+      else { m.el.setAttribute("cx", m.x.toFixed(1)); m.el.setAttribute("cy", m.y.toFixed(1)); }
+    }
+    function entferne(m) { m.el.remove(); mol.splice(mol.indexOf(m), 1); }
+    function zufallNormal() { var u = 1 - Math.random(), v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+
+    function rezeptorenZeichnen() {
+      rezeptoren.forEach(function (r) { r.el.classList.toggle("sy-besetzt", !r.frei); r.el.classList.toggle("sy-gesperrt", r.gesperrt); });
+      transporter.forEach(function (tp) { tp.el.classList.toggle("sy-gesperrt", stoff === "wiederaufnahme-hemmer"); });
+    }
+    function signalStaerke() {
+      var n = rezeptoren.filter(function (r) { return !r.frei; }).length;
+      return Math.round(n / rezeptoren.length * 100);
+    }
+    function anzeige(s) {
+      if (balken) balken.setAttribute("width", (balkenMax * s / 100).toFixed(1));
+      if (balkenText) balkenText.textContent = s + " %";
+    }
+    function zeichneVerlauf() {
+      if (!verlauf) return;
+      var W = 600, H = 120, L = 40, T = 10, B = 100, tMax = 12;
+      function pfad(k) { return k.map(function (p, i) { return (i ? "L" : "M") + (L + Math.min(p[0], tMax) / tMax * (W - L - 10)).toFixed(1) + " " + (B - p[1] / 100 * (B - T)).toFixed(1); }).join(" "); }
+      var a = verlauf.querySelector(".sy-alt"), n = verlauf.querySelector(".sy-neu");
+      if (a) a.setAttribute("d", alteKurve && alteKurve.length ? pfad(alteKurve) : "");
+      if (n) n.setAttribute("d", kurve.length ? pfad(kurve) : "");
+    }
+
+    function stoffAnwenden() {
+      wirkung();
+      rezeptoren.forEach(function (r, i) { r.gesperrt = stoff === "rezeptor-blocker" && i % 3 !== 0; });
+      mol.filter(function (m) { return m.art === "x"; }).forEach(function (m) { if (m.r) m.r.frei = true; entferne(m); });
+      if (stoff === "wie-transmitter") for (var i = 0; i < 6; i++) neuesTeilchen(spalt.x + 20 + Math.random() * (spalt.width - 40), spalt.y + 8 + Math.random() * (spalt.height - 16), "x");
+      rezeptorenZeichnen();
+      if (!lauf) start(false);
+    }
+
+    function schritt(jetzt) {
+      if (letzt === null) letzt = jetzt;
+      var echt = Math.min(0.05, (jetzt - letzt) / 1000); letzt = jetzt;
+      if (pause) { lauf = requestAnimationFrame(schritt); return; }
+      var dt = echt * (zeitlupe ? 0.35 : 1); t += dt;
+      var sigma = 38 * Math.sqrt(dt), oben = spalt.y + 4, unten = spalt.y + spalt.height - 4;
+      var hemmer = stoff === "wiederaufnahme-hemmer", rate = hemmer ? 0.45 : 2.2;
+      mol.slice().forEach(function (m) {
+        if (m.ziel) { /* wird zum Transporter zurückgeholt */
+          var dx = m.ziel.x - m.x, dy = spalt.y - 6 - m.y, d = Math.sqrt(dx * dx + dy * dy), v = 260 * dt;
+          if (d <= v) { entferne(m); return; }
+          m.x += dx / d * v; m.y += dy / d * v; setze(m); return;
+        }
+        if (m.ausstoss) { m.ausstoss -= dt; m.y += 75 * dt; if (m.ausstoss <= 0) m.ausstoss = 0; }
+        if (!m.frei) {
+          if (t >= m.bis) { m.frei = true; m.r.frei = true; m.r = null; m.y = unten - 22; m.ruhe = t + 0.5; }
+          else { setze(m); return; }
+        }
+        m.x += zufallNormal() * sigma; m.y += zufallNormal() * sigma + 2 * dt; m.alter = (m.alter || 0) + dt;
+        if (m.x < spalt.x + 4) m.x = spalt.x + 4; if (m.x > spalt.x + spalt.width - 4) m.x = spalt.x + spalt.width - 4;
+        if (m.y < oben) m.y = oben; if (m.y > unten) m.y = unten;
+        if (m.y > unten - 8 && !(m.ruhe > t)) {
+          var r = rezeptoren.filter(function (q) { return q.frei && !q.gesperrt && Math.abs(q.x - m.x) < 14; })[0];
+          if (r) {
+            r.frei = false; m.frei = false; m.r = r; m.x = r.x; m.y = unten - 2;
+            m.bis = t + (m.art === "x" ? 1.6 + Math.random() : 0.35 + Math.random() * 0.3);
+            if (m.art !== "x") melde("andocken");
+            setze(m); return;
+          }
+        }
+        if (m.art !== "x" && !m.ausstoss && m.alter > 0.4 && Math.random() < dt * rate) {
+          if (hemmer || !transporter.length) { entferne(m); melde("abbau"); return; }
+          m.ziel = transporter.reduce(function (a, q) { return Math.abs(q.x - m.x) < Math.abs(a.x - m.x) ? q : a; });
+          melde("zurueck");
+          var bl = blaeschen.filter(function (v) { return !v.voll; })[0]; if (bl && Math.random() < 0.15) { bl.voll = true; bl.el.classList.remove("sy-leer"); }
+        }
+        setze(m);
+      });
+      rezeptorenZeichnen();
+      var s = signalStaerke(); anzeige(s);
+      if (gesehen.verschmelzen) {
+        kurve.push([t - t0, s]); if (s > maxSig) maxSig = s;
+        if (s >= 30) { melde("signal"); if (sigAn === null) sigAn = t; }
+        if (sigAn !== null && s < 10 && sigAus === null) sigAus = t;
+        if (s >= 10) sigAus = null;
+      }
+      zeichneVerlauf();
+      if (!laufend && texte.ruhe) {
+        var ruhe = s > 0 ? texte.ruhe + " " + s + " %" : "";
+        if (ruhe && status && status.textContent !== ruhe) sage(ruhe);
+      }
+      var transmitterDa = mol.some(function (m) { return m.art !== "x"; });
+      if (gesehen.verschmelzen && !transmitterDa && !freisetzung) {
+        melde("ende"); abschluss();
+      }
+      lauf = requestAnimationFrame(schritt);
+    }
+    var t0 = 0, freisetzung = false, laufend = false, laufName = "";
+    function start(mitSignal) {
+      if (lauf) cancelAnimationFrame(lauf);
+      letzt = null; lauf = requestAnimationFrame(schritt);
+      if (!mitSignal) return;
+    }
+    function abschluss() {
+      if (!laufend) return; laufend = false;
+      var dauer = sigAn === null ? 0 : ((sigAus === null ? t : sigAus) - sigAn);
+      if (vergleich) {
+        var tr = el("tr");
+        tr.appendChild(el("td", null, laufName || "ohne Stoff"));
+        tr.appendChild(el("td", "zahl", maxSig + " %"));
+        tr.appendChild(el("td", "zahl", zeit(Math.max(0, dauer))));
+        vergleich.appendChild(tr);
+      }
+      sage("Fertig. Stärkstes Signal: " + maxSig + " %. Dauer des Signals: " + zeit(Math.max(0, dauer)) + " Modellzeit.");
+      senden.disabled = false;
+    }
+    function signalSenden() {
+      if (laufend) return;
+      wirkung(); laufName = stoffName; laufend = true; senden.disabled = true;
+      gesehen = {}; if (protokoll) protokoll.innerHTML = ""; alteKurve = kurve.length ? kurve : alteKurve; kurve = []; maxSig = 0; sigAn = null; sigAus = null;
+      mol.filter(function (m) { return m.art !== "x"; }).forEach(entferne);
+      rezeptoren.forEach(function (r) { if (!mol.some(function (m) { return m.r === r; })) r.frei = true; });
+      t0 = t; freisetzung = true; sage("Ein Signal läuft zum Endknöpfchen.");
+      var L = weg.getTotalLength(), dauer = 0.9, s0 = null;
+      punkt.style.display = "";
+      function fahre(jetzt) {
+        if (s0 === null) s0 = t;
+        var f = Math.min(1, (t - s0) / dauer), q = weg.getPointAtLength(f * L);
+        punkt.setAttribute("cx", q.x); punkt.setAttribute("cy", q.y);
+        if (f < 1) { requestAnimationFrame(fahre); return; }
+        punkt.style.display = "none"; melde("ankunft"); verschmelzen();
+      }
+      start(true); requestAnimationFrame(fahre);
+    }
+    function verschmelzen() {
+      var volle = blaeschen.filter(function (b) { return b.voll; }), wahl = volle.slice(0, Math.min(3, volle.length));
+      if (!wahl.length) { sage("Alle Bläschen sind leer. Warte, bis sie wieder gefüllt sind."); freisetzung = false; laufend = false; senden.disabled = false; return; }
+      var s0 = t, dauer = 0.6;
+      function bewege() {
+        var f = Math.min(1, (t - s0) / dauer);
+        wahl.forEach(function (b) { b.el.setAttribute("cy", (b.y + (spalt.y - 14 - b.y) * f).toFixed(1)); });
+        if (f < 1) { requestAnimationFrame(bewege); return; }
+        melde("verschmelzen");
+        wahl.forEach(function (b) {
+          for (var i = 0; i < 9; i++) { var m = neuesTeilchen(b.x + (Math.random() - 0.5) * 22, spalt.y + 5, "t"); m.ausstoss = 0.4 + Math.random() * 0.3; }
+          b.voll = false; b.el.classList.add("sy-leer"); b.el.setAttribute("cy", b.y);
+        });
+        melde("spalt"); freisetzung = false; sage("Transmitter sind im Spalt.");
+      }
+      requestAnimationFrame(bewege);
+    }
+
+    var senden = root.querySelector(".sy-senden");
+    if (senden) senden.addEventListener("click", signalSenden);
+    var pk = root.querySelector(".sy-pause");
+    if (pk) pk.addEventListener("click", function () { pause = !pause; pk.setAttribute("aria-pressed", String(pause)); pk.textContent = pause ? "Weiter" : "Pause"; });
+    var zl = root.querySelector(".sy-zeitlupe");
+    if (zl) zl.addEventListener("click", function () { zeitlupe = !zeitlupe; zl.setAttribute("aria-pressed", String(zeitlupe)); });
+    var bk = root.querySelector(".sy-beschriftung-knopf");
+    if (bk) bk.addEventListener("click", function () { var aus = svg.classList.toggle("sy-ohne-text"); bk.setAttribute("aria-pressed", String(aus)); });
+    var rs = root.querySelector(".sy-reset");
+    if (rs) rs.addEventListener("click", function () {
+      mol.slice().forEach(entferne); rezeptoren.forEach(function (r) { r.frei = true; });
+      blaeschen.forEach(function (b) { b.voll = true; b.el.classList.remove("sy-leer"); b.el.setAttribute("cy", b.y); });
+      laufend = false; freisetzung = false; if (senden) senden.disabled = false; kurve = []; alteKurve = null; if (vergleich) vergleich.innerHTML = ""; if (protokoll) protokoll.innerHTML = "";
+      var o = root.querySelector('input[name="sy-stoff"][data-wirkung="ohne"]'); if (o) o.checked = true; stoffAnwenden(); anzeige(0); zeichneVerlauf(); sage("Zurückgesetzt.");
+    });
+    alle(root, 'input[name="sy-stoff"]').forEach(function (r) { r.addEventListener("change", stoffAnwenden); });
+    /* Bläschen langsam wieder auffüllen */
+    setInterval(function () { if (pause) return; var b = blaeschen.filter(function (v) { return !v.voll; })[0]; if (b && !laufend) { b.voll = true; b.el.classList.remove("sy-leer"); } }, 2500);
+    stoffAnwenden(); anzeige(0);
+  }
+
   /* ---------- Speicher (nur dieser Browser, Fehler werden geschluckt) ---------- */
   function lies(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
   function schreib(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
@@ -574,6 +793,7 @@
     alle(document, "[data-signal]").forEach(signal);
     alle(document, "[data-lernlandkarte]").forEach(lernlandkarte);
     alle(document, "[data-ichkann]").forEach(ichkann);
+    alle(document, "[data-synapse]").forEach(synapse);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", los); else los();
 })();

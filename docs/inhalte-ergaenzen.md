@@ -184,10 +184,11 @@ Vorlagenseiten können Übungen mit Selbstprüfung bekommen. Im `<head>` nach `m
 | Ja/Nein-Tabelle | `<div data-jn>` mit Tabelle, Zellen `td.lm-jn[data-ok="ja"]` oder `"nein"` | Antippen wechselt leer, ja, nein. Prüfen markiert jede Zelle |
 | Entdecker | `<div data-entdecker>` mit eingebundener SVG (Teile `.lm-teil[data-teil]`), Liste `ul.lm-daten` mit `li[data-teil][data-name][data-silben]` (Text = Funktion), `.lm-info`, `.lm-knoepfe`, `.lm-zaehler` | Teil antippen zeigt Name, Silben und Funktion, Zähler „3 von 7 Teilen angesehen“. Ohne JavaScript bleibt die Liste lesbar |
 | Signal-Modell | `<div data-signal data-tempo="110">` mit SVG-Pfaden `path[id]` (optional `data-ende`, `data-pause`, `data-zeige`), Knöpfen `button[data-ablauf="a; b + c"]` und `ol.lm-protokoll` | Ein Punkt läuft die Pfade ab (`;` nacheinander, `+` gleichzeitig). Das Protokoll zeigt, was nacheinander passiert, mit Modellzeit |
+| Synapsen-Baukasten | `<div data-synapse>` mit SVG-Teilen `[data-sy]` (signalweg, blaeschen, transporter, rezeptor, spalt, anzeige), Knöpfen `.sy-senden`, `.sy-zeitlupe`, `.sy-pause`, `.sy-beschriftung-knopf`, `.sy-reset`, Stoff-Auswahl `input[name="sy-stoff"][data-wirkung]` (ohne, rezeptor-blocker, wiederaufnahme-hemmer, wie-transmitter), `svg.sy-verlauf`, `.sy-vergleich`, `ol.lm-protokoll` und Ereignistexten `ul.sy-ereignisse li[data-e]` | Transmitter wandern als Punkte durch den Spalt, docken an und werden zurückgeholt. Signalstärke als Balken und Verlauf, Vergleichstabelle je Durchgang. Stoffe heißen neutral „Stoff X1–X3“, echte Namen nur bei der Lehrkraft |
 | Lernlandkarte | `<main data-lernlandkarte data-speicher="…">` mit `.llk-name`, `.llk-laden`, Eingabe `.llk-neu` + `.llk-dazu`, Rückkanal-Import `.llk-import` + `.llk-einfuegen`, `.lm-vorrat`, Stationen `.lm-feld[data-feld]`, Mythen `.llk-mythos[data-id]` in `.llk-mythen`, `.llk-export`, `.llk-importdatei`, `.llk-leeren` | Die Klasse sammelt Fragen und ordnet sie Stationen zu. Mythen sind verdeckt und werden aufgedeckt, abgestimmt und einer Station zugeordnet. Eine Karte pro Klassenname, Sicherung als JSON-Datei. Keine Auflösungen im HTML |
 | Ich-kann-Liste | `<section data-ichkann data-speicher="…">` mit `ol` aus Sätzen und `.lm-leeren` | Wird zur Tabelle mit Vorher/Nachher, je ●○○ noch nicht, ●●○ teilweise, ●●● sicher |
 
-Beispiele: `biologie/klasse-9/nervensystem/signalweg/`, `…/nervenzelle/` und `…/lernlandkarte/`.
+Beispiele: `biologie/klasse-9/nervensystem/signalweg/`, `…/nervenzelle/`, `…/synapse/` und `…/lernlandkarte/`.
 
 ### Bestehende Anwendung einhängen
 
