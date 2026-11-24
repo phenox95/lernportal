@@ -18,7 +18,17 @@
                     data-pause="ms" (Wartezeit am Ende) und data-zeige="id …" (Elemente .lm-zeigen erscheinen).
                     Knöpfe button[data-ablauf="a; b+c"]: Semikolon = nacheinander, Plus = gleichzeitig.
                     Tempo in Einheiten der SVG je Sekunde: data-tempo am Baustein (Standard 120).
-                    Protokoll ol.lm-protokoll mit Modellzeit. */
+                    Protokoll ol.lm-protokoll mit Modellzeit.
+   [data-lernlandkarte data-speicher="name"]
+                    Lernlandkarte einer Reihe. Stationen .lm-feld[data-feld] mit button.lm-feld-ziel und .lm-inhalt,
+                    Eingabe input.llk-neu und button.llk-dazu, optional textarea.llk-import mit button.llk-einfuegen
+                    (Text aus dem Rückkanal, eine Frage je Zeile), Vorrat .lm-vorrat. Mythen als
+                    .llk-mythos[data-id] mit der Aussage als Text, Liste .llk-mythen. Karten-Name input.llk-name,
+                    Knöpfe .llk-laden, .llk-export, .llk-importdatei (input type=file), .llk-leeren, Liste .llk-namen.
+                    Speichert nur in diesem Browser (localStorage), je Karten-Name getrennt. Keine Lösungen.
+   [data-ichkann data-speicher="name"]
+                    Ich-kann-Liste vorher und nachher: ol mit li je Satz. Drei Stufen (noch nicht, teilweise, sicher).
+                    Speichert nur in diesem Browser. */
 (function () {
   "use strict";
 
@@ -303,12 +313,267 @@
     });
   }
 
+
+  /* ---------- Speicher (nur dieser Browser, Fehler werden geschluckt) ---------- */
+  function lies(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+  function schreib(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+  function weg(k) { try { localStorage.removeItem(k); } catch (e) { /* ohne Speicher */ } }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  /* ---------- Lernlandkarte ---------- */
+  function lernlandkarte(root) {
+    var basis = "lp-llk-" + (root.getAttribute("data-speicher") || "karte");
+    var vorrat = root.querySelector(".lm-vorrat"), felder = alle(root, ".lm-feld");
+    var eingabe = root.querySelector(".llk-neu"), name = root.querySelector(".llk-name"), namenListe = root.querySelector(".llk-namen");
+    var stand = root.querySelector(".llk-stand");
+    var mythenHtml = alle(root, ".llk-mythos"), mythenListe = root.querySelector(".llk-mythen");
+    var stationen = felder.map(function (f) { return { id: f.getAttribute("data-feld"), titel: (f.querySelector(".lm-feld-ziel strong") || f.querySelector(".lm-feld-ziel")).textContent.trim() }; });
+    var aktuell = "", daten = null, gewaehlt = null;
+
+    function leer() { return { fragen: [], mythen: {} }; }
+    function schluessel(n) { return basis + ":" + n; }
+    function namen() { return lies(basis + ":namen") || []; }
+    function sichern() {
+      if (!aktuell) return;
+      var inhalt = daten.fragen.length || Object.keys(daten.mythen).some(function (k) { return daten.mythen[k].auf; });
+      var l = namen(), ok = true;
+      if (inhalt || l.indexOf(aktuell) >= 0) ok = schreib(schluessel(aktuell), daten);
+      if (inhalt && l.indexOf(aktuell) < 0) { l.push(aktuell); schreib(basis + ":namen", l); }
+      if (stand) stand.textContent = ok ? "Gespeichert auf diesem Gerät: Karte „" + aktuell + "“." : "Speichern ist in diesem Browser nicht möglich. Nutze „Als Datei sichern“.";
+      zeigeNamen();
+    }
+    function zeigeNamen() {
+      if (!namenListe) return;
+      namenListe.innerHTML = "";
+      namen().forEach(function (n) {
+        var b = el("button", "lm-knopf zweit", n); b.type = "button";
+        b.setAttribute("aria-pressed", n === aktuell ? "true" : "false");
+        b.addEventListener("click", function () { oeffne(n); });
+        var li = el("li"); li.appendChild(b); namenListe.appendChild(li);
+      });
+    }
+    function mythos(id) {
+      if (!daten.mythen[id]) daten.mythen[id] = { auf: false, s: [0, 0, 0], station: "", geklaert: false, ergebnis: "" };
+      return daten.mythen[id];
+    }
+    function waehle(k) {
+      gewaehlt = k;
+      alle(root, ".llk-frage").forEach(function (x) { x.setAttribute("aria-pressed", x === k ? "true" : "false"); });
+      felder.forEach(function (f) { f.classList.toggle("ziel", !!k); });
+      if (vorrat) vorrat.classList.toggle("ziel", !!k);
+    }
+    function frageKarte(f) {
+      var k = el("div", "llk-karte");
+      var b = el("button", "lm-karte llk-frage"); b.type = "button"; b.setAttribute("aria-pressed", "false");
+      b.appendChild(el("span", "", f.t)); b.setAttribute("data-id", f.id);
+      b.addEventListener("click", function () { waehle(gewaehlt === b ? null : b); });
+      k.appendChild(b);
+      if (f.feld) {
+        var lab = el("label", "llk-haken"), cb = el("input"); cb.type = "checkbox"; cb.checked = !!f.ok;
+        cb.addEventListener("change", function () { f.ok = cb.checked; k.classList.toggle("ok", f.ok); sichern(); });
+        lab.appendChild(cb); lab.appendChild(el("span", "", "beantwortet")); k.appendChild(lab);
+        k.classList.toggle("ok", !!f.ok);
+      }
+      var x = el("button", "llk-weg", "Entfernen"); x.type = "button"; x.setAttribute("aria-label", "Frage entfernen: " + f.t);
+      x.addEventListener("click", function () { daten.fragen = daten.fragen.filter(function (y) { return y !== f; }); sichern(); zeichne(); });
+      k.appendChild(x);
+      return k;
+    }
+    function zeichne() {
+      waehle(null);
+      if (vorrat) vorrat.innerHTML = "";
+      felder.forEach(function (f) { f.querySelector(".lm-inhalt").innerHTML = ""; });
+      daten.fragen.forEach(function (f) {
+        var ziel = f.feld ? root.querySelector('.lm-feld[data-feld="' + f.feld + '"] .lm-inhalt') : vorrat;
+        if (!ziel) { f.feld = ""; ziel = vorrat; }
+        ziel.appendChild(frageKarte(f));
+      });
+      felder.forEach(function (f) {
+        var id = f.getAttribute("data-feld"), inh = f.querySelector(".lm-inhalt");
+        mythenHtml.forEach(function (m, i) {
+          var d = mythos(m.getAttribute("data-id"));
+          if (d.station === id) {
+            var c = el("p", "llk-mythos-chip" + (d.geklaert ? " ok" : ""), "Aussage " + (i + 1) + (d.geklaert ? ": geklärt" : ": noch offen"));
+            inh.appendChild(c);
+          }
+        });
+        var offen = daten.fragen.filter(function (q) { return q.feld === id; }), fertig = offen.filter(function (q) { return q.ok; }).length;
+        var z = f.querySelector(".llk-zahl"); if (!z) { z = el("span", "llk-zahl"); f.querySelector(".lm-feld-ziel").appendChild(z); }
+        z.textContent = offen.length ? fertig + " von " + offen.length + " Fragen beantwortet" : "noch keine Fragen";
+      });
+      zeichneMythen();
+    }
+    function zeichneMythen() {
+      if (!mythenListe) return;
+      mythenListe.innerHTML = "";
+      mythenHtml.forEach(function (m, i) {
+        var id = m.getAttribute("data-id"), d = mythos(id);
+        var li = el("li", "llk-myth" + (d.auf ? " auf" : ""));
+        li.appendChild(el("h4", "", "Aussage " + (i + 1)));
+        if (!d.auf) {
+          var auf = el("button", "lm-knopf", "Aufdecken"); auf.type = "button";
+          auf.addEventListener("click", function () { d.auf = true; sichern(); zeichneMythen(); });
+          li.appendChild(el("p", "llk-verdeckt", "Die Aussage ist noch verdeckt."));
+          li.appendChild(auf);
+        } else {
+          li.appendChild(el("p", "llk-aussage", "„" + m.textContent.trim() + "“"));
+          var zaehl = el("div", "llk-stimmen");
+          ["stimmt", "stimmt nicht", "weiß nicht"].forEach(function (w, j) {
+            var box = el("div", "llk-stimme");
+            var plus = el("button", "lm-knopf zweit", w + ": " + d.s[j]); plus.type = "button";
+            plus.setAttribute("aria-label", w + ", bisher " + d.s[j] + " Stimmen. Antippen zählt eine Stimme dazu.");
+            plus.addEventListener("click", function () { d.s[j]++; sichern(); zeichneMythen(); });
+            var minus = el("button", "llk-minus", "−"); minus.type = "button"; minus.setAttribute("aria-label", w + ": eine Stimme zurück");
+            minus.addEventListener("click", function () { if (d.s[j] > 0) d.s[j]--; sichern(); zeichneMythen(); });
+            box.appendChild(plus); box.appendChild(minus); zaehl.appendChild(box);
+          });
+          li.appendChild(zaehl);
+          var sel = el("select", "llk-station"), lab = el("label", "llk-zeile");
+          lab.appendChild(el("span", "", "Station: "));
+          var o0 = el("option", "", "noch nicht zugeordnet"); o0.value = ""; sel.appendChild(o0);
+          stationen.forEach(function (st) { var o = el("option", "", st.titel); o.value = st.id; sel.appendChild(o); });
+          sel.value = d.station || "";
+          sel.addEventListener("change", function () { d.station = sel.value; sichern(); zeichne(); });
+          lab.appendChild(sel); li.appendChild(lab);
+          var lk = el("label", "llk-haken"), cb = el("input"); cb.type = "checkbox"; cb.checked = !!d.geklaert;
+          cb.addEventListener("change", function () { d.geklaert = cb.checked; sichern(); zeichne(); });
+          lk.appendChild(cb); lk.appendChild(el("span", "", "in der Reihe geklärt")); li.appendChild(lk);
+          var ta = el("textarea", "lp-schreib llk-ergebnis"); ta.rows = 2; ta.value = d.ergebnis || "";
+          ta.setAttribute("aria-label", "Unser Ergebnis zu Aussage " + (i + 1));
+          ta.placeholder = "Unser Ergebnis (wenn geklärt)";
+          ta.addEventListener("input", function () { d.ergebnis = ta.value; sichern(); });
+          li.appendChild(ta);
+        }
+        mythenListe.appendChild(li);
+      });
+    }
+    function dazu(text) {
+      text = String(text || "").replace(/^\s*[-•*]\s*/, "").trim();
+      if (!text) return false;
+      daten.fragen.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), t: text.slice(0, 200), feld: "", ok: false });
+      return true;
+    }
+    function verschiebe(feld) {
+      if (!gewaehlt) { if (stand) stand.textContent = "Tippe zuerst eine Frage an. Tippe dann auf die Station."; return; }
+      var id = gewaehlt.getAttribute("data-id");
+      daten.fragen.forEach(function (f) { if (f.id === id) { f.feld = feld; if (!feld) f.ok = false; } });
+      sichern(); zeichne();
+      var neu = root.querySelector('.llk-frage[data-id="' + id + '"]'); if (neu) neu.focus();
+    }
+    function oeffne(n) {
+      n = String(n || "").trim().slice(0, 40) || "Meine Klasse";
+      aktuell = n; if (name) name.value = n;
+      daten = lies(schluessel(n)) || leer();
+      if (!daten.fragen) daten.fragen = []; if (!daten.mythen) daten.mythen = {};
+      schreib(basis + ":zuletzt", n);
+      sichern(); zeichne();
+    }
+
+    felder.forEach(function (f) {
+      var z = f.querySelector(".lm-feld-ziel"); z.type = "button";
+      z.addEventListener("click", function () { verschiebe(f.getAttribute("data-feld")); });
+    });
+    var zurueck = root.querySelector(".llk-zurueck");
+    if (zurueck) zurueck.addEventListener("click", function () { verschiebe(""); });
+    var dazuKnopf = root.querySelector(".llk-dazu");
+    function neueFrage() { if (dazu(eingabe.value)) { eingabe.value = ""; sichern(); zeichne(); } eingabe.focus(); }
+    if (dazuKnopf) dazuKnopf.addEventListener("click", neueFrage);
+    if (eingabe) eingabe.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); neueFrage(); } });
+    var imp = root.querySelector(".llk-import"), einf = root.querySelector(".llk-einfuegen");
+    if (imp && einf) einf.addEventListener("click", function () {
+      var n = 0; imp.value.split(/\r?\n/).forEach(function (z) { if (dazu(z.replace(/^\s*-\s*[^:]{1,30}:\s*/, ""))) n++; });
+      imp.value = ""; sichern(); zeichne();
+      if (stand) stand.textContent = n + (n === 1 ? " Frage" : " Fragen") + " eingefügt.";
+    });
+    var laden = root.querySelector(".llk-laden");
+    if (laden) laden.addEventListener("click", function () { oeffne(name.value); });
+    if (name) name.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); oeffne(name.value); } });
+    var exp = root.querySelector(".llk-export");
+    if (exp) exp.addEventListener("click", function () {
+      var blob = new Blob([JSON.stringify({ karte: aktuell, daten: daten }, null, 1)], { type: "application/json" });
+      var a = el("a"); a.href = URL.createObjectURL(blob); a.download = "lernlandkarte-" + aktuell.replace(/[^a-z0-9äöüß-]+/gi, "-").toLowerCase() + ".json";
+      document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    });
+    var datei = root.querySelector(".llk-importdatei");
+    if (datei) datei.addEventListener("change", function () {
+      var f = datei.files && datei.files[0]; if (!f) return;
+      var r = new FileReader();
+      r.onload = function () {
+        try {
+          var o = JSON.parse(r.result);
+          if (!o || !o.daten || !Array.isArray(o.daten.fragen)) throw new Error("Format");
+          aktuell = String(o.karte || aktuell).slice(0, 40); if (name) name.value = aktuell;
+          daten = { fragen: o.daten.fragen.filter(function (q) { return q && typeof q.t === "string"; }).map(function (q) { return { id: String(q.id || Math.random()), t: q.t.slice(0, 200), feld: typeof q.feld === "string" ? q.feld : "", ok: !!q.ok }; }), mythen: typeof o.daten.mythen === "object" && o.daten.mythen ? o.daten.mythen : {} };
+          sichern(); zeichne();
+        } catch (e) { if (stand) stand.textContent = "Die Datei passt nicht. Nimm eine Datei, die hier gesichert wurde."; }
+        datei.value = "";
+      };
+      r.readAsText(f);
+    });
+    var leeren = root.querySelector(".llk-leeren");
+    if (leeren) leeren.addEventListener("click", function () {
+      if (leeren.getAttribute("data-sicher") !== "1") {
+        leeren.setAttribute("data-sicher", "1"); leeren.textContent = "Wirklich leeren? Nochmal tippen";
+        setTimeout(function () { leeren.removeAttribute("data-sicher"); leeren.textContent = "Karte leeren"; }, 4000);
+        return;
+      }
+      leeren.removeAttribute("data-sicher"); leeren.textContent = "Karte leeren";
+      daten = leer(); weg(schluessel(aktuell));
+      var l = namen().filter(function (x) { return x !== aktuell; }); schreib(basis + ":namen", l);
+      sichern(); zeichne();
+    });
+    oeffne(lies(basis + ":zuletzt") || (name && name.value) || "Meine Klasse");
+  }
+
+  /* ---------- Ich-kann-Liste vorher und nachher ---------- */
+  function ichkann(root) {
+    var key = "lp-ichkann-" + (root.getAttribute("data-speicher") || "liste");
+    var saetze = alle(root, "ol > li").map(function (li) { return li.textContent.trim(); });
+    var liste = root.querySelector("ol"); if (!saetze.length) return;
+    var werte = lies(key) || {};
+    var STUFEN = ["noch nicht", "teilweise", "sicher"];
+    var tab = el("table", "lp-tabelle lm-ichkann"), kopf = el("thead"), tr = el("tr");
+    ["Ich kann …", "Vorher", "Nachher"].forEach(function (t) { var th = el("th", "", t); th.scope = "col"; tr.appendChild(th); });
+    kopf.appendChild(tr); tab.appendChild(kopf);
+    var body = el("tbody");
+    saetze.forEach(function (s, i) {
+      var r = el("tr"), th = el("th", "", "… " + s); th.scope = "row"; r.appendChild(th);
+      ["v", "n"].forEach(function (wann) {
+        var td = el("td"), grp = el("div", "lm-stufen"); grp.setAttribute("role", "group");
+        grp.setAttribute("aria-label", (wann === "v" ? "Vorher: " : "Nachher: ") + s);
+        STUFEN.forEach(function (st, j) {
+          var b = el("button", "", "●".repeat(j + 1) + "○".repeat(2 - j)); b.type = "button";
+          b.setAttribute("aria-label", st); b.title = st;
+          b.setAttribute("aria-pressed", werte[wann + i] === j + 1 ? "true" : "false");
+          b.addEventListener("click", function () {
+            werte[wann + i] = werte[wann + i] === j + 1 ? 0 : j + 1; schreib(key, werte);
+            alle(grp, "button").forEach(function (x, k) { x.setAttribute("aria-pressed", werte[wann + i] === k + 1 ? "true" : "false"); });
+          });
+          grp.appendChild(b);
+        });
+        td.appendChild(grp); r.appendChild(td);
+      });
+      body.appendChild(r);
+    });
+    tab.appendChild(body);
+    var rahmen = el("div", "lp-scroll"); rahmen.setAttribute("tabindex", "0"); rahmen.setAttribute("role", "region"); rahmen.setAttribute("aria-label", "Ich-kann-Liste, seitlich wischbar");
+    rahmen.appendChild(tab);
+    liste.replaceWith(rahmen);
+    var lz = root.querySelector(".lm-leeren");
+    if (lz) lz.addEventListener("click", function () {
+      werte = {}; weg(key);
+      alle(root, ".lm-stufen button").forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+    });
+  }
+
   function los() {
     alle(document, "[data-reihe]").forEach(reihe);
     alle(document, "[data-ablage]").forEach(ablage);
     alle(document, "[data-jn]").forEach(jn);
     alle(document, "[data-entdecker]").forEach(entdecker);
     alle(document, "[data-signal]").forEach(signal);
+    alle(document, "[data-lernlandkarte]").forEach(lernlandkarte);
+    alle(document, "[data-ichkann]").forEach(ichkann);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", los); else los();
 })();

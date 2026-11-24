@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="de" class="lp-vorlage">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../../../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../../../assets/favicon/apple-touch-icon.png">
+  <title>Lernlandkarte Nervensystem – Lernportal</title>
+  <meta name="description" content="Lernlandkarte der Reihe Nervensystem: Fragen der Klasse den fünf Stationen zuordnen, Aussagen prüfen und sich vorher und nachher einschätzen.">
+  <link rel="stylesheet" href="../../../../assets/css/material.css">
+  <link rel="stylesheet" href="../../../../assets/css/lernmodul.css">
+  <script src="../../../../assets/js/prefs.js"></script>
+  <script src="../../../../assets/js/material.js" defer></script>
+  <script src="../../../../assets/js/lernmodul.js" defer></script>
+  <script src="../../../../assets/js/vorlesen.js" defer></script>
+</head>
+<body class="lp-seite" data-root="../../../../" data-title="Lernlandkarte: Unser Nervensystem" data-subject="Biologie" data-grade="Klasse 9" data-tf="nervensystem">
+  <noscript><p class="lp-noscript"><a href="../../../../">Zurück zum Portal</a> · Diese Seite braucht JavaScript.</p></noscript>
+
+  <main class="lp-inhalt" data-lernlandkarte data-speicher="nervensystem-9">
+
+    <aside class="lp-leitfrage" aria-labelledby="ueber">
+      <span class="lp-label" id="ueber">So funktioniert die Lernlandkarte</span>
+      <p data-vorlesen style="font-size:1.0625rem;font-weight:400">Die Reihe hat fünf Stationen. Sammelt eure Fragen. Ordnet jede Frage einer Station zu. Hakt eine Frage ab, wenn ihr sie beantwortet habt.</p>
+    </aside>
+
+    <!-- Karte wählen: je Klasse eine eigene Karte, gespeichert nur in diesem Browser -->
+    <section class="lp-material" aria-labelledby="karte">
+      <div class="lp-material-kopf"><strong id="karte">Karte</strong><span>Für welche Klasse?</span></div>
+      <div class="lp-material-inhalt">
+        <div class="llk-steuer">
+          <label class="lp-sr" for="llk-name">Name der Karte</label>
+          <input type="text" id="llk-name" class="llk-name" maxlength="40" placeholder="zum Beispiel 9a" autocomplete="off">
+          <button type="button" class="lm-knopf llk-laden">Karte öffnen</button>
+        </div>
+        <ul class="llk-namen" aria-label="Gespeicherte Karten"></ul>
+        <p class="llk-stand" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Fragen sammeln -->
+    <section class="lp-aufgabe lp-breit" aria-labelledby="a1">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a1">Unsere Fragen</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag">a) <strong class="lp-op">Formuliere</strong> eine Frage zum Nervensystem. Schreibe sie in das Feld.</p>
+      <div class="llk-eingabe">
+        <label class="lp-sr" for="llk-neu">Neue Frage</label>
+        <input type="text" id="llk-neu" class="llk-neu" maxlength="200" placeholder="Wie …? Warum …? Was passiert, wenn …?" autocomplete="off">
+        <button type="button" class="lm-knopf llk-dazu">Frage dazu</button>
+      </div>
+      <details style="margin-top:0.6rem">
+        <summary>Fragen aus dem Rückkanal einfügen</summary>
+        <p class="lm-hinweis">Sammle die Fragen der Gruppen mit dem <a href="../../../../labor/rueckkanal/">Rückkanal per QR-Code</a>. Tippe dort „Als Text kopieren“. Füge den Text hier ein. Jede Zeile wird eine Frage.</p>
+        <label class="lp-sr" for="llk-import">Text aus dem Rückkanal</label>
+        <textarea id="llk-import" class="lp-schreib llk-import" rows="3"></textarea>
+        <div class="lm-leiste"><button type="button" class="lm-knopf zweit llk-einfuegen">Fragen einfügen</button></div>
+      </details>
+
+      <p class="lp-auftrag" style="margin-top:1rem">b) <strong class="lp-op">Ordne</strong> jede Frage einer Station zu. <strong class="lp-op">Begründe</strong> eine Zuordnung mündlich.</p>
+      <p class="lm-hinweis">Tippe eine Frage an. Tippe dann auf den Namen der Station.</p>
+      <div class="lm-vorrat" aria-label="Fragen ohne Station"></div>
+      <div class="lm-leiste"><button type="button" class="lm-knopf zweit llk-zurueck">Gewählte Frage zurück zu den offenen Fragen</button></div>
+
+      <div class="lm-felder llk-felder">
+        <div class="lm-feld" data-feld="sinne"><button class="lm-feld-ziel" type="button">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M3 20 Q20 5 37 20 Q20 35 3 20 Z"/><circle cx="20" cy="20" r="6"/></svg>
+          <strong>1 Sinne</strong><small>Sinnesorgane, Reize, Sinnesleistungen</small></button><div class="lm-inhalt"></div></div>
+        <div class="lm-feld" data-feld="nervenzelle"><button class="lm-feld-ziel" type="button">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="11" cy="20" r="6"/><path d="M17 20 H34 M34 20 L38 16 M34 20 L38 24 M7 15 L3 9 M7 25 L3 31 M11 14 L11 7"/></svg>
+          <strong>2 Nervenzelle</strong><small>Bau der Nervenzelle, Mikroskopie, Synapse</small></button><div class="lm-inhalt"></div></div>
+        <div class="lm-feld" data-feld="signalweg"><button class="lm-feld-ziel" type="button">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="7" cy="30" r="3.5"/><circle cx="33" cy="10" r="3.5"/><path d="M10 28 C18 26 14 14 22 12 L29 11 M25 7 L29 11 L25 15"/></svg>
+          <strong>3 Signalweg und Reflex</strong><small>Vom Reiz zur Reaktion, Reflex, Nervensystem und Stress</small></button><div class="lm-inhalt"></div></div>
+        <div class="lm-feld" data-feld="gehirn"><button class="lm-feld-ziel" type="button">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 8 C13 4 5 9 6 16 C3 20 5 27 10 28 C12 33 18 33 20 30 C22 33 28 33 30 28 C35 27 37 20 34 16 C35 9 27 4 20 8 Z M20 8 V30"/></svg>
+          <strong>4 Gehirn</strong><small>Sinnestäuschungen, Lernen und Gedächtnis</small></button><div class="lm-inhalt"></div></div>
+        <div class="lm-feld" data-feld="sucht"><button class="lm-feld-ziel" type="button">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="14" width="30" height="12" rx="6" transform="rotate(-35 20 20)"/><path d="M16 26 L24 14"/></svg>
+          <strong>5 Sucht</strong><small>Drogen im Gehirn, Wege in die Sucht, Vorbeugung</small></button><div class="lm-inhalt"></div></div>
+        <div class="lm-feld" data-feld="spaeter"><button class="lm-feld-ziel" type="button">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="M20 11 V20 L26 24"/></svg>
+          <strong>Später</strong><small>Fragen zu einem anderen Thema</small></button><div class="lm-inhalt"></div></div>
+      </div>
+
+      <div class="lp-hilfe">
+        <span class="lp-label">Fragestarter</span>
+        <ul class="lp-bausteine">
+          <li>Wie …?</li>
+          <li>Warum …?</li>
+          <li>Was passiert, wenn …?</li>
+          <li>Ich vermute, dass …, weil … (●●●)</li>
+        </ul>
+      </div>
+      <div class="lp-hilfe">
+        <span class="lp-label">Wortspeicher</span>
+        <ul class="lp-woerter">
+          <li><span class="lp-wort" aria-hidden="true">Ner-ven-sys-tem</span><span class="lp-sr">Nervensystem</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Ge-hirn</span><span class="lp-sr">Gehirn</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Rü-cken-mark</span><span class="lp-sr">Rückenmark</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Nerv</span><span class="lp-sr">Nerv</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Ner-ven-zel-le</span><span class="lp-sr">Nervenzelle</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Re-flex</span><span class="lp-sr">Reflex</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Aussagen (Mythen-Check). Die Auflösung steht hier bewusst nicht: Die Klasse klärt jede Aussage im Lauf der Reihe. -->
+    <section class="lp-aufgabe lp-breit" aria-labelledby="a2">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a2">Stimmt das?</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Entscheide</strong> bei jeder Aussage: stimmt, stimmt nicht oder weiß nicht. <strong class="lp-op">Begründe</strong> eine Entscheidung. Ordne die Aussage danach einer Station zu.</p>
+      <p class="lm-hinweis">Die Aussagen bleiben offen. Ihr klärt jede Aussage in der Reihe. Dann haken wir sie ab und schreiben euer Ergebnis dazu.</p>
+      <ul class="llk-mythen" aria-live="polite">
+        <li class="llk-mythos" data-id="m1">Wir nutzen nur 10 % unseres Gehirns.</li>
+        <li class="llk-mythos" data-id="m2">Nerven sind dünne Röhren, durch die etwas fließt.</li>
+        <li class="llk-mythos" data-id="m3">Bei einem Reflex ist das Gehirn nicht beteiligt.</li>
+        <li class="llk-mythos" data-id="m4">Drogen verändern, wie Nervenzellen Signale weitergeben.</li>
+      </ul>
+    </section>
+
+    <div class="lp-material lp-breit">
+      <div class="lp-material-kopf"><strong>Karte sichern</strong><span>für ein anderes Gerät</span></div>
+      <div class="lp-material-inhalt">
+        <p class="lm-hinweis" style="margin-top:0">Die Karte bleibt nur in diesem Browser. Mit einer Datei nimmst du sie auf ein anderes Gerät mit. Schreibe keine Namen in die Fragen.</p>
+        <div class="lm-leiste">
+          <button type="button" class="lm-knopf zweit llk-export">Als Datei sichern</button>
+          <label class="lm-knopf zweit" style="display:inline-flex;align-items:center">Datei laden<input type="file" class="llk-importdatei lp-sr" accept="application/json,.json"></label>
+          <button type="button" class="lm-knopf zweit llk-leeren">Karte leeren</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="lp-inhalt" style="padding-top:0">
+    <!-- Ich kann: jede Schülerin und jeder Schüler auf dem eigenen Gerät -->
+    <section class="lp-aufgabe" aria-labelledby="a3" data-ichkann data-speicher="nervensystem-9">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a3">Ich kann …</span>
+        <span class="lp-niveau" data-stufe="1" role="img" aria-label="Niveau 1 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Schätze</strong> dich ein: ●○○ noch nicht, ●●○ teilweise, ●●● sicher. Fülle „Vorher“ jetzt aus. Fülle „Nachher“ am Ende der Reihe aus.</p>
+      <ol>
+        <li>Sinnesorgane ihren Reizen zuordnen.</li>
+        <li>den Bau einer Nervenzelle erklären.</li>
+        <li>den Weg vom Reiz zur Reaktion beschreiben.</li>
+        <li>Reflex und Reaktion unterscheiden.</li>
+        <li>erklären, wie ein Signal von Zelle zu Zelle kommt.</li>
+        <li>erklären, wie Drogen im Gehirn wirken.</li>
+      </ol>
+      <p class="lm-hinweis">Deine Einschätzung bleibt nur auf diesem Gerät. Niemand sonst sieht sie.</p>
+      <div class="lm-leiste"><button type="button" class="lm-knopf zweit lm-leeren">Einschätzung löschen</button></div>
+    </section>
+
+    <p class="lp-fuss">Die Lernlandkarte speichert nur in diesem Browser. Nichts wird übertragen. Symbole: eigene Zeichnungen, CC BY 4.0.</p>
+  </div>
+</body>
+</html>

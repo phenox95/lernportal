@@ -11,6 +11,72 @@
     "status": "Beispiel"
   },
   {
+    "title": "Auftakt: Was leistet unser Nervensystem?",
+    "description": "Elfmeter in 0,4 Sekunden: Leistungen des Nervensystems sammeln, Fragen stellen, Aussagen prüfen und die Lernlandkarte der Reihe anlegen.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/auftakt/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–F",
+    "datum": "2026-11-24",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/nervensystem/auftakt/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Lernlandkarte: Unser Nervensystem",
+        "pfad": "biologie/klasse-9/nervensystem/lernlandkarte/",
+        "art": "Übung"
+      }
+    ]
+  },
+  {
+    "title": "Reiz und Reaktion",
+    "description": "Lineal-Fall-Test: Reaktionszeit messen und die Kette vom Reiz zur Reaktion beschreiben.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/reiz-reaktion/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/nervensystem/reiz-reaktion/praesentation/",
+        "art": "Präsentation"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/signalweg/",
+        "grund": "Später in der Reihe wird die Kette vom Reiz zur Reaktion mit Rückenmark und Reflex genauer."
+      }
+    ]
+  },
+  {
+    "title": "Lernlandkarte: Unser Nervensystem",
+    "description": "Fragen der Klasse den fünf Stationen der Reihe zuordnen und abhaken, Aussagen prüfen, sich vorher und nachher einschätzen.",
+    "type": "Lernmodul",
+    "path": "biologie/klasse-9/nervensystem/lernlandkarte/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "Reihe",
+    "datum": "2026-11-24",
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/auftakt/",
+        "grund": "In der Auftaktstunde legt die Klasse die Lernlandkarte an."
+      }
+    ]
+  },
+  {
     "title": "Das Auge: Bau und Funktion",
     "description": "Beschreibe die Teile des Auges und benenne sie.",
     "type": "Lernmodul",
