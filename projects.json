@@ -21,6 +21,8 @@
     "dauer": "45 Min.",
     "niveau": "E–F",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 0,
     "dateien": [
       {
         "titel": "Präsentation zur Stunde",
@@ -45,6 +47,8 @@
     "dauer": "45 Min.",
     "niveau": "E–G",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 1,
     "dateien": [
       {
         "titel": "Präsentation zur Stunde",
@@ -76,6 +80,8 @@
     "dauer": "45 Min.",
     "niveau": "E–G",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 2,
     "dateien": [
       {
         "titel": "Präsentation zur Stunde",
@@ -106,6 +112,8 @@
     "dauer": "45 Min.",
     "niveau": "E–G",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 5,
     "dateien": [
       {
         "titel": "Präsentation zur Stunde",
@@ -147,6 +155,8 @@
     "dauer": "45 Min.",
     "niveau": "E–G",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 5,
     "dateien": [
       {
         "titel": "Präsentation zur Stunde",
@@ -182,6 +192,8 @@
     "themenfeld": "3.6",
     "dauer": "Reihe",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 0,
     "verweise": [
       {
         "pfad": "biologie/klasse-9/nervensystem/auftakt/",
@@ -199,6 +211,8 @@
     "themenfeld": "3.6",
     "dauer": "45 Min.",
     "datum": "2026-11-03",
+    "reihe": "Neurobiologie",
+    "folge": 3,
     "begriffe": true
   },
   {
@@ -211,6 +225,8 @@
     "themenfeld": "3.6",
     "dauer": "45 Min.",
     "datum": "2026-11-03",
+    "reihe": "Neurobiologie",
+    "folge": 4,
     "verweise": [
       {
         "pfad": "biologie/klasse-9/nervensystem/auge-bau/",
@@ -230,6 +246,8 @@
     "dauer": "45 Min.",
     "niveau": "E–F",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 6,
     "verweise": [
       {
         "pfad": "biologie/klasse-7/zelle/zelldifferenzierung/",
@@ -248,6 +266,8 @@
     "dauer": "45 Min.",
     "niveau": "E–F",
     "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 9,
     "verweise": [
       {
         "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",

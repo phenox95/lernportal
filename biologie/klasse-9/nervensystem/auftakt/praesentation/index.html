@@ -18,7 +18,28 @@
 <style>
 .koerper{width:100%;max-width:360px;height:auto;display:block}
 .koerper text{font-family:inherit;font-size:30px;fill:var(--ink)}
-.tor{display:block;width:100%;height:auto}
+.tor{display:block;width:100%;height:auto;overflow:hidden}
+/* Impulsfilm Elfmeter: Grundzustand = Endbild (Leseansicht, Druck, Bewegung reduzieren), .spielt startet den Film (5,4 s) */
+.tor .ball{transform:translate(78px,34px) scale(.5)}
+.tor .tw-steht{opacity:0}
+.tor .tw-fliegt,.tor .treffer{opacity:1}
+.uhr{font-size:96px;line-height:1;font-weight:500;color:var(--ad);margin:10px 0 6px;font-variant-numeric:tabular-nums}
+[data-film].spielt .ball{animation:el-ball 5.4s linear both}
+[data-film].spielt .tw-steht{animation:el-steht 5.4s linear both}
+[data-film].spielt .tw-fliegt{animation:el-fliegt 5.4s both}
+[data-film].spielt .treffer{animation:el-treffer 5.4s linear both}
+@keyframes el-ball{
+ 0%,11.1%{transform:translate(350px,350px) scale(1)}
+ 48.1%{transform:translate(262px,214px) scale(.8)}
+ 85.2%{transform:translate(160px,104px) scale(.6)}
+ 100%{transform:translate(78px,34px) scale(.5)}}
+@keyframes el-steht{0%,48.1%{opacity:1}53.7%,100%{opacity:0}}
+@keyframes el-fliegt{
+ 0%,48.1%{opacity:0;transform:translate(120px,90px) rotate(40deg)}
+ 50%{opacity:1;animation-timing-function:ease-out}
+ 85.2%,100%{opacity:1;transform:none}}
+@keyframes el-treffer{0%,84%{opacity:0}86%{opacity:1}100%{opacity:1}}
+.tor .tw-fliegt{transform-box:view-box;transform-origin:290px 160px}
 .zahl{font-size:44px;line-height:1.25;color:#fff;margin:8px 0 0}
 .placemat{width:100%;max-width:420px;height:auto;display:block}
 .placemat text{font-family:inherit;font-size:22px;fill:var(--ink2)}
@@ -84,25 +105,31 @@
 <section class="slide dark" data-min="2">
 <p class="phase" data-ph="im">Impuls</p>
 <h1 class="k">Elfmeter</h1>
-<div class="split">
-<svg class="tor" viewBox="0 0 700 380" role="img" aria-label="Fußballtor von vorn. Der Torwart steht in der Mitte, die Arme ausgebreitet. Vorn liegt der Ball auf dem Elfmeterpunkt.">
+<div class="split" data-film style="grid-template-columns:1.5fr 1fr;align-items:center">
+<svg class="tor" viewBox="0 0 700 390" role="img" aria-label="Animation in Zeitlupe: Der Ball fliegt vom Elfmeterpunkt in die linke obere Ecke des Tors. Der Torwart springt und lenkt den Ball im letzten Moment mit den Fingerspitzen über die Latte. Eine Stoppuhr zählt bis 0,40 Sekunden.">
  <g stroke="rgba(255,255,255,.25)" stroke-width="1.5">
   <path d="M90 60 V280 M140 60 V280 M190 60 V280 M240 60 V280 M290 60 V280 M340 60 V280 M390 60 V280 M440 60 V280 M490 60 V280 M540 60 V280 M590 60 V280"/>
   <path d="M60 100 H640 M60 140 H640 M60 180 H640 M60 220 H640 M60 260 H640"/>
  </g>
  <path d="M60 280 V60 H640 V280" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/>
  <path d="M0 290 H700" stroke="rgba(255,255,255,.6)" stroke-width="3"/>
- <g fill="none" stroke="var(--ad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+ <ellipse cx="350" cy="372" rx="16" ry="4" fill="rgba(255,255,255,.5)"/>
+ <g class="tw-steht" fill="none" stroke="var(--ad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="350" cy="150" r="20" fill="var(--ad)"/>
   <path d="M350 172 V230 M350 186 L290 150 M350 186 L410 150 M350 230 L320 285 M350 230 L380 285"/>
  </g>
- <g>
-  <circle cx="350" cy="350" r="22" fill="#fff"/>
-  <path d="M338 340 l12 -6 l12 6 l-4 13 h-16 z" fill="var(--dk)"/>
- </g>
+ <g class="tw-fliegt"><g fill="none" stroke="var(--ad)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="226" cy="152" r="20" fill="var(--ad)"/>
+  <path d="M252 140 L178 106 M252 140 L186 94 M248 152 L318 162 M318 162 L380 150 M318 162 L372 186"/>
+ </g></g>
+ <g class="treffer" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M150 86 l-10 -14 M140 104 l-18 -2 M160 82 l4 -18"/></g>
+ <g class="ball"><circle r="22" fill="#fff"/><path d="M-12 -10 l12 -6 l12 6 l-4 13 h-16 z" fill="var(--dk)"/></g>
 </svg>
 <div>
+<p class="tip" style="color:#fff;margin:0">Zeitlupe: 10-mal langsamer</p>
+<p class="uhr" aria-hidden="true"><span data-zaehler data-bis="0.4" data-stellen="2" data-start="600" data-dauer="4000">0,40</span> s</p>
 <p class="zahl">Der Ball braucht etwa <b>0,4 Sekunden</b> bis ins Tor.</p>
+<button class="b sec" data-film-neu style="margin-top:22px">Noch einmal ansehen</button>
 </div>
 </div>
 </section>
@@ -244,6 +271,7 @@
 })();
 </script>
 <script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/impulsfilm.js" defer></script>
 <script src="../../../../../assets/js/praesentation.js" defer></script>
 </body>
 </html>
