@@ -256,6 +256,26 @@
     ]
   },
   {
+    "title": "Wettlauf der Signale: Wozu die Myelinscheide?",
+    "description": "Modell zur Erregungsleitung: vermuten, zwei Signale um die Wette laufen lassen und mit einem Regler zeigen, was beschädigte Myelinscheiden bei Multipler Sklerose bewirken.",
+    "type": "Lernmodul",
+    "path": "biologie/klasse-9/nervensystem/erregungsleitung/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "folge": 6,
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",
+        "grund": "Dort lernst du den Bau der Nervenzelle mit Axon, Myelinscheide und Schnürring kennen."
+      }
+    ]
+  },
+  {
     "title": "Vom Reiz zur Reaktion: Signalweg und Reflex",
     "description": "Lege den Signalweg vom Reiz bis zur Reaktion, ordne ZNS und PNS zu und vergleiche Reflex und willkürliche Bewegung im Modell.",
     "type": "Lernmodul",

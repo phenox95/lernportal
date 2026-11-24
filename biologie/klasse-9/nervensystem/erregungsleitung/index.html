@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="de" class="lp-vorlage">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../../../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../../../assets/favicon/apple-touch-icon.png">
+  <title>Wettlauf der Signale: Wozu die Myelinscheide? – Lernportal</title>
+  <meta name="description" content="Modell zur Erregungsleitung: Erst vermuten, dann zwei Signale um die Wette laufen lassen, mit und ohne Myelinscheide. Mit Regler für beschädigte Abschnitte wie bei Multipler Sklerose.">
+  <link rel="stylesheet" href="../../../../assets/css/material.css">
+  <link rel="stylesheet" href="../../../../assets/css/lernmodul.css">
+  <script src="../../../../assets/js/prefs.js"></script>
+  <script src="../../../../assets/js/material.js" defer></script>
+  <script src="../../../../assets/js/lernmodul.js" defer></script>
+  <script src="../../../../assets/js/vorlesen.js" defer></script>
+  <style>
+    .wl-bild { display: block; width: 100%; height: auto; }
+    .wl-bild text { font-family: inherit; fill: var(--lp-text); }
+    .wl-axon { stroke: var(--lm-zelle-rand); stroke-width: 5; stroke-linecap: round; }
+    .wl-myelin { fill: var(--lm-myelin); stroke: var(--lm-myelin-rand); stroke-width: 2; transition: opacity 0.3s; }
+    .wl-myelin.kaputt { fill: none; stroke-dasharray: 5 4; opacity: 0.7; }
+    .wl-punkt { fill: var(--lm-hl); stroke: var(--lp-bg, #fff); stroke-width: 2; }
+    .wl-spur { fill: none; stroke: var(--lm-hl); stroke-width: 3; opacity: 0.55; }
+    .wl-wahl { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.4rem 0 0.2rem; }
+    .wl-wahl .lm-knopf[aria-pressed="true"] { outline: 3px solid var(--lp-akzent); outline-offset: 2px; }
+    .wl-zu { position: relative; }
+    .wl-zu.gesperrt > * { visibility: hidden; }
+    .wl-zu.gesperrt::after { content: "Erst vermuten, dann starten"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--lp-rahmen); border-radius: var(--lp-radius); color: var(--lp-text2); font-weight: 700; }
+    .wl-zeiten { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.6rem; }
+    .wl-zeiten div { padding: 0.5rem 0.7rem; border-left: 6px solid var(--lp-akzent); background: var(--lp-flaeche); }
+    .wl-zeiten b { display: block; font-size: 1.3em; }
+    .wl-regler { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-top: 0.8rem; }
+    .wl-regler input { flex: 1; min-width: 180px; height: 44px; accent-color: var(--lp-akzent); }
+    .wl-regler output { font-weight: 700; min-width: 7rem; }
+    @media (max-width: 520px) { .wl-zeiten { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="lp-seite" data-root="../../../../" data-title="Wettlauf der Signale: Wozu die Myelinscheide?" data-subject="Biologie" data-grade="Klasse 9" data-tf="nervensystem">
+  <noscript><p class="lp-noscript"><a href="../../../../">Zurück zum Portal</a> · Diese Seite braucht JavaScript für das Modell und die Übungen.</p></noscript>
+
+  <main class="lp-inhalt">
+
+    <!-- Impuls: Anlass für die Fragenentwicklung. Die Frage der Stunde steht hier bewusst nicht. -->
+    <section class="lp-material" aria-labelledby="impuls">
+      <div class="lp-material-kopf"><strong id="impuls">Impuls</strong><span>Schnecke oder Rennwagen?</span></div>
+      <div class="lp-material-inhalt" data-vorlesen>
+        <p>Manche Nervenfasern leiten ein Signal mit etwa <strong>1 Meter pro Sekunde</strong>. Das ist langsames Gehen.</p>
+        <p>Andere Nervenfasern schaffen etwa <strong>100 Meter pro Sekunde</strong>. Das sind 360 km/h, so schnell wie ein Rennwagen.</p>
+        <p>Beide Nervenfasern sind in deinem Körper.</p>
+      </div>
+      <p class="lp-quelle">Quelle: eigener Text, gerundete Werte</p>
+    </section>
+
+    <aside class="lp-leitfrage lm-frage" aria-labelledby="frage-label">
+      <label class="lp-label" id="frage-label" for="klassenfrage">Unsere Frage für heute</label>
+      <textarea class="lp-schreib" id="klassenfrage" rows="2"></textarea>
+    </aside>
+
+    <!-- M1: Wettlauf-Modell -->
+    <figure class="lp-material lp-breit lp-abbildung" aria-labelledby="m1">
+      <div class="lp-material-kopf"><strong id="m1">M1</strong><span>Modell: Wettlauf der Signale</span></div>
+      <div class="lp-material-inhalt" id="wettlauf">
+        <p data-vorlesen>Zwei Nervenfasern sind gleich lang. Die obere hat <span class="lp-fett">keine Myelinscheide</span>. Das Signal muss jedes Stück des Axons entlang laufen. Die untere hat eine <span class="lp-fett">Myelinscheide</span>. Das Signal springt von <span class="lp-fett">Schnürring</span> zu Schnürring.</p>
+        <p class="lp-auftrag"><strong class="lp-op">Vermute</strong> zuerst: Welches Signal kommt zuerst am Ende an?</p>
+        <div class="wl-wahl" role="group" aria-label="Vermutung">
+          <button class="lm-knopf zweit" type="button" data-v="oben">das obere (ohne Myelinscheide)</button>
+          <button class="lm-knopf zweit" type="button" data-v="unten">das untere (mit Myelinscheide)</button>
+          <button class="lm-knopf zweit" type="button" data-v="gleich">beide gleichzeitig</button>
+        </div>
+        <p class="lm-rm" id="wl-vermutung" aria-live="polite"></p>
+        <div class="wl-zu gesperrt" id="wl-zu">
+          <svg class="wl-bild" viewBox="0 0 700 250" role="img" aria-labelledby="wl-titel" id="wl-svg">
+            <title id="wl-titel">Zwei gleich lange Nervenfasern übereinander, jeweils mit Zellkörper links und Ziel rechts. Die obere hat keine Myelinscheide, die untere hat acht Abschnitte Myelinscheide mit Schnürringen dazwischen.</title>
+            <g font-size="15">
+              <text x="60" y="30">ohne Myelinscheide</text>
+              <text x="60" y="150">mit Myelinscheide</text>
+              <text x="652" y="30" text-anchor="middle">Ziel</text>
+              <text x="652" y="150" text-anchor="middle">Ziel</text>
+            </g>
+            <!-- obere Faser -->
+            <circle cx="40" cy="70" r="20" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="2.5"/>
+            <line class="wl-axon" x1="60" y1="70" x2="640" y2="70"/>
+            <path d="M 652 46 V 94" stroke="var(--lp-text)" stroke-width="3" stroke-dasharray="6 4"/>
+            <path class="wl-spur" id="wl-spur-oben" d="M 60 70 H 60"/>
+            <circle class="wl-punkt" id="wl-oben" cx="60" cy="70" r="9"/>
+            <!-- untere Faser -->
+            <circle cx="40" cy="190" r="20" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="2.5"/>
+            <line class="wl-axon" x1="60" y1="190" x2="640" y2="190"/>
+            <g id="wl-myelin"></g>
+            <path d="M 652 166 V 214" stroke="var(--lp-text)" stroke-width="3" stroke-dasharray="6 4"/>
+            <path class="wl-spur" id="wl-spur-unten" d="M 60 190 H 60" style="display:none"/>
+            <circle class="wl-punkt" id="wl-unten" cx="60" cy="190" r="9"/>
+            <g font-size="13"><text x="132" y="236" text-anchor="middle">Schnürring</text><line x1="132" y1="222" x2="132" y2="200" stroke="var(--lp-text)" stroke-width="1"/></g>
+          </svg>
+          <div class="lm-leiste">
+            <button class="lm-knopf" type="button" id="wl-los">Wettlauf starten</button>
+          </div>
+          <div class="wl-zeiten" aria-live="polite">
+            <div>ohne Myelinscheide<b id="wl-t-oben">–</b></div>
+            <div>mit Myelinscheide<b id="wl-t-unten">–</b></div>
+          </div>
+          <div class="wl-regler">
+            <label for="wl-kaputt">Beschädigte Abschnitte der Myelinscheide</label>
+            <input type="range" id="wl-kaputt" min="0" max="8" step="1" value="0">
+            <output for="wl-kaputt" id="wl-kaputt-aus">0 von 8</output>
+          </div>
+        </div>
+        <p class="lm-hinweis">Die Zeiten gelten für eine 1 Meter lange Nervenfaser. Das Modell läuft in Zeitlupe. Die Bewegung ist nicht maßstabsgetreu, die Zeiten schon.</p>
+      </div>
+      <figcaption class="lp-quelle">Quelle: eigene, stark vereinfachte Zeichnung, CC BY 4.0. Werte gerundet (etwa 1 m/s ohne, etwa 100 m/s mit Myelinscheide).</figcaption>
+    </figure>
+
+    <!-- Aufgabe 1: Beobachtungen prüfen -->
+    <section class="lp-aufgabe" aria-labelledby="a1">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a1">Aufgabe 1</span>
+        <span class="lp-niveau" data-stufe="1" role="img" aria-label="Niveau 1 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Beschreibe</strong> deine Beobachtungen in M1. Entscheide in jeder Zeile: ja oder nein.</p>
+      <div data-jn>
+        <div class="lp-scroll" tabindex="0" role="region" aria-label="Tabelle zu Aufgabe 1, seitlich wischbar">
+          <table class="lp-tabelle">
+            <thead><tr><th scope="col">Aussage</th><th scope="col">ohne Myelinscheide</th><th scope="col">mit Myelinscheide</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Das Signal läuft jedes Stück des Axons entlang.</th><td class="lm-jn" data-ok="ja"></td><td class="lm-jn" data-ok="nein"></td></tr>
+              <tr><th scope="row">Das Signal springt von Schnürring zu Schnürring.</th><td class="lm-jn" data-ok="nein"></td><td class="lm-jn" data-ok="ja"></td></tr>
+              <tr><th scope="row">Das Signal braucht für 1 Meter etwa 1 Sekunde.</th><td class="lm-jn" data-ok="ja"></td><td class="lm-jn" data-ok="nein"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lm-leiste"><button class="lm-knopf lm-pruefen" type="button">Prüfen</button></div>
+        <p class="lm-rm" aria-live="polite"></p>
+      </div>
+      <div class="lp-hilfe">
+        <span class="lp-label">Wortspeicher</span>
+        <ul class="lp-woerter">
+          <li><span class="lp-wort" aria-hidden="true">My-e-lin-schei-de</span><span class="lp-sr">Myelinscheide</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Schnür-ring</span><span class="lp-sr">Schnürring</span></li>
+          <li><span class="lp-wort" aria-hidden="true">A-xon</span><span class="lp-sr">Axon</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Ner-ven-fa-ser</span><span class="lp-sr">Nervenfaser</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Aufgabe 2: Erklären -->
+    <section class="lp-aufgabe" aria-labelledby="a2">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a2">Aufgabe 2</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Erkläre</strong>, warum das Signal mit Myelinscheide schneller am Ziel ist.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine">
+          <li>Ohne Myelinscheide muss das Signal …</li>
+          <li>Mit Myelinscheide springt das Signal …</li>
+          <li>Darum …</li>
+        </ul>
+      </div>
+      <label class="lp-sr" for="schreib2">Schreibraum für Aufgabe 2</label>
+      <textarea class="lp-schreib" id="schreib2" rows="5"></textarea>
+    </section>
+
+    <!-- Aufgabe 3: Multiple Sklerose -->
+    <section class="lp-aufgabe" aria-labelledby="a3">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a3">Aufgabe 3</span>
+        <span class="lp-niveau" data-stufe="3" role="img" aria-label="Niveau 3 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag">Bei der Krankheit <strong>Multiple Sklerose (MS)</strong> wird die Myelinscheide an manchen Stellen beschädigt.</p>
+      <ul class="lp-teile">
+        <li><label class="lp-teil"><input type="checkbox"><span>a) <strong class="lp-op">Untersuche</strong> mit dem Regler in M1, wie sich die Zeit mit 1, 2 und 4 beschädigten Abschnitten ändert. Notiere die Zeiten.</span></label></li>
+        <li><label class="lp-teil"><input type="checkbox"><span>b) <strong class="lp-op">Erläutere</strong>, welche Folgen das für Bewegungen haben kann, zum Beispiel beim Gehen.</span></label></li>
+      </ul>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine">
+          <li>Mit … beschädigten Abschnitten braucht das Signal …</li>
+          <li>Wenn das Signal zu spät am Muskel ankommt, …</li>
+        </ul>
+      </div>
+      <label class="lp-sr" for="schreib3">Schreibraum für Aufgabe 3</label>
+      <textarea class="lp-schreib" id="schreib3" rows="6"></textarea>
+    </section>
+
+    <p class="lp-fuss">Eingaben bleiben auf diesem Gerät und werden nicht gespeichert oder übertragen.</p>
+  </main>
+
+  <script>
+  /* Wettlauf: 8 Abschnitte je 12,5 cm. Ohne Myelinscheide 1 m/s (125 ms je Abschnitt),
+     mit Myelinscheide 100 m/s (1,25 ms je Abschnitt). Beschädigter Abschnitt: wie ohne Myelinscheide.
+     Animation in Zeitlupe: langsamer Abschnitt 0,7 s, Sprung 0,12 s. */
+  (function () {
+    var box = document.getElementById("wettlauf"); if (!box) return;
+    var NS = "http://www.w3.org/2000/svg", X0 = 60, X1 = 640, N = 8, L = (X1 - X0) / N;
+    var LANG = 125, SPRUNG = 1.25, A_LANG = 700, A_SPRUNG = 120;
+    var ruhig = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var gMy = document.getElementById("wl-myelin"), oben = document.getElementById("wl-oben"), unten = document.getElementById("wl-unten");
+    var spurO = document.getElementById("wl-spur-oben"), spurU = document.getElementById("wl-spur-unten");
+    var tO = document.getElementById("wl-t-oben"), tU = document.getElementById("wl-t-unten");
+    var regler = document.getElementById("wl-kaputt"), raus = document.getElementById("wl-kaputt-aus");
+    var los = document.getElementById("wl-los"), zu = document.getElementById("wl-zu"), vm = document.getElementById("wl-vermutung");
+    var wahl = [].slice.call(box.querySelectorAll(".wl-wahl button")), vermutung = null, lauf = null;
+    /* Reihenfolge der beschädigten Abschnitte: verteilt, nicht nur vorne */
+    var ORDNUNG = [2, 5, 0, 7, 3, 6, 1, 4];
+    var my = [];
+    for (var i = 0; i < N; i++) {
+      var r = document.createElementNS(NS, "rect");
+      r.setAttribute("x", X0 + i * L + 5); r.setAttribute("y", 178); r.setAttribute("width", L - 10); r.setAttribute("height", 24); r.setAttribute("rx", 12);
+      r.setAttribute("class", "wl-myelin"); gMy.appendChild(r); my.push(r);
+    }
+    function kaputt() { var k = +regler.value, s = {}; ORDNUNG.slice(0, k).forEach(function (j) { s[j] = true; }); return s; }
+    function ms(x) { return x >= 1000 ? (x / 1000).toFixed(2).replace(".", ",") + " s" : x < 10 ? x.toFixed(1).replace(".", ",") + " ms" : Math.round(x) + " ms"; }
+    function zeiten() {
+      var k = kaputt(), u = 0;
+      for (var j = 0; j < N; j++) u += k[j] ? LANG : SPRUNG;
+      return { oben: N * LANG, unten: u };
+    }
+    function zeigeMyelin() {
+      var k = kaputt();
+      my.forEach(function (r, j) { r.classList.toggle("kaputt", !!k[j]); });
+      raus.textContent = regler.value + " von 8";
+      regler.setAttribute("aria-valuetext", regler.value + " von 8 Abschnitten beschädigt");
+    }
+    function setze(p, spur, x, y) { p.setAttribute("cx", x); p.setAttribute("cy", y); spur.setAttribute("d", "M " + X0 + " " + y + " H " + x); }
+    function zurueck() { if (lauf) cancelAnimationFrame(lauf); lauf = null; setze(oben, spurO, X0, 70); setze(unten, spurU, X0, 190); tO.textContent = "–"; tU.textContent = "–"; }
+    function ende() {
+      var z = zeiten();
+      setze(oben, spurO, X1, 70); setze(unten, spurU, X1, 190);
+      tO.textContent = ms(z.oben); tU.textContent = ms(z.unten);
+      if (vermutung) {
+        var richtig = z.unten < z.oben ? "unten" : z.unten > z.oben ? "oben" : "gleich";
+        vm.textContent = vermutung === richtig ? "✓ Eure Vermutung passt." : "✗ Anders als vermutet. Schaut euch den Wettlauf noch einmal an.";
+        vm.className = "lm-rm " + (vermutung === richtig ? "ok" : "falsch");
+      }
+      los.disabled = false; los.textContent = "Noch einmal starten";
+    }
+    /* Position der unteren Faser zur Animationszeit t (ms) */
+    function posUnten(t, k) {
+      for (var j = 0; j < N; j++) {
+        var d = k[j] ? A_LANG : A_SPRUNG;
+        if (t < d) {
+          var f = t / d, x = X0 + (j + f) * L;
+          return { x: x, y: k[j] ? 190 : 190 - Math.sin(f * Math.PI) * 22, fertig: false };
+        }
+        t -= d;
+      }
+      return { x: X1, y: 190, fertig: true };
+    }
+    function start() {
+      zurueck(); zeigeMyelin();
+      if (ruhig) { ende(); return; }
+      los.disabled = true;
+      var k = kaputt(), t0 = performance.now(), dO = N * A_LANG, fertigU = false;
+      function schritt(jetzt) {
+        var t = jetzt - t0;
+        setze(oben, spurO, X0 + Math.min(1, t / dO) * (X1 - X0), 70);
+        var pu = posUnten(t, k);
+        unten.setAttribute("cx", pu.x); unten.setAttribute("cy", pu.y); spurU.setAttribute("d", "M " + X0 + " 190 H " + pu.x);
+        if (pu.fertig && !fertigU) { fertigU = true; tU.textContent = ms(zeiten().unten); }
+        if (t >= dO) tO.textContent = ms(zeiten().oben);
+        if (t < Math.max(dO, N * A_LANG) || !pu.fertig) lauf = requestAnimationFrame(schritt); else ende();
+      }
+      lauf = requestAnimationFrame(schritt);
+    }
+    wahl.forEach(function (b) {
+      b.addEventListener("click", function () {
+        vermutung = b.getAttribute("data-v");
+        wahl.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        zu.classList.remove("gesperrt"); zu.removeAttribute("aria-hidden");
+        vm.className = "lm-rm"; vm.textContent = "Eure Vermutung: " + b.textContent + ". Startet jetzt den Wettlauf.";
+        zurueck(); los.textContent = "Wettlauf starten";
+      });
+    });
+    zu.setAttribute("aria-hidden", "true");
+    los.addEventListener("click", start);
+    regler.addEventListener("input", function () { zurueck(); zeigeMyelin(); vermutung = null; vm.className = "lm-rm"; vm.textContent = "Startet den Wettlauf mit " + regler.value + " beschädigten Abschnitten."; los.textContent = "Wettlauf starten"; });
+    zeigeMyelin();
+  })();
+  </script>
+
+  <!-- Spielinhalte für Begriffe und Belohnungsspiele. Entwurf: vor dem Einsatz gegenlesen und dann "geprueft": true setzen. -->
+  <script type="application/json" id="lp-spiel-daten">
+  {
+   "geprueft": false,
+   "titel": "Wettlauf der Signale",
+   "paare": [
+    ["Myelinscheide", "Hülle um das Axon, die es isoliert; das Signal läuft dadurch schneller", "My-e-lin-schei-de"],
+    ["Schnürring", "Lücke zwischen zwei Abschnitten der Myelinscheide; das Signal springt von Schnürring zu Schnürring", "Schnür-ring"],
+    ["Axon", "Langer Fortsatz der Nervenzelle, der das Signal weiterleitet", "A-xon"],
+    ["Multiple Sklerose", "Krankheit, bei der die Myelinscheide an manchen Stellen beschädigt wird", "Mul-ti-ple Skle-ro-se"]
+   ],
+   "spiele": ["memory", "quiz", "zuordnen"]
+  }
+  </script>
+</body>
+</html>
