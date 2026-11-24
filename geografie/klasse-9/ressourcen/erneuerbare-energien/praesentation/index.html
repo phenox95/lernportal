@@ -15,6 +15,54 @@
 <link rel="stylesheet" href="../assets/energie.css">
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
+<style>
+/* Impuls: erst schätzen */
+.cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.en-schaetz .card{min-height:84px;background:rgba(255,255,255,.14);color:#fff}.en-schaetz .card b{color:#fff;font-size:30px}
+.en-host{display:flex;gap:14px;align-items:center;margin-top:8px;font-size:18px}.en-host .ia-info{color:rgba(255,255,255,.85)}
+.en-ctl{margin:10px 0 0}
+.en-imp{display:flex;flex-direction:column}.en-offen .en-ctl{order:3;margin:0}
+.en-frage{margin:0 0 14px}
+.en-loes{display:none}
+.en-offen .en-loes{display:grid;margin-top:6px}
+.en-offen .en-schaetz,.en-offen .en-frage{display:none}
+.en-ring{width:300px;height:300px}
+.en-offen .en-ring circle+circle{animation:en-ring 1.6s cubic-bezier(.3,.7,.4,1) both}
+.en-offen .ringnum{animation:en-auf .6s ease-out 1.2s both}
+@keyframes en-ring{from{stroke-dasharray:0 502.7}to{stroke-dasharray:281.5 502.7}}
+@keyframes en-auf{from{opacity:0}to{opacity:1}}
+/* Ein Tag im Stromnetz */
+.en-wahl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 8px 44px}
+.en-wahl .b{font-size:20px;padding:8px 18px}
+.en-wahl .b[aria-pressed=true]{background:var(--g);color:#fff;border-color:var(--g)}
+.en-status{font-size:19px;color:var(--grey)}
+.en-pruefen{position:relative}
+.en-zu>*{visibility:hidden}
+.en-zu::after{content:"Erst vermuten, dann prüfen.";position:absolute;inset:0;display:grid;place-items:center;border:2px dashed var(--grey);border-radius:16px;font-size:24px;color:var(--grey);max-height:340px}
+.en-grid2{display:grid;grid-template-columns:540px 1fr;gap:26px;align-items:start}
+.en-chart{display:block;width:100%}
+.en-at{font-size:15px;fill:var(--grey);text-anchor:middle}.en-at.en-re{text-anchor:end}.en-at.en-li{text-anchor:start}
+.en-ax{stroke:var(--ink);stroke-width:1.5}.en-grid{stroke:rgba(0,0,0,.08);stroke-width:1}
+.en-sonne{fill:#F4C542;opacity:.85}.en-wind{fill:#7FB3D5}
+.en-verb{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linejoin:round}
+.en-cur{stroke:var(--bad,#C0392B);stroke-width:2.5;stroke-dasharray:6 5}
+.en-leg{display:flex;gap:20px;font-size:17px;color:var(--grey);margin:2px 0 0 50px}
+.en-leg i{display:inline-block;width:22px;height:12px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.l-verb{background:var(--ink);height:4px!important}.l-sonne{background:#F4C542}.l-wind{background:#7FB3D5}
+.en-uhr{display:flex;justify-content:space-between;font-size:20px;font-weight:500}
+.en-seite input[type=range]{width:100%;accent-color:var(--g);height:34px}
+.en-btns{margin:4px 0 6px}.en-btns .b{font-size:18px;padding:6px 16px}
+.en-wert{font-size:19px;line-height:1.35;margin:0 0 4px}
+.en-sp{display:block;width:130px;margin:0}
+.en-mitte{display:grid;grid-template-columns:1fr 130px;gap:12px;align-items:start}
+.en-sp-r{fill:#fff;stroke:var(--ink);stroke-width:2}.en-sp-w{fill:#5DA0D0;transition:y .2s,height .2s}
+.en-pumpe{font-size:18px;line-height:1.3;margin:2px 0 0;min-height:2.6em;font-weight:500}
+.en-pumpe.hoch{color:var(--ok)}.en-pumpe.runter{color:#1F6BA5}
+.en-tag .src{margin:2px 0 0;font-size:15px}
+.en-seite{max-width:410px}
+.en-t2{font-size:21px!important;margin:10px 0 0!important}
+@media (prefers-reduced-motion:reduce){.en-offen .en-ring circle+circle,.en-offen .ringnum,.en-sp-w{animation:none;transition:none}}
+</style>
 </head>
 <body class="lp-pres" data-root="../../../../../" data-title="Erneuerbare Energien: Stunde 1" data-subject="Geografie" data-grade="Klasse 9">
 <noscript><p class="lp-noscript"><a href="../../../../../">Zurück zum Portal</a> · Diese Seite benötigt JavaScript für die vollständige Darstellung.</p></noscript>
@@ -25,9 +73,14 @@
 <div class="mint pad"><p class="task"><span class="snr">1</span><span><b>Erkläre</b> in einem Satz: Warum steigt Deutschland aus der Kohle aus?</span><span></span></p><p class="task"><span class="snr">2</span><span><b>Entscheide</b> und <b>begründe</b>: Beim Verbrennen von Kohle entsteht CO<sub>2</sub>.</span><span></span></p><div class="choices" data-ia="tf" data-richtig="richtig" data-feedback="Beim Verbrennen von Kohle entsteht CO₂, ein Treibhausgas."><span class="choice">richtig</span><span class="choice">falsch</span></div></div>
   <div class="shilfe sm">Du darfst dir die Aufgaben vorlesen lassen. Arbeite leise und allein.</div>
 </section>
-<section class="slide dark" data-min="4" data-notes="IMPULS und FRAGENENTWICKLUNG (zusammen ca. 8 Min., höchstens 10) Zeigen, Stille aushalten (20 Sekunden). Dann die drei Impulsfragen von der Folie stellen, ohne die Leitfrage vorwegzunehmen. Zielkorridor (wird NICHT verkündet): Wie kann Strom aus Wind, Sonne und Wasser zuverlässig sein, obwohl er schwankt? Alternative Impulsform: Schlagzeile (dpa, Dezember 2025) statt Zahl. Stolperstein: 56 Prozent bezieht sich nur auf Strom, nicht auf die gesamte Energie. Das wird am Ende der Stunde aufgegriffen.">
-  <h1>Fast 56 Prozent des Stroms.</h1><span class="badge">4 Min. · Plenum</span>
-<div class="split2"><div><p class="lead">Erneuerbare Energien decken fast 56 Prozent des Stromverbrauchs.<sup>1</sup></p><div class="prompts"><p><svg class="ic" aria-hidden="true" width="24" height="24"><use href="#i-eye"/></svg>Was fällt euch auf?</p><p><svg class="ic" aria-hidden="true" width="24" height="24"><use href="#i-bolt"/></svg>Was überrascht euch?</p><p><svg class="ic" aria-hidden="true" width="24" height="24"><use href="#i-search"/></svg>Was wollt ihr herausfinden?</p></div></div><div class="ringwrap"><svg class="ring" viewBox="0 0 200 200" role="img" aria-label="Ringdiagramm: 56 Prozent erneuerbar, 44 Prozent übrig"><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="22"/><circle cx="100" cy="100" r="80" fill="none" stroke="var(--y)" stroke-width="22" stroke-linecap="round" stroke-dasharray="281.5 502.7" transform="rotate(-90 100 100)"/></svg><div class="ringnum">56 %</div></div></div>
+<section class="slide dark" data-min="4" data-notes="IMPULS und FRAGENENTWICKLUNG (zusammen ca. 8 Min., höchstens 10) Erst schätzen lassen (Hand heben, Lehrkraft tippt die Stimmen), dann Auflösen. Stille aushalten (20 Sekunden). Dann die drei Impulsfragen von der Folie stellen, ohne die Leitfrage vorwegzunehmen. Zielkorridor (wird NICHT verkündet): Wie kann Strom aus Wind, Sonne und Wasser zuverlässig sein, obwohl er schwankt? Alternative Impulsform: Schlagzeile (dpa, Dezember 2025) statt Zahl. Stolperstein: 56 Prozent bezieht sich nur auf Strom, nicht auf die gesamte Energie. Das wird am Ende der Stunde aufgegriffen.">
+  <h1>Wie viel Prozent?</h1><span class="badge">4 Min. · erst schätzen, dann Plenum</span>
+<div class="en-imp" data-en-imp>
+<p class="task big en-frage"><span class="snr">1</span><span><b>Schätze</b>: Wie viel Prozent unseres Stroms kamen 2025 aus Wind, Sonne, Wasser und Biomasse?</span><i class="lvl">D</i></p>
+<div class="en-schaetz" data-ia="vote"><div class="cards4"><div class="card"><b>unter 25 %</b></div><div class="card"><b>25 bis 50 %</b></div><div class="card"><b>50 bis 75 %</b></div><div class="card"><b>über 75 %</b></div></div><div class="en-host" data-ia-host></div></div>
+<p class="en-ctl"><button class="b" type="button" data-en-auf>Auflösen</button></p>
+<div class="split2 en-loes"><div><p class="lead">Erneuerbare Energien decken fast 56 Prozent des Stromverbrauchs.<sup>1</sup></p><div class="prompts"><p><svg class="ic" aria-hidden="true" width="24" height="24"><use href="#i-eye"/></svg>Was fällt euch auf?</p><p><svg class="ic" aria-hidden="true" width="24" height="24"><use href="#i-bolt"/></svg>Was überrascht euch?</p><p><svg class="ic" aria-hidden="true" width="24" height="24"><use href="#i-search"/></svg>Was wollt ihr herausfinden?</p></div></div><div class="ringwrap en-ring"><svg class="ring" viewBox="0 0 200 200" role="img" aria-label="Ringdiagramm: 56 Prozent erneuerbar, 44 Prozent übrig"><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="22"/><circle cx="100" cy="100" r="80" fill="none" stroke="var(--y)" stroke-width="22" stroke-linecap="round" stroke-dasharray="281.5 502.7" transform="rotate(-90 100 100)"/></svg><div class="ringnum">56 %</div></div></div>
+</div>
   <p class="src"><sup>1</sup> Anteil am Stromverbrauch in Deutschland, 2025. Quelle: BDEW/ZSW, Dezember 2025.</p>
 </section>
 <section class="slide" data-min="4" data-notes="FRAGENENTWICKLUNG Eine oder mehrere Fragen sammeln, dann im Plenum priorisieren und sichtbar fixieren (&quot;Unsere Frage für heute: ...&quot;). Das Fragefeld auf dem Beamer oder an der Tafel ausfüllen. Abweichende, fachlich tragfähige Fragen aufgreifen statt korrigieren. Kommt keine brauchbare Frage, mit Impulsfragen nachsteuern und notfalls selbst ergänzen. Tragfähig wäre zum Beispiel: &quot;Wie funktioniert Strom aus Wind und Sonne, wenn es windstill oder dunkel ist?&quot; Basis: gelenkt über die Fragestarter. Erweiterung: offene Aufforderung zur eigenen Frage.">
@@ -70,8 +123,19 @@
 <g fill="var(--ink)"><text x="14" y="176" font-size="20" font-weight="700">Zu viel Strom</text><text x="14" y="203" font-size="18">Wasser wird</text><text x="14" y="226" font-size="18">hochgepumpt</text>
 <text x="364" y="176" font-size="20" font-weight="700">Zu wenig Strom</text><text x="364" y="203" font-size="18">Wasser fließt</text><text x="364" y="226" font-size="18">runter und treibt</text><text x="364" y="249" font-size="18">die Turbine an</text></g></svg></div><div data-ia-host><div class="stat"><b>600 m</b><span>Höhenunterschied im Kraftwerk Wehr im Schwarzwald</span></div><div class="stat"><b>über 100</b><span>Wechsel zwischen Pumpen und Strom erzeugen pro Tag</span></div><p class="src">Quelle: planet schule, Windenergie und Wasserkraft</p></div></div>
 </section>
-<section class="slide dark" data-min="20" data-notes="QUIZ (ca. 20 Min., Beamer, Team-Modus) Das Quiz liegt im selben Projekt (Ordner quiz). Der Knopf und der QR-Code auf der Folie führen dorthin, auch für Geräte der SuS. Einstellung: 3 oder 4 Teams, 10 Fragen (ca. 20 Min.). Bleibt Zeit übrig, 15 Fragen (ca. 28 Min.). Einzelmodus auf Geräten möglich. Hintergrund: Das Quiz wiederholt Film, Strommix 2025 und Begriffe. Die Erklärung nach jeder Antwort nutzen, um Fehlvorstellungen zu klären. Zeit knapp? Nach 20 Minuten abbrechen, der Zwischenstand zählt. Plan B: Das Quiz läuft auch ohne Internet, wenn der Projektordner lokal liegt (index.html öffnen). Ohne Gerät: Fakt-oder-Fake-Fragen mündlich stellen.">
-  <h1>Quiz</h1><span class="badge">20 Min. · Teams</span>
+<section class="slide" data-min="6" data-notes="VERTIEFUNG MIT MODELL Erst vermuten lassen (Hand heben), dann den Regler am Board schieben oder den Tag abspielen. Die Werte sind ein gerundetes Modell, keine Messung. Zielkorridor: Mittags gibt es Überschuss, abends eine Lücke. Pumpspeicher verschieben Strom vom Mittag in den Abend.">
+  <h1>Ein Tag im Stromnetz</h1><span class="badge">6 Min. · erst vermuten, dann am Board</span>
+<div class="en-tag" data-en-tag>
+<p class="task s"><span class="snr">1</span><span><b>Vermute</b>: Wann muss das Pumpspeicherwerk Strom liefern?</span><i class="lvl">E</i></p>
+<div class="en-wahl" role="group" aria-label="Vermutung"><button type="button" class="b sec" aria-pressed="false">morgens</button><button type="button" class="b sec" aria-pressed="false">mittags</button><button type="button" class="b sec" aria-pressed="false">abends</button><button type="button" class="b sec" aria-pressed="false">nachts</button><span class="en-status" aria-live="polite">Erst vermuten, dann prüfen.</span></div>
+<div class="en-pruefen en-zu">
+<div class="en-grid2"><div><svg class="en-chart" viewBox="0 0 625 300" role="img" aria-label="Modell eines sonnigen, windigen Frühlingstags: Linie für den Stromverbrauch, Flächen für Strom aus Wind und Sonne über 24 Stunden."><line x1="44" y1="262.0" x2="590" y2="262.0" class="en-grid"/><text x="38" y="268.0" class="en-at en-re">0</text><line x1="44" y1="198.0" x2="590" y2="198.0" class="en-grid"/><text x="38" y="204.0" class="en-at en-re">20</text><line x1="44" y1="134.0" x2="590" y2="134.0" class="en-grid"/><text x="38" y="140.0" class="en-at en-re">40</text><line x1="44" y1="70.0" x2="590" y2="70.0" class="en-grid"/><text x="38" y="76.0" class="en-at en-re">60</text><text x="8" y="16" class="en-at en-li">GW</text><polygon points="50.0,262 50.0,191.6 55.6,190.8 61.2,189.9 66.9,189.1 72.5,188.3 78.1,187.5 83.8,186.7 89.4,185.9 95.0,185.2 100.6,184.5 106.2,183.8 111.9,183.2 117.5,182.5 123.1,182.0 128.8,181.4 134.4,181.0 140.0,180.5 145.6,180.1 151.2,179.8 156.9,179.5 162.5,179.2 168.1,179.0 173.8,178.9 179.4,178.8 185.0,178.8 190.6,169.0 196.2,159.2 201.9,149.6 207.5,140.1 213.1,130.8 218.8,121.6 224.4,112.8 230.0,104.2 235.6,95.8 241.2,87.8 246.9,80.1 252.5,72.8 258.1,65.9 263.8,59.4 269.4,53.3 275.0,47.6 280.6,42.4 286.2,37.7 291.9,33.4 297.5,29.7 303.1,26.5 308.8,23.8 314.4,21.6 320.0,20.0 325.6,18.9 331.2,18.4 336.9,18.4 342.5,18.9 348.1,20.0 353.8,21.6 359.4,23.7 365.0,26.4 370.6,29.6 376.2,33.3 381.9,37.4 387.5,42.1 393.1,47.2 398.8,52.7 404.4,58.7 410.0,65.1 415.6,71.8 421.2,79.0 426.9,86.4 432.5,94.2 438.1,102.3 443.8,110.7 449.4,119.2 455.0,128.0 460.6,137.0 466.2,146.2 471.9,155.4 477.5,164.8 483.1,174.2 488.8,183.7 494.4,193.2 500.0,202.7 505.6,202.2 511.2,201.8 516.9,201.2 522.5,200.7 528.1,200.0 533.8,199.4 539.4,198.7 545.0,198.0 550.6,197.3 556.2,196.5 561.9,195.7 567.5,194.9 573.1,194.1 578.8,193.3 584.4,192.4 590.0,191.6 590.0,262" class="en-sonne"/><polygon points="50.0,262 50.0,191.6 55.6,190.8 61.2,189.9 66.9,189.1 72.5,188.3 78.1,187.5 83.8,186.7 89.4,185.9 95.0,185.2 100.6,184.5 106.2,183.8 111.9,183.2 117.5,182.5 123.1,182.0 128.8,181.4 134.4,181.0 140.0,180.5 145.6,180.1 151.2,179.8 156.9,179.5 162.5,179.2 168.1,179.0 173.8,178.9 179.4,178.8 185.0,178.8 190.6,178.8 196.2,178.9 201.9,179.0 207.5,179.2 213.1,179.5 218.8,179.8 224.4,180.1 230.0,180.5 235.6,181.0 241.2,181.4 246.9,182.0 252.5,182.5 258.1,183.2 263.8,183.8 269.4,184.5 275.0,185.2 280.6,185.9 286.2,186.7 291.9,187.5 297.5,188.3 303.1,189.1 308.8,189.9 314.4,190.8 320.0,191.6 325.6,192.4 331.2,193.3 336.9,194.1 342.5,194.9 348.1,195.7 353.8,196.5 359.4,197.3 365.0,198.0 370.6,198.7 376.2,199.4 381.9,200.0 387.5,200.7 393.1,201.2 398.8,201.8 404.4,202.2 410.0,202.7 415.6,203.1 421.2,203.4 426.9,203.7 432.5,204.0 438.1,204.2 443.8,204.3 449.4,204.4 455.0,204.4 460.6,204.4 466.2,204.3 471.9,204.2 477.5,204.0 483.1,203.7 488.8,203.4 494.4,203.1 500.0,202.7 505.6,202.2 511.2,201.8 516.9,201.2 522.5,200.7 528.1,200.0 533.8,199.4 539.4,198.7 545.0,198.0 550.6,197.3 556.2,196.5 561.9,195.7 567.5,194.9 573.1,194.1 578.8,193.3 584.4,192.4 590.0,191.6 590.0,262" class="en-wind"/><polyline points="50.0,118.0 55.6,119.6 61.2,121.2 66.9,122.8 72.5,124.4 78.1,125.2 83.8,126.0 89.4,126.8 95.0,127.6 100.6,127.6 106.2,127.6 111.9,127.6 117.5,127.6 123.1,126.8 128.8,126.0 134.4,125.2 140.0,124.4 145.6,122.0 151.2,119.6 156.9,117.2 162.5,114.8 168.1,110.0 173.8,105.2 179.4,100.4 185.0,95.6 190.6,90.8 196.2,86.0 201.9,81.2 207.5,76.4 213.1,73.2 218.8,70.0 224.4,66.8 230.0,63.6 235.6,62.0 241.2,60.4 246.9,58.8 252.5,57.2 258.1,56.4 263.8,55.6 269.4,54.8 275.0,54.0 280.6,53.2 286.2,52.4 291.9,51.6 297.5,50.8 303.1,50.8 308.8,50.8 314.4,50.8 320.0,50.8 325.6,51.6 331.2,52.4 336.9,53.2 342.5,54.0 348.1,54.8 353.8,55.6 359.4,56.4 365.0,57.2 370.6,58.0 376.2,58.8 381.9,59.6 387.5,60.4 393.1,59.6 398.8,58.8 404.4,58.0 410.0,57.2 415.6,54.8 421.2,52.4 426.9,50.0 432.5,47.6 438.1,45.2 443.8,42.8 449.4,40.4 455.0,38.0 460.6,38.8 466.2,39.6 471.9,40.4 477.5,41.2 483.1,44.4 488.8,47.6 494.4,50.8 500.0,54.0 505.6,59.6 511.2,65.2 516.9,70.8 522.5,76.4 528.1,81.2 533.8,86.0 539.4,90.8 545.0,95.6 550.6,98.8 556.2,102.0 561.9,105.2 567.5,108.4 573.1,110.8 578.8,113.2 584.4,115.6 590.0,118.0" class="en-verb"/><line x1="50" y1="262" x2="590" y2="262" class="en-ax"/><line x1="50" y1="262" x2="50" y2="268" class="en-ax"/><text x="50" y="288" class="en-at">0 Uhr</text><line x1="185" y1="262" x2="185" y2="268" class="en-ax"/><text x="185" y="288" class="en-at">6 Uhr</text><line x1="320" y1="262" x2="320" y2="268" class="en-ax"/><text x="320" y="288" class="en-at">12 Uhr</text><line x1="455" y1="262" x2="455" y2="268" class="en-ax"/><text x="455" y="288" class="en-at">18 Uhr</text><line x1="590" y1="262" x2="590" y2="268" class="en-ax"/><text x="590" y="288" class="en-at">24 Uhr</text><line id="enCur" x1="50" y1="16" x2="50" y2="262" class="en-cur"/></svg><div class="en-leg"><span><i class="l-verb"></i>Verbrauch</span><span><i class="l-sonne"></i>Sonne</span><span><i class="l-wind"></i>Wind</span></div><p class="src">Modell: sonniger, windiger Frühlingstag in Deutschland. Gerundete Beispielwerte.</p></div>
+<div class="en-seite"><label class="en-uhr" for="enH">Uhrzeit <output id="enHo">12:00 Uhr</output></label><input type="range" id="enH" min="0" max="24" step="0.5" value="12"><p class="en-btns"><button type="button" class="b sec" id="enPlay">Tag abspielen</button></p><div class="en-mitte"><p class="en-wert" id="enWert" aria-live="polite"></p><svg class="en-sp" viewBox="0 0 160 150" role="img" aria-label="Oberbecken des Pumpspeicherwerks mit Füllstand"><rect x="20" y="20" width="120" height="100" rx="8" class="en-sp-r"/><rect id="enWasser" x="22" y="70" width="116" height="48" class="en-sp-w"/><text x="80" y="142" class="en-at" text-anchor="middle">Oberbecken</text></svg></div><p class="en-pumpe" id="enPumpe"></p><p class="task s en-t2"><span class="snr">2</span><span><b>Erkläre</b> mit dem Modell, warum Wind und Sonne Speicher brauchen.</span><i class="lvl">F</i></p></div></div>
+</div>
+</div>
+</section>
+<section class="slide dark" data-min="14" data-notes="QUIZ (ca. 14 Min., Beamer, Team-Modus) Das Quiz liegt im selben Projekt (Ordner quiz). Der Knopf und der QR-Code auf der Folie führen dorthin, auch für Geräte der SuS. Einstellung: 3 oder 4 Teams, 10 Fragen (ca. 20 Min.). Bleibt Zeit übrig, 15 Fragen (ca. 28 Min.). Einzelmodus auf Geräten möglich. Hintergrund: Das Quiz wiederholt Film, Strommix 2025 und Begriffe. Die Erklärung nach jeder Antwort nutzen, um Fehlvorstellungen zu klären. Zeit knapp? Nach 20 Minuten abbrechen, der Zwischenstand zählt. Plan B: Das Quiz läuft auch ohne Internet, wenn der Projektordner lokal liegt (index.html öffnen). Ohne Gerät: Fakt-oder-Fake-Fragen mündlich stellen.">
+  <h1>Quiz</h1><span class="badge">14 Min. · Teams</span>
 <div class="split2"><div><p class="task big"><span class="snr"></span><span><b>Spiele</b> das Quiz in Teams. Erst besprechen, dann antworten.</span><span></span></p><p class="lead"><b>Joker:</b> Jedes Team darf einmal 50:50 nutzen.<br><b>Rätsel:</b> Je weniger Hinweise ihr braucht, desto mehr Punkte gibt es.</p></div>
   <div class="qr"><div id="qr" role="img" aria-label="QR-Code zum Quiz"></div><a class="b" id="quizlink" href="../quiz/" target="_blank" rel="noopener">Quiz öffnen</a><p class="src" id="quizurl"></p></div></div>
 </section>
@@ -155,6 +219,45 @@ if(l)l.href=u;if(t)t.textContent=u;
 try{var c=qrcode(0,'M');c.addData(u);c.make();q.innerHTML=c.createSvgTag({cellSize:6,margin:2,scalable:true});}catch(e){}})();
 </script>
 <script src="../assets/interaktiv.js"></script>
+<script>
+(function(){
+"use strict";
+var ruhig=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* Impuls: erst schätzen, dann auflösen */
+[].forEach.call(document.querySelectorAll("[data-en-imp]"),function(box){
+ var b=box.querySelector("[data-en-auf]"),hi=box.querySelector(".en-host .ia-info");if(hi)hi.textContent="Tippt eure Schätzung an. Jede Stimme zählt.";
+ b.addEventListener("click",function(){var auf=box.classList.toggle("en-offen");b.textContent=auf?"Wieder verdecken":"Auflösen";b.blur()});
+});
+/* Ein Tag im Stromnetz (Modell) */
+var tag=document.querySelector("[data-en-tag]");if(!tag)return;
+var V=[45,43,42,42,43,46,52,58,62,64,65,66,66,65,64,63,64,67,70,69,65,58,52,48,45];
+function sonne(h){return h>6&&h<20?55*Math.sin(Math.PI*(h-6)/14):0}
+function wind(h){return 22+4*Math.sin(2*Math.PI*h/24)}
+function verb(h){var i=Math.floor(h),f=h-i;return i>=24?V[24]:V[i]+(V[i+1]-V[i])*f}
+/* Füllstand Oberbecken: steigt bei Überschuss, sinkt bei Lücke ab 17 Uhr */
+var stand=[],L=35,k;for(k=0;k<=96;k++){var h=k/4,d=sonne(h)+wind(h)-verb(h);if(d>0)L+=Math.min(d,8)*0.45;else if(h>=17)L-=Math.min(-d,8)*0.38;L=Math.max(5,Math.min(95,L));stand.push(L)}
+var wahl=[].slice.call(tag.querySelectorAll(".en-wahl button")),pr=tag.querySelector(".en-pruefen"),st=tag.querySelector(".en-status");
+wahl.forEach(function(w){w.addEventListener("click",function(){wahl.forEach(function(x){x.setAttribute("aria-pressed",x===w?"true":"false")});pr.classList.remove("en-zu");st.textContent="Vermutung: "+w.textContent+". Jetzt prüfen.";w.blur()})});
+var r=document.getElementById("enH"),o=document.getElementById("enHo"),cur=document.getElementById("enCur"),wert=document.getElementById("enWert"),pumpe=document.getElementById("enPumpe"),wasser=document.getElementById("enWasser");
+function zeig(h){
+ var s=sonne(h),w=wind(h),v=verb(h),e=s+w,d=e-v,x=50+h*22.5;
+ cur.setAttribute("x1",x);cur.setAttribute("x2",x);
+ o.textContent=(Math.floor(h)<10?"0":"")+Math.floor(h)+":"+(h%1?"30":"00")+" Uhr";
+ wert.innerHTML="Wind und Sonne: <b>"+Math.round(e)+" GW</b><br>Verbrauch: <b>"+Math.round(v)+" GW</b><br>"+(d>=0?"Überschuss: <b>"+Math.round(d)+" GW</b>":"Lücke: <b>"+Math.round(-d)+" GW</b>");
+ var lv=stand[Math.round(h*4)],hh=lv*0.96;wasser.setAttribute("y",118-hh);wasser.setAttribute("height",hh);
+ pumpe.textContent=d>0?"Pumpe läuft: Wasser wird hochgepumpt.":(h>=17?"Turbine läuft: Wasser fließt runter. Den Rest liefern andere Kraftwerke.":"Lücke: Andere Kraftwerke und Stromimporte liefern.");
+ pumpe.className="en-pumpe "+(d>0?"hoch":(h>=17?"runter":""));
+}
+r.addEventListener("input",function(){zeig(+r.value)});zeig(+r.value);
+var play=document.getElementById("enPlay"),t0=null,raf=null;
+play.addEventListener("click",function(){play.blur();if(raf){cancelAnimationFrame(raf);raf=null;play.textContent="Tag abspielen";return}
+ if(ruhig){r.value=18;zeig(18);return}
+ t0=null;play.textContent="Anhalten";
+ function f(t){if(t0===null)t0=t;var h=Math.min(24,(t-t0)/8000*24);h=Math.round(h*2)/2;r.value=h;zeig(h);if(h<24)raf=requestAnimationFrame(f);else{raf=null;play.textContent="Tag abspielen"}}
+ raf=requestAnimationFrame(f)});
+})();
+</script>
+
 <!-- ENTWURF: Spielinhalte bitte fachlich gegenlesen. -->
 <script type="application/json" id="lp-spiel-daten">
 {
