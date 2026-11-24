@@ -635,3 +635,24 @@ body[data-subject="Geografie"] .bg-spiel { --g: var(--tf-g, #A9442B); --dk: var(
 .n-fragen { padding-left: 1.4rem; max-width: 42rem; }
 .n-fragen li { margin: 0.6rem 0; }
 .n-tabs button { white-space: normal; }
+
+/* Lange Reihen: Sprungleiste zu den Stunden und eingeklappte Zusatzmaterialien */
+.stunden-sprung { position: sticky; top: var(--kopf-h, 3.5rem); z-index: 5; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0.35rem; margin: 0.25rem 0 0.5rem; padding: 0.5rem 0; scrollbar-width: thin; background: var(--bg); border-bottom: 1px solid var(--line); }
+.stunden-sprung a { flex: none; display: inline-flex; align-items: center; justify-content: center; min-width: 2.5rem; min-height: 2.5rem; padding: 0 0.5rem; border: 1px solid var(--rahmen); border-radius: 0.6rem; background: var(--surface); color: var(--text); font-size: 0.9375rem; font-weight: 700; text-decoration: none; }
+.stunden-sprung a:hover { background: var(--field); }
+.stunden-sprung a:focus-visible, .stunde-mehr summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.stunde-block { scroll-margin-top: calc(var(--kopf-h, 3.5rem) + 4rem); }
+.stunde-mehr { margin: 0 0 0.75rem; padding-left: 3.25rem; }
+.stunde-mehr summary { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 0.25rem; color: var(--text-2); font-size: 0.875rem; cursor: pointer; }
+.stunde-mehr[open] summary { color: var(--text); }
+@media (max-width: 40rem) { .stunde-mehr { padding-left: 0; } }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Kompakte Liste in langen Reihen: nur Nummer und Titel, eine Zeile je Stunde */
+.reihe-kompakt { margin-left: auto; min-height: 2.5rem; padding: 0 0.85rem; border: 1px solid var(--rahmen); border-radius: 0.6rem; background: var(--surface); color: var(--text); font: inherit; font-size: 0.875rem; font-weight: 700; cursor: pointer; }
+.reihe-kompakt[aria-pressed="true"] { background: var(--text); color: var(--surface); }
+.reihe-kompakt:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.reihe.kompakt .row { min-height: 3rem; padding: 0.55rem 0; }
+.reihe.kompakt .row-meta, .reihe.kompakt .chips, .reihe.kompakt .row-description { display: none; }
+.reihe.kompakt .stunde-mehr { margin-bottom: 0.25rem; }
