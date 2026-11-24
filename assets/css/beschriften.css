@@ -1,0 +1,33 @@
+/* Lernportal – Beschriften durch Ziehen (Skript assets/js/beschriften.js).
+   Farben über die Variablen von Portal (lp-, lm-) oder Präsentation, mit Ersatzwerten. Rückmeldung immer mit Zeichen. */
+
+.bs [hidden] { display: none !important; }
+.bs-stufen { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
+.bs-stufe[aria-pressed="true"] { outline: 3px solid var(--lp-akzent, var(--g, #494294)); outline-offset: 2px; font-weight: 700; }
+.bs-bild { position: relative; }
+.bs-bild svg { display: block; width: 100%; height: auto; }
+.bs-linien line { stroke: var(--lp-text, var(--ink, #111)); stroke-width: 1.5; }
+.bs-linien circle { fill: var(--lp-text, var(--ink, #111)); }
+.bs-feldebene { position: absolute; inset: 0; pointer-events: none; }
+.bs-feld { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; width: 17%; min-width: 5.5rem; min-height: 2.4rem; padding: 0.2rem 0.4rem;
+  font: inherit; font-size: clamp(0.72rem, 1.6vw, 1rem); line-height: 1.15; text-align: center; color: var(--lp-text, var(--ink, #111));
+  background: var(--lp-bg, var(--paper, #fff)); border: 2px dashed var(--lp-rahmen, var(--line, #999)); border-radius: 10px; cursor: pointer; }
+.bs-feld.voll { border-style: solid; border-color: var(--lp-akzent, var(--g, #494294)); font-weight: 700; }
+.bs-feld.ok { border: 3px solid var(--lm-ok, #0c6a49); }
+.bs-feld.falsch { border: 3px solid var(--lm-bad, #a12a1a); }
+.bs-feld:focus-visible { outline: 3px solid var(--lp-fokus, var(--g, #494294)); outline-offset: 2px; }
+.bs-tipp { cursor: text; }
+.bs-marke { position: absolute; transform: translate(-50%, -165%); font-weight: 700; font-size: 1.1rem; padding: 0 0.3rem; border-radius: 6px; background: var(--lp-bg, var(--paper, #fff)); }
+.bs-marke.ok { color: var(--lm-ok, #0c6a49); }
+.bs-marke.falsch { color: var(--lm-bad, #a12a1a); }
+.bs-vorrat { display: flex; flex-wrap: wrap; gap: 0.5rem; min-height: 3rem; margin-top: 0.4rem; }
+.bs-wort { touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
+.bs-wort[aria-pressed="true"] { outline: 3px solid var(--lp-akzent, var(--g, #494294)); outline-offset: 2px; }
+.bs-geist { position: fixed; z-index: 1000; transform: translate(-50%, -50%); pointer-events: none; opacity: 0.9; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+.bs-rm.ok { color: var(--lm-ok, #0c6a49); }
+.bs-rm.falsch { color: var(--lm-bad, #a12a1a); }
+.bs-bild { margin: 0.8rem 0 1rem; }
+@media (max-width: 600px) {
+  .bs-feld { width: 21%; min-width: 0; min-height: 1.9rem; padding: 0.1rem 0.15rem; font-size: 0.62rem; border-radius: 6px; }
+  .bs-marke { font-size: 0.8rem; }
+}
