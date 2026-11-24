@@ -1,16 +1,334 @@
 {
-  "hinweis": "Stundenkalender: Hier steht, was in welcher Lerngruppe wann dran war. Nur Klasse, Fach, Wochentag und Stunde, keine Räume und keine Namen. Einträge zu Klassenarbeiten, Noten oder Erwartungshorizonten gehören nicht hierher (alles im Repository ist öffentlich).",
-  "lerngruppen": [
-    { "id": "7a-geo", "klasse": "7a", "fach": "Geografie", "woche": [ { "tag": 4, "stunden": [5, 6] } ] },
-    { "id": "7b-geo", "klasse": "7b", "fach": "Geografie", "woche": [ { "tag": 2, "stunden": [5] }, { "tag": 4, "stunden": [2] } ] },
-    { "id": "7m-bio", "klasse": "7m", "fach": "Biologie", "woche": [ { "tag": 1, "stunden": [6] }, { "tag": 4, "stunden": [4] } ] },
-    { "id": "7s-bio", "klasse": "7s", "fach": "Biologie", "woche": [ { "tag": 1, "stunden": [5] }, { "tag": 3, "stunden": [7] } ] },
-    { "id": "8b-geo", "klasse": "8b", "fach": "Geografie", "woche": [ { "tag": 3, "stunden": [6] } ] },
-    { "id": "9a-geo", "klasse": "9a", "fach": "Geografie", "woche": [ { "tag": 5, "stunden": [4, 5] } ] },
-    { "id": "9a-bio", "klasse": "9a", "fach": "Biologie", "woche": [ { "tag": 1, "stunden": [8] }, { "tag": 5, "stunden": [7] } ] },
-    { "id": "9m-bio", "klasse": "9m", "fach": "Biologie", "woche": [ { "tag": 2, "stunden": [1, 2] } ] },
-    { "id": "10a-geo", "klasse": "10a", "fach": "Geografie", "woche": [ { "tag": 5, "stunden": [8] } ] },
-    { "id": "10m-bio", "klasse": "10m", "fach": "Biologie", "woche": [ { "tag": 1, "stunden": [7] }, { "tag": 4, "stunden": [7] } ] }
-  ],
-  "eintraege": []
+ "hinweis": "Stundenkalender: Hier steht, was in welcher Lerngruppe wann dran war. Nur Klasse, Fach, Wochentag und Stunde, keine Räume und keine Namen. Einträge zu Klassenarbeiten, Noten oder Erwartungshorizonten gehören nicht hierher (alles im Repository ist öffentlich).",
+ "lerngruppen": [
+  {
+   "id": "7a-geo",
+   "klasse": "7a",
+   "fach": "Geografie",
+   "woche": [
+    {
+     "tag": 4,
+     "stunden": [
+      5,
+      6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "7b-geo",
+   "klasse": "7b",
+   "fach": "Geografie",
+   "woche": [
+    {
+     "tag": 2,
+     "stunden": [
+      5
+     ]
+    },
+    {
+     "tag": 4,
+     "stunden": [
+      2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "7m-bio",
+   "klasse": "7m",
+   "fach": "Biologie",
+   "woche": [
+    {
+     "tag": 1,
+     "stunden": [
+      6
+     ]
+    },
+    {
+     "tag": 4,
+     "stunden": [
+      4
+     ]
+    }
+   ]
+  },
+  {
+   "id": "7s-bio",
+   "klasse": "7s",
+   "fach": "Biologie",
+   "woche": [
+    {
+     "tag": 1,
+     "stunden": [
+      5
+     ]
+    },
+    {
+     "tag": 3,
+     "stunden": [
+      7
+     ]
+    }
+   ]
+  },
+  {
+   "id": "8b-geo",
+   "klasse": "8b",
+   "fach": "Geografie",
+   "woche": [
+    {
+     "tag": 3,
+     "stunden": [
+      6
+     ]
+    }
+   ]
+  },
+  {
+   "id": "9a-geo",
+   "klasse": "9a",
+   "fach": "Geografie",
+   "woche": [
+    {
+     "tag": 5,
+     "stunden": [
+      4,
+      5
+     ]
+    }
+   ]
+  },
+  {
+   "id": "9a-bio",
+   "klasse": "9a",
+   "fach": "Biologie",
+   "woche": [
+    {
+     "tag": 1,
+     "stunden": [
+      8
+     ]
+    },
+    {
+     "tag": 5,
+     "stunden": [
+      7
+     ]
+    }
+   ]
+  },
+  {
+   "id": "9m-bio",
+   "klasse": "9m",
+   "fach": "Biologie",
+   "woche": [
+    {
+     "tag": 2,
+     "stunden": [
+      1,
+      2
+     ]
+    }
+   ]
+  },
+  {
+   "id": "10a-geo",
+   "klasse": "10a",
+   "fach": "Geografie",
+   "woche": [
+    {
+     "tag": 5,
+     "stunden": [
+      8
+     ]
+    }
+   ]
+  },
+  {
+   "id": "10m-bio",
+   "klasse": "10m",
+   "fach": "Biologie",
+   "woche": [
+    {
+     "tag": 1,
+     "stunden": [
+      7
+     ]
+    },
+    {
+     "tag": 4,
+     "stunden": [
+      7
+     ]
+    }
+   ]
+  }
+ ],
+ "eintraege": [],
+ "frei": [
+  {
+   "name": "Herbstferien",
+   "von": "2026-10-19",
+   "bis": "2026-10-31",
+   "art": "ferien"
+  },
+  {
+   "name": "Weihnachtsferien",
+   "von": "2026-12-23",
+   "bis": "2027-01-02",
+   "art": "ferien"
+  },
+  {
+   "name": "1. Weihnachtsfeiertag",
+   "von": "2026-12-25",
+   "bis": "2026-12-25",
+   "art": "feiertag"
+  },
+  {
+   "name": "Neujahr",
+   "von": "2027-01-01",
+   "bis": "2027-01-01",
+   "art": "feiertag"
+  },
+  {
+   "name": "Winterferien",
+   "von": "2027-02-01",
+   "bis": "2027-02-06",
+   "art": "ferien"
+  },
+  {
+   "name": "Internationaler Frauentag",
+   "von": "2027-03-08",
+   "bis": "2027-03-08",
+   "art": "feiertag"
+  },
+  {
+   "name": "Osterferien",
+   "von": "2027-03-22",
+   "bis": "2027-04-02",
+   "art": "ferien"
+  },
+  {
+   "name": "Karfreitag",
+   "von": "2027-03-26",
+   "bis": "2027-03-26",
+   "art": "feiertag"
+  },
+  {
+   "name": "Ostermontag",
+   "von": "2027-03-29",
+   "bis": "2027-03-29",
+   "art": "feiertag"
+  },
+  {
+   "name": "Christi Himmelfahrt",
+   "von": "2027-05-06",
+   "bis": "2027-05-06",
+   "art": "feiertag"
+  },
+  {
+   "name": "Unterrichtsfreier Tag",
+   "von": "2027-05-07",
+   "bis": "2027-05-07",
+   "art": "frei"
+  },
+  {
+   "name": "Pfingstmontag",
+   "von": "2027-05-17",
+   "bis": "2027-05-17",
+   "art": "feiertag"
+  },
+  {
+   "name": "Pfingstferien",
+   "von": "2027-05-18",
+   "bis": "2027-05-19",
+   "art": "ferien"
+  },
+  {
+   "name": "Sommerferien",
+   "von": "2027-07-01",
+   "bis": "2027-08-14",
+   "art": "ferien"
+  },
+  {
+   "name": "Herbstferien",
+   "von": "2027-10-11",
+   "bis": "2027-10-23",
+   "art": "ferien"
+  },
+  {
+   "name": "Weihnachtsferien",
+   "von": "2027-12-22",
+   "bis": "2027-12-31",
+   "art": "ferien"
+  },
+  {
+   "name": "Winterferien",
+   "von": "2028-01-31",
+   "bis": "2028-02-05",
+   "art": "ferien"
+  },
+  {
+   "name": "Internationaler Frauentag",
+   "von": "2028-03-08",
+   "bis": "2028-03-08",
+   "art": "feiertag"
+  },
+  {
+   "name": "Osterferien",
+   "von": "2028-04-10",
+   "bis": "2028-04-22",
+   "art": "ferien"
+  },
+  {
+   "name": "Karfreitag",
+   "von": "2028-04-14",
+   "bis": "2028-04-14",
+   "art": "feiertag"
+  },
+  {
+   "name": "Ostermontag",
+   "von": "2028-04-17",
+   "bis": "2028-04-17",
+   "art": "feiertag"
+  },
+  {
+   "name": "Tag der Arbeit",
+   "von": "2028-05-01",
+   "bis": "2028-05-01",
+   "art": "feiertag"
+  },
+  {
+   "name": "Christi Himmelfahrt",
+   "von": "2028-05-25",
+   "bis": "2028-05-25",
+   "art": "feiertag"
+  },
+  {
+   "name": "Unterrichtsfreier Tag",
+   "von": "2028-05-26",
+   "bis": "2028-05-26",
+   "art": "frei"
+  },
+  {
+   "name": "Pfingstferien",
+   "von": "2028-06-01",
+   "bis": "2028-06-02",
+   "art": "ferien"
+  },
+  {
+   "name": "Pfingstmontag",
+   "von": "2028-06-05",
+   "bis": "2028-06-05",
+   "art": "feiertag"
+  },
+  {
+   "name": "Sommerferien",
+   "von": "2028-07-01",
+   "bis": "2028-08-12",
+   "art": "ferien"
+  }
+ ],
+ "quelle": "Schulferien und unterrichtsfreie Tage: Senatsverwaltung für Bildung, Jugend und Familie Berlin (Kalenderdatei schulferien_berlin.ics, Stand November 2026), bis Schuljahr 2027/28. Feiertage: Berliner Feiertagsgesetz (nur Werktage). Vor dem Einsatz gegenlesen."
 }

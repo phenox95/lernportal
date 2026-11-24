@@ -25,7 +25,11 @@
   let monat = new Date(heute.getFullYear(), heute.getMonth(), 1);
   let gewaehlt = iso(heute);
 
-  const rhythmus = (d) => (gruppe ? gruppe.woche.find((w) => w.tag === d.getDay()) : null);
+  /* Ferien, Feiertage und unterrichtsfreie Tage (Berlin): an solchen Tagen gilt der Wochenplan nicht */
+  const freiAm = (d) => { const s = iso(d); return daten.frei.filter((f) => f.von <= s && s <= f.bis); };
+  const planAm = (d) => (gruppe ? gruppe.woche.find((w) => w.tag === d.getDay()) : null);
+  const rhythmus = (d) => (freiAm(d).length ? null : planAm(d));
+  const freiText = (liste) => liste.map((f) => f.name).filter((n, i, a) => a.indexOf(n) === i).join(", ");
   const eintraegeAm = (s) => daten.eintraege.filter((e) => e.gruppe === gruppe.id && e.datum === s);
 
   function materialKarte(e, d) {
@@ -58,6 +62,20 @@
     z.textContent = "";
   }
 
+  function zeichneFerien() {
+    const z = $("kal-ferien"); if (!z) return;
+    const h = iso(heute), laufend = daten.frei.find((f) => f.art === "ferien" && f.von <= h && h <= f.bis);
+    if (laufend) {
+      const e = ausIso(laufend.bis); do { e.setDate(e.getDate() + 1); } while (e.getDay() === 0 || e.getDay() === 6 || freiAm(e).length);
+      z.textContent = laufend.name + " bis " + langDatum(ausIso(laufend.bis)) + ". Schule wieder ab " + langDatum(e) + ".";
+      return;
+    }
+    const kommend = daten.frei.filter((f) => f.art === "ferien" && f.von > h).sort((a, b) => (a.von < b.von ? -1 : 1))[0];
+    if (!kommend) { z.textContent = ""; return; }
+    const tage = Math.round((ausIso(kommend.von) - heute) / 86400000);
+    z.textContent = "Nächste Ferien: " + kommend.name + " ab " + langDatum(ausIso(kommend.von)) + " (noch " + tage + (tage === 1 ? " Tag)." : " Tage).");
+  }
+
   function zeichneMonat() {
     $("kal-monat").textContent = MONAT[monat.getMonth()] + " " + monat.getFullYear();
     const r = $("kal-raster"); r.textContent = "";
@@ -71,7 +89,9 @@
       const b = neu("button", "kal-tagzelle" + (im ? "" : " anderer-monat"));
       b.type = "button"; b.setAttribute("role", "gridcell");
       const hatU = !!rhythmus(tag), n = gruppe ? eintraegeAm(s).length : 0;
+      const fr = freiAm(tag);
       if (hatU) b.classList.add("unterricht");
+      if (fr.length) b.classList.add(fr.some((f) => f.art === "ferien") ? "ferien" : "freitag");
       if (s === iso(heute)) b.classList.add("heute");
       if (s === gewaehlt) b.classList.add("gewaehlt");
       b.appendChild(neu("span", "", String(tag.getDate())));
@@ -79,7 +99,7 @@
       if (hatU) m.appendChild(neu("span", "kal-punkt kal-unterricht"));
       if (n) m.appendChild(neu("span", "kal-punkt kal-eintrag"));
       b.appendChild(m);
-      b.setAttribute("aria-label", langDatum(tag) + (hatU ? ", Unterricht" : "") + (n ? ", " + n + (n === 1 ? " Eintrag" : " Einträge") : ""));
+      b.setAttribute("aria-label", langDatum(tag) + (hatU ? ", Unterricht" : "") + (fr.length ? ", " + freiText(fr) + ", kein Unterricht" : "") + (n ? ", " + n + (n === 1 ? " Eintrag" : " Einträge") : ""));
       b.addEventListener("click", () => { gewaehlt = s; if (!im) { monat = new Date(tag.getFullYear(), tag.getMonth(), 1); } zeichneAlles(); });
       r.appendChild(b);
     }
@@ -91,7 +111,8 @@
     if (!d || !gruppe) return;
     const liste = eintraegeAm(gewaehlt);
     if (liste.length) { liste.forEach((e) => box.appendChild(materialKarte(e, d))); return; }
-    const w = rhythmus(d);
+    const w = rhythmus(d), fr = freiAm(d);
+    if (fr.length) { box.appendChild(neu("p", "hint", freiText(fr) + ": kein Unterricht.")); return; }
     box.appendChild(neu("p", "hint", w ? "In dieser Gruppe ist Unterricht (" + stundenText(w.stunden) + "). Es ist noch nichts eingetragen." : "In dieser Gruppe ist an diesem Tag kein Unterricht."));
   }
 
@@ -105,11 +126,11 @@
 
   function zeichneAlles() {
     document.querySelector(".kal").dataset.fach = gruppe ? gruppe.fach : "";
-    zeichneNaechste(); zeichneMonat(); zeichneTag(); zeichneListe();
+    zeichneNaechste(); zeichneFerien(); zeichneMonat(); zeichneTag(); zeichneListe();
   }
 
   Promise.all([holen("kalender.json"), holen("projects.json")]).then(([k, p]) => {
-    daten = { lerngruppen: Array.isArray(k.lerngruppen) ? k.lerngruppen : [], eintraege: Array.isArray(k.eintraege) ? k.eintraege : [] };
+    daten = { lerngruppen: Array.isArray(k.lerngruppen) ? k.lerngruppen : [], eintraege: Array.isArray(k.eintraege) ? k.eintraege : [], frei: Array.isArray(k.frei) ? k.frei.filter((f) => f && ausIso(f.von) && ausIso(f.bis)) : [] };
     (Array.isArray(p) ? p : []).forEach((x) => { if (x && x.path) projekte[x.path] = x; });
     const sel = $("kal-gruppe");
     daten.lerngruppen.forEach((g) => { const o = neu("option", "", g.klasse + " · " + g.fach); o.value = g.id; sel.appendChild(o); });

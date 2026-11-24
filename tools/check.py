@@ -323,6 +323,14 @@ for g in ka.get("lerngruppen", []):
     for w in g.get("woche", []):
         if w.get("tag") not in (1, 2, 3, 4, 5) or not w.get("stunden") or any(not isinstance(x, int) or not 1 <= x <= 11 for x in w["stunden"]):
             err(f"{gg}: Wochentag (1–5) oder Stunden (1–11) ungültig")
+for i, f in enumerate(ka.get("frei", [])):
+    ff = f"kalender.json frei[{i}] „{f.get('name', '?')}“"
+    if f.get("art") not in ("ferien", "feiertag", "frei"):
+        err(f"{ff}: art muss ferien, feiertag oder frei sein")
+    if not (re.match(r"^\d{4}-\d{2}-\d{2}$", str(f.get("von", ""))) and re.match(r"^\d{4}-\d{2}-\d{2}$", str(f.get("bis", "")))):
+        err(f"{ff}: von und bis im Format JJJJ-MM-TT erwartet")
+    elif f["von"] > f["bis"]:
+        err(f"{ff}: von liegt nach bis")
 kal_pfade = {p.get("path"): p for p in projekte if isinstance(p, dict)}
 for i, e in enumerate(ka.get("eintraege", [])):
     ee = f"kalender.json eintraege[{i}] {e.get('datum', '?')}"
