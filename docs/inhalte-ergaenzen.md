@@ -315,3 +315,13 @@ Die Seite zeigt, was in einer Lerngruppe wann dran war. Die Schülerinnen und Sc
 - **Pflege:** Jede Stunde wird von Hand eingetragen. Im Chat genügt eine Zeile je Termin, zum Beispiel „19.11., 7b, Ätna Tourismus“.
 
 - **Ferien und Feiertage (`frei` in `kalender.json`):** Liste mit `name`, `von`, `bis` (beide `JJJJ-MM-TT`, einschließlich) und `art` (`ferien`, `feiertag` oder `frei` für unterrichtsfreie Tage). An solchen Tagen gilt der Wochenplan nicht: kein Unterricht im Raster, nicht in „Nächste Stunde“. Dazu die Zeile „Nächste Ferien“. Quelle der Schulferien und unterrichtsfreien Tage: Senatsverwaltung für Bildung, Jugend und Familie Berlin, Kalenderdatei `schulferien_berlin.ics` (Stand November 2026, bis Schuljahr 2027/28). Die Enddaten der Datei sind „bis ausschließlich“, in `bis` steht der letzte Ferientag. Feiertage nach dem Berliner Feiertagsgesetz (nur Werktage). Bei neuen Schuljahren die Datei erneut laden und ergänzen.
+
+## Lange Reihen auf der Themenfeld-Seite
+
+Hat eine Reihe mit Stundennummern mindestens 6 Stunden (Konstante `LANG` in `assets/js/app.js`, zum Beispiel Neurobiologie), bekommt sie drei Hilfen gegen langes Scrollen:
+
+- **Sprungleiste:** Eine Reihe aus Nummernknöpfen (0, 1, 2 …) klebt unter der Kopfleiste und führt per Tipp zur Stunde. Sie scrollt seitlich, braucht also nur eine Zeile.
+- **Kompakt:** Der Schalter „Kompakt“ im Reihenkopf zeigt je Stunde nur Nummer und Titel (eine bis zwei Zeilen statt der Marken für Präsentation, Arbeitsblatt, Übung). Voreinstellung ist an, die Wahl bleibt im Browser (`localStorage`, Schlüssel `lp-liste-kompakt`) und gilt für alle langen Reihen.
+- **Weitere Materialien eingeklappt:** Gehören zu einer Stunde mehrere Einträge (die nicht schon als Datei der Materialseite aufgeführt sind), stehen die weiteren unter „n weitere Materialien“ eingeklappt.
+
+Kürzere Reihen bleiben unverändert.

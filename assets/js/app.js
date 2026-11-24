@@ -848,6 +848,21 @@
     const items = projects.filter(p => isVisible(p) && p.subject === fach && themeOf(p) === tfLabel(tf));
     counter.textContent = items.length ? countText(items.length) : "";
     list.innerHTML = items.length ? reihenListe(items) : '<p class="empty-message">Für dieses Themenfeld gibt es noch kein Material.</p>';
+    /* Höhe der klebenden Kopfleiste merken: die Sprungleiste klebt darunter */
+    const kopf = document.querySelector(".site-header");
+    const kopfHoehe = () => document.documentElement.style.setProperty("--kopf-h", (kopf ? Math.round(kopf.getBoundingClientRect().height) : 56) + "px");
+    kopfHoehe(); window.addEventListener("resize", kopfHoehe);
+    /* Lange Reihen: Schalter „Kompakt“ (nur Nummer und Titel), Voreinstellung an, die Wahl bleibt im Browser */
+    let kompakt = true; try { kompakt = localStorage.getItem("lp-liste-kompakt") !== "0"; } catch (e) { /* ok */ }
+    list.querySelectorAll(".reihe-lang").forEach(sec => {
+      const knopf = sec.querySelector(".reihe-kompakt");
+      const setze = an => { sec.classList.toggle("kompakt", an); if (knopf) knopf.setAttribute("aria-pressed", String(an)); };
+      setze(kompakt);
+      if (knopf) knopf.addEventListener("click", () => {
+        kompakt = !sec.classList.contains("kompakt"); try { localStorage.setItem("lp-liste-kompakt", kompakt ? "1" : "0"); } catch (e) { /* ok */ }
+        list.querySelectorAll(".reihe-lang").forEach(x => { x.classList.toggle("kompakt", kompakt); const k = x.querySelector(".reihe-kompakt"); if (k) k.setAttribute("aria-pressed", String(kompakt)); });
+      });
+    });
     renderVerbindungen(tf, fach, items);
     initThemenfeldAktuell(tf, fach);
     /* Verweis auf die Begriffe des Themenfelds (begriffe/), nur wenn ein Eintrag geprüfte Begriffe hat (Feld begriffe: true) */
@@ -874,7 +889,9 @@
 
   /* Eine Nummer je Stunde: Einträge einer Reihe mit derselben Nummer bilden einen Block. Die erste Zeile trägt die Nummer,
      weitere Einträge stehen ohne Nummer darunter. Ein Eintrag, dessen Seite die erste Zeile schon unter "dateien" führt, erscheint nicht noch einmal. */
-  function stundenBloecke(mine, name, ohne) {
+  const reiheId = name => String(name || "reihe").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "reihe";
+  const LANG = 6;                                          // ab so vielen Stunden: Sprungleiste und eingeklappte Zusatzmaterialien
+  function stundenBloecke(mine, name, ohne, lang) {
     const bloecke = [];
     mine.forEach(p => {
       const nr = reihenNr(p, name);
@@ -887,8 +904,12 @@
       const [kopf, ...rest] = eintraege;
       const schon = new Set(dateienOf(kopf).map(d => norm(d.pfad)));
       const teile = rest.filter(p => !schon.has(norm(p.path)));
-      const zeilen = row(kopf, false, { nr, ohne }) + teile.map(p => row(p, false, { nr, ohne, teil: true })).join("");
-      return teile.length ? `<div class="stunde-block">${zeilen}</div>` : zeilen;
+      /* Lange Reihen: weitere Materialien einer Stunde (Lernmodul, Simulation, Übung) stehen eingeklappt unter der Hauptzeile */
+      const mehr = !teile.length ? "" : lang
+        ? `<details class="stunde-mehr"><summary>${teile.length === 1 ? "1 weiteres Material" : teile.length + " weitere Materialien"}</summary>${teile.map(p => row(p, false, { nr, ohne, teil: true })).join("")}</details>`
+        : teile.map(p => row(p, false, { nr, ohne, teil: true })).join("");
+      const id = nr != null ? ` id="st-${reiheId(name)}-${nr}"` : "";
+      return `<div class="stunde-block"${id}>${row(kopf, false, { nr, ohne })}${mehr}</div>`;
     }).join("");
   }
 
@@ -910,8 +931,12 @@
       const stunden = nummern.length && nummern.every(n => n != null) ? new Set(nummern).size : 0;
       const zahl = stunden ? stunden + (stunden === 1 ? " Stunde" : " Stunden") : countText(mine.length);
       const kopfMeta = [zahl, ...ohne.map(f => mine[0][f])].map(escapeHtml).join(" · ");
-      return `<section class="reihe"><div class="reihe-kopf"><h2 class="reihe-titel">${escapeHtml(titel)}</h2><span class="reihe-zahl">${kopfMeta}</span>${ziele}</div>
-        <div class="group">${name ? stundenBloecke(mine, name, ohne) : mine.map(p => row(p, false, { ohne })).join("")}</div></section>`;
+      const lang = !!name && stunden >= LANG;
+      const nrListe = lang ? [...new Set(nummern)].sort((a, b) => a - b) : [];
+      const sprung = nrListe.length ? `<nav class="stunden-sprung" aria-label="Zu einer Stunde springen">${nrListe.map(n => `<a href="#st-${reiheId(name)}-${n}" aria-label="Stunde ${n}">${n}</a>`).join("")}</nav>` : "";
+      const kompaktKnopf = lang ? `<button type="button" class="reihe-kompakt" aria-pressed="false" aria-label="Kompakte Liste: nur Nummer und Titel">Kompakt</button>` : "";
+      return `<section class="reihe${lang ? " reihe-lang" : ""}"><div class="reihe-kopf"><h2 class="reihe-titel">${escapeHtml(titel)}</h2><span class="reihe-zahl">${kopfMeta}</span>${ziele}${kompaktKnopf}</div>${sprung}
+        <div class="group">${name ? stundenBloecke(mine, name, ohne, lang) : mine.map(p => row(p, false, { ohne })).join("")}</div></section>`;
     };
     const parts = namen.map(n => gruppe("Reihe: " + n, items.filter(p => String(p.reihe || "").trim() === n), n));
     const ohne = items.filter(p => !String(p.reihe || "").trim());
