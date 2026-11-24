@@ -9,7 +9,8 @@
    <button data-film-neu> im selben data-film: spielt die Animation noch einmal ab.
    <span data-zaehler data-bis="0.4" data-stellen="2" data-start="600" data-dauer="4000">0,40</span>
      Zählt beim Abspielen gleichmäßig von 0 bis data-bis (Komma, data-stellen Nachkommastellen),
-     beginnt nach data-start ms und dauert data-dauer ms. Im HTML steht der Endwert. */
+     beginnt nach data-start ms und dauert data-dauer ms. Im HTML steht der Endwert.
+     Mit data-von="2.5" zählt er ab diesem Wert (auch abwärts, z. B. data-von="100" data-bis="99.94"). */
 (function () {
   "use strict";
   var ruhig = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -20,14 +21,14 @@
   }
   function zaehlen(film) {
     [].forEach.call(film.querySelectorAll("[data-zaehler]"), function (z) {
-      var bis = +z.getAttribute("data-bis") || 0, start = +z.getAttribute("data-start") || 0, dauer = +z.getAttribute("data-dauer") || 1000;
+      var von = +z.getAttribute("data-von") || 0, bis = +z.getAttribute("data-bis") || 0, start = +z.getAttribute("data-start") || 0, dauer = +z.getAttribute("data-dauer") || 1000;
       var lauf = (z._lauf || 0) + 1, t0 = null; z._lauf = lauf;
-      zahl(z, 0);
+      zahl(z, von);
       function tick(t) {
         if (z._lauf !== lauf) return;              // neu gestartet oder angehalten
         if (t0 === null) t0 = t;
         var p = Math.min(1, Math.max(0, (t - t0 - start) / dauer));
-        zahl(z, bis * p);
+        zahl(z, von + (bis - von) * p);
         if (p < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);

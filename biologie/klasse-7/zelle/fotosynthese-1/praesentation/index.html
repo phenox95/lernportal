@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Gestaltung nach dem Skill "unslop" von Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop --><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
@@ -8,256 +8,167 @@
 <link rel="stylesheet" href="../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<link rel="stylesheet" href="../../../../../assets/css/stunde.css">
 <style>
-/* Eigene Bausteine dieser Stunde (nur hier; dieselben Klassennamen nutzt auch stunde.css) */
-.lead.s{font-size:24px;margin:0 0 12px}
-.task.s{font-size:24px;margin:0 0 12px}
-.shilfe.sm{font-size:20px;padding:12px 16px}
-.mint{background:var(--tint);border-radius:12px}
-.tl{font-size:22px;font-weight:400;margin:16px 0 8px;color:var(--ink2)}
+/* Folien dieser Stunde: Bild-Rahmen und Zeichnungen (Klassen nur hier) */
 .frame.mini img{max-height:272px;width:auto;margin:0 auto}
-.dg:focus-visible,.qc:focus-visible,.tc:focus-visible{outline:3px solid var(--g);outline-offset:2px}
-
-/* Linienzeichen: ein Satz, ein Strich */
-.circ{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:50%;border:1.5px solid var(--g);color:var(--g);margin-top:16px}
-.circ svg,.arr svg,.down svg{fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
-.circ svg{width:32px;height:32px}
-.circ.y{border-color:var(--ad);color:var(--ad);margin:0}
-.circ.big{width:96px;height:96px}.circ.big svg{width:48px;height:48px}
-.arr{display:grid;color:var(--ink3)}.arr svg{width:40px;height:40px}
-.down{display:grid;color:var(--g)}.down svg{width:40px;height:40px}
-
-/* Folien dieser Stunde */
-.row4{display:flex;gap:32px}
-.row4 figure{margin:0;flex:1;text-align:center}
-.row4 img{width:100%;display:block;border-radius:16px}
-.order{display:flex;align-items:center;gap:16px;margin-top:32px}
-.order figure{margin:0;flex:1;text-align:center}
-.order img{width:100%;display:block}
-.pill{display:block;margin-top:12px;padding:8px 0;font-size:28px;font-weight:400;color:var(--ink);border-bottom:2px solid var(--g)}
-.facts{display:grid;gap:0}
-.facts div{padding:24px 0;font-size:32px;line-height:1.2;color:rgba(255,255,255,.82);border-top:1px solid rgba(255,255,255,.18)}
-.facts div:first-child{font-size:56px;color:var(--ad);border-top:0;padding-top:0}
-.fragefeld{height:248px;background:#fff;border:2px solid var(--ad);border-radius:16px;margin-bottom:32px;font-size:40px;line-height:1.3;color:var(--ink);padding:16px 24px;outline:none;overflow:hidden}
-.fragefeld:focus-visible{outline:3px solid var(--ad);outline-offset:3px}
-.fragefeld:empty:before{content:attr(data-ph);color:var(--ink3);font-size:28px}
-.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.row3 .mint{display:grid;justify-items:center;gap:12px;padding:24px 16px;color:#fff;font-weight:400;font-size:24px;text-align:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:24px;border-bottom:1.5px solid var(--line)}
-.stat{padding:8px 0 24px;text-align:left;font-size:24px;color:var(--ink2)}
-.stat+.stat{padding-left:24px;border-left:1.5px solid var(--line)}
-.stat b{display:block;font-size:56px;line-height:1.1;font-weight:400;color:var(--ink);margin-bottom:4px;font-variant-numeric:tabular-nums}
-.stat.g b{color:var(--g)}
-.eq .line{display:flex;align-items:center;gap:16px;margin-bottom:16px}
-.eq .line b{font-size:40px;font-weight:400;color:var(--ink3)}
-.eq .line.mid b{font-size:32px;color:var(--ink)}
-.eq .chip{flex:1}
-.eq .mid{font-size:24px}
-.exit{display:grid;grid-template-columns:128px 1fr;gap:24px;align-items:center;margin-top:24px}
-.exitq{margin:0;font-size:36px;line-height:1.35;color:var(--ink);padding:24px 32px}
-.onDark{font-size:24px;margin-top:32px;color:rgba(255,255,255,.82)}
-
-/* Ziehen und Ablegen */
-.row4.dn{gap:24px}
-.row4.dn figure{position:relative}
-.row4.dn img{width:auto;max-height:148px;margin:0 auto 8px}
-.tag{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:400}
-.dg{display:inline-block;background:#fff;color:var(--ink);font-weight:400;font-size:24px;padding:8px 16px;border-radius:8px;border:1.5px solid var(--g);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;position:relative;z-index:2}
-.dg.sel{outline:4px solid var(--g);outline-offset:2px}
-.dg.drag{z-index:60;cursor:grabbing}
-.dz{min-height:56px;border:2px dashed var(--ink3);border-radius:12px;display:flex;align-items:center;justify-content:center;background:#fff;position:relative}
-.dz.ok{border:2px solid var(--ok);background:var(--okbg)}
-.dz.bad{border:2px solid var(--bad);background:var(--badbg)}
-.bank{display:flex;flex-wrap:wrap;gap:12px;min-height:64px;padding:8px;border-radius:16px;background:var(--tint);margin-top:12px;align-items:center}
-.bank.col{flex-direction:column;align-items:stretch;margin-top:0;gap:8px}
-.bank.col .dg{text-align:center;font-size:22px;line-height:1.2;padding:4px 16px}
-.ctl{display:flex;gap:16px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.row4{display:flex;gap:24px}.row4 figure{margin:0;flex:1;text-align:center;position:relative}
+.row4.dn img{width:auto;max-height:150px;margin:0 auto 8px;display:block;border-radius:12px}
+.tag{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:500}
 .m2grid{display:grid;grid-template-columns:700px 1fr;gap:32px;align-items:start}
 .m2wrap{position:relative;border:1.5px solid var(--line);border-radius:16px;overflow:hidden;line-height:0;background:#fff}
 .m2wrap img{width:100%;display:block}
 .dz.ov{position:absolute;transform:translate(-50%,-50%);min-height:0;height:8.4%;background:rgba(255,255,255,.93)}
 .dz.ov .dg{font-size:18px;line-height:1.25;padding:2px 8px;border-radius:8px;white-space:nowrap}
-.glgrid{display:grid;grid-template-columns:1fr 372px;gap:32px;align-items:start;margin-top:8px}
-.eqz{display:grid;gap:24px}
-.eqr{display:flex;align-items:center;gap:16px;font-size:24px}
-.eqr b{font-size:40px;font-weight:400;color:var(--ink3)}
-.eqr .dz.w{flex:1;min-height:64px}
-.eqr .dz{min-width:152px;min-height:64px}
-.eqr.mid .dz{flex:1}
-
-/* Strichliste, Chloroplasten, Quellen-Check */
-.tally{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.tc{position:relative;background:var(--tint);border-radius:12px;padding:12px 8px 16px;text-align:center;font-size:20px;line-height:1.25;cursor:pointer;user-select:none;touch-action:manipulation}
-.tc .tn{display:block;font-size:44px;font-weight:400;color:var(--g);font-variant-numeric:tabular-nums}
-.tm{position:absolute;right:4px;top:4px;border:0;background:#fff;border-radius:50%;width:36px;height:36px;font-size:20px;font-weight:400;cursor:pointer;color:var(--ink2)}
-.m3wrap{position:relative;line-height:0}
-.m3wrap img{width:100%;display:block;border-radius:8px}
-.m3f{padding:8px}
+.bank.col .dg{font-size:22px;padding:6px 14px}
+.bank.col.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.bank.col.g2 .dg{font-size:19px;padding:6px 8px}
+.eqz{display:grid;gap:20px}.eqr{display:flex;align-items:center;gap:14px;font-size:24px}.eqr b{font-size:40px;font-weight:400;color:var(--ink3)}
+.eqr .dz{min-width:150px;min-height:62px;flex:1}.eqr.mid .dz{flex:1}
+.glgrid{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start;margin-top:4px}
+.down svg,.arr svg{width:40px;height:40px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}.down{display:grid;color:var(--g)}
+.m3wrap{position:relative;line-height:0}.m3wrap img{width:100%;display:block;border-radius:8px}.m3f{padding:8px}
 .m3t{margin:12px 0 4px;font-size:20px}
 .hs{position:absolute;width:11%;height:17%;transform:translate(-50%,-50%);border-radius:50%;cursor:pointer;touch-action:manipulation}
-.hs.got{outline:3px solid var(--ok);background:rgba(31,122,77,.14)}
-.hs.no{background:rgba(179,56,44,.22);outline:3px solid var(--bad)}
-#qc{margin-top:16px}
-.qrow{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:12px;align-items:stretch}
-.qc{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;font-weight:400;font-size:22px;line-height:1.25;text-align:center;display:grid;place-items:center;cursor:pointer;user-select:none;touch-action:manipulation;min-height:80px}
-.qc.pick{background:var(--g);color:#fff;border-color:var(--g)}
-.qc.ok{border-color:var(--ok)}.qc.bad{border-color:var(--bad)}
-.qc small{display:block;font-weight:400;font-size:18px;color:inherit;margin-top:4px}
-.qctl{display:grid;gap:8px;align-content:center}
-.qctl .b{font-size:18px;padding:8px 16px}
+.hs.got{outline:3px solid var(--ok);background:rgba(31,122,77,.14)}.hs.no{background:rgba(179,56,44,.22);outline:3px solid var(--bad)}
+.stats{display:grid;grid-template-columns:1fr 1fr;margin-bottom:20px;border-bottom:1.5px solid var(--line)}
+.stat{padding:6px 0 20px;font-size:24px;color:var(--ink2)}.stat+.stat{padding-left:24px;border-left:1.5px solid var(--line)}
+.stat b{display:block;font-size:52px;line-height:1.1;font-weight:400;color:var(--ink);font-variant-numeric:tabular-nums}.stat.g b{color:var(--g)}
+.shilfe.sm{font-size:20px;padding:12px 16px}
+#qc{margin-top:14px}.qrow{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:12px;align-items:stretch}
+.qc{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px;font-size:22px;line-height:1.25;text-align:center;display:grid;place-items:center;cursor:pointer;user-select:none;touch-action:manipulation;min-height:80px}
+.qc.pick{background:var(--g);color:#fff;border-color:var(--g)}.qc.ok{border-color:var(--ok)}.qc.bad{border-color:var(--bad)}
+.qc small{display:block;font-size:18px;color:inherit;margin-top:4px}.qctl{display:grid;gap:8px;align-content:center}.qctl .b{font-size:18px;padding:8px 16px}
+.tl{font-size:22px;margin:14px 0 8px;color:var(--ink2)}
+.tally{grid-template-columns:repeat(4,1fr)}
+.eqfest{font-size:22px;margin:0 0 12px;padding:8px 14px;border-radius:12px;background:var(--mint)}
+.eqfest .chip{font-size:22px}
+.lf{margin:0;font-size:26px;color:var(--dk)}
+/* Impulsfilm Van Helmont: Ohne .spielt steht das Endbild */
+.vh{display:block;width:100%;max-height:430px}
+.vh-baum{transform-box:view-box;transform-origin:300px 330px}
+.vh-tropfen{opacity:.9}
+[data-film].spielt .vh-baum{animation:vh-wachsen 6s cubic-bezier(.4,0,.3,1) .4s both}
+[data-film].spielt .vh-tropfen{animation:vh-regen 1.2s linear var(--d) 6 both}
+@keyframes vh-wachsen{from{transform:scale(.2)}to{transform:scale(1)}}
+@keyframes vh-regen{from{transform:translateY(0);opacity:0}20%{opacity:.9}to{transform:translateY(170px);opacity:0}}
+.vh-werte{display:grid;gap:0;align-content:center}
+.vh-werte div{padding:12px 0;border-top:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:24px}
+.vh-werte div:first-child{border-top:0}
+.vh-werte b{display:block;font-size:52px;font-weight:500;line-height:1.1;color:var(--ad);font-variant-numeric:tabular-nums}
+.vh-werte .klein{font-size:21px;color:rgba(255,255,255,.75)}
+.slide.dark .b.sec{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
 </style>
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
-</head><body class="lp-pres" data-root="../../../../../" data-title="Die Zelle – Stunde 10: Woher nimmt die Pflanze ihre Masse?" data-subject="Biologie" data-grade="Klasse 7">
-<noscript><p class="lp-noscript"><a href="../../../../../">Zurück zum Portal</a> · Diese Seite benötigt JavaScript für die vollständige Darstellung.</p></noscript>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Die Zelle – Stunde 10: Woher nimmt die Pflanze ihre Masse?" data-subject="Biologie" data-grade="Klasse 7">
+<noscript><p style="padding:1rem;font-size:1rem;background:#fff">Diese Präsentation braucht JavaScript. Bitte aktiviere es im Browser.</p></noscript>
 <div id="buehne">
-<div id="stage"><section class="slide light" data-min="3" data-notes="Do Now: SuS bearbeiten sofort beim Betreten ohne Erklärung (im Heft). Zum Abgleich kommt eine Schülerin oder ein Schüler nach vorn und ordnet die Wörter den Bildern zu.">
-    <h1>Do Now</h1><span class="badge">3 Min. · allein</span>
-      <p class="lead s"><b>Ordne</b> den Bildern die Organisationsstufen zu: Zelle, Gewebe, Organ, Organismus. Schreibe sie von klein nach groß in dein Heft.</p>
-      <div data-dnd id="dn">
-        <div class="row4 dn"><figure><img src="../../../../../assets/img/fotosynthese-1/gewebe.webp" loading="lazy" alt="Bild A"><b class="tag">A</b><div class="dz" data-ans="Gewebe"></div></figure><figure><img src="../../../../../assets/img/fotosynthese-1/organismus.webp" loading="lazy" alt="Bild B"><b class="tag">B</b><div class="dz" data-ans="Organismus"></div></figure><figure><img src="../../../../../assets/img/fotosynthese-1/zelle.webp" loading="lazy" alt="Bild C"><b class="tag">C</b><div class="dz" data-ans="Zelle"></div></figure><figure><img src="../../../../../assets/img/fotosynthese-1/organ.webp" loading="lazy" alt="Bild D"><b class="tag">D</b><div class="dz" data-ans="Organ"></div></figure></div>
+<div id="stage">
+
+<section class="slide" data-min="3">
+<p class="phase">Einstieg · Do Now · Wiederholung</p>
+<h1 class="k">Do Now</h1>
+<span class="badge">3 Min. · allein, ins Heft</span>
+<div data-zuordnen><p class="task s"><span class="snr">DN</span><span><b>Ordne</b> den Bildern die Organisationsstufen zu: Zelle, Gewebe, Organ, Organismus. Schreibe sie von klein nach groß in dein Heft.</span><i class="lvl">D</i></p>
+<div class="row4 dn"><figure><img src="../../../../../assets/img/fotosynthese-1/gewebe.webp" loading="lazy" alt="Bild A"><b class="tag">A</b><div class="dz" data-ans="Gewebe"></div></figure><figure><img src="../../../../../assets/img/fotosynthese-1/organismus.webp" loading="lazy" alt="Bild B"><b class="tag">B</b><div class="dz" data-ans="Organismus"></div></figure><figure><img src="../../../../../assets/img/fotosynthese-1/zelle.webp" loading="lazy" alt="Bild C"><b class="tag">C</b><div class="dz" data-ans="Zelle"></div></figure><figure><img src="../../../../../assets/img/fotosynthese-1/organ.webp" loading="lazy" alt="Bild D"><b class="tag">D</b><div class="dz" data-ans="Organ"></div></figure></div>
         <div class="bank"><span class="dg">Organismus</span><span class="dg">Zelle</span><span class="dg">Organ</span><span class="dg">Gewebe</span></div>
-        <div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><span class="fb"></span></div>
-        <p class="tip">Wort ziehen oder antippen, dann das Feld unter dem Bild antippen.</p>
-      </div></section>
-<section class="slide light"  data-notes="Max. 1 Minute abgleichen. Dann Impuls zeigen.">
-    <h1>Do Now: Lösung</h1>
-      <div class="order"><figure><img src="../../../../../assets/img/fotosynthese-1/zelle.webp" loading="lazy" alt="Zelle"><b class="pill">Zelle</b><small>Bild C</small></figure><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><figure><img src="../../../../../assets/img/fotosynthese-1/gewebe.webp" loading="lazy" alt="Gewebe"><b class="pill">Gewebe</b><small>Bild A</small></figure><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><figure><img src="../../../../../assets/img/fotosynthese-1/organ.webp" loading="lazy" alt="Organ"><b class="pill">Organ</b><small>Bild D</small></figure><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><figure><img src="../../../../../assets/img/fotosynthese-1/organismus.webp" loading="lazy" alt="Organismus"><b class="pill">Organismus</b><small>Bild B</small></figure></div>
-      <p class="center muted">von klein nach groß</p></section>
-<section class="slide dark"  data-notes="Impuls stumm zeigen (ca. 2 Min.). Keine Frage vorgeben. Moderationsfragen: Was fällt euch auf? Was überrascht euch? Welche Frage stellt sich euch? Zielkorridor: Woher bekommt die Weide die Stoffe, aus denen sie wächst, und wo in der Zelle geschieht das? Tipp: Mit dem Stift (P) Auffälliges im Bild einkreisen lassen.">
-    <h1>Ein Versuch aus dem 17. Jahrhundert</h1>
-      <div class="split"><div class="frame white"><img src="../../../../../assets/img/fotosynthese-1/vh.webp" loading="lazy" alt="Weide im Kübel, 2,5 kg zu Beginn und 84,5 kg nach 5 Jahren; Erde 100 kg und 99,94 kg"></div>
-      <div class="facts"><div>5 Jahre</div><div>nur Regenwasser</div><div>Kübel abgedeckt</div></div></div></section>
-<section class="slide dark"  data-notes="Die Klassenfrage kann eine Schülerin oder ein Schüler ins Feld tippen oder mit dem Stift schreiben. Abweichende, tragfähige Fragen aufgreifen. Impuls plus Fragenentwicklung höchstens 5 Minuten.">
-    <h1>Unsere Frage für heute</h1>
-      <div class="fragefeld" contenteditable="true" spellcheck="false" data-ph="Frage hier eintippen oder mit dem Stift schreiben"></div>
-      <div class="row3"><div class="mint"><b class="circ y"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></b><span>Was fällt euch auf?</span></div><div class="mint"><b class="circ y"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></b><span>Was überrascht euch?</span></div><div class="mint"><b class="circ y"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg></b><span>Welche Frage stellt sich euch?</span></div></div></section>
-<section class="slide light" data-min="4" data-notes="Think-Pair-Share. Die Klasse macht pro Hypothese einen Strich (antippen). Noch nicht bewerten. Die Hypothesen werden in der Sicherung mit den Zahlen geprüft.">
-    <h1>Hypothese</h1><span class="badge">4 Min. · allein → Partner → Klasse</span>
-      <div class="split"><div><p class="task big"><span class="snr">1</span><span><b>Stelle</b> eine Hypothese auf: Woher stammen die 82 kg, die die Weide zugenommen hat?</span><i class="lvl">E</i></p><div class="shilfe"><b>Hilfe:</b> Ich vermute, dass … , weil …</div>
-      <p class="tl">Unsere Hypothesen (antippen = Strich):</p>
-      <div class="tally" id="tally"><div class="tc" data-n="0"><span class="tn">0</span><span>aus der Erde</span><button class="tm" title="Strich zurück">−</button></div><div class="tc" data-n="0"><span class="tn">0</span><span>aus dem Wasser</span><button class="tm" title="Strich zurück">−</button></div><div class="tc" data-n="0"><span class="tn">0</span><span>aus der Luft</span><button class="tm" title="Strich zurück">−</button></div><div class="tc" data-n="0"><span class="tn">0</span><span>etwas anderes</span><button class="tm" title="Strich zurück">−</button></div></div></div>
-      <div class="frame"><img src="../../../../../assets/img/fotosynthese-1/vh.webp" loading="lazy" alt="Van-Helmont-Versuch"></div></div></section>
-<section class="slide light" data-min="10" data-notes="M1 und M2 liegen auf dem AB. Lesestrategie: pro Absatz 1–2 Schlüsselwörter markieren. Vorlesen anbieten. Zum Abgleich von Aufgabe 3 folgt die Tafelfolie.">
-    <h1>Erarbeitung 1</h1><span class="badge">10 Min. · allein, dann Partner</span>
-      <div class="split"><div><p class="task"><span class="snr">2</span><span>Lies M1. <b>Markiere</b> in jedem Absatz 1–2 Schlüsselwörter.</span><i class="lvl">D–E</i></p><p class="task"><span class="snr">3</span><span><b>Beschrifte</b> die Pfeile in M2 mit diesen Wörtern: Licht, Wasser, Kohlenstoffdioxid, Sauerstoff, Traubenzucker.</span><i class="lvl">E</i></p><div class="shilfe"><b>Wortspeicher</b><br>Fo-to-syn-the-se · Koh-len-stoff-di-oxid · Sau-er-stoff · Trau-ben-zu-cker · Was-ser · Licht</div></div>
-      <div><div class="frame"><img src="../../../../../assets/img/fotosynthese-1/m2.webp" loading="lazy" alt="M2: Schema der Fotosynthese mit unbeschrifteten Pfeilen"></div><p class="muted">Zum Lesen: Vorlesen lassen ist erlaubt.</p></div></div></section>
-<section class="slide light"  data-notes="Schülerinnen und Schüler beschriften die Pfeile an der Tafel. Die beiden Pfeile rechts: oben Sauerstoff, unten Traubenzucker. Prüfen zeigt richtig (grün) und falsch (rot).">
-    <h1>An der Tafel: Pfeile beschriften</h1>
-      <p class="task s"><span class="snr">3</span><span><b>Beschrifte</b> die Pfeile in M2 mit diesen Wörtern: Licht, Wasser, Kohlenstoffdioxid, Sauerstoff, Traubenzucker.</span><i class="lvl">E</i></p>
-      <div data-dnd id="m2" class="m2grid">
-        <div class="m2wrap"><img src="../../../../../assets/img/fotosynthese-1/m2.webp" loading="lazy" alt="M2: Schema der Fotosynthese"><div class="dz ov" data-ans="Licht" style="left:39.7%;top:19.6%;width:15%"></div><div class="dz ov" data-ans="Kohlenstoffdioxid" style="left:33.4%;top:40.2%;width:30%"></div><div class="dz ov" data-ans="Sauerstoff" style="left:81.8%;top:40.5%;width:20%"></div><div class="dz ov" data-ans="Traubenzucker" style="left:67.5%;top:53%;width:22%"></div><div class="dz ov" data-ans="Wasser" style="left:60.5%;top:75.4%;width:17%"></div></div>
-        <div><div class="bank col"><span class="dg">Wasser</span><span class="dg">Licht</span><span class="dg">Sauerstoff</span><span class="dg">Kohlenstoffdioxid</span><span class="dg">Traubenzucker</span></div><div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><span class="fb"></span></div><p class="tip">Wort ziehen oder antippen, dann Feld am Pfeil antippen.</p></div>
-      </div></section>
-<section class="slide light" data-min="8" data-notes="Rundgang: Wortgleichung mit Ort (Chloroplast) prüfen. Aufgabe 5 notfalls mündlich. Rechts können SuS an der Tafel alle Chloroplasten antippen. Zellkern und Vakuole geben einen Hinweis.">
-    <h1>Erarbeitung 2</h1><span class="badge">8 Min. · Partnerarbeit</span>
-      <div class="split"><div><p class="task"><span class="snr">4</span><span><b>Gib</b> die Wortgleichung der Fotosynthese an. Nutze M1 und M2.</span><i class="lvl">E</i></p><p class="task"><span class="snr">5</span><span><b>Beschreibe</b> mit M1 und M3, welche Aufgabe die Chloroplasten in der Blattzelle haben.</span><i class="lvl">E</i></p><div class="shilfe"><b>Hilfe:</b> Im Chloroplast wird …</div></div>
+<div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><button class="b lsg" style="background:var(--y);color:var(--ink)">Lösung</button><span class="fb"></span></div></div>
+</section>
+<section class="slide dark" data-notes="Impuls stumm zeigen (ca. 2 Min.). Erst still schauen lassen, dann Noch einmal. Keine Frage vorgeben. Zielkorridor: Woher bekommt die Weide die Stoffe, aus denen sie wächst, und wo in der Zelle geschieht das?">
+<p class="phase">Einstieg · Impuls</p>
+<h1 class="k">Ein Versuch, fünf Jahre lang</h1>
+<span class="badge">2 Min. · Plenum · erst still schauen</span>
+<div class="split" data-film style="grid-template-columns:1.15fr 1fr;align-items:center">
+<svg class="vh" viewBox="0 0 560 470" role="img" aria-label="Eigene Zeichnung: Eine kleine Weide steht in einem abgedeckten Kübel mit Erde. Regen fällt aus einer Wolke. In fünf Jahren wächst die Weide zu einem großen Baum."><g class="vh-wolke"><ellipse cx="195" cy="62" rx="78" ry="30" fill="#E8EEF2"/><ellipse cx="150" cy="70" rx="44" ry="24" fill="#E8EEF2"/><ellipse cx="240" cy="72" rx="46" ry="22" fill="#E8EEF2"/></g><g fill="#7FB3E6"><path class="vh-tropfen" style="--d:0.1s" d="M150 90 c4 6 6 9 6 12 a6 6 0 0 1 -12 0 c0 -3 2 -6 6 -12z"/><path class="vh-tropfen" style="--d:0.8s" d="M180 110 c4 6 6 9 6 12 a6 6 0 0 1 -12 0 c0 -3 2 -6 6 -12z"/><path class="vh-tropfen" style="--d:0.8s" d="M210 92 c4 6 6 9 6 12 a6 6 0 0 1 -12 0 c0 -3 2 -6 6 -12z"/><path class="vh-tropfen" style="--d:1.2s" d="M240 112 c4 6 6 9 6 12 a6 6 0 0 1 -12 0 c0 -3 2 -6 6 -12z"/><path class="vh-tropfen" style="--d:1.0s" d="M165 135 c4 6 6 9 6 12 a6 6 0 0 1 -12 0 c0 -3 2 -6 6 -12z"/><path class="vh-tropfen" style="--d:0.3s" d="M225 138 c4 6 6 9 6 12 a6 6 0 0 1 -12 0 c0 -3 2 -6 6 -12z"/></g><path d="M190 330 h220 l-22 130 h-176 z" fill="#C8693F" stroke="#7A3A1E" stroke-width="3"/><path d="M196 336 h208 l-18 116 h-172 z" fill="#8A6A4A"/><g class="vh-baum"><g fill="none" stroke="#B98A5E" stroke-width="7" stroke-linecap="round"><path d="M300 330 L300 190"/><path d="M300 250 L240 180"/><path d="M300 230 L360 160"/><path d="M300 195 L265 120"/><path d="M300 195 L335 115"/><path d="M240 180 L205 140"/><path d="M360 160 L395 125"/><path d="M300 190 L300 95"/></g><g fill="#8FD18A" stroke="#4E8F48" stroke-width="1.2"><ellipse cx="290" cy="238" rx="15" ry="4.5" transform="rotate(-177 290 238) translate(12 0)"/><ellipse cx="290" cy="238" rx="15" ry="4.5" transform="rotate(-88 290 238) translate(12 0)"/><ellipse cx="280" cy="227" rx="15" ry="4.5" transform="rotate(-184 280 227) translate(12 0)"/><ellipse cx="280" cy="227" rx="15" ry="4.5" transform="rotate(-89 280 227) translate(12 0)"/><ellipse cx="270" cy="215" rx="15" ry="4.5" transform="rotate(-181 270 215) translate(12 0)"/><ellipse cx="270" cy="215" rx="15" ry="4.5" transform="rotate(-83 270 215) translate(12 0)"/><ellipse cx="260" cy="203" rx="15" ry="4.5" transform="rotate(-172 260 203) translate(12 0)"/><ellipse cx="260" cy="203" rx="15" ry="4.5" transform="rotate(-80 260 203) translate(12 0)"/><ellipse cx="250" cy="192" rx="15" ry="4.5" transform="rotate(-171 250 192) translate(12 0)"/><ellipse cx="250" cy="192" rx="15" ry="4.5" transform="rotate(-82 250 192) translate(12 0)"/><ellipse cx="310" cy="218" rx="15" ry="4.5" transform="rotate(-91 310 218) translate(12 0)"/><ellipse cx="310" cy="218" rx="15" ry="4.5" transform="rotate(-8 310 218) translate(12 0)"/><ellipse cx="320" cy="207" rx="15" ry="4.5" transform="rotate(-98 320 207) translate(12 0)"/><ellipse cx="320" cy="207" rx="15" ry="4.5" transform="rotate(7 320 207) translate(12 0)"/><ellipse cx="330" cy="195" rx="15" ry="4.5" transform="rotate(-92 330 195) translate(12 0)"/><ellipse cx="330" cy="195" rx="15" ry="4.5" transform="rotate(-5 330 195) translate(12 0)"/><ellipse cx="340" cy="183" rx="15" ry="4.5" transform="rotate(-102 340 183) translate(12 0)"/><ellipse cx="340" cy="183" rx="15" ry="4.5" transform="rotate(10 340 183) translate(12 0)"/><ellipse cx="350" cy="172" rx="15" ry="4.5" transform="rotate(-101 350 172) translate(12 0)"/><ellipse cx="350" cy="172" rx="15" ry="4.5" transform="rotate(-1 350 172) translate(12 0)"/><ellipse cx="294" cy="182" rx="15" ry="4.5" transform="rotate(-175 294 182) translate(12 0)"/><ellipse cx="294" cy="182" rx="15" ry="4.5" transform="rotate(-74 294 182) translate(12 0)"/><ellipse cx="288" cy="170" rx="15" ry="4.5" transform="rotate(-172 288 170) translate(12 0)"/><ellipse cx="288" cy="170" rx="15" ry="4.5" transform="rotate(-69 288 170) translate(12 0)"/><ellipse cx="282" cy="158" rx="15" ry="4.5" transform="rotate(-158 282 158) translate(12 0)"/><ellipse cx="282" cy="158" rx="15" ry="4.5" transform="rotate(-73 282 158) translate(12 0)"/><ellipse cx="277" cy="145" rx="15" ry="4.5" transform="rotate(-161 277 145) translate(12 0)"/><ellipse cx="277" cy="145" rx="15" ry="4.5" transform="rotate(-59 277 145) translate(12 0)"/><ellipse cx="271" cy="132" rx="15" ry="4.5" transform="rotate(-159 271 132) translate(12 0)"/><ellipse cx="271" cy="132" rx="15" ry="4.5" transform="rotate(-63 271 132) translate(12 0)"/><ellipse cx="306" cy="182" rx="15" ry="4.5" transform="rotate(-119 306 182) translate(12 0)"/><ellipse cx="306" cy="182" rx="15" ry="4.5" transform="rotate(-19 306 182) translate(12 0)"/><ellipse cx="312" cy="168" rx="15" ry="4.5" transform="rotate(-117 312 168) translate(12 0)"/><ellipse cx="312" cy="168" rx="15" ry="4.5" transform="rotate(-25 312 168) translate(12 0)"/><ellipse cx="318" cy="155" rx="15" ry="4.5" transform="rotate(-108 318 155) translate(12 0)"/><ellipse cx="318" cy="155" rx="15" ry="4.5" transform="rotate(-22 318 155) translate(12 0)"/><ellipse cx="323" cy="142" rx="15" ry="4.5" transform="rotate(-120 323 142) translate(12 0)"/><ellipse cx="323" cy="142" rx="15" ry="4.5" transform="rotate(-18 323 142) translate(12 0)"/><ellipse cx="329" cy="128" rx="15" ry="4.5" transform="rotate(-113 329 128) translate(12 0)"/><ellipse cx="329" cy="128" rx="15" ry="4.5" transform="rotate(-15 329 128) translate(12 0)"/><ellipse cx="234" cy="173" rx="15" ry="4.5" transform="rotate(-180 234 173) translate(12 0)"/><ellipse cx="234" cy="173" rx="15" ry="4.5" transform="rotate(-85 234 173) translate(12 0)"/><ellipse cx="228" cy="167" rx="15" ry="4.5" transform="rotate(-187 228 167) translate(12 0)"/><ellipse cx="228" cy="167" rx="15" ry="4.5" transform="rotate(-77 228 167) translate(12 0)"/><ellipse cx="222" cy="160" rx="15" ry="4.5" transform="rotate(-176 222 160) translate(12 0)"/><ellipse cx="222" cy="160" rx="15" ry="4.5" transform="rotate(-80 222 160) translate(12 0)"/><ellipse cx="217" cy="153" rx="15" ry="4.5" transform="rotate(-182 217 153) translate(12 0)"/><ellipse cx="217" cy="153" rx="15" ry="4.5" transform="rotate(-74 217 153) translate(12 0)"/><ellipse cx="211" cy="147" rx="15" ry="4.5" transform="rotate(-186 211 147) translate(12 0)"/><ellipse cx="211" cy="147" rx="15" ry="4.5" transform="rotate(-85 211 147) translate(12 0)"/><ellipse cx="366" cy="154" rx="15" ry="4.5" transform="rotate(-105 366 154) translate(12 0)"/><ellipse cx="366" cy="154" rx="15" ry="4.5" transform="rotate(-3 366 154) translate(12 0)"/><ellipse cx="372" cy="148" rx="15" ry="4.5" transform="rotate(-93 372 148) translate(12 0)"/><ellipse cx="372" cy="148" rx="15" ry="4.5" transform="rotate(10 372 148) translate(12 0)"/><ellipse cx="378" cy="142" rx="15" ry="4.5" transform="rotate(-88 378 142) translate(12 0)"/><ellipse cx="378" cy="142" rx="15" ry="4.5" transform="rotate(5 378 142) translate(12 0)"/><ellipse cx="383" cy="137" rx="15" ry="4.5" transform="rotate(-86 383 137) translate(12 0)"/><ellipse cx="383" cy="137" rx="15" ry="4.5" transform="rotate(8 383 137) translate(12 0)"/><ellipse cx="389" cy="131" rx="15" ry="4.5" transform="rotate(-100 389 131) translate(12 0)"/><ellipse cx="389" cy="131" rx="15" ry="4.5" transform="rotate(6 389 131) translate(12 0)"/><ellipse cx="300" cy="174" rx="15" ry="4.5" transform="rotate(-148 300 174) translate(12 0)"/><ellipse cx="300" cy="174" rx="15" ry="4.5" transform="rotate(-44 300 174) translate(12 0)"/><ellipse cx="300" cy="158" rx="15" ry="4.5" transform="rotate(-144 300 158) translate(12 0)"/><ellipse cx="300" cy="158" rx="15" ry="4.5" transform="rotate(-38 300 158) translate(12 0)"/><ellipse cx="300" cy="142" rx="15" ry="4.5" transform="rotate(-142 300 142) translate(12 0)"/><ellipse cx="300" cy="142" rx="15" ry="4.5" transform="rotate(-41 300 142) translate(12 0)"/><ellipse cx="300" cy="127" rx="15" ry="4.5" transform="rotate(-147 300 127) translate(12 0)"/><ellipse cx="300" cy="127" rx="15" ry="4.5" transform="rotate(-31 300 127) translate(12 0)"/><ellipse cx="300" cy="111" rx="15" ry="4.5" transform="rotate(-139 300 111) translate(12 0)"/><ellipse cx="300" cy="111" rx="15" ry="4.5" transform="rotate(-37 300 111) translate(12 0)"/></g><g fill="none" stroke="#B98A5E" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M300 340 l-30 40 M300 345 l26 44 M300 350 l0 52 M285 362 l-24 10 M314 368 l26 8"/></g></g><path d="M180 326 h108 M312 326 h108" stroke="#F2F2F2" stroke-width="7" stroke-linecap="round"/></svg>
+<div class="vh-werte"><div><b><span data-zaehler data-bis="5" data-stellen="0" data-start="400" data-dauer="6000">5</span> Jahre</b>nur Regenwasser, Kübel abgedeckt</div><div><b>Weide <span data-zaehler data-von="2.5" data-bis="84.5" data-stellen="1" data-start="400" data-dauer="6000">84,5</span> kg</b><span class="klein">am Anfang 2,5 kg</span></div><div><b>Erde <span data-zaehler data-von="100" data-bis="99.94" data-stellen="2" data-start="400" data-dauer="6000">99,94</span> kg</b><span class="klein">am Anfang 100,00 kg (trocken)</span></div><div><button class="b sec" data-film-neu>Noch einmal</button><span class="klein" style="margin-left:14px">Eigene Zeichnung nach van Helmont</span></div></div>
+</div>
+</section>
+<section class="slide" data-min="3">
+<p class="phase">Einstieg · Fragenentwicklung</p>
+<h1 class="k">Eure Fragen</h1>
+<span class="badge">3 Min. · erst zu zweit, dann Plenum</span>
+<div data-fragenfeld data-impulse="Was fällt euch an den Zahlen auf?|Was überrascht euch?|Was passt nicht zusammen?|Welche Frage stellt sich euch?"></div>
+</section>
+<section class="slide" data-min="4">
+<p class="phase">Erarbeitung · Hypothese</p>
+<h1 class="k">Woher kommen die 82 kg?</h1>
+<span class="badge">4 Min. · allein, Partner, Klasse</span>
+<div class="split"><div><p class="task big"><span class="snr">1</span><span><b>Stelle</b> eine Hypothese auf: Woher stammen die 82 kg, die die Weide zugenommen hat?</span><i class="lvl">E</i></p><div class="shilfe"><b>Hilfe:</b> Ich vermute, dass … , weil …</div></div><div><p class="tl">Unsere Hypothesen (antippen = Strich):</p><div class="tally" data-strich><div class="tc"><span class="tn">0</span><span>aus der Erde</span><button class="tm" title="Strich zurück" aria-label="Strich zurück">−</button></div><div class="tc"><span class="tn">0</span><span>aus dem Wasser</span><button class="tm" title="Strich zurück" aria-label="Strich zurück">−</button></div><div class="tc"><span class="tn">0</span><span>aus der Luft</span><button class="tm" title="Strich zurück" aria-label="Strich zurück">−</button></div><div class="tc"><span class="tn">0</span><span>etwas anderes</span><button class="tm" title="Strich zurück" aria-label="Strich zurück">−</button></div></div><p class="tip">Wir prüfen die Hypothesen am Ende der Stunde.</p></div></div>
+</section>
+<section class="slide" data-min="10" data-notes="M1 und M2 liegen auf dem AB. Lesestrategie: pro Absatz 1–2 Schlüsselwörter markieren. Vorlesen anbieten.">
+<p class="phase">Erarbeitung 1 · M1 und M2</p>
+<h1 class="k">Was braucht die Pflanze?</h1>
+<span class="badge">10 Min. · allein, dann Partner</span>
+<div class="split"><div><p class="task"><span class="snr">2</span><span>Lies M1. <b>Markiere</b> in jedem Absatz 1–2 Schlüsselwörter.</span><i class="lvl">D–E</i></p><p class="task"><span class="snr">3</span><span><b>Beschrifte</b> die Pfeile in M2 mit diesen Wörtern: Licht, Wasser, Kohlenstoffdioxid, Sauerstoff, Traubenzucker.</span><i class="lvl">E</i></p><div class="shilfe"><b>Wortspeicher</b><br>Fo-to-syn-the-se · Koh-len-stoff-di-oxid · Sau-er-stoff · Trau-ben-zu-cker · Was-ser · Licht</div></div>
+      <div><div class="frame"><img src="../../../../../assets/img/fotosynthese-1/m2.webp" loading="lazy" alt="M2: Schema der Fotosynthese mit unbeschrifteten Pfeilen"></div><p class="muted">Zum Lesen: Vorlesen lassen ist erlaubt.</p></div></div>
+</section>
+<section class="slide" data-min="3">
+<p class="phase">Sicherung · am Board</p>
+<h1 class="k">Pfeile beschriften</h1>
+<span class="badge">3 Min. · am Board ziehen</span>
+<div data-zuordnen class="m2grid"><div class="m2wrap"><img src="../../../../../assets/img/fotosynthese-1/m2.webp" loading="lazy" alt="M2: Schema der Fotosynthese"><div class="dz ov" data-ans="Licht" style="left:39.7%;top:19.6%;width:15%"></div><div class="dz ov" data-ans="Kohlenstoffdioxid" style="left:33.4%;top:40.2%;width:30%"></div><div class="dz ov" data-ans="Sauerstoff" style="left:81.8%;top:40.5%;width:20%"></div><div class="dz ov" data-ans="Traubenzucker" style="left:67.5%;top:53%;width:22%"></div><div class="dz ov" data-ans="Wasser" style="left:60.5%;top:75.4%;width:17%"></div></div>
+        <div><div class="bank col"><span class="dg">Wasser</span><span class="dg">Licht</span><span class="dg">Sauerstoff</span><span class="dg">Kohlenstoffdioxid</span><span class="dg">Traubenzucker</span></div><div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><button class="b lsg" style="background:var(--y);color:var(--ink)">Lösung</button><span class="fb"></span></div><p class="tip">Wort ziehen oder antippen, dann Feld am Pfeil antippen.</p></div></div>
+</section>
+<section class="slide" data-min="8">
+<p class="phase">Erarbeitung 2 · M1 und M3</p>
+<h1 class="k">Wo geschieht die Fotosynthese?</h1>
+<span class="badge">8 Min. · Partnerarbeit</span>
+<div class="split"><div><p class="task"><span class="snr">4</span><span><b>Gib</b> die Wortgleichung der Fotosynthese an. Nutze M1 und M2.</span><i class="lvl">E</i></p><p class="task"><span class="snr">5</span><span><b>Beschreibe</b> mit M1 und M3, welche Aufgabe die Chloroplasten in der Blattzelle haben.</span><i class="lvl">E</i></p><div class="shilfe"><b>Hilfe:</b> Im Chloroplast wird …</div></div>
       <div><div class="frame m3f"><div class="m3wrap"><img src="../../../../../assets/img/fotosynthese-1/m3.webp" loading="lazy" alt="M3: Schema einer Blattzelle mit Chloroplasten, Zellwand, Zellkern und Vakuole">
         <span class="hs chl" data-n="Chloroplast" style="left:12%;top:58.92857142857143%"></span><span class="hs chl" data-n="Chloroplast" style="left:21%;top:78.57142857142857%"></span><span class="hs chl" data-n="Chloroplast" style="left:30%;top:21.42857142857143%"></span><span class="hs chl" data-n="Chloroplast" style="left:47%;top:26.78571428571429%"></span><span class="hs chl" data-n="Chloroplast" style="left:53.5%;top:46.42857142857143%"></span><span class="hs chl" data-n="Chloroplast" style="left:52%;top:71.42857142857143%"></span><span class="hs chl" data-n="Chloroplast" style="left:12%;top:41.07142857142858%"></span>
         <span class="hs" data-n="Zellkern" style="left:15%;top:25%"></span><span class="hs" data-n="Zellsaftraum (Vakuole)" style="left:35%;top:53.5%"></span></div></div>
-        <p class="tl m3t">Tippe auf alle Chloroplasten: <b id="m3c">0</b> von 7 <button class="b sec s" id="m3r">Neu</button></p><p class="fb" id="m3fb"></p></div></div></section>
-<section class="slide light"  data-notes="Die Wortgleichung wird an der Tafel zusammengesetzt. Erde und Wärme sind Ablenker. Die Reihenfolge innerhalb der Ausgangsstoffe und innerhalb der Produkte ist egal.">
-    <h1>An der Tafel: Wortgleichung</h1>
-      <p class="task s"><span class="snr">4</span><span><b>Gib</b> die Wortgleichung der Fotosynthese an. Nutze M1 und M2.</span><i class="lvl">E</i></p>
-      <div data-dnd id="gl" class="glgrid">
-        <div class="eqz">
-          <div class="eqr"><div class="dz w" data-grp="aus"></div><b>+</b><div class="dz w" data-grp="aus"></div></div>
-          <div class="eqr mid"><span class="down"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span><span>mit</span><div class="dz" data-grp="en"></div><span>im</span><div class="dz" data-grp="ort"></div></div>
-          <div class="eqr"><div class="dz w" data-grp="pro"></div><b>+</b><div class="dz w" data-grp="pro"></div></div>
-        </div>
-        <div><div class="bank col"><span class="dg">Traubenzucker</span><span class="dg">Chloroplast</span><span class="dg">Wasser</span><span class="dg">Erde</span><span class="dg">Lichtenergie</span><span class="dg">Sauerstoff</span><span class="dg">Wärme</span><span class="dg">Kohlenstoffdioxid</span></div><div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><span class="fb"></span></div></div>
-      </div></section>
-<section class="slide light"  data-notes="Deutung von Van Helmonts Versuch im Plenum besprechen. Erwartungshorizont steht nicht im öffentlichen Repository.">
-    <h1>Zusatz für Schnelle</h1><span class="badge">Niveau F</span>
-      <div class="split"><div><div class="mint pad"><p class="task"><span class="snr">7a</span><span><b>Beurteile</b> Van Helmonts Deutung: Die Weide habe ihre Masse nur aus dem Wasser aufgebaut.</span><i class="lvl">F</i></p></div><div class="mint pad"><p class="task"><span class="snr">7b</span><span><b>Erläutere</b>, warum die Erde trotzdem 0,06 kg leichter wurde.</span><i class="lvl">F</i></p></div></div>
-      <div class="frame"><img src="../../../../../assets/img/fotosynthese-1/vh.webp" loading="lazy" alt="Van-Helmont-Versuch"></div></div></section>
-<section class="slide light"  data-notes="Zusammenfassung. Der Ort der Fotosynthese ist der Chloroplast. Reihenfolge der beiden Pfeile rechts nicht entscheidend.">
-    <h1>Auflösung: Pfeile und Wortgleichung</h1>
-      <div class="split"><div class="frame"><img src="../../../../../assets/img/fotosynthese-1/m2l.webp" loading="lazy" alt="M2 mit Beschriftung"></div>
-      <div class="chips"><span class="chip c1">Kohlenstoffdioxid</span><span class="chip c2">Wasser</span><span class="chip c3">Lichtenergie, im Chloroplast</span><span class="chip c4">Traubenzucker</span><span class="chip c5">Sauerstoff</span></div></div></section>
-<section class="slide light" data-min="8" data-notes="Hypothesen aus der Strichliste mit den Zahlen prüfen. Die Masse stammt nicht aus der Erde. Quellen-Check: Wasser und Kohlenstoffdioxid aus der Luft liefern Masse. Erde nur 0,06 kg, Licht ist Energie.">
-    <h1>Woher stammt die Masse?</h1><span class="badge">8 Min.</span>
-      <div class="split"><div><div class="stats"><div class="stat g"><b>+ 82 kg</b>Weide</div><div class="stat s"><b>− 0,06 kg</b>Erde (trocken)</div></div>
+        <p class="tl m3t">Tippe auf alle Chloroplasten: <b id="m3c">0</b> von 7 <button class="b sec s" id="m3r">Neu</button></p><p class="fb" id="m3fb"></p></div></div>
+</section>
+<section class="slide" data-min="3" data-notes="Erde und Wärme sind Ablenker. Die Reihenfolge innerhalb der Ausgangsstoffe und innerhalb der Produkte ist egal.">
+<p class="phase">Sicherung · am Board</p>
+<h1 class="k">Die Wortgleichung</h1>
+<span class="badge">3 Min. · am Board ziehen</span>
+<div data-zuordnen class="glgrid"><div class="eqz"><div class="eqr"><div class="dz" data-ans="Kohlenstoffdioxid|Wasser"></div><b>+</b><div class="dz" data-ans="Kohlenstoffdioxid|Wasser"></div></div><div class="eqr mid"><span class="down"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span><span>mit</span><div class="dz" data-ans="Lichtenergie"></div><span>im</span><div class="dz" data-ans="Chloroplast"></div></div><div class="eqr"><div class="dz" data-ans="Traubenzucker|Sauerstoff"></div><b>+</b><div class="dz" data-ans="Traubenzucker|Sauerstoff"></div></div></div><p class="tip" style="grid-column:1">Zwei Wörter passen nicht.</p><div style="grid-row:1;grid-column:2"><div class="bank col g2"><span class="dg">Traubenzucker</span><span class="dg">Chloroplast</span><span class="dg">Wasser</span><span class="dg">Erde</span><span class="dg">Lichtenergie</span><span class="dg">Sauerstoff</span><span class="dg">Wärme</span><span class="dg">Kohlenstoffdioxid</span></div><div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><button class="b lsg" style="background:var(--y);color:var(--ink)">Lösung</button><span class="fb"></span></div></div></div>
+</section>
+<section class="slide">
+<p class="phase">Vertiefung · Erweiterung ●●●</p>
+<h1 class="k">Zusatz für Schnelle</h1>
+<span class="badge">Niveau F</span>
+<div class="split"><div><div class="mint pad"><p class="task"><span class="snr">7a</span><span><b>Beurteile</b> Van Helmonts Deutung: Die Weide habe ihre Masse nur aus dem Wasser aufgebaut.</span><i class="lvl">F</i></p></div><div class="mint pad"><p class="task"><span class="snr">7b</span><span><b>Erläutere</b>, warum die Erde trotzdem 0,06 kg leichter wurde.</span><i class="lvl">F</i></p></div></div>
+      <div class="frame"><img src="../../../../../assets/img/fotosynthese-1/vh.webp" loading="lazy" alt="Van-Helmont-Versuch"></div></div>
+</section>
+<section class="slide" data-min="8" data-notes="Hypothesen aus der Strichliste mit den Zahlen prüfen. Die Masse stammt nicht aus der Erde. Wasser und Kohlenstoffdioxid aus der Luft liefern Masse. Erde nur 0,06 kg, Licht ist Energie.">
+<p class="phase">Sicherung · Hypothesen prüfen</p>
+<h1 class="k">Woher stammt die Masse?</h1>
+<span class="badge">8 Min. · allein, dann Plenum</span>
+<div class="split"><div><div class="stats"><div class="stat g"><b>+ 82 kg</b>Weide</div><div class="stat s"><b>− 0,06 kg</b>Erde (trocken)</div></div>
       <div class="shilfe sm"><b>Hilfe</b><br>Die Erde wurde nur 0,06 kg leichter. Deshalb … (Z. …) Die Weide baut ihre Masse aus … und … auf (Z. …).</div></div><div><p class="task big"><span class="snr">6</span><span><b>Erkläre</b> mit den Messwerten aus M0 und mit Zeilenangaben aus M1, woher die 82 kg der Weide stammen.</span><i class="lvl">E–F</i></p></div></div>
       <div id="qc"><p class="tl">Was kann Masse für die Weide liefern? Tippe die richtigen Karten an.</p>
       <div class="qrow"><div class="qc" data-y="0" data-e="Die Erde wurde nur 0,06 kg leichter.">Erde</div><div class="qc" data-y="1" data-e="Ausgangsstoff der Fotosynthese.">Wasser</div><div class="qc" data-y="1" data-e="Zweiter Ausgangsstoff.">Kohlenstoffdioxid aus der Luft</div><div class="qc" data-y="0" data-e="Energie, kein Stoff.">Licht</div>
-      <div class="qctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button></div></div><p class="fb"></p></div></section>
-<section class="slide light"  data-notes="Hefteintrag abschreiben lassen. Danach Exit-Ticket.">
-    <h1>Hefteintrag: Fotosynthese</h1>
-      <div class="split"><div class="eq"><div class="line"><span class="chip c1">Kohlenstoffdioxid</span><b>+</b><span class="chip c2">Wasser</span></div>
-      <div class="line mid"><span class="down"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span> <b>Lichtenergie, im Chloroplast</b></div>
-      <div class="line"><span class="chip c4">Traubenzucker</span><b>+</b><span class="chip c5">Sauerstoff</span></div></div>
-      <div class="frame mini"><img src="../../../../../assets/img/fotosynthese-1/zelle.webp" loading="lazy" alt="Blattzelle mit Chloroplasten"></div></div>
-      <div class="mint merk"><b>Merksatz</b><br>Pflanzen bauen ihre Masse selbst auf. Ihre Baustoffe stammen vor allem aus Luft (Kohlenstoffdioxid) und Wasser, nicht aus der Erde.</div></section>
-<section class="slide dark" data-min="5" data-notes="Einsammeln. Bewertung nach dem Erwartungshorizont der Lehrkraft, der nicht im öffentlichen Repository steht.">
-    <h1>Exit-Ticket</h1><span class="badge">5 Min.</span>
-      <div class="exit"><b class="circ y big"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3a2.85 2.85 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></b><div class="frame white"><p class="exitq"><b>Begründe</b>, warum Zwiebelzellen keine Fotosynthese betreiben können.</p></div></div>
-      <p class="onDark">Schreibe auf das AB (letzte Seite) oder auf einen Zettel. Wir sammeln die Antworten ein.</p></section>
-<div id="foot"><span>Biologie · Die Zelle · Fotosynthese</span><span id="date"></span><span id="num"></span></div>
-<div id="tools"><button id="prev" title="zurück">‹</button><button id="next" title="weiter">›</button></div><div id="bar"></div><div id="notes"></div></div>
-<div id="help">← → blättern · P Stift · T Timer · L Lärmampel · F Vollbild · N Notizen</div>
+      <div class="qctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button></div></div><p class="fb"></p></div>
+</section>
+<section class="slide" data-min="4" data-notes="Erst allein ergänzen lassen, dann eine Person am Board ziehen lassen. Die erste Lücke ist Kohlenstoffdioxid (aus der Luft); Prüfen akzeptiert beide Reihenfolgen.">
+<p class="phase">Sicherung · Merksatz</p>
+<h1 class="k">Unser Merksatz</h1>
+<span class="badge">4 Min. · allein, dann prüfen</span>
+<div data-zuordnen><p class="task s"><span class="snr">MS</span><span><b>Ergänze</b> den Merksatz. Schreibe ihn danach ins Heft.</span><i class="lvl">D–E</i></p><p class="eqfest"><b>Wortgleichung:</b> Kohlenstoffdioxid + Wasser → Traubenzucker + Sauerstoff (mit Lichtenergie, im Chloroplast)</p><div class="merk" style="line-height:2;font-size:25px">Pflanzen bauen ihre Masse selbst auf. Ihre Baustoffe sind <span class="dz il" data-ans="Kohlenstoffdioxid"></span> aus der Luft und <span class="dz il" data-ans="Wasser"></span>, nicht die <span class="dz il" data-ans="Erde"></span>. Das geschieht bei der <span class="dz il" data-ans="Fotosynthese"></span> im <span class="dz il" data-ans="Chloroplast"></span>. Die Energie dafür liefert das <span class="dz il" data-ans="Licht"></span>.</div><div class="bank"><span class="dg">Licht</span><span class="dg">Erde</span><span class="dg">Chloroplast</span><span class="dg">Kohlenstoffdioxid</span><span class="dg">Fotosynthese</span><span class="dg">Wasser</span></div><div class="ctl"><button class="b chk">Prüfen</button><button class="b sec rst">Neu</button><button class="b lsg" style="background:var(--y);color:var(--ink)">Lösung</button><span class="fb"></span></div></div>
+</section>
+<section class="slide" data-min="4" data-notes="Einsammeln. Bewertung nach dem Erwartungshorizont der Lehrkraft, der nicht im öffentlichen Repository steht.">
+<p class="phase">Reflexion · Exit-Ticket</p>
+<h1 class="k">Exit-Ticket</h1>
+<span class="badge">4 Min. · allein, auf den Zettel</span>
+<div class="mint pad" style="margin:0 0 14px"><p class="lf">Unsere Frage: <span data-leitfrage></span></p></div><p class="task big"><span class="snr">ET</span><span><b>Begründe</b>, warum Zwiebelzellen keine Fotosynthese betreiben können.</span><i class="lvl">E</i></p><div class="shilfe"><b>Satzbausteine:</b> Zwiebelzellen haben keine … · Die Fotosynthese läuft nur im … ab · Deshalb …</div><p class="tip">Schreibe auf das AB (letzte Seite) oder auf einen Zettel. Wir sammeln ein.</p>
+</section>
+<section class="slide" data-min="2">
+<p class="phase">Reflexion · Selbsteinschätzung</p>
+<h1 class="k">Ich kann …</h1>
+<span class="badge">2 Min. · allein</span>
+<div data-selbst><p class="lead s" style="margin-bottom:12px">Tippe an, wie sicher du dich fühlst. Das ist nur für dich.</p><div class="sb"><span class="t">Ich kann eine <b>Hypothese aufstellen</b>, woher die Masse einer Pflanze stammt.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div><div class="sb"><span class="t">Ich kann die Wortgleichung der Fotosynthese <b>angeben</b>.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div><div class="sb"><span class="t">Ich kann <b>erklären</b>, warum die Masse der Weide nicht aus der Erde stammt.</span><span class="st"><button aria-pressed="false">kann ich</button><button aria-pressed="false">fast</button><button aria-pressed="false">noch nicht</button></span></div></div>
+</section>
+
+<div id="nummer"></div>
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
 </div>
-<script>
-const S=[...document.querySelectorAll('.slide')];let i=0,K=1;
-const st=document.getElementById('stage'),bar=document.getElementById('bar'),nt=document.getElementById('notes');
-var bu=document.getElementById('buehne');function fit(){K=Math.min(bu.clientWidth/1280,bu.clientHeight/720);st.style.transform='translate(-50%,-50%) scale('+K+')'}
-function show(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach(function(s,k){s.classList.toggle('on',k===i)});
- document.getElementById('num').textContent=(i+1)+' / '+S.length;bar.style.transform='scaleX('+((i+1)/S.length)+')';
- nt.textContent=S[i].dataset.notes||'';document.getElementById('foot').className=S[i].classList.contains('dark')?'ondark':'';try{location.hash=i+1}catch(x){}}
-function typing(e){const t=e.target;return t&&(t.isContentEditable||t.tagName==='TEXTAREA'||t.tagName==='INPUT')}
-addEventListener('keydown',function(e){if(typing(e))return;
- if(['ArrowRight','PageDown',' '].indexOf(e.key)>=0){e.preventDefault();show(i+1)}else if(['ArrowLeft','PageUp'].indexOf(e.key)>=0){show(i-1)}
- else if(e.key==='Home')show(0);else if(e.key==='End')show(S.length-1);
- else if(e.key==='f'||e.key==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
- else if(e.key==='n'||e.key==='N'){nt.style.display=nt.style.display==='block'?'none':'block'}});
-document.getElementById('prev').onclick=function(){show(i-1)};document.getElementById('next').onclick=function(){show(i+1)};
+</div>
 
-/* ---------- Ziehen und Ablegen (Maus, Finger, Stift; auch Antippen) ---------- */
-function initDnD(root){
- const bank=root.querySelector('.bank'),items=[].slice.call(root.querySelectorAll('.dg')),zones=[].slice.call(root.querySelectorAll('.dz')),fb=root.querySelector('.fb');let sel=null;
- function clearMarks(){zones.forEach(function(z){z.classList.remove('ok','bad')});if(fb){fb.textContent='';fb.className='fb'}}
- function place(it,z){const old=z.querySelector('.dg');if(old&&old!==it)bank.appendChild(old);z.appendChild(it);it.classList.remove('sel');sel=null;items.forEach(function(x){x.classList.remove('sel')});clearMarks()}
- function home(it){bank.appendChild(it);clearMarks()}
- items.forEach(function(it){let sx,sy,moved=false,id=null;
-  it.addEventListener('pointerdown',function(e){it.setPointerCapture(e.pointerId);sx=e.clientX;sy=e.clientY;moved=false;id=e.pointerId;it.classList.add('drag');e.preventDefault()});
-  it.addEventListener('pointermove',function(e){if(id!==e.pointerId)return;const dx=(e.clientX-sx)/K,dy=(e.clientY-sy)/K;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;if(moved)it.style.transform='translate('+dx+'px,'+dy+'px)'});
-  it.addEventListener('pointerup',function(e){if(id!==e.pointerId)return;it.classList.remove('drag');try{it.releasePointerCapture(id)}catch(x){}id=null;it.style.transform='';
-   if(moved){it.style.pointerEvents='none';const t=document.elementFromPoint(e.clientX,e.clientY);it.style.pointerEvents='';const z=t&&t.closest?t.closest('.dz'):null;if(z&&root.contains(z))place(it,z);else home(it)}
-   else{const pz=it.parentElement.classList.contains('dz')?it.parentElement:null;
-    if(pz){if(sel&&sel!==it){place(sel,pz)}else home(it)}
-    else{sel=(sel===it)?null:it;items.forEach(function(x){x.classList.toggle('sel',x===sel)})}}});
-  it.addEventListener('pointercancel',function(){id=null;it.style.transform='';it.classList.remove('drag')})});
- zones.forEach(function(z){z.addEventListener('click',function(e){if(sel&&!z.querySelector('.dg'))place(sel,z)})});
- root.querySelector('.rst').onclick=function(){items.forEach(function(x){bank.appendChild(x)});clearMarks()};
- root.querySelector('.chk').onclick=function(){let ok=0,n=zones.length;
-  if(root.id==='gl'){const set={aus:['Kohlenstoffdioxid','Wasser'],en:['Lichtenergie'],ort:['Chloroplast'],pro:['Traubenzucker','Sauerstoff']};
-   zones.forEach(function(z){const it=z.querySelector('.dg'),g=z.dataset.grp;z.classList.remove('ok','bad');if(it&&set[g].indexOf(it.textContent)>=0){z.classList.add('ok');ok++}else z.classList.add('bad')})}
-  else{zones.forEach(function(z){const it=z.querySelector('.dg');z.classList.remove('ok','bad');if(it&&it.textContent===z.dataset.ans){z.classList.add('ok');ok++}else z.classList.add('bad')})}
-  fb.textContent=ok===n?'Alles richtig':ok+' von '+n+' richtig. Rot: noch einmal versuchen.';fb.className='fb '+(ok===n?'good':'warn')}}
-document.querySelectorAll('[data-dnd]').forEach(initDnD);
-
-/* ---------- Strichliste Hypothesen ---------- */
-document.querySelectorAll('#tally .tc').forEach(function(c){const n=c.querySelector('.tn');
- c.addEventListener('click',function(e){if(e.target.classList.contains('tm')){c.dataset.n=Math.max(0,+c.dataset.n-1)}else c.dataset.n=+c.dataset.n+1;n.textContent=c.dataset.n})});
-
-/* ---------- M3: Chloroplasten antippen ---------- */
-(function(){const hs=[].slice.call(document.querySelectorAll('.hs')),c=document.getElementById('m3c'),f=document.getElementById('m3fb');
- function upd(){const g=document.querySelectorAll('.hs.chl.got').length;c.textContent=g;if(g===7){f.textContent='Alle Chloroplasten gefunden. Dort läuft die Fotosynthese ab.';f.className='fb good'}}
- hs.forEach(function(h){h.addEventListener('click',function(){if(h.classList.contains('chl')){h.classList.add('got');if(!f.classList.contains('good')){f.textContent='';}upd()}
-  else{f.textContent='Das ist der '+h.dataset.n+', nicht der Chloroplast.';f.className='fb warn';h.classList.add('no');setTimeout(function(){h.classList.remove('no')},900)}})});
- document.getElementById('m3r').onclick=function(){hs.forEach(function(h){h.classList.remove('got')});f.textContent='';f.className='fb';c.textContent='0'}})();
-
-/* ---------- Quellen-Check ---------- */
-(function(){const q=document.getElementById('qc'),cards=[].slice.call(q.querySelectorAll('.qc')),f=q.querySelector('.fb');
- function clr(){cards.forEach(function(c){c.classList.remove('ok','bad');const s=c.querySelector('small');if(s)s.remove()});f.textContent='';f.className='fb'}
- cards.forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('pick');clr()})});
- q.querySelector('.rst').onclick=function(){cards.forEach(function(c){c.classList.remove('pick')});clr()};
- q.querySelector('.chk').onclick=function(){let ok=0;cards.forEach(function(c){const right=(c.classList.contains('pick')?'1':'0')===c.dataset.y;c.classList.remove('ok','bad');c.classList.add(right?'ok':'bad');if(right)ok++;const s=c.querySelector('small')||document.createElement('small');s.textContent=c.dataset.e;c.appendChild(s)});
-  f.textContent=ok===4?'Alles richtig: Die Masse stammt aus Luft (Kohlenstoffdioxid) und Wasser.':ok+' von 4 richtig. Lies die Hinweise auf den Karten.';f.className='fb '+(ok===4?'good':'warn')}})();
-
-addEventListener('resize',fit);fit();addEventListener('load',fit);if(window.ResizeObserver)new ResizeObserver(fit).observe(bu);setTimeout(function(){const h=document.getElementById('help');if(h)h.style.display='none'},6000);
-document.getElementById('date').textContent=new Date().toLocaleDateString('de-DE');
-var h0=1;try{h0=parseInt(location.hash.slice(1))||1}catch(x){}show(h0-1);</script>
 <!-- Spielinhalte für die Belohnungsspiele (Memory, Quiz, Zuordnen, Wortsalat). ENTWURF: bitte fachlich gegenlesen.
      Jedes Paar: ["Begriff", "kurze Erklärung", "Silben (optional)"]. Mindestens 4 Paare, besser 8. Nur Inhalte dieser Stunde. -->
 <script type="application/json" id="lp-spiel-daten">
@@ -276,4 +187,28 @@ var h0=1;try{h0=parseInt(location.hash.slice(1))||1}catch(x){}show(h0-1);</scrip
  ]
 }
 </script>
-<script src="../../../../../assets/js/praesentation.js" defer></script></body></html>
+<script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/impulsfilm.js" defer></script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+/* ---------- M3: Chloroplasten antippen ---------- */
+(function(){const hs=[].slice.call(document.querySelectorAll('.hs')),c=document.getElementById('m3c'),f=document.getElementById('m3fb');
+ function upd(){const g=document.querySelectorAll('.hs.chl.got').length;c.textContent=g;if(g===7){f.textContent='Alle Chloroplasten gefunden. Dort läuft die Fotosynthese ab.';f.className='fb good'}}
+ hs.forEach(function(h){h.addEventListener('click',function(){if(h.classList.contains('chl')){h.classList.add('got');if(!f.classList.contains('good')){f.textContent='';}upd()}
+  else{f.textContent='Das ist der '+h.dataset.n+', nicht der Chloroplast.';f.className='fb warn';h.classList.add('no');setTimeout(function(){h.classList.remove('no')},900)}})});
+ document.getElementById('m3r').onclick=function(){hs.forEach(function(h){h.classList.remove('got')});f.textContent='';f.className='fb';c.textContent='0'}})();
+
+/* ---------- Quellen-Check ---------- */
+(function(){const q=document.getElementById('qc'),cards=[].slice.call(q.querySelectorAll('.qc')),f=q.querySelector('.fb');
+ function clr(){cards.forEach(function(c){c.classList.remove('ok','bad');const s=c.querySelector('small');if(s)s.remove()});f.textContent='';f.className='fb'}
+ cards.forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('pick');clr()})});
+ q.querySelector('.rst').onclick=function(){cards.forEach(function(c){c.classList.remove('pick')});clr()};
+ q.querySelector('.chk').onclick=function(){let ok=0;cards.forEach(function(c){const right=(c.classList.contains('pick')?'1':'0')===c.dataset.y;c.classList.remove('ok','bad');c.classList.add(right?'ok':'bad');if(right)ok++;const s=c.querySelector('small')||document.createElement('small');s.textContent=c.dataset.e;c.appendChild(s)});
+  f.textContent=ok===4?'Alles richtig: Die Masse stammt aus Luft (Kohlenstoffdioxid) und Wasser.':ok+' von 4 richtig. Lies die Hinweise auf den Karten.';f.className='fb '+(ok===4?'good':'warn')}})();
+
+
+});
+</script>
+</body>
+</html>
