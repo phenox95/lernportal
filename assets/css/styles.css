@@ -248,6 +248,12 @@ body[data-subject="Geografie"] .fach-intro::after { background: var(--geo); -web
 .chip svg { flex: none; color: var(--text-2); }
 .chip-niveau { letter-spacing: 0.08em; color: var(--text-2); }
 .row-nr { flex: none; align-self: flex-start; min-width: 2.25rem; text-align: center; color: var(--text); }
+/* Eine Nummer je Stunde: weitere Materialien derselben Stunde ohne Trennlinie darunter, etwas kleiner */
+.stunde-block { border-bottom: 1px solid var(--line); }
+.stunde-block > .row { border-bottom: 0; }
+.stunde-block > .row:not(:last-child) { padding-bottom: 0.5rem; }
+.row-teil { min-height: 0; padding-top: 0.5rem; }
+.row-teil .row-title { font-size: 1rem; }
 .badge { display: inline-block; margin-left: 0.5rem; padding: 0.05rem 0.6rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--surface); color: var(--text-2); font-size: 0.75rem; font-weight: 400; vertical-align: 0.1em; letter-spacing: 0; }
 
 /* Klassenstufen als kompakte Auswahl */

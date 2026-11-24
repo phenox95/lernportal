@@ -157,6 +157,8 @@ for i, p in enumerate(projekte):
         err(f"{n}: Eine Präsentation hat \"geprueft\": true, im Eintrag fehlt \"begriffe\": true (sonst fehlen die Begriffe auf der Seite begriffe/)")
 
 eintraege = {p.get("path") for p in projekte}
+# auch Ordner, die eine Materialseite unter "dateien" führt (z. B. Präsentation Teil 2 einer Stunde in einem Nachbarordner)
+eintraege |= {d.get("pfad") for p in projekte for d in (p.get("dateien") or []) if isinstance(d, dict) and str(d.get("pfad", "")).endswith("/")}
 for idx in ROOT.glob("*/klasse-*/**/index.html"):
     ordner = idx.parent.relative_to(ROOT).as_posix() + "/"
     if 'http-equiv="refresh"' in idx.read_text(encoding="utf-8", errors="ignore")[:800]:
