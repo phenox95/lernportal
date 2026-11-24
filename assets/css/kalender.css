@@ -41,3 +41,11 @@
 .kal-links a:hover { background: var(--field); }
 .kal-geplant { display: inline-block; margin-left: 0.5rem; padding: 0.05rem 0.5rem; border: 1px solid var(--rahmen); border-radius: 1rem; font-size: 0.75rem; font-weight: 700; }
 @media (max-width: 40rem) { .kal-tagzelle { min-height: 3rem; font-size: 0.9375rem; } .kal-kopf h2 { font-size: 1.0625rem; } }
+
+/* Ferien, Feiertage, unterrichtsfreie Tage */
+.kal-tagzelle.ferien { background: var(--field); }
+.kal-tagzelle.freitag { background: repeating-linear-gradient(135deg, var(--field) 0 6px, var(--surface) 6px 12px); }
+.kal-tagzelle.gewaehlt.ferien, .kal-tagzelle.gewaehlt.freitag { border-color: var(--text); }
+.kal-sw-ferien { background: var(--field); box-shadow: inset 0 0 0 1px var(--rahmen); }
+.kal-sw-frei { background: repeating-linear-gradient(135deg, var(--field) 0 3px, var(--surface) 3px 6px); box-shadow: inset 0 0 0 1px var(--rahmen); }
+.kal-ferien { margin-top: 0.25rem; color: var(--text-2); }
