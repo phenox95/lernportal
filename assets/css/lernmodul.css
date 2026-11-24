@@ -1,0 +1,169 @@
+/* Lernportal – Bausteine für Lernmodule auf Vorlagenseiten (body.lp-seite).
+   Gehört zu assets/js/lernmodul.js. Nach material.css laden. Nutzt nur die lp-Variablen,
+   eigene Farben nur für Abbildungen (mit Werten für den Dunkelmodus).
+   Rückmeldungen tragen immer Zeichen und Text (✓ / ✗), nie nur Farbe. */
+
+:root {
+  --lm-ok: #0c6a49; --lm-bad: #a12a1a;
+  --lm-ok-bg: rgba(12, 106, 73, 0.12); --lm-bad-bg: rgba(161, 42, 26, 0.1);
+  --lm-hl: #c24a08;
+  /* Abbildungen Nervensystem */
+  --lm-zns: #dcdaf0; --lm-zns-rand: #494294;
+  --lm-sens: #1f5f9a; --lm-motor: #a3470a;
+  --lm-haut: #efe3d6; --lm-haut-rand: #8a7a68;
+  --lm-zelle: #e4e1f3; --lm-zelle-rand: #494294;
+  --lm-kern: #8f86d0; --lm-myelin: #f3e3a8; --lm-myelin-rand: #8a6a08;
+  --lm-muskel: #f1d3cf; --lm-muskel-rand: #8c3b31;
+  --lm-platte: #5b5b5b; --lm-hitze: #c2410c;
+}
+:root[data-theme="dark"] {
+  --lm-ok: #6fd9b0; --lm-bad: #ff9a8a;
+  --lm-ok-bg: rgba(111, 217, 176, 0.14); --lm-bad-bg: rgba(255, 154, 138, 0.14);
+  --lm-hl: #ffa468;
+  --lm-zns: #2e2b52; --lm-zns-rand: #b8b2f0;
+  --lm-sens: #8ab8e8; --lm-motor: #ffb066;
+  --lm-haut: #3a332c; --lm-haut-rand: #c9b8a4;
+  --lm-zelle: #2e2b52; --lm-zelle-rand: #b8b2f0;
+  --lm-kern: #7d74c4; --lm-myelin: #5c4f1f; --lm-myelin-rand: #e8c860;
+  --lm-muskel: #4a2a26; --lm-muskel-rand: #f0a89e;
+  --lm-platte: #9a9a9a; --lm-hitze: #ff8a50;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="auto"], :root:not([data-theme]) {
+    --lm-ok: #6fd9b0; --lm-bad: #ff9a8a;
+    --lm-ok-bg: rgba(111, 217, 176, 0.14); --lm-bad-bg: rgba(255, 154, 138, 0.14);
+    --lm-hl: #ffa468;
+    --lm-zns: #2e2b52; --lm-zns-rand: #b8b2f0;
+    --lm-sens: #8ab8e8; --lm-motor: #ffb066;
+    --lm-haut: #3a332c; --lm-haut-rand: #c9b8a4;
+    --lm-zelle: #2e2b52; --lm-zelle-rand: #b8b2f0;
+    --lm-kern: #7d74c4; --lm-myelin: #5c4f1f; --lm-myelin-rand: #e8c860;
+    --lm-muskel: #4a2a26; --lm-muskel-rand: #f0a89e;
+    --lm-platte: #9a9a9a; --lm-hitze: #ff8a50;
+  }
+}
+
+/* Knöpfe */
+.lm-knopf {
+  min-height: 2.75rem; padding: 0.45rem 1.1rem; font: inherit; font-weight: 700;
+  color: #fff; background: var(--lp-akzent); border: 2px solid var(--lp-akzent);
+  border-radius: calc(var(--lp-radius) * 1.2); cursor: pointer;
+}
+.lm-knopf.zweit { color: var(--lp-text); background: transparent; border-color: var(--lp-rahmen); }
+.lm-knopf[disabled] { opacity: 0.55; cursor: not-allowed; }
+.lm-leiste { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 0.9rem; }
+.lm-rm { min-height: 1.5em; margin: 0.6rem 0 0; font-weight: 700; max-width: 70ch; }
+.lm-rm.ok { color: var(--lm-ok); }
+
+/* Karten (Reihenfolge und Ablage) */
+.lm-vorrat {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; min-height: 3.5rem; margin: 0.5rem 0 0; padding: 0.6rem;
+  border: 2px dashed var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-gruppe);
+}
+.lm-vorrat:empty::before { content: "Alle Karten liegen."; align-self: center; color: var(--lp-text2); font-size: 0.9375rem; }
+.lm-karte {
+  display: inline-flex; flex-direction: column; align-items: flex-start; gap: 0.1rem;
+  min-height: 2.75rem; max-width: 100%; padding: 0.45rem 0.8rem; text-align: left;
+  font: inherit; line-height: 1.35; color: var(--lp-text); background: var(--lp-flaeche);
+  border: 2px solid var(--lp-rahmen); border-radius: calc(var(--lp-radius) * 0.9); cursor: pointer;
+  touch-action: manipulation;
+}
+.lm-karte small { font-size: 0.875rem; color: var(--lp-text2); }
+.lm-karte[aria-pressed="true"] { border-color: var(--lp-akzent); box-shadow: 0 0 0 3px var(--lp-akzent); }
+.lm-karte.ok { border-color: var(--lm-ok); background: var(--lm-ok-bg); }
+.lm-karte.falsch { border-color: var(--lm-bad); border-style: dashed; background: var(--lm-bad-bg); }
+.lm-karte .lm-marke { font-weight: 700; }
+.lm-karte.ok .lm-marke { color: var(--lm-ok); }
+.lm-karte.falsch .lm-marke { color: var(--lm-bad); }
+
+/* Reihenfolge: nummerierte Plätze mit Pfeil dazwischen */
+.lm-kette { display: grid; gap: 0; margin: 0.9rem 0 0; padding: 0; list-style: none; counter-reset: lm-p; }
+.lm-platz { counter-increment: lm-p; display: grid; grid-template-columns: 2rem minmax(0, 1fr); align-items: center; gap: 0.5rem; }
+.lm-platz::before { content: counter(lm-p); font-weight: 700; text-align: right; color: var(--lp-text2); }
+.lm-platz + .lm-platz { margin-top: 1.6rem; position: relative; }
+.lm-platz + .lm-platz::after {
+  content: "↓"; position: absolute; left: 2.5rem; top: -1.55rem; font-size: 1.2rem; line-height: 1.5rem; color: var(--lp-text2);
+}
+.lm-leer {
+  display: flex; align-items: center; min-height: 2.75rem; padding: 0.4rem 0.8rem;
+  border: 2px dashed var(--lp-rahmen); border-radius: calc(var(--lp-radius) * 0.9); color: var(--lp-text2); font-size: 0.9375rem;
+}
+.lm-platz .lm-karte { width: 100%; }
+
+/* Ablage: Felder nebeneinander */
+.lm-felder { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.75rem; margin-top: 0.9rem; }
+.lm-feld { display: flex; flex-direction: column; border: 2px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); }
+.lm-feld.ziel { border-color: var(--lp-akzent); }
+.lm-feld-ziel {
+  min-height: 2.75rem; padding: 0.5rem 0.8rem; text-align: left; font: inherit; font-weight: 700;
+  color: var(--lp-text); background: var(--lp-gruppe); border: 0; border-bottom: 1px solid var(--lp-linie);
+  border-radius: var(--lp-radius) var(--lp-radius) 0 0; cursor: pointer;
+}
+.lm-feld-ziel small { display: block; font-weight: 400; color: var(--lp-text2); font-size: 0.875rem; }
+.lm-inhalt { display: flex; flex-direction: column; gap: 0.4rem; min-height: 3.5rem; padding: 0.5rem; }
+
+/* Ja/Nein-Tabelle */
+.lm-jn button {
+  min-width: 4.5rem; min-height: 2.75rem; padding: 0.3rem 0.6rem; font: inherit; font-weight: 700;
+  color: var(--lp-text); background: var(--lp-flaeche); border: 2px solid var(--lp-rahmen);
+  border-radius: calc(var(--lp-radius) * 0.9); cursor: pointer;
+}
+.lm-jn button[data-wert=""] { color: var(--lp-text2); font-weight: 400; }
+.lm-jn.ok button { border-color: var(--lm-ok); background: var(--lm-ok-bg); }
+.lm-jn.falsch button { border-color: var(--lm-bad); border-style: dashed; background: var(--lm-bad-bg); }
+.lm-jn .lm-marke { margin-left: 0.4rem; font-weight: 700; }
+.lm-jn.ok .lm-marke { color: var(--lm-ok); }
+.lm-jn.falsch .lm-marke { color: var(--lm-bad); }
+
+/* Abbildungen */
+.lm-abb { padding: 0.5rem; background: var(--lp-flaeche); }
+.lm-abb svg { display: block; width: 100%; height: auto; }
+.lm-abb text { fill: var(--lp-text); font-family: var(--lp-schrift); }
+.lm-zwei { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+@media (max-width: 48rem) { .lm-zwei { grid-template-columns: minmax(0, 1fr); } }
+
+/* Entdecker */
+.lm-teil { cursor: pointer; }
+.lm-teil:focus { outline: none; }
+.lm-teil:focus-visible > :not(.lm-tap), .lm-teil.aktiv > :not(.lm-tap) { stroke: var(--lm-hl) !important; }
+.lm-teil.aktiv > :not(.lm-tap) { stroke-dasharray: 6 3; }
+.lm-tap { stroke: transparent; fill: none; pointer-events: stroke; }
+.lm-info { min-height: 9rem; padding: 0.8rem 1rem; border: 2px solid var(--lp-akzent); border-radius: var(--lp-radius); background: var(--lp-flaeche); }
+.lm-info h3 { margin: 0 0 0.2rem; font-size: 1.125rem; }
+.lm-info .lm-silben { margin: 0 0 0.4rem; color: var(--lp-text2); }
+.lm-knoepfe { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 0.4rem; margin: 0.75rem 0 0; padding: 0; list-style: none; }
+.lm-knoepfe button {
+  width: 100%; min-height: 2.75rem; padding: 0.35rem 0.7rem; text-align: left; font: inherit;
+  color: var(--lp-text); background: var(--lp-flaeche); border: 2px solid var(--lp-rahmen); border-radius: calc(var(--lp-radius) * 0.9); cursor: pointer;
+}
+.lm-knoepfe button[aria-pressed="true"] { color: #fff; font-weight: 700; background: var(--lp-akzent); border-color: var(--lp-akzent); }
+.lm-knoepfe button.gesehen::after { content: " ✓"; }
+.lm-zaehler { margin: 0.5rem 0 0; font-size: 0.875rem; color: var(--lp-text2); }
+
+/* Signal-Modell */
+.lm-punkt { fill: var(--lm-hl); stroke: #fff; stroke-width: 2; }
+.lm-zeigen { opacity: 0; transition: opacity 0.25s; }
+.lm-zeigen.lm-an { opacity: 1; }
+.lm-nur-weg { stroke: none !important; fill: none; }
+.lm-protokoll { min-height: 6rem; margin: 0; padding: 0.6rem 0.8rem 0.6rem 2.4rem; border: 2px solid var(--lp-rahmen); border-radius: var(--lp-radius); background: var(--lp-flaeche); }
+.lm-protokoll:empty { padding-left: 0.8rem; }
+.lm-protokoll:empty::before { content: "Hier erscheint, was nacheinander passiert."; color: var(--lp-text2); }
+.lm-protokoll li { margin: 0.2rem 0; }
+.lm-protokoll .lm-zeit { font-weight: 700; font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .lm-zeigen { transition: none; } }
+
+/* Feld für die Frage der Klasse */
+.lm-frage textarea { margin-top: 0.4rem; min-height: 4.5rem; }
+
+/* Bedienhinweis und Legende */
+.lm-hinweis { margin: 0.4rem 0 0; font-size: 0.9375rem; color: var(--lp-text2); max-width: 70ch; }
+.lm-legende { display: grid; gap: 0.35rem; margin: 0.75rem 0 0; padding: 0; list-style: none; font-size: 0.9375rem; }
+.lm-legende li { display: flex; align-items: center; gap: 0.5rem; }
+.lm-legende svg { flex: none; width: 2.5rem; height: 0.9rem; }
+
+/* Breite Inhalte (Tabellen, Abbildungen) dürfen die Spalte nicht aufweiten: sonst scrollt auf dem Handy die ganze Seite */
+.lp-inhalt { grid-template-columns: minmax(0, 1fr); }
+.lm-leer[hidden] { display: none; }
+.lm-unter { margin-top: 0.75rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.lm-unter .lm-knoepfe { margin-top: 0; }
+@media (max-width: 48rem) { .lm-unter { grid-template-columns: minmax(0, 1fr); } }
