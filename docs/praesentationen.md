@@ -160,6 +160,7 @@ Für Stunden mit Aufgaben zum Ausfüllen, Zuordnen und Prüfen gibt es **eine** 
 | Matrix | `<table data-matrix>` mit `td.m` und `.summe` | Merkmale ankreuzen, Summe je Zeile |
 | Checkliste | `[data-checkliste]` mit `.cp`, `.cz` | Punkte abhaken, Zähler |
 | „Ich kann“ | `[data-selbst]` mit `.sb` (drei Knöpfe) | Selbsteinschätzung in drei Stufen, nichts wird gespeichert |
+| Impulsfilm | `<div data-film>` (eigene Datei `assets/js/impulsfilm.js`, nach `stunde.js` laden), optional Knopf `[data-film-neu]` und Zähler `<span data-zaehler data-bis="0.4" data-stellen="2" data-start="600" data-dauer="4000">0,40</span>` | Bekommt beim Zeigen der Folie die Klasse `spielt`, die CSS-Animationen der Stunde hängen daran. **Das CSS ohne `spielt` zeigt das Endbild**: so sehen Leseansicht, Druck und „Bewegung reduzieren“ ein fertiges Bild. Der Zähler zählt mit Komma bis zum Endwert. Beispiele: Elfmeter (Auftakt Neurobiologie), fallendes Lineal (Reiz und Reaktion), wackelnde Dose (Sinnesorgane) |
 | Phasenmarke | `<p class="phase">` | Farbe nach Phase (Do Now, Impuls, Erarbeitung, Sicherung, Reflexion) |
 
 Hinweise: Klassennamen `.nr` und `.hilfe` nicht verwenden (kollidieren mit `material.css`). Inhalte der Lehrkraft (Zielkorridor, Erwartungshorizont) kommen nicht in die Folien, nur Lösungen, die Schülerinnen und Schüler selbst per Knopf prüfen.

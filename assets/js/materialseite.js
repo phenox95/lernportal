@@ -125,7 +125,14 @@
       if (fach) meta.appendChild(neu("span", "lp-fach", fach));
       if (fach && klasse) meta.appendChild(document.createTextNode(" "));
       if (klasse) meta.appendChild(neu("span", "", klasse));
-      meta.hidden = !fach && !klasse;
+      /* Reihe und Stundennummer (Feld folge), wie in der Liste der Themenfeld-Seite */
+      const reihe = String(eintrag.reihe || "").trim();
+      if (reihe) {
+        const nr = Number.isFinite(eintrag.folge) ? " · Nr. " + eintrag.folge : "";
+        if (meta.childNodes.length) meta.appendChild(document.createTextNode(" "));
+        meta.appendChild(neu("span", "lp-reihe", "Reihe " + reihe + nr));
+      }
+      meta.hidden = !fach && !klasse && !reihe;
     }
   }
 
