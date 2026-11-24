@@ -37,6 +37,26 @@ self.addEventListener("activate", e => e.waitUntil(caches.keys().then(n => Promi
 
 **Seite nicht gefunden (`404.html`):** GitHub Pages zeigt die Datei bei jeder unbekannten Adresse. Sie lädt keine weiteren Dateien und findet den Stamm des Portals selbst (unter `<name>.github.io` der erste Ordner, unter eigener Domain `/`).
 
+## Sicherung
+
+**Automatisch:** `.github/workflows/sicherung.yml` sichert jeden Sonntag (ca. 3–4 Uhr deutscher Zeit) den Stand von `main`. Hat sich seit der letzten Sicherung nichts geändert, entsteht keine neue. Jede Sicherung ist ein Release „Sicherung JJJJ-MM-TT“ (rechts auf der Startseite des Repositorys unter **Releases**) mit zwei Dateien:
+
+- `lernportal-JJJJ-MM-TT.zip`: alle Dateien des Portals, ohne Versionsgeschichte. Zum Durchsehen oder um das Portal anderswo hochzuladen.
+- `lernportal-JJJJ-MM-TT.bundle`: das komplette Repository mit allen Versionen und Branches.
+
+Es bleiben die 12 neuesten Releases (etwa ein Vierteljahr, Zahl `BEHALTEN` im Workflow). Die Tags `sicherung-JJJJ-MM-TT` bleiben immer stehen, ältere Stände sind darüber weiter erreichbar.
+
+**Von Hand sichern** (z. B. vor einem großen Umbau): GitHub, **Actions → Sicherung → Run workflow**. Mit dem Häkchen „Auch sichern, wenn sich nichts geändert hat“ entsteht in jedem Fall eine neue Sicherung.
+
+**Außerhalb von GitHub ablegen:** Releases liegen bei GitHub. Gegen den Verlust des Kontos hilft nur eine Kopie woanders. Dafür etwa einmal im Monat die neueste `.bundle`-Datei herunterladen und auf einem eigenen Speicher oder einer Schul-Cloud ablegen.
+
+**Wiederherstellen:**
+
+- Einzelne Datei oder alten Stand ansehen: auf GitHub den Tag `sicherung-…` öffnen (Branch-Auswahl → Tags) oder die ZIP-Datei herunterladen.
+- Ganzes Repository aus einer Bundle-Datei: `git clone lernportal-JJJJ-MM-TT.bundle lernportal`. Danach ist es ein normales Repository, das sich in ein neues GitHub-Repository hochladen lässt (`git remote set-url origin <neue Adresse>` und `git push --all`).
+
+**Nicht in GitHub Actions getestet**, nur die Befehle `git archive`, `git bundle` und der Aufräum-Filter lokal. Nach dem ersten Lauf unter **Actions** prüfen, ob er grün ist und das Release erscheint.
+
 ## Hinweis
 
 Die Einträge in `projects.json` und `impuls.json` sind Beispiele. Vor dem produktiven Einsatz durch echte Inhalte ersetzen oder löschen.
