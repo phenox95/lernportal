@@ -169,6 +169,44 @@
     ]
   },
   {
+    "title": "Das Auge: Bau und Bildentstehung",
+    "description": "Zwei Stunden: Kamera und Auge vergleichen, die Teile des Auges erkunden, dann mit Lupe und Pupillen-Versuch erklären, wie ein Bild im Auge entsteht.",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/auge-stunde/",
+    "dauer": "2 × 45 Min.",
+    "niveau": "E–G",
+    "folge": 3,
+    "dateien": [
+      {
+        "titel": "Präsentation Teil 1: Bau des Auges",
+        "pfad": "biologie/klasse-9/nervensystem/auge-stunde/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Präsentation Teil 2: Wie entsteht ein Bild?",
+        "pfad": "biologie/klasse-9/nervensystem/auge-stunde/bild/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Lernmodul: Das Auge entdecken",
+        "pfad": "biologie/klasse-9/nervensystem/auge-bau/",
+        "art": "Übung"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/sinnesorgane/",
+        "grund": "Dort habt ihr das Auge als Sinnesorgan für Licht kennengelernt."
+      }
+    ],
+    "begriffe": true
+  },
+  {
     "title": "Das Auge: Bau und Funktion",
     "description": "Beschreibe die Teile des Auges und benenne sie.",
     "type": "Lernmodul",
@@ -180,6 +218,39 @@
     "datum": "2026-11-03",
     "reihe": "Neurobiologie",
     "folge": 3,
+    "begriffe": true
+  },
+  {
+    "title": "Kurzsichtigkeit: Warum Mia die Tafel unscharf sieht",
+    "description": "Funktionsstörung des Auges: In einer Simulation den Bündelpunkt untersuchen, Ursachen der Kurzsichtigkeit erklären, die passende Brille testen und das Modell prüfen.",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "datum": "2026-11-24",
+    "reihe": "Neurobiologie",
+    "type": "Materialseite",
+    "path": "biologie/klasse-9/nervensystem/kurzsichtigkeit-stunde/",
+    "dauer": "45 Min.",
+    "niveau": "E–G",
+    "folge": 4,
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-9/nervensystem/kurzsichtigkeit-stunde/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Simulation: Kurzsichtigkeit und Brille",
+        "pfad": "biologie/klasse-9/nervensystem/kurzsichtigkeit/",
+        "art": "Übung"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/auge-stunde/",
+        "grund": "Der Bau des Auges und der Weg des Lichts sind die Grundlage für diese Stunde."
+      }
+    ],
     "begriffe": true
   },
   {
