@@ -1,0 +1,43 @@
+/* Lernportal – Stundenkalender. Gehört zu kalender/ und assets/js/kalender.js. Nur Tokens aus styles.css. */
+.kal { padding-bottom: 3rem; }
+.kal h2 { margin: 2rem 0 0.75rem; font-size: 1.25rem; letter-spacing: -0.01em; }
+.kal-gruppe { display: grid; gap: 0.35rem; margin-top: 1.25rem; max-width: 24rem; }
+.kal-gruppe label { font-size: 0.875rem; color: var(--text-2); font-weight: 700; }
+.kal-gruppe select { min-height: 3rem; padding: 0 0.75rem; border: 2px solid var(--rahmen); border-radius: var(--radius); background: var(--surface); color: var(--text); font: inherit; font-size: 1.0625rem; }
+.kal-gruppe select:focus-visible, .kal button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.kal-naechste { margin: 0.75rem 0 0; font-size: 1rem; }
+
+.kal-kopf { display: flex; align-items: center; gap: 0.5rem; margin-top: 2rem; }
+.kal-kopf h2 { flex: 1; margin: 0; text-align: center; font-size: 1.25rem; }
+.kal-pfeil, .kal-heute { min-width: 2.75rem; min-height: 2.75rem; border: 1px solid var(--rahmen); border-radius: var(--radius); background: var(--surface); color: var(--text); font: inherit; font-size: 1.25rem; cursor: pointer; }
+.kal-heute { padding: 0 0.9rem; font-size: 0.9375rem; font-weight: 700; }
+.kal-raster { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.3rem; margin-top: 0.75rem; }
+.kal-wt { padding: 0.25rem 0; text-align: center; font-size: 0.8125rem; font-weight: 700; color: var(--text-2); }
+.kal-tagzelle { position: relative; min-height: 3.5rem; padding: 0.35rem 0.25rem; border: 1px solid var(--line); border-radius: 0.6rem; background: var(--surface); color: var(--text); font: inherit; font-size: 1rem; text-align: center; cursor: pointer; display: grid; align-content: space-between; justify-items: center; }
+.kal-tagzelle:hover { border-color: var(--rahmen); }
+.kal-tagzelle.leer { visibility: hidden; }
+.kal-tagzelle.anderer-monat { opacity: 0.45; }
+.kal-tagzelle.heute { box-shadow: inset 0 0 0 2px var(--text); font-weight: 700; }
+.kal-tagzelle.gewaehlt { background: var(--field); border-color: var(--text); }
+.kal-tagzelle.unterricht { border-color: var(--rahmen); }
+.kal-marken { display: flex; gap: 0.25rem; min-height: 0.7rem; }
+.kal-punkt { display: inline-block; width: 0.7rem; height: 0.7rem; border-radius: 50%; vertical-align: -0.05rem; }
+.kal-unterricht { box-shadow: inset 0 0 0 2px var(--text-2); }
+.kal-eintrag { background: var(--fach, var(--text)); }
+.kal[data-fach="Biologie"] { --fach: var(--bio); }
+.kal[data-fach="Geografie"] { --fach: var(--geo); }
+.kal-legende { margin: 0.75rem 0 0; font-size: 0.875rem; color: var(--text-2); }
+.kal-legende .kal-punkt { margin-left: 0.75rem; }
+.kal-legende .kal-punkt:first-child { margin-left: 0; }
+
+.kal-eintrag-karte { padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+.kal-eintrag-karte:first-child { border-top: 1px solid var(--line); }
+.kal-datum { margin: 0; font-size: 0.875rem; font-weight: 700; color: var(--text-2); }
+.kal-material { margin: 0.35rem 0 0; font-size: 1.0625rem; font-weight: 700; }
+.kal-reihe { margin: 0.1rem 0 0; font-size: 0.875rem; color: var(--text-2); }
+.kal-notiz { margin: 0.4rem 0 0; font-size: 0.9375rem; }
+.kal-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+.kal-links a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 0.9rem; border: 1px solid var(--rahmen); border-radius: var(--radius); color: var(--text); font-size: 0.9375rem; text-decoration: none; }
+.kal-links a:hover { background: var(--field); }
+.kal-geplant { display: inline-block; margin-left: 0.5rem; padding: 0.05rem 0.5rem; border: 1px solid var(--rahmen); border-radius: 1rem; font-size: 0.75rem; font-weight: 700; }
+@media (max-width: 40rem) { .kal-tagzelle { min-height: 3rem; font-size: 0.9375rem; } .kal-kopf h2 { font-size: 1.0625rem; } }

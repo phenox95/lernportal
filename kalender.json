@@ -1,0 +1,16 @@
+{
+  "hinweis": "Stundenkalender: Hier steht, was in welcher Lerngruppe wann dran war. Nur Klasse, Fach, Wochentag und Stunde, keine Räume und keine Namen. Einträge zu Klassenarbeiten, Noten oder Erwartungshorizonten gehören nicht hierher (alles im Repository ist öffentlich).",
+  "lerngruppen": [
+    { "id": "7a-geo", "klasse": "7a", "fach": "Geografie", "woche": [ { "tag": 4, "stunden": [5, 6] } ] },
+    { "id": "7b-geo", "klasse": "7b", "fach": "Geografie", "woche": [ { "tag": 2, "stunden": [5] }, { "tag": 4, "stunden": [2] } ] },
+    { "id": "7m-bio", "klasse": "7m", "fach": "Biologie", "woche": [ { "tag": 1, "stunden": [6] }, { "tag": 4, "stunden": [4] } ] },
+    { "id": "7s-bio", "klasse": "7s", "fach": "Biologie", "woche": [ { "tag": 1, "stunden": [5] }, { "tag": 3, "stunden": [7] } ] },
+    { "id": "8b-geo", "klasse": "8b", "fach": "Geografie", "woche": [ { "tag": 3, "stunden": [6] } ] },
+    { "id": "9a-geo", "klasse": "9a", "fach": "Geografie", "woche": [ { "tag": 5, "stunden": [4, 5] } ] },
+    { "id": "9a-bio", "klasse": "9a", "fach": "Biologie", "woche": [ { "tag": 1, "stunden": [8] }, { "tag": 5, "stunden": [7] } ] },
+    { "id": "9m-bio", "klasse": "9m", "fach": "Biologie", "woche": [ { "tag": 2, "stunden": [1, 2] } ] },
+    { "id": "10a-geo", "klasse": "10a", "fach": "Geografie", "woche": [ { "tag": 5, "stunden": [8] } ] },
+    { "id": "10m-bio", "klasse": "10m", "fach": "Biologie", "woche": [ { "tag": 1, "stunden": [7] }, { "tag": 4, "stunden": [7] } ] }
+  ],
+  "eintraege": []
+}

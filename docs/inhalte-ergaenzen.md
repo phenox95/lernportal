@@ -269,3 +269,27 @@ Die Zeiten der Folien (`data-min`) ergeben je Stunde etwa 90 Minuten. Die Spieli
 - **Seite `nachrichten/` (Nachrichten und Themenarchiv):** Zeigt alle Meldungen mit Suche und Filtern nach Fach und Nachhaltigkeitsziel (auch `nachrichten/?ziel=7`), einen kurzen Kasten „So prüfst du eine Meldung“ und das Archiv aller bisherigen Themen der Woche bis heute. Nichts wird gelöscht: Ältere Meldungen bleiben im Archiv, auf Wochen-, Fach- und Zielseiten erscheinen nur die neuesten.
 - **Wessen Sicht?** Das optionale Feld `art` kennzeichnet in der Liste, wer spricht: `Medienbericht`, `Regierung` (Sicht der Regierung) oder `Position` (Position eines Verbands, z. B. Deutsche Umwelthilfe, Germanwatch). Bei Positionen und Regierungsmeldungen nennt die Einordnung ausdrücklich, dass es eine Sicht ist, und fordert zum Vergleich auf. Zu einem Thema möglichst beides aufnehmen (Beutelsbacher Konsens). Zugelassene Verbände stehen in `erlaubteQuellen`. Ebenfalls zugelassen sind `fluter.de` (Jugendmagazin der bpb) und `utopia.de` (Nachhaltigkeitsmagazin, ein privates Medium: bei Meldungen von dort `art: Medienbericht` setzen und mit einer zweiten Quelle vergleichen). `web.de` ist bewusst nicht zugelassen.
 - **Regeln für Meldungen:** Nur verlinken und mit eigenen Worten einordnen, keine Artikeltexte oder Bilder übernehmen. Titel und Datum prüfen, bevor etwas eingetragen wird. Zu einem kontroversen Thema Meldungen mit verschiedenen Blickwinkeln wählen (Beutelsbacher Konsens). Die Links führen auf fremde Seiten und öffnen in einem neuen Tab. Die Seite weist darauf hin.
+
+
+## Stundenkalender (`kalender.json`, Seite `kalender/`)
+
+Die Seite zeigt, was in einer Lerngruppe wann dran war. Die Schülerinnen und Schüler wählen ihre Lerngruppe (wird im Browser gemerkt).
+
+```json
+{
+  "lerngruppen": [
+    { "id": "7b-geo", "klasse": "7b", "fach": "Geografie", "woche": [ { "tag": 2, "stunden": [5] }, { "tag": 4, "stunden": [2] } ] }
+  ],
+  "eintraege": [
+    { "datum": "2026-11-19", "gruppe": "7b-geo",
+      "material": ["geografie/klasse-7/risikoraeume/aetna-tourismus/"],
+      "notiz": "Hausaufgabe: Aufgabe 3 fertig." }
+  ]
+}
+```
+
+- **Lerngruppen:** `id` (eindeutig, z. B. `7b-geo`), `klasse` (z. B. `7b`), `fach` (`Biologie` oder `Geografie`), `woche` mit `tag` (1 = Montag bis 5 = Freitag) und `stunden` (1–11). Daraus entstehen die Unterrichtstage im Kalender und die Zeile „Nächste Stunde“. **Keine Räume, keine Namen von Schülerinnen und Schülern.** Eine Klasse mit zwei Fächern bekommt zwei Lerngruppen (`9a-geo`, `9a-bio`).
+- **Einträge:** `datum` (`JJJJ-MM-TT`), `gruppe` (eine `id`), `material` (Liste von Pfaden aus `projects.json`, dieselbe Schreibweise wie `path`) und/oder `notiz` (ein Satz, z. B. die Hausaufgabe). Zukünftige Daten erscheinen als „geplant“. Bei Präsentationen zeigt die Zeile zusätzlich „Nachlesen“ (Leseansicht).
+- **Nicht eintragen:** Klassenarbeiten, Noten, Erwartungshorizonte oder Lösungen. Alles im Repository ist öffentlich.
+- **Prüfen:** `python3 tools/check.py` prüft Lerngruppen (Fach, Klasse, Wochentage, Stunden) und Einträge (Datum, Gruppe, Pfad in `projects.json`).
+- **Pflege:** Jede Stunde wird von Hand eingetragen. Im Chat genügt eine Zeile je Termin, zum Beispiel „19.11., 7b, Ätna Tourismus“.
