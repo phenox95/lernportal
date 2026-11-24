@@ -41,7 +41,8 @@
       "bne": [
         13
       ],
-      "woche": "2026-12-14"
+      "woche": "2026-12-14",
+      "bild": "https://www.zdfheute.de/assets/cop31-102~1280x720?cb=1795340175795"
     },
     {
       "datum": "2026-11-22",
@@ -57,7 +58,8 @@
         13,
         7
       ],
-      "woche": "2026-12-14"
+      "woche": "2026-12-14",
+      "bild": "https://www.bundesumweltministerium.de/typo3temp/assets/images/_c__AP__csm_261122_cop31_schneider_lp_1200_62428210f9_64732d5373744075b660e1fd770baf39.jpg"
     },
     {
       "datum": "2026-10-16",
@@ -74,7 +76,8 @@
         2,
         13
       ],
-      "woche": "2026-12-07"
+      "woche": "2026-12-07",
+      "bild": "https://www.zdfheute.de/assets/duerre-kenia-100~1280x720?cb=1792066637831"
     },
     {
       "datum": "2026-11-17",
