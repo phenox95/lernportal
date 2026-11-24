@@ -13,12 +13,14 @@
 <link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
 <link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<link rel="stylesheet" href="../../../../../assets/css/messen.css">
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
 <style>
 .lf{font-size:30px;line-height:1.35;font-weight:500}
 .qrbox{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px;display:inline-block}
 .qrbox svg{display:block;width:190px;height:190px}
+.qrbox.klein svg{width:150px;height:150px}
 .tab{width:100%;border-collapse:collapse;font-size:22px}
 .tab th,.tab td{border:1.5px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
 .abb{display:block;width:100%;height:auto}
@@ -107,13 +109,13 @@
 <p class="phase" data-ph="si">Sicherung</p>
 <h1 class="k">Unsere Klassentabelle</h1>
 <span class="badge">5 Min. · Gruppe</span>
-<div class="split" style="grid-template-columns:1.6fr 1fr;align-items:center">
+<div class="split" style="grid-template-columns:1fr 1.7fr;gap:28px">
 <div>
-<p class="task"><span class="snr">1</span><span><b>Sende</b> euren Gruppenwert: Portalseite, Abschnitt „Gruppenwert senden“. Zeigt den QR-Code der Lehrkraft.</span></p>
-<p class="tip">Ohne Gerät: Schreibt euren Wert in die Tabelle an der Tafel.</p>
-<p class="tip" style="margin-top:10px">Die Tabelle ist der Start für die nächste Stunde.</p>
+<p class="task"><span class="snr">1</span><span><b>Sende</b> euren Gruppenwert: Portalseite, Abschnitt „Gruppenwert senden“. Haltet den QR-Code vor die Kamera.</span></p>
+<div style="text-align:center;margin:8px 0"><div class="qrbox klein" data-qr="../stationen/#senden" role="img" aria-label="QR-Code: Gruppenwert senden"></div></div>
+<p class="tip">Ohne Gerät: Ruft euren Wert.</p>
 </div>
-<div style="text-align:center"><div class="qrbox" data-qr="../stationen/#senden" role="img" aria-label="QR-Code: Gruppenwert senden"></div></div>
+<div data-qr-sammeln data-key="lp-sinnes-stationen-tabelle" data-namen="A=Blinder Fleck|B=Zwei Spitzen|C=Hörbereich"></div>
 </div>
 </section>
 <section class="slide" data-min="4">
@@ -162,6 +164,7 @@
 })();
 </script>
 <script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/messen.js" defer></script>
 <script src="../../../../../assets/js/praesentation.js" defer></script>
 </body>
 </html>

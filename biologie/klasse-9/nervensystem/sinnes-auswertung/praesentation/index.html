@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
 <link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<link rel="stylesheet" href="../../../../../assets/css/messen.css">
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
 <style>
@@ -30,6 +31,10 @@
 #ktab .tab{font-size:20px;margin-bottom:10px}
 #ktab h3{font-size:20px;margin:6px 0 4px;font-weight:500}
 .ktab-wrap{max-height:430px;overflow:auto}
+/* Regler Zwei Spitzen: Felder der Tastsinneszellen, zwei Zirkelspitzen */
+.zp-feld{fill:#fff;stroke:var(--ink3);stroke-width:1.5}
+.zp-feld.an{fill:var(--mint);stroke:var(--g);stroke-width:3}
+.zp-zelle{fill:var(--ink3)}
 </style>
 </head>
 <body class="lp-pres" data-root="../../../../../" data-title="Nervensystem – Sinnesleistungen auswerten" data-subject="Biologie" data-grade="Klasse 9">
@@ -75,10 +80,10 @@
 <p class="task"><span class="snr">5</span><span><b>Beurteile</b>, ob eure Hypothese bestätigt ist. Deute einen Ausreißer.</span><i class="lvl">●●●</i></p>
 <div class="shilfe" style="font-size:20px">Ein Messfehler war … Dadurch ist der Wert zu hoch / zu niedrig, weil … · Ihr dürft euch die Infokarte vorlesen lassen.</div>
 </section>
-<section class="slide" data-min="12">
+<section class="slide" data-min="11">
 <p class="phase" data-ph="er">Erarbeitung II · Gruppenpuzzle</p>
 <h1 class="k">Erklärt euch die Stationen</h1>
-<span class="badge">12 Min. · gemischte Gruppen A, B, C</span>
+<span class="badge">11 Min. · gemischte Gruppen A, B, C</span>
 <p class="task big"><span class="snr">1</span><span><b>Erkläre</b> den anderen dein Stationsergebnis in 2 Minuten: Ergebnis, Erklärung, Messfehler.</span></p>
 <p class="task"><span class="snr">2</span><span><b>Notiere</b> die Ergebnisse der anderen Stationen im Notizraster.</span><i class="lvl">●○○</i></p>
 <p class="tip">Reihenfolge: A, dann B, dann C. Wer zuhört, darf nachfragen.</p>
@@ -97,28 +102,36 @@
 </div>
 <p class="tip" style="margin-top:10px">Messfehler sammeln wir an der Tafel.</p>
 </section>
-<section class="slide" data-min="4">
+<section class="slide" data-min="5">
 <p class="phase" data-ph="er">Transfer</p>
 <h1 class="k">Lesen mit den Fingern</h1>
-<span class="badge">4 Min. · allein, dann Partner</span>
-<div class="split" style="grid-template-columns:1.6fr 1fr;align-items:center">
+<span class="badge">5 Min. · allein, dann Partner</span>
+<div class="split" style="grid-template-columns:1fr 1.25fr;gap:28px">
 <div>
-<p class="lead s">Blinde Menschen lesen Braille mit der Fingerkuppe, nicht mit dem Handrücken.</p>
+<p class="lead s" style="margin-bottom:12px">Blinde Menschen lesen Braille mit der Fingerkuppe, nicht mit dem Handrücken.</p>
 <p class="task"><span class="snr">1</span><span><b>Erkläre</b> das mit der Lage der Tastsinneszellen.</span><i class="lvl">●●○</i></p>
 <p class="task"><span class="snr">2</span><span><b>Erläutere</b>, was laute Musik über Kopfhörer für Station C bedeutet.</span><i class="lvl">●●●</i></p>
-</div>
-<svg class="abb" viewBox="0 0 300 160" role="img" aria-label="Braille-Schrift: erhabene Punkte in Gruppen zu sechs Feldern">
- <g fill="var(--g)">
-  <circle cx="30" cy="30" r="10"/><circle cx="30" cy="80" r="10"/><circle cx="60" cy="30" r="10"/>
-  <circle cx="120" cy="30" r="10"/><circle cx="150" cy="80" r="10"/><circle cx="120" cy="130" r="10"/>
-  <circle cx="210" cy="30" r="10"/><circle cx="240" cy="30" r="10"/><circle cx="240" cy="80" r="10"/><circle cx="210" cy="130" r="10"/>
- </g>
- <g fill="none" stroke="var(--line)" stroke-width="2">
-  <circle cx="60" cy="80" r="10"/><circle cx="30" cy="130" r="10"/><circle cx="60" cy="130" r="10"/>
-  <circle cx="150" cy="30" r="10"/><circle cx="120" cy="80" r="10"/><circle cx="150" cy="130" r="10"/>
-  <circle cx="210" cy="80" r="10"/><circle cx="240" cy="130" r="10"/>
- </g>
+<svg viewBox="0 0 300 100" style="display:block;width:100%;max-width:220px;height:auto;margin-top:12px" role="img" aria-label="Braille-Schrift: erhabene Punkte in Gruppen zu sechs Feldern">
+ <g fill="var(--g)"><circle cx="20" cy="20" r="8"/><circle cx="20" cy="50" r="8"/><circle cx="44" cy="20" r="8"/><circle cx="120" cy="20" r="8"/><circle cx="144" cy="50" r="8"/><circle cx="120" cy="80" r="8"/><circle cx="220" cy="20" r="8"/><circle cx="244" cy="20" r="8"/><circle cx="244" cy="50" r="8"/><circle cx="220" cy="80" r="8"/></g>
+ <g fill="none" stroke="var(--line)" stroke-width="2"><circle cx="44" cy="50" r="8"/><circle cx="20" cy="80" r="8"/><circle cx="44" cy="80" r="8"/><circle cx="144" cy="20" r="8"/><circle cx="120" cy="50" r="8"/><circle cx="144" cy="80" r="8"/><circle cx="220" cy="50" r="8"/><circle cx="244" cy="80" r="8"/></g>
 </svg>
+<p class="rg-hinweis" style="margin-top:12px">Zum Modell rechts: Jedes Kästchen ist das Feld einer Tastsinneszelle. Die Werte sind gerundete Richtwerte.</p>
+</div>
+<div data-vermuten>
+<p class="vm-frage"><b>Vermute</b>: Braille-Punkte liegen 2,5 mm auseinander. Wo spürst du zwei Punkte?</p>
+<div class="vm-wahl"><button>Fingerkuppe</button><button>Handrücken</button><button>an beiden</button></div>
+<div class="vm-pruefen" data-zweipunkt>
+<div class="rg-knoepfe zp-stellen" style="margin-bottom:4px"><button type="button" class="b sec s" data-d="2" aria-pressed="true">Fingerkuppe</button><button type="button" class="b sec s" data-d="10" aria-pressed="false">Handfläche</button><button type="button" class="b sec s" data-d="25" aria-pressed="false">Handrücken</button><button type="button" class="b sec s" data-d="35" aria-pressed="false">Unterarm</button></div>
+<div class="rg-zeile"><label for="zp-a" style="min-width:0">Abstand</label><input type="range" id="zp-a" min="1" max="50" value="2.5" step="0.5"><output for="zp-a" id="zp-aus" style="min-width:90px">2,5 mm</output></div>
+<svg class="rg-bild zp-bild" viewBox="0 0 640 96" role="img" aria-label="Modell der Haut">
+ <defs><clipPath id="zp-rand"><rect x="0" y="0" width="640" height="96"/></clipPath></defs>
+ <rect x="0" y="44" width="640" height="52" fill="var(--tint)"/>
+ <g class="zp-felder" clip-path="url(#zp-rand)"></g>
+ <g class="zp-spitzen" fill="var(--dk)"></g>
+</svg>
+<p class="rg-erg" id="zp-erg" aria-live="polite">1 Feld getroffen: Du spürst 1 Spitze.</p>
+</div>
+</div>
 </div>
 </section>
 <section class="slide" data-min="2">
@@ -171,7 +184,40 @@
   });
 })();
 </script>
+<script>
+/* Regler Zwei Spitzen: Felder mit Durchmesser D (mm) liegen nebeneinander, eine Feldmitte in der Bildmitte.
+   Zwei Spitzen im Abstand a liegen in verschiedenen Feldern, sobald a >= D. Skala 12 px je mm. */
+(function () {
+  var box = document.querySelector("[data-zweipunkt]"); if (!box) return;
+  var NS = "http://www.w3.org/2000/svg", PX = 12, MX = 320, Y = 70;
+  var r = box.querySelector("#zp-a"), aus = box.querySelector("#zp-aus"), erg = box.querySelector("#zp-erg"), bild = box.querySelector(".zp-bild");
+  var felder = box.querySelector(".zp-felder"), spitzen = box.querySelector(".zp-spitzen"), stellen = [].slice.call(box.querySelectorAll("[data-d]"));
+  var D = 2, ort = "Fingerkuppe";
+  function k(x) { return String(x).replace(".", ","); }
+  function sv(t, at) { var e = document.createElementNS(NS, t); for (var n in at) e.setAttribute(n, at[n]); return e; }
+  function setzen() {
+    var a = +r.value, rad = D * PX / 2, links = MX - a * PX / 2, rechts = MX + a * PX / 2;
+    function feld(x) { return Math.round((x - MX) / (D * PX)); }
+    var fl = feld(links), fr = feld(rechts), zwei = fl !== fr;
+    aus.textContent = k(a) + " mm";
+    felder.textContent = ""; spitzen.textContent = "";
+    var n = Math.ceil(MX / (D * PX)) + 1;
+    for (var i = -n; i <= n; i++) {
+      var cx = MX + i * D * PX;
+      felder.appendChild(sv("rect", { x: cx - rad + 1, y: Y - 20, width: Math.max(2 * rad - 2, 2), height: 40, rx: Math.min(6, rad), "class": "zp-feld" + (i === fl || i === fr ? " an" : "") }));
+      felder.appendChild(sv("circle", { cx: cx, cy: Y, r: 3, "class": "zp-zelle" }));
+    }
+    [links, rechts].forEach(function (x) { spitzen.appendChild(sv("path", { d: "M" + x + " " + (Y - 22) + " l-8 -46 h16 z" })); });
+    erg.textContent = zwei ? "2 Felder getroffen: Du spürst 2 Spitzen." : "1 Feld getroffen: Du spürst 1 Spitze.";
+    bild.setAttribute("aria-label", "Modell der Haut, " + ort + ", Abstand " + k(a) + " Millimeter. Felder der Tastsinneszellen mit " + D + " Millimetern Breite. " + erg.textContent);
+  }
+  r.addEventListener("input", setzen);
+  stellen.forEach(function (b) { b.addEventListener("click", function () { D = +b.getAttribute("data-d"); ort = b.textContent; stellen.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); }); setzen(); }); });
+  setzen();
+})();
+</script>
 <script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/messen.js" defer></script>
 <script src="../../../../../assets/js/praesentation.js" defer></script>
 </body>
 </html>

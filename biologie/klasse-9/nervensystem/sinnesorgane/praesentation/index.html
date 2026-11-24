@@ -8,11 +8,12 @@
 <link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
 <title>Nervensystem – Sinnesorgane und Reizarten</title>
-<meta name="description" content="Biologie Klasse 9, Themenfeld 3.6: Sinnesorgane und Reizarten. Do Now, Dosen-Impuls, Fragenentwicklung, Zuordnen, Sinneszelle, Hundepfeife, Exit-Ticket.">
+<meta name="description" content="Biologie Klasse 9, Themenfeld 3.6: Sinnesorgane und Reizarten. Do Now, Dosen-Impuls, Fragenentwicklung, Zuordnen, Sinneszelle, Hundepfeife mit Regler (erst vermuten, dann prüfen), Exit-Ticket.">
 <link rel="stylesheet" href="../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
 <link rel="stylesheet" href="../../../../../assets/css/stunde.css">
+<link rel="stylesheet" href="../../../../../assets/css/messen.css">
 <script src="../../../../../assets/js/prefs.js"></script>
 <script src="../../../../../assets/js/material.js" defer></script>
 <style>
@@ -29,6 +30,13 @@
 [data-film].spielt .dose{animation:do-wackeln 3.6s ease-in-out both}
 [data-film].spielt .klang{animation:do-klang 3.6s linear both}
 @keyframes do-wackeln{0%,8%,30%,38%,60%,68%,90%,100%{transform:none}11%,41%,71%{transform:rotate(-7deg)}15%,45%,75%{transform:rotate(7deg)}19%,49%,79%{transform:rotate(-5deg)}23%,53%,83%{transform:rotate(4deg)}}
+/* Regler Hundepfeife: Signale laufen den Nerv entlang, ohne Bewegung stehen sie still */
+.hp-zelle{fill:var(--mint);stroke:var(--ink);stroke-width:2.5}
+.hp-an .hp-zelle{fill:var(--g)}
+.hp-puls{fill:var(--g);opacity:0}
+.hp-an .hp-puls{opacity:1;animation:hp-lauf .8s linear infinite}
+@keyframes hp-lauf{from{transform:translateX(0)}to{transform:translateX(90px)}}
+@media (prefers-reduced-motion:reduce){.hp-an .hp-puls{animation:none}}
 @keyframes do-klang{0%,8%{opacity:0}12%,24%{opacity:1}30%,38%{opacity:0}42%,54%{opacity:1}60%,68%{opacity:0}72%,100%{opacity:1}}
 </style>
 </head>
@@ -146,10 +154,41 @@
 <p class="phase" data-ph="er">Transfer</p>
 <h1 class="k">Die Hundepfeife</h1>
 <span class="badge">6 Min. · allein, dann Partner</span>
-<p class="lead s">Eine Hundepfeife pfeift. Der Hund reagiert. Wir hören nichts.</p>
+<div class="split" style="grid-template-columns:1fr 1.2fr;gap:28px">
+<div>
+<p class="lead s" style="margin-bottom:12px">Eine Hundepfeife pfeift. Der Hund reagiert. Wir hören nichts.</p>
 <p class="task"><span class="snr">1</span><span><b>Erkläre</b> das mit dem Begriff Sinneszelle.</span><i class="lvl">●●○</i></p>
 <p class="task"><span class="snr">2</span><span><b>Erkläre</b>: Du reibst mit geschlossenen Augen vorsichtig über die Lider. Du siehst Lichtpunkte, obwohl kein Licht da ist.</span><i class="lvl">●●●</i></p>
-<div class="shilfe" style="font-size:21px">Satzbausteine: Die Hörsinneszellen des Hundes … · Unsere Hörsinneszellen … · Die Lichtsinneszellen melden immer …</div>
+<div class="shilfe" style="font-size:20px">Satzbausteine: Die Hörsinneszellen des Hundes … · Unsere Hörsinneszellen … · Die Lichtsinneszellen melden immer …</div>
+</div>
+<div data-vermuten>
+<p class="vm-frage"><b>Vermute</b>: Die Hundepfeife pfeift mit 30.000 Hz. Wessen Hörsinneszellen melden ein Signal?</p>
+<div class="vm-wahl"><button>nur Mensch</button><button>nur Hund</button><button>beide</button></div>
+<div class="vm-pruefen" data-hundepfeife>
+<div class="rg-zeile"><label for="hp-hz" style="min-width:0">Tonhöhe</label><input type="range" id="hp-hz" min="1" max="50" value="5" step="1"><output for="hp-hz" id="hp-aus" style="min-width:140px">5.000 Hz</output></div>
+<svg class="rg-bild hp-bild" viewBox="0 0 640 190" role="img" aria-label="Modell: Hörsinneszelle von Mensch und Hund, je mit Nerv zum Gehirn.">
+ <g class="hp-reihe" data-bis="20000">
+  <text x="0" y="62" font-size="24">Mensch</text>
+  <circle class="hp-zelle" cx="150" cy="54" r="20"/>
+  <path d="M172 54 H430" stroke="var(--ink)" stroke-width="4"/>
+  <circle class="hp-puls" cx="180" cy="54" r="8"/><circle class="hp-puls" cx="270" cy="54" r="8"/><circle class="hp-puls" cx="360" cy="54" r="8"/>
+  <ellipse cx="462" cy="54" rx="36" ry="26" fill="#fff" stroke="var(--ink)" stroke-width="2.5"/>
+  <text class="hp-text" x="508" y="62" font-size="22">hört</text>
+ </g>
+ <g class="hp-reihe" data-bis="45000" transform="translate(0 92)">
+  <text x="0" y="62" font-size="24">Hund</text>
+  <circle class="hp-zelle" cx="150" cy="54" r="20"/>
+  <path d="M172 54 H430" stroke="var(--ink)" stroke-width="4"/>
+  <circle class="hp-puls" cx="180" cy="54" r="8"/><circle class="hp-puls" cx="270" cy="54" r="8"/><circle class="hp-puls" cx="360" cy="54" r="8"/>
+  <ellipse cx="462" cy="54" rx="36" ry="26" fill="#fff" stroke="var(--ink)" stroke-width="2.5"/>
+  <text class="hp-text" x="508" y="62" font-size="22">hört</text>
+ </g>
+ <g font-size="16" fill="var(--ink3)"><text x="128" y="16">Hörsinneszelle</text><text x="282" y="16">Nerv</text><text x="436" y="16">Gehirn</text></g>
+</svg>
+<p class="rg-hinweis">Modell, Werte gerundet: junge Menschen bis etwa 20.000 Hz, Hunde bis etwa 45.000 Hz.</p>
+</div>
+</div>
+</div>
 </section>
 <section class="slide" data-min="4">
 <p class="phase" data-ph="re">Reflexion</p>
@@ -196,7 +235,28 @@
   });
 })();
 </script>
+<script>
+/* Regler Hundepfeife: Eine Hörsinneszelle meldet nur Töne bis zu ihrer Grenze (data-bis in Hz) */
+(function () {
+  var box = document.querySelector("[data-hundepfeife]"); if (!box) return;
+  var r = box.querySelector("#hp-hz"), aus = box.querySelector("#hp-aus"), reihen = [].slice.call(box.querySelectorAll(".hp-reihe")), bild = box.querySelector(".hp-bild");
+  function tausend(x) { return String(x).replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+  function setzen() {
+    var hz = r.value * 1000, teile = [];
+    aus.textContent = tausend(hz) + " Hz";
+    reihen.forEach(function (g) {
+      var an = hz <= +g.getAttribute("data-bis");
+      g.classList.toggle("hp-an", an);
+      g.querySelector(".hp-text").textContent = an ? "hört" : "hört nichts";
+      teile.push(g.querySelector("text").textContent + (an ? ": Sinneszelle meldet ein Signal" : ": kein Signal"));
+    });
+    bild.setAttribute("aria-label", "Modell bei " + tausend(hz) + " Hertz. " + teile.join(". ") + ".");
+  }
+  r.addEventListener("input", setzen); setzen();
+})();
+</script>
 <script src="../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../assets/js/messen.js" defer></script>
 <script src="../../../../../assets/js/impulsfilm.js" defer></script>
 <script src="../../../../../assets/js/praesentation.js" defer></script>
 </body>
