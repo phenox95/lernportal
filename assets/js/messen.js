@@ -20,6 +20,8 @@
       Großes Tippfeld für die ganze Folie: Eine Person nach der anderen tippt am Board.
       Die Zeiten landen unter demselben data-key wie die Klassenmessung (als Ringe im Punktdiagramm).
       Ohne Mittelwert, nur die letzten Versuche. data-ziel (Sekunden) ist optional: Zeiten bis dahin bekommen den Text data-ja, langsamere data-nein.
+      data-wahl schaltet zwei Runden frei: Runde 1 einfache Reaktion, Runde 2 Wahlreaktion (manchmal „Stopp!“ statt „Jetzt!“).
+      Dann stehen die Mittelwerte beider Runden und die Fehler daneben. Runde-2-Zeiten liegen getrennt (daten.w) und erscheinen nicht im Punktdiagramm.
 
    3) Gruppenwerte per QR-Code sammeln
       <div data-qr-sammeln data-key="lp-…" data-namen="A=Blinder Fleck|B=Zwei Spitzen"></div>
@@ -100,17 +102,30 @@
   function messHoeren(key, f) { (hoerer[key] = hoerer[key] || []).push(f); }
 
   /* Tippfeld: ruhe -> warte (zufällig 1,5 bis 4,5 s) -> los -> ruhe. wert(s) bekommt die Zeit in Sekunden. */
-  function tippTest(feld, info, wert) {
+  /* Mit opt.wahl() === true: Wahlreaktion. In etwa einem Drittel der Versuche erscheint „Stopp!“ statt „Jetzt!“.
+     Dann darf niemand tippen; opt.fehler() zählt Fehler. */
+  function tippTest(feld, info, wert, opt) {
+    opt = opt || {};
     var zustand = "ruhe", uhr = null, t0 = 0;
-    function text(t, cls) { feld.textContent = t; feld.className = feld.className.replace(/\s*\b(warte|los)\b/g, "") + (cls ? " " + cls : ""); }
+    function text(t, cls) { feld.textContent = t; feld.className = feld.className.replace(/\s*\b(warte|los|stopp)\b/g, "") + (cls ? " " + cls : ""); }
     function tippen() {
       var jetzt = performance.now();
       if (zustand === "ruhe") {
         zustand = "warte"; text("Warte …", "warte"); info("Noch nicht tippen.");
-        uhr = setTimeout(function () { zustand = "los"; text("Jetzt!", "los"); t0 = performance.now(); }, 1500 + Math.random() * 3000);
+        uhr = setTimeout(function () {
+          if (opt.wahl && opt.wahl() && Math.random() < 0.35) {
+            zustand = "stopp"; text("✋ Stopp! Nicht tippen", "stopp");
+            uhr = setTimeout(function () { zustand = "ruhe"; text("Gut gewartet. Antippen für den nächsten Versuch."); info("Richtig: Bei „Stopp“ nicht tippen."); }, 1500);
+            return;
+          }
+          zustand = "los"; text("Jetzt!", "los"); t0 = performance.now();
+        }, 1500 + Math.random() * 3000);
       } else if (zustand === "warte") {
         clearTimeout(uhr); zustand = "ruhe"; text("Zu früh. Antippen für einen neuen Versuch.");
         info("Zu früh getippt. Der Versuch zählt nicht.");
+      } else if (zustand === "stopp") {
+        clearTimeout(uhr); zustand = "ruhe"; text("Falsch getippt. Antippen für einen neuen Versuch.");
+        info("Bei „Stopp“ getippt: ein Fehler."); if (opt.fehler) opt.fehler();
       } else if (zustand === "los") {
         var s = (jetzt - t0) / 1000; zustand = "ruhe";
         if (s > 1.5) { text("Zu langsam. Antippen für einen neuen Versuch."); info("Über 1,5 Sekunden: Der Versuch zählt nicht."); return; }
@@ -207,7 +222,7 @@
       if (daten[art].length) daten[art].pop(); else if (daten.l.length) daten.l.pop();
       speichern(); zeichnen(); status.textContent = "Letzten Wert gelöscht.";
     });
-    scharf(leer, "Neu beginnen", function () { daten.l.length = 0; daten.b.length = 0; letzte = []; speichern(); zeichnen(); status.textContent = "Neu begonnen. Die Tabelle ist leer."; });
+    scharf(leer, "Neu beginnen", function () { daten.l.length = 0; daten.b.length = 0; if (daten.w) daten.w.length = 0; daten.f = 0; letzte = []; speichern(); zeichnen(); status.textContent = "Neu begonnen. Die Tabelle ist leer."; });
 
     var test1 = tippTest(feld, function (t) { testInfo.textContent = t; }, function (s) {
       daten.b.push(s); letzte.push("b"); speichern(); zeichnen();
@@ -225,7 +240,9 @@
   [].forEach.call(document.querySelectorAll("[data-boardtest]"), function (root, nr) {
     var KEY = root.getAttribute("data-key") || ("lp-klassenmessung:" + location.pathname + ":0");
     var ZIEL = parseFloat(root.getAttribute("data-ziel")), JA = root.getAttribute("data-ja") || "", NEIN = root.getAttribute("data-nein") || "";
-    var daten = messDaten(KEY), neu = [];
+    var daten = messDaten(KEY), neu = [], WAHL = root.hasAttribute("data-wahl"), modus = "e";
+    if (!daten.w) daten.w = [];
+    if (!daten.f) daten.f = 0;
     root.classList.add("bt");
     var feld = knopf("Antippen zum Start", "km-feld bt-feld");
     var seite = el("div", null, "bt-seite");
@@ -233,26 +250,43 @@
     var liste = el("ol", null, "bt-liste"); liste.setAttribute("aria-live", "polite");
     var info = el("p", "Warte, bis das Feld „Jetzt!“ zeigt. Dann tippe so schnell du kannst.", "bt-info"); info.setAttribute("aria-live", "polite");
     var weg = knopf("Letzten Versuch löschen", "b sec s");
-    seite.appendChild(titel); seite.appendChild(liste); seite.appendChild(info); seite.appendChild(weg);
+    var modi = el("div", null, "bt-modi"), mE = knopf("Runde 1", "b sec s"), mW = knopf("Runde 2", "b sec s");
+    modi.setAttribute("role", "group"); modi.setAttribute("aria-label", "Art des Tests");
+    modi.appendChild(mE); modi.appendChild(mW);
+    var vergleich = el("p", null, "bt-vergleich"); vergleich.setAttribute("aria-live", "polite");
+    if (WAHL) seite.appendChild(modi);
+    seite.appendChild(titel); seite.appendChild(liste); if (WAHL) seite.appendChild(vergleich); seite.appendChild(info); seite.appendChild(weg);
     root.appendChild(feld); root.appendChild(seite);
 
     function zeigen() {
       liste.textContent = "";
       if (!neu.length) { liste.appendChild(el("li", "Noch keine Zeit. Wer tippt zuerst?", "bt-leer")); }
-      neu.slice(-5).forEach(function (s) {
-        var li = el("li"); li.appendChild(el("b", komma(s, 2) + " s"));
-        if (isFinite(ZIEL)) li.appendChild(el("span", s <= ZIEL ? JA : NEIN));
+      neu.slice(WAHL ? -3 : -5).forEach(function (v) {
+        var li = el("li"); li.appendChild(el("b", komma(v.s, 2) + " s"));
+        if (WAHL) li.appendChild(el("span", v.m === "w" ? "Runde 2" : "Runde 1"));
+        else if (isFinite(ZIEL)) li.appendChild(el("span", v.s <= ZIEL ? JA : NEIN));
         liste.appendChild(li);
       });
       weg.disabled = !neu.length;
+      mE.setAttribute("aria-pressed", String(modus === "e")); mW.setAttribute("aria-pressed", String(modus === "w"));
+      if (WAHL) {
+        var me = mittel(daten.b), mw = mittel(daten.w);
+        vergleich.textContent = "Mittelwert Runde 1: " + (me == null ? "–" : komma(me, 2) + " s") + " · Runde 2: " + (mw == null ? "–" : komma(mw, 2) + " s") + (daten.f ? " · Fehler: " + daten.f : "");
+      }
     }
     var test = tippTest(feld, function (t) { info.textContent = t; }, function (s) {
-      neu.push(s); daten.b.push(s); messGeaendert(KEY, zeigen); zeigen();
+      neu.push({ s: s, m: modus }); (modus === "w" ? daten.w : daten.b).push(s); messGeaendert(KEY, zeigen); zeigen();
       info.textContent = "Nächste Person: Tippe auf das Feld.";
-    });
+    }, { wahl: function () { return modus === "w"; }, fehler: function () { daten.f++; messGeaendert(KEY, zeigen); zeigen(); } });
+    function setzeModus(m) {
+      modus = m; test.stopp(); zeigen();
+      info.textContent = m === "w" ? "Runde 2: Tippe nur bei „Jetzt!“. Bei „Stopp!“ nicht tippen." : "Runde 1: Tippe, sobald „Jetzt!“ erscheint.";
+    }
+    mE.addEventListener("click", function () { setzeModus("e"); });
+    mW.addEventListener("click", function () { setzeModus("w"); });
     weg.addEventListener("click", function () {
       if (!neu.length) return;
-      var s = neu.pop(), i = daten.b.lastIndexOf(s); if (i >= 0) daten.b.splice(i, 1);
+      var v = neu.pop(), arr = v.m === "w" ? daten.w : daten.b, i = arr.lastIndexOf(v.s); if (i >= 0) arr.splice(i, 1);
       messGeaendert(KEY, zeigen); zeigen(); info.textContent = "Letzten Versuch gelöscht.";
     });
     beiFolienwechsel(root, function () { test.stopp(); });

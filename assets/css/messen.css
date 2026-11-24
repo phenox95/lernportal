@@ -74,6 +74,16 @@
 .bt-liste .bt-leer{font-size:22px;color:var(--ink3);border-left-color:var(--line)}
 .bt-info{font-size:20px;color:var(--ink2);margin:0;min-height:52px}
 .bt .b:disabled{opacity:.45;cursor:default}
+.km-feld.stopp{background:var(--paper,#fff);color:var(--ink);border:6px dashed var(--ink);font-size:64px}
+.bt-modi{display:flex;flex-wrap:wrap;gap:8px}
+.bt-modi .b{margin:0}
+.bt-modi .b[aria-pressed="true"]{background:var(--g);color:#fff;outline-color:var(--g)}
+.bt[data-wahl],.bt[data-wahl] .bt-feld{min-height:280px}
+.bt[data-wahl] .bt-seite{gap:6px}
+.bt[data-wahl] .bt-liste li{padding:2px 10px}
+.bt[data-wahl] .bt-liste b{font-size:28px}
+.bt[data-wahl] .bt-info{min-height:0}
+.bt-vergleich{font-size:20px;margin:0;font-weight:500;color:var(--dk)}
 
 /* ---------- Gruppenwerte per QR-Code ---------- */
 .qs-leiste{display:flex;gap:8px;flex-wrap:wrap}
