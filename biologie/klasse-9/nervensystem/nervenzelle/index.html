@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="de" class="lp-vorlage">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../../../../assets/favicon/favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="../../../../assets/favicon/apple-touch-icon.png">
+  <title>Die Nervenzelle: Bau und Funktion – Lernportal</title>
+  <meta name="description" content="Entdecke die Teile der Nervenzelle, ordne ihre Aufgaben zu und vergleiche sie mit Muskel- und Hautzelle.">
+  <link rel="stylesheet" href="../../../../assets/css/material.css">
+  <link rel="stylesheet" href="../../../../assets/css/lernmodul.css">
+  <script src="../../../../assets/js/prefs.js"></script>
+  <script src="../../../../assets/js/material.js" defer></script>
+  <script src="../../../../assets/js/lernmodul.js" defer></script>
+  <script src="../../../../assets/js/vorlesen.js" defer></script>
+</head>
+<body class="lp-seite" data-root="../../../../" data-title="Die Nervenzelle: Bau und Funktion" data-subject="Biologie" data-grade="Klasse 9" data-tf="nervensystem">
+  <noscript><p class="lp-noscript"><a href="../../../../">Zurück zum Portal</a> · Diese Seite braucht JavaScript für die Übungen.</p></noscript>
+
+  <main class="lp-inhalt">
+
+    <!-- Impuls: Anlass für die Fragenentwicklung. Die Frage der Stunde steht hier bewusst nicht. -->
+    <figure class="lp-material lp-abbildung" aria-labelledby="impuls">
+      <div class="lp-material-kopf"><strong id="impuls">Impuls</strong><span>Eine Zelle, einen Meter lang</span></div>
+      <div class="lp-material-inhalt lm-zwei">
+        <div data-vorlesen>
+          <p>Die meisten Zellen in deinem Körper sind winzig. Sie sind nur 0,01 bis 0,1 mm groß.</p>
+          <p>Im Rückenmark liegt der Zellkörper einer Nervenzelle. Ihr Fortsatz reicht bis zu einem Muskel im Fuß.</p>
+          <p>Diese eine Zelle kann bis zu 1 Meter lang sein.</p>
+        </div>
+        <div class="lm-abb">
+          <svg viewBox="0 0 300 330" role="img" aria-labelledby="imp-titel">
+            <title id="imp-titel">Mensch von vorn. Eine Linie zeigt eine einzige Nervenzelle vom Rückenmark bis zum Fuß.</title>
+            <circle cx="150" cy="32" r="22" fill="none" stroke="var(--lm-haut-rand)" stroke-width="2"/>
+            <rect x="118" y="58" width="64" height="110" rx="18" fill="none" stroke="var(--lm-haut-rand)" stroke-width="2"/>
+            <rect x="122" y="166" width="25" height="146" rx="10" fill="none" stroke="var(--lm-haut-rand)" stroke-width="2"/>
+            <rect x="153" y="166" width="25" height="146" rx="10" fill="none" stroke="var(--lm-haut-rand)" stroke-width="2"/>
+            <ellipse cx="128" cy="316" rx="18" ry="7" fill="none" stroke="var(--lm-haut-rand)" stroke-width="2"/>
+            <rect x="146" y="60" width="8" height="100" rx="4" fill="var(--lm-zns)" stroke="var(--lm-zns-rand)" stroke-width="1.5"/>
+            <path d="M 150 148 C 140 165, 136 200, 134 240 S 132 300, 122 314" fill="none" stroke="var(--lp-akzent)" stroke-width="3"/>
+            <circle cx="150" cy="148" r="6" fill="var(--lp-akzent)"/>
+            <circle cx="122" cy="314" r="4" fill="var(--lp-akzent)"/>
+            <g font-size="14">
+              <text x="196" y="150">Zellkörper</text>
+              <line x1="194" y1="146" x2="158" y2="148" stroke="var(--lp-text)" stroke-width="1"/>
+              <text x="196" y="250">eine einzige</text>
+              <text x="196" y="266">Nervenzelle</text>
+              <line x1="194" y1="252" x2="140" y2="240" stroke="var(--lp-text)" stroke-width="1"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <figcaption class="lp-quelle">Quelle: eigener Text und eigene Zeichnung, CC BY 4.0</figcaption>
+    </figure>
+
+    <aside class="lp-leitfrage lm-frage" aria-labelledby="frage-label">
+      <label class="lp-label" id="frage-label" for="klassenfrage">Unsere Frage für heute</label>
+      <textarea class="lp-schreib" id="klassenfrage" rows="2"></textarea>
+    </aside>
+
+    <!-- M1: Entdecker -->
+    <figure class="lp-material lp-breit lp-abbildung" aria-labelledby="m1">
+      <div class="lp-material-kopf"><strong id="m1">M1</strong><span>Abbildung: Bau einer Nervenzelle</span></div>
+      <div class="lp-material-inhalt" data-entdecker>
+        <div class="lm-abb">
+            <svg viewBox="0 0 740 260" role="img" aria-labelledby="m1-titel">
+              <title id="m1-titel">Schematische Nervenzelle. Links der Zellkörper mit Zellkern und verzweigten Dendriten. Nach rechts geht das lange Axon ab. Es ist von Abschnitten der Myelinscheide umhüllt, dazwischen liegen Schnürringe. Am Ende teilt sich das Axon in Endknöpfchen.</title>
+              <g class="lm-teil" data-teil="dendrit">
+                <path d="M118 112 L80 78 L48 56 M80 78 L60 96 M48 56 L26 60 M48 56 L44 32 M112 135 L66 140 L30 128 M66 140 L40 164 M30 128 L14 112 M122 160 L92 198 L70 230 M92 198 L58 204 M150 90 L142 50 L120 24 M142 50 L166 26 M172 164 L182 206 L164 236 M182 206 L208 230" fill="none" stroke="var(--lm-zelle-rand)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="lm-tap" d="M118 112 L80 78 L48 56 M80 78 L60 96 M48 56 L26 60 M48 56 L44 32 M112 135 L66 140 L30 128 M66 140 L40 164 M30 128 L14 112 M122 160 L92 198 L70 230 M92 198 L58 204 M150 90 L142 50 L120 24 M142 50 L166 26 M172 164 L182 206 L164 236 M182 206 L208 230" stroke-width="18"/>
+              </g>
+              <g class="lm-teil" data-teil="axon">
+                <path d="M194 130 L640 130 M640 130 L688 98 M640 130 L698 130 M640 130 L688 162" fill="none" stroke="var(--lm-zelle-rand)" stroke-width="5" stroke-linecap="round"/>
+                <path class="lm-tap" d="M194 130 L640 130 M640 130 L688 98 M640 130 L698 130 M640 130 L688 162" stroke-width="20"/>
+              </g>
+              <g class="lm-teil" data-teil="zellkoerper">
+                <path d="M110 128 C108 98 132 86 154 88 C180 90 198 108 198 130 C198 156 178 172 152 172 C126 172 112 156 110 128 Z" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="3"/>
+              </g>
+              <g class="lm-teil" data-teil="zellkern">
+                <circle cx="150" cy="128" r="17" fill="var(--lm-kern)" stroke="var(--lm-zelle-rand)" stroke-width="2"/>
+                <circle cx="154" cy="124" r="4" fill="var(--lm-zelle-rand)"/>
+              </g>
+              <g class="lm-teil" data-teil="myelin">
+                <rect x="214" y="117" width="70" height="26" rx="13" fill="var(--lm-myelin)" stroke="var(--lm-myelin-rand)" stroke-width="2"/>
+                <rect x="296" y="117" width="70" height="26" rx="13" fill="var(--lm-myelin)" stroke="var(--lm-myelin-rand)" stroke-width="2"/>
+                <rect x="378" y="117" width="70" height="26" rx="13" fill="var(--lm-myelin)" stroke="var(--lm-myelin-rand)" stroke-width="2"/>
+                <rect x="460" y="117" width="70" height="26" rx="13" fill="var(--lm-myelin)" stroke="var(--lm-myelin-rand)" stroke-width="2"/>
+                <rect x="542" y="117" width="70" height="26" rx="13" fill="var(--lm-myelin)" stroke="var(--lm-myelin-rand)" stroke-width="2"/>
+              </g>
+              <g class="lm-teil" data-teil="schnuerring">
+                <circle cx="290" cy="130" r="11" fill="transparent" stroke="var(--lp-text)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <circle cx="372" cy="130" r="11" fill="transparent" stroke="var(--lp-text)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <circle cx="454" cy="130" r="11" fill="transparent" stroke="var(--lp-text)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                <circle cx="536" cy="130" r="11" fill="transparent" stroke="var(--lp-text)" stroke-width="1.5" stroke-dasharray="3 3"/>
+              </g>
+              <g class="lm-teil" data-teil="endknoepfchen">
+                <circle cx="694" cy="94" r="11" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="3"/>
+                <circle cx="706" cy="130" r="11" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="3"/>
+                <circle cx="694" cy="166" r="11" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="3"/>
+              </g>
+            </svg>
+        </div>
+        <div class="lm-zwei lm-unter">
+          <div class="lm-info"></div>
+          <div>
+            <ul class="lm-knoepfe" aria-label="Teile der Nervenzelle"></ul>
+            <p class="lm-zaehler"></p>
+          </div>
+        </div>
+        <ul class="lm-daten">
+          <li data-teil="dendrit" data-name="Dendriten" data-silben="Den-dri-ten">Kurze Fortsätze, die sich stark verzweigen. Sie nehmen Signale von anderen Zellen auf.</li>
+          <li data-teil="zellkoerper" data-name="Zellkörper (Soma)" data-silben="Zell-kör-per (So-ma)">Hier kommen die Signale der Dendriten zusammen. Der Zellkörper hält die Zelle am Leben.</li>
+          <li data-teil="zellkern" data-name="Zellkern" data-silben="Zell-kern">Er liegt im Zellkörper. Er enthält die Erbinformation und steuert die Zelle.</li>
+          <li data-teil="axon" data-name="Axon" data-silben="A-xon">Ein langer Fortsatz. Er leitet das Signal vom Zellkörper weg, oft über weite Strecken.</li>
+          <li data-teil="myelin" data-name="Myelinscheide" data-silben="My-e-lin-schei-de">Eine Hülle um das Axon. Sie isoliert das Axon wie die Hülle ein Kabel. So läuft das Signal schneller.</li>
+          <li data-teil="schnuerring" data-name="Schnürring" data-silben="Schnür-ring">Eine kleine Lücke zwischen zwei Abschnitten der Myelinscheide. Das Signal springt von Schnürring zu Schnürring.</li>
+          <li data-teil="endknoepfchen" data-name="Endknöpfchen" data-silben="End-knöpf-chen">Die verdickten Enden des Axons. Hier gibt die Nervenzelle das Signal an die nächste Zelle weiter, zum Beispiel an einen Muskel.</li>
+        </ul>
+      </div>
+      <figcaption class="lp-quelle">Quelle: eigene, vereinfachte Zeichnung, nicht maßstabsgetreu, CC BY 4.0</figcaption>
+    </figure>
+
+    <!-- Aufgabe 1 -->
+    <section class="lp-aufgabe" aria-labelledby="a1">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a1">Aufgabe 1</span>
+        <span class="lp-niveau" data-stufe="1" role="img" aria-label="Niveau 1 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Beschreibe</strong> den Bau der Nervenzelle. Tippe dazu in M1 alle Teile an. Beschreibe danach drei Teile in eigenen Worten.</p>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine">
+          <li>Das Teil heißt …</li>
+          <li>Es liegt …</li>
+          <li>Es hat die Aufgabe, …</li>
+        </ul>
+      </div>
+      <label class="lp-sr" for="schreib1">Schreibraum für Aufgabe 1</label>
+      <textarea class="lp-schreib" id="schreib1" rows="5"></textarea>
+    </section>
+
+    <!-- Aufgabe 2 -->
+    <section class="lp-aufgabe" aria-labelledby="a2">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a2">Aufgabe 2</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+
+      <div data-ablage>
+        <p class="lp-auftrag">a) <strong class="lp-op">Ordne</strong> jedem Teil seine Aufgabe zu.</p>
+        <p class="lm-hinweis">Tippe eine Aufgabe an. Tippe dann auf das passende Teil. Am Rechner kannst du die Karte auch ziehen.</p>
+        <div class="lm-vorrat" aria-label="Aufgaben der Teile">
+          <button class="lm-karte" data-ziel="dendrit">nimmt Signale von anderen Zellen auf</button>
+          <button class="lm-karte" data-ziel="zellkoerper">sammelt die Signale und hält die Zelle am Leben</button>
+          <button class="lm-karte" data-ziel="axon">leitet das Signal über weite Strecken</button>
+          <button class="lm-karte" data-ziel="myelin">isoliert das Axon, damit das Signal schneller läuft</button>
+          <button class="lm-karte" data-ziel="endknoepfchen">gibt das Signal an die nächste Zelle weiter</button>
+        </div>
+        <div class="lm-felder">
+          <div class="lm-feld" data-feld="dendrit"><button class="lm-feld-ziel" type="button">Dendriten</button><div class="lm-inhalt"></div></div>
+          <div class="lm-feld" data-feld="zellkoerper"><button class="lm-feld-ziel" type="button">Zellkörper</button><div class="lm-inhalt"></div></div>
+          <div class="lm-feld" data-feld="axon"><button class="lm-feld-ziel" type="button">Axon</button><div class="lm-inhalt"></div></div>
+          <div class="lm-feld" data-feld="myelin"><button class="lm-feld-ziel" type="button">Myelinscheide</button><div class="lm-inhalt"></div></div>
+          <div class="lm-feld" data-feld="endknoepfchen"><button class="lm-feld-ziel" type="button">Endknöpfchen</button><div class="lm-inhalt"></div></div>
+        </div>
+        <div class="lm-leiste">
+          <button class="lm-knopf lm-pruefen" type="button">Prüfen</button>
+          <button class="lm-knopf zweit lm-neu" type="button">Neu mischen</button>
+        </div>
+        <p class="lm-rm" aria-live="polite"></p>
+      </div>
+
+      <div data-reihe>
+        <p class="lp-auftrag">b) <strong class="lp-op">Ordne</strong> die Teile in der Reihenfolge, in der das Signal durch die Nervenzelle läuft.</p>
+        <div class="lm-vorrat" aria-label="Teile zum Ordnen">
+          <button class="lm-karte" data-pos="1"><strong>Dendriten</strong></button>
+          <button class="lm-karte" data-pos="2"><strong>Zellkörper</strong></button>
+          <button class="lm-karte" data-pos="3"><strong>Axon</strong></button>
+          <button class="lm-karte" data-pos="4"><strong>Endknöpfchen</strong></button>
+        </div>
+        <ol class="lm-kette" aria-label="Weg des Signals"></ol>
+        <div class="lm-leiste">
+          <button class="lm-knopf lm-pruefen" type="button">Prüfen</button>
+          <button class="lm-knopf zweit lm-neu" type="button">Neu mischen</button>
+        </div>
+        <p class="lm-rm" aria-live="polite"></p>
+      </div>
+
+      <div class="lp-hilfe">
+        <span class="lp-label">Wortspeicher</span>
+        <ul class="lp-woerter">
+          <li><span class="lp-wort" aria-hidden="true">Den-dri-ten</span><span class="lp-sr">Dendriten</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Zell-kör-per</span><span class="lp-sr">Zellkörper</span></li>
+          <li><span class="lp-wort" aria-hidden="true">So-ma</span><span class="lp-sr">Soma</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Zell-kern</span><span class="lp-sr">Zellkern</span></li>
+          <li><span class="lp-wort" aria-hidden="true">A-xon</span><span class="lp-sr">Axon</span></li>
+          <li><span class="lp-wort" aria-hidden="true">My-e-lin-schei-de</span><span class="lp-sr">Myelinscheide</span></li>
+          <li><span class="lp-wort" aria-hidden="true">Schnür-ring</span><span class="lp-sr">Schnürring</span></li>
+          <li><span class="lp-wort" aria-hidden="true">End-knöpf-chen</span><span class="lp-sr">Endknöpfchen</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- M2: Vergleich der Zellen -->
+    <figure class="lp-material lp-breit lp-abbildung" aria-labelledby="m2">
+      <div class="lp-material-kopf"><strong id="m2">M2</strong><span>Abbildung und Text: Drei Zellen im Vergleich</span></div>
+      <div class="lp-material-inhalt">
+        <div class="lm-abb">
+          <svg viewBox="0 0 680 190" role="img" aria-labelledby="m2-titel">
+            <title id="m2-titel">Drei Zellen nebeneinander. Links eine Nervenzelle mit Dendriten, Zellkörper und langem Axon. In der Mitte eine lange, gestreifte Muskelzelle mit mehreren Zellkernen. Rechts Hautzellen, die dicht an dicht in einer Schicht liegen, jede mit einem Zellkern.</title>
+            <!-- Nervenzelle -->
+            <path d="M40 80 L20 60 M40 80 L16 90 M44 104 L26 124 M60 70 L58 44 M64 106 L72 130" fill="none" stroke="var(--lm-zelle-rand)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M70 90 L190 90 M190 90 L204 78 M190 90 L204 102" fill="none" stroke="var(--lm-zelle-rand)" stroke-width="3.5" stroke-linecap="round"/>
+            <rect x="84" y="83" width="26" height="14" rx="7" fill="var(--lm-myelin)" stroke="var(--lm-myelin-rand)" stroke-width="1.5"/>
+            <rect x="116" y="83" width="26" height="14" rx="7" fill="var(--lm-myelin)" stroke="var(--lm-myelin-rand)" stroke-width="1.5"/>
+            <rect x="148" y="83" width="26" height="14" rx="7" fill="var(--lm-myelin)" stroke="var(--lm-myelin-rand)" stroke-width="1.5"/>
+            <circle cx="52" cy="88" r="20" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="2.5"/>
+            <circle cx="52" cy="88" r="8" fill="var(--lm-kern)"/>
+            <circle cx="206" cy="77" r="5" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="2"/>
+            <circle cx="206" cy="103" r="5" fill="var(--lm-zelle)" stroke="var(--lm-zelle-rand)" stroke-width="2"/>
+            <!-- Muskelzelle -->
+            <rect x="248" y="66" width="190" height="48" rx="24" fill="var(--lm-muskel)" stroke="var(--lm-muskel-rand)" stroke-width="2.5"/>
+            <path d="M272 70 V110 M284 68 V112 M296 67 V113 M308 67 V113 M320 67 V113 M332 67 V113 M344 67 V113 M356 67 V113 M368 67 V113 M380 67 V113 M392 67 V113 M404 68 V112 M416 70 V110" stroke="var(--lm-muskel-rand)" stroke-width="1" opacity="0.6"/>
+            <ellipse cx="290" cy="74" rx="10" ry="4.5" fill="var(--lm-kern)"/>
+            <ellipse cx="350" cy="106" rx="10" ry="4.5" fill="var(--lm-kern)"/>
+            <ellipse cx="405" cy="74" rx="10" ry="4.5" fill="var(--lm-kern)"/>
+            <!-- Hautzellen -->
+            <g fill="var(--lm-haut)" stroke="var(--lm-haut-rand)" stroke-width="2">
+              <rect x="476" y="60" width="46" height="30"/><rect x="522" y="60" width="46" height="30"/><rect x="568" y="60" width="46" height="30"/><rect x="614" y="60" width="46" height="30"/>
+              <rect x="476" y="90" width="46" height="30"/><rect x="522" y="90" width="46" height="30"/><rect x="568" y="90" width="46" height="30"/><rect x="614" y="90" width="46" height="30"/>
+            </g>
+            <g fill="var(--lm-kern)">
+              <circle cx="499" cy="75" r="6"/><circle cx="545" cy="75" r="6"/><circle cx="591" cy="75" r="6"/><circle cx="637" cy="75" r="6"/>
+              <circle cx="499" cy="105" r="6"/><circle cx="545" cy="105" r="6"/><circle cx="591" cy="105" r="6"/><circle cx="637" cy="105" r="6"/>
+            </g>
+            <g font-size="15" font-weight="700" text-anchor="middle">
+              <text x="110" y="170">Nervenzelle</text>
+              <text x="343" y="170">Muskelzelle</text>
+              <text x="568" y="170">Hautzellen</text>
+            </g>
+          </svg>
+        </div>
+        <ul data-vorlesen style="margin:0.75rem 0 0; padding-left:1.2rem">
+          <li><span class="lp-fett">Muskelzelle:</span> Sie ist lang und hat mehrere Zellkerne. Sie kann sich zusammenziehen. Dann bewegt sich der Muskel.</li>
+          <li><span class="lp-fett">Hautzellen:</span> Sie liegen dicht an dicht in Schichten. So schützen sie den Körper.</li>
+        </ul>
+      </div>
+      <figcaption class="lp-quelle">Quelle: eigene, vereinfachte Zeichnung und eigener Text, nicht maßstabsgetreu, CC BY 4.0</figcaption>
+    </figure>
+
+    <!-- Aufgabe 3 -->
+    <section class="lp-aufgabe" aria-labelledby="a3">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a3">Aufgabe 3</span>
+        <span class="lp-niveau" data-stufe="2" role="img" aria-label="Niveau 2 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <p class="lp-auftrag"><strong class="lp-op">Vergleiche</strong> die Nervenzelle mit der Muskelzelle und den Hautzellen. Nutze M1 und M2. Entscheide in jeder Zeile: ja oder nein.</p>
+      <div data-jn>
+        <div class="lp-scroll" tabindex="0" role="region" aria-label="Tabelle zu Aufgabe 3, seitlich wischbar">
+          <table class="lp-tabelle">
+            <thead><tr><th scope="col">Merkmal</th><th scope="col">Nervenzelle</th><th scope="col">Muskelzelle</th><th scope="col">Hautzelle</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Die Zelle hat einen oder mehrere Zellkerne.</th><td class="lm-jn" data-ok="ja"></td><td class="lm-jn" data-ok="ja"></td><td class="lm-jn" data-ok="ja"></td></tr>
+              <tr><th scope="row">Die Zelle hat lange Fortsätze, die sich verzweigen.</th><td class="lm-jn" data-ok="ja"></td><td class="lm-jn" data-ok="nein"></td><td class="lm-jn" data-ok="nein"></td></tr>
+              <tr><th scope="row">Die Zelle kann sich zusammenziehen.</th><td class="lm-jn" data-ok="nein"></td><td class="lm-jn" data-ok="ja"></td><td class="lm-jn" data-ok="nein"></td></tr>
+              <tr><th scope="row">Die Zellen liegen dicht an dicht und bilden eine Schutzschicht.</th><td class="lm-jn" data-ok="nein"></td><td class="lm-jn" data-ok="nein"></td><td class="lm-jn" data-ok="ja"></td></tr>
+              <tr><th scope="row">Die Zelle gibt Signale an andere Zellen weiter.</th><td class="lm-jn" data-ok="ja"></td><td class="lm-jn" data-ok="nein"></td><td class="lm-jn" data-ok="nein"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="lm-leiste"><button class="lm-knopf lm-pruefen" type="button">Prüfen</button></div>
+        <p class="lm-rm" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Aufgabe 4 -->
+    <section class="lp-aufgabe" aria-labelledby="a4">
+      <div class="lp-aufgabe-kopf">
+        <span class="lp-label" id="a4">Aufgabe 4</span>
+        <span class="lp-niveau" data-stufe="3" role="img" aria-label="Niveau 3 von 3"><i></i><i></i><i></i></span>
+      </div>
+      <ul class="lp-teile">
+        <li><label class="lp-teil"><input type="checkbox"><span>a) <strong class="lp-op">Erkläre</strong> mit dem Bau der Nervenzelle, wie ein Signal vom Rückenmark bis zu einem Muskel im Fuß kommt. Nutze die Begriffe Axon, Myelinscheide und Endknöpfchen.</span></label></li>
+        <li><label class="lp-teil"><input type="checkbox"><span>b) <strong class="lp-op">Erläutere</strong>, was passiert, wenn die Myelinscheide beschädigt ist. Das passiert zum Beispiel bei der Krankheit Multiple Sklerose.</span></label></li>
+      </ul>
+      <div class="lp-hilfe">
+        <span class="lp-label">Satzbausteine</span>
+        <ul class="lp-bausteine">
+          <li>Das Axon ist sehr lang. Deshalb …</li>
+          <li>Die Myelinscheide sorgt dafür, dass …</li>
+          <li>An den Endknöpfchen …</li>
+          <li>Wenn die Myelinscheide beschädigt ist, dann …</li>
+        </ul>
+      </div>
+      <label class="lp-sr" for="schreib4">Schreibraum für Aufgabe 4</label>
+      <textarea class="lp-schreib" id="schreib4" rows="7"></textarea>
+    </section>
+
+    <p class="lp-fuss">Eingaben bleiben auf diesem Gerät und werden nicht gespeichert oder übertragen.</p>
+  </main>
+
+  <!-- Spielinhalte für Begriffe und Belohnungsspiele. Entwurf: vor dem Einsatz gegenlesen und dann "geprueft": true setzen. -->
+  <script type="application/json" id="lp-spiel-daten">
+  {
+   "geprueft": false,
+   "titel": "Die Nervenzelle",
+   "paare": [
+    ["Dendriten", "Kurze, verzweigte Fortsätze, die Signale von anderen Zellen aufnehmen", "Den-dri-ten"],
+    ["Zellkörper", "Teil der Nervenzelle mit dem Zellkern, hier kommen die Signale zusammen", "Zell-kör-per"],
+    ["Axon", "Langer Fortsatz, der das Signal vom Zellkörper wegleitet", "A-xon"],
+    ["Myelinscheide", "Hülle um das Axon, die es isoliert, damit das Signal schneller läuft", "My-e-lin-schei-de"],
+    ["Schnürring", "Lücke zwischen zwei Abschnitten der Myelinscheide", "Schnür-ring"],
+    ["Endknöpfchen", "Verdickte Enden des Axons, die das Signal an die nächste Zelle weitergeben", "End-knöpf-chen"]
+   ],
+   "spiele": ["memory", "quiz", "zuordnen"]
+  }
+  </script>
+</body>
+</html>

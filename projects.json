@@ -41,6 +41,42 @@
     "begriffe": true
   },
   {
+    "title": "Die Nervenzelle: Bau und Funktion",
+    "description": "Entdecke die Teile der Nervenzelle, ordne ihre Aufgaben zu und vergleiche sie mit Muskel- und Hautzelle.",
+    "type": "Lernmodul",
+    "path": "biologie/klasse-9/nervensystem/nervenzelle/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–F",
+    "datum": "2026-11-24",
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/zelldifferenzierung/",
+        "grund": "In Klasse 7 ging es schon darum, dass Zellen je nach Aufgabe unterschiedlich gebaut sind."
+      }
+    ]
+  },
+  {
+    "title": "Vom Reiz zur Reaktion: Signalweg und Reflex",
+    "description": "Lege den Signalweg vom Reiz bis zur Reaktion, ordne ZNS und PNS zu und vergleiche Reflex und willkürliche Bewegung im Modell.",
+    "type": "Lernmodul",
+    "path": "biologie/klasse-9/nervensystem/signalweg/",
+    "subject": "Biologie",
+    "grade": "Klasse 9",
+    "themenfeld": "3.6",
+    "dauer": "45 Min.",
+    "niveau": "E–F",
+    "datum": "2026-11-24",
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-9/nervensystem/nervenzelle/",
+        "grund": "Nervenzellen bilden die Nerven, die das Signal vom Reiz zum Muskel leiten."
+      }
+    ]
+  },
+  {
     "title": "Urlaub auf dem Vulkan – Tourismus am Ätna",
     "description": "Chancen und Risiken des Tourismus am Ätna: Impuls, Partnerpuzzle und begründetes Urteil.",
     "type": "Interaktive Präsentation",

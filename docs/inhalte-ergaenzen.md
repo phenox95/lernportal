@@ -172,6 +172,20 @@ Jede Anwendung bekommt dieselbe Kopfleiste mit **Zurück zum Portal** und dem Le
 
 Bausteine der Vorlage: Einstieg, Material (M1, M2 …) mit Quelle, Text mit Zeilennummern (jede Zeile ein `li`, Nummer an jeder fünften), Tabelle im eigenen Scroll-Container, Abbildung mit festem Seitenverhältnis, Aufgabe mit Operator und Niveau (`data-stufe` 1 bis 3), Teilaufgaben zum Abhaken, Hilfe-Kästen (Tipp, Wortspeicher mit Silben, Satzbausteine) und Schreibraum. Aufgabe, Material und Hilfe unterscheiden sich durch Rahmen und Beschriftung, nicht nur durch Farbe. Lehrkrafthinweise und Erwartungshorizonte gehören nie auf die Schülerseite.
 
+### Interaktive Bausteine für Lernmodule (`lernmodul.js`)
+
+Vorlagenseiten können Übungen mit Selbstprüfung bekommen. Im `<head>` nach `material.css` ergänzen: `<link rel="stylesheet" href="…/assets/css/lernmodul.css">` und `<script src="…/assets/js/lernmodul.js" defer></script>`. Die Fachinhalte stehen nur im HTML, das Skript speichert nichts. Rückmeldungen zeigen Zeichen und Text (✓ richtig, ✗ noch nicht), nie nur Farbe. Alles geht mit Tippen und mit der Tastatur. Die Lösung prüfen die SuS selbst per Knopf, es gibt keinen Lösungsknopf.
+
+| Baustein | Aufbau im HTML | Wirkung |
+|---|---|---|
+| Reihenfolge | `<div data-reihe>` mit `.lm-vorrat` (Karten `button.lm-karte[data-pos="1"]` …), leerem `ol.lm-kette`, `.lm-pruefen`, `.lm-neu`, `.lm-rm` | Karten antippen legt sie auf den nächsten Platz, Pfeile zwischen den Plätzen, Prüfen je Platz |
+| Ablage | `<div data-ablage>` mit `.lm-vorrat` (Karten `button.lm-karte[data-ziel]`) und `.lm-feld[data-feld]` mit `button.lm-feld-ziel` und `.lm-inhalt` | Karte antippen, dann Feld antippen (am Rechner auch ziehen). Mehrere richtige Felder: `data-ziel="a\|b"` |
+| Ja/Nein-Tabelle | `<div data-jn>` mit Tabelle, Zellen `td.lm-jn[data-ok="ja"]` oder `"nein"` | Antippen wechselt leer, ja, nein. Prüfen markiert jede Zelle |
+| Entdecker | `<div data-entdecker>` mit eingebundener SVG (Teile `.lm-teil[data-teil]`), Liste `ul.lm-daten` mit `li[data-teil][data-name][data-silben]` (Text = Funktion), `.lm-info`, `.lm-knoepfe`, `.lm-zaehler` | Teil antippen zeigt Name, Silben und Funktion, Zähler „3 von 7 Teilen angesehen“. Ohne JavaScript bleibt die Liste lesbar |
+| Signal-Modell | `<div data-signal data-tempo="110">` mit SVG-Pfaden `path[id]` (optional `data-ende`, `data-pause`, `data-zeige`), Knöpfen `button[data-ablauf="a; b + c"]` und `ol.lm-protokoll` | Ein Punkt läuft die Pfade ab (`;` nacheinander, `+` gleichzeitig). Das Protokoll zeigt, was nacheinander passiert, mit Modellzeit |
+
+Beispiele: `biologie/klasse-9/nervensystem/signalweg/` und `biologie/klasse-9/nervensystem/nervenzelle/`.
+
 ### Bestehende Anwendung einhängen
 
 Eine Anwendung mit eigenem Aussehen bekommt nur die Kopfleiste. Im `<head>` ergänzen (Pfade je nach Tiefe anpassen, `defer` ist Pflicht):
