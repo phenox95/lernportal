@@ -1510,6 +1510,21 @@
         "titel": "Präsentation zur Stunde",
         "pfad": "geografie/klasse-7/risikoraeume/erdbeben-tokio-2/praesentation/",
         "art": "Präsentation"
+      },
+      {
+        "titel": "Gruppenzettel",
+        "pfad": "geografie/klasse-7/risikoraeume/erdbeben-tokio-2/gruppenzettel.pdf",
+        "art": "Arbeitsblatt"
+      },
+      {
+        "titel": "Beobachtungsbogen",
+        "pfad": "geografie/klasse-7/risikoraeume/erdbeben-tokio-2/beobachtungsbogen.pdf",
+        "art": "Arbeitsblatt"
+      },
+      {
+        "titel": "Maßnahmenkarten und Namensschilder",
+        "pfad": "geografie/klasse-7/risikoraeume/erdbeben-tokio-2/massnahmenkarten-namensschilder.pdf",
+        "art": "Arbeitsblatt"
       }
     ],
     "bne": [
@@ -1804,6 +1819,11 @@
         "titel": "Präsentation zur Stunde",
         "pfad": "geografie/klasse-7/risikoraeume/erdbeben-haiti-chile/praesentation/",
         "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt Haiti und Chile 2010",
+        "pfad": "geografie/klasse-7/risikoraeume/erdbeben-haiti-chile/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt"
       }
     ],
     "bne": [
