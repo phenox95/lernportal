@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="../../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../../assets/favicon/apple-touch-icon.png">
+<title>Der Hundezuchtverein – Stunde 5: Stammbaumanalyse</title>
+<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Stammbäume aus dem Zuchtbuch lesen, dominanten und rezessiven Erbgang bestimmen, Genotypen eintragen, Wahrscheinlichkeit für den nächsten Wurf berechnen.">
+<link rel="stylesheet" href="../../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../../assets/css/praesentation.css">
+<link rel="stylesheet" href="../../../../../../assets/css/stunde.css">
+<script src="../../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../../assets/js/material.js" defer></script>
+<style>
+/* Nur, was diese Stunde zusätzlich braucht. Farben über Variablen des Designs. */
+.slide{padding-right:132px}.slide .badge{right:132px}
+.sb-cols{display:grid;grid-template-columns:600px 1fr;gap:26px;align-items:start}
+.sb-host{border:3px solid var(--g);border-radius:16px;background:#fff;padding:8px}
+.sb-host svg{display:block}
+.sb-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.sb-fb{font-size:20px;font-weight:700;margin:6px 0 0;min-height:1.4em}.sb-fb.good{color:#1e7e3c}.sb-fb.warn{color:#c0392b}
+.sb-t{font-size:22px;line-height:1.35;margin:0 0 8px;display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:start}
+.sb-t .snr{font-weight:700;color:var(--g)}
+.sb-wahl{display:flex;gap:10px;flex-wrap:wrap;margin:2px 0 4px}
+.sb-ch{font:700 20px Andika,Verdana,sans-serif;min-height:48px;padding:6px 18px;border:3px solid #c9d3ce;border-radius:12px;background:#fff;color:var(--ink);cursor:pointer;touch-action:manipulation}
+.sb-ch[aria-pressed=true]{border:5px double var(--ink);padding:4px 16px;background:repeating-linear-gradient(135deg,#fff 0 9px,rgba(var(--fach-rgb),.2) 9px 11px)}
+.sb-k{min-height:56px;background:#fff;border:3px dashed var(--g);border-radius:14px;padding:6px 12px;font-size:21px;line-height:1.35;outline:none}
+.sb-k:focus-visible,.sb-in:focus-visible,.sb-ch:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.sb-h{display:none;margin-top:6px;background:var(--mint);border-radius:12px;padding:8px 14px;font-size:20px;line-height:1.35}.sb-h.on{display:block}
+.sb-kq{border-collapse:collapse;margin:4px 0}.sb-kq th,.sb-kq td{border:3px solid var(--ink);width:70px;height:42px;text-align:center;font-size:21px;font-weight:700}
+.sb-kq th{background:var(--mint)}.sb-in{width:64px;font:700 22px Andika,Verdana,sans-serif;text-align:center;border:0;background:transparent;color:var(--ink)}
+.sb-leg{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:center;font-size:21px}
+.sb-leg svg{width:64px;height:48px}
+.sb-q{margin:0 0 10px}.sb-q p{margin:0 0 4px;font-size:21px}
+.sb-tab{width:100%;border-collapse:collapse;font-size:22px}.sb-tab td{border:3px solid var(--g);padding:10px 14px;vertical-align:top}.sb-tab td:first-child{width:46%;background:var(--mint);font-weight:700}
+.sb-tab .lueck{min-width:170px}
+.sb-card{background:var(--mint);border-radius:14px;padding:12px 18px;font-size:22px;line-height:1.35}
+.sb-aus{display:none}.zeigt .sb-aus{display:block}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../../../" data-title="Der Hundezuchtverein – Stunde 5: Stammbaumanalyse" data-subject="Biologie" data-grade="Klasse 10">
+<noscript><p class="lp-noscript"><a href="../../../../../../">Zurück zum Portal</a> · Diese Seite benötigt JavaScript für die vollständige Darstellung.</p></noscript>
+<div id="buehne">
+<div id="stage">
+
+<!-- 1 DO NOW -->
+<section class="slide" data-min="3">
+<p class="phase" data-ph="dn">Einstieg · Do Now · Wiederholung der letzten Stunde</p>
+<h1 class="k">Do Now</h1>
+<span class="badge">3 Min. · allein</span>
+<p class="task"><span class="snr">1</span><span><b>Erkläre</b>, weshalb bei einer Verpaarung Aa × Aa wieder Welpen mit aa auftreten können. (A = kurzes Fell, a = langes Fell)</span><i class="lvl">F</i></p>
+<p class="task"><span class="snr">2</span><span><b>Gib</b> an, mit welcher Wahrscheinlichkeit ein Welpe aa hat.</span><i class="lvl">E</i></p>
+<p class="shilfe">Logbuch, Feld „Do Now“. Allein und leise. Die Anweisung darf dir jemand vorlesen.</p>
+<div class="sb-row" style="margin-top:14px"><button class="b" data-hilfe type="button">Hilfe Stufe 1 zeigen</button><button class="b lz" data-zeige type="button">Abgleich zeigen</button></div>
+<div class="sb-h" data-stufen><span data-s>Wohin schauen: Auf das Kreuzungsquadrat der letzten Stunde.</span><span data-s>Wie vorgehen: Zeichne die Geschlechtszellen von beiden Eltern ein: je A und a.</span><span data-s>Teilergebnis: Von vier Kombinationen ist eine ______.</span></div>
+<div class="lsg-box" style="margin-top:14px"><div class="sb-card">Jedes Elterntier gibt A oder a weiter. Von vier gleich wahrscheinlichen Kombinationen (AA, Aa, aA, aa) ist eine aa. Wahrscheinlichkeit: <b>1 von 4, also 25 %</b>.</div></div>
+</section>
+
+<!-- 2 IMPULS -->
+<section class="slide dark">
+<p class="phase" data-ph="im">Einstieg · Impuls</p>
+<h1 class="k">Das Zuchtbuch</h1>
+<span class="badge">2 Min. · Plenum</span>
+<div class="sb-cols" style="grid-template-columns:640px 1fr">
+<div class="sb-host" id="sbImp"></div>
+<div><p class="lead" style="font-size:26px">Auszug aus dem Zuchtbuch des Zwingers Feldmark.</p><p class="lead" style="font-size:24px">Ausgefüllt = langes Fell.</p><p class="lead" style="font-size:40px;font-weight:700;color:var(--y);margin-top:30px">Was fällt euch auf?</p></div>
+</div>
+</section>
+
+<!-- 3 FRAGENENTWICKLUNG -->
+<section class="slide" data-min="3">
+<p class="phase" data-ph="im">Einstieg · Fragenentwicklung</p>
+<h1 class="k">Welche Frage stellt sich euch?</h1>
+<span class="badge">3 Min. · Plenum</span>
+<div data-fragenfeld></div>
+</section>
+
+<!-- 4 STAMMBAUM LESEN -->
+<section class="slide" data-min="4">
+<p class="phase" data-ph="er">Erarbeitung 1 · Stammbaum lesen</p>
+<h1 class="k">So liest man einen Stammbaum</h1>
+<span class="badge">4 Min. · Paare · AB 1</span>
+<div class="sb-cols" style="grid-template-columns:440px 1fr">
+<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:14px 18px">
+<div class="sb-leg">
+<svg viewBox="0 0 64 48" aria-hidden="true"><rect x="12" y="4" width="40" height="40" fill="#fff" stroke="#1A2B24" stroke-width="3"/></svg><span>Quadrat: Rüde</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="20" fill="#fff" stroke="#1A2B24" stroke-width="3"/></svg><span>Kreis: Hündin</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="20" style="fill:var(--g)" stroke="#1A2B24" stroke-width="3"/></svg><span>ausgefüllt: Merkmal vorhanden</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><line x1="0" y1="24" x2="64" y2="24" stroke="#1A2B24" stroke-width="3"/></svg><span>waagerecht: Elternpaar</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><path d="M32 0V20M8 20H56M8 20V48M56 20V48" fill="none" stroke="#1A2B24" stroke-width="3"/></svg><span>nach unten: Welpen eines Wurfs</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="26" font-weight="700" font-family="Andika" fill="#5B6A63">II-3</text></svg><span>Generation II, Tier Nr. 3</span>
+</div></div>
+<div>
+<p class="task" style="font-size:24px"><span class="snr">1</span><span><b>Entnimm</b> M1 (Folie 5) und der Legende, was die Symbole bedeuten, und <b>kreuze</b> an.</span><i class="lvl">D–E</i></p>
+<div class="sb-q"><p>Ein ausgefüllter Kreis steht für …</p><div class="sb-wahl" data-wahl><button class="sb-ch" type="button" data-ok="1">eine Hündin mit Merkmal</button><button class="sb-ch" type="button">einen Rüden mit Merkmal</button><button class="sb-ch" type="button">eine Hündin ohne Merkmal</button></div></div>
+<div class="sb-q"><p>Die Linie zwischen Quadrat und Kreis zeigt …</p><div class="sb-wahl" data-wahl><button class="sb-ch" type="button" data-ok="1">ein Elternpaar</button><button class="sb-ch" type="button">zwei Geschwister</button></div></div>
+<div class="sb-q"><p>„II-3“ bedeutet …</p><div class="sb-wahl" data-wahl><button class="sb-ch" type="button" data-ok="1">Generation II, Tier 3</button><button class="sb-ch" type="button">Generation 3, Tier II</button></div></div>
+<p class="sb-fb" id="sbFb4"></p>
+</div></div>
+</section>
+
+<!-- 5 STAMMBAUM A -->
+<section class="slide" data-min="7">
+<p class="phase" data-ph="er">Erarbeitung 2 · Stammbaum M1</p>
+<h1 class="k">M1: Wie vererbt sich langes Fell?</h1>
+<span class="badge">7 Min. · Paare · AB 2–3</span>
+<div class="sb-cols">
+<div><div class="sb-host" id="sbA" aria-live="polite"></div><div class="sb-row"><button class="b" id="sbAchk" type="button">Genotypen prüfen</button><button class="b sec" id="sbAlsg" type="button">Lösung</button><button class="b sec" id="sbArst" type="button">Zurücksetzen</button></div><p class="sb-fb" id="sbAfb"></p><p class="tip" style="margin:0">Tippe ein Symbol an: ? → AA → Aa → aa → A_ (AA oder Aa).</p></div>
+<div>
+<p class="sb-t"><span class="snr">2</span><span><b>Bestimme</b> den Erbgang von langem Fell und <b>begründe</b> mit I-1, I-2 und II-2.</span><i class="lvl">F–G</i></p>
+<div class="sb-wahl" data-wahl data-fbid="sbAv"><button class="sb-ch" type="button">dominant</button><button class="sb-ch" type="button" data-ok="1">rezessiv</button></div><p class="sb-fb" id="sbAv"></p>
+<div class="sb-k" contenteditable="true" aria-label="Begründung zu M1"></div>
+<p class="sb-t" style="margin-top:8px"><span class="snr">3</span><span><b>Trage</b> die Genotypen in M1 ein.</span><i class="lvl">F</i></p>
+<div class="sb-row" style="margin-top:0"><button class="b" data-hilfe type="button">Hilfe Stufe 1 zeigen</button></div>
+<div class="sb-h" data-stufen><span data-s>Wohin schauen: Auf II-2. Das Tier hat langes Fell.</span><span data-s>Wie vorgehen: II-2 hat von beiden Eltern je ein a bekommen. Was haben I-1 und I-2 dann?</span><span data-s>Satzbaustein: Beide Eltern sind kurzhaarig, haben aber … Dann ist langes Fell …</span></div>
+</div></div>
+</section>
+
+<!-- 6 STAMMBAUM B -->
+<section class="slide" data-min="6">
+<p class="phase" data-ph="er">Erarbeitung 3 · Stammbaum M2</p>
+<h1 class="k">M2: Und jetzt schwarzes Fell?</h1>
+<span class="badge">6 Min. · Paare · AB 4</span>
+<div class="sb-cols">
+<div><div class="sb-host" id="sbB" aria-live="polite"></div><div class="sb-row"><button class="b" id="sbBchk" type="button">Genotypen prüfen</button><button class="b sec" id="sbBlsg" type="button">Lösung</button><button class="b sec" id="sbBrst" type="button">Zurücksetzen</button></div><p class="sb-fb" id="sbBfb"></p><p class="tip" style="margin:0">Zwinger Auenhof. Ausgefüllt = schwarzes Fell, leer = braunes Fell.</p></div>
+<div>
+<p class="sb-t"><span class="snr">4</span><span><b>Bestimme</b> den Erbgang von schwarzem Fell und <b>begründe</b> mit I-1, I-2 und II-2.</span><i class="lvl">G</i></p>
+<div class="sb-wahl" data-wahl data-fbid="sbBv"><button class="sb-ch" type="button" data-ok="1">dominant</button><button class="sb-ch" type="button">rezessiv</button></div><p class="sb-fb" id="sbBv"></p>
+<div class="sb-k" contenteditable="true" aria-label="Begründung zu M2"></div>
+<p class="sb-t" style="margin-top:8px"><span class="snr"></span><span><b>Vergleiche</b> M1 und M2: Was ist gleich, was ist anders?</span><i class="lvl">G</i></p>
+<div class="sb-k" contenteditable="true" aria-label="Vergleich M1 und M2" style="min-height:48px"></div>
+<div class="sb-row"><button class="b" data-hilfe type="button">Hilfe Stufe 1 zeigen</button></div>
+<div class="sb-h" data-stufen><span data-s>Wohin schauen: Wie sehen die Eltern in M1 aus, wie in M2?</span><span data-s>Wie vorgehen: Beide Stammbäume haben dieselbe Form. Vergleiche, wer das Merkmal hat.</span><span data-s>Satzbaustein: In M1 haben die Eltern …, in M2 …. Das Merkmal ist einmal …, einmal …</span></div>
+</div></div>
+</section>
+
+<!-- 7 SCHLUSSREGELN -->
+<section class="slide" data-min="3">
+<p class="phase" data-ph="si">Sicherung · Schlussregeln</p>
+<h1 class="k">Aus dem Stammbaum auf den Erbgang schließen</h1>
+<span class="badge">3 Min. · Plenum · AB 5</span>
+<p class="task" style="font-size:24px"><span class="snr">5</span><span><b>Ergänze</b> die Tabelle. Tippe in die Lücken.</span><i class="lvl">F</i></p>
+<table class="sb-tab"><tr><td>Zwei Eltern <b>ohne</b> Merkmal haben einen Welpen <b>mit</b> Merkmal.</td><td>Das Merkmal wird <span class="lueck" contenteditable="true" aria-label="Erbgang 1"></span> vererbt. Beide Eltern sind <span class="lueck" contenteditable="true" aria-label="Genotyp der Eltern 1"></span> (Aa).</td></tr>
+<tr><td>Zwei Eltern <b>mit</b> Merkmal haben einen Welpen <b>ohne</b> Merkmal.</td><td>Das Merkmal wird <span class="lueck" contenteditable="true" aria-label="Erbgang 2"></span> vererbt. Beide Eltern sind <span class="lueck" contenteditable="true" aria-label="Genotyp der Eltern 2"></span> (Aa).</td></tr></table>
+<div class="sb-row" style="margin-top:14px"><button class="b lz" data-zeige type="button">Lösung zeigen</button></div>
+<div class="lsg-box" style="margin-top:12px"><div class="sb-card"><b>1:</b> rezessiv · mischerbig. <b>2:</b> dominant · mischerbig.<br>Wortspeicher: re-zes-siv · do-mi-nant · misch-er-big · rein-er-big</div></div>
+</section>
+
+<!-- 8 STAMMBAUM C -->
+<section class="slide" data-min="7">
+<p class="phase" data-ph="si">Anwendung · Stammbaum M3</p>
+<h1 class="k">M3: Der nächste Wurf</h1>
+<span class="badge">7 Min. · allein · AB 6–7</span>
+<div class="sb-cols" style="grid-template-columns:560px 1fr">
+<div><div class="sb-host" id="sbC" aria-live="polite"></div><div class="sb-row"><button class="b" id="sbCchk" type="button">Genotypen prüfen</button><button class="b sec" id="sbClsg" type="button">Lösung</button></div><p class="sb-fb" id="sbCfb" style="margin-left:90px"></p></div>
+<div>
+<p class="sb-t" style="font-size:20px"><span class="snr">6</span><span><b>Trage</b> die Genotypen in M3 ein (Tipp: Beginne bei den Tieren mit langem Fell). <b>Erkläre</b>, warum II-3 Aa sein muss.</span><i class="lvl">F–G</i></p>
+<div class="sb-k" contenteditable="true" aria-label="Begründung zu II-3" style="min-height:44px"></div>
+<p class="sb-t" style="font-size:20px;margin-top:8px"><span class="snr">7</span><span><b>Berechne</b> mit dem Kreuzungsquadrat die Wahrscheinlichkeit, dass der nächste Welpe von II-3 × II-4 langes Fell hat.</span><i class="lvl">G–H</i></p>
+<table class="sb-kq" aria-label="Kreuzungsquadrat II-3 mal II-4"><tr><th></th><th>a</th><th>a</th></tr><tr><th>A</th><td><input class="sb-in" data-a="Aa" maxlength="2" aria-label="Feld 1"></td><td><input class="sb-in" data-a="Aa" maxlength="2" aria-label="Feld 2"></td></tr><tr><th>a</th><td><input class="sb-in" data-a="aa" maxlength="2" aria-label="Feld 3"></td><td><input class="sb-in" data-a="aa" maxlength="2" aria-label="Feld 4"></td></tr></table>
+<div class="sb-row" style="margin-top:2px"><span style="font-size:20px">Langes Fell:</span><input class="sb-in" id="sbCw" data-w="50" maxlength="3" style="border:3px solid var(--ink);border-radius:10px;width:80px" aria-label="Wahrscheinlichkeit in Prozent"><span style="font-size:20px">%</span><button class="b" id="sbCkq" type="button">Prüfen</button></div>
+<p class="sb-fb" id="sbCkqfb" style="margin-top:2px"></p>
+</div></div>
+</section>
+
+<!-- 9 GRENZEN -->
+<section class="slide" data-min="2">
+<p class="phase" data-ph="si">Sicherung · Grenzen</p>
+<h1 class="k">Wie sicher ist der Schluss?</h1>
+<span class="badge">2 Min. · Plenum · AB 8</span>
+<div class="sb-card" style="font-size:26px;margin-bottom:16px">Ein Zuchtbuch hat oft nur zwei oder drei Welpen je Wurf. Denke an euren Münzwurf mit nur 20 Welpen.</div>
+<p class="task big"><span class="snr">8</span><span><b>Beurteile</b>, wie sicher ein Stammbaum mit sehr wenigen Welpen den Erbgang zeigt.</span><i class="lvl">G–H</i></p>
+<div class="sb-k" contenteditable="true" aria-label="Beurteilung" style="min-height:100px"></div>
+<p class="tip">Satzbausteine: Bei wenigen Welpen … · Der Zufall kann bewirken, dass … · Sicherer wird der Schluss, wenn …</p>
+</section>
+
+<!-- 10 TRANSFER -->
+<section class="slide" data-min="4">
+<p class="phase" data-ph="si">Transfer · Familie</p>
+<h1 class="k">Dieselbe Methode beim Menschen</h1>
+<span class="badge">4 Min. · allein · Zusatz</span>
+<div class="sb-cols" style="grid-template-columns:560px 1fr">
+<div><div class="sb-host" id="sbD"></div><p class="tip" style="margin:6px 0 0">Ausgefüllt = erblich bedingte Stoffwechselerkrankung (zum Beispiel Mukoviszidose).</p></div>
+<div>
+<p class="sb-t"><span class="snr">1</span><span><b>Bestimme</b> den Erbgang.</span><i class="lvl">G</i></p>
+<div class="sb-wahl" data-wahl data-fbid="sbDv"><button class="sb-ch" type="button">dominant</button><button class="sb-ch" type="button" data-ok="1">rezessiv</button></div><p class="sb-fb" id="sbDv"></p>
+<p class="sb-t"><span class="snr">2</span><span><b>Gib</b> die Wahrscheinlichkeit an, dass ein weiteres Kind der Eltern I-1 und I-2 erkrankt.</span><i class="lvl">G</i></p>
+<div class="sb-wahl" data-wahl data-fbid="sbDw"><button class="sb-ch" type="button">0 %</button><button class="sb-ch" type="button" data-ok="1">25 %</button><button class="sb-ch" type="button">50 %</button><button class="sb-ch" type="button">75 %</button></div><p class="sb-fb" id="sbDw"></p>
+<p class="sb-t"><span class="snr">3</span><span><b>Beurteile</b> die Aussage: „Das nächste Kind wird bestimmt gesund, weil das letzte krank war.“</span><i class="lvl">H</i></p>
+<div class="sb-k" contenteditable="true" aria-label="Beurteilung der Aussage"></div>
+</div></div>
+</section>
+
+<!-- 11 MERKSATZ -->
+<section class="slide dark" data-min="3">
+<p class="phase" data-ph="re">Reflexion · Merksatz</p>
+<h1 class="k">Merksatz und Ausblick</h1>
+<span class="badge">3 Min. · Plenum</span>
+<div class="sb-card" style="background:#fff;color:var(--ink);font-size:26px;line-height:1.7">
+<b>Schreibe</b> den Merksatz.<br>
+Haben zwei Eltern <b>ohne</b> Merkmal ein Kind <b>mit</b> Merkmal, wird das Merkmal <span class="lueck" contenteditable="true" aria-label="Merksatz Lücke 1" style="min-width:200px"></span> vererbt.<br>
+Haben zwei Eltern <b>mit</b> Merkmal ein Kind <b>ohne</b> Merkmal, wird das Merkmal <span class="lueck" contenteditable="true" aria-label="Merksatz Lücke 2" style="min-width:200px"></span> vererbt.</div>
+<p class="lead" style="font-size:24px;margin-top:20px">Blitzlicht: Was ist euch heute klarer geworden? Was ist noch offen?</p>
+</section>
+
+<div id="nummer"></div>
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+
+<!-- Spielinhalte für die Belohnungsspiele. ENTWURF: fachlich gegenlesen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Stammbaumanalyse",
+ "geprueft": false,
+ "paare": [
+  ["Stammbaum", "Zeichnung, die zeigt, wer mit wem Welpen hat und wer ein Merkmal trägt", "Stamm-baum"],
+  ["Generation", "Alle Tiere einer Stufe im Stammbaum, zum Beispiel I oder II", "Ge-ne-ra-ti-on"],
+  ["Merkmalsträger", "Tier, das ein Merkmal zeigt, im Stammbaum ausgefüllt", "Merk-mals-trä-ger"],
+  ["dominant", "Die Anlage setzt sich durch, auch wenn nur eine da ist", "do-mi-nant"],
+  ["rezessiv", "Die Anlage zeigt sich nur, wenn sie zweimal da ist", "re-zes-siv"],
+  ["mischerbig", "Zwei verschiedene Anlagen, zum Beispiel Aa", "misch-er-big"],
+  ["reinerbig", "Zweimal dieselbe Anlage, zum Beispiel AA oder aa", "rein-er-big"],
+  ["Genotyp", "Die Anlagen eines Tieres, zum Beispiel Aa"]
+ ],
+ "spiele": ["memory", "quiz"]
+}
+</script>
+<script src="../../../../../../assets/js/stammbaum.js"></script>
+<script src="../stammbaeume.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+/* Stammbäume */
+LPStammbaum.render($("#sbImp"),window.HZ_SB.A,{ask:false});
+LPStammbaum.render($("#sbD"),window.HZ_SB.D,{ask:false});
+function sb(id,key,pre){var p=LPStammbaum.render($("#sb"+id),window.HZ_SB[key],{ask:true});var fb=$("#sb"+id+"fb");
+  $("#sb"+id+"chk").onclick=function(){var r=p.check();fb.textContent=r.ok===r.total?"Alle "+r.total+" Genotypen stimmen.":r.ok+" von "+r.total+" stimmen. ✗ markiert die offenen Felder.";fb.className="sb-fb "+(r.ok===r.total?"good":"warn")};
+  $("#sb"+id+"lsg").onclick=function(){p.loesung();var r=p.check();fb.textContent="Lösung eingetragen.";fb.className="sb-fb"};
+  var rs=$("#sb"+id+"rst");if(rs)rs.onclick=function(){p.reset();fb.textContent="";fb.className="sb-fb"}}
+sb("A","A");sb("B","B");sb("C","C");
+/* Auswahlgruppen */
+$$("[data-wahl]").forEach(function(g){var fb=g.dataset.fbid?$("#"+g.dataset.fbid):null,q=g.closest(".slide");
+  $$(".sb-ch",g).forEach(function(b){b.onclick=function(){$$(".sb-ch",g).forEach(function(o){o.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");
+    var ok=b.hasAttribute("data-ok");if(fb){fb.textContent=ok?"Richtig.":"Noch nicht. Schau noch einmal auf die Eltern und auf den Welpen.";fb.className="sb-fb "+(ok?"good":"warn")}
+    var f4=$("#sbFb4");if(f4&&q.contains(f4)){var gs=$$("[data-wahl]",q),done=gs.filter(function(x){return $$("[aria-pressed=true]",x).length}),ok2=gs.filter(function(x){var p=$("[aria-pressed=true]",x);return p&&p.hasAttribute("data-ok")});
+      f4.textContent=done.length<gs.length?done.length+" von "+gs.length+" beantwortet.":(ok2.length===gs.length?"Alle richtig.":ok2.length+" von "+gs.length+" richtig. Tippe noch einmal an.");f4.className="sb-fb "+(done.length===gs.length&&ok2.length===gs.length?"good":"")}}})});
+/* Hilfe in Stufen */
+$$("[data-hilfe]").forEach(function(b){var sec=b.closest(".slide"),box=$("[data-stufen]",sec),st=$$("[data-s]",box),n=0;st.forEach(function(s){s.style.display="none";s.style.marginBottom="4px"});
+  b.onclick=function(){if(n<st.length){box.classList.add("on");st.forEach(function(s){s.style.display="none"});st[n].style.display="block";n++}b.textContent=n<st.length?"Hilfe Stufe "+(n+1)+" zeigen":"Alle Stufen offen";if(n>=st.length)b.disabled=true}});
+/* Kreuzungsquadrat M3 */
+$("#sbCkq").onclick=function(){var fb=$("#sbCkqfb"),ins=$$(".sb-in[data-a]"),ok=0;ins.forEach(function(i){var v=i.value.trim();var good=v===i.dataset.a||(i.dataset.a==="Aa"&&v==="aA");if(good)ok++;i.style.background=good?"":"transparent";i.style.textDecoration=good?"none":"line-through"});
+  var w=parseInt($("#sbCw").value,10),wok=w===50;fb.textContent=(ok===4?"Felder richtig. ":(ok+" von 4 richtig. "))+(isNaN(w)?"Trage die Wahrscheinlichkeit ein.":(wok?"50 % stimmt.":"Zähle die aa-Felder."));fb.className="sb-fb "+(ok===4&&wok?"good":"warn")};
+})();
+</script>
+<script src="../../../../../../assets/js/stunde.js" defer></script>
+<script src="../../../../../../assets/js/praesentation.js" defer></script>
+</body>
+</html>
