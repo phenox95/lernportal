@@ -96,7 +96,7 @@ Standardbaustein für den Einstieg nach Impuls (Abschnitt „Impuls und Fragenen
 
 Die Klasse sammelt **gemeinsam** Sterne, solange die Lärmampel läuft und grün ist (Standard: 30 Sekunden Ruhe = 1 Stern, 8 Sterne bis zum Spiel, beides im Lärmampel-Fenster unter „Sterne einstellen“ änderbar). Bei Gelb pausiert der Balken, bei Rot beginnt er von vorn. **Sterne gehen nie verloren**, die Lehrkraft kann von Hand geben und wegnehmen. Es werden keine Namen oder Gruppen erfasst, nichts wird gespeichert (nur die Einstellungen). Beim Ziel erscheint „Spiel starten“.
 
-**Merkregel: Spiele sind allgemein, Inhalte gehören immer zu Fach und Thema.** Die Spiele (`assets/games/memory.js`, `quiz.js`, `zuordnen.js`, `wortsalat.js`) enthalten keine Fachinhalte. Jede Präsentation bringt ihre eigenen Inhalte als Datenblock mit, nie fachübergreifend wiederverwenden. Aus denselben Paaren bauen alle Spiele ihre Runden. Beim Start wird zufällig ein Spiel gewählt, das zu den Daten passt, und nicht dasselbe zweimal hintereinander.
+**Merkregel: Spiele sind allgemein, Inhalte gehören immer zu Fach und Thema.** Die Spiele (alle Dateien in `assets/games/`) enthalten keine Fachinhalte. Jede Präsentation bringt ihre eigenen Inhalte als Datenblock mit, nie fachübergreifend wiederverwenden. Aus denselben Paaren bauen alle Spiele ihre Runden. Beim Start wird zufällig ein Spiel gewählt, das zu den Daten passt, und nicht dasselbe zweimal hintereinander.
 
 ```html
 <script type="application/json" id="lp-spiel-daten">
@@ -113,6 +113,20 @@ Die Klasse sammelt **gemeinsam** Sterne, solange die Lärmampel läuft und grün
 
 - Ein Paar besteht aus Begriff, kurzer Erklärung und optional den Silben des Begriffs. Mindestens 4 Paare, besser 8, nur Inhalte der Stunde. Fachliche Entwürfe vor dem Einsatz gegenlesen.
 - `spiele` (optional) begrenzt die Auswahl. Fehlt es, kommen alle in Frage. Wortsalat braucht mindestens 3 einteilige Begriffe (3 bis 14 Buchstaben, ohne Leerzeichen und Bindestrich).
+- **Spiele im Überblick** (alle ohne Fachinhalt, alle bauen ihre Runden aus denselben Paaren):
+
+| Name (`spiele`) | Wer | Braucht | Kurz |
+|---|---|---|---|
+| `memory`, `quiz`, `zuordnen`, `wortsalat` | Klasse oder allein | 4 Paare (Wortsalat: 3 einteilige Begriffe) | die ersten vier Spiele |
+| `reihum` | 2–4 Teams | 4 Paare | Reihum-Quiz mit Punktetafel, je Team 3 Fragen |
+| `dreierreihe` | 2 Teams | 9 Paare | Tic-Tac-Toe mit Begriffen: Feld gehört dem Team, das zur Erklärung den Begriff antippt |
+| `domino` | allein oder 1–4 Teams | 4 Paare | Kette: Erklärung am Ende der Kette, passende Karte anlegen |
+| `buchstabenraten` | allein oder 1–4 Teams | 3 Begriffe aus 3–18 Buchstaben | Erklärung als Hinweis, Buchstaben raten, 7 Fehler |
+| `stimmts` | allein | 4 Paare | Passt die Erklärung zum Begriff? Stimmt / Stimmt nicht |
+| `duell` | 2 Spieler gegenüber | 4 Paare | Tablet in der Mitte, die obere Hälfte steht auf dem Kopf, wer zuerst richtig tippt, bekommt den Punkt |
+| `erklaeren` | 2–4 Teams, 1 Gerät | 4 Paare | Begriff erklären, ohne ihn zu sagen; „Erklärung zeigen“ als Hilfe |
+
+  **Nur auf der Begriffe-Seite** laufen `duell` und `erklaeren` (Gerät in der Hand). In der Präsentation fehlen sie bewusst: Am Beamer sähe die ganze Klasse den geheimen Begriff, und das Duell braucht eine Fläche zwischen zwei Spielern. Mehrspieler-Spiele fragen zuerst die Zahl der Teams ab. Dafür stehen `hilfe.anzahl(feld, text, werte, los)` und `hilfe.tafel(feld, n)` (Punktetafel mit `punkt(i)`, `dran(i)`, `sieger()`) in `LP.hilfe`, in `praesentation.js` und in `begriffe.js` gleich.
 - Die Spieldateien werden erst geladen, wenn das Spiel startet. Ein neues Spiel ist eine Datei in `assets/games/`, die sich mit `window.LPSpiele.reg.<name> = { titel, start({ feld, paare, hilfe, ende }) }` anmeldet, und ein Eintrag in der Liste `SPIELE` in `praesentation.js`.
 
 ### Begriffe-Seite (`begriffe/`): Nachschlagen und Üben
