@@ -8,7 +8,7 @@
 <link rel="icon" href="../../../../../../assets/favicon/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="../../../../../../assets/favicon/apple-touch-icon.png">
 <title>Der Hundezuchtverein – Stunde 5: Stammbaumanalyse</title>
-<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Stammbäume aus dem Zuchtbuch lesen, dominanten und rezessiven Erbgang bestimmen, Genotypen eintragen, Wahrscheinlichkeit für den nächsten Wurf berechnen.">
+<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Stammbäume lesen, dominanten und rezessiven Erbgang bestimmen, Genotypen eintragen, Wahrscheinlichkeit für den nächsten Wurf berechnen.">
 <link rel="stylesheet" href="../../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../../assets/css/praesentation.css">
@@ -53,7 +53,7 @@
 <p class="phase" data-ph="dn">Do Now</p>
 <h1 class="k">Do Now</h1>
 <span class="badge">3 Min. · allein</span>
-<p class="task big"><span class="snr">1</span><span><b>Erkläre</b>, warum bei Aa × Aa auch Welpen mit aa entstehen können. A = kurzes Fell, a = langes Fell.</span></p>
+<p class="task big"><span class="snr">1</span><span><b>Erkläre</b>, warum bei Aa × Aa auch Kinder mit aa entstehen können. A = dominantes Allel, a = rezessives Allel.</span></p>
 <p class="shilfe">Logbuch, Feld „Do Now“. Allein und leise.</p>
 <div class="sb-row" style="margin-top:14px"><button class="b lz" data-zeige type="button">Abgleich</button></div>
 <div class="lsg-box" style="margin-top:14px"><div class="sb-card">Beide Eltern können a weitergeben. Von vier Kombinationen ist eine aa. Das sind 25 %.</div></div>
@@ -62,11 +62,11 @@
 <!-- 2 IMPULS -->
 <section class="slide dark">
 <p class="phase" data-ph="im">Impuls</p>
-<h1 class="k">Das Zuchtbuch</h1>
+<h1 class="k">Ein Stammbaum</h1>
 <span class="badge">2 Min. · Plenum</span>
 <div class="sb-cols" style="grid-template-columns:640px 1fr">
 <div class="sb-host" id="sbImp"></div>
-<div><p class="lead" style="font-size:26px">Zuchtbuch des Zwingers Feldmark.<br>Ausgefüllt = langes Fell.</p><p class="lead" style="font-size:40px;font-weight:700;color:var(--y);margin-top:30px">Was fällt euch auf?</p></div>
+<div><p class="lead" style="font-size:26px">Familie Weber.<br>Ausgefüllt = kann den Daumen im Winkel von 90° zurückbiegen.</p><p class="lead" style="font-size:40px;font-weight:700;color:var(--y);margin-top:30px">Was fällt euch auf?</p></div>
 </div>
 </section>
 
@@ -106,17 +106,17 @@
 <div class="sb-cols" style="grid-template-columns:420px 1fr;gap:20px">
 <div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:14px 18px">
 <div class="sb-leg">
-<svg viewBox="0 0 64 48" aria-hidden="true"><rect x="12" y="4" width="40" height="40" fill="#fff" stroke="#1A2B24" stroke-width="3"/></svg><span>Quadrat = Rüde</span>
-<svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="20" fill="#fff" stroke="#1A2B24" stroke-width="3"/></svg><span>Kreis = Hündin</span>
-<svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="20" style="fill:var(--g)" stroke="#1A2B24" stroke-width="3"/></svg><span>ausgefüllt = hat das Merkmal</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><rect x="12" y="4" width="40" height="40" fill="#fff" stroke="#1A2B24" stroke-width="3"/></svg><span>Quadrat = Mann</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="20" fill="#fff" stroke="#1A2B24" stroke-width="3"/></svg><span>Kreis = Frau</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="20" style="fill:var(--g)" stroke="#1A2B24" stroke-width="3"/></svg><span>ausgefüllt = Merkmalsträger</span>
 <svg viewBox="0 0 64 48" aria-hidden="true"><line x1="0" y1="24" x2="64" y2="24" stroke="#1A2B24" stroke-width="3"/></svg><span>Linie = Elternpaar</span>
-<svg viewBox="0 0 64 48" aria-hidden="true"><path d="M32 0V20M8 20H56M8 20V48M56 20V48" fill="none" stroke="#1A2B24" stroke-width="3"/></svg><span>nach unten = Welpen</span>
-<svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="26" font-weight="700" font-family="Andika" fill="#1A2B24">Rex</text></svg><span>Name des Tieres</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><path d="M32 0V20M8 20H56M8 20V48M56 20V48" fill="none" stroke="#1A2B24" stroke-width="3"/></svg><span>nach unten = Kinder</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="26" font-weight="700" font-family="Andika" fill="#1A2B24">Rex</text></svg><span>Name der Person</span>
 <svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="26" font-weight="700" font-family="Andika" fill="#5B6A63">F1</text></svg><span>P = Eltern, F1 = Kinder, F2 = Enkel</span>
-</div><p class="tip" style="margin:10px 0 0">Im Buch: Mann und Frau.</p></div>
+</div></div>
 <div><div class="sb-host" id="sbA5"></div>
-<p class="task" style="font-size:22px;margin:10px 0 4px"><span class="snr">2</span><span><b>Lies</b> M2. Wie viele Welpen haben Bruno und Luna? Welches Tier hat langes Fell?</span></p>
-<div class="sb-wahl" data-wahl><button class="sb-ch" type="button">3 Welpen, Rex</button><button class="sb-ch" type="button" data-ok="1">4 Welpen, Mila</button><button class="sb-ch" type="button">4 Welpen, Odin</button></div><p class="sb-fb" id="sbFb5"></p>
+<p class="task" style="font-size:22px;margin:10px 0 4px"><span class="snr">2</span><span><b>Lies</b> M2. Wie viele Kinder haben Thomas und Sabine? Wer kann den Daumen zurückbiegen?</span></p>
+<div class="sb-wahl" data-wahl><button class="sb-ch" type="button">3 Kinder, Jonas</button><button class="sb-ch" type="button" data-ok="1">4 Kinder, Laura</button><button class="sb-ch" type="button">4 Kinder, Felix</button></div><p class="sb-fb" id="sbFb5"></p>
 </div></div>
 </section>
 
@@ -126,12 +126,11 @@
 <h1 class="k">Zwei Regeln für den Stammbaum</h1>
 <span class="badge">6 Min. · Paare · AB 3</span>
 <div class="grid2" style="gap:20px">
-<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:10px 16px"><h2 style="margin:0 0 4px;font-size:26px;color:var(--dk)">Regel 1: rezessiv (M2)</h2><div class="sb-host" id="sbR1" style="border-width:2px;padding:4px"></div>
-<p style="font-size:19px;line-height:1.3;margin:6px 0 0">Bruno und Luna zeigen das Merkmal nicht, ihre Tochter Mila schon. Ein dominanter Erbgang scheidet aus: Sonst müsste ein Elternteil das dominante Allel tragen und das Merkmal zeigen. Das Merkmal ist <b>rezessiv</b>, beide Eltern sind heterozygot (Aa).</p></div>
-<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:10px 16px"><h2 style="margin:0 0 4px;font-size:26px;color:var(--dk)">Regel 2: dominant (M3)</h2><div class="sb-host" id="sbR2" style="border-width:2px;padding:4px"></div>
-<p style="font-size:19px;line-height:1.3;margin:6px 0 0">Das Merkmal tritt in beiden Generationen auf. Fritz und Emma zeigen es, ihre Tochter Lotte nicht. Das Merkmal ist <b>dominant</b>, beide Eltern sind heterozygot (Aa).</p></div>
+<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:10px 16px"><h2 style="margin:0 0 4px;font-size:23px;color:var(--dk)">Regel 1: rezessiv (M2, Daumenbiegen)</h2><div class="sb-host" id="sbR1" style="border-width:2px;padding:4px"></div>
+<p style="font-size:19px;line-height:1.3;margin:6px 0 0">Thomas und Sabine können den Daumen nicht zurückbiegen, ihre Tochter Laura schon. Ein dominanter Erbgang scheidet aus: Sonst müsste ein Elternteil das dominante Allel tragen und das Merkmal zeigen. Das Merkmal ist <b>rezessiv</b>, beide Eltern sind heterozygot (Aa).</p></div>
+<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:10px 16px"><h2 style="margin:0 0 4px;font-size:23px;color:var(--dk)">Regel 2: dominant (M3, zusätzlicher Finger)</h2><div class="sb-host" id="sbR2" style="border-width:2px;padding:4px"></div>
+<p style="font-size:19px;line-height:1.3;margin:6px 0 0">Das Merkmal tritt in beiden Generationen auf. Karl und Elke zeigen es, ihre Tochter Lisa nicht. Das Merkmal ist <b>dominant</b>, beide Eltern sind heterozygot (Aa).</p></div>
 </div>
-<p class="tip" style="padding-left:84px">M3: Zwinger Auenhof. Ausgefüllt = schwarzes Fell, leer = braunes Fell.</p>
 </section>
 
 <!-- 7 ÜBEN M4 -->
@@ -140,12 +139,12 @@
 <h1 class="k">M4: Dominant oder rezessiv?</h1>
 <span class="badge">5 Min. · Paare · AB 4</span>
 <div class="sb-cols" style="grid-template-columns:560px 1fr">
-<div><div class="sb-host" id="sbP1"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Ausgefüllt = langes Fell.</p></div>
+<div><div class="sb-host" id="sbP1"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Familie Hartmann. Ausgefüllt = Albinismus (kaum Farbstoff in Haut, Haaren und Augen).</p></div>
 <div>
-<p class="sb-t"><span class="snr">4</span><span><b>Bestimme</b>, ob langes Fell dominant oder rezessiv vererbt wird.</span></p>
+<p class="sb-t"><span class="snr">4</span><span><b>Bestimme</b>, ob Albinismus dominant oder rezessiv vererbt wird.</span></p>
 <div class="sb-wahl" data-wahl data-fbid="sbP1a"><button class="sb-ch" type="button">dominant</button><button class="sb-ch" type="button" data-ok="1">rezessiv</button></div><p class="sb-fb" id="sbP1a"></p>
 <p class="sb-t"><span class="snr"></span><span><b>Begründe</b> mit einer Regel. Welche passt?</span></p>
-<div class="sb-wahl" data-wahl data-fbid="sbP1b"><button class="sb-ch" type="button" data-ok="1">Regel 1: Anton und Greta ohne Merkmal, Balu mit Merkmal</button><button class="sb-ch" type="button">Regel 2: zwei Eltern mit Merkmal, Kind ohne</button></div><p class="sb-fb" id="sbP1b"></p>
+<div class="sb-wahl" data-wahl data-fbid="sbP1b"><button class="sb-ch" type="button" data-ok="1">Regel 1: Hans und Gerda ohne Merkmal, Bernd mit Merkmal</button><button class="sb-ch" type="button">Regel 2: zwei Eltern mit Merkmal, Kind ohne</button></div><p class="sb-fb" id="sbP1b"></p>
 </div></div>
 </section>
 
@@ -155,12 +154,12 @@
 <h1 class="k">M5: Dominant oder rezessiv?</h1>
 <span class="badge">5 Min. · Paare · AB 5</span>
 <div class="sb-cols" style="grid-template-columns:560px 1fr">
-<div><div class="sb-host" id="sbP2"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Zwinger Birkenhof. Ausgefüllt = schwarzes Fell.</p></div>
+<div><div class="sb-host" id="sbP2"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Familie Brandt. Ausgefüllt = verkürzte Finger (Brachydaktylie).</p></div>
 <div>
-<p class="sb-t"><span class="snr">5</span><span><b>Bestimme</b>, ob schwarzes Fell dominant oder rezessiv vererbt wird.</span></p>
+<p class="sb-t"><span class="snr">5</span><span><b>Bestimme</b>, ob verkürzte Finger dominant oder rezessiv vererbt werden.</span></p>
 <div class="sb-wahl" data-wahl data-fbid="sbP2a"><button class="sb-ch" type="button" data-ok="1">dominant</button><button class="sb-ch" type="button">rezessiv</button></div><p class="sb-fb" id="sbP2a"></p>
 <p class="sb-t"><span class="snr"></span><span><b>Begründe</b> mit einer Regel. Welche passt?</span></p>
-<div class="sb-wahl" data-wahl data-fbid="sbP2b"><button class="sb-ch" type="button">Regel 1: zwei Eltern ohne Merkmal, Kind mit Merkmal</button><button class="sb-ch" type="button" data-ok="1">Regel 2: Sam und Tessa mit Merkmal, Udo ohne</button></div><p class="sb-fb" id="sbP2b"></p>
+<div class="sb-wahl" data-wahl data-fbid="sbP2b"><button class="sb-ch" type="button">Regel 1: zwei Eltern ohne Merkmal, Kind mit Merkmal</button><button class="sb-ch" type="button" data-ok="1">Regel 2: Sven und Uta mit Merkmal, Udo ohne</button></div><p class="sb-fb" id="sbP2b"></p>
 </div></div>
 </section>
 
@@ -182,11 +181,11 @@ Zwei Eltern <b>mit</b> Merkmal, Kind <b>ohne</b> Merkmal: Das Merkmal ist <span 
 <h1 class="k">M6: Autosom oder Gonosom?</h1>
 <span class="badge">Wenn Zeit · AB 6</span>
 <div class="sb-cols" style="grid-template-columns:560px 1fr">
-<div><div class="sb-host" id="sbE"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Ausgefüllt = hat das Merkmal.</p></div>
+<div><div class="sb-host" id="sbE"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Ausgefüllt = Rot-Grün-Sehschwäche.</p></div>
 <div>
 <p class="sb-t"><span class="snr">6</span><span><b>Bestimme</b> den Erbgang in M6.</span></p>
 <div class="sb-wahl" data-wahl data-fbid="sbEv"><button class="sb-ch" type="button">autosomal-rezessiv</button><button class="sb-ch" type="button">autosomal-dominant</button><button class="sb-ch" type="button" data-ok="1">X-gonosomal-rezessiv</button></div><p class="sb-fb" id="sbEv"></p>
-<p class="tip" style="margin-top:6px;font-size:18px;line-height:1.35;padding-left:0">Hinweis: Nur ein Geschlecht hat das Merkmal? Dann liegt das Allel vermutlich auf einem Gonosom. Weibliche Tiere, die es weitergeben, ohne es zu zeigen, heißen <b>Konduktorinnen</b>.</p>
+<p class="tip" style="margin-top:6px;font-size:18px;line-height:1.35;padding-left:0">Hinweis: Nur ein Geschlecht hat das Merkmal? Dann liegt das Allel vermutlich auf einem Gonosom. Frauen, die es weitergeben, ohne es zu zeigen, heißen <b>Konduktorinnen</b>.</p>
 </div></div>
 </section>
 
@@ -204,8 +203,8 @@ Zwei Eltern <b>mit</b> Merkmal, Kind <b>ohne</b> Merkmal: Das Merkmal ist <span 
  "geprueft": false,
  "paare": [
   ["Stammbaum", "Zeichnung, die zeigt, wer mit wem Nachkommen hat und wer ein Merkmal hat", "Stamm-baum"],
-  ["Generation", "Alle Tiere einer Stufe im Stammbaum, zum Beispiel I oder II", "Ge-ne-ra-ti-on"],
-  ["Merkmalsträger", "Tier oder Mensch, der das Merkmal zeigt, im Stammbaum ausgefüllt", "Merk-mals-trä-ger"],
+  ["Generation", "Alle Personen einer Stufe im Stammbaum, zum Beispiel P oder F1", "Ge-ne-ra-ti-on"],
+  ["Merkmalsträger", "Person, die das Merkmal zeigt, im Stammbaum ausgefüllt", "Merk-mals-trä-ger"],
   ["dominant", "Die Anlage setzt sich durch, auch wenn nur eine da ist", "do-mi-nant"],
   ["rezessiv", "Die Anlage zeigt sich nur, wenn sie zweimal da ist", "re-zes-siv"],
   ["heterozygot", "Zwei verschiedene Allele, zum Beispiel Aa (mischerbig)", "he-te-ro-zy-got"],
