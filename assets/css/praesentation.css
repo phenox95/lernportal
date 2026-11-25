@@ -112,6 +112,24 @@
 .lp-pr-zuordnen { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
 .lp-pr-zuordnen .lp-pr-karten .lp-pr-karte { text-align: left; }
 @media (max-width: 800px) { .lp-pr-zuordnen { grid-template-columns: 1fr; } }
+/* ---------- Mehrspieler-Spiele: Teams, Punktetafel, Duell, Domino ---------- */
+.lp-pr-karte:disabled { opacity: .55; cursor: default; }
+.lp-pr-wahl { display: flex; flex-direction: column; gap: 20px; }
+.lp-pr-tafel { display: flex; flex-wrap: wrap; gap: 10px; }
+.lp-pr-team { font-size: clamp(16px, 1.8vw, 26px); font-weight: 700; padding: 6px 14px; border: 3px solid var(--g, #1a1a1a); border-radius: 12px; background: #fff; color: var(--dk, #1a1a1a); }
+.lp-pr-team.dran { background: var(--g, #1a1a1a); color: #fff; }
+.lp-pr-buchstaben.tasten .lp-pr-karte { min-width: 48px; min-height: 52px; font-size: clamp(18px, 2.4vw, 32px); padding: 4px 10px; }
+.lp-pr-duell { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px; }
+.lp-pr-duellseite { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 10px 12px; border: 3px solid var(--g, #1a1a1a); border-radius: 16px; background: var(--mint, #f2f2f2); }
+.lp-pr-duellseite.oben { transform: rotate(180deg); }
+.lp-pr-duellseite .lp-pr-karte { min-height: 44px; padding: 8px 10px; font-size: clamp(15px, 2vw, 26px); }
+.lp-pr-duellfrage { margin: 0; font-weight: 700; font-size: clamp(16px, 2.2vw, 30px); line-height: 1.25; }
+.lp-pr-duellstand { margin: 0; font-size: clamp(13px, 1.5vw, 20px); color: var(--grey, #555); min-height: 1.3em; }
+.lp-pr-kette { display: flex; flex-wrap: wrap; gap: 8px; }
+.lp-pr-domino { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 0; padding: 0; overflow: hidden; text-align: left; border: 3px solid var(--g, #1a1a1a); border-radius: 12px; background: #fff; font-size: clamp(14px, 1.8vw, 24px); font-weight: 700; color: var(--dk, #1a1a1a); }
+.lp-pr-kette .lp-pr-domino { max-width: 100%; flex: 0 1 28rem; }
+.lp-pr-domino > span { padding: 8px 12px; }
+.lp-pr-drechts { font-weight: 400; font-size: .85em; border-left: 3px solid var(--g, #1a1a1a); background: var(--mint, #eee); }
 @media print { .lp-pr-spiel { display: none !important; } }
 
 

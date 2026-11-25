@@ -1008,12 +1008,39 @@
     el: neu,
     knopf,
     mischen(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; },
-    zeit(sek) { return Math.floor(sek / 60) + ":" + String(Math.floor(sek % 60)).padStart(2, "0"); }
+    zeit(sek) { return Math.floor(sek / 60) + ":" + String(Math.floor(sek % 60)).padStart(2, "0"); },
+    /* Mehrspieler: Auswahl der Anzahl (Teams oder Spieler), dann los(n) */
+    anzahl(feld, text, werte, los) {
+      const box = neu("div", "lp-pr-wahl"), reihe = neu("div", "lp-pr-buchstaben");
+      box.appendChild(neu("p", "lp-pr-spieltext", text));
+      werte.forEach((w) => { const b = knopf("lp-pr-karte", String(w), w + " auswählen"); b.addEventListener("click", () => { box.remove(); los(w); }); reihe.appendChild(b); });
+      box.appendChild(reihe); feld.appendChild(box);
+    },
+    /* Punktetafel für n Teams (bei n = 1 nur „Punkte“) */
+    tafel(feld, n, name) {
+      name = name || "Team";
+      const el = neu("div", "lp-pr-tafel"), z = [], p = [];
+      for (let i = 0; i < n; i++) { p.push(0); const s = neu("span", "lp-pr-team", ""); z.push(s); el.appendChild(s); }
+      const zeige = () => z.forEach((s, i) => { s.textContent = n === 1 ? "Punkte: " + p[i] : name + " " + (i + 1) + ": " + p[i]; });
+      zeige(); feld.appendChild(el);
+      return {
+        punkte: p,
+        dran(i) { z.forEach((s, j) => s.classList.toggle("dran", j === i)); },
+        punkt(i) { p[i]++; zeige(); },
+        sieger() {
+          const m = Math.max.apply(null, p), w = p.map((x, i) => (x === m ? i : -1)).filter((i) => i >= 0);
+          return n === 1 ? p[0] + " Punkte" : (w.length > 1 ? "Unentschieden" : name + " " + (w[0] + 1) + " gewinnt") + " (" + p.join(" : ") + ")";
+        }
+      };
+    }
   };
-  const SPIELE = ["memory", "quiz", "zuordnen", "wortsalat"];
+  // Duell und Erklären fehlen hier mit Absicht: Sie brauchen ein Gerät in der Hand (Duell: Tablet zwischen zwei Spielern, Erklären: geheime Karte). Sie laufen nur auf der Begriffe-Seite.
+  const SPIELE = ["memory", "quiz", "zuordnen", "wortsalat", "reihum", "dreierreihe", "domino", "buchstabenraten", "stimmts"];
   const EIGNUNG = {                                        // Mindestanzahl brauchbarer Paare je Spiel
     memory: (p) => p.length >= 4, quiz: (p) => p.length >= 4, zuordnen: (p) => p.length >= 4,
-    wortsalat: (p) => p.filter((x) => /^[A-Za-zÄÖÜäöüß]{3,14}$/.test(x.b)).length >= 3
+    wortsalat: (p) => p.filter((x) => /^[A-Za-zÄÖÜäöüß]{3,14}$/.test(x.b)).length >= 3,
+    reihum: (p) => p.length >= 4, dreierreihe: (p) => p.length >= 9, domino: (p) => p.length >= 4, stimmts: (p) => p.length >= 4,
+    buchstabenraten: (p) => p.filter((x) => /^[A-Za-zÄÖÜäöüß]{3,18}$/.test(x.b)).length >= 3
   };
   let letztesSpiel = "";
   function spielDaten() {
