@@ -1079,6 +1079,22 @@
   };
   const wenigBewegung = () => !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
 
+  /* ---------- Datum: kleines Tagesdatum unten links auf jeder Folie (an Tafel und Board üblich), unten links; Schalter unter „Weitere Werkzeuge“ ---------- */
+  const datumEl = neu("div", "lp-pr-datum");
+  datumEl.setAttribute("aria-hidden", "true");
+  stage.appendChild(datumEl);
+  let datumTaste = null;
+  const datumText = () => { try { return new Intl.DateTimeFormat("de-DE", { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(new Date()); } catch (e) { return new Date().toLocaleDateString("de-DE"); } };
+  function datumZeigen(an) {
+    datumEl.hidden = !an;
+    if (an) datumEl.textContent = datumText();
+    if (datumTaste) { datumTaste.classList.toggle("on", an); datumTaste.setAttribute("aria-pressed", String(an)); }
+    speichern("lp-pr-datum", an);
+  }
+  datumEl.hidden = laden("lp-pr-datum", true) === false;
+  if (!datumEl.hidden) datumEl.textContent = datumText();
+  setInterval(() => { if (!datumEl.hidden) { const t = datumText(); if (datumEl.textContent !== t) datumEl.textContent = t; } }, 60000);   // Datum wechselt um Mitternacht mit
+
   /* ---------- Blende: frei verschiebbare und in jeder Kante ziehbare Abdeckung der Folie ---------- */
   const blende = neu("div", "lp-pr-blende");
   blende.hidden = true;
@@ -1251,6 +1267,8 @@
     };
     blendeTaste = eintrag("Blende", "B", () => blendeSchalte(), "Blende: Teil der Folie verdecken");
     blendeTaste.setAttribute("aria-pressed", "false");
+    datumTaste = eintrag("Datum anzeigen", "", () => datumZeigen(datumEl.hidden), "Tagesdatum oben auf der Folie ein- oder ausblenden");
+    datumTaste.classList.toggle("on", !datumEl.hidden); datumTaste.setAttribute("aria-pressed", String(!datumEl.hidden));
     eintrag("Wer ist dran?", "Z", () => schalte("zufall"), "Zufallsnummer");
     eintrag("Gruppen losen", "G", () => schalte("gruppen"), "Gruppen losen");
     eintrag("Stoppuhr", "S", () => schalte("stoppuhr"), "Stoppuhr");
