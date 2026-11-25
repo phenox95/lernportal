@@ -6,12 +6,12 @@
      p.loesung() -> trägt alle Lösungen ein
      p.reset()   -> setzt alle Eingaben zurück
    Daten: { w, h, gens: ["I","II"], nodes: { "I-1": { g:0, x:200, sex:"m"|"w", aff:true|false, sol:"Aa" } }, fam: [ { p:["I-1","I-2"], k:["II-1","II-2"] } ] }
-   g = Generation (0 beginnt oben), x = waagerechte Lage, aff = Merkmal ausgefüllt, sol = Lösung (AA, Aa, aa oder A_ für „AA oder Aa“).
-   Mit ask: true wechselt ein Antippen eines Symbols zwischen ?, AA, Aa, aa und A_ (Tastatur: Enter oder Leertaste).
+   g = Generation (0 beginnt oben), x = waagerechte Lage, aff = Merkmal ausgefüllt, sol = Lösung (AA, Aa oder aa). Nur Tiere mit sol sind antippbar; unsichere Tiere bleiben leer.
+   Mit ask: true wechselt ein Antippen eines Symbols zwischen ?, AA, Aa und aa (Tastatur: Enter oder Leertaste).
    Das Merkmal steht immer auch als Beschriftung da, nicht nur als Füllung: ausgefüllt = Merkmal. Es wird nichts gespeichert oder gesendet. */
 (function () {
   "use strict";
-  var NS = "http://www.w3.org/2000/svg", S = 44, STATES = ["?", "AA", "Aa", "aa", "A_"];
+  var NS = "http://www.w3.org/2000/svg", S = 44, STATES = ["?", "AA", "Aa", "aa"];
   function el(n, a, t) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (t != null) e.textContent = t; return e; }
   function y(g) { return 52 + g * 124; }
   function render(host, ped, opt) {
@@ -50,9 +50,9 @@
       } else if (n.show) { tx.textContent = n.show; }
       svg.appendChild(g);
     });
-    function label(id) { var n = N[id], who = (n.sex === "m" ? "Rüde" : "Hündin"); return id + ", " + who + (n.aff ? ", mit Merkmal" : ", ohne Merkmal") + (opt.ask ? ", Genotyp " + (state[id] === "?" ? "offen" : state[id].replace("_", " oder Aa")) : ""); }
+    function label(id) { var n = N[id], who = (n.sex === "m" ? "Rüde" : "Hündin"); return id + ", " + who + (n.aff ? ", mit Merkmal" : ", ohne Merkmal") + (opt.ask ? ", Genotyp " + (state[id] === "?" ? "offen" : state[id]) : ""); }
     function setState(id, s, silent) {
-      state[id] = s; var o = gnodes[id]; o.tx.textContent = s === "A_" ? "A_" : s; o.tx.style.opacity = s === "?" ? ".45" : "1";
+      state[id] = s; var o = gnodes[id]; o.tx.textContent = s; o.tx.style.opacity = s === "?" ? ".45" : "1";
       o.bd.textContent = ""; o.sh.removeAttribute("stroke-dasharray"); delete mark[id];
       o.g.setAttribute("aria-label", label(id));
     }
