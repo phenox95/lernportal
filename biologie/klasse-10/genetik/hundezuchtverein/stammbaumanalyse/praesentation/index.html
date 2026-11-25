@@ -8,7 +8,7 @@
 <link rel="icon" href="../../../../../../assets/favicon/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="../../../../../../assets/favicon/apple-touch-icon.png">
 <title>Der Hundezuchtverein – Stunde 5: Stammbaumanalyse</title>
-<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Stammbäume lesen, dominanten und rezessiven Erbgang bestimmen, Genotypen eintragen, Wahrscheinlichkeit für den nächsten Wurf berechnen.">
+<meta name="description" content="Biologie Klasse 10, Themenfeld Genetik: Stammbäume lesen, Regeln für dominante und rezessive Erbgänge selbst ableiten, Genotypen eintragen, Wahrscheinlichkeit für das nächste Kind berechnen, X-chromosomale Vererbung beurteilen.">
 <link rel="stylesheet" href="../../../../../../assets/css/material.css">
 <link rel="stylesheet" href="../../../../../../assets/css/praesentation-design.css">
 <link rel="stylesheet" href="../../../../../../assets/css/praesentation.css">
@@ -23,12 +23,14 @@
 .sb-host svg{display:block}
 .sb-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
 .sb-fb{font-size:20px;font-weight:700;margin:6px 0 0;min-height:1.4em}.sb-fb.good{color:#1e7e3c}.sb-fb.warn{color:#c0392b}
-.sb-t{font-size:22px;line-height:1.35;margin:0 0 8px;display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:start}
+.sb-t{font-size:22px;line-height:1.35;margin:0 0 8px;display:grid;grid-template-columns:36px 1fr auto;gap:8px;align-items:start}
 .sb-t .snr{font-weight:700;color:var(--g)}
-.sb-wahl{display:flex;gap:10px;flex-wrap:wrap;margin:2px 0 4px}
+.sb-wahl{display:flex;gap:10px;flex-wrap:wrap;margin:2px 0 4px}.sb-wahl.kl .sb-ch{font-size:18px;padding:4px 12px}
+.dicht .sb-t{font-size:20px;margin-bottom:4px}.dicht .sb-k{min-height:48px;font-size:19px}.dicht .sb-fb{font-size:18px;margin:2px 0 0}.dicht .aufg{padding:6px 12px;margin-bottom:0}.dicht .sb-wahl{margin:0}
 .sb-ch{font:700 20px Andika,Verdana,sans-serif;min-height:48px;padding:6px 18px;border:3px solid #c9d3ce;border-radius:12px;background:#fff;color:var(--ink);cursor:pointer;touch-action:manipulation}
 .sb-ch[aria-pressed=true]{border:5px double var(--ink);padding:4px 16px;background:repeating-linear-gradient(135deg,#fff 0 9px,rgba(var(--fach-rgb),.2) 9px 11px)}
 .sb-k{min-height:56px;background:#fff;border:3px dashed var(--g);border-radius:14px;padding:6px 12px;font-size:21px;line-height:1.35;outline:none}
+.sb-k:empty::before{content:attr(data-platzhalter);color:var(--grey)}
 .sb-k:focus-visible,.sb-in:focus-visible,.sb-ch:focus-visible{outline:3px solid var(--y);outline-offset:2px}
 .sb-h{display:none;margin-top:6px;background:var(--mint);border-radius:12px;padding:8px 14px;font-size:20px;line-height:1.35}.sb-h.on{display:block}
 .sb-kq{border-collapse:collapse;margin:4px 0}.sb-kq th,.sb-kq td{border:3px solid var(--ink);width:78px;height:54px;text-align:center;font-size:22px;font-weight:700}
@@ -56,7 +58,7 @@
 <p class="task big"><span class="snr">1</span><span><b>Erkläre</b>, warum bei Aa × Aa auch Kinder mit aa entstehen können. A = dominantes Allel, a = rezessives Allel.</span></p>
 <p class="shilfe">Logbuch, Feld „Do Now“. Allein und leise.</p>
 <div class="sb-row" style="margin-top:14px"><button class="b lz" data-zeige type="button">Abgleich</button></div>
-<div class="lsg-box" style="margin-top:14px"><div class="sb-card">Beide Eltern können a weitergeben. Von vier Kombinationen ist eine aa. Das sind 25 %.</div></div>
+<div class="lsg-box" style="margin-top:14px"><div class="sb-card">Beide Eltern können a weitergeben. Von vier Kombinationen ist eine aa, die Wahrscheinlichkeit ist 25 %. Die 25 % gelten für jedes Kind neu, wie bei jedem Münzwurf. Von vier Kindern können also auch zwei oder keins aa haben.</div></div>
 </section>
 
 <!-- 2 IMPULS -->
@@ -78,31 +80,11 @@
 <div data-fragenfeld></div>
 </section>
 
-<!-- 4 HINTERGRUND: WARUM STAMMBÄUME -->
-<section class="slide" data-min="5">
-<p class="phase" data-ph="er">Hintergrund · Buch S. 129</p>
-<h1 class="k">Warum zeichnet man Stammbäume?</h1>
-<span class="badge">5 Min. · allein · AB 1</span>
-<div class="sb-txt" aria-label="M1 Text">
-<p><span>1</span>Die Vererbung von Merkmalen lässt sich beim Menschen nur schwer untersuchen.</p>
-<p><span>2</span>Gezielte Kreuzungsversuche verbieten sich schon aus ethischen Gründen.</p>
-<p><span>3</span>Hinzu kommen die geringe Zahl an Nachkommen und die lange Generationenfolge.</p>
-<p><span>4</span>Deshalb erfasst man in der Familienforschung, wie ein Merkmal in einer Familie</p>
-<p><span>5</span>über mehrere Generationen hinweg auftritt, und stellt es in einem Stammbaum dar.</p>
-<p><span>6</span>Die Auswertung soll meist drei Fragen klären:</p>
-<p><span>7</span>Wird das zugehörige Gen dominant oder rezessiv vererbt?</p>
-<p><span>8</span>Liegt es auf einem Autosom oder auf einem Gonosom?</p>
-<p><span>9</span>Mit welcher Wahrscheinlichkeit erbt ein Nachkomme eine in der Familie bekannte Krankheit?</p>
-</div>
-<p class="task" style="font-size:24px;margin-top:12px"><span class="snr">1</span><span><b>Lies</b> den Text M1. <b>Nenne</b> drei Gründe, warum man beim Menschen keine Kreuzungsversuche macht (Z. 2–3). <b>Gib</b> an, welche Fragen die Auswertung klärt (Z. 6–9).</span></p>
-<div class="sb-k" contenteditable="true" aria-label="Zwei Gründe"></div>
-</section>
-
-<!-- 5 SO LIEST MAN EINEN STAMMBAUM -->
+<!-- 4 SO LIEST MAN EINEN STAMMBAUM -->
 <section class="slide" data-min="3">
-<p class="phase" data-ph="er">Hintergrund · Buch S. 130</p>
+<p class="phase" data-ph="er">Erarbeitung · Buch S. 130</p>
 <h1 class="k">So liest man einen Stammbaum</h1>
-<span class="badge">3 Min. · Paare · AB 2</span>
+<span class="badge">3 Min. · Paare · AB 1</span>
 <div class="sb-cols" style="grid-template-columns:420px 1fr;gap:20px">
 <div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:14px 18px">
 <div class="sb-leg">
@@ -111,94 +93,157 @@
 <svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="20" style="fill:var(--g)" stroke="#1A2B24" stroke-width="3"/></svg><span>ausgefüllt = Merkmalsträger</span>
 <svg viewBox="0 0 64 48" aria-hidden="true"><line x1="0" y1="24" x2="64" y2="24" stroke="#1A2B24" stroke-width="3"/></svg><span>Linie = Elternpaar</span>
 <svg viewBox="0 0 64 48" aria-hidden="true"><path d="M32 0V20M8 20H56M8 20V48M56 20V48" fill="none" stroke="#1A2B24" stroke-width="3"/></svg><span>nach unten = Kinder</span>
-<svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="26" font-weight="700" font-family="Andika" fill="#1A2B24">Rex</text></svg><span>Name der Person</span>
-<svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="26" font-weight="700" font-family="Andika" fill="#5B6A63">F1</text></svg><span>P = Eltern, F1 = Kinder, F2 = Enkel</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="22" font-weight="700" font-family="Andika" fill="#1A2B24">Laura</text></svg><span>Name der Person</span>
+<svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="26" font-weight="700" font-family="Andika" fill="#5B6A63">II</text></svg><span>I, II = Generationen</span>
 </div></div>
-<div><div class="sb-host" id="sbA5"></div>
-<p class="task" style="font-size:22px;margin:10px 0 4px"><span class="snr">2</span><span><b>Lies</b> M2. Wie viele Kinder haben Thomas und Sabine? Wer kann den Daumen zurückbiegen?</span></p>
-<div class="sb-wahl" data-wahl><button class="sb-ch" type="button">3 Kinder, Jonas</button><button class="sb-ch" type="button" data-ok="1">4 Kinder, Laura</button><button class="sb-ch" type="button">4 Kinder, Felix</button></div><p class="sb-fb" id="sbFb5"></p>
+<div><div class="sb-host" id="sbA5" style="max-width:520px"></div>
+<p class="task" style="font-size:22px;margin:10px 0 4px"><span class="snr">2</span><span><b>Gib an</b>, wie viele Kinder Thomas und Sabine haben und wer den Daumen zurückbiegen kann.</span><i class="lvl">●○○ D</i></p>
+<div class="sb-wahl kl" data-wahl data-fbid="sbFb5"><button class="sb-ch" type="button" data-fb="Noch nicht. Zähle noch einmal alle Symbole unter Thomas und Sabine.">3 Kinder: Laura</button><button class="sb-ch" type="button" data-ok="1">4 Kinder: Laura und Marie</button><button class="sb-ch" type="button" data-fb="Noch nicht. Ausgefüllt heißt: Die Person hat das Merkmal.">4 Kinder: Jonas und Ben</button></div><p class="sb-fb" id="sbFb5"></p>
 </div></div>
 </section>
 
-<!-- 6 ZWEI REGELN -->
-<section class="slide" data-min="6">
-<p class="phase" data-ph="er">Zwei Regeln · Buch S. 130</p>
-<h1 class="k">Zwei Regeln für den Stammbaum</h1>
-<span class="badge">6 Min. · Paare · AB 3</span>
-<div class="grid2" style="gap:20px">
-<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:10px 16px"><h2 style="margin:0 0 4px;font-size:23px;color:var(--dk)">Regel 1: rezessiv (M2, Daumenbiegen)</h2><div class="sb-host" id="sbR1" style="border-width:2px;padding:4px"></div>
-<p style="font-size:19px;line-height:1.3;margin:6px 0 0">Thomas und Sabine können den Daumen nicht zurückbiegen, ihre Tochter Laura schon. Ein dominanter Erbgang scheidet aus: Sonst müsste ein Elternteil das dominante Allel tragen und das Merkmal zeigen. Das Merkmal ist <b>rezessiv</b>, beide Eltern sind heterozygot (Aa).</p></div>
-<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:10px 16px"><h2 style="margin:0 0 4px;font-size:23px;color:var(--dk)">Regel 2: dominant (M3, Rhesusfaktor)</h2><div class="sb-host" id="sbR2" style="border-width:2px;padding:4px"></div>
-<p style="font-size:19px;line-height:1.3;margin:6px 0 0">Karl und Elke sind rhesuspositiv (Rh+), ihre Tochter Lisa ist rhesusnegativ (Rh−). Das Merkmal Rh+ ist <b>dominant</b>, beide Eltern sind heterozygot (Dd). Buch S. 134.</p></div>
-</div>
+<!-- 5 ERARBEITUNG REGEL 1 -->
+<section class="slide" data-min="7">
+<p class="phase" data-ph="er">Erarbeitung</p>
+<h1 class="k">M2: Wie kann das sein?</h1>
+<span class="badge">7 Min. · Paare · AB 2</span>
+<div class="sb-cols" style="grid-template-columns:520px 1fr">
+<div><div class="sb-host" id="sbR1"></div>
+<div class="sb-card" style="margin-top:10px;font-size:20px"><b>Aus der Do Now:</b> Aa × Aa kann ein Kind mit aa ergeben. Die Eltern zeigen das rezessive Merkmal nicht.</div></div>
+<div>
+<p class="task" style="font-size:22px;margin:0 0 6px"><span class="snr">3</span><span><b>Erkläre</b> mit der Do Now, wie Laura und Marie das Merkmal haben können, obwohl Thomas und Sabine es nicht zeigen.</span><i class="lvl">●○○ E</i></p>
+<p class="task" style="font-size:22px;margin:0 0 6px"><span class="snr">4</span><span><b>Begründe</b>, warum das Merkmal nicht dominant sein kann.</span><i class="lvl">●●○ F</i></p>
+<p class="shilfe" style="font-size:19px">Satzbausteine: Thomas und Sabine haben den Genotyp …, weil … · Wäre das Merkmal dominant, dann müsste …</p>
+<div class="sb-row"><button class="b lz" data-zeige type="button">Abgleich</button></div>
+<div class="lsg-box" style="margin-top:10px"><div class="sb-card" style="font-size:20px"><b>Regel 1: Zwei Eltern ohne Merkmal, Kind mit Merkmal → rezessiv.</b><br>Thomas und Sabine sind beide Aa. Jeder gibt ein a weiter, Laura und Marie sind aa. Wäre das Merkmal dominant, müsste ein Elternteil das dominante Allel tragen und das Merkmal selbst zeigen.</div></div>
+</div></div>
+</section>
+
+<!-- 6 ERARBEITUNG REGEL 2 -->
+<section class="slide" data-min="5">
+<p class="phase" data-ph="er">Erarbeitung · Buch S. 134</p>
+<h1 class="k">M3: Und umgekehrt?</h1>
+<span class="badge">5 Min. · Paare · AB 3</span>
+<div class="sb-cols" style="grid-template-columns:520px 1fr">
+<div><div class="sb-host" id="sbR2"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Familie Kern. Ausgefüllt = rhesuspositiv (Rh+), leer = rhesusnegativ (Rh−).</p></div>
+<div>
+<p class="task" style="font-size:22px;margin:0 0 6px"><span class="snr">5</span><span><b>Leite</b> aus M3 eine zweite Regel <b>ab</b>. Begründe sie mit einem Kreuzungsquadrat für Karl und Elke.</span><i class="lvl">●●● F–G</i></p>
+<p class="shilfe" style="font-size:19px">Hilfe: Rh+ = D, Rh− = d. Lisa ist dd. Von wem hat sie die beiden d?</p>
+<div class="sb-row"><button class="b lz" data-zeige type="button">Abgleich</button></div>
+<div class="lsg-box" style="margin-top:10px"><div class="sb-card" style="font-size:20px"><b>Regel 2: Zwei Eltern mit Merkmal, Kind ohne Merkmal → dominant.</b><br>Karl und Elke sind beide Dd, Lisa ist dd. Ein rezessiver Erbgang scheidet aus: Eltern mit einem rezessiven Merkmal hätten dd und könnten nur d weitergeben. Dann hätten alle Kinder das Merkmal.</div></div>
+</div></div>
 </section>
 
 <!-- 7 ÜBEN M4 -->
-<section class="slide" data-min="5">
-<p class="phase" data-ph="si">Üben</p>
+<section class="slide" data-min="6">
+<p class="phase" data-ph="si">Sicherung · Üben</p>
 <h1 class="k">M4: Dominant oder rezessiv?</h1>
-<span class="badge">5 Min. · Paare · AB 4</span>
-<div class="sb-cols" style="grid-template-columns:560px 1fr">
-<div><div class="sb-host" id="sbP1"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Familie Hartmann. Ausgefüllt = rote Haare.</p></div>
+<span class="badge">6 Min. · Paare · AB 4</span>
+<div class="sb-cols dicht" style="grid-template-columns:480px 1fr">
+<div><div class="sb-host" id="sbP1"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Familie Hartmann. Ausgefüllt = rote Haare. Jens hat eingeheiratet.</p></div>
 <div>
-<p class="sb-t"><span class="snr">4</span><span><b>Bestimme</b>, ob rote Haare dominant oder rezessiv vererbt werden.</span></p>
-<div class="sb-wahl" data-wahl data-fbid="sbP1a"><button class="sb-ch" type="button">dominant</button><button class="sb-ch" type="button" data-ok="1">rezessiv</button></div><p class="sb-fb" id="sbP1a"></p>
-<p class="sb-t"><span class="snr"></span><span><b>Begründe</b> mit einer Regel. Welche passt?</span></p>
-<div class="sb-wahl" data-wahl data-fbid="sbP1b"><button class="sb-ch" type="button" data-ok="1">Regel 1: Hans und Gerda ohne Merkmal, Bernd mit Merkmal</button><button class="sb-ch" type="button">Regel 2: zwei Eltern mit Merkmal, Kind ohne</button></div><p class="sb-fb" id="sbP1b"></p>
+<p class="sb-t"><span class="snr">6</span><span><b>Bestimme</b>, ob rote Haare dominant oder rezessiv vererbt werden. <b>Begründe</b> in einem Satz.</span><i class="lvl">●●○ F</i></p>
+<div class="sb-wahl" data-wahl data-fbid="sbP1a"><button class="sb-ch" type="button" data-fb="Noch nicht. Suche ein Elternpaar ohne Merkmal mit einem Kind mit Merkmal.">dominant</button><button class="sb-ch" type="button" data-ok="1">rezessiv</button></div><p class="sb-fb" id="sbP1a"></p>
+<div class="sb-k" contenteditable="true" aria-label="Begründung zu M4" data-platzhalter="Rote Haare werden … vererbt, weil …"></div>
+<div class="aufg" style="margin-top:8px">
+<p class="sb-t"><span class="snr">7</span><span><b>Ermittle</b> die Genotypen. Tippe die Symbole an. Ute bleibt offen.</span><i class="lvl">●●● G</i></p>
+<div class="sb-row"><button class="lz" type="button" id="sbP1chk">Prüfen</button><button class="lz" type="button" id="sbP1rst">Neu</button></div><p class="sb-fb" id="sbP1g" role="status"></p>
+<p class="sb-t"><span class="snr">8</span><span><b>Berechne</b>, mit welcher Wahrscheinlichkeit ein weiteres Kind von Mia und Jens rote Haare hat.</span><i class="lvl">●●● G–H</i></p>
+<button class="lz" data-lz type="button">Lösung</button><div class="lz-box">Mia Aa × Jens aa: Aa, Aa, aa, aa. Die Wahrscheinlichkeit ist 2 von 4 = 50 %.</div>
+</div>
 </div></div>
 </section>
 
 <!-- 8 ÜBEN M5 -->
-<section class="slide" data-min="5">
-<p class="phase" data-ph="si">Üben</p>
+<section class="slide" data-min="4">
+<p class="phase" data-ph="si">Sicherung · Üben</p>
 <h1 class="k">M5: Dominant oder rezessiv?</h1>
-<span class="badge">5 Min. · Paare · AB 5</span>
+<span class="badge">4 Min. · Paare · AB 5</span>
 <div class="sb-cols" style="grid-template-columns:560px 1fr">
-<div><div class="sb-host" id="sbP2"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Familie Brandt. Ausgefüllt = rhesuspositiv (Rh+).</p></div>
+<div><div class="sb-host" id="sbP2"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Familie Brandt. Ausgefüllt = rhesuspositiv (Rh+). Uta hat eingeheiratet.</p></div>
 <div>
-<p class="sb-t"><span class="snr">5</span><span><b>Bestimme</b>, ob rhesuspositiv dominant oder rezessiv vererbt wird.</span></p>
-<div class="sb-wahl" data-wahl data-fbid="sbP2a"><button class="sb-ch" type="button" data-ok="1">dominant</button><button class="sb-ch" type="button">rezessiv</button></div><p class="sb-fb" id="sbP2a"></p>
-<p class="sb-t"><span class="snr"></span><span><b>Begründe</b> mit einer Regel. Welche passt?</span></p>
-<div class="sb-wahl" data-wahl data-fbid="sbP2b"><button class="sb-ch" type="button">Regel 1: zwei Eltern ohne Merkmal, Kind mit Merkmal</button><button class="sb-ch" type="button" data-ok="1">Regel 2: Sven und Uta mit Merkmal, Udo ohne</button></div><p class="sb-fb" id="sbP2b"></p>
+<p class="sb-t"><span class="snr">9</span><span><b>Bestimme</b>, ob rhesuspositiv dominant oder rezessiv vererbt wird. <b>Begründe</b> in einem Satz.</span><i class="lvl">●●○ F</i></p>
+<div class="sb-wahl" data-wahl data-fbid="sbP2a"><button class="sb-ch" type="button" data-ok="1">dominant</button><button class="sb-ch" type="button" data-fb="Noch nicht. Suche ein Elternpaar mit Merkmal mit einem Kind ohne Merkmal.">rezessiv</button></div><p class="sb-fb" id="sbP2a"></p>
+<div class="sb-k" contenteditable="true" aria-label="Begründung zu M5" data-platzhalter="Rhesuspositiv wird … vererbt, weil …"></div>
+<div class="aufg" style="margin-top:8px">
+<p class="sb-t"><span class="snr">10</span><span><b>Begründe</b>, warum Kurt und Pia allein noch keine Entscheidung erlauben.</span><i class="lvl">●●● G</i></p>
+<button class="lz" data-lz type="button">Lösung</button><div class="lz-box">Bei Kurt und Pia greift keine Regel: Ein Elternteil hat das Merkmal, der andere nicht. Das passt zu dominant und zu rezessiv. Erst Sven und Uta (beide Rh+) mit Udo (Rh−) entscheiden: dominant.</div>
+</div>
 </div></div>
 </section>
 
 <!-- 9 ERWEITERUNG -->
 <section class="slide">
-<p class="phase" data-ph="si">Erweiterung · Buch S. 130</p>
-<h1 class="k">M6: Autosom oder Gonosom?</h1>
+<p class="phase" data-ph="er">Vertiefung · Erweiterung · Buch S. 130</p>
+<h1 class="k">M6: Autosom oder X-Chromosom?</h1>
 <span class="badge">Wenn Zeit · AB 6</span>
 <div class="sb-cols" style="grid-template-columns:560px 1fr">
 <div><div class="sb-host" id="sbE"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Ausgefüllt = Rot-Grün-Sehschwäche.</p></div>
 <div>
-<p class="sb-t"><span class="snr">6</span><span><b>Bestimme</b> den Erbgang in M6.</span></p>
-<div class="sb-wahl" data-wahl data-fbid="sbEv"><button class="sb-ch" type="button">autosomal-rezessiv</button><button class="sb-ch" type="button">autosomal-dominant</button><button class="sb-ch" type="button" data-ok="1">X-gonosomal-rezessiv</button></div><p class="sb-fb" id="sbEv"></p>
-<p class="tip" style="margin-top:6px;font-size:18px;line-height:1.35;padding-left:0">Hinweis: Nur ein Geschlecht hat das Merkmal? Dann liegt das Allel vermutlich auf einem Gonosom. Frauen, die es weitergeben, ohne es zu zeigen, heißen <b>Konduktorinnen</b>.</p>
+<p class="sb-t"><span class="snr">11</span><span><b>Beurteile</b>, welcher Erbgang in M6 am wahrscheinlichsten ist.</span><i class="lvl">●●● G–H</i></p>
+<div class="sb-wahl" data-wahl data-fbid="sbEv"><button class="sb-ch" type="button" data-fb="Ausgeschlossen: Arno und Berta haben das Merkmal nicht, ihr Sohn Carl schon.">autosomal-dominant</button><button class="sb-ch" type="button" data-fb="Möglich, aber unwahrscheinlicher: Dann müsste auch Franz zufällig Aa sein. Und es sind nur Männer betroffen.">autosomal-rezessiv</button><button class="sb-ch" type="button" data-ok="1" data-fb="Am wahrscheinlichsten: Nur Männer haben das Merkmal. Sie haben es von Müttern ohne Merkmal.">X-chromosomal-rezessiv</button></div><p class="sb-fb" id="sbEv"></p>
+<div class="aufg" style="margin-top:6px">
+<p class="sb-t"><span class="snr">12</span><span><b>Gib an</b>, welche Frauen sicher Konduktorinnen sind und welche es nur sein können.</span><i class="lvl">●●● G–H</i></p>
+<button class="lz" data-lz type="button">Lösung</button><div class="lz-box">Sicher: Berta und Elsa, denn sie haben Söhne mit Merkmal. Möglich (je 50 %): Dora und Hanna.</div>
+</div>
+<p class="tip" style="margin-top:6px;font-size:18px;line-height:1.35;padding-left:0">Hinweis: Frauen, die das Allel weitergeben, ohne das Merkmal zu zeigen, heißen <b>Konduktorinnen</b>. Auch Frauen können rot-grün-sehschwach sein, aber nur mit zwei betroffenen X-Chromosomen. Das ist selten.</p>
 </div></div>
 </section>
 
-<!-- 10 MERKSATZ -->
-<section class="slide dark" data-min="3">
-<p class="phase" data-ph="re">Merksatz</p>
-<h1 class="k">Merksatz</h1>
-<span class="badge">3 Min. · Plenum</span>
-<div class="sb-card" style="background:#fff;color:var(--ink);font-size:26px;line-height:1.7">
-<b>Schreibe</b> den Merksatz.<br>
-Zwei Eltern <b>ohne</b> Merkmal, Kind <b>mit</b> Merkmal: Das Merkmal ist <span class="lueck" contenteditable="true" aria-label="Merksatz Lücke 1" style="min-width:200px"></span>.<br>
-Zwei Eltern <b>mit</b> Merkmal, Kind <b>ohne</b> Merkmal: Das Merkmal ist <span class="lueck" contenteditable="true" aria-label="Merksatz Lücke 2" style="min-width:200px"></span>.</div>
+<!-- 10 TRANSFER -->
+<section class="slide" data-min="3">
+<p class="phase" data-ph="er">Transfer</p>
+<h1 class="k">Warum Stammbäume beim Menschen?</h1>
+<span class="badge">3 Min. · allein · oder Hausaufgabe</span>
+<div class="sb-txt" aria-label="M1 Text">
+<p><span>1</span>Bei Pflanzen und Hunden kann man gezielt kreuzen.</p>
+<p><span>2</span>Beim Menschen ist das verboten. Es wäre ethisch falsch.</p>
+<p><span>3</span>Menschen haben außerdem wenige Kinder.</p>
+<p><span>4</span>Bis Kinder selbst Kinder haben, dauert es etwa 30 Jahre.</p>
+<p><span>5</span>Deshalb sammelt man Daten über ein Merkmal in einer Familie.</p>
+<p><span>6</span>Man zeichnet sie als Stammbaum über mehrere Generationen.</p>
+</div>
+<p class="task" style="font-size:24px;margin-top:12px"><span class="snr">13</span><span><b>Erkläre</b> mit M1, warum man beim Menschen Stammbäume auswertet und keine Kreuzungsversuche macht.</span><i class="lvl">●○○ E</i></p>
+<p class="shilfe" style="font-size:19px">Lest den Text zu zweit laut. Eine Person liest, die andere zeigt mit.</p>
+<div class="sb-k" contenteditable="true" aria-label="Erklärung zu M1"></div>
 </section>
 
-<!-- 11 ABSCHLUSS -->
-<section class="slide" data-min="3">
-<p class="phase" data-ph="re">Abschluss</p>
-<h1 class="k">Zurück zu unserer Frage</h1>
+<!-- 11 MERKSATZ -->
+<section class="slide dark" data-min="3">
+<p class="phase" data-ph="si">Sicherung · Merksatz</p>
+<h1 class="k">Merksatz</h1>
 <span class="badge">3 Min. · Plenum</span>
+<div class="sb-card" style="background:#fff;color:var(--ink);font-size:26px;line-height:1.6">
+<b>Schreibe</b> den Merksatz ins Logbuch.<br>
+Zwei Eltern <b>ohne</b> Merkmal, Kind <b>mit</b> Merkmal: Das Merkmal ist <span class="lueck" contenteditable="true" aria-label="Merksatz Lücke 1" style="min-width:200px"></span>.<br>
+Zwei Eltern <b>mit</b> Merkmal, Kind <b>ohne</b> Merkmal: Das Merkmal ist <span class="lueck" contenteditable="true" aria-label="Merksatz Lücke 2" style="min-width:200px"></span>.<br>
+Greift keine der beiden Regeln, kann man den Erbgang mit diesem Stammbaum <span class="lueck" contenteditable="true" aria-label="Merksatz Lücke 3" style="min-width:200px"></span> bestimmen.</div>
+<div class="sb-row" style="margin-top:12px"><button class="b lz" data-zeige type="button">Abgleich</button></div>
+<div class="lsg-box" style="margin-top:10px"><div class="sb-card" style="background:#fff;color:var(--ink);font-size:22px">1 rezessiv · 2 dominant · 3 nicht sicher</div></div>
+</section>
+
+<!-- 12 ABSCHLUSS -->
+<section class="slide" data-min="2">
+<p class="phase" data-ph="si">Abschluss</p>
+<h1 class="k">Zurück zu unserer Frage</h1>
+<span class="badge">2 Min. · Plenum</span>
 <div class="sb-card" style="font-size:26px;margin-bottom:14px"><b>Unsere Frage:</b> <span data-leitfrage>…</span></div>
-<div class="grid2" style="gap:18px">
-<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:12px 18px;font-size:22px;line-height:1.4"><b style="color:var(--dk)">So gehst du vor</b><br>1 Zeichne oder lies den Stammbaum.<br>2 Zwei Eltern ohne Merkmal, Kind mit Merkmal: <b>rezessiv</b>.<br>3 Zwei Eltern mit Merkmal, Kind ohne Merkmal: <b>dominant</b>.<br>4 Nur ein Geschlecht betroffen? Vermutlich <b>gonosomal</b>.</div>
-<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:12px 18px"><p class="task" style="font-size:22px;margin:0 0 6px;grid-template-columns:1fr"><span><b>Exit-Ticket:</b> <b>Beantworte</b> unsere Frage in zwei Sätzen.</span></p><div class="sb-k" contenteditable="true" aria-label="Exit-Ticket" style="min-height:96px"></div></div>
-</div>
-<p class="tip" style="padding-left:84px">Zum Üben (freiwillig): Buch S. 131, Material A, A1 und A2.</p>
+<div class="hz-card" style="border:3px solid var(--g);border-radius:16px;padding:12px 18px;font-size:23px;line-height:1.45"><b style="color:var(--dk)">So gehst du vor</b><br>1 Lies den Stammbaum: Wer hat das Merkmal?<br>2 Suche zwei Eltern ohne Merkmal mit einem Kind mit Merkmal: <b>rezessiv</b>.<br>3 Suche zwei Eltern mit Merkmal mit einem Kind ohne Merkmal: <b>dominant</b>.<br>4 Greift keine Regel? Dann ist der Erbgang <b>nicht sicher bestimmbar</b>.<br>5 Fast nur Männer betroffen, über Mütter ohne Merkmal? Dann ist <b>X-chromosomal-rezessiv</b> wahrscheinlich.</div>
+<p class="tip" style="padding-left:0;margin-top:10px">Zum Üben (freiwillig): Buch S. 131, Material A, A1 und A2.</p>
+</section>
+
+<!-- 13 EXIT-TICKET -->
+<section class="slide" data-min="3">
+<p class="phase" data-ph="re">Exit-Ticket</p>
+<h1 class="k">Exit-Ticket: M7</h1>
+<span class="badge">3 Min. · allein · AB 7</span>
+<div class="sb-cols" style="grid-template-columns:560px 1fr">
+<div><div class="sb-host" id="sbX"></div><p class="tip" style="margin:6px 0 0;padding-left:0">Familie Wolf. Ausgefüllt = Merkmal. Jan hat eingeheiratet.</p></div>
+<div>
+<p class="task" style="font-size:22px;margin:0 0 6px"><span class="snr">14</span><span><b>Bestimme</b> den Erbgang in M7. <b>Begründe</b> in einem Satz mit den Namen der Personen.</span><i class="lvl">●●○ F</i></p>
+<div class="sb-k" contenteditable="true" aria-label="Exit-Ticket" style="min-height:120px"></div>
+<p class="shilfe" style="font-size:19px">Tipp: Prüfe jedes Elternpaar einzeln.</p>
+</div></div>
 </section>
 
 <div id="nummer"></div>
@@ -217,11 +262,12 @@ Zwei Eltern <b>mit</b> Merkmal, Kind <b>ohne</b> Merkmal: Das Merkmal ist <span 
   ["Stammbaum", "Zeichnung, die zeigt, wer mit wem Nachkommen hat und wer ein Merkmal hat", "Stamm-baum"],
   ["Generation", "Alle Personen einer Stufe im Stammbaum, zum Beispiel P oder F1", "Ge-ne-ra-ti-on"],
   ["Merkmalsträger", "Person, die das Merkmal zeigt, im Stammbaum ausgefüllt", "Merk-mals-trä-ger"],
-  ["dominant", "Die Anlage setzt sich durch, auch wenn nur eine da ist", "do-mi-nant"],
-  ["rezessiv", "Die Anlage zeigt sich nur, wenn sie zweimal da ist", "re-zes-siv"],
+  ["dominant", "Das Merkmal zeigt sich schon, wenn das Allel nur einmal da ist", "do-mi-nant"],
+  ["rezessiv", "Das Merkmal zeigt sich nur, wenn das Allel zweimal da ist", "re-zes-siv"],
   ["heterozygot", "Zwei verschiedene Allele, zum Beispiel Aa (mischerbig)", "he-te-ro-zy-got"],
   ["homozygot", "Zweimal dasselbe Allel, zum Beispiel aa (reinerbig)", "ho-mo-zy-got"],
-  ["Gonosom", "Geschlechtschromosom, X oder Y", "Go-no-som"]
+  ["Gonosom", "Geschlechtschromosom, X oder Y", "Go-no-som"],
+  ["Konduktorin", "Frau, die ein Allel weitergibt, ohne das Merkmal zu zeigen", "Kon-duk-to-rin"]
  ],
  "spiele": ["memory", "quiz"]
 }
@@ -232,12 +278,16 @@ Zwei Eltern <b>mit</b> Merkmal, Kind <b>ohne</b> Merkmal: Das Merkmal ist <span 
 (function(){
 "use strict";
 var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
-[["sbImp","A"],["sbA5","A"],["sbR1","A"],["sbR2","B"],["sbP1","C"],["sbP2","F"],["sbE","E"]].forEach(function(x){LPStammbaum.render($("#"+x[0]),window.HZ_SB[x[1]],{ask:false})});
-$$("[data-wahl]").forEach(function(g){var fb=g.dataset.fbid?$("#"+g.dataset.fbid):null,q=g.closest(".slide");
+[["sbImp","A"],["sbA5","A"],["sbR1","A"],["sbR2","B"],["sbP2","F"],["sbE","E"],["sbX","G"]].forEach(function(x){LPStammbaum.render($("#"+x[0]),window.HZ_SB[x[1]],{ask:false})});
+/* M4: Genotypen antippen und prüfen */
+var gt=LPStammbaum.render($("#sbP1"),window.HZ_SB.C,{ask:true}),gfb=$("#sbP1g");
+$("#sbP1chk").onclick=function(){var r=gt.check();gfb.textContent=r.ok===r.total?"Alles richtig.":r.ok+" von "+r.total+" richtig. Gestrichelte Symbole noch einmal prüfen.";gfb.className="sb-fb "+(r.ok===r.total?"good":"warn")};
+$("#sbP1rst").onclick=function(){gt.reset();gfb.textContent="";gfb.className="sb-fb"};
+/* Wahl-Knöpfe: data-ok = richtig, data-fb = eigene Rückmeldung */
+$$("[data-wahl]").forEach(function(g){var fb=g.dataset.fbid?$("#"+g.dataset.fbid):null;
   $$(".sb-ch",g).forEach(function(b){b.onclick=function(){$$(".sb-ch",g).forEach(function(o){o.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");
-    var ok=b.hasAttribute("data-ok");
-    if(fb){fb.textContent=ok?"Richtig.":"Noch nicht. Lies noch einmal die Regeln.";fb.className="sb-fb "+(ok?"good":"warn")}
-    var f5=$("#sbFb5");if(f5&&q.contains(f5)){f5.textContent=ok?"Richtig.":"Noch nicht. Zähle noch einmal.";f5.className="sb-fb "+(ok?"good":"warn")}}})});
+    var ok=b.hasAttribute("data-ok"),t=b.getAttribute("data-fb");
+    if(fb){fb.textContent=ok?("Richtig."+(t?" "+t:"")):(t||"Noch nicht. Lies noch einmal die Regeln.");fb.className="sb-fb "+(ok?"good":"warn");fb.setAttribute("role","status")}}})});
 })();
 </script>
 <script src="../../../../../../assets/js/stunde.js" defer></script>
