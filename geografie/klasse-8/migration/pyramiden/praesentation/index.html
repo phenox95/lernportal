@@ -1,0 +1,212 @@
+<!doctype html>
+<!-- Gestaltung nach dem Skill "unslop" von Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop -->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="../../../../../assets/favicon/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../../../../../assets/favicon/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../../../../../assets/favicon/apple-touch-icon.png">
+<title>Bevölkerungspyramiden lesen</title>
+<meta name="description" content="Geografie Klasse 8, Migration und Bevölkerung: Bevölkerungspyramiden von Deutschland, Nigeria, China und Indien lesen, vergleichen und mit Geburten- und Sterberate erklären (Gruppenpuzzle).">
+<link rel="stylesheet" href="../../../../../assets/css/material.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation-design.css">
+<link rel="stylesheet" href="../../../../../assets/css/praesentation.css">
+<script src="../../../../../assets/js/prefs.js"></script>
+<script src="../../../../../assets/js/material.js" defer></script>
+<style>
+#nav{position:absolute;left:0;bottom:0;height:6px;width:100%;background:rgba(0,0,0,.08);z-index:6}
+#nav i{display:block;height:100%;width:0;background:var(--y);transition:width .25s}
+#notiz{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding:14px 28px;font-size:18px;line-height:1.45;max-height:34vh;overflow:auto;display:none;z-index:2000}
+#notiz.an{display:block}
+.mint{background:var(--mint);border-radius:16px}
+.shilfe.sm{font-size:22px;padding:12px 16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.entwurf{border:2px solid var(--g);border-radius:16px;padding:22px 26px;background:#fff;color:var(--ink)}
+.entwurf h2{margin:0 0 10px;font-size:30px}
+.entwurf .zahl{font-size:76px;font-weight:500;line-height:1.05}
+.entwurf .z2{font-size:28px;margin-top:8px}
+.bar{height:26px;border-radius:8px;background:var(--g);margin-top:8px}
+.bar.k{background:var(--o)}
+.marken{display:flex;gap:8px;margin-top:10px;min-height:34px}
+.marke{background:#fff;color:#B3261E;border:2px solid #B3261E;border-radius:8px;padding:0 10px;font-weight:500;font-size:22px}
+.src{font-size:18px;line-height:1.35;color:var(--grey);margin:8px 0 0 110px}
+.slide.dark .src{color:#E6D3C8}
+.ja-nein{display:grid;gap:10px}
+.zeile{display:grid;grid-template-columns:240px 1fr 54px;gap:12px;align-items:center;font-size:27px}
+.zeile .eb{display:flex;gap:8px;flex-wrap:wrap}
+.zeile button,.wahl{font:inherit;font-weight:500;min-height:48px;padding:0 14px;border-radius:12px;border:2px solid var(--g);background:#fff;color:var(--ink);cursor:pointer;font-size:24px}
+.zeile button[aria-pressed=true]{background:var(--g);color:#fff}
+.zeile .erg{font-size:34px;font-weight:500;text-align:center}
+.btn{font:inherit;font-weight:500;font-size:24px;min-height:56px;padding:0 24px;border-radius:14px;border:0;background:var(--g);color:#fff;cursor:pointer}
+.btn.zweit{background:#fff;color:var(--ink);border:2px solid var(--g)}
+.show-no{display:none}.show-no.show{display:block}
+.schritte .task{font-size:26px;margin:0 0 10px}
+.tab{width:100%;border-collapse:collapse;font-size:24px}
+.tab th,.tab td{border:2px solid var(--g);padding:8px 12px;text-align:left;vertical-align:top}
+.tab th{background:var(--mint)}
+.tab td[contenteditable]{min-height:70px;outline:none}
+.tab td[contenteditable]:focus{background:#fff8dc}
+.linie{display:flex;align-items:center;gap:22px;margin:14px 70px 14px 0}
+.linie .strich{flex:1;border-top:6px solid var(--g);position:relative}
+.linie .strich:before,.linie .strich:after{content:"";position:absolute;top:-14px;width:6px;height:22px;background:var(--g)}
+.linie .strich:before{left:0}.linie .strich:after{right:0}
+.linie b{font-size:32px}
+.these{border:2px solid var(--g);border-radius:18px;padding:18px 26px;background:#fff;font-size:38px;font-weight:500;line-height:1.25;color:var(--ink)}
+.eingabe{border:2px dashed var(--g);border-radius:16px;padding:18px 24px;font-size:26px;line-height:1.6;min-height:300px;background:#fff;color:var(--ink)}
+.merk{font-size:40px;line-height:1.7;background:var(--mint);border-radius:18px;padding:26px 34px}
+.lueck{display:inline-block;min-width:170px;border-bottom:5px solid var(--g);text-align:center;font-weight:500;outline:none}
+.merk.auf .lueck{border-bottom:0;background:#fff;border-radius:8px;padding:0 10px}
+@media print{#nav,#notiz{display:none}}
+
+.pbild{display:block;width:100%;max-height:430px;object-fit:contain;background:#fff;border-radius:12px;border:2px solid var(--g)}
+.pk{font-size:30px;font-weight:500;margin:6px 0 0;text-align:center}
+.datentab td,.datentab th{font-size:23px;text-align:center}
+.datentab td:first-child,.datentab th:first-child{text-align:left}
+</style>
+</head>
+<body class="lp-pres" data-root="../../../../../" data-title="Bevölkerungspyramiden lesen" data-subject="Geografie" data-grade="Klasse 8">
+<noscript><p class="lp-noscript"><a href="../../../../../">Zurück zum Portal</a> · Diese Präsentation benötigt JavaScript für die vollständige Darstellung.</p></noscript>
+<div id="buehne">
+<div id="stage">
+
+<!-- 1 Do Now -->
+<section class="slide" data-min="3" data-notes="Do Now: Wiederholung der Vorstunde (Raten). Zettel liegt auf dem Platz, schriftlich, 3 Minuten, danach Partnercheck und Stempel. Währenddessen Anwesenheit. Lösung per Knopf.">
+  <h1>Do Now: Raten</h1><span class="badge">3 Min. · allein</span>
+  <div class="mint pad">
+    <p class="task"><span class="snr">1</span><span><b>Berechne</b> das natürliche Wachstum: Geburtenrate 30 ‰, Sterberate 10 ‰.</span><i class="lvl">●○○ D</i></p>
+    <p class="task"><span class="snr">2</span><span><b>Erkläre</b> in einem Satz, was dein Ergebnis bedeutet.</span><i class="lvl">●●○ E</i></p>
+  </div>
+  <div class="shilfe sm" style="margin-top:14px">Formel: natürliches Wachstum = Geburtenrate − Sterberate. Du darfst dir die Aufgabe vorlesen lassen.</div>
+  <p style="margin-top:14px"><button class="btn zweit" data-zeige="l1" type="button">Lösung zeigen</button></p>
+  <div class="shilfe sm show-no" id="l1" style="margin-top:10px">30 − 10 = 20 ‰. Von 1.000 Menschen kommen in einem Jahr 20 mehr dazu, als sterben.</div>
+</section>
+
+<!-- 2 Impuls -->
+<section class="slide dark" data-min="3" data-notes="Impuls stumm zeigen, 30 Sekunden schauen lassen. Nur die Achse erklären (links Männer, rechts Frauen, unten jung, oben alt). Keine Länder nennen, keine Leitfrage. Offene Impulsfragen: Was fällt euch auf? Was überrascht euch?">
+  <h1>Zwei Länder</h1><span class="badge">3 Min. · Plenum</span>
+  <div class="row2">
+    <div><img class="pbild" src="../bilder/nigeria.png" alt="Bevölkerungspyramide Land 1: sehr breite Basis, nach oben schnell schmaler"><p class="pk">Land 1</p></div>
+    <div><img class="pbild" src="../bilder/deutschland.png" alt="Bevölkerungspyramide Land 2: schmale Basis, breite Mitte, oben nicht sehr schmal"><p class="pk">Land 2</p></div>
+  </div>
+  <p class="src" style="margin-left:0">Modellpyramiden nach Weltbank-Daten 2023 (Anteile der Altersgruppen), Form innerhalb der Gruppen vereinfacht. Links Männer, rechts Frauen, unten jung, oben alt.</p>
+</section>
+
+<!-- 3 Fragenentwicklung -->
+<section class="slide" data-min="4" data-notes="Fragenentwicklung: SuS nennen Fragen, die Lehrkraft tippt sie ein, die Klasse priorisiert mit Handzeichen. Mit dem Knopf zur Leitfrage wird die gewählte Frage unten eingetragen. Impuls plus Fragenentwicklung höchstens 5 Minuten. Fragen auch auf der Fragenwand im Raum festhalten.">
+  <h1>Eure Fragen</h1><span class="badge">3 Min. · Plenum</span>
+  <div data-fragenfeld></div>
+</section>
+
+<!-- 4 Erarbeitung 1: Expertengruppen -->
+<section class="slide" data-min="10" data-notes="Expertengruppen (4 Gruppen à 6, je ein Land: Deutschland, Nigeria, China, Indien). Jede Gruppe bekommt ihre Expertenkarte. Lesen: Karte wird vorgelesen. Am Ende muss jede Person ihr Land erklären können.">
+  <h1>Expertengruppe: Euer Land</h1><span class="badge">10 Min. · Gruppe (6)</span>
+  <div class="schritte">
+    <p class="task"><span class="snr">1</span><span><b>Beschreibe</b> die Form deiner Pyramide: Ist die Basis breit oder schmal? Wie sieht die Spitze aus?</span><i class="lvl">●○○ D</i></p>
+    <p class="task"><span class="snr">2</span><span><b>Vergleiche</b> die Basis mit der Mitte der Pyramide. Wo ist der Balken breiter?</span><i class="lvl">●●○ E</i></p>
+    <p class="task"><span class="snr">3</span><span><b>Erkläre</b> mit Geburtenrate und Sterberate, warum die Pyramide so aussieht.</span><i class="lvl">●●○ E</i></p>
+    <p class="task"><span class="snr">4</span><span><b>Übe</b> in der Gruppe: Jede Person erklärt ihr Land in 3 Sätzen. Danach geht ihr in die Stammgruppe.</span><i class="lvl">●●○ E</i></p>
+  </div>
+  <div class="shilfe sm"><b>Wortspeicher:</b> Ge-burts-ra-te · Ster-be-ra-te · Ba-sis · Spit-ze · Al-ters-grup-pe · Wachs-tum · Ur-ne</div>
+</section>
+
+<!-- 5 Erarbeitung 2: Stammgruppen -->
+<section class="slide" data-min="12" data-notes="Stammgruppen (6 Gruppen à 4, je eine Person pro Land). Reihum berichten alle ihr Land, die anderen tragen in die Vergleichstabelle auf dem Blatt ein. Danach Typen zuordnen.">
+  <h1>Stammgruppe: Vergleicht die Länder</h1><span class="badge">12 Min. · Gruppe (4)</span>
+  <div class="schritte">
+    <p class="task"><span class="snr">1</span><span><b>Berichte</b> in 2 Minuten von deinem Land. Die anderen tragen in die Tabelle ein.</span><i class="lvl">●○○ D</i></p>
+    <p class="task"><span class="snr">2</span><span><b>Vergleiche</b> die vier Länder in der Tabelle: Basis, Geburtenrate, Sterberate, Wachstum.</span><i class="lvl">●●○ E</i></p>
+    <p class="task"><span class="snr">3</span><span><b>Ordne</b> jedes Land einem Typ zu: Pyramide, Glocke oder Urne.</span><i class="lvl">●●○ E</i></p>
+  </div>
+  <div class="shilfe sm"><b>Satzbausteine:</b> Die Basis ist breiter als die Mitte, weil … · Die Geburtenrate ist höher als die Sterberate, deshalb …</div>
+</section>
+
+<!-- 6 Sicherung -->
+<section class="slide" data-min="8" data-notes="Sicherung im Plenum. Gruppen nennen ihre Zuordnung, Felder anklicken und eintippen oder an der Tafel ergänzen. Eingaben gehen beim Neuladen verloren. Die Frage der Klasse wird oben angezeigt, sobald sie im Fragenfeld übernommen wurde.">
+  <h1>Wir sichern die Ergebnisse</h1><span class="badge">8 Min. · Plenum</span>
+  <p class="shilfe sm" style="margin-bottom:10px">Unsere Frage: <b data-leitfrage>(wird im Fragenfeld gesammelt)</b></p>
+  <table class="tab datentab">
+    <tr><th>Land</th><th>Geburtenrate</th><th>Sterberate</th><th>Wachstum</th><th>Typ</th></tr>
+    <tr><td>Nigeria</td><td>33,0 ‰</td><td>11,7 ‰</td><td>+21,3 ‰</td><td contenteditable="true" aria-label="Typ Nigeria"></td></tr>
+    <tr><td>Indien</td><td>16,1 ‰</td><td>6,6 ‰</td><td>+9,5 ‰</td><td contenteditable="true" aria-label="Typ Indien"></td></tr>
+    <tr><td>China</td><td>6,4 ‰</td><td>7,9 ‰</td><td>−1,5 ‰</td><td contenteditable="true" aria-label="Typ China"></td></tr>
+    <tr><td>Deutschland</td><td>8,3 ‰</td><td>12,3 ‰</td><td>−4,0 ‰</td><td contenteditable="true" aria-label="Typ Deutschland"></td></tr>
+  </table>
+  <p class="src" style="margin-left:0">Daten 2023: Weltbank, World Development Indicators (CC BY 4.0). Wachstum = Geburtenrate − Sterberate, ohne Zuwanderung.</p>
+</section>
+
+<!-- 7 Transfer -->
+<section class="slide" data-min="3" data-notes="Transfer in Partnerarbeit, wenn die Zeit reicht, sonst mündlich. Think-Pair-Share: erst allein 30 Sekunden, dann Partner, dann zwei Antworten im Plenum.">
+  <h1>Transfer</h1><span class="badge">3 Min. · Partner</span>
+  <div class="these" style="font-size:34px">Welches der vier Länder wächst in 30 Jahren am stärksten?</div>
+  <div class="schritte" style="margin-top:20px">
+    <p class="task"><span class="snr">1</span><span><b>Beurteile</b> und entscheide dich für ein Land.</span><i class="lvl">●●● F</i></p>
+    <p class="task"><span class="snr">2</span><span><b>Begründe</b> mit zwei Merkmalen aus der Tabelle oder der Pyramide.</span><i class="lvl">●●● F</i></p>
+  </div>
+  <div class="shilfe sm"><b>Satzbausteine:</b> Ich denke, dass … am stärksten wächst, weil … Außerdem …</div>
+</section>
+
+<!-- 8 Exit-Ticket -->
+<section class="slide" data-min="2" data-notes="Exit-Ticket auf dem Zettel. Die zweite Frage wird an die Fragenwand gehängt und in der nächsten Stunde aufgegriffen.">
+  <h1>Exit-Ticket</h1><span class="badge">2 Min. · allein</span>
+  <p class="task"><span class="snr">1</span><span><b>Schreibe</b> auf: Das habe ich heute verstanden.</span><i class="lvl">●○○ D</i></p>
+  <p class="task"><span class="snr">2</span><span><b>Formuliere</b> eine Frage für nächste Woche. Sie kommt an die Fragenwand.</span><i class="lvl">●●○ E</i></p>
+  <p class="shilfe sm" style="margin-top:14px">Nächste Woche: Wie verändern sich Geburten- und Sterberate über viele Jahre?</p>
+</section>
+
+<div id="nav"><i></i></div>
+<button class="pfeil l" id="zur" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12 15 19.5"/></svg></button>
+<button class="pfeil r" id="vor" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 16.5 12 9 19.5"/></svg></button>
+</div>
+</div>
+<div id="notiz"></div>
+
+<script>
+(function(){
+  var buehne=document.getElementById('buehne'),stage=document.getElementById('stage'),notiz=document.getElementById('notiz'),balken=document.querySelector('#nav i');
+  var slides=[].slice.call(document.querySelectorAll('.slide')),cur=0;
+  function fit(){var s=Math.min(buehne.clientWidth/1280,buehne.clientHeight/720);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+  function show(n){
+    cur=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,i){s.classList.toggle('on',i===cur)});
+    balken.style.width=((cur+1)/slides.length*100)+'%';
+    document.getElementById('zur').disabled=cur===0;document.getElementById('vor').disabled=cur===slides.length-1;
+    notiz.textContent=slides[cur].getAttribute('data-notes')||'';
+    try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
+  }
+  function tippt(t){return t&&(t.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(t.tagName))}
+  document.addEventListener('keydown',function(e){
+    if(tippt(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&e.target.tagName!=='BUTTON')){e.preventDefault();show(cur+1)}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){show(cur-1)}
+    else if(e.key==='n'||e.key==='N'){notiz.classList.toggle('an')}
+    else if(e.key==='f'||e.key==='F'){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(x){}}
+  });
+  document.getElementById('vor').onclick=function(){show(cur+1)};
+  document.getElementById('zur').onclick=function(){show(cur-1)};
+  [].forEach.call(document.querySelectorAll('[data-zeige]'),function(b){b.onclick=function(){document.getElementById(b.getAttribute('data-zeige')).classList.toggle('show')}});
+  window.addEventListener('resize',fit);fit();
+  var h=parseInt((location.hash||'').replace('#',''),10);show(isNaN(h)?0:h-1);
+})();
+</script>
+<!-- ENTWURF: bitte fachlich gegenlesen, dann "geprueft": true -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Bevölkerungspyramiden",
+ "geprueft": false,
+ "paare": [
+ ["Geburtenrate", "Zahl der Geburten pro 1.000 Menschen in einem Jahr", "Ge-burts-ra-te"],
+ ["Sterberate", "Zahl der Todesfälle pro 1.000 Menschen in einem Jahr", "Ster-be-ra-te"],
+ ["natürliches Wachstum", "Geburtenrate minus Sterberate", "na-tür-li-ches Wachs-tum"],
+ ["Pyramide", "Typ mit sehr breiter Basis: viele Kinder, wenige alte Menschen"],
+ ["Glocke", "Typ, bei dem die Basis etwa so breit ist wie die Mitte"],
+ ["Urne", "Typ mit schmaler Basis: wenige Kinder, viele ältere Menschen"]
+ ]
+}
+</script>
+<script src="../../../../../assets/js/praesentation.js" defer></script>
+<script src="../../../../../assets/js/referent.js" defer></script>
+<script src="../../../../../assets/js/fotofolie.js" defer></script>
+</body>
+</html>
