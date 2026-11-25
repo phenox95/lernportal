@@ -309,7 +309,7 @@ Die Seite zeigt, was in einer Lerngruppe wann dran war. Die Schülerinnen und Sc
 ```
 
 - **Lerngruppen:** `id` (eindeutig, z. B. `7b-geo`), `klasse` (z. B. `7b`), `fach` (`Biologie` oder `Geografie`), `woche` mit `tag` (1 = Montag bis 5 = Freitag) und `stunden` (1–11). Daraus entstehen die Unterrichtstage im Kalender und die Zeile „Nächste Stunde“. **Keine Räume, keine Namen von Schülerinnen und Schülern.** Eine Klasse mit zwei Fächern bekommt zwei Lerngruppen (`9a-geo`, `9a-bio`).
-- **Einträge:** `datum` (`JJJJ-MM-TT`), `gruppe` (eine `id`), `material` (Liste von Pfaden aus `projects.json`, dieselbe Schreibweise wie `path`) und/oder `notiz` (ein Satz, z. B. die Hausaufgabe). Zukünftige Daten erscheinen als „geplant“. Bei Präsentationen zeigt die Zeile zusätzlich „Nachlesen“ (Leseansicht).
+- **Einträge:** `datum` (`JJJJ-MM-TT`), `gruppe` (eine `id`), `material` (Liste von Pfaden aus `projects.json`, dieselbe Schreibweise wie `path`) und/oder `notiz` (ein Satz, z. B. die Hausaufgabe). Die Seite zeigt nur Einträge bis heute (was dran war); spätere Daten bleiben verborgen, bis der Tag da ist. Bei Präsentationen zeigt die Zeile zusätzlich „Nachlesen“ (Leseansicht).
 - **Nicht eintragen:** Klassenarbeiten, Noten, Erwartungshorizonte oder Lösungen. Alles im Repository ist öffentlich.
 - **Prüfen:** `python3 tools/check.py` prüft Lerngruppen (Fach, Klasse, Wochentage, Stunden) und Einträge (Datum, Gruppe, Pfad in `projects.json`).
 - **Pflege:** Jede Stunde wird von Hand eingetragen. Im Chat genügt eine Zeile je Termin, zum Beispiel „19.11., 7b, Ätna Tourismus“.
