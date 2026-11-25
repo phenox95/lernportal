@@ -165,7 +165,309 @@
    ]
   }
  ],
- "eintraege": [],
+ "eintraege": [
+  {
+   "datum": "2026-11-03",
+   "gruppe": "9m-bio",
+   "material": [
+    "biologie/klasse-9/nervensystem/auge-bau/"
+   ]
+  },
+  {
+   "datum": "2026-11-04",
+   "gruppe": "7s-bio",
+   "material": [
+    "biologie/klasse-7/zelle/fotosynthese-1/"
+   ]
+  },
+  {
+   "datum": "2026-11-05",
+   "gruppe": "7a-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/aetna-tourismus/"
+   ]
+  },
+  {
+   "datum": "2026-11-05",
+   "gruppe": "7b-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/aetna-tourismus/"
+   ]
+  },
+  {
+   "datum": "2026-11-05",
+   "gruppe": "7m-bio",
+   "material": [
+    "biologie/klasse-7/zelle/fotosynthese-1/"
+   ]
+  },
+  {
+   "datum": "2026-11-06",
+   "gruppe": "10a-geo",
+   "material": [
+    "geografie/klasse-10/globalisierung/globalisierung-als-netz/"
+   ]
+  },
+  {
+   "datum": "2026-11-06",
+   "gruppe": "9a-bio",
+   "material": [
+    "biologie/klasse-9/gesundheit/impfen/"
+   ]
+  },
+  {
+   "datum": "2026-11-06",
+   "gruppe": "9a-bio",
+   "material": [
+    "biologie/klasse-9/nervensystem/auge-bau/"
+   ]
+  },
+  {
+   "datum": "2026-11-06",
+   "gruppe": "9a-geo",
+   "material": [
+    "geografie/klasse-9/ressourcen/erneuerbare-energien/"
+   ]
+  },
+  {
+   "datum": "2026-11-09",
+   "gruppe": "9a-bio",
+   "material": [
+    "biologie/klasse-9/nervensystem/kurzsichtigkeit/"
+   ]
+  },
+  {
+   "datum": "2026-11-10",
+   "gruppe": "7b-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/vulkanausbruch/"
+   ]
+  },
+  {
+   "datum": "2026-11-10",
+   "gruppe": "9m-bio",
+   "material": [
+    "biologie/klasse-9/gesundheit/impfen/"
+   ]
+  },
+  {
+   "datum": "2026-11-10",
+   "gruppe": "9m-bio",
+   "material": [
+    "biologie/klasse-9/nervensystem/kurzsichtigkeit/"
+   ]
+  },
+  {
+   "datum": "2026-11-12",
+   "gruppe": "7a-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/vulkanausbruch/"
+   ]
+  },
+  {
+   "datum": "2026-11-12",
+   "gruppe": "7b-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/"
+   ]
+  },
+  {
+   "datum": "2026-11-13",
+   "gruppe": "10a-geo",
+   "material": [
+    "geografie/klasse-9/klimawandel/quellen-pruefen/"
+   ]
+  },
+  {
+   "datum": "2026-11-13",
+   "gruppe": "9a-geo",
+   "material": [
+    "geografie/klasse-9/klimawandel/quellen-pruefen/"
+   ]
+  },
+  {
+   "datum": "2026-11-13",
+   "gruppe": "9a-geo",
+   "material": [
+    "geografie/klasse-9/ressourcen/e-fuels/"
+   ]
+  },
+  {
+   "datum": "2026-11-16",
+   "gruppe": "10m-bio",
+   "material": [
+    "biologie/klasse-10/genetik/hundezuchtverein/teil-2/"
+   ]
+  },
+  {
+   "datum": "2026-11-16",
+   "gruppe": "7m-bio",
+   "material": [
+    "biologie/klasse-7/zelle/fotosynthese-2/"
+   ]
+  },
+  {
+   "datum": "2026-11-16",
+   "gruppe": "7s-bio",
+   "material": [
+    "biologie/klasse-7/zelle/fotosynthese-2/"
+   ]
+  },
+  {
+   "datum": "2026-11-16",
+   "gruppe": "9a-bio",
+   "material": [
+    "biologie/klasse-9/gesundheit/impfen-usa/"
+   ]
+  },
+  {
+   "datum": "2026-11-17",
+   "gruppe": "7b-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/erdbeben-tokio-1/"
+   ]
+  },
+  {
+   "datum": "2026-11-17",
+   "gruppe": "9m-bio",
+   "material": [
+    "biologie/klasse-9/gesundheit/impfen-usa/"
+   ]
+  },
+  {
+   "datum": "2026-11-18",
+   "gruppe": "7s-bio",
+   "material": [
+    "biologie/klasse-7/zelle/fotosynthese-3/"
+   ]
+  },
+  {
+   "datum": "2026-11-19",
+   "gruppe": "10m-bio",
+   "material": [
+    "biologie/klasse-10/genetik/hundezuchtverein/muenzwurf/"
+   ]
+  },
+  {
+   "datum": "2026-11-19",
+   "gruppe": "7a-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/aetna-landwirtschaft/"
+   ]
+  },
+  {
+   "datum": "2026-11-19",
+   "gruppe": "7a-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/erdbeben-tokio-1/"
+   ]
+  },
+  {
+   "datum": "2026-11-19",
+   "gruppe": "7b-geo",
+   "material": [
+    "geografie/klasse-7/risikoraeume/erdbeben-tokio-2/"
+   ]
+  },
+  {
+   "datum": "2026-11-19",
+   "gruppe": "7m-bio",
+   "material": [
+    "biologie/klasse-7/zelle/fotosynthese-3/"
+   ]
+  },
+  {
+   "datum": "2026-11-20",
+   "gruppe": "10a-geo",
+   "material": [
+    "geografie/klasse-10/globalisierung/weltklimakonferenz-cop31/"
+   ]
+  },
+  {
+   "datum": "2026-11-20",
+   "gruppe": "10a-geo",
+   "material": [
+    "geografie/klasse-9/klimawandel/escape-climate-change/"
+   ]
+  },
+  {
+   "datum": "2026-11-20",
+   "gruppe": "10a-geo",
+   "material": [
+    "geografie/klasse-9/klimawandel/klima-info/"
+   ]
+  },
+  {
+   "datum": "2026-11-20",
+   "gruppe": "9a-bio",
+   "material": [
+    "biologie/klasse-9/gesundheit/lek-rueckgabe/"
+   ]
+  },
+  {
+   "datum": "2026-11-20",
+   "gruppe": "9a-geo",
+   "material": [
+    "geografie/klasse-9/klimawandel/escape-climate-change/"
+   ]
+  },
+  {
+   "datum": "2026-11-20",
+   "gruppe": "9a-geo",
+   "material": [
+    "geografie/klasse-9/klimawandel/klima-info/"
+   ]
+  },
+  {
+   "datum": "2026-11-23",
+   "gruppe": "10m-bio",
+   "material": [
+    "biologie/klasse-10/genetik/hundezuchtverein/mendel-regel-1/"
+   ]
+  },
+  {
+   "datum": "2026-11-23",
+   "gruppe": "7m-bio",
+   "material": [
+    "biologie/klasse-7/zelle/fotosynthese-4/"
+   ]
+  },
+  {
+   "datum": "2026-11-23",
+   "gruppe": "7s-bio",
+   "material": [
+    "biologie/klasse-7/zelle/fotosynthese-4/"
+   ]
+  },
+  {
+   "datum": "2026-11-23",
+   "gruppe": "9a-bio",
+   "material": [
+    "biologie/klasse-9/gesundheit/allergie/"
+   ]
+  },
+  {
+   "datum": "2026-11-24",
+   "gruppe": "9m-bio",
+   "material": [
+    "biologie/klasse-9/gesundheit/lek-rueckgabe/"
+   ]
+  },
+  {
+   "datum": "2026-11-24",
+   "gruppe": "9m-bio",
+   "material": [
+    "biologie/klasse-9/nervensystem/auftakt/"
+   ]
+  },
+  {
+   "datum": "2026-11-25",
+   "gruppe": "8b-geo",
+   "material": [
+    "geografie/klasse-8/migration/pyramiden/"
+   ]
+  }
+ ],
  "frei": [
   {
    "name": "Herbstferien",
