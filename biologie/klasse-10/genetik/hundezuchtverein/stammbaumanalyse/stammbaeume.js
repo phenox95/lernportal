@@ -23,8 +23,8 @@ window.HZ_SB = {
       "II-3": { g: 1, x: 330, sex: "w", aff: false, sol: "Aa" }, "II-4": { g: 1, x: 470, sex: "m", aff: true, sol: "aa" },
       "III-1": { g: 2, x: 330, sex: "m", aff: true, sol: "aa" }, "III-2": { g: 2, x: 400, sex: "w", aff: false, sol: "Aa" }, "III-3": { g: 2, x: 470, sex: "w", aff: false, sol: "Aa" } },
     fam: [{ p: ["I-1", "I-2"], k: ["II-1", "II-2", "II-3"] }, { p: ["II-3", "II-4"], k: ["III-1", "III-2", "III-3"] }] },
-  /* Transfer: Familie, Merkmal Erkrankung (ausgefüllt), ohne Genotypen zum Eintragen */
-  D: { w: 560, h: 270, gens: ["I", "II"], alt: "Stammbaum einer Familie: Zwei gesunde Eltern, vier Kinder, ein Sohn erkrankt",
+  /* Transfer: Familie, Merkmal Albinismus (ausgefüllt), autosomal-rezessiv, ohne Genotypen zum Eintragen */
+  D: { w: 560, h: 270, gens: ["I", "II"], alt: "Stammbaum einer Familie: Zwei Eltern ohne Albinismus, vier Kinder, ein Sohn mit Albinismus",
     nodes: {
       "I-1": { g: 0, x: 200, sex: "m", aff: false }, "I-2": { g: 0, x: 360, sex: "w", aff: false },
       "II-1": { g: 1, x: 90, sex: "w", aff: false }, "II-2": { g: 1, x: 215, sex: "m", aff: true },
