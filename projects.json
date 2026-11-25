@@ -1428,6 +1428,40 @@
     ]
   },
   {
+    "title": "Der Hundezuchtverein – Stunde 5: Stammbaumanalyse",
+    "description": "Do Now, Impuls Zuchtbuch als Stammbaum, Fragenentwicklung, Stammbaum lesen, Erbgang (dominant oder rezessiv) aus Stammbäumen bestimmen mit Genotypen zum Eintragen und Prüfen, Schlussregeln, Kreuzungsquadrat für den nächsten Wurf, Grenzen kleiner Zahlen, Transfer Familie, Merksatz.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-10/genetik/hundezuchtverein/stammbaumanalyse/",
+    "subject": "Biologie",
+    "grade": "Klasse 10",
+    "themenfeld": "3.7",
+    "reihe": "Der Hundezuchtverein",
+    "folge": 5,
+    "dauer": "45 Min.",
+    "niveau": "E–H",
+    "datum": "2026-11-25",
+    "sichtbar": true,
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-10/genetik/hundezuchtverein/stammbaumanalyse/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Arbeitsblatt: Stammbaumanalyse",
+        "pfad": "biologie/klasse-10/genetik/hundezuchtverein/stammbaumanalyse/arbeitsblatt-stammbaum.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-10/genetik/hundezuchtverein/mendel-regel-2/",
+        "grund": "Aufbauende Stunde: Der Stammbaum nutzt das Kreuzungsquadrat, dominant, rezessiv und Aa aus Stunde 4."
+      }
+    ]
+  },
+  {
     "title": "Erdbeben – Stunde 4: Alarm für Tokio",
     "description": "Do Now, Impuls mit Meldungen aus Japan, Fragenentwicklung, Rollen der Erdbebenkonferenz vorbereiten, Beobachtungsaufgabe.",
     "type": "Materialseite",
