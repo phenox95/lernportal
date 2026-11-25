@@ -6,7 +6,7 @@
 <title>Fotosynthese – Arbeitsblatt</title>
 <link rel="stylesheet" href="druck.css">
 <style>
-.m3 img{width:100%;display:block;filter:grayscale(1)}
+.m3 img,img.sw{width:100%;display:block;filter:grayscale(1)}
 .gl{display:grid;grid-template-columns:24mm 1fr 6mm 1fr;gap:2mm 2mm;align-items:end;margin-top:1mm}
 .gl .l{border-bottom:.75pt solid #111;height:7mm}
 .gl .mit{grid-column:2/5;display:flex;gap:2mm;align-items:end}
@@ -32,24 +32,7 @@
   <div class="material">
    <div class="mk">M0 <span>Der Versuch von van Helmont</span></div>
    <div class="mi">
-    <svg viewBox="0 0 330 162" role="img" aria-label="Zeichnung: Links steht eine kleine Weide in einem abgedeckten Kübel mit Erde. Ein Pfeil zeigt: nach 5 Jahren. Rechts steht im gleichen Kübel ein großer Baum." style="width:100%;height:auto">
-     <g fill="#ececec" stroke="#111" stroke-width="1.5">
-      <path d="M20 95 h80 l-9 50 h-62 z"/><path d="M220 95 h80 l-9 50 h-62 z"/>
-     </g>
-     <g stroke="#111" stroke-width="3" stroke-linecap="round"><path d="M14 93 h36 M70 93 h36"/><path d="M214 93 h36 M270 93 h36"/></g>
-     <g fill="none" stroke="#111" stroke-width="2" stroke-linecap="round">
-      <path d="M60 95 V62 M60 75 l-9-9 M60 70 l9-10"/>
-      <path d="M260 95 V40 M260 70 l-26-24 M260 60 l26-26 M260 48 l-12-24 M260 48 l12-26"/>
-     </g>
-     <g fill="#fff" stroke="#111" stroke-width="1.2">
-      <ellipse cx="51" cy="64" rx="6" ry="2.5" transform="rotate(-45 51 64)"/><ellipse cx="69" cy="58" rx="6" ry="2.5" transform="rotate(-50 69 58)"/><ellipse cx="60" cy="60" rx="2.5" ry="6"/>
-      <ellipse cx="260" cy="30" rx="48" ry="26" fill="#ececec"/>
-      <ellipse cx="228" cy="44" rx="18" ry="12" fill="#ececec"/><ellipse cx="292" cy="40" rx="18" ry="12" fill="#ececec"/>
-     </g>
-     <g fill="none" stroke="#111" stroke-width="1.5"><path d="M125 100 h70 m-7-6 7 6-7 6"/></g>
-     <g font-size="11" fill="#111"><text x="160" y="90" text-anchor="middle">5 Jahre</text>
-      <text x="60" y="159" text-anchor="middle">am Anfang</text><text x="260" y="159" text-anchor="middle">nach 5 Jahren</text></g>
-    </svg>
+    <img class="sw" src="../../../../assets/img/fotosynthese-1/vh.webp" alt="Van-Helmont-Versuch: Weidenzweig 2,5 kg in 100 kg Erde, nach 5 Jahren Weide 84,5 kg und Erde 99,94 kg">
     <table style="margin-top:1.5mm">
      <thead><tr><th></th><th>am Anfang</th><th>nach 5 Jahren</th></tr></thead>
      <tbody>
@@ -59,7 +42,7 @@
     </table>
     <p style="margin-top:1.5mm">Die Weide wächst 5 Jahre in einem abgedeckten Kübel. Sie bekommt nur Regenwasser.</p>
    </div>
-   <div class="q">Quelle: eigene Zeichnung nach dem Versuch von J. B. van Helmont (um 1640), CC BY 4.0</div>
+   <div class="q">Versuch von J. B. van Helmont (um 1640)</div>
   </div>
 
   <div style="display:flex;flex-direction:column;gap:3mm">
@@ -123,34 +106,14 @@
  <div class="material">
   <div class="mk">M2 <span>Fotosynthese als Schema</span></div>
   <div class="mi">
-   <svg viewBox="0 0 400 190" role="img" aria-label="Schema: Ein Baum. In der Krone liegt ein Kasten Blattzellen mit Chloroplasten. Fünf Pfeile mit leeren Linien: von der Sonne in den Kasten, von links in den Kasten, von den Wurzeln durch den Stamm in den Kasten, aus dem Kasten nach rechts in die Luft und ein kurzer Pfeil im Kasten, der in der Pflanze bleibt." style="width:150mm;height:auto;display:block;margin:0 auto">
-    <g fill="none" stroke="#111" stroke-width="1.5">
-     <circle cx="38" cy="30" r="16" fill="#fff"/>
-     <path d="M38 6 v-4 M38 54 v4 M14 30 h-4 M62 30 h4 M21 13 l-3-3 M55 47 l3 3 M21 47 l-3 3 M55 13 l3-3"/>
-     <ellipse cx="215" cy="75" rx="85" ry="60" fill="#ececec" stroke-dasharray="4 3"/>
-     <path d="M207 135 v35 M223 135 v35 M207 170 l-14 14 M223 170 l14 14 M215 170 v16"/>
-     <path d="M0 176 h400" stroke-width="1"/>
-     <rect x="165" y="45" width="100" height="58" rx="8" fill="#fff"/>
-    </g>
-    <g font-size="10.5" fill="#111" text-anchor="middle"><text x="215" y="70">Blattzellen mit</text><text x="215" y="84">Chloroplasten</text></g>
-    <!-- Pfeile -->
-    <g fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round">
-     <path d="M60 46 L150 62 L148 56 L166 66 L146 74 L148 68 L58 52 z"/>
-     <path d="M70 74 h80 v-6 l15 10 -15 10 v-6 h-80 z"/>
-     <path d="M211 168 v-58 h-5 l9 -9 9 9 h-5 v58 z"/>
-     <path d="M266 68 h90 v-6 l15 10 -15 10 v-6 h-90 z"/>
-     <path d="M236 103 v12 h28 v5 l9 -8 -9 -8 v5 h-22 v-6 z"/>
-    </g>
-    <g font-size="10" fill="#111" font-weight="700"><text x="74" y="34">a</text><text x="70" y="100">b</text><text x="234" y="150">c</text><text x="340" y="100">d</text><text x="280" y="128">e</text></g>
-    <g stroke="#111" stroke-width=".75"><path d="M82 34 h70"/><path d="M78 100 h70"/><path d="M242 150 h70"/><path d="M348 100 h50"/><path d="M288 128 h70"/></g>
-   </svg>
+   <img class="sw" src="../../../../assets/img/fotosynthese-1/m2.webp" style="width:150mm;margin:0 auto" alt="M2: Schema der Fotosynthese mit unbeschrifteten Pfeilen">
   </div>
-  <div class="q">Quelle: eigene, vereinfachte Zeichnung, CC BY 4.0</div>
+  <div class="q">Quelle: Schema aus dem Lernportal</div>
  </div>
 
  <div class="aufgabe">
   <div class="nr">3</div>
-  <div class="txt"><p><b>Beschrifte</b> die Pfeile a bis e in M2 mit diesen Wörtern: Licht, Wasser, Kohlenstoffdioxid, Sauerstoff, Traubenzucker.</p></div>
+  <div class="txt"><p><b>Beschrifte</b> die Pfeile in M2 mit diesen Wörtern: Licht, Wasser, Kohlenstoffdioxid, Sauerstoff, Traubenzucker.</p></div>
   <div class="st">E<i>●●○</i></div>
  </div>
 
