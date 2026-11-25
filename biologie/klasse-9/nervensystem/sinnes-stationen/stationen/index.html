@@ -365,5 +365,22 @@
     addEventListener("pagehide", function () { if (ctx && ctx.close) try { ctx.close(); } catch (e) { /* egal */ } });
   })();
   </script>
+<!-- ENTWURF: Begriffe noch nicht fachlich gegengelesen. Vor dem Einsatz gegenlesen und dann "geprueft": true setzen. -->
+<script type="application/json" id="lp-spiel-daten">
+{
+ "titel": "Sinnes-Stationen",
+ "paare": [
+  ["Blinder Fleck", "Stelle im Auge, an der man beim Versuch den Punkt nicht mehr sieht", "Blin-der Fleck"],
+  ["Versuchsperson", "Person, an der der Versuch gemacht wird", "Ver-suchs-per-son"],
+  ["Messperson", "Person, die beim Versuch misst", "Mess-per-son"],
+  ["Protokoll", "Hier wird nach jedem Durchgang aufgeschrieben, was die Versuchsperson sagt", "Pro-to-koll"],
+  ["Zufallsplan", "Plan, der die Durchgänge in zufälliger Reihenfolge vorgibt", "Zu-falls-plan"],
+  ["Kontrolle", "Zusätzlicher Versuch, der prüft, ob das Ergebnis stimmt", "Kon-trol-le"],
+  ["Mittelwert", "Wert, der aus den Messwerten einer Gruppe berechnet wird", "Mit-tel-wert"],
+  ["Tonhöhe", "Wie hoch ein Ton klingt, sie wird in Hertz (Hz) angegeben", "Ton-hö-he"]
+ ],
+ "spiele": ["memory", "quiz", "zuordnen"]
+}
+</script>
 </body>
 </html>
