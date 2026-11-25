@@ -1677,5 +1677,44 @@
         "grund": "Gleicher Fall: Im Planspiel Mini-COP31 verhandelt die Klasse selbst über die COP31 in Antalya, hier werden die echten Entwürfe der Konferenz und die Interessen dahinter verglichen."
       }
     ]
+  },
+  {
+    "title": "Bevölkerungspyramiden lesen",
+    "subject": "Geografie",
+    "grade": "Klasse 8",
+    "type": "Materialseite",
+    "description": "Pyramiden von Deutschland, Nigeria, China und Indien lesen, vergleichen und mit Geburten- und Sterberate erklären (Gruppenpuzzle). Mit Do Now, Fragenentwicklung, Expertenkarten und Stammgruppenblatt. Stichwörter: Bevölkerungspyramide, Geburtenrate, Sterberate, natürliches Wachstum.",
+    "path": "geografie/klasse-8/migration/pyramiden/",
+    "themenfeld": "3.2",
+    "reihe": "Bevölkerung und Migration",
+    "dauer": "45 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-25",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "geografie/klasse-8/migration/pyramiden/praesentation/",
+        "art": "Präsentation"
+      },
+      {
+        "titel": "Do-Now-Zettel (Druck)",
+        "pfad": "geografie/klasse-8/migration/pyramiden/do-now-zettel.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      },
+      {
+        "titel": "Expertenkarten (Druck, 4 Seiten)",
+        "pfad": "geografie/klasse-8/migration/pyramiden/arbeitsblatt-1.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      },
+      {
+        "titel": "Stammgruppenblatt mit Exit-Ticket (Druck)",
+        "pfad": "geografie/klasse-8/migration/pyramiden/arbeitsblatt-2.pdf",
+        "art": "Arbeitsblatt",
+        "stufe": 2
+      }
+    ],
+    "sichtbar": true
   }
 ]
