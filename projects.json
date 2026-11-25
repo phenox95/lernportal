@@ -1004,6 +1004,36 @@
     ]
   },
   {
+    "title": "Die Zelle – Stunde 14: Die Zellatmung",
+    "description": "Zwei Kannen mit Erbsen, eine wird warm: Fragen entwickeln, einen Versuch und einen Text auswerten, die Wortgleichung der Zellatmung aufstellen, das Mitochondrium beschriften und Zellatmung und Fotosynthese vergleichen.",
+    "type": "Materialseite",
+    "path": "biologie/klasse-7/zelle/zellatmung/",
+    "subject": "Biologie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–F",
+    "datum": "2026-11-30",
+    "reihe": "Zelle",
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "biologie/klasse-7/zelle/zellatmung/praesentation/",
+        "art": "Präsentation"
+      }
+    ],
+    "verweise": [
+      {
+        "pfad": "biologie/klasse-7/zelle/fotosynthese-2/",
+        "grund": "Stunde 14 stellt die Zellatmung als Gegenstück zur Fotosynthese aus Stunde 11 auf."
+      },
+      {
+        "pfad": "biologie/klasse-7/zelle/zellen-bei-tieren/",
+        "grund": "Dort wurde das Mitochondrium als Teil der Tierzelle und der Pflanzenzelle eingeführt."
+      }
+    ]
+  },
+  {
     "title": "Feuerwerk aus der Tiefe – Vulkanausbrüche",
     "description": "Entstehung und Ausbruch von Vulkanen, Schicht- und Schildvulkan vergleichen, Kurzprojekt zu Vulkanen und Erdbeben.",
     "type": "Interaktive Präsentation",
