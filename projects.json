@@ -1785,5 +1785,35 @@
       }
     ],
     "sichtbar": true
+  },
+  {
+    "title": "Erdbeben – Stunde 6: Haiti und Chile 2010",
+    "description": "Do Now, Impuls mit zwei Beben aus dem Jahr 2010, Fragenentwicklung, Ursachen für den Schaden ordnen, Merksatz, Transfer auf Tokio und Selbsteinschätzung zum Abschluss der Reihe.",
+    "type": "Materialseite",
+    "path": "geografie/klasse-7/risikoraeume/erdbeben-haiti-chile/",
+    "subject": "Geografie",
+    "grade": "Klasse 7",
+    "themenfeld": "3.1",
+    "dauer": "45 Min.",
+    "niveau": "D–G",
+    "datum": "2026-11-25",
+    "reihe": "Erdbeben",
+    "folge": 6,
+    "dateien": [
+      {
+        "titel": "Präsentation zur Stunde",
+        "pfad": "geografie/klasse-7/risikoraeume/erdbeben-haiti-chile/praesentation/",
+        "art": "Präsentation"
+      }
+    ],
+    "bne": [
+      11
+    ],
+    "verweise": [
+      {
+        "pfad": "geografie/klasse-7/risikoraeume/erdbeben-tokio-2/",
+        "grund": "Stunde 6 überträgt die Maßnahmen der Erdbebenkonferenz auf den Vergleich von Haiti und Chile und kehrt am Ende zu Tokio zurück."
+      }
+    ]
   }
 ]
