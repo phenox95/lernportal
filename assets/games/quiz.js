@@ -13,24 +13,27 @@
       const frage = h.el("p", "lp-pr-frage"), karten = h.el("div", "lp-pr-karten"), sagt = h.el("p", "lp-pr-spieltext", "");
       karten.style.gridTemplateColumns = "repeat(2, 1fr)";
       feld.appendChild(info); feld.appendChild(frage); feld.appendChild(karten); feld.appendChild(sagt);
+      const vl = h.vorlesen(frage);
       const uhr = setInterval(() => { if (!document.body.contains(karten)) return clearInterval(uhr); zeit.textContent = h.zeit((Date.now() - t0) / 1000); }, 500);
       function runde() {
         if (n >= runden.length) {
           clearInterval(uhr); karten.remove(); frage.remove(); sagt.remove();
-          feld.appendChild(h.el("p", "lp-pr-geschafft", richtig + " von " + runden.length + " richtig" + (h.ohneZeit ? "" : " in " + h.zeit((Date.now() - t0) / 1000)) + "!"));
+          if (vl) vl.remove();
+          feld.appendChild(h.el("p", "lp-pr-geschafft", richtig + " von " + runden.length + " richtig" + (h.ohneZeit ? "" : " in " + h.zeit((Date.now() - t0) / 1000))));
           return;
         }
         const r = runden[n]; zaehler.textContent = "Frage " + (n + 1) + " von " + runden.length;
-        frage.textContent = "Welcher Begriff passt? „" + r.e + "“"; sagt.textContent = ""; karten.textContent = "";
+        h.frage(frage, "Tippe den Begriff an, der zur Erklärung passt.", "„" + r.e + "“"); h.rueck(sagt, "", ""); karten.textContent = "";
         const falsch = h.mischen(paare.filter((p) => p !== r)).slice(0, 3);
         let gesperrt = false;
         h.mischen([r].concat(falsch)).forEach((p) => {
           const b = h.knopf("lp-pr-karte", p.s || p.b);
           b.addEventListener("click", () => {
             if (gesperrt) return; gesperrt = true;
-            if (p === r) { b.classList.add("ok"); richtig++; sagt.textContent = "Richtig!"; }
-            else { b.classList.add("bad"); sagt.textContent = "Gesucht war: " + (r.s || r.b); [].forEach.call(karten.children, (x) => { if (x.textContent === (r.s || r.b)) x.classList.add("ok"); }); }
-            setTimeout(() => { n++; runde(); }, 1600);
+            if (p === r) { b.classList.add("ok"); richtig++; h.rueck(sagt, "gut", "Richtig"); }
+            else { b.classList.add("bad"); h.rueck(sagt, "falsch", "Nicht richtig. Gesucht war: " + (r.s || r.b)); [].forEach.call(karten.children, (x) => { if (x.textContent === (r.s || r.b)) x.classList.add("ok"); }); }
+            [].forEach.call(karten.children, (x) => { x.disabled = true; });
+            h.weiter(feld, () => { n++; runde(); }, 1600);
           });
           karten.appendChild(b);
         });

@@ -241,9 +241,51 @@
     el: neu, knopf, ohneZeit: true,
     mischen(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; },
     zeit(sek) { return Math.floor(sek / 60) + ":" + String(Math.floor(sek % 60)).padStart(2, "0"); },
+    /* Aufgabe mit Operator vorn (fett), darunter der Inhalt, z. B. die Erklärung in Anführungszeichen */
+    frage(el, auftrag, inhalt) {
+      el.textContent = "";
+      const a = neu("span", "lp-pr-auftrag"), i = auftrag.indexOf(" ");
+      a.appendChild(neu("b", "", i > 0 ? auftrag.slice(0, i) : auftrag));
+      if (i > 0) a.appendChild(document.createTextNode(auftrag.slice(i)));
+      el.appendChild(a);
+      if (inhalt) el.appendChild(document.createTextNode(inhalt));
+    },
+    /* Rückmeldung: Text plus Linien-Symbol (Haken oder Kreuz), nie nur Farbe. art: "gut", "falsch" oder leer */
+    rueck(el, art, text) {
+      el.textContent = text || "";
+      el.classList.toggle("lp-pr-gut", art === "gut");
+      el.classList.toggle("lp-pr-falsch", art === "falsch");
+      if (!el.hasAttribute("role")) el.setAttribute("role", "status");
+    },
+    /* Eigenes Tempo: Nach einer Rückmeldung geht es erst mit „Weiter“ weiter, damit alle die Rückmeldung in Ruhe lesen können */
+    weiter(feld, los) {
+      const b = knopf("lp-pr-klein lp-pr-weiter", "Weiter");
+      b.addEventListener("click", () => { b.remove(); los(); });
+      feld.appendChild(b); b.focus();
+    },
+    /* Vorlesen-Knopf für ein Textelement (liest den jeweils aktuellen Text). Nur mit lokaler deutscher Stimme, sonst kein Knopf. */
+    vorlesen(el) {
+      const synth = window.speechSynthesis;
+      if (!synth || typeof SpeechSynthesisUtterance === "undefined") return null;
+      const stimme = () => (synth.getVoices() || []).filter((v) => /^de(-|_|$)/i.test(v.lang) && v.localService)[0] || null;
+      const b = knopf("lp-pr-klein lp-pr-vorl", "Vorlesen");
+      b.setAttribute("aria-pressed", "false");
+      b.hidden = !stimme();
+      if (b.hidden && synth.addEventListener) synth.addEventListener("voiceschanged", () => { b.hidden = !stimme(); });
+      b.addEventListener("click", () => {
+        if (synth.speaking) { synth.cancel(); b.setAttribute("aria-pressed", "false"); return; }
+        const v = stimme(); if (!v) return;
+        const u = new SpeechSynthesisUtterance(el.textContent);
+        u.voice = v; u.lang = v.lang; u.rate = 0.9;
+        u.onend = u.onerror = () => b.setAttribute("aria-pressed", "false");
+        b.setAttribute("aria-pressed", "true"); synth.speak(u);
+      });
+      el.parentNode.insertBefore(b, el);
+      return b;
+    },
     /* Mehrspieler: Auswahl der Anzahl (Teams oder Spieler), dann los(n) */
     anzahl(feld, text, werte, los) {
-      const box = neu("div", "lp-pr-wahl"), reihe = neu("div", "lp-pr-buchstaben");
+      const box = neu("div", "lp-pr-spielwahl"), reihe = neu("div", "lp-pr-buchstaben");
       box.appendChild(neu("p", "lp-pr-spieltext", text));
       werte.forEach((w) => { const b = knopf("lp-pr-karte", String(w), w + " auswählen"); b.addEventListener("click", () => { box.remove(); los(w); }); reihe.appendChild(b); });
       box.appendChild(reihe); feld.appendChild(box);
@@ -253,11 +295,11 @@
       name = name || "Team";
       const el = neu("div", "lp-pr-tafel"), z = [], p = [];
       for (let i = 0; i < n; i++) { p.push(0); const s = neu("span", "lp-pr-team", ""); z.push(s); el.appendChild(s); }
-      const zeige = () => z.forEach((s, i) => { s.textContent = n === 1 ? "Punkte: " + p[i] : name + " " + (i + 1) + ": " + p[i]; });
+      const zeige = () => z.forEach((s, i) => { s.textContent = (n === 1 ? "Punkte: " + p[i] : name + " " + (i + 1) + ": " + p[i]) + (s.classList.contains("dran") ? " (ist dran)" : ""); });
       zeige(); feld.appendChild(el);
       return {
         punkte: p,
-        dran(i) { z.forEach((s, j) => s.classList.toggle("dran", j === i)); },
+        dran(i) { z.forEach((s, j) => { s.classList.toggle("dran", j === i); if (j === i) s.setAttribute("aria-current", "true"); else s.removeAttribute("aria-current"); }); zeige(); },
         punkt(i) { p[i]++; zeige(); },
         sieger() {
           const m = Math.max.apply(null, p), w = p.map((x, i) => (x === m ? i : -1)).filter((i) => i >= 0);
