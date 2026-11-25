@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>AB Stammbaumanalyse</title>
+<link rel="stylesheet" href="druck.css">
+<style>
+/* Nur für dieses Blatt: Stammbäume in Schwarz und Grau, Kreuzungsquadrat, Merksatz. */
+:root{--g:#333}
+.sb svg{display:block;width:100%;height:auto}
+.sb.kl{max-width:92mm;margin:0 auto}
+.leg{display:grid;grid-template-columns:auto 1fr;gap:1mm 2.5mm;align-items:center}
+.leg svg{width:9mm;height:7mm}
+.kq{border-collapse:collapse;width:auto}
+.kq th,.kq td{width:11mm;height:8mm;text-align:center;vertical-align:middle;padding:0;border:.75pt solid #111}
+.kq th{background:#ececec}
+.kq-reihe{display:flex;gap:4mm;align-items:flex-start}
+.kq-reihe .linien{flex:1}
+.merk p+p{margin-top:1.5mm}
+.lue{display:inline-block;width:32mm;border-bottom:.75pt solid #111}
+.aufgabe .st{white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ===================== SEITE 1 ===================== -->
+<div class="seite">
+ <div class="kopf">
+  <div class="thema"><small>Biologie 10 · Genetik · Der Hundezuchtverein · Stunde 5</small>Stammbaumanalyse</div>
+  <div class="feld">Name:<span></span></div>
+  <div class="feld kl">Klasse:<span></span></div>
+  <div class="niv" aria-label="Niveau">●●○</div>
+ </div>
+
+ <div class="leitfrage"><b>Unsere Frage für heute:</b><span class="linie"></span></div>
+
+ <div class="zwei r">
+  <div class="material">
+   <div class="mk">M2 <span>Familie Weber</span></div>
+   <div class="mi"><div class="sb" data-sb="A"></div></div>
+   <div class="q">ausgefüllt = kann den Daumen im 90°-Winkel zurückbiegen (vereinfachtes Schulmodell, Buch S. 129) · Quelle: eigene Zeichnung, CC BY 4.0</div>
+  </div>
+  <div class="material">
+   <div class="mk">Legende</div>
+   <div class="mi leg">
+    <svg viewBox="0 0 64 48" aria-hidden="true"><rect x="14" y="6" width="36" height="36" fill="#fff" stroke="#111" stroke-width="3"/></svg><span>Quadrat = Mann</span>
+    <svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="18" fill="#fff" stroke="#111" stroke-width="3"/></svg><span>Kreis = Frau</span>
+    <svg viewBox="0 0 64 48" aria-hidden="true"><circle cx="32" cy="24" r="18" fill="#333" stroke="#111" stroke-width="3"/></svg><span><b>ausgefüllt = Merkmalsträger</b></span>
+    <svg viewBox="0 0 64 48" aria-hidden="true"><line x1="2" y1="24" x2="62" y2="24" stroke="#111" stroke-width="3"/></svg><span>Linie zwischen zwei Personen = Elternpaar</span>
+    <svg viewBox="0 0 64 48" aria-hidden="true"><path d="M32 2V20M10 20H54M10 20V46M54 20V46" fill="none" stroke="#111" stroke-width="3"/></svg><span>Linie nach unten = Kinder</span>
+    <svg viewBox="0 0 64 48" aria-hidden="true"><text x="32" y="34" text-anchor="middle" font-size="26" font-weight="700" fill="#555">II</text></svg><span>I, II, III = Generationen (I = die älteste)</span>
+   </div>
+  </div>
+ </div>
+
+ <div class="aufgabe">
+  <div class="nr">1</div>
+  <div class="txt"><p><b>Gib an</b>, wie viele Kinder Thomas und Sabine haben und wer den Daumen zurückbiegen kann.</p><div class="linien"><i></i></div></div>
+  <div class="st"><i>●○○</i>D</div>
+ </div>
+
+ <div class="aufgabe">
+  <div class="nr">2</div>
+  <div class="txt">
+   <div class="teil"><span class="kaestchen"></span><p>a) <b>Erkläre</b> mit der Do Now, wie Laura und Marie das Merkmal haben können, obwohl Thomas und Sabine es nicht zeigen.</p></div>
+   <div class="linien"><i></i><i></i></div>
+   <div class="teil"><span class="kaestchen"></span><p>b) <b>Begründe</b>, warum das Merkmal nicht dominant sein kann.</p></div>
+   <div class="linien"><i></i><i></i></div>
+  </div>
+  <div class="st"><i>●○○</i>E<i style="margin-top:12mm">●●○</i>F</div>
+ </div>
+
+ <div class="zwei">
+  <div class="material">
+   <div class="mk">M3 <span>Familie Kern: Rhesusfaktor (Buch S. 134)</span></div>
+   <div class="mi"><div class="sb" data-sb="B"></div></div>
+   <div class="q">ausgefüllt = rhesuspositiv (Rh+), leer = rhesusnegativ (Rh−) · Quelle: eigene Zeichnung, CC BY 4.0</div>
+  </div>
+  <div class="aufgabe" style="align-self:start">
+   <div class="nr">3</div>
+   <div class="txt">
+    <p><b>Leite</b> aus M3 eine zweite Regel <b>ab</b>. Begründe sie mit einem Kreuzungsquadrat für Karl und Elke.</p>
+    <div class="kq-reihe">
+     <table class="kq" aria-label="Kreuzungsquadrat"><tr><th></th><th></th><th></th></tr><tr><th></th><td></td><td></td></tr><tr><th></th><td></td><td></td></tr></table>
+     <div class="linien"><i></i><i></i><i></i></div>
+    </div>
+    <div class="hilfe"><span class="t">Tipp:</span>Rh+ = D, Rh− = d. Lisa ist dd. Von wem hat sie die beiden d?</div>
+   </div>
+   <div class="st"><i>●●●</i>F–G</div>
+  </div>
+ </div>
+
+ <div class="hilfe"><span class="t">Satzbausteine:</span>Thomas und Sabine haben den Genotyp …, weil … · Wäre das Merkmal dominant, dann müsste … · Zwei Eltern mit Merkmal haben ein Kind ohne Merkmal. Deshalb …</div>
+
+ <div class="fuss"><span>Stammbaumanalyse · Quelle: eigene Texte und Zeichnungen, CC BY 4.0</span><span>Seite 1 von 3</span></div>
+</div>
+
+<!-- ===================== SEITE 2 ===================== -->
+<div class="seite">
+ <div class="kopf">
+  <div class="thema">Stammbaumanalyse (Fortsetzung)</div>
+  <div class="feld">Name:<span></span></div>
+ </div>
+
+ <div class="zwei">
+  <div class="material">
+   <div class="mk">M4 <span>Familie Hartmann: rote Haare</span></div>
+   <div class="mi"><div class="sb" data-sb="C"></div></div>
+   <div class="q">ausgefüllt = rote Haare · Jens hat eingeheiratet.</div>
+  </div>
+  <div class="material">
+   <div class="mk">M5 <span>Familie Brandt: Rhesusfaktor</span></div>
+   <div class="mi"><div class="sb" data-sb="F"></div></div>
+   <div class="q">ausgefüllt = rhesuspositiv (Rh+) · Uta hat eingeheiratet.</div>
+  </div>
+ </div>
+
+ <div class="aufgabe">
+  <div class="nr">4</div>
+  <div class="txt"><p><b>Bestimme</b> in M4, ob rote Haare dominant oder rezessiv vererbt werden. <b>Begründe</b> in einem Satz mit den Namen der Personen.</p><div class="linien"><i></i><i></i></div></div>
+  <div class="st"><i>●●○</i>F</div>
+ </div>
+
+ <div class="aufgabe">
+  <div class="nr">5</div>
+  <div class="txt"><p><b>Ermittle</b> die Genotypen in M4 (A = nicht rot, a = rot). Ist ein Genotyp nicht sicher, schreibe A_.</p>
+   <table aria-label="Genotypen in M4"><tr><th>Hans</th><th>Gerda</th><th>Ute</th><th>Bernd</th><th>Mia</th><th>Jens</th><th>Leon</th><th>Sarah</th><th>Lena</th></tr><tr><td class="leer"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div>
+  <div class="st"><i>●●●</i>G</div>
+ </div>
+
+ <div class="aufgabe">
+  <div class="nr">6</div>
+  <div class="txt">
+   <p><b>Berechne</b>, mit welcher Wahrscheinlichkeit ein weiteres Kind von Mia und Jens rote Haare hat.</p>
+   <div class="kq-reihe">
+    <table class="kq" aria-label="Kreuzungsquadrat"><tr><th></th><th></th><th></th></tr><tr><th></th><td></td><td></td></tr><tr><th></th><td></td><td></td></tr></table>
+    <div class="linien"><i></i><i></i></div>
+   </div>
+  </div>
+  <div class="st"><i>●●●</i>G–H</div>
+ </div>
+
+ <div class="aufgabe">
+  <div class="nr">7</div>
+  <div class="txt">
+   <div class="teil"><span class="kaestchen"></span><p>a) <b>Bestimme</b> in M5, ob rhesuspositiv dominant oder rezessiv vererbt wird. <b>Begründe</b> in einem Satz mit den Namen der Personen.</p></div>
+   <div class="linien"><i></i><i></i></div>
+   <div class="teil"><span class="kaestchen"></span><p>b) <b>Begründe</b>, warum Kurt und Pia allein noch keine Entscheidung erlauben.</p></div>
+   <div class="linien"><i></i><i></i></div>
+  </div>
+  <div class="st"><i>●●○</i>F<i style="margin-top:12mm">●●●</i>G</div>
+ </div>
+
+ <div class="sicher merk">
+  <p><b>Merksatz</b></p>
+  <p>Zwei Eltern <b>ohne</b> Merkmal, Kind <b>mit</b> Merkmal: Das Merkmal ist <span class="lue"></span>.</p>
+  <p>Zwei Eltern <b>mit</b> Merkmal, Kind <b>ohne</b> Merkmal: Das Merkmal ist <span class="lue"></span>.</p>
+  <p>Greift keine der beiden Regeln, kann man den Erbgang mit diesem Stammbaum <span class="lue"></span> bestimmen.</p>
+  <p style="color:#444"><b>Wortspeicher:</b> re-zes-siv · do-mi-nant · nicht si-cher</p>
+ </div>
+
+
+ <div class="fuss"><span>Stammbaumanalyse</span><span>Seite 2 von 3</span></div>
+</div>
+
+<!-- ===================== SEITE 3 ===================== -->
+<div class="seite">
+ <div class="kopf">
+  <div class="thema">Stammbaumanalyse (Fortsetzung)</div>
+  <div class="feld">Name:<span></span></div>
+ </div>
+
+ <div class="zwei">
+  <div class="material">
+   <div class="mk">M6 <span>Rot-Grün-Sehschwäche (Erweiterung)</span></div>
+   <div class="mi"><div class="sb" data-sb="E"></div></div>
+   <div class="q">ausgefüllt = Rot-Grün-Sehschwäche · Franz hat eingeheiratet.</div>
+  </div>
+  <div class="aufgabe" style="align-self:start">
+   <div class="nr">8</div>
+   <div class="txt">
+    <div class="teil"><span class="kaestchen"></span><p>a) <b>Beurteile</b>, welcher Erbgang in M6 am wahrscheinlichsten ist. Begründe auch, welcher Erbgang sicher ausgeschlossen ist.</p></div>
+    <div class="linien"><i></i><i></i><i></i></div>
+    <div class="teil"><span class="kaestchen"></span><p>b) <b>Gib an</b>, welche Frauen sicher Konduktorinnen sind und welche es nur sein können.</p></div>
+    <div class="linien"><i></i><i></i></div>
+    <div class="hilfe"><span class="t">Wortspeicher:</span>
+     <div class="wort"><span>au-to-so-mal</span><span>X-chro-mo-so-mal</span><span>Kon-duk-to-rin</span><span>aus-ge-schlos-sen</span></div>
+    </div>
+   </div>
+   <div class="st"><i>●●●</i>G–H</div>
+  </div>
+ </div>
+
+ <div class="material">
+  <div class="mk">M1 <span>Warum Stammbäume beim Menschen?</span></div>
+  <div class="mi zeilen">
+   <p>Bei Pflanzen und Hunden kann man gezielt kreuzen.</p>
+   <p>Beim Menschen ist das verboten. Es wäre ethisch falsch.</p>
+   <p>Menschen haben außerdem wenige Kinder.</p>
+   <p>Bis Kinder selbst Kinder haben, dauert es etwa 30 Jahre.</p>
+   <p>Deshalb sammelt man Daten über ein Merkmal in einer Familie.</p>
+   <p>Man zeichnet sie als Stammbaum über mehrere Generationen.</p>
+  </div>
+  <div class="q">Quelle: eigener Text nach Buch S. 129, CC BY 4.0</div>
+ </div>
+
+ <div class="aufgabe">
+  <div class="nr">9</div>
+  <div class="txt"><p><b>Erkläre</b> mit M1, warum man beim Menschen Stammbäume auswertet und keine Kreuzungsversuche macht.</p><div class="linien"><i></i><i></i></div></div>
+  <div class="st"><i>●○○</i>E</div>
+ </div>
+
+ <div class="zwei">
+  <div class="material">
+   <div class="mk">M7 <span>Exit-Ticket: Familie Wolf</span></div>
+   <div class="mi"><div class="sb" data-sb="G"></div></div>
+   <div class="q">ausgefüllt = Merkmal · Jan hat eingeheiratet.</div>
+  </div>
+  <div class="aufgabe" style="align-self:start">
+   <div class="nr">10</div>
+   <div class="txt">
+    <p><b>Bestimme</b> den Erbgang in M7. <b>Begründe</b> in einem Satz mit den Namen der Personen.</p>
+    <div class="linien"><i></i><i></i><i></i></div>
+    <div class="hilfe"><span class="t">Tipp:</span>Prüfe jedes Elternpaar einzeln.</div>
+   </div>
+   <div class="st"><i>●●○</i>F</div>
+  </div>
+ </div>
+
+ <div class="hilfe"><span class="t">Vertiefung (freiwillig):</span>Buch S. 131, Material A, A1 und A2.</div>
+
+ <div class="fuss"><span>Stammbaumanalyse</span><span>Seite 3 von 3</span></div>
+</div>
+
+<script src="../../../../../assets/js/stammbaum.js"></script>
+<script src="../stammbaumanalyse/stammbaeume.js"></script>
+<script>
+[].forEach.call(document.querySelectorAll("[data-sb]"), function (h) { LPStammbaum.render(h, window.HZ_SB[h.getAttribute("data-sb")], { ask: false }); });
+</script>
+</body>
+</html>

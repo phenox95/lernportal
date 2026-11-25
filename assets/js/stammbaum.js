@@ -5,8 +5,8 @@
      p.check()   -> { ok, total }   (markiert richtige und falsche Felder mit Haken oder Kreuz)
      p.loesung() -> trägt alle Lösungen ein
      p.reset()   -> setzt alle Eingaben zurück
-   Daten: { w, h, gens: ["I","II"], nodes: { "Rex": { g:0, x:200, sex:"m"|"w", aff:true|false, sol:"Aa" } }, fam: [ { p:["I-1","I-2"], k:["II-1","II-2"] } ] }
-   name = Beschriftung unter dem Symbol (sonst der Schlüssel), g = Generation (0 beginnt oben), x = waagerechte Lage, aff = Merkmal ausgefüllt, sol = Lösung (AA, Aa oder aa). Nur Tiere mit sol sind antippbar; unsichere Tiere bleiben leer.
+   Daten: { w, h, art: "mensch" (optional, sonst Hund), gens: ["I","II"], nodes: { "Rex": { g:0, x:200, sex:"m"|"w", aff:true|false, sol:"Aa" } }, fam: [ { p:["I-1","I-2"], k:["II-1","II-2"] } ] }
+   name = Beschriftung unter dem Symbol (sonst der Schlüssel), g = Generation (0 beginnt oben), x = waagerechte Lage, aff = Merkmal ausgefüllt, sol = Lösung (AA, Aa oder aa), art = "mensch" liest Mann/Frau statt Rüde/Hündin vor. Nur Tiere mit sol sind antippbar; unsichere Tiere bleiben leer.
    Mit ask: true wechselt ein Antippen eines Symbols zwischen ?, AA, Aa und aa (Tastatur: Enter oder Leertaste).
    Das Merkmal steht immer auch als Beschriftung da, nicht nur als Füllung: ausgefüllt = Merkmal. Es wird nichts gespeichert oder gesendet. */
 (function () {
@@ -50,7 +50,7 @@
       } else if (n.show) { tx.textContent = n.show; }
       svg.appendChild(g);
     });
-    function label(id) { var n = N[id], who = (n.sex === "m" ? "Rüde" : "Hündin"); return id + ", " + who + (n.aff ? ", mit Merkmal" : ", ohne Merkmal") + (opt.ask ? ", Genotyp " + (state[id] === "?" ? "offen" : state[id]) : ""); }
+    function label(id) { var n = N[id], mensch = ped.art === "mensch", who = n.sex === "m" ? (mensch ? "Mann" : "Rüde") : (mensch ? "Frau" : "Hündin"); return (n.name || id) + ", " + who + (n.aff ? ", mit Merkmal" : ", ohne Merkmal") + (opt.ask ? ", Genotyp " + (state[id] === "?" ? "offen" : state[id]) : ""); }
     function setState(id, s, silent) {
       state[id] = s; var o = gnodes[id]; o.tx.textContent = s; o.tx.style.opacity = s === "?" ? ".45" : "1";
       o.bd.textContent = ""; o.sh.removeAttribute("stroke-dasharray"); delete mark[id];
