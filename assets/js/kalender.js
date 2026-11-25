@@ -30,12 +30,11 @@
   const planAm = (d) => (gruppe ? gruppe.woche.find((w) => w.tag === d.getDay()) : null);
   const rhythmus = (d) => (freiAm(d).length ? null : planAm(d));
   const freiText = (liste) => liste.map((f) => f.name).filter((n, i, a) => a.indexOf(n) === i).join(", ");
-  const eintraegeAm = (s) => daten.eintraege.filter((e) => e.gruppe === gruppe.id && e.datum === s);
+  const eintraegeAm = (s) => daten.eintraege.filter((e) => e.gruppe === gruppe.id && e.datum === s && e.datum <= iso(heute));
 
   function materialKarte(e, d) {
     const k = neu("div", "kal-eintrag-karte");
     const dat = neu("p", "kal-datum", langDatum(d) + (rhythmus(d) ? " · " + stundenText(rhythmus(d).stunden) : ""));
-    if (d > heute) dat.appendChild(neu("span", "kal-geplant", "geplant"));
     k.appendChild(dat);
     (e.material || []).forEach((pfad) => {
       const p = projekte[pfad]; if (!p || !sicher(pfad)) return;
@@ -119,7 +118,7 @@
   function zeichneListe() {
     const box = $("kal-liste"); box.textContent = "";
     if (!gruppe) return;
-    const liste = daten.eintraege.filter((e) => e.gruppe === gruppe.id && ausIso(e.datum)).sort((a, b) => (a.datum < b.datum ? 1 : -1));
+    const liste = daten.eintraege.filter((e) => e.gruppe === gruppe.id && ausIso(e.datum) && e.datum <= iso(heute)).sort((a, b) => (a.datum < b.datum ? 1 : -1));
     if (!liste.length) { box.appendChild(neu("p", "empty-message", "Für " + gruppe.klasse + " " + gruppe.fach + " ist noch nichts eingetragen.")); return; }
     liste.forEach((e) => box.appendChild(materialKarte(e, ausIso(e.datum))));
   }
