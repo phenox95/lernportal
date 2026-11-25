@@ -5,8 +5,8 @@
      p.check()   -> { ok, total }   (markiert richtige und falsche Felder mit Haken oder Kreuz)
      p.loesung() -> trägt alle Lösungen ein
      p.reset()   -> setzt alle Eingaben zurück
-   Daten: { w, h, gens: ["I","II"], nodes: { "I-1": { g:0, x:200, sex:"m"|"w", aff:true|false, sol:"Aa" } }, fam: [ { p:["I-1","I-2"], k:["II-1","II-2"] } ] }
-   g = Generation (0 beginnt oben), x = waagerechte Lage, aff = Merkmal ausgefüllt, sol = Lösung (AA, Aa oder aa). Nur Tiere mit sol sind antippbar; unsichere Tiere bleiben leer.
+   Daten: { w, h, gens: ["I","II"], nodes: { "Rex": { g:0, x:200, sex:"m"|"w", aff:true|false, sol:"Aa" } }, fam: [ { p:["I-1","I-2"], k:["II-1","II-2"] } ] }
+   name = Beschriftung unter dem Symbol (sonst der Schlüssel), g = Generation (0 beginnt oben), x = waagerechte Lage, aff = Merkmal ausgefüllt, sol = Lösung (AA, Aa oder aa). Nur Tiere mit sol sind antippbar; unsichere Tiere bleiben leer.
    Mit ask: true wechselt ein Antippen eines Symbols zwischen ?, AA, Aa und aa (Tastatur: Enter oder Leertaste).
    Das Merkmal steht immer auch als Beschriftung da, nicht nur als Füllung: ausgefüllt = Merkmal. Es wird nichts gespeichert oder gesendet. */
 (function () {
@@ -30,7 +30,7 @@
       ks.forEach(function (k) { ln(k.x, yb, k.x, y(k.g) - S / 2); });
     });
     /* Generationen links */
-    (ped.gens || []).forEach(function (r, g) { svg.appendChild(el("text", { x: 6, y: y(g) + 7, "font-size": 22, "font-weight": 700, fill: "#5B6A63", "font-family": "Andika,Verdana,sans-serif" }, r)); });
+    (ped.gens || []).forEach(function (r, g) { svg.appendChild(el("text", { x: 6, y: y(g) + 7, "font-size": 20, "font-weight": 700, fill: "#5B6A63", "font-family": "Andika,Verdana,sans-serif" }, r)); });
     /* Symbole */
     Object.keys(N).forEach(function (id) {
       var n = N[id], g = el("g", { transform: "translate(" + n.x + "," + y(n.g) + ")" });
@@ -39,7 +39,7 @@
       g.appendChild(sh);
       var tx = el("text", { "text-anchor": "middle", y: 7, "font-size": 20, "font-weight": 700, "font-family": "Andika,Verdana,sans-serif" }, "");
       tx.style.fill = n.aff ? "#fff" : "#1A2B24"; g.appendChild(tx);
-      g.appendChild(el("text", { "text-anchor": "middle", y: S / 2 + 20, "font-size": 16, "font-family": "Andika,Verdana,sans-serif", fill: "#5B6A63" }, id));
+      g.appendChild(el("text", { "text-anchor": "middle", y: S / 2 + 20, "font-size": 16, "font-family": "Andika,Verdana,sans-serif", fill: "#1A2B24" }, n.name || id));
       var bd = el("text", { x: S / 2 - 2, y: -S / 2 + 4, "font-size": 24, "font-weight": 700, "font-family": "Andika,Verdana,sans-serif" }, ""); g.appendChild(bd);
       gnodes[id] = { g: g, tx: tx, sh: sh, bd: bd };
       if (opt.ask && n.sol) {
