@@ -600,9 +600,9 @@ section[aria-labelledby="h-klasse"] .row-meta { margin-top: 0; }
 .bg-silben { display: block; font-size: 0.875rem; font-weight: 400; color: var(--text-2); }
 @media (min-width: 44rem) { .bg-zeile { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); } }
 :root[data-spacing="weit"] .bg-zeile { line-height: 1.8; }
-/* Übungsfenster: helle Fläche wie in den Präsentationen, Portal-Schrift, Fachfarbe aus 5.3 der Master-Anweisung */
+/* Übungsfenster: helle Fläche und Schrift Andika wie in den Präsentationen (praesentation.css), Fachfarbe des Themenfelds */
 html.bg-spiel-offen { overflow: hidden; }
-.bg-spiel { --g: var(--tf-g, #0F6E56); --dk: var(--tf-dk, #0B4F3C); --mint: var(--tf-mint, #E8F3EC); --grey: var(--tf-grey, #5B6A63); --ink: var(--tf-ink0, #1A2B24); font-family: var(--font-body); color-scheme: light; }
+.bg-spiel { --g: var(--tf-g, #0F6E56); --dk: var(--tf-dk, #0B4F3C); --mint: var(--tf-mint, #E8F3EC); --grey: var(--tf-grey, #5B6A63); --ink: var(--tf-ink0, #1A2B24); color-scheme: light; }
 body[data-subject="Geografie"] .bg-spiel { --g: var(--tf-g, #A9442B); --dk: var(--tf-dk, #7C2F1C); --mint: var(--tf-mint, #F5EBE1); --grey: var(--tf-grey, #7D726B); --ink: var(--tf-ink0, #2B211E); }
 .bg-spiel .lp-pr-spielkopf { padding: 0.6rem clamp(0.75rem, 4vw, 2rem); font-size: clamp(1.0625rem, 2.6vw, 1.5rem); padding-top: max(0.6rem, env(safe-area-inset-top)); }
 .bg-spiel .lp-pr-spielkopf { flex-wrap: wrap; gap: 0.4rem 1rem; }
@@ -610,8 +610,7 @@ body[data-subject="Geografie"] .bg-spiel { --g: var(--tf-g, #A9442B); --dk: var(
 .bg-spiel .lp-pr-spielfeld { padding: clamp(0.9rem, 3vw, 1.5rem) clamp(0.75rem, 4vw, 2rem); padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
 .bg-spielknoepfe { flex: none; display: flex; gap: 0.5rem; }
 .bg-spiel .lp-pr-klein { font-size: 0.9375rem; }
-.bg-spiel .lp-pr-klein[hidden] { display: none; }
-.bg-spiel :focus-visible { outline: 4px solid #F4B400; outline-offset: 2px; }
+.bg-spiel .lp-pr-klein[hidden], .bg-spiel .lp-pr-karte[hidden] { display: none; }
 /* Verweis von der Themenfeld-Seite */
 .tf-begriffe { margin: 1.25rem 0 0; }
 .tf-begriffe[hidden] { display: none; }
