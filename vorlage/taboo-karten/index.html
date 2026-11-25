@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Begriffe-Taboo: Kartenvorlage</title>
+<!-- Vorlage zum Drucken (A4, Schwarz-Weiß). Felder antippen und ausfüllen, dann Drucken. Nichts wird gespeichert.
+     Nicht in projects.json. Beim Kopieren in einen tieferen Ordner die Pfade zur Schrift (../../assets/fonts/) verlängern. -->
+<style>
+@font-face{font-family:Andika;src:url(../../assets/fonts/andika-regular.woff2) format("woff2");font-weight:400}
+@font-face{font-family:Andika;src:url(../../assets/fonts/andika-bold.woff2) format("woff2");font-weight:700}
+@page { size: A4 portrait; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: "Andika", Verdana, Arial, sans-serif; color: #111; font-size: 9pt; line-height: 1.3; text-align: left; hyphens: manual; background: #ddd;
+       -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.hinweis { max-width: 210mm; margin: 10px auto; padding: 10px 14px; background: #fff; border: 2px solid #111; border-radius: 8px; font-size: 14px; line-height: 1.4; }
+.hinweis button { font: inherit; font-weight: 700; min-height: 44px; padding: 6px 16px; border: 2px solid #111; border-radius: 8px; background: #fff; cursor: pointer; }
+.seite { width: 210mm; height: 296mm; padding: 10mm; background: #fff; margin: 10mm auto; box-shadow: 0 2px 14px rgba(0,0,0,.28); overflow: hidden; }
+.raster { display: grid; grid-template-columns: 95mm 95mm; grid-template-rows: repeat(4, 69mm); }
+.karte { border: .4mm dashed #555; padding: 5mm 6mm; display: flex; flex-direction: column; gap: 2mm; }
+.kopf { font-size: 8pt; color: #444; display: flex; justify-content: space-between; }
+.begriff { font-size: 17pt; font-weight: 700; line-height: 1.15; min-height: 10mm; border-bottom: .6mm solid #111; padding-bottom: 1.5mm; }
+.nicht { font-size: 8pt; font-weight: 700; margin-top: 1mm; }
+.verbot { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5mm; }
+.verbot li { font-size: 12pt; min-height: 7.5mm; padding: 0 0 0 7mm; position: relative; border-bottom: .3mm solid #999; }
+.verbot li::before { content: "✕"; position: absolute; left: 0; font-weight: 700; }
+.hilfe { margin-top: auto; font-size: 8pt; color: #333; background: #eee; border-radius: 1mm; padding: 1.5mm 2mm; min-height: 11mm; }
+.hilfe b { display: block; }
+[contenteditable]:focus { outline: 2px solid #111; outline-offset: 1px; }
+.beispiel .kopf::after { content: "Beispiel"; }
+.regeln h1 { font-size: 20pt; margin: 0 0 6mm; }
+.regeln ol { margin: 0; padding-left: 8mm; font-size: 13pt; line-height: 1.5; }
+.regeln li { margin-bottom: 4mm; max-width: 75ch; }
+.regeln .kasten { margin-top: 8mm; border: .5mm solid #111; padding: 4mm 5mm; font-size: 12pt; }
+@media print { body { background: #fff; } .hinweis { display: none; } .seite { margin: 0; box-shadow: none; page-break-after: always; } .seite:last-child { page-break-after: auto; } }
+</style>
+</head>
+<body>
+<div class="hinweis">
+  <p><strong>Begriffe-Taboo: Kartenvorlage.</strong> Tippe in ein Feld und schreibe: oben den <b>Begriff</b>, dann <b>drei verbotene Wörter</b> und unten eine <b>Hilfe</b> (kurze Erklärung). Verboten sind Wörter, die man fast immer zum Erklären nutzen würde. Beispiel: Zu „Chloroplast“ passt nicht „Fotosynthese“.</p>
+  <p>Drucken: A4, Schwarz-Weiß, <b>Seiten- und Randanpassung aus</b> (Größe 100 %). Seite 1 und 2 enthalten je 8 Karten, Seite 3 die Spielregeln. Die Karten an den gestrichelten Linien ausschneiden. Nichts wird gespeichert, <b>schreibe vor dem Drucken alles ein</b>.</p>
+  <button type="button" onclick="window.print()">Drucken</button>
+</div>
+
+<section class="seite" aria-label="Karten, Seite 1"><div class="raster" id="r1"></div></section>
+<section class="seite" aria-label="Karten, Seite 2"><div class="raster" id="r2"></div></section>
+
+<section class="seite regeln" aria-label="Spielregeln">
+  <h1>Begriffe-Taboo: So spielt ihr</h1>
+  <ol>
+    <li><b>Bildet</b> zwei Teams. Legt die Karten gemischt als Stapel in die Mitte.</li>
+    <li><b>Zieht</b> eine Karte. Nur die erklärende Person schaut darauf. Alle anderen sehen weg.</li>
+    <li><b>Erkläre</b> den Begriff mit eigenen Worten. Sage das Wort nicht, auch kein Wortteil. Sage auch die drei verbotenen Wörter nicht. Zeige nicht auf Gegenstände.</li>
+    <li><b>Rate</b> als Team den Begriff. Ein Team hat 1 Minute pro Karte. Nutzt eine Uhr oder ein Handy.</li>
+    <li><b>Punkte:</b> Begriff gefunden = 1 Punkt. Ein verbotenes Wort gesagt oder die Zeit ist um = kein Punkt. Das gegnerische Team passt auf die verbotenen Wörter auf.</li>
+    <li><b>Ende:</b> Jedes Team war viermal dran. Das Team mit den meisten Punkten gewinnt.</li>
+  </ol>
+  <div class="kasten"><b>Tipp zum Erklären:</b> Sage zuerst, zu welcher Gruppe der Begriff gehört („Das ist ein Teil der Zelle …“). Nenne dann, was er tut oder wie er aussieht. Brauchst du Hilfe, liest eine Mitspielerin oder ein Mitspieler die graue Hilfe unten auf der Karte vor.</div>
+</section>
+
+<script>
+(function () {
+  "use strict";
+  function karte(beispiel) {
+    var k = document.createElement("div"); k.className = "karte" + (beispiel ? " beispiel" : "");
+    var kopf = document.createElement("div"); kopf.className = "kopf"; var l = document.createElement("span"); l.textContent = "Begriffe-Taboo"; kopf.appendChild(l); k.appendChild(kopf);
+    var b = document.createElement("div"); b.className = "begriff"; b.contentEditable = "true"; b.setAttribute("aria-label", "Begriff"); k.appendChild(b);
+    var n = document.createElement("div"); n.className = "nicht"; n.textContent = "Nicht sagen:"; k.appendChild(n);
+    var ul = document.createElement("ul"); ul.className = "verbot";
+    for (var i = 0; i < 3; i++) { var li = document.createElement("li"); li.contentEditable = "true"; li.setAttribute("aria-label", "Verbotenes Wort " + (i + 1)); ul.appendChild(li); }
+    k.appendChild(ul);
+    var h = document.createElement("div"); h.className = "hilfe"; var hb = document.createElement("b"); hb.textContent = "Hilfe:"; h.appendChild(hb);
+    var ht = document.createElement("span"); ht.contentEditable = "true"; ht.setAttribute("aria-label", "Hilfe"); h.appendChild(ht); k.appendChild(h);
+    if (beispiel) {
+      b.textContent = "Chloroplast";
+      ul.children[0].textContent = "Fotosynthese"; ul.children[1].textContent = "Pflanze"; ul.children[2].textContent = "grün";
+      ht.textContent = "Ort der Fotosynthese in der Pflanzenzelle";
+    }
+    return k;
+  }
+  ["r1", "r2"].forEach(function (id, s) { var r = document.getElementById(id); for (var i = 0; i < 8; i++) r.appendChild(karte(s === 0 && i === 0)); });
+})();
+</script>
+</body>
+</html>
