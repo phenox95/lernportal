@@ -23,11 +23,19 @@ window.HZ_SB = {
       "II-3": { g: 1, x: 330, sex: "w", aff: false, sol: "Aa" }, "II-4": { g: 1, x: 470, sex: "m", aff: true, sol: "aa" },
       "III-1": { g: 2, x: 330, sex: "m", aff: true, sol: "aa" }, "III-2": { g: 2, x: 400, sex: "w", aff: false, sol: "Aa" }, "III-3": { g: 2, x: 470, sex: "w", aff: false, sol: "Aa" } },
     fam: [{ p: ["I-1", "I-2"], k: ["II-1", "II-2", "II-3"] }, { p: ["II-3", "II-4"], k: ["III-1", "III-2", "III-3"] }] },
-  /* Transfer: Familie, Merkmal Albinismus (ausgefüllt), autosomal-rezessiv, ohne Genotypen zum Eintragen */
-  D: { w: 560, h: 270, gens: ["I", "II"], alt: "Stammbaum einer Familie: Zwei Eltern ohne Albinismus, vier Kinder, ein Sohn mit Albinismus",
+  /* Transfer: Familie, Merkmal Daumenbiegen (ausgefüllt), autosomal-rezessiv (Buch S. 129 und 130), ohne Genotypen zum Eintragen */
+  D: { w: 560, h: 270, gens: ["I", "II"], alt: "Stammbaum einer Familie: Zwei Eltern ohne Daumenbiegen, vier Kinder, ein Sohn kann den Daumen zurückbiegen",
     nodes: {
       "I-1": { g: 0, x: 200, sex: "m", aff: false }, "I-2": { g: 0, x: 360, sex: "w", aff: false },
       "II-1": { g: 1, x: 90, sex: "w", aff: false }, "II-2": { g: 1, x: 215, sex: "m", aff: true },
       "II-3": { g: 1, x: 345, sex: "w", aff: false }, "II-4": { g: 1, x: 470, sex: "m", aff: false } },
-    fam: [{ p: ["I-1", "I-2"], k: ["II-1", "II-2", "II-3", "II-4"] }] }
+    fam: [{ p: ["I-1", "I-2"], k: ["II-1", "II-2", "II-3", "II-4"] }] },
+  /* M4: nur Männer betroffen, X-gonosomal-rezessiv (Buch S. 130, Schritt 2). ausgefüllt = Merkmal */
+  E: { w: 580, h: 390, gens: ["I", "II", "III"], alt: "Stammbaum M4: Drei Generationen, nur Männer mit Merkmal",
+    nodes: {
+      "I-1": { g: 0, x: 220, sex: "m", aff: false }, "I-2": { g: 0, x: 400, sex: "w", aff: false },
+      "II-1": { g: 1, x: 110, sex: "m", aff: true }, "II-2": { g: 1, x: 220, sex: "w", aff: false },
+      "II-3": { g: 1, x: 330, sex: "w", aff: false }, "II-4": { g: 1, x: 470, sex: "m", aff: false },
+      "III-1": { g: 2, x: 330, sex: "m", aff: true }, "III-2": { g: 2, x: 400, sex: "w", aff: false }, "III-3": { g: 2, x: 470, sex: "m", aff: false } },
+    fam: [{ p: ["I-1", "I-2"], k: ["II-1", "II-2", "II-3"] }, { p: ["II-3", "II-4"], k: ["III-1", "III-2", "III-3"] }] }
 };
