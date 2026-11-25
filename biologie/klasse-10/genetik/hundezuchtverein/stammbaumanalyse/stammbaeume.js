@@ -37,5 +37,13 @@ window.HZ_SB = {
       "II-1": { g: 1, x: 110, sex: "m", aff: true }, "II-2": { g: 1, x: 220, sex: "w", aff: false },
       "II-3": { g: 1, x: 330, sex: "w", aff: false }, "II-4": { g: 1, x: 470, sex: "m", aff: false },
       "III-1": { g: 2, x: 330, sex: "m", aff: true }, "III-2": { g: 2, x: 400, sex: "w", aff: false }, "III-3": { g: 2, x: 470, sex: "m", aff: false } },
+    fam: [{ p: ["I-1", "I-2"], k: ["II-1", "II-2", "II-3"] }, { p: ["II-3", "II-4"], k: ["III-1", "III-2", "III-3"] }] },
+  /* M5: dominant, schwarzes Fell (ausgefüllt), Zwinger Birkenhof */
+  F: { w: 580, h: 390, gens: ["I", "II", "III"], alt: "Stammbaum M5: Drei Generationen, schwarzes Fell in jeder Generation",
+    nodes: {
+      "I-1": { g: 0, x: 220, sex: "m", aff: true }, "I-2": { g: 0, x: 400, sex: "w", aff: false },
+      "II-1": { g: 1, x: 110, sex: "m", aff: false }, "II-2": { g: 1, x: 220, sex: "w", aff: true },
+      "II-3": { g: 1, x: 330, sex: "m", aff: true }, "II-4": { g: 1, x: 470, sex: "w", aff: true },
+      "III-1": { g: 2, x: 330, sex: "m", aff: false }, "III-2": { g: 2, x: 400, sex: "w", aff: true }, "III-3": { g: 2, x: 470, sex: "w", aff: true } },
     fam: [{ p: ["I-1", "I-2"], k: ["II-1", "II-2", "II-3"] }, { p: ["II-3", "II-4"], k: ["III-1", "III-2", "III-3"] }] }
 };
