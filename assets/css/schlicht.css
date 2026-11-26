@@ -1,0 +1,36 @@
+/* Schlichte Folien. Muster, Stand 26.11.2026, zunächst nur für die Reflex-Stunde (Bio 9).
+   Einschalten: <body class="lp-pres schlicht" …> und diese Datei nach praesentation-design.css und stunde.css laden.
+   Ziel: Die Folie zeigt Material und Auftrag, keine Schilder. Eine Farbe je Fach statt Themenfeld-Tönen. */
+
+/* Eine Fachfarbe: gewinnt gegen themenfarben.css, weil diese Datei später geladen wird (gleiche Spezifität). */
+body.schlicht[data-subject="Biologie"]{--g:#0F6E56;--dk:#0B4F3C;--ink:#1A2B24;--fach-rgb:15,110,86;--accent:#0F6E56;--accent-2:#0F6E56;--accent-hover:#0B4F3C;--accent-ink:#0F6E56;--lp-akzent:#0F6E56}
+body.schlicht[data-subject="Geografie"]{--g:#A9442B;--dk:#7C2F1C;--ink:#2B211E;--fach-rgb:169,68,43;--accent:#A9442B;--accent-2:#A9442B;--accent-hover:#7C2F1C;--accent-ink:#A9442B;--lp-akzent:#A9442B}
+
+/* Keine Phasenschilder, kein Zierstrich über der Überschrift */
+body.schlicht .phase,body.schlicht .phase[data-ph]{display:none}
+.schlicht h1{padding-top:0}
+.schlicht h1:before{display:none}
+
+/* Sozialform und Zeit als schlichte Zeile unter der Überschrift statt als Rahmen oben rechts */
+.schlicht .badge{position:static;display:block;border:0;padding:0;margin:-14px 0 22px;font-size:22px;color:var(--ink3)}
+
+/* Niveau-Punkte leise */
+.schlicht .lvl{border:0;padding:0;color:var(--ink3);font-size:16px;letter-spacing:1px}
+
+/* Abbildung mit Bildunterschrift und Quelle */
+.schlicht .abb{margin:0}
+.schlicht .abb img{display:block;max-width:100%;max-height:420px;width:auto;height:auto;background:#fff;border:1.5px solid var(--line)}
+.schlicht .abb figcaption{font-size:20px;line-height:1.35;margin-top:8px;color:var(--ink2)}
+.schlicht .abb .quelle{display:block;font-size:15px;color:var(--ink3);margin-top:4px}
+
+/* Fallbeschreibung neben dem Bild */
+.schlicht .fall{font-size:30px;line-height:1.4}
+.schlicht .fall p{margin:0 0 18px}
+
+/* Unsere Frage, klein über dem Auftrag */
+.schlicht .unsere-frage{font-size:22px;color:var(--ink2);margin:-8px 0 20px}
+.schlicht .unsere-frage b{font-weight:700;color:var(--ink)}
+
+/* Verweis auf das Schulbuch */
+.schlicht .buch{border-left:4px solid var(--g);background:#fff;padding:10px 16px;font-size:22px;line-height:1.35;margin:16px 0 0}
+.schlicht .buch b{font-weight:700}
