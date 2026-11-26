@@ -440,7 +440,7 @@
     ]
   },
   {
-    "title": "Reflex oder Reaktion? Ein Experiment",
+    "title": "Kniesehnenreflex und Reaktionszeit",
     "description": "Zwei Stunden: Den Kniesehnenreflex Schritt für Schritt verfolgen, Reflex und Reaktion vergleichen, dann mit Kontrolle messen, ob Ablenkung die Reaktion langsamer macht.",
     "type": "Materialseite",
     "path": "biologie/klasse-9/nervensystem/reflex-stunde/",
@@ -454,7 +454,7 @@
     "folge": 10,
     "dateien": [
       {
-        "titel": "Präsentation Teil 1: Reflex oder Reaktion?",
+        "titel": "Präsentation Teil 1: Kniesehnenreflex und Reaktionszeit",
         "pfad": "biologie/klasse-9/nervensystem/reflex-stunde/praesentation/",
         "art": "Präsentation"
       },
