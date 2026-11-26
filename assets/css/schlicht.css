@@ -1,36 +1,73 @@
-/* Schlichte Folien. Muster, Stand 26.11.2026, zunächst nur für die Reflex-Stunde (Bio 9).
+/* Schlichte Folien, Richtung „Overhead“: schwarz auf weiß, große Schrift, kein Rahmen.
+   Muster, Stand 26.11.2026, zunächst nur für die Reflex-Stunde (Bio 9).
    Einschalten: <body class="lp-pres schlicht" …> und diese Datei nach praesentation-design.css und stunde.css laden.
-   Ziel: Die Folie zeigt Material und Auftrag, keine Schilder. Eine Farbe je Fach statt Themenfeld-Tönen. */
+   Werkzeuge bleiben über die Tasten erreichbar (P Stift, T Timer, S Stoppuhr …). Die Leiste rechts erscheint,
+   wenn man über den rechten Rand fährt oder dort tippt. Blättern: Pfeiltasten, Presenter oder Tippen auf den Rand. */
 
-/* Eine Fachfarbe: gewinnt gegen themenfarben.css, weil diese Datei später geladen wird (gleiche Spezifität). */
-body.schlicht[data-subject="Biologie"]{--g:#0F6E56;--dk:#0B4F3C;--ink:#1A2B24;--fach-rgb:15,110,86;--accent:#0F6E56;--accent-2:#0F6E56;--accent-hover:#0B4F3C;--accent-ink:#0F6E56;--lp-akzent:#0F6E56}
-body.schlicht[data-subject="Geografie"]{--g:#A9442B;--dk:#7C2F1C;--ink:#2B211E;--fach-rgb:169,68,43;--accent:#A9442B;--accent-2:#A9442B;--accent-hover:#7C2F1C;--accent-ink:#A9442B;--lp-akzent:#A9442B}
+body.schlicht,body.schlicht[data-subject][data-tf]{--g:#0F6E56;--dk:#0B4F3C;--ink:#000;--ink2:#222;--ink3:#444;--line:#000;--paper:#fff;--tint:#fff;--mint:#fff;--fach-rgb:15,110,86;--y:#000;--accent:#000;--lp-akzent:#000}
+body.schlicht .slide{background:#fff;color:#000;padding:56px 72px 64px}
 
-/* Keine Phasenschilder, kein Zierstrich über der Überschrift */
+/* Kein Rahmen um die Folie: Werkzeugleiste, Datum, Fortschritt und Seitenzahl unsichtbar */
+body.schlicht .lp-pr-dock{opacity:0;transition:opacity .2s}
+body.schlicht .lp-pr-dock:hover,body.schlicht .lp-pr-dock:focus-within{opacity:1}
+body.schlicht .lp-pr-datum,body.schlicht #nav,body.schlicht #nummer{display:none}
+/* Blätterflächen bleiben bedienbar (Touch, Board), sind aber nicht zu sehen */
+body.schlicht .pfeil{opacity:0;background:transparent;border:0;color:#000}
+body.schlicht .pfeil:hover,body.schlicht .pfeil:focus-visible{opacity:.35}
+
+/* Keine Phasenschilder, kein Zierstrich */
 body.schlicht .phase,body.schlicht .phase[data-ph]{display:none}
-.schlicht h1{padding-top:0}
-.schlicht h1:before{display:none}
+body.schlicht h1{padding-top:0;margin:0 0 30px;font-size:54px;font-weight:700;color:#000}
+body.schlicht h1:before{display:none}
 
-/* Sozialform und Zeit als schlichte Zeile unter der Überschrift statt als Rahmen oben rechts */
-.schlicht .badge{position:static;display:block;border:0;padding:0;margin:-14px 0 22px;font-size:22px;color:var(--ink3)}
+/* Sozialform und Zeit: eine Zeile am Ende der Folie */
+body.schlicht .badge{position:absolute;left:72px;bottom:44px;top:auto;right:auto;border:0;padding:0;margin:0;font-size:24px;color:#000;background:none}
 
-/* Niveau-Punkte leise */
-.schlicht .lvl{border:0;padding:0;color:var(--ink3);font-size:16px;letter-spacing:1px}
+/* Aufgaben: normale nummerierte Liste */
+body.schlicht .task{font-size:32px;line-height:1.4;margin:0 0 18px;grid-template-columns:44px 1fr}
+body.schlicht .task.big{font-size:34px}
+body.schlicht .snr{color:#000}
+body.schlicht .snr:after{content:"."}
+body.schlicht .lvl{display:none}
+body.schlicht .task b{font-weight:700}
 
-/* Abbildung mit Bildunterschrift und Quelle */
-.schlicht .abb{margin:0}
-.schlicht .abb img{display:block;max-width:100%;max-height:420px;width:auto;height:auto;background:#fff;border:1.5px solid var(--line)}
-.schlicht .abb figcaption{font-size:20px;line-height:1.35;margin-top:8px;color:var(--ink2)}
-.schlicht .abb .quelle{display:block;font-size:15px;color:var(--ink3);margin-top:4px}
+/* Kästen und Pillen werden zu normalem Text */
+body.schlicht .mint,body.schlicht .shilfe{background:none;border:0;border-radius:0;padding:0;margin:0 0 22px}
+body.schlicht .shilfe{font-size:24px;line-height:1.45}
+body.schlicht .wort{display:block;font-size:30px;margin-top:6px}
+body.schlicht .wort span{display:inline;border:0;padding:0;background:none;color:#000;font-size:30px;font-weight:400}
+body.schlicht .wort span+span:before{content:", "}
+body.schlicht .tip{font-size:24px;color:#000}
+body.schlicht .b,body.schlicht .b.sec{background:#fff;color:#000;border:2px solid #000;border-radius:0;font-weight:400}
+body.schlicht .qrbox{border:0;border-radius:0;padding:0}
 
-/* Fallbeschreibung neben dem Bild */
-.schlicht .fall{font-size:30px;line-height:1.4}
-.schlicht .fall p{margin:0 0 18px}
+/* Tabelle: schwarze Linien, keine Farbfläche */
+body.schlicht table.tab{border:2px solid #000;border-radius:0;font-size:27px}
+body.schlicht .tab th{background:#fff;color:#000;border-bottom:2px solid #000;font-size:27px}
+body.schlicht .tab td{border-top:1px solid #000;padding:12px 14px}
+body.schlicht .tab td+td,body.schlicht .tab th+th{border-left:1px solid #000}
 
-/* Unsere Frage, klein über dem Auftrag */
-.schlicht .unsere-frage{font-size:22px;color:var(--ink2);margin:-8px 0 20px}
-.schlicht .unsere-frage b{font-weight:700;color:var(--ink)}
+/* Abbildung mit Quelle */
+body.schlicht .abb{margin:0;padding:0;border:0;border-radius:0;background:none}
+body.schlicht .abb img{display:block;max-width:100%;max-height:540px;width:auto;height:auto}
+body.schlicht .abb .quelle{display:block;font-size:15px;color:#000;margin-top:6px}
+
+/* Fall neben dem Bild */
+body.schlicht .fall{font-size:36px;line-height:1.45}
+body.schlicht .fall p{margin:0 0 26px}
+
+/* Unsere Frage */
+body.schlicht .unsere-frage{font-size:26px;color:#000;margin:-14px 0 26px}
 
 /* Verweis auf das Schulbuch */
-.schlicht .buch{border-left:4px solid var(--g);background:#fff;padding:10px 16px;font-size:22px;line-height:1.35;margin:16px 0 0}
-.schlicht .buch b{font-weight:700}
+body.schlicht .buch{border:0;background:none;padding:0;font-size:24px;margin:18px 0 0}
+
+/* Fragenfeld: schwarz statt Fachfarbe */
+body.schlicht .fragen-hilfe b{border-color:#000;color:#000}
+body.schlicht .fragen-leit{border:2px solid #000;border-radius:0}
+body.schlicht .fragen-label{color:#000}
+body.schlicht .fragen-neu input{border-radius:0;border-color:#000}
+body.schlicht .fragen-karte{background:#fff;border:1px solid #000;border-radius:0}
+body.schlicht .fragen-karte button.leit{background:#000;border-color:#000}
+body.schlicht .fragen-hilfe li{font-size:28px}
+body.schlicht .fragen-neu button{background:#000;color:#fff;border:0;border-radius:0}
